@@ -14,6 +14,12 @@
 		846D6C0422E14D89006287B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 846D6C0222E14D89006287B8 /* LaunchScreen.storyboard */; };
 		846D6C0F22E151B8006287B8 /* AJNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C0E22E151B8006287B8 /* AJNavigationController.swift */; };
 		846D6C1122E15276006287B8 /* const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C1022E15276006287B8 /* const.swift */; };
+		846D6C1622E16139006287B8 /* AJTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C1522E16139006287B8 /* AJTabbarController.swift */; };
+		846D6C2422E161FB006287B8 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C2322E161FB006287B8 /* HomeViewController.swift */; };
+		846D6C2622E1621C006287B8 /* DataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C2522E1621C006287B8 /* DataViewController.swift */; };
+		846D6C2822E1622B006287B8 /* InsertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C2722E1622B006287B8 /* InsertViewController.swift */; };
+		846D6C2A22E1623C006287B8 /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C2922E1623C006287B8 /* MineViewController.swift */; };
+		846D6C2C22E16463006287B8 /* AJGuidePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C2B22E16463006287B8 /* AJGuidePageView.swift */; };
 		C51C8BD65C07AB3DB20DF1D9 /* Pods_AIJian.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB88905D4BA97B5422D8CCA1 /* Pods_AIJian.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +33,12 @@
 		846D6C0522E14D89006287B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		846D6C0E22E151B8006287B8 /* AJNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AJNavigationController.swift; sourceTree = "<group>"; };
 		846D6C1022E15276006287B8 /* const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = const.swift; sourceTree = "<group>"; };
+		846D6C1522E16139006287B8 /* AJTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AJTabbarController.swift; sourceTree = "<group>"; };
+		846D6C2322E161FB006287B8 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		846D6C2522E1621C006287B8 /* DataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewController.swift; sourceTree = "<group>"; };
+		846D6C2722E1622B006287B8 /* InsertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertViewController.swift; sourceTree = "<group>"; };
+		846D6C2922E1623C006287B8 /* MineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineViewController.swift; sourceTree = "<group>"; };
+		846D6C2B22E16463006287B8 /* AJGuidePageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AJGuidePageView.swift; sourceTree = "<group>"; };
 		A92ED38E7290A71018D96804 /* Pods-AIJian.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AIJian.debug.xcconfig"; path = "Target Support Files/Pods-AIJian/Pods-AIJian.debug.xcconfig"; sourceTree = "<group>"; };
 		B70B834D750B5B24AF91DBA1 /* Pods-AIJian.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AIJian.release.xcconfig"; path = "Target Support Files/Pods-AIJian/Pods-AIJian.release.xcconfig"; sourceTree = "<group>"; };
 		DB88905D4BA97B5422D8CCA1 /* Pods_AIJian.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AIJian.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,7 +100,12 @@
 		846D6C0C22E15108006287B8 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				846D6C2B22E16463006287B8 /* AJGuidePageView.swift */,
 				846D6C0E22E151B8006287B8 /* AJNavigationController.swift */,
+				846D6C1522E16139006287B8 /* AJTabbarController.swift */,
+				846D6C1422E1601C006287B8 /* Home */,
+				846D6C1322E16007006287B8 /* Data */,
+				846D6C1222E15FE9006287B8 /* Insert */,
 				846D6C0D22E15123006287B8 /* Mine */,
 			);
 			path = Main;
@@ -97,8 +114,129 @@
 		846D6C0D22E15123006287B8 /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				846D6C2222E161DC006287B8 /* Model */,
+				846D6C1E22E161AC006287B8 /* View */,
+				846D6C1D22E161A5006287B8 /* ViewController */,
 			);
 			path = Mine;
+			sourceTree = "<group>";
+		};
+		846D6C1222E15FE9006287B8 /* Insert */ = {
+			isa = PBXGroup;
+			children = (
+				846D6C2122E161D5006287B8 /* Model */,
+				846D6C1C22E1619F006287B8 /* View */,
+				846D6C1B22E16192006287B8 /* ViewController */,
+			);
+			path = Insert;
+			sourceTree = "<group>";
+		};
+		846D6C1322E16007006287B8 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				846D6C2022E161CD006287B8 /* Model */,
+				846D6C1A22E16185006287B8 /* View */,
+				846D6C1922E1617C006287B8 /* ViewController */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		846D6C1422E1601C006287B8 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				846D6C1F22E161C2006287B8 /* Model */,
+				846D6C1722E1615A006287B8 /* View */,
+				846D6C1822E16169006287B8 /* ViewController */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		846D6C1722E1615A006287B8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		846D6C1822E16169006287B8 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				846D6C2322E161FB006287B8 /* HomeViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		846D6C1922E1617C006287B8 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				846D6C2522E1621C006287B8 /* DataViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		846D6C1A22E16185006287B8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		846D6C1B22E16192006287B8 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				846D6C2722E1622B006287B8 /* InsertViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		846D6C1C22E1619F006287B8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		846D6C1D22E161A5006287B8 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				846D6C2922E1623C006287B8 /* MineViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		846D6C1E22E161AC006287B8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		846D6C1F22E161C2006287B8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		846D6C2022E161CD006287B8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		846D6C2122E161D5006287B8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		846D6C2222E161DC006287B8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		B462FAF8CB1B4050B4E32345 /* Pods */ = {
@@ -226,9 +364,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				846D6BFC22E14D79006287B8 /* ViewController.swift in Sources */,
+				846D6C2822E1622B006287B8 /* InsertViewController.swift in Sources */,
+				846D6C2A22E1623C006287B8 /* MineViewController.swift in Sources */,
+				846D6C2622E1621C006287B8 /* DataViewController.swift in Sources */,
 				846D6C1122E15276006287B8 /* const.swift in Sources */,
+				846D6C2C22E16463006287B8 /* AJGuidePageView.swift in Sources */,
 				846D6C0F22E151B8006287B8 /* AJNavigationController.swift in Sources */,
+				846D6C1622E16139006287B8 /* AJTabbarController.swift in Sources */,
 				846D6BFA22E14D79006287B8 /* AppDelegate.swift in Sources */,
+				846D6C2422E161FB006287B8 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,7 +527,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = annn.AIJian;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -401,7 +545,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = annn.AIJian;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

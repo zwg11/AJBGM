@@ -16,9 +16,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        let tabBarController = AJTabbarController()
+        // tabBarController的主题颜色
+        tabBarController.tabBar.tintColor = UIColor.init(red: 9.0/255.0, green: 187.0/255.0, blue: 7.0/255.0, alpha: 0.5)
+        // tabBarController子视图控制器集合
+        //tabBarController.viewControllers = [weChat,addressBook,find]
+        // 添加到rootViewController
+        
+        window?.rootViewController = tabBarController
+        window?.makeKeyAndVisible()
+        self.setStaticGuidePage()
         return true
     }
 
+    // 设置启动页轮播图
+    func setStaticGuidePage() {
+        let imageNameArray: [String] = ["67", "396","5"]
+        let guideView = AJGuidePageView.init(imageNameArray: imageNameArray, isHiddenSkipButton: false)
+        self.window?.rootViewController?.view.addSubview(guideView)
+    }
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
