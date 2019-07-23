@@ -24,8 +24,10 @@ class AJNavigationController: UINavigationController {
 
     func setNavBarAppearence()
     {
-        
-    
+        // 设置 导航栏颜色 和 标题字体颜色
+        self.navigationBar.barTintColor = barDefaultColor
+        let navigationTitleAttribute: NSDictionary = NSDictionary(object: UIColor.white, forKey: NSAttributedString.Key.foregroundColor as NSCopying)
+        self.navigationBar.titleTextAttributes = navigationTitleAttribute as? [NSAttributedString.Key : Any]    
     
     }
 }

@@ -10,11 +10,25 @@ import Foundation
 import UIKit
 
 let AJScreenWidth = UIScreen.main.bounds.width
+<<<<<<< HEAD
 let AJScreenHeight = UIScreen.main.bounds.height
+=======
+
+let AJScrennHeight = UIScreen.main.bounds.height
+>>>>>>> 450b3d3057b5b8711bc40d122447079c34164128
 //白色
+
+let AJScreenHeight = UIScreen.main.bounds.height
+
 let DominantColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 1)
 //黑色
 let FooterViewColor = UIColor.init(red: 240/255.0, green: 241/255.0, blue: 244/255.0, alpha: 1)
+
+// 导航栏默认颜色
+let barDefaultColor = UIColor.init(red: 86.0/255.0, green: 119.0/255.0, blue: 252.0/255.0, alpha: 1)
+
+// 边框颜色
+let borderColor = UIColor.init(red: 187.0/255.0, green: 187.0/255.0, blue: 187.0/255.0, alpha: 1)
 
 // iphone X
 let isIphoneX = AJScreenHeight == 812 ? true : false

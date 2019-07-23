@@ -21,6 +21,19 @@
 		846D6C2822E1622B006287B8 /* InsertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C2722E1622B006287B8 /* InsertViewController.swift */; };
 		846D6C2A22E1623C006287B8 /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C2922E1623C006287B8 /* MineViewController.swift */; };
 		846D6C2C22E16463006287B8 /* AJGuidePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C2B22E16463006287B8 /* AJGuidePageView.swift */; };
+		846D6C2E22E189EF006287B8 /* headerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C2D22E189EF006287B8 /* headerView.swift */; };
+		846D6C3022E19BD2006287B8 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C2F22E19BD2006287B8 /* ChartView.swift */; };
+		846D6C3222E19C17006287B8 /* StatisticalDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C3122E19C17006287B8 /* StatisticalDataView.swift */; };
+		846D6C3422E19CA3006287B8 /* DataTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C3322E19CA3006287B8 /* DataTableView.swift */; };
+		846D6C3622E19CC0006287B8 /* SharedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C3522E19CC0006287B8 /* SharedView.swift */; };
+		846D6C3822E1A648006287B8 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C3722E1A648006287B8 /* ChartViewController.swift */; };
+		846D6C3A22E1A66B006287B8 /* StatisticalDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C3922E1A66B006287B8 /* StatisticalDataViewController.swift */; };
+		846D6C3C22E1A67D006287B8 /* DataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C3B22E1A67D006287B8 /* DataTableViewController.swift */; };
+		846D6C3E22E1A693006287B8 /* SharedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C3D22E1A693006287B8 /* SharedViewController.swift */; };
+		846D6C4022E56123006287B8 /* StatisticDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C3F22E56123006287B8 /* StatisticDate.swift */; };
+		846D6C4322E56618006287B8 /* averageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C4222E56618006287B8 /* averageView.swift */; };
+		846D6C4522E56635006287B8 /* totalCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C4422E56635006287B8 /* totalCheckView.swift */; };
+		846D6C4722E59359006287B8 /* perAndAfterMealTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C4622E59359006287B8 /* perAndAfterMealTests.swift */; };
 		C51C8BD65C07AB3DB20DF1D9 /* Pods_AIJian.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB88905D4BA97B5422D8CCA1 /* Pods_AIJian.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +54,19 @@
 		846D6C2722E1622B006287B8 /* InsertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertViewController.swift; sourceTree = "<group>"; };
 		846D6C2922E1623C006287B8 /* MineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineViewController.swift; sourceTree = "<group>"; };
 		846D6C2B22E16463006287B8 /* AJGuidePageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AJGuidePageView.swift; sourceTree = "<group>"; };
+		846D6C2D22E189EF006287B8 /* headerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = headerView.swift; sourceTree = "<group>"; };
+		846D6C2F22E19BD2006287B8 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		846D6C3122E19C17006287B8 /* StatisticalDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticalDataView.swift; sourceTree = "<group>"; };
+		846D6C3322E19CA3006287B8 /* DataTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTableView.swift; sourceTree = "<group>"; };
+		846D6C3522E19CC0006287B8 /* SharedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedView.swift; sourceTree = "<group>"; };
+		846D6C3722E1A648006287B8 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
+		846D6C3922E1A66B006287B8 /* StatisticalDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticalDataViewController.swift; sourceTree = "<group>"; };
+		846D6C3B22E1A67D006287B8 /* DataTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTableViewController.swift; sourceTree = "<group>"; };
+		846D6C3D22E1A693006287B8 /* SharedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedViewController.swift; sourceTree = "<group>"; };
+		846D6C3F22E56123006287B8 /* StatisticDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticDate.swift; sourceTree = "<group>"; };
+		846D6C4222E56618006287B8 /* averageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = averageView.swift; sourceTree = "<group>"; };
+		846D6C4422E56635006287B8 /* totalCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = totalCheckView.swift; sourceTree = "<group>"; };
+		846D6C4622E59359006287B8 /* perAndAfterMealTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = perAndAfterMealTests.swift; sourceTree = "<group>"; };
 		A92ED38E7290A71018D96804 /* Pods-AIJian.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AIJian.debug.xcconfig"; path = "Target Support Files/Pods-AIJian/Pods-AIJian.debug.xcconfig"; sourceTree = "<group>"; };
 		B70B834D750B5B24AF91DBA1 /* Pods-AIJian.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AIJian.release.xcconfig"; path = "Target Support Files/Pods-AIJian/Pods-AIJian.release.xcconfig"; sourceTree = "<group>"; };
 		DB88905D4BA97B5422D8CCA1 /* Pods_AIJian.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AIJian.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -172,6 +198,10 @@
 			isa = PBXGroup;
 			children = (
 				846D6C2522E1621C006287B8 /* DataViewController.swift */,
+				846D6C3722E1A648006287B8 /* ChartViewController.swift */,
+				846D6C3922E1A66B006287B8 /* StatisticalDataViewController.swift */,
+				846D6C3B22E1A67D006287B8 /* DataTableViewController.swift */,
+				846D6C3D22E1A693006287B8 /* SharedViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -179,6 +209,10 @@
 		846D6C1A22E16185006287B8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				846D6C4822E5DE43006287B8 /* Table */,
+				846D6C4122E565C4006287B8 /* StatisticalData */,
+				846D6C2F22E19BD2006287B8 /* ChartView.swift */,
+				846D6C3522E19CC0006287B8 /* SharedView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -209,7 +243,11 @@
 		846D6C1E22E161AC006287B8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
 				8403B04322E5517C008E8612 /* AJMineHeaderView.swift */,
+=======
+				846D6C2D22E189EF006287B8 /* headerView.swift */,
+>>>>>>> 450b3d3057b5b8711bc40d122447079c34164128
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -224,6 +262,7 @@
 		846D6C2022E161CD006287B8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				846D6C3F22E56123006287B8 /* StatisticDate.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -240,6 +279,26 @@
 			children = (
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		846D6C4122E565C4006287B8 /* StatisticalData */ = {
+			isa = PBXGroup;
+			children = (
+				846D6C3122E19C17006287B8 /* StatisticalDataView.swift */,
+				846D6C4222E56618006287B8 /* averageView.swift */,
+				846D6C4422E56635006287B8 /* totalCheckView.swift */,
+				846D6C4622E59359006287B8 /* perAndAfterMealTests.swift */,
+			);
+			path = StatisticalData;
+			sourceTree = "<group>";
+		};
+		846D6C4822E5DE43006287B8 /* Table */ = {
+			isa = PBXGroup;
+			children = (
+				846D6C3322E19CA3006287B8 /* DataTableView.swift */,
+			);
+			name = Table;
+			path = Table.temp_caseinsensitive_rename.;
 			sourceTree = "<group>";
 		};
 		B462FAF8CB1B4050B4E32345 /* Pods */ = {
@@ -366,17 +425,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				846D6C3622E19CC0006287B8 /* SharedView.swift in Sources */,
+				846D6C4522E56635006287B8 /* totalCheckView.swift in Sources */,
+				846D6C3C22E1A67D006287B8 /* DataTableViewController.swift in Sources */,
 				846D6BFC22E14D79006287B8 /* ViewController.swift in Sources */,
+				846D6C2E22E189EF006287B8 /* headerView.swift in Sources */,
 				846D6C2822E1622B006287B8 /* InsertViewController.swift in Sources */,
+				846D6C3422E19CA3006287B8 /* DataTableView.swift in Sources */,
+				846D6C3822E1A648006287B8 /* ChartViewController.swift in Sources */,
 				846D6C2A22E1623C006287B8 /* MineViewController.swift in Sources */,
 				846D6C2622E1621C006287B8 /* DataViewController.swift in Sources */,
 				846D6C1122E15276006287B8 /* const.swift in Sources */,
 				846D6C2C22E16463006287B8 /* AJGuidePageView.swift in Sources */,
+				846D6C4722E59359006287B8 /* perAndAfterMealTests.swift in Sources */,
 				846D6C0F22E151B8006287B8 /* AJNavigationController.swift in Sources */,
+				846D6C4022E56123006287B8 /* StatisticDate.swift in Sources */,
+				846D6C4322E56618006287B8 /* averageView.swift in Sources */,
+				846D6C3222E19C17006287B8 /* StatisticalDataView.swift in Sources */,
 				846D6C1622E16139006287B8 /* AJTabbarController.swift in Sources */,
+<<<<<<< HEAD
 				8403B04422E5517C008E8612 /* AJMineHeaderView.swift in Sources */,
+=======
+				846D6C3A22E1A66B006287B8 /* StatisticalDataViewController.swift in Sources */,
+				846D6C3E22E1A693006287B8 /* SharedViewController.swift in Sources */,
+>>>>>>> 450b3d3057b5b8711bc40d122447079c34164128
 				846D6BFA22E14D79006287B8 /* AppDelegate.swift in Sources */,
 				846D6C2422E161FB006287B8 /* HomeViewController.swift in Sources */,
+				846D6C3022E19BD2006287B8 /* ChartView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -74,7 +74,7 @@ extension AJGuidePageView{
         if isHiddenSkipButton{
             return
         }
-        let skipButton = UIButton.init(frame: CGRect.init(x: HHScreenWidth * 0.8, y: HHScreenHeight * 0.1, width: 70, height: 35))
+        let skipButton = UIButton.init(frame: CGRect.init(x: HHScreenWidth * 0.75, y: HHScreenHeight * 0.1, width: 70, height: 35))
         skipButton.setTitle("Skip", for:.normal)
         skipButton.backgroundColor = UIColor.gray
         skipButton.setTitleColor(UIColor.white, for: .normal)
