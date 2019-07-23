@@ -15,8 +15,9 @@ class AJTabbarController: UITabBarController {
 
         // Do any additional setup after loading the view.
         let Home = HomeViewController()
-        let nv1 = UINavigationController(rootViewController: Home)
+        let nv1 = AJNavigationController(rootViewController: Home)
         Home.navigationItem.title = "Home"
+        Home.navigationController?.navigationBar.tintColor = barDefaultColor
         //未选中状态的图标
         nv1.tabBarItem.image = UIImage(named: "zhuye.png")?.withRenderingMode(.alwaysOriginal)
         //选中状态的tab图标
@@ -27,7 +28,7 @@ class AJTabbarController: UITabBarController {
         
         
         let Data = DataViewController()
-        let nv2 = UINavigationController(rootViewController: Data)
+        let nv2 = AJNavigationController(rootViewController: Data)
         Data.navigationItem.title = "Data"
         nv2.tabBarItem.image = UIImage(named: "shuju.png")?.withRenderingMode(.alwaysOriginal)
         nv2.tabBarItem.selectedImage = UIImage(named: "shuju-2.png")?.withRenderingMode(.alwaysOriginal)
@@ -35,7 +36,7 @@ class AJTabbarController: UITabBarController {
         self.addChild(nv2)
         
         let Insert = InsertViewController()
-        let nv3 = UINavigationController(rootViewController: Insert)
+        let nv3 = AJNavigationController(rootViewController: Insert)
         Insert.navigationItem.title = "Insert"
         nv3.tabBarItem.image = UIImage(named: "shuru.png")?.withRenderingMode(.alwaysOriginal)
         nv3.tabBarItem.selectedImage = UIImage(named: "shuru-2.png")?.withRenderingMode(.alwaysOriginal)
@@ -43,7 +44,7 @@ class AJTabbarController: UITabBarController {
         self.addChild(nv3)
         
         let Mine = InsertViewController()
-        let nv4 = UINavigationController(rootViewController: Mine)
+        let nv4 = AJNavigationController(rootViewController: Mine)
         Mine.navigationItem.title = "Mine"
         nv4.tabBarItem.image = UIImage(named: "wode.png")?.withRenderingMode(.alwaysOriginal)
         nv4.tabBarItem.selectedImage = UIImage(named: "wode-2.png")?.withRenderingMode(.alwaysOriginal)
@@ -51,7 +52,7 @@ class AJTabbarController: UITabBarController {
         self.addChild(nv4)
         
         // 设置tabbar颜色
-        self.tabBar.tintColor = UIColor.white
+        self.tabBar.tintColor = barDefaultColor
     }
     
 

@@ -8,6 +8,7 @@ target 'AIJian' do
   pod ‘HandyJSON','5.0.0-beta'
   pod 'SwiftyMenu'
   pod 'Charts'
+  pod 'DNSPageView'
   # Pods for AIJian
 
 end
