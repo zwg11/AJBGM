@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8403B04422E5517C008E8612 /* AJMineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8403B04322E5517C008E8612 /* AJMineHeaderView.swift */; };
 		846D6BFA22E14D79006287B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6BF922E14D79006287B8 /* AppDelegate.swift */; };
 		846D6BFC22E14D79006287B8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6BFB22E14D79006287B8 /* ViewController.swift */; };
 		846D6BFF22E14D79006287B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 846D6BFD22E14D79006287B8 /* Main.storyboard */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8403B04322E5517C008E8612 /* AJMineHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AJMineHeaderView.swift; path = AIJian/Main/Mine/ViewController/AJMineHeaderView.swift; sourceTree = SOURCE_ROOT; };
 		846D6BF622E14D79006287B8 /* AIJian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AIJian.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		846D6BF922E14D79006287B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		846D6BFB22E14D79006287B8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 		846D6C1E22E161AC006287B8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8403B04322E5517C008E8612 /* AJMineHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -371,6 +374,7 @@
 				846D6C2C22E16463006287B8 /* AJGuidePageView.swift in Sources */,
 				846D6C0F22E151B8006287B8 /* AJNavigationController.swift in Sources */,
 				846D6C1622E16139006287B8 /* AJTabbarController.swift in Sources */,
+				8403B04422E5517C008E8612 /* AJMineHeaderView.swift in Sources */,
 				846D6BFA22E14D79006287B8 /* AppDelegate.swift in Sources */,
 				846D6C2422E161FB006287B8 /* HomeViewController.swift in Sources */,
 			);
