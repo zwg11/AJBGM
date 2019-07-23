@@ -4,14 +4,16 @@
 //
 //  Created by ADMIN on 2019/7/19.
 //  Copyright © 2019 apple. All rights reserved.
-//
+//  常量文件
 
 import Foundation
 import UIKit
 
 let AJScreenWidth = UIScreen.main.bounds.width
 let AJScrennHeight = UIScreen.main.bounds.height
+//白色
 let DominantColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 1)
+//黑色
 let FooterViewColor = UIColor.init(red: 240/255.0, green: 241/255.0, blue: 244/255.0, alpha: 1)
 
 // iphone X
