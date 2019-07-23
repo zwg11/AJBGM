@@ -10,12 +10,12 @@ import Foundation
 import UIKit
 
 let AJScreenWidth = UIScreen.main.bounds.width
-<<<<<<< HEAD
+
 let AJScrennHeight = UIScreen.main.bounds.height
 //白色
-=======
+
 let AJScreenHeight = UIScreen.main.bounds.height
->>>>>>> master
+
 let DominantColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 1)
 //黑色
 let FooterViewColor = UIColor.init(red: 240/255.0, green: 241/255.0, blue: 244/255.0, alpha: 1)
