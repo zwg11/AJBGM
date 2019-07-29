@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8441E12622EF106A005A4EBC /* AJMineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8441E12522EF106A005A4EBC /* AJMineHeaderView.swift */; };
 		846D6BFA22E14D79006287B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6BF922E14D79006287B8 /* AppDelegate.swift */; };
 		846D6BFC22E14D79006287B8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6BFB22E14D79006287B8 /* ViewController.swift */; };
 		846D6BFF22E14D79006287B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 846D6BFD22E14D79006287B8 /* Main.storyboard */; };
@@ -38,6 +39,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8441E12522EF106A005A4EBC /* AJMineHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AJMineHeaderView.swift; sourceTree = "<group>"; };
 		846D6BF622E14D79006287B8 /* AIJian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AIJian.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		846D6BF922E14D79006287B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		846D6BFB22E14D79006287B8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 		846D6C1E22E161AC006287B8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8441E12522EF106A005A4EBC /* AJMineHeaderView.swift */,
 				846D6C2D22E189EF006287B8 /* headerView.swift */,
 			);
 			path = View;
@@ -446,6 +449,7 @@
 				846D6C4722E59359006287B8 /* perAndAfterMealTests.swift in Sources */,
 				846D6C0F22E151B8006287B8 /* AJNavigationController.swift in Sources */,
 				846D6C4022E56123006287B8 /* StatisticDate.swift in Sources */,
+				8441E12622EF106A005A4EBC /* AJMineHeaderView.swift in Sources */,
 				846D6C4322E56618006287B8 /* averageView.swift in Sources */,
 				846D6C3222E19C17006287B8 /* StatisticalDataView.swift in Sources */,
 				846D6C1622E16139006287B8 /* AJTabbarController.swift in Sources */,
