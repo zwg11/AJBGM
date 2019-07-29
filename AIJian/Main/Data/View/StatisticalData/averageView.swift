@@ -4,16 +4,15 @@
 //
 //  Created by ADMIN on 2019/7/22.
 //  Copyright © 2019 apple. All rights reserved.
-//
+//  Author : zwg
 
 import UIKit
 import SnapKit
 
+// 平均值展示框
 class averageView: UIView {
     let greenColor = UIColor.init(red: 97.0/255.0, green: 213.0/255.0, blue: 96.0/255.0, alpha: 1)
-//    let redColor = UIColor.init(red: 229.0/255.0, green: 28.0/255.0, blue: 35.0/255.0, alpha: 1)
-//    let yellowColor = UIColor.init(red: 229.0/255.0, green: 217.0/255.0, blue: 28.0/255.0, alpha: 1)
-//    let blueColor = UIColor.init(red: 139.0/255.0, green: 159.0/255.0, blue: 74.0/255.0, alpha: 1)
+
     private lazy var averageTitle:UILabel = {
         let label = UILabel()
         label.text = "Average"
@@ -147,9 +146,10 @@ class averageView: UIView {
         self.addSubview(avgView)
         self.avgView.snp.makeConstraints{ (make) in
             make.left.equalToSuperview().offset(10)
+            make.right.equalToSuperview().offset(-10)
             make.top.equalTo(averageTitle.snp.bottom)
             make.height.equalTo(145)
-            make.width.equalTo(AJScreenWidth-20)
+            //make.width.equalTo(AJScreenWidth-20)
             
         }
         
