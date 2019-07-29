@@ -18,6 +18,10 @@ class ChartViewController: UIViewController {
         super.viewDidLoad()
 
         self.view.addSubview(headerView)
+        
+//        self.headerView.snp.makeConstraints{(make) in
+//            make.left.right.equalToSuperview()
+//        }
         self.view.backgroundColor = UIColor.orange
         // Do any additional setup after loading the view.
     }

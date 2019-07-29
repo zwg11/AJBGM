@@ -34,6 +34,7 @@
 		846D6C4322E56618006287B8 /* averageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C4222E56618006287B8 /* averageView.swift */; };
 		846D6C4522E56635006287B8 /* totalCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C4422E56635006287B8 /* totalCheckView.swift */; };
 		846D6C4722E59359006287B8 /* perAndAfterMealTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C4622E59359006287B8 /* perAndAfterMealTests.swift */; };
+		846D6C5022EEDA34006287B8 /* pickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C4F22EEDA34006287B8 /* pickerView.swift */; };
 		C51C8BD65C07AB3DB20DF1D9 /* Pods_AIJian.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB88905D4BA97B5422D8CCA1 /* Pods_AIJian.framework */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +68,7 @@
 		846D6C4222E56618006287B8 /* averageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = averageView.swift; sourceTree = "<group>"; };
 		846D6C4422E56635006287B8 /* totalCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = totalCheckView.swift; sourceTree = "<group>"; };
 		846D6C4622E59359006287B8 /* perAndAfterMealTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = perAndAfterMealTests.swift; sourceTree = "<group>"; };
+		846D6C4F22EEDA34006287B8 /* pickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pickerView.swift; sourceTree = "<group>"; };
 		A92ED38E7290A71018D96804 /* Pods-AIJian.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AIJian.debug.xcconfig"; path = "Target Support Files/Pods-AIJian/Pods-AIJian.debug.xcconfig"; sourceTree = "<group>"; };
 		B70B834D750B5B24AF91DBA1 /* Pods-AIJian.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AIJian.release.xcconfig"; path = "Target Support Files/Pods-AIJian/Pods-AIJian.release.xcconfig"; sourceTree = "<group>"; };
 		DB88905D4BA97B5422D8CCA1 /* Pods_AIJian.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AIJian.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -209,10 +211,10 @@
 		846D6C1A22E16185006287B8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				846D6C4E22EED9ED006287B8 /* share */,
 				846D6C4822E5DE43006287B8 /* Table */,
 				846D6C4122E565C4006287B8 /* StatisticalData */,
 				846D6C2F22E19BD2006287B8 /* ChartView.swift */,
-				846D6C3522E19CC0006287B8 /* SharedView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -299,6 +301,15 @@
 			);
 			name = Table;
 			path = Table.temp_caseinsensitive_rename.;
+			sourceTree = "<group>";
+		};
+		846D6C4E22EED9ED006287B8 /* share */ = {
+			isa = PBXGroup;
+			children = (
+				846D6C3522E19CC0006287B8 /* SharedView.swift */,
+				846D6C4F22EEDA34006287B8 /* pickerView.swift */,
+			);
+			path = share;
 			sourceTree = "<group>";
 		};
 		B462FAF8CB1B4050B4E32345 /* Pods */ = {
@@ -437,6 +448,7 @@
 				846D6C2622E1621C006287B8 /* DataViewController.swift in Sources */,
 				846D6C1122E15276006287B8 /* const.swift in Sources */,
 				846D6C2C22E16463006287B8 /* AJGuidePageView.swift in Sources */,
+				846D6C5022EEDA34006287B8 /* pickerView.swift in Sources */,
 				846D6C4722E59359006287B8 /* perAndAfterMealTests.swift in Sources */,
 				846D6C0F22E151B8006287B8 /* AJNavigationController.swift in Sources */,
 				846D6C4022E56123006287B8 /* StatisticDate.swift in Sources */,
@@ -600,6 +612,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = AIJian/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -618,6 +631,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = AIJian/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
