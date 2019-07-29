@@ -123,15 +123,7 @@ class DataViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
     }
@@ -146,6 +138,7 @@ class DataViewController: UIViewController {
     
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
 
+        //*****************************************
         // 转屏时的动画太丑了，想个办法美化下
         UIView.animate(withDuration: 0, animations: changeSizeAndOrigin)
         pageViewManager.titleView.frame.size.width = UIScreen.main.bounds.width
