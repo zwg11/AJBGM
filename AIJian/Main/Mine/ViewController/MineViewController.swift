@@ -12,10 +12,8 @@ class MineViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let headview = AJMineHeaderView(frame: CGRect(x: 0, y: navigationBarHeight, width: AJScreenWidth, height: AJScreenHeight/3))
         self.view.addSubview(headview)
-      
     }
     
     //列表数据
@@ -30,5 +28,4 @@ class MineViewController: UIViewController {
                  ["icon":"video", "title": "版本更新"]]
         ]
     }()
-    
 }
