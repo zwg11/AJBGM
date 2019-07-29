@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // 设置启动页轮播图
     func setStaticGuidePage() {
-        let imageNameArray: [String] = ["67", "396","5"]
+        let imageNameArray: [String] = ["yindao01", "yindao02","yindao03"]
         let guideView = AJGuidePageView.init(imageNameArray: imageNameArray, isHiddenSkipButton: false)
         self.window?.rootViewController?.view.addSubview(guideView)
     }
