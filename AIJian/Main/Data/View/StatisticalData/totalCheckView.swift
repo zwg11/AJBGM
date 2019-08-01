@@ -9,13 +9,14 @@
 import UIKit
 import SnapKit
 
-class checkView: UIView {
+class totalCheckView: UIView {
     // 初始化字体颜色，红 黄 绿 蓝
     let greenColor = UIColor.init(red: 97.0/255.0, green: 213.0/255.0, blue: 96.0/255.0, alpha: 1)
     let redColor = UIColor.init(red: 229.0/255.0, green: 28.0/255.0, blue: 35.0/255.0, alpha: 1)
     let yellowColor = UIColor.init(red: 229.0/255.0, green: 217.0/255.0, blue: 28.0/255.0, alpha: 1)
     let blueColor = UIColor.init(red: 139.0/255.0, green: 159.0/255.0, blue: 74.0/255.0, alpha: 1)
     
+    private var title:String?
     // 该函数为方便初始化标签
     func initLabel(setTextColor color:UIColor,setText text:String) -> UILabel{
         let label = UILabel()
@@ -133,14 +134,6 @@ class checkView: UIView {
         return label
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupUI()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     
     // MARK: - 设置所有部件的布局约束
@@ -153,13 +146,13 @@ class checkView: UIView {
             make.width.equalTo((AJScreenWidth-20)/2)
         }
         
-        
+        // 整体框的布局
         self.addSubview(totalTestView)
         self.totalTestView.snp.makeConstraints{ (make) in
-            make.left.equalToSuperview().offset(10)
             make.top.equalTo(checkViewTitle.snp.bottom)
             make.height.equalTo(96)
-            make.width.equalTo(AJScreenWidth-20)
+            make.left.equalToSuperview().offset(10)
+            make.right.equalToSuperview().offset(-10)
             
         }
         // MARK: - Label布局约束

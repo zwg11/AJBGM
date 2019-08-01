@@ -1,19 +1,20 @@
 //
-//  InsertViewController.swift
+//  infoInputViewController.swift
 //  AIJian
 //
-//  Created by ADMIN on 2019/7/19.
+//  Created by ADMIN on 2019/7/31.
 //  Copyright © 2019 apple. All rights reserved.
 //
 
 import UIKit
+import SnapKit
 
-class InsertViewController: UIViewController {
+class infoInputViewController: UIViewController,UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = UIColor.lightGray
+        self.view.backgroundColor = UIColor.white
         // Do any additional setup after loading the view.
     }
     
@@ -28,4 +29,9 @@ class InsertViewController: UIViewController {
     }
     */
 
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        // 收起键盘
+        textField.resignFirstResponder()
+        return true
+    }
 }

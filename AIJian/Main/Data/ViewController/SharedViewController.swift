@@ -54,10 +54,11 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         let sharedScrollView = UIScrollView()
+        // 设置内容高度为屏幕的3/2,显示滚动条，d能上下滚动，背景为白色
         sharedScrollView.contentSize = CGSize(width: AJScreenWidth, height: AJScreenWidth*3/2)
         sharedScrollView.alwaysBounceVertical = true
         sharedScrollView.showsVerticalScrollIndicator = true
-        sharedScrollView.backgroundColor = UIColor.yellow
+        sharedScrollView.backgroundColor = UIColor.white
         self.view.addSubview(sharedScrollView)
         sharedScrollView.snp.makeConstraints{(make) in
             make.left.right.equalToSuperview()

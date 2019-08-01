@@ -74,7 +74,7 @@ class SharedView: UIView {
     }()
     // 姓名文本框
     lazy var nameTextField:UITextField = {
-        let textField = textFieldInit(placeholder: "请输入姓名", keyboardType: .default)
+        let textField = textFieldInit(placeholder: " 请输入姓名", keyboardType: .default)
 
         return textField
     }()
@@ -107,7 +107,7 @@ class SharedView: UIView {
     }()
     // 邮箱文本框
     lazy var emailTextField:UITextField = {
-        let textField = textFieldInit(placeholder: "请输入邮箱", keyboardType: UIKeyboardType.emailAddress)
+        let textField = textFieldInit(placeholder: " 请输入邮箱", keyboardType: UIKeyboardType.emailAddress)
 
         return textField
     }()
@@ -120,7 +120,8 @@ class SharedView: UIView {
         textField.keyboardType = type
         textField.layer.borderColor = UIColor.gray.cgColor
         textField.layer.borderWidth = 1
-        textField.borderStyle = .bezel
+        textField.borderStyle = .line
+        textField.setValue(NSNumber(value: 10), forKey: "paddingLeft")
         
         return textField
     }
@@ -133,7 +134,7 @@ class SharedView: UIView {
     
     func setupUI(){
         //AJScreenWidth
-        self.backgroundColor = UIColor.yellow
+        self.backgroundColor = UIColor.white
         UIView.setAnimationCurve(.linear)
         
         // MARK: - 发送按钮及其说明框

@@ -93,6 +93,10 @@ class perAndAfterMealTests: UIView {
         return label
     }()
     
+    private lazy var lowPercent:UILabel = {
+        let label = initLabel(setTextColor: redColor, setText: "0%")
+        return label
+    }()
     
     //***********低于正常值*************
     private lazy var lowerNormal:UILabel = {
@@ -105,6 +109,10 @@ class perAndAfterMealTests: UIView {
         return label
     }()
     
+    private lazy var lowerNormalPercent:UILabel = {
+        let label = initLabel(setTextColor: yellowColor, setText: "0%")
+        return label
+    }()
     
     //***********正常*************
     private lazy var normal:UILabel = {
@@ -117,6 +125,10 @@ class perAndAfterMealTests: UIView {
         return label
     }()
     
+    private lazy var normalPercent:UILabel = {
+        let label = initLabel(setTextColor: greenColor, setText: "0%")
+        return label
+    }()
     
     //***********高于正常值*************
     private lazy var higherNormal:UILabel = {
@@ -129,15 +141,12 @@ class perAndAfterMealTests: UIView {
         return label
     }()
     
+    private lazy var higherNormalPercent:UILabel = {
+        let label = initLabel(setTextColor: blueColor, setText: "0%")
+        
+        return label
+    }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupUI()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     
     // MARK: - 设置所有部件的布局约束
@@ -153,10 +162,10 @@ class perAndAfterMealTests: UIView {
         
         self.addSubview(totalTestView)
         self.totalTestView.snp.makeConstraints{ (make) in
-            make.left.equalToSuperview().offset(10)
             make.top.equalTo(checkViewTitle.snp.bottom)
-            make.height.equalTo(76)
-            make.width.equalTo(AJScreenWidth-20)
+            make.height.equalTo(96)
+            make.left.equalToSuperview().offset(10)
+            make.right.equalToSuperview().offset(-10)
             
         }
         // MARK: - Label布局约束
@@ -180,6 +189,14 @@ class perAndAfterMealTests: UIView {
             
         }
         
+        self.totalTestView.addSubview(lowPercent)
+        self.lowPercent.snp.makeConstraints{ (make) in
+            make.left.equalToSuperview()
+            make.top.equalTo(lowValue.snp.bottom)
+            make.height.equalTo(30)
+            make.width.equalTo((AJScreenWidth-20)/4)
+            
+        }
         
         // ***************************低于*****************************
         self.totalTestView.addSubview(lowerNormal)
@@ -195,6 +212,15 @@ class perAndAfterMealTests: UIView {
         self.lowerNormalValue.snp.makeConstraints{ (make) in
             make.left.equalTo(lowerNormal.snp.left)
             make.top.equalTo(lowerNormal.snp.bottom)
+            make.height.equalTo(30)
+            make.width.equalTo((AJScreenWidth-20)/4)
+            
+        }
+        
+        self.totalTestView.addSubview(lowerNormalPercent)
+        self.lowerNormalPercent.snp.makeConstraints{ (make) in
+            make.left.equalTo(lowerNormal.snp.left)
+            make.top.equalTo(lowerNormalValue.snp.bottom)
             make.height.equalTo(30)
             make.width.equalTo((AJScreenWidth-20)/4)
             
@@ -219,6 +245,15 @@ class perAndAfterMealTests: UIView {
             
         }
         
+        self.totalTestView.addSubview(normalPercent)
+        self.normalPercent.snp.makeConstraints{ (make) in
+            make.left.equalTo(lowerNormal.snp.right)
+            make.top.equalTo(normalValue.snp.bottom)
+            make.height.equalTo(low.snp.height)
+            make.width.equalTo((AJScreenWidth-20)/4)
+            
+        }
+        //
         // ***************************高于*****************************
         self.totalTestView.addSubview(higherNormal)
         self.higherNormal.snp.makeConstraints{ (make) in
@@ -238,7 +273,16 @@ class perAndAfterMealTests: UIView {
             
         }
         
-        // **************************下划线***************************
+        self.totalTestView.addSubview(higherNormalPercent)
+        self.higherNormalPercent.snp.makeConstraints{ (make) in
+            make.left.equalTo(normal.snp.right)
+            make.top.equalTo(higherNormalValue.snp.bottom)
+            make.height.equalTo(low.snp.height)
+            make.width.equalTo((AJScreenWidth-20)/4)
+            
+        }
+        
+        // ***************************下划线******************************
         self.totalTestView.addSubview(lineView1)
         self.lineView1.snp.makeConstraints{ (make) in
             make.centerX.equalTo(low.snp.centerX)
