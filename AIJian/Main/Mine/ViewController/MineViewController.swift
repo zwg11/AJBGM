@@ -18,14 +18,14 @@ class MineViewController: UIViewController {
     
     //列表数据
     private lazy var dataSource: Array = {
-        return [[["icon":"video", "title": "信息管理"],
-                 ["icon":"video", "title": "清楚缓存"],
-                 ["icon":"video", "title": "密码修改"],
-                 ["icon":"video", "title": "血糖设置"]],
+        return [[["icon":"aboutUs", "title": "信息管理"],
+                 ["icon":"aboutUs", "title": "单位设置"],
+                 ["icon":"aboutUs", "title": "密码修改"],
+                 ["icon":"aboutUs", "title": "血糖设置"]],
                 
-                [["icon":"video", "title": "视频帮助"],
-                 ["icon":"video", "title": "关于我们"],
-                 ["icon":"video", "title": "版本更新"]]
+                [["icon":"aboutUs", "title": "使用说明"],
+                 ["icon":"aboutUs", "title": "关于我们"],
+                 ["icon":"aboutUs", "title": "版本更新"]]
         ]
     }()
 }

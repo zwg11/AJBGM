@@ -14,8 +14,7 @@ class AJMineHeaderView:UIView{
     private lazy var titleImage:UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named:"defaultUserImage")
-        
-        imageView.layer.cornerRadius = 60
+        imageView.layer.cornerRadius = (AJScreenWidth*0.3)/2   //将圆角设置成半径
         imageView.layer.masksToBounds = true
         return imageView
     }()
@@ -61,6 +60,10 @@ class AJMineHeaderView:UIView{
         fatalError("init(coder:) has not been implemented")
     }
     
+}
+
+
+extension UIImageView{
     
     
 }

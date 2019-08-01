@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8441E12622EF106A005A4EBC /* AJMineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8441E12522EF106A005A4EBC /* AJMineHeaderView.swift */; };
+		845BBA9922F2940500CAEFCC /* AJMineTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BBA9822F2940500CAEFCC /* AJMineTableView.swift */; };
 		846D6BFA22E14D79006287B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6BF922E14D79006287B8 /* AppDelegate.swift */; };
 		846D6BFC22E14D79006287B8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6BFB22E14D79006287B8 /* ViewController.swift */; };
 		846D6BFF22E14D79006287B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 846D6BFD22E14D79006287B8 /* Main.storyboard */; };
@@ -21,7 +22,6 @@
 		846D6C2822E1622B006287B8 /* InsertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C2722E1622B006287B8 /* InsertViewController.swift */; };
 		846D6C2A22E1623C006287B8 /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C2922E1623C006287B8 /* MineViewController.swift */; };
 		846D6C2C22E16463006287B8 /* AJGuidePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C2B22E16463006287B8 /* AJGuidePageView.swift */; };
-		846D6C2E22E189EF006287B8 /* headerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C2D22E189EF006287B8 /* headerView.swift */; };
 		846D6C3022E19BD2006287B8 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C2F22E19BD2006287B8 /* ChartView.swift */; };
 		846D6C3222E19C17006287B8 /* StatisticalDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C3122E19C17006287B8 /* StatisticalDataView.swift */; };
 		846D6C3422E19CA3006287B8 /* DataTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C3322E19CA3006287B8 /* DataTableView.swift */; };
@@ -40,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		8441E12522EF106A005A4EBC /* AJMineHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AJMineHeaderView.swift; sourceTree = "<group>"; };
+		845BBA9822F2940500CAEFCC /* AJMineTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AJMineTableView.swift; sourceTree = "<group>"; };
 		846D6BF622E14D79006287B8 /* AIJian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AIJian.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		846D6BF922E14D79006287B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		846D6BFB22E14D79006287B8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -55,7 +56,6 @@
 		846D6C2722E1622B006287B8 /* InsertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertViewController.swift; sourceTree = "<group>"; };
 		846D6C2922E1623C006287B8 /* MineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineViewController.swift; sourceTree = "<group>"; };
 		846D6C2B22E16463006287B8 /* AJGuidePageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AJGuidePageView.swift; sourceTree = "<group>"; };
-		846D6C2D22E189EF006287B8 /* headerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = headerView.swift; sourceTree = "<group>"; };
 		846D6C2F22E19BD2006287B8 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		846D6C3122E19C17006287B8 /* StatisticalDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticalDataView.swift; sourceTree = "<group>"; };
 		846D6C3322E19CA3006287B8 /* DataTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTableView.swift; sourceTree = "<group>"; };
@@ -246,7 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				8441E12522EF106A005A4EBC /* AJMineHeaderView.swift */,
-				846D6C2D22E189EF006287B8 /* headerView.swift */,
+				845BBA9822F2940500CAEFCC /* AJMineTableView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -437,12 +437,12 @@
 				846D6C4522E56635006287B8 /* totalCheckView.swift in Sources */,
 				846D6C3C22E1A67D006287B8 /* DataTableViewController.swift in Sources */,
 				846D6BFC22E14D79006287B8 /* ViewController.swift in Sources */,
-				846D6C2E22E189EF006287B8 /* headerView.swift in Sources */,
 				846D6C2822E1622B006287B8 /* InsertViewController.swift in Sources */,
 				846D6C3422E19CA3006287B8 /* DataTableView.swift in Sources */,
 				846D6C3822E1A648006287B8 /* ChartViewController.swift in Sources */,
 				846D6C2A22E1623C006287B8 /* MineViewController.swift in Sources */,
 				846D6C2622E1621C006287B8 /* DataViewController.swift in Sources */,
+				845BBA9922F2940500CAEFCC /* AJMineTableView.swift in Sources */,
 				846D6C1122E15276006287B8 /* const.swift in Sources */,
 				846D6C2C22E16463006287B8 /* AJGuidePageView.swift in Sources */,
 				846D6C5022EEDA34006287B8 /* pickerView.swift in Sources */,
