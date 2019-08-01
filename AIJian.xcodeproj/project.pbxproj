@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8403B04422E5517C008E8612 /* AJMineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8403B04322E5517C008E8612 /* AJMineHeaderView.swift */; };
+		8441E12622EF106A005A4EBC /* AJMineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8441E12522EF106A005A4EBC /* AJMineHeaderView.swift */; };
 		846D6BFA22E14D79006287B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6BF922E14D79006287B8 /* AppDelegate.swift */; };
 		846D6BFC22E14D79006287B8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6BFB22E14D79006287B8 /* ViewController.swift */; };
 		846D6BFF22E14D79006287B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 846D6BFD22E14D79006287B8 /* Main.storyboard */; };
@@ -22,8 +22,7 @@
 		846D6C2A22E1623C006287B8 /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C2922E1623C006287B8 /* MineViewController.swift */; };
 		846D6C2C22E16463006287B8 /* AJGuidePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C2B22E16463006287B8 /* AJGuidePageView.swift */; };
 		846D6C2E22E189EF006287B8 /* headerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C2D22E189EF006287B8 /* headerView.swift */; };
-		846D6C3022E19BD2006287B8 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C2F22E19BD2006287B8 /* ChartView.swift */; };
-		846D6C3222E19C17006287B8 /* StatisticalDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C3122E19C17006287B8 /* StatisticalDataView.swift */; };
+		846D6C3022E19BD2006287B8 /* ChartHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C2F22E19BD2006287B8 /* ChartHeaderView.swift */; };
 		846D6C3422E19CA3006287B8 /* DataTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C3322E19CA3006287B8 /* DataTableView.swift */; };
 		846D6C3622E19CC0006287B8 /* SharedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C3522E19CC0006287B8 /* SharedView.swift */; };
 		846D6C3822E1A648006287B8 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C3722E1A648006287B8 /* ChartViewController.swift */; };
@@ -35,11 +34,26 @@
 		846D6C4522E56635006287B8 /* totalCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C4422E56635006287B8 /* totalCheckView.swift */; };
 		846D6C4722E59359006287B8 /* perAndAfterMealTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C4622E59359006287B8 /* perAndAfterMealTests.swift */; };
 		846D6C5022EEDA34006287B8 /* pickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C4F22EEDA34006287B8 /* pickerView.swift */; };
+		846D6C7122F005E7006287B8 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C7022F005E7006287B8 /* ChartView.swift */; };
+		846D6C7322F00854006287B8 /* valueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C7222F00854006287B8 /* valueFormatter.swift */; };
+		846D6C7522F04863006287B8 /* AJStartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C7422F04863006287B8 /* AJStartView.swift */; };
+		846D6C7C22F06CE2006287B8 /* loginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C7B22F06CE2006287B8 /* loginView.swift */; };
+		846D6C8222F077E0006287B8 /* loginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C8122F077E0006287B8 /* loginViewController.swift */; };
+		846D6C8422F1475B006287B8 /* loginNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C8322F1475B006287B8 /* loginNavigationController.swift */; };
+		846D6C8B22F158DE006287B8 /* registerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C8A22F158DE006287B8 /* registerView.swift */; };
+		846D6C8D22F158F2006287B8 /* InfoInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C8C22F158F2006287B8 /* InfoInputView.swift */; };
+		846D6C8F22F15CD5006287B8 /* emailCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C8E22F15CD5006287B8 /* emailCheckView.swift */; };
+		846D6C9122F17684006287B8 /* emailCheckSecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C9022F17684006287B8 /* emailCheckSecondView.swift */; };
+		846D6C9622F198EA006287B8 /* registerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C9522F198EA006287B8 /* registerViewController.swift */; };
+		846D6C9822F19902006287B8 /* infoInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C9722F19902006287B8 /* infoInputViewController.swift */; };
+		846D6C9A22F19921006287B8 /* emailCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C9922F19921006287B8 /* emailCheckViewController.swift */; };
+		846D6C9C22F19935006287B8 /* emailCheckSecViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C9B22F19935006287B8 /* emailCheckSecViewController.swift */; };
+		846D6C9F22F27631006287B8 /* UIButton_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C9E22F27631006287B8 /* UIButton_Extension.swift */; };
 		C51C8BD65C07AB3DB20DF1D9 /* Pods_AIJian.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB88905D4BA97B5422D8CCA1 /* Pods_AIJian.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8403B04322E5517C008E8612 /* AJMineHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AJMineHeaderView.swift; path = AIJian/Main/Mine/ViewController/AJMineHeaderView.swift; sourceTree = SOURCE_ROOT; };
+		8441E12522EF106A005A4EBC /* AJMineHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AJMineHeaderView.swift; sourceTree = "<group>"; };
 		846D6BF622E14D79006287B8 /* AIJian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AIJian.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		846D6BF922E14D79006287B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		846D6BFB22E14D79006287B8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,8 +70,7 @@
 		846D6C2922E1623C006287B8 /* MineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineViewController.swift; sourceTree = "<group>"; };
 		846D6C2B22E16463006287B8 /* AJGuidePageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AJGuidePageView.swift; sourceTree = "<group>"; };
 		846D6C2D22E189EF006287B8 /* headerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = headerView.swift; sourceTree = "<group>"; };
-		846D6C2F22E19BD2006287B8 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
-		846D6C3122E19C17006287B8 /* StatisticalDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticalDataView.swift; sourceTree = "<group>"; };
+		846D6C2F22E19BD2006287B8 /* ChartHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartHeaderView.swift; sourceTree = "<group>"; };
 		846D6C3322E19CA3006287B8 /* DataTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTableView.swift; sourceTree = "<group>"; };
 		846D6C3522E19CC0006287B8 /* SharedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedView.swift; sourceTree = "<group>"; };
 		846D6C3722E1A648006287B8 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +82,21 @@
 		846D6C4422E56635006287B8 /* totalCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = totalCheckView.swift; sourceTree = "<group>"; };
 		846D6C4622E59359006287B8 /* perAndAfterMealTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = perAndAfterMealTests.swift; sourceTree = "<group>"; };
 		846D6C4F22EEDA34006287B8 /* pickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pickerView.swift; sourceTree = "<group>"; };
+		846D6C7022F005E7006287B8 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		846D6C7222F00854006287B8 /* valueFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = valueFormatter.swift; sourceTree = "<group>"; };
+		846D6C7422F04863006287B8 /* AJStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AJStartView.swift; sourceTree = "<group>"; };
+		846D6C7B22F06CE2006287B8 /* loginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loginView.swift; sourceTree = "<group>"; };
+		846D6C8122F077E0006287B8 /* loginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginViewController.swift; sourceTree = "<group>"; };
+		846D6C8322F1475B006287B8 /* loginNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginNavigationController.swift; sourceTree = "<group>"; };
+		846D6C8A22F158DE006287B8 /* registerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = registerView.swift; sourceTree = "<group>"; };
+		846D6C8C22F158F2006287B8 /* InfoInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoInputView.swift; sourceTree = "<group>"; };
+		846D6C8E22F15CD5006287B8 /* emailCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emailCheckView.swift; sourceTree = "<group>"; };
+		846D6C9022F17684006287B8 /* emailCheckSecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emailCheckSecondView.swift; sourceTree = "<group>"; };
+		846D6C9522F198EA006287B8 /* registerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = registerViewController.swift; sourceTree = "<group>"; };
+		846D6C9722F19902006287B8 /* infoInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = infoInputViewController.swift; sourceTree = "<group>"; };
+		846D6C9922F19921006287B8 /* emailCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emailCheckViewController.swift; sourceTree = "<group>"; };
+		846D6C9B22F19935006287B8 /* emailCheckSecViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emailCheckSecViewController.swift; sourceTree = "<group>"; };
+		846D6C9E22F27631006287B8 /* UIButton_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton_Extension.swift; sourceTree = "<group>"; };
 		A92ED38E7290A71018D96804 /* Pods-AIJian.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AIJian.debug.xcconfig"; path = "Target Support Files/Pods-AIJian/Pods-AIJian.debug.xcconfig"; sourceTree = "<group>"; };
 		B70B834D750B5B24AF91DBA1 /* Pods-AIJian.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AIJian.release.xcconfig"; path = "Target Support Files/Pods-AIJian/Pods-AIJian.release.xcconfig"; sourceTree = "<group>"; };
 		DB88905D4BA97B5422D8CCA1 /* Pods_AIJian.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AIJian.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,8 +148,9 @@
 				846D6BFB22E14D79006287B8 /* ViewController.swift */,
 				846D6C1022E15276006287B8 /* const.swift */,
 				846D6C0C22E15108006287B8 /* Main */,
-				846D6C0022E14D89006287B8 /* Assets.xcassets */,
+				846D6C9D22F275EE006287B8 /* New Group */,
 				846D6C0222E14D89006287B8 /* LaunchScreen.storyboard */,
+				846D6C0022E14D89006287B8 /* Assets.xcassets */,
 				846D6C0522E14D89006287B8 /* Info.plist */,
 			);
 			path = AIJian;
@@ -132,7 +161,9 @@
 			children = (
 				846D6C2B22E16463006287B8 /* AJGuidePageView.swift */,
 				846D6C0E22E151B8006287B8 /* AJNavigationController.swift */,
+				846D6C7422F04863006287B8 /* AJStartView.swift */,
 				846D6C1522E16139006287B8 /* AJTabbarController.swift */,
+				846D6C7A22F06CE2006287B8 /* LoginAndRegister */,
 				846D6C1422E1601C006287B8 /* Home */,
 				846D6C1322E16007006287B8 /* Data */,
 				846D6C1222E15FE9006287B8 /* Insert */,
@@ -211,10 +242,10 @@
 		846D6C1A22E16185006287B8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				846D6C6F22F0047A006287B8 /* Charts */,
 				846D6C4E22EED9ED006287B8 /* share */,
 				846D6C4822E5DE43006287B8 /* Table */,
 				846D6C4122E565C4006287B8 /* StatisticalData */,
-				846D6C2F22E19BD2006287B8 /* ChartView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -245,11 +276,8 @@
 		846D6C1E22E161AC006287B8 /* View */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
-				8403B04322E5517C008E8612 /* AJMineHeaderView.swift */,
-=======
+				8441E12522EF106A005A4EBC /* AJMineHeaderView.swift */,
 				846D6C2D22E189EF006287B8 /* headerView.swift */,
->>>>>>> 450b3d3057b5b8711bc40d122447079c34164128
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -286,7 +314,6 @@
 		846D6C4122E565C4006287B8 /* StatisticalData */ = {
 			isa = PBXGroup;
 			children = (
-				846D6C3122E19C17006287B8 /* StatisticalDataView.swift */,
 				846D6C4222E56618006287B8 /* averageView.swift */,
 				846D6C4422E56635006287B8 /* totalCheckView.swift */,
 				846D6C4622E59359006287B8 /* perAndAfterMealTests.swift */,
@@ -310,6 +337,115 @@
 				846D6C4F22EEDA34006287B8 /* pickerView.swift */,
 			);
 			path = share;
+			sourceTree = "<group>";
+		};
+		846D6C6F22F0047A006287B8 /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+				846D6C2F22E19BD2006287B8 /* ChartHeaderView.swift */,
+				846D6C7022F005E7006287B8 /* ChartView.swift */,
+				846D6C7222F00854006287B8 /* valueFormatter.swift */,
+			);
+			path = Charts;
+			sourceTree = "<group>";
+		};
+		846D6C7A22F06CE2006287B8 /* LoginAndRegister */ = {
+			isa = PBXGroup;
+			children = (
+				846D6C8022F06D94006287B8 /* Model */,
+				846D6C7F22F06D8E006287B8 /* View */,
+				846D6C7E22F06D73006287B8 /* ViewController */,
+			);
+			path = LoginAndRegister;
+			sourceTree = "<group>";
+		};
+		846D6C7E22F06D73006287B8 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				846D6C8322F1475B006287B8 /* loginNavigationController.swift */,
+				846D6C9222F19886006287B8 /* login */,
+				846D6C9322F19896006287B8 /* register */,
+				846D6C9422F198A7006287B8 /* PasswordForget */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		846D6C7F22F06D8E006287B8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				846D6C8722F15877006287B8 /* login */,
+				846D6C8822F15886006287B8 /* Register */,
+				846D6C8922F15898006287B8 /* PasswordForget */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		846D6C8022F06D94006287B8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		846D6C8722F15877006287B8 /* login */ = {
+			isa = PBXGroup;
+			children = (
+				846D6C7B22F06CE2006287B8 /* loginView.swift */,
+			);
+			path = login;
+			sourceTree = "<group>";
+		};
+		846D6C8822F15886006287B8 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				846D6C8A22F158DE006287B8 /* registerView.swift */,
+				846D6C8C22F158F2006287B8 /* InfoInputView.swift */,
+			);
+			path = Register;
+			sourceTree = "<group>";
+		};
+		846D6C8922F15898006287B8 /* PasswordForget */ = {
+			isa = PBXGroup;
+			children = (
+				846D6C8E22F15CD5006287B8 /* emailCheckView.swift */,
+				846D6C9022F17684006287B8 /* emailCheckSecondView.swift */,
+			);
+			path = PasswordForget;
+			sourceTree = "<group>";
+		};
+		846D6C9222F19886006287B8 /* login */ = {
+			isa = PBXGroup;
+			children = (
+				846D6C8122F077E0006287B8 /* loginViewController.swift */,
+			);
+			path = login;
+			sourceTree = "<group>";
+		};
+		846D6C9322F19896006287B8 /* register */ = {
+			isa = PBXGroup;
+			children = (
+				846D6C9522F198EA006287B8 /* registerViewController.swift */,
+				846D6C9722F19902006287B8 /* infoInputViewController.swift */,
+			);
+			path = register;
+			sourceTree = "<group>";
+		};
+		846D6C9422F198A7006287B8 /* PasswordForget */ = {
+			isa = PBXGroup;
+			children = (
+				846D6C9922F19921006287B8 /* emailCheckViewController.swift */,
+				846D6C9B22F19935006287B8 /* emailCheckSecViewController.swift */,
+			);
+			path = PasswordForget;
+			sourceTree = "<group>";
+		};
+		846D6C9D22F275EE006287B8 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				846D6C9E22F27631006287B8 /* UIButton_Extension.swift */,
+			);
+			name = "New Group";
+			path = "Main/New Group";
 			sourceTree = "<group>";
 		};
 		B462FAF8CB1B4050B4E32345 /* Pods */ = {
@@ -439,31 +575,44 @@
 				846D6C3622E19CC0006287B8 /* SharedView.swift in Sources */,
 				846D6C4522E56635006287B8 /* totalCheckView.swift in Sources */,
 				846D6C3C22E1A67D006287B8 /* DataTableViewController.swift in Sources */,
+				846D6C7122F005E7006287B8 /* ChartView.swift in Sources */,
+				846D6C9A22F19921006287B8 /* emailCheckViewController.swift in Sources */,
 				846D6BFC22E14D79006287B8 /* ViewController.swift in Sources */,
 				846D6C2E22E189EF006287B8 /* headerView.swift in Sources */,
+				846D6C9122F17684006287B8 /* emailCheckSecondView.swift in Sources */,
 				846D6C2822E1622B006287B8 /* InsertViewController.swift in Sources */,
+				846D6C8422F1475B006287B8 /* loginNavigationController.swift in Sources */,
 				846D6C3422E19CA3006287B8 /* DataTableView.swift in Sources */,
 				846D6C3822E1A648006287B8 /* ChartViewController.swift in Sources */,
 				846D6C2A22E1623C006287B8 /* MineViewController.swift in Sources */,
+				846D6C8D22F158F2006287B8 /* InfoInputView.swift in Sources */,
 				846D6C2622E1621C006287B8 /* DataViewController.swift in Sources */,
+				846D6C8B22F158DE006287B8 /* registerView.swift in Sources */,
 				846D6C1122E15276006287B8 /* const.swift in Sources */,
 				846D6C2C22E16463006287B8 /* AJGuidePageView.swift in Sources */,
 				846D6C5022EEDA34006287B8 /* pickerView.swift in Sources */,
 				846D6C4722E59359006287B8 /* perAndAfterMealTests.swift in Sources */,
 				846D6C0F22E151B8006287B8 /* AJNavigationController.swift in Sources */,
 				846D6C4022E56123006287B8 /* StatisticDate.swift in Sources */,
+				8441E12622EF106A005A4EBC /* AJMineHeaderView.swift in Sources */,
 				846D6C4322E56618006287B8 /* averageView.swift in Sources */,
-				846D6C3222E19C17006287B8 /* StatisticalDataView.swift in Sources */,
 				846D6C1622E16139006287B8 /* AJTabbarController.swift in Sources */,
-<<<<<<< HEAD
-				8403B04422E5517C008E8612 /* AJMineHeaderView.swift in Sources */,
-=======
+				846D6C9622F198EA006287B8 /* registerViewController.swift in Sources */,
+				846D6C9F22F27631006287B8 /* UIButton_Extension.swift in Sources */,
+				846D6C3A22E1A66B006287B8 /* StatisticalDataViewController.swift in Sources */,
+				846D6C8222F077E0006287B8 /* loginViewController.swift in Sources */,
+				846D6C9C22F19935006287B8 /* emailCheckSecViewController.swift in Sources */,
+				846D6C3E22E1A693006287B8 /* SharedViewController.swift in Sources */,
+				846D6C7C22F06CE2006287B8 /* loginView.swift in Sources */,
 				846D6C3A22E1A66B006287B8 /* StatisticalDataViewController.swift in Sources */,
 				846D6C3E22E1A693006287B8 /* SharedViewController.swift in Sources */,
->>>>>>> 450b3d3057b5b8711bc40d122447079c34164128
 				846D6BFA22E14D79006287B8 /* AppDelegate.swift in Sources */,
+				846D6C8F22F15CD5006287B8 /* emailCheckView.swift in Sources */,
+				846D6C9822F19902006287B8 /* infoInputViewController.swift in Sources */,
+				846D6C7322F00854006287B8 /* valueFormatter.swift in Sources */,
+				846D6C7522F04863006287B8 /* AJStartView.swift in Sources */,
 				846D6C2422E161FB006287B8 /* HomeViewController.swift in Sources */,
-				846D6C3022E19BD2006287B8 /* ChartView.swift in Sources */,
+				846D6C3022E19BD2006287B8 /* ChartHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

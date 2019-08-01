@@ -13,6 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    var isFirstStart:Bool?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -22,16 +23,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // tabBarController子视图控制器集合
         //tabBarController.viewControllers = [weChat,addressBook,find]
         // 添加到rootViewController
-        
-        window?.rootViewController = tabBarController
+        let viewController = loginViewController()
+        let nv = loginNavigationController(rootViewController: viewController)
+        window?.rootViewController = nv
         window?.makeKeyAndVisible()
-        self.setStaticGuidePage()
+        
+
+        let startImageView = AJStartView.init(imageName: "startView-1", timer: 3)
+        self.window?.rootViewController?.view.addSubview(startImageView)
+        isFirstStart = false
+        if isFirstStart == true{
+            self.setStaticGuidePage()
+        }
         return true
     }
 
     // 设置启动页轮播图
     func setStaticGuidePage() {
-        let imageNameArray: [String] = ["67", "396","5"]
+        let imageNameArray: [String] = ["yindao01", "yindao02","yindao03"]
         let guideView = AJGuidePageView.init(imageNameArray: imageNameArray, isHiddenSkipButton: false)
         self.window?.rootViewController?.view.addSubview(guideView)
     }

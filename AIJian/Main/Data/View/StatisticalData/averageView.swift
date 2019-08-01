@@ -13,6 +13,7 @@ import SnapKit
 class averageView: UIView {
     let greenColor = UIColor.init(red: 97.0/255.0, green: 213.0/255.0, blue: 96.0/255.0, alpha: 1)
 
+    // 标题
     private lazy var averageTitle:UILabel = {
         let label = UILabel()
         label.text = "Average"
@@ -128,12 +129,9 @@ class averageView: UIView {
         
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupUI()
-    }
     
     func setupUI(){
+        // 标题布局设置
         self.addSubview(averageTitle)
         self.averageTitle.snp.makeConstraints{ (make) in
             make.left.equalToSuperview().offset(10)
@@ -236,14 +234,6 @@ class averageView: UIView {
         }
 
     }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    
-    
-
     
 
 }

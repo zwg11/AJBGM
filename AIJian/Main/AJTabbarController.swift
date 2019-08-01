@@ -43,7 +43,7 @@ class AJTabbarController: UITabBarController {
         nv3.tabBarItem.title = "Insert"
         self.addChild(nv3)
         
-        let Mine = InsertViewController()
+        let Mine = MineViewController()
         let nv4 = AJNavigationController(rootViewController: Mine)
         Mine.navigationItem.title = "Mine"
         nv4.tabBarItem.image = UIImage(named: "wode.png")?.withRenderingMode(.alwaysOriginal)

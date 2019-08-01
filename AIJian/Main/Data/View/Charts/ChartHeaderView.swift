@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-class ChartView: UIView {
+class ChartHeaderView: UIView {
 
     // title
     private lazy var textLabel:UILabel = {
@@ -26,11 +26,6 @@ class ChartView: UIView {
         return imageView
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.backgroundColor = UIColor.white
-        setUpUI()
-    }
     
     func setUpUI(){
         self.addSubview(self.textLabel)
@@ -50,16 +45,8 @@ class ChartView: UIView {
         }
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
+    
+    
 
 }
