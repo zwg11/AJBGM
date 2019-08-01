@@ -53,13 +53,13 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
     //    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        let uview = UIScrollView()
-        uview.contentSize = CGSize(width: AJScreenWidth, height: AJScreenWidth*3/2)
-        uview.alwaysBounceVertical = true
-        uview.showsVerticalScrollIndicator = true
-        uview.backgroundColor = UIColor.yellow
-        self.view.addSubview(uview)
-        uview.snp.makeConstraints{(make) in
+        let sharedScrollView = UIScrollView()
+        sharedScrollView.contentSize = CGSize(width: AJScreenWidth, height: AJScreenWidth*3/2)
+        sharedScrollView.alwaysBounceVertical = true
+        sharedScrollView.showsVerticalScrollIndicator = true
+        sharedScrollView.backgroundColor = UIColor.yellow
+        self.view.addSubview(sharedScrollView)
+        sharedScrollView.snp.makeConstraints{(make) in
             make.left.right.equalToSuperview()
             //*********************************
             // 可使底部与tabbar自动对齐
@@ -81,7 +81,7 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
             
         }
         //        share.setupUI()
-        //        uview.addSubview(share)
+        //        sharedScrollView.addSubview(share)
         //        // 这样设置约束是可以的，能够自适应，但为什么？***************************
         //          //此处也未设置view的高度Y和顶部位置，但默认顶部置顶，不知为什么
         // ***********************如果没有设置高度，那么该视图的按钮、文本框等都不能点击******************
@@ -96,7 +96,7 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
         
         
         // sharedView 视图设置
-        uview.addSubview(shareV)
+        sharedScrollView.addSubview(shareV)
         
         shareV.snp.makeConstraints{(make) in
             make.left.equalTo(self.view.snp.left)

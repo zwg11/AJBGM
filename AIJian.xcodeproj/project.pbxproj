@@ -245,8 +245,17 @@
 		846D6C1E22E161AC006287B8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+
+
+				8403B04322E5517C008E8612 /* AJMineHeaderView.swift */,
+
+				846D6C2D22E189EF006287B8 /* headerView.swift */,
+
+
 				8441E12522EF106A005A4EBC /* AJMineHeaderView.swift */,
 				845BBA9822F2940500CAEFCC /* AJMineTableView.swift */,
+				846D6C2D22E189EF006287B8 /* headerView.swift */,
+
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -453,8 +462,17 @@
 				846D6C4322E56618006287B8 /* averageView.swift in Sources */,
 				846D6C3222E19C17006287B8 /* StatisticalDataView.swift in Sources */,
 				846D6C1622E16139006287B8 /* AJTabbarController.swift in Sources */,
+
+
+				8403B04422E5517C008E8612 /* AJMineHeaderView.swift in Sources */,
+
 				846D6C3A22E1A66B006287B8 /* StatisticalDataViewController.swift in Sources */,
 				846D6C3E22E1A693006287B8 /* SharedViewController.swift in Sources */,
+
+
+				846D6C3A22E1A66B006287B8 /* StatisticalDataViewController.swift in Sources */,
+				846D6C3E22E1A693006287B8 /* SharedViewController.swift in Sources */,
+
 				846D6BFA22E14D79006287B8 /* AppDelegate.swift in Sources */,
 				846D6C2422E161FB006287B8 /* HomeViewController.swift in Sources */,
 				846D6C3022E19BD2006287B8 /* ChartView.swift in Sources */,
