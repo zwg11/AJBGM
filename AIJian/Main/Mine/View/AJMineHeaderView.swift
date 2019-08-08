@@ -14,18 +14,18 @@ class AJMineHeaderView:UIView{
     private lazy var titleImage:UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named:"defaultUserImage")
-        
-        imageView.layer.cornerRadius = 60
+        imageView.layer.cornerRadius = (AJScreenWidth*0.3)/2   //将圆角设置成半径
         imageView.layer.masksToBounds = true
         return imageView
     }()
     
-    //点击登录
+    //点击登录,label无法直接添加addtarger
     private lazy var textLabel:UILabel = {
         let label = UILabel()
         label.text = "Click Login"
         label.textColor = UIColor.white
         label.font = UIFont.systemFont(ofSize: 24)
+        
         return label
     }()
     
@@ -61,6 +61,10 @@ class AJMineHeaderView:UIView{
         fatalError("init(coder:) has not been implemented")
     }
     
+}
+
+
+extension UIImageView{
     
     
 }

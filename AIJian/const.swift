@@ -30,3 +30,29 @@ let isIphoneX = AJScreenHeight == 812 ? true : false
 let navigationBarHeight : CGFloat = isIphoneX ? 88 : 64
 // tabBarHeight
 let tabBarHeight : CGFloat = isIphoneX ? 49 + 34 : 49
+
+
+let ABOUTUS_STRING = "艾康生物科技有限公司"
+
+var weightUnit : String = "kg"
+var heightUnit : String = "cm"
+var bloodUnit : String = "mmol/L"
+
+
+/// 宽度比
+let kScalWidth = (AJScreenWidth / 375)
+/// 高度比
+let kScalHeight = (AJScreenHeight / 667)
+/// RGB颜色
+func kRGBColor(_ r:CGFloat,_ g : CGFloat, _ b : CGFloat, _ p : CGFloat) -> UIColor {
+    
+    return UIColor.init(red: r / 255.0, green: g / 255.0, blue: b / 255.0, alpha: p)
+}
+
+let kPrintLog = 1  // 控制台输出开关 1：打开   0：关闭
+// 控制台打印
+func PLog(item: Any...) {
+    if kPrintLog == 1 {
+        print(item.last!)
+    }
+}
