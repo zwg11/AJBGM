@@ -13,12 +13,10 @@ class InfoViewController: UIViewController ,PickerDelegate{
     var num:Int = 0
 
     //列表数据
-    public lazy var infoArray: Array = ["用户名","性    别","体    重","身    高","邮    箱","生    日"]
+    public lazy var infoArray: Array = ["用户名","性    别","体    重","身    高","生    日","国    家","电    话"]
     
-    public lazy var infoDataArray : NSMutableArray = ["xxx","男","45","170","6662@.com","2019-02-08"]
-    
-    //var update:UITableViewCell??
-    
+    public lazy var infoDataArray : NSMutableArray = ["xxx","男","45","170","2019-02-08","中国","123456"]
+
     let tableview:UITableView = {
         let tableView = UITableView.init(frame: CGRect(x: 0, y: navigationBarHeight, width: AJScreenWidth, height: AJScreenHeight/15*7))
         return tableView
@@ -30,9 +28,6 @@ class InfoViewController: UIViewController ,PickerDelegate{
         self.title = "Information"
         self.view.backgroundColor = UIColor.white
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title:"back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back))
-        
-        
-       
         
         tableview.register(UITableViewCell.self, forCellReuseIdentifier:"infocell")
         tableview.delegate = self
@@ -65,27 +60,18 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
         print("row",indexPath.row)
         //根据注册的cell类ID值获取到载体cell
         var cell = tableView.dequeueReusableCell(withIdentifier: "infocell")
-        
         var style: UITableViewCell.CellStyle
-
         style = UITableViewCell.CellStyle.value1
-
-        
         cell = UITableViewCell(style: style, reuseIdentifier: "infocell")
-        
         cell!.accessoryType = .disclosureIndicator
         cell?.textLabel?.text = infoArray[(indexPath as NSIndexPath).row]
-
-        
+  
         //放真实数据,右边value
-        if(indexPath.row == 0){
-            cell?.detailTextLabel?.text = infoDataArray[(indexPath as NSIndexPath).row] as? String
-        }else if(indexPath.row == 3){
-            cell?.detailTextLabel?.text = "45kg"
+        if(indexPath.row == 2){   //2为体重
+            cell?.detailTextLabel?.text = (infoDataArray[(indexPath as NSIndexPath).row] as? String)! + weightUnit
+        }else if(indexPath.row == 3){  //3为身高
+            cell?.detailTextLabel?.text = (infoDataArray[(indexPath as NSIndexPath).row] as? String)! + heightUnit
             print(infoDataArray[(indexPath as NSIndexPath).row] )
-        }else if(indexPath.row == 4){
-            cell?.detailTextLabel?.text = infoDataArray[(indexPath as NSIndexPath).row] as? String
-//            print(infoDataArray[(indexPath as NSIndexPath).row] + weightUnit)
         }else{
             cell?.detailTextLabel?.text = infoDataArray[(indexPath as NSIndexPath).row] as? String
         }
@@ -105,17 +91,28 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
         print(row)
         switch row {
             case 0:
-                inputUserName()
+                inputUserName()  //用户名
                 num = 0
             case 1:
                 let pickerView = BHJPickerView.init(self, .gender)
-                pickerView.pickerViewShow()
+                pickerView.pickerViewShow()  //性别
                 num = 1
-            case 5:
-                let pickerView = BHJPickerView.init(self, .date)
+            case 2:
+                inputWeight()  //体重
+                num = 2
+            case 3:
+                inputHeight()  //身高
+                num = 3
+            case 4:
+                let pickerView = BHJPickerView.init(self, .date)   //生日
                 pickerView.pickerViewShow()
+                num = 4
+            case 5:
+                inputNation()  //国家
                 num = 5
-            
+            case 6:
+                inputPhone()   //电话
+                num = 6
             default:
                 inputUserName()
                 //let pickerView = BHJPickerView.init(self, .address)
@@ -124,15 +121,11 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
-//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        let footview = UIView()
-//        foot
-//    view.backgroundColor = FooterViewColor
-//        return footview
-////    }
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return AJScreenHeight/15
     }
+    
     //输入用户名
     @objc func inputUserName(){
         let alertController = UIAlertController(title: "请输入用户名",message: "",
@@ -146,10 +139,10 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
             action in
             let UserName = alertController.textFields!.first!
             if String(UserName.text!) == ""  {  //||  String(UserName.text!) == "0"
-                print("什么事情，也不干")
+                print("用户名，什么事情，也不干")
             }else{
                 self.infoDataArray[0] = UserName.text!
-                print("这个num是多少",self.num)
+                print("用户名num是多少",self.num)
                 
                 self.tableview.reloadRows(at: [IndexPath(row:self.num,section:0)], with: .fade)
                 // print("用户名：\(String(describing: UserName.text)) ")
@@ -159,26 +152,139 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
         alertController.addAction(cancelAction)
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)
-        
+    }
+    
+    //改性别
+    func selectedGender(_ pickerView: BHJPickerView, _ genderStr: String) {
+        let messge = genderStr
+        self.infoDataArray[1] = messge
+        self.tableview.reloadRows(at: [IndexPath(row:1,section:0)], with: .fade)
+        print(messge)
+    }
+    //改体重
+    func inputWeight(){
+        let alertController = UIAlertController(title: "请输入体重",message: "",
+                                                preferredStyle: .alert)
+        alertController.addTextField {
+            (textField: UITextField!) -> Void in
+            textField.placeholder = "体重"
+        }
+        let cancelAction = UIAlertAction(title: "cancel", style: .cancel, handler: nil)
+        let okAction = UIAlertAction(title: "Sure", style: .default, handler: {
+            action in
+            let UserName = alertController.textFields!.first!
+            if String(UserName.text!) == ""  {  //||  String(UserName.text!) == "0"
+                print("体重，什么事情，也不干")
+            }else{
+                self.infoDataArray[2] = UserName.text!
+                print("体重num是多少",self.num)
+                
+                self.tableview.reloadRows(at: [IndexPath(row:self.num,section:0)], with: .fade)
+                // print("用户名：\(String(describing: UserName.text)) ")
+            }
+            
+        })
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    //改身高
+    func inputHeight(){
+        let alertController = UIAlertController(title: "请输入身高",message: "",
+                                                preferredStyle: .alert)
+        alertController.addTextField {
+            (textField: UITextField!) -> Void in
+            textField.placeholder = "身高"
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let okAction = UIAlertAction(title: "Sure", style: .default, handler: {
+            action in
+            let UserName = alertController.textFields!.first!
+            if String(UserName.text!) == ""  {  //||  String(UserName.text!) == "0"
+                print("身高，什么事情，也不干")
+            }else{
+                self.infoDataArray[3] = UserName.text!
+                print("这个num是多少",self.num)
+                
+                self.tableview.reloadRows(at: [IndexPath(row:self.num,section:0)], with: .fade)
+                // print("用户名：\(String(describing: UserName.text)) ")
+            }
+            
+        })
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    //改生日
+    func selectedDate(_ pickerView: BHJPickerView, _ dateStr: Date) {
+        let messge = Date().dateStringWithDate(dateStr)
+        self.infoDataArray[4] = messge
+        print("点击生日num是多少",self.num)
+        self.tableview.reloadRows(at: [IndexPath(row:self.num,section:0)], with: .fade)
+        print(messge)
+    }
+    
+    //改国家
+    func inputNation(){
+        let alertController = UIAlertController(title: "请输入国家",message: "",
+                                                preferredStyle: .alert)
+        alertController.addTextField {
+            (textField: UITextField!) -> Void in
+            textField.placeholder = "国家"
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let okAction = UIAlertAction(title: "Sure", style: .default, handler: {
+            action in
+            let UserName = alertController.textFields!.first!
+            if String(UserName.text!) == ""  {  //||  String(UserName.text!) == "0"
+                print("国家，什么事情，也不干")
+            }else{
+                self.infoDataArray[5] = UserName.text!
+                print("国家num是多少",self.num)
+                self.tableview.reloadRows(at: [IndexPath(row:self.num,section:0)], with: .fade)
+                // print("用户名：\(String(describing: UserName.text)) ")
+            }
+            
+        })
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    //改电话
+    func inputPhone(){
+        let alertController = UIAlertController(title: "请输入电话",message: "",
+                                                preferredStyle: .alert)
+        alertController.addTextField {
+            (textField: UITextField!) -> Void in
+            textField.placeholder = "电话"
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let okAction = UIAlertAction(title: "Sure", style: .default, handler: {
+            action in
+            let UserName = alertController.textFields!.first!
+            if String(UserName.text!) == ""  {  //||  String(UserName.text!) == "0"
+                print("电话，什么事情，也不干")
+            }else{
+                self.infoDataArray[6] = UserName.text!
+                print("电话num是多少",self.num)
+                self.tableview.reloadRows(at: [IndexPath(row:self.num,section:0)], with: .fade)
+                // print("用户名：\(String(describing: UserName.text)) ")
+            }
+            
+        })
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     
     func selectedAddress(_ pickerView: BHJPickerView, _ procince: AddressModel, _ city: AddressModel, _ area: AddressModel) {
       //选择地址
     }
-    //改时间
-    func selectedDate(_ pickerView: BHJPickerView, _ dateStr: Date) {
-        let messge = Date().dateStringWithDate(dateStr)
-        print("这个num是多少",self.num)
-        
-        self.tableview.reloadRows(at: [IndexPath(row:self.num,section:0)], with: .fade)
-        self.infoDataArray[5] = messge
-        print(messge)
-    }
-    //改性别
-    func selectedGender(_ pickerView: BHJPickerView, _ genderStr: String) {
-        let messge = genderStr
-        self.infoDataArray[2] = messge
-        print(messge)
-    }
+    
+    
+  
 }
