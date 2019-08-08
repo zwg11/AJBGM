@@ -19,12 +19,13 @@ class AJMineHeaderView:UIView{
         return imageView
     }()
     
-    //点击登录
+    //点击登录,label无法直接添加addtarger
     private lazy var textLabel:UILabel = {
         let label = UILabel()
         label.text = "Click Login"
         label.textColor = UIColor.white
         label.font = UIFont.systemFont(ofSize: 24)
+        
         return label
     }()
     
