@@ -49,6 +49,12 @@
 		846D6C9A22F19921006287B8 /* emailCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C9922F19921006287B8 /* emailCheckViewController.swift */; };
 		846D6C9C22F19935006287B8 /* emailCheckSecViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C9B22F19935006287B8 /* emailCheckSecViewController.swift */; };
 		846D6C9F22F27631006287B8 /* UIButton_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C9E22F27631006287B8 /* UIButton_Extension.swift */; };
+		846D6CA122F3107B006287B8 /* manualInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6CA022F3107B006287B8 /* manualInputView.swift */; };
+		846D6CA522F310CB006287B8 /* chooseDevView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6CA422F310CB006287B8 /* chooseDevView.swift */; };
+		846D6CA722F310E4006287B8 /* dateShowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6CA622F310E4006287B8 /* dateShowView.swift */; };
+		846D6CA922F3111E006287B8 /* recentTrendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6CA822F3111E006287B8 /* recentTrendView.swift */; };
+		846D6CAB22F3CD81006287B8 /* theLastCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6CAA22F3CD81006287B8 /* theLastCheckView.swift */; };
+		846D6CAD22F3CDFB006287B8 /* glucoseRecentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6CAC22F3CDFB006287B8 /* glucoseRecentView.swift */; };
 		C51C8BD65C07AB3DB20DF1D9 /* Pods_AIJian.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB88905D4BA97B5422D8CCA1 /* Pods_AIJian.framework */; };
 /* End PBXBuildFile section */
 
@@ -97,6 +103,12 @@
 		846D6C9922F19921006287B8 /* emailCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emailCheckViewController.swift; sourceTree = "<group>"; };
 		846D6C9B22F19935006287B8 /* emailCheckSecViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emailCheckSecViewController.swift; sourceTree = "<group>"; };
 		846D6C9E22F27631006287B8 /* UIButton_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton_Extension.swift; sourceTree = "<group>"; };
+		846D6CA022F3107B006287B8 /* manualInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = manualInputView.swift; path = "../New Group/manualInputView.swift"; sourceTree = "<group>"; };
+		846D6CA422F310CB006287B8 /* chooseDevView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseDevView.swift; sourceTree = "<group>"; };
+		846D6CA622F310E4006287B8 /* dateShowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dateShowView.swift; sourceTree = "<group>"; };
+		846D6CA822F3111E006287B8 /* recentTrendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = recentTrendView.swift; sourceTree = "<group>"; };
+		846D6CAA22F3CD81006287B8 /* theLastCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = theLastCheckView.swift; sourceTree = "<group>"; };
+		846D6CAC22F3CDFB006287B8 /* glucoseRecentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = glucoseRecentView.swift; sourceTree = "<group>"; };
 		A92ED38E7290A71018D96804 /* Pods-AIJian.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AIJian.debug.xcconfig"; path = "Target Support Files/Pods-AIJian/Pods-AIJian.debug.xcconfig"; sourceTree = "<group>"; };
 		B70B834D750B5B24AF91DBA1 /* Pods-AIJian.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AIJian.release.xcconfig"; path = "Target Support Files/Pods-AIJian/Pods-AIJian.release.xcconfig"; sourceTree = "<group>"; };
 		DB88905D4BA97B5422D8CCA1 /* Pods_AIJian.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AIJian.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -148,7 +160,7 @@
 				846D6BFB22E14D79006287B8 /* ViewController.swift */,
 				846D6C1022E15276006287B8 /* const.swift */,
 				846D6C0C22E15108006287B8 /* Main */,
-				846D6C9D22F275EE006287B8 /* New Group */,
+				846D6C9D22F275EE006287B8 /* Extension */,
 				846D6C0222E14D89006287B8 /* LaunchScreen.storyboard */,
 				846D6C0022E14D89006287B8 /* Assets.xcassets */,
 				846D6C0522E14D89006287B8 /* Info.plist */,
@@ -215,6 +227,9 @@
 		846D6C1722E1615A006287B8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				846D6CA822F3111E006287B8 /* recentTrendView.swift */,
+				846D6CAA22F3CD81006287B8 /* theLastCheckView.swift */,
+				846D6CAC22F3CDFB006287B8 /* glucoseRecentView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -261,6 +276,8 @@
 		846D6C1C22E1619F006287B8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				846D6CA322F310A1006287B8 /* BLE */,
+				846D6CA222F31085006287B8 /* Manual */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -439,13 +456,30 @@
 			path = PasswordForget;
 			sourceTree = "<group>";
 		};
-		846D6C9D22F275EE006287B8 /* New Group */ = {
+		846D6C9D22F275EE006287B8 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
 				846D6C9E22F27631006287B8 /* UIButton_Extension.swift */,
 			);
-			name = "New Group";
-			path = "Main/New Group";
+			name = Extension;
+			path = Main/Extension;
+			sourceTree = "<group>";
+		};
+		846D6CA222F31085006287B8 /* Manual */ = {
+			isa = PBXGroup;
+			children = (
+				846D6CA022F3107B006287B8 /* manualInputView.swift */,
+			);
+			path = Manual;
+			sourceTree = "<group>";
+		};
+		846D6CA322F310A1006287B8 /* BLE */ = {
+			isa = PBXGroup;
+			children = (
+				846D6CA422F310CB006287B8 /* chooseDevView.swift */,
+				846D6CA622F310E4006287B8 /* dateShowView.swift */,
+			);
+			path = BLE;
 			sourceTree = "<group>";
 		};
 		B462FAF8CB1B4050B4E32345 /* Pods */ = {
@@ -573,16 +607,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				846D6C3622E19CC0006287B8 /* SharedView.swift in Sources */,
+				846D6CA122F3107B006287B8 /* manualInputView.swift in Sources */,
 				846D6C4522E56635006287B8 /* totalCheckView.swift in Sources */,
 				846D6C3C22E1A67D006287B8 /* DataTableViewController.swift in Sources */,
 				846D6C7122F005E7006287B8 /* ChartView.swift in Sources */,
 				846D6C9A22F19921006287B8 /* emailCheckViewController.swift in Sources */,
 				846D6BFC22E14D79006287B8 /* ViewController.swift in Sources */,
+				846D6CAD22F3CDFB006287B8 /* glucoseRecentView.swift in Sources */,
 				846D6C2E22E189EF006287B8 /* headerView.swift in Sources */,
+				846D6CA922F3111E006287B8 /* recentTrendView.swift in Sources */,
+				846D6CAB22F3CD81006287B8 /* theLastCheckView.swift in Sources */,
 				846D6C9122F17684006287B8 /* emailCheckSecondView.swift in Sources */,
 				846D6C2822E1622B006287B8 /* InsertViewController.swift in Sources */,
 				846D6C8422F1475B006287B8 /* loginNavigationController.swift in Sources */,
 				846D6C3422E19CA3006287B8 /* DataTableView.swift in Sources */,
+				846D6CA522F310CB006287B8 /* chooseDevView.swift in Sources */,
 				846D6C3822E1A648006287B8 /* ChartViewController.swift in Sources */,
 				846D6C2A22E1623C006287B8 /* MineViewController.swift in Sources */,
 				846D6C8D22F158F2006287B8 /* InfoInputView.swift in Sources */,
@@ -613,6 +652,7 @@
 				846D6C7522F04863006287B8 /* AJStartView.swift in Sources */,
 				846D6C2422E161FB006287B8 /* HomeViewController.swift in Sources */,
 				846D6C3022E19BD2006287B8 /* ChartHeaderView.swift in Sources */,
+				846D6CA722F310E4006287B8 /* dateShowView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

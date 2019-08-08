@@ -52,10 +52,10 @@ class totalCheckView: UIView {
         return view
     }()
     // 设置标题
-    private lazy var checkViewTitle:UILabel = {
+    lazy var checkViewTitle:UILabel = {
        let label = UILabel()
         label.textAlignment = .left
-        label.text = String("total - 3 tests")
+        //label.text = String("total - 3 tests")
         label.textColor = UIColor.black
         label.font = UIFont.systemFont(ofSize: 18)
         return label
@@ -66,6 +66,18 @@ class totalCheckView: UIView {
        let view = UIView()
         view.layer.borderWidth = 1
         view.layer.borderColor = borderColor.cgColor
+        return view
+    }()
+    
+    // 为方便布局，再设置两个视图，分别占据总体检测视图的一半
+    // 左边视图
+    private lazy var leftView:UIView = {
+        let view = UIView()
+        return view
+    }()
+    // 右边视图
+    private lazy var rightView:UIView = {
+        let view = UIView()
         return view
     }()
     
@@ -155,154 +167,171 @@ class totalCheckView: UIView {
             make.right.equalToSuperview().offset(-10)
             
         }
+        // 左半部视图
+        self.totalTestView.addSubview(leftView)
+        leftView.snp.makeConstraints{(make) in
+            make.left.bottom.top.equalToSuperview()
+            make.right.equalTo(totalTestView.snp.centerX)
+        }
+        // 右半部视图
+        self.totalTestView.addSubview(rightView)
+        rightView.snp.makeConstraints{(make) in
+            make.right.bottom.top.equalToSuperview()
+            make.left.equalTo(totalTestView.snp.centerX)
+        }
         // MARK: - Label布局约束
         // 所有Label 高30 宽totalTestView的 1/4 
         // ***************************低血糖*****************************
-        self.totalTestView.addSubview(low)
+        self.leftView.addSubview(low)
+        // 设置布局：左边界、顶部与父视图相同，右边界为父视图的中间
         self.low.snp.makeConstraints{ (make) in
             make.left.equalToSuperview()
             make.top.equalToSuperview()
             make.height.equalTo(30)
-            make.width.equalTo((AJScreenWidth-20)/4)
+            make.right.equalTo(leftView.snp.centerX)
             
         }
         
-        self.totalTestView.addSubview(lowValue)
+        // 紧挨上面的视图的底部，长宽高都一样
+        self.leftView.addSubview(lowValue)
         self.lowValue.snp.makeConstraints{ (make) in
             make.left.equalToSuperview()
             make.top.equalTo(low.snp.bottom)
             make.height.equalTo(30)
-            make.width.equalTo((AJScreenWidth-20)/4)
+            make.right.equalTo(low.snp.right)
             
         }
         
-        self.totalTestView.addSubview(lowPercent)
+        // 紧挨上面的视图的底部，长宽高都一样
+        self.leftView.addSubview(lowPercent)
         self.lowPercent.snp.makeConstraints{ (make) in
             make.left.equalToSuperview()
             make.top.equalTo(lowValue.snp.bottom)
             make.height.equalTo(30)
-            make.width.equalTo((AJScreenWidth-20)/4)
+            make.right.equalTo(low.snp.right)
             
         }
         
         // ***************************低于*****************************
-        self.totalTestView.addSubview(lowerNormal)
+        self.leftView.addSubview(lowerNormal)
         self.lowerNormal.snp.makeConstraints{ (make) in
             make.left.equalTo(low.snp.right)
-            make.top.equalToSuperview()
+            make.top.right.equalToSuperview()
             make.height.equalTo(30)
-            make.width.equalTo((AJScreenWidth-20)/4)
+            
 
         }
 
-        self.totalTestView.addSubview(lowerNormalValue)
+        self.leftView.addSubview(lowerNormalValue)
         self.lowerNormalValue.snp.makeConstraints{ (make) in
             make.left.equalTo(lowerNormal.snp.left)
             make.top.equalTo(lowerNormal.snp.bottom)
             make.height.equalTo(30)
-            make.width.equalTo((AJScreenWidth-20)/4)
+            make.right.equalToSuperview()
 
         }
 
-        self.totalTestView.addSubview(lowerNormalPercent)
+        self.leftView.addSubview(lowerNormalPercent)
         self.lowerNormalPercent.snp.makeConstraints{ (make) in
             make.left.equalTo(lowerNormal.snp.left)
             make.top.equalTo(lowerNormalValue.snp.bottom)
             make.height.equalTo(30)
-            make.width.equalTo((AJScreenWidth-20)/4)
+            make.right.equalToSuperview()
 
         }
 
         // ***************************正常*****************************
-        self.totalTestView.addSubview(normal)
+        self.rightView.addSubview(normal)
         self.normal.snp.makeConstraints{ (make) in
-            make.left.equalTo(lowerNormal.snp.right)
-            make.top.equalToSuperview()
+
+            make.left.top.equalToSuperview()
             make.height.equalTo(low.snp.height)
-            make.width.equalTo((AJScreenWidth-20)/4)
+            make.right.equalTo(rightView.snp.centerX)
 
         }
 
-        self.totalTestView.addSubview(normalValue)
+        self.rightView.addSubview(normalValue)
         self.normalValue.snp.makeConstraints{ (make) in
-            make.left.equalTo(lowerNormal.snp.right)
+            make.left.equalTo(normal.snp.left)
             make.top.equalTo(normal.snp.bottom)
             make.height.equalTo(low.snp.height)
-            make.width.equalTo((AJScreenWidth-20)/4)
+            make.right.equalTo(normal.snp.right)
 
         }
 
-        self.totalTestView.addSubview(normalPercent)
+        self.rightView.addSubview(normalPercent)
         self.normalPercent.snp.makeConstraints{ (make) in
-            make.left.equalTo(lowerNormal.snp.right)
+            make.left.equalTo(normal.snp.left)
             make.top.equalTo(normalValue.snp.bottom)
             make.height.equalTo(low.snp.height)
-            make.width.equalTo((AJScreenWidth-20)/4)
+            make.right.equalTo(normal.snp.right)
 
         }
 //
         // ***************************高于*****************************
-        self.totalTestView.addSubview(higherNormal)
+        self.rightView.addSubview(higherNormal)
         self.higherNormal.snp.makeConstraints{ (make) in
             make.left.equalTo(normal.snp.right)
-            make.top.equalToSuperview()
+            make.top.right.equalToSuperview()
             make.height.equalTo(low.snp.height)
-            make.width.equalTo((AJScreenWidth-20)/4)
 
         }
 
-        self.totalTestView.addSubview(higherNormalValue)
+        self.rightView.addSubview(higherNormalValue)
         self.higherNormalValue.snp.makeConstraints{ (make) in
             make.left.equalTo(normal.snp.right)
             make.top.equalTo(higherNormal.snp.bottom)
             make.height.equalTo(low.snp.height)
-            make.width.equalTo((AJScreenWidth-20)/4)
+            make.right.equalToSuperview()
 
         }
         
-        self.totalTestView.addSubview(higherNormalPercent)
+        self.rightView.addSubview(higherNormalPercent)
         self.higherNormalPercent.snp.makeConstraints{ (make) in
             make.left.equalTo(normal.snp.right)
             make.top.equalTo(higherNormalValue.snp.bottom)
             make.height.equalTo(low.snp.height)
-            make.width.equalTo((AJScreenWidth-20)/4)
+            make.right.equalToSuperview()
 
         }
         
         // ***************************下划线******************************
         self.totalTestView.addSubview(lineView1)
         self.lineView1.snp.makeConstraints{ (make) in
-            make.centerX.equalTo(low.snp.centerX)
             make.centerY.equalTo(lowValue.snp.bottom)
             make.height.equalTo(2)
-            make.width.equalTo((AJScreenWidth-20)/5)
-            
+
+            make.left.equalTo(low.snp.left).offset(10)
+            make.right.equalTo(low.snp.right).offset(-10)
         }
         
         self.totalTestView.addSubview(lineView2)
         self.lineView2.snp.makeConstraints{ (make) in
-            make.centerX.equalTo(lowerNormal.snp.centerX)
             make.centerY.equalTo(lowerNormalValue.snp.bottom)
             make.height.equalTo(2)
-            make.width.equalTo((AJScreenWidth-20)/5)
+  
+            make.left.equalTo(lowerNormal.snp.left).offset(10)
+            make.right.equalTo(lowerNormal.snp.right).offset(-10)
             
         }
         
         self.totalTestView.addSubview(lineView3)
         self.lineView3.snp.makeConstraints{ (make) in
-            make.centerX.equalTo(normal.snp.centerX)
             make.centerY.equalTo(normalValue.snp.bottom)
             make.height.equalTo(2)
-            make.width.equalTo((AJScreenWidth-20)/5)
+
+            make.left.equalTo(normal.snp.left).offset(10)
+            make.right.equalTo(normal.snp.right).offset(-10)
             
         }
         
         self.totalTestView.addSubview(lineView4)
         self.lineView4.snp.makeConstraints{ (make) in
-            make.centerX.equalTo(higherNormal.snp.centerX)
             make.centerY.equalTo(higherNormalValue.snp.bottom)
             make.height.equalTo(2)
-            make.width.equalTo((AJScreenWidth-20)/5)
+ 
+            make.left.equalTo(higherNormal.snp.left).offset(10)
+            make.right.equalTo(higherNormal.snp.right).offset(-10)
             
         }
         

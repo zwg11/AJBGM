@@ -97,20 +97,20 @@ class SharedView: UIView {
         button.setTitleColor(UIColor.black, for: .normal)
         return button
     }()
-    // 邮箱文本框
-    private lazy var emailLabel:UILabel = {
-        let label = UILabel()
-        label.text = "邮箱："
-        label.textAlignment = .left
-        return label
-        
-    }()
-    // 邮箱文本框
-    lazy var emailTextField:UITextField = {
-        let textField = textFieldInit(placeholder: " 请输入邮箱", keyboardType: UIKeyboardType.emailAddress)
-
-        return textField
-    }()
+//    // 邮箱文本框
+//    private lazy var emailLabel:UILabel = {
+//        let label = UILabel()
+//        label.text = "邮箱："
+//        label.textAlignment = .left
+//        return label
+//        
+//    }()
+//    // 邮箱文本框
+//    lazy var emailTextField:UITextField = {
+//        let textField = textFieldInit(placeholder: " 请输入邮箱", keyboardType: UIKeyboardType.emailAddress)
+//
+//        return textField
+//    }()
     
     // 设置文本框的统一风格
     func textFieldInit(placeholder string:String,keyboardType type:UIKeyboardType) -> UITextField{
@@ -207,29 +207,30 @@ class SharedView: UIView {
             make.top.equalTo(birthdayLabel.snp.bottom).offset(AJScreenWidth/40)
             make.height.equalTo(AJScreenWidth/12)
         }
-        // 邮箱label
-        self.reportInfo.addSubview(emailLabel)
-        self.emailLabel.snp.makeConstraints{(make) in
-            make.left.equalToSuperview().offset(AJScreenWidth/40)
-            make.top.equalTo(birthdayButton.snp.bottom).offset(AJScreenWidth/40)
-            make.height.equalTo(AJScreenWidth/15)
-            make.right.equalTo(infoExpLabel.snp.centerX)
-        }
-        // 邮箱文本框
-        self.reportInfo.addSubview(emailTextField)
-        self.emailTextField.snp.makeConstraints{(make) in
-            make.left.equalToSuperview().offset(AJScreenWidth/40)
-            make.right.equalToSuperview().offset(-AJScreenWidth/40)
-            make.top.equalTo(emailLabel.snp.bottom).offset(AJScreenWidth/40)
-            make.height.equalTo(AJScreenWidth/12)
-        }
+//        // 邮箱label
+//        self.reportInfo.addSubview(emailLabel)
+//        self.emailLabel.snp.makeConstraints{(make) in
+//            make.left.equalToSuperview().offset(AJScreenWidth/40)
+//            make.top.equalTo(birthdayButton.snp.bottom).offset(AJScreenWidth/40)
+//            make.height.equalTo(AJScreenWidth/15)
+//            make.right.equalTo(infoExpLabel.snp.centerX)
+//        }
+//        // 邮箱文本框
+//        self.reportInfo.addSubview(emailTextField)
+//        self.emailTextField.snp.makeConstraints{(make) in
+//            make.left.equalToSuperview().offset(AJScreenWidth/40)
+//            make.right.equalToSuperview().offset(-AJScreenWidth/40)
+//            make.top.equalTo(emailLabel.snp.bottom).offset(AJScreenWidth/40)
+//            make.height.equalTo(AJScreenWidth/12)
+//        }
         
         //发送报告信息框布局
         self.reportInfo.snp.makeConstraints{(make) in
             make.left.equalToSuperview().offset(AJScreenWidth/40)
             make.right.equalToSuperview().offset(-AJScreenWidth/40)
             make.top.equalTo(explainView.snp.bottom).offset(AJScreenWidth/20)
-            make.height.equalTo(AJScreenWidth/4*3)
+            // 若再加一个label和一个文本框，高度为 AJScreenWidth/4*3 较合适
+            make.height.equalTo(AJScreenWidth/20*11)
         }
         
         

@@ -29,7 +29,7 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
     private lazy var shareV:SharedView = {
         let view = SharedView()
         view.setupUI()
-        view.emailTextField.delegate = self
+        //view.emailTextField.delegate = self
         view.nameTextField.delegate = self
         view.birthdayButton.addTarget(self, action: #selector(chooseDate), for: .touchUpInside)
         return view
@@ -219,14 +219,14 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         print(textField.text ?? "")
-        
-        // 判断是哪个文本框，将内容赋值给对应的字符串
-        if textField == shareV.nameTextField{
-            name = textField.text
-        }
-        else if textField == shareV.emailTextField{
-            email = textField.text
-        }
+        name = textField.text
+//        // 判断是哪个文本框，将内容赋值给对应的字符串
+//        if textField == shareV.nameTextField{
+//            name = textField.text
+//        }
+//        else if textField == shareV.emailTextField{
+//            email = textField.text
+//        }
         // 收起键盘
         textField.resignFirstResponder()
         return true

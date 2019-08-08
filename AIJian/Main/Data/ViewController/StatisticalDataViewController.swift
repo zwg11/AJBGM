@@ -11,6 +11,7 @@ import SnapKit
 
 class StatisticalDataViewController: UIViewController,UIScrollViewDelegate {
 
+    
     var scrollView:UIScrollView?
     // 平均统计视图
     lazy var averageview:averageView = {
@@ -23,24 +24,30 @@ class StatisticalDataViewController: UIViewController,UIScrollViewDelegate {
     lazy var totalview:totalCheckView = {
         let view = totalCheckView()
         view.setupUI()
+        //注：标题的数字后期需要用整数变量代替
+        view.checkViewTitle.text = "total - 0 tests"
         //view.backgroundColor = UIColor.gray
         return view
     }()
     // 餐前检测结果视图
-    lazy var perMeal:perAndAfterMealTests = {
-        let view = perAndAfterMealTests()
+    lazy var perMeal:totalCheckView = {
+        let view = totalCheckView()
         view.setupUI()
-        view.isPerMeal = true
-        view.titleChange()
+        //注：标题的数字后期需要用整数变量代替
+        view.checkViewTitle.text = "per meal - 0 tests"
+//        view.isPerMeal = true
+//        view.titleChange()
         //view.backgroundColor = UIColor.blue
         return view
     }()
     // 餐后检测结果视图
-    lazy var afterMeal:perAndAfterMealTests = {
-        let view = perAndAfterMealTests()
+    lazy var afterMeal:totalCheckView = {
+        let view = totalCheckView()
         view.setupUI()
-        view.isPerMeal = false
-        view.titleChange()
+        //注：标题的数字后期需要用整数变量代替
+        view.checkViewTitle.text = "after meal - 0 tests"
+//        view.isPerMeal = false
+//        view.titleChange()
         //view.backgroundColor = UIColor.red
         return view
     }()

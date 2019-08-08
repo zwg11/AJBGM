@@ -30,6 +30,7 @@ class registerViewController: UIViewController,UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // 
         self.view.backgroundColor = UIColor.blue
         self.title = "注册"
         self.view.addSubview(register)

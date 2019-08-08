@@ -40,7 +40,9 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
     
 
     @objc func changeSure(){
-        self.navigationController?.popToViewController(loginViewController(), animated: true)
+        
+        // 返回到该导航控制器的根视图
+        self.navigationController?.popToRootViewController(animated: true)
     }
 
     
