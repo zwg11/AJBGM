@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>exerIntensity</key>
+	<array>
+		<string>低</string>
+		<string>中</string>
+		<string>高</string>
+	</array>
+	<key>insulin</key>
+	<array>
+		<string>无</string>
+		<string>胰岛素1通用追加</string>
+		<string>胰岛素2长秀霖</string>
+		<string>胰岛素3 20/80(预混)</string>
+		<string>编辑条目</string>
+	</array>
+	<key>remark</key>
+	<array>
+		<string>add items</string>
+	</array>
+	<key>sport</key>
+	<array>
+		<string>nothing</string>
+		<string>swim</string>
+		<string>running</string>
+		<string>walking</string>
+		<string>riding</string>
+		<string>others</string>
+	</array>
+	<key>medicine</key>
+	<array>
+		<string>nothing </string>
+		<string>Asipirin</string>
+		<string>对乙酰氨基酚</string>
+	</array>
+	<key>portion</key>
+	<array>
+		<string>nothing</string>
+		<string>less</string>
+		<string>normal</string>
+		<string>more</string>
+	</array>
+	<key>event</key>
+	<array>
+		<string>perBreakfast</string>
+		<string>AfterBreakfast</string>
+		<string>perLunch</string>
+		<string>afterLunch</string>
+		<string>perDinner</string>
+		<string>afterDinner</string>
+	</array>
+</dict>
+</plist>

@@ -1,18 +1,25 @@
 //
-//  UIButton_Extension.swift
-//  AIJian
+//  UIButton+Extension.swift
+//  st
 //
-//  Created by ADMIN on 2019/8/1.
+//  Created by ADMIN on 2019/8/9.
 //  Copyright © 2019 apple. All rights reserved.
 //
 
 import Foundation
 import UIKit
-
-// MARK: - 倒计时
 extension UIButton{
+    // 按钮一般风格设置
+    // 字体内容及其颜色 边框设置
+    func NorStyle(title string:String){
+        self.setTitle(string, for: .normal)
+        self.setTitleColor(UIColor.black, for: .normal)
+        self.layer.borderColor = UIColor.black.cgColor
+        self.layer.borderWidth = 1
+        self.layer.cornerRadius = 3
+    }
     
-    public func countDown(count: Int){
+    func countDown(count: Int){
         // 倒计时开始,禁止点击事件
         isEnabled = false
         
@@ -53,5 +60,4 @@ extension UIButton{
         // 启动时间源
         codeTimer.resume()
     }
-    
 }

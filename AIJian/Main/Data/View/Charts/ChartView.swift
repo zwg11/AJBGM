@@ -18,13 +18,18 @@ class ChartView: UIView {
         //_lineChartView.delegate = self//
         _lineChartView.backgroundColor = UIColor.init(red: 230/255.0, green: 253/255.0, blue: 253/255.0, alpha: 1.0)
         _lineChartView.doubleTapToZoomEnabled = false
-        _lineChartView.scaleXEnabled = false
-        _lineChartView.scaleYEnabled = false
         _lineChartView.chartDescription?.text = ""//设置为""隐藏描述文字
+        
+        // 是否显示图表左下角的图例，变false使得其不显示
+        _lineChartView.legend.enabled = false
         
         _lineChartView.noDataText = "暂无数据"
         _lineChartView.noDataTextColor = UIColor.gray
         _lineChartView.noDataFont = UIFont.boldSystemFont(ofSize: 14)
+        
+        // 是否支持拖拽,使x轴可以拖拽，y轴不可以
+        _lineChartView.scaleXEnabled = true
+        _lineChartView.scaleYEnabled = false
         
         //y轴
         _lineChartView.rightAxis.enabled = false
@@ -68,7 +73,8 @@ class ChartView: UIView {
             // 将数据添加到图表数据数组中
             yDataArray1.append(entry)
         }
-        let set1 = LineChartDataSet.init(entries: yDataArray1, label: "血糖值")
+        // 将数据数组添加到表中（entries），并附说明（label）
+        let set1 = LineChartDataSet.init(entries: yDataArray1, label: "")
 
         
         set1.drawIconsEnabled = false

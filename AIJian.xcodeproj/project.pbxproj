@@ -39,7 +39,6 @@
 		846D6C3622E19CC0006287B8 /* SharedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C3522E19CC0006287B8 /* SharedView.swift */; };
 		846D6C3822E1A648006287B8 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C3722E1A648006287B8 /* ChartViewController.swift */; };
 		846D6C3A22E1A66B006287B8 /* StatisticalDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C3922E1A66B006287B8 /* StatisticalDataViewController.swift */; };
-		846D6C3C22E1A67D006287B8 /* DataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C3B22E1A67D006287B8 /* DataTableViewController.swift */; };
 		846D6C3E22E1A693006287B8 /* SharedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C3D22E1A693006287B8 /* SharedViewController.swift */; };
 		846D6C4022E56123006287B8 /* StatisticDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C3F22E56123006287B8 /* StatisticDate.swift */; };
 		846D6C4322E56618006287B8 /* averageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C4222E56618006287B8 /* averageView.swift */; };
@@ -60,7 +59,21 @@
 		846D6C9822F19902006287B8 /* infoInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C9722F19902006287B8 /* infoInputViewController.swift */; };
 		846D6C9A22F19921006287B8 /* emailCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C9922F19921006287B8 /* emailCheckViewController.swift */; };
 		846D6C9C22F19935006287B8 /* emailCheckSecViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C9B22F19935006287B8 /* emailCheckSecViewController.swift */; };
-		846D6C9F22F27631006287B8 /* UIButton_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C9E22F27631006287B8 /* UIButton_Extension.swift */; };
+		84E49A602301155E00009089 /* allPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A542301155E00009089 /* allPickerView.swift */; };
+		84E49A612301155E00009089 /* portionAndInsulinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A552301155E00009089 /* portionAndInsulinView.swift */; };
+		84E49A622301155E00009089 /* sportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A562301155E00009089 /* sportView.swift */; };
+		84E49A632301155E00009089 /* bodyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A572301155E00009089 /* bodyInfoView.swift */; };
+		84E49A642301155E00009089 /* dateAndTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A582301155E00009089 /* dateAndTimeView.swift */; };
+		84E49A662301155E00009089 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A5A2301155E00009089 /* InputView.swift */; };
+		84E49A672301155E00009089 /* glucoseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A5B2301155E00009089 /* glucoseView.swift */; };
+		84E49A682301155E00009089 /* remarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A5C2301155E00009089 /* remarkView.swift */; };
+		84E49A71230116E700009089 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A6C230116E700009089 /* UIImageView+Extension.swift */; };
+		84E49A72230116E700009089 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A6D230116E700009089 /* UILabel+Extension.swift */; };
+		84E49A73230116E700009089 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A6E230116E700009089 /* UIButton+Extension.swift */; };
+		84E49A74230116E700009089 /* UIAlertViewController_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A6F230116E700009089 /* UIAlertViewController_Extension.swift */; };
+		84E49A75230116E700009089 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A70230116E700009089 /* UITextField+Extension.swift */; };
+		84E49A772301189600009089 /* inputChoose.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84E49A762301189600009089 /* inputChoose.plist */; };
+		84E49A7923014C1F00009089 /* DataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A7823014C1F00009089 /* DataTableViewController.swift */; };
 		84FB492222F7F26700478287 /* quitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FB492122F7F26700478287 /* quitView.swift */; };
 		84FB492422F92AC300478287 /* BrithdayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FB492322F92AC300478287 /* BrithdayViewController.swift */; };
 		C51C8BD65C07AB3DB20DF1D9 /* Pods_AIJian.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB88905D4BA97B5422D8CCA1 /* Pods_AIJian.framework */; };
@@ -101,7 +114,6 @@
 		846D6C3522E19CC0006287B8 /* SharedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedView.swift; sourceTree = "<group>"; };
 		846D6C3722E1A648006287B8 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		846D6C3922E1A66B006287B8 /* StatisticalDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticalDataViewController.swift; sourceTree = "<group>"; };
-		846D6C3B22E1A67D006287B8 /* DataTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTableViewController.swift; sourceTree = "<group>"; };
 		846D6C3D22E1A693006287B8 /* SharedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedViewController.swift; sourceTree = "<group>"; };
 		846D6C3F22E56123006287B8 /* StatisticDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticDate.swift; sourceTree = "<group>"; };
 		846D6C4222E56618006287B8 /* averageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = averageView.swift; sourceTree = "<group>"; };
@@ -122,7 +134,21 @@
 		846D6C9722F19902006287B8 /* infoInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = infoInputViewController.swift; sourceTree = "<group>"; };
 		846D6C9922F19921006287B8 /* emailCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emailCheckViewController.swift; sourceTree = "<group>"; };
 		846D6C9B22F19935006287B8 /* emailCheckSecViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emailCheckSecViewController.swift; sourceTree = "<group>"; };
-		846D6C9E22F27631006287B8 /* UIButton_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton_Extension.swift; sourceTree = "<group>"; };
+		84E49A542301155E00009089 /* allPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = allPickerView.swift; sourceTree = "<group>"; };
+		84E49A552301155E00009089 /* portionAndInsulinView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = portionAndInsulinView.swift; sourceTree = "<group>"; };
+		84E49A562301155E00009089 /* sportView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sportView.swift; sourceTree = "<group>"; };
+		84E49A572301155E00009089 /* bodyInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = bodyInfoView.swift; sourceTree = "<group>"; };
+		84E49A582301155E00009089 /* dateAndTimeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dateAndTimeView.swift; sourceTree = "<group>"; };
+		84E49A5A2301155E00009089 /* InputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
+		84E49A5B2301155E00009089 /* glucoseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = glucoseView.swift; sourceTree = "<group>"; };
+		84E49A5C2301155E00009089 /* remarkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = remarkView.swift; sourceTree = "<group>"; };
+		84E49A6C230116E700009089 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
+		84E49A6D230116E700009089 /* UILabel+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
+		84E49A6E230116E700009089 /* UIButton+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
+		84E49A6F230116E700009089 /* UIAlertViewController_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertViewController_Extension.swift; sourceTree = "<group>"; };
+		84E49A70230116E700009089 /* UITextField+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
+		84E49A762301189600009089 /* inputChoose.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = inputChoose.plist; sourceTree = "<group>"; };
+		84E49A7823014C1F00009089 /* DataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableViewController.swift; sourceTree = "<group>"; };
 		84FB492122F7F26700478287 /* quitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = quitView.swift; sourceTree = "<group>"; };
 		84FB492322F92AC300478287 /* BrithdayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrithdayViewController.swift; sourceTree = "<group>"; };
 		A92ED38E7290A71018D96804 /* Pods-AIJian.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AIJian.debug.xcconfig"; path = "Target Support Files/Pods-AIJian/Pods-AIJian.debug.xcconfig"; sourceTree = "<group>"; };
@@ -177,10 +203,11 @@
 				846D6BFB22E14D79006287B8 /* ViewController.swift */,
 				846D6C1022E15276006287B8 /* const.swift */,
 				846D6C0C22E15108006287B8 /* Main */,
-				846D6C9D22F275EE006287B8 /* New Group */,
 				846D6C0222E14D89006287B8 /* LaunchScreen.storyboard */,
+				84E49A6B230116E700009089 /* extension */,
 				846D6C0022E14D89006287B8 /* Assets.xcassets */,
 				846D6C0522E14D89006287B8 /* Info.plist */,
+				84E49A762301189600009089 /* inputChoose.plist */,
 			);
 			path = AIJian;
 			sourceTree = "<group>";
@@ -259,10 +286,10 @@
 		846D6C1922E1617C006287B8 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				84E49A7823014C1F00009089 /* DataTableViewController.swift */,
 				846D6C2522E1621C006287B8 /* DataViewController.swift */,
 				846D6C3722E1A648006287B8 /* ChartViewController.swift */,
 				846D6C3922E1A66B006287B8 /* StatisticalDataViewController.swift */,
-				846D6C3B22E1A67D006287B8 /* DataTableViewController.swift */,
 				846D6C3D22E1A693006287B8 /* SharedViewController.swift */,
 			);
 			path = ViewController;
@@ -290,6 +317,14 @@
 		846D6C1C22E1619F006287B8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				84E49A542301155E00009089 /* allPickerView.swift */,
+				84E49A582301155E00009089 /* dateAndTimeView.swift */,
+				84E49A5B2301155E00009089 /* glucoseView.swift */,
+				84E49A552301155E00009089 /* portionAndInsulinView.swift */,
+				84E49A572301155E00009089 /* bodyInfoView.swift */,
+				84E49A562301155E00009089 /* sportView.swift */,
+				84E49A5C2301155E00009089 /* remarkView.swift */,
+				84E49A5A2301155E00009089 /* InputView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -481,13 +516,16 @@
 			path = PasswordForget;
 			sourceTree = "<group>";
 		};
-		846D6C9D22F275EE006287B8 /* New Group */ = {
+		84E49A6B230116E700009089 /* extension */ = {
 			isa = PBXGroup;
 			children = (
-				846D6C9E22F27631006287B8 /* UIButton_Extension.swift */,
+				84E49A6C230116E700009089 /* UIImageView+Extension.swift */,
+				84E49A6D230116E700009089 /* UILabel+Extension.swift */,
+				84E49A6E230116E700009089 /* UIButton+Extension.swift */,
+				84E49A6F230116E700009089 /* UIAlertViewController_Extension.swift */,
+				84E49A70230116E700009089 /* UITextField+Extension.swift */,
 			);
-			name = "New Group";
-			path = "Main/New Group";
+			path = extension;
 			sourceTree = "<group>";
 		};
 		B462FAF8CB1B4050B4E32345 /* Pods */ = {
@@ -561,6 +599,7 @@
 			files = (
 				846D6C0422E14D89006287B8 /* LaunchScreen.storyboard in Resources */,
 				846D6C0122E14D89006287B8 /* Assets.xcassets in Resources */,
+				84E49A772301189600009089 /* inputChoose.plist in Resources */,
 				8427005522FAD397008EA8AD /* city.json in Resources */,
 				846D6BFF22E14D79006287B8 /* Main.storyboard in Resources */,
 			);
@@ -616,21 +655,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				8427005322FACDD3008EA8AD /* NSDate+Date.swift in Sources */,
+				84E49A642301155E00009089 /* dateAndTimeView.swift in Sources */,
 				84FB492422F92AC300478287 /* BrithdayViewController.swift in Sources */,
 				846D6C3622E19CC0006287B8 /* SharedView.swift in Sources */,
 				842CC50022F3FA8700E8B8F9 /* UnitViewController.swift in Sources */,
 				846D6C4522E56635006287B8 /* totalCheckView.swift in Sources */,
-				846D6C3C22E1A67D006287B8 /* DataTableViewController.swift in Sources */,
+				84E49A7923014C1F00009089 /* DataTableViewController.swift in Sources */,
 				846D6C7122F005E7006287B8 /* ChartView.swift in Sources */,
 				846D6C9A22F19921006287B8 /* emailCheckViewController.swift in Sources */,
 				846D6BFC22E14D79006287B8 /* ViewController.swift in Sources */,
+				84E49A612301155E00009089 /* portionAndInsulinView.swift in Sources */,
 				842CC50822F3FB5600E8B8F9 /* AboutUsViewController.swift in Sources */,
 				846D6C9122F17684006287B8 /* emailCheckSecondView.swift in Sources */,
+				84E49A682301155E00009089 /* remarkView.swift in Sources */,
 				846D6C2822E1622B006287B8 /* InsertViewController.swift in Sources */,
 				842CC50222F3FA9E00E8B8F9 /* PassChangeViewController.swift in Sources */,
 				846D6C8422F1475B006287B8 /* loginNavigationController.swift in Sources */,
 				846D6C3422E19CA3006287B8 /* DataTableView.swift in Sources */,
 				842CC4FE22F3ED5F00E8B8F9 /* InfoViewController.swift in Sources */,
+				84E49A662301155E00009089 /* InputView.swift in Sources */,
 				846D6C3822E1A648006287B8 /* ChartViewController.swift in Sources */,
 				842CC50622F3FB4900E8B8F9 /* UseDirViewController.swift in Sources */,
 				846D6C2A22E1623C006287B8 /* MineViewController.swift in Sources */,
@@ -638,22 +681,27 @@
 				846D6C2622E1621C006287B8 /* DataViewController.swift in Sources */,
 				845BBA9922F2940500CAEFCC /* AJMineTableView.swift in Sources */,
 				846D6C8B22F158DE006287B8 /* registerView.swift in Sources */,
+				84E49A632301155E00009089 /* bodyInfoView.swift in Sources */,
+				84E49A622301155E00009089 /* sportView.swift in Sources */,
 				846D6C1122E15276006287B8 /* const.swift in Sources */,
 				846D6C2C22E16463006287B8 /* AJGuidePageView.swift in Sources */,
 				842CC50422F3FAB200E8B8F9 /* BloodSetViewController.swift in Sources */,
 				846D6C5022EEDA34006287B8 /* pickerView.swift in Sources */,
+				84E49A75230116E700009089 /* UITextField+Extension.swift in Sources */,
 				84FB492222F7F26700478287 /* quitView.swift in Sources */,
+				84E49A672301155E00009089 /* glucoseView.swift in Sources */,
 				846D6C4722E59359006287B8 /* perAndAfterMealTests.swift in Sources */,
 				846D6C0F22E151B8006287B8 /* AJNavigationController.swift in Sources */,
+				84E49A72230116E700009089 /* UILabel+Extension.swift in Sources */,
 				846D6C4022E56123006287B8 /* StatisticDate.swift in Sources */,
 				8441E12622EF106A005A4EBC /* AJMineHeaderView.swift in Sources */,
 				846D6C4322E56618006287B8 /* averageView.swift in Sources */,
 				846D6C1622E16139006287B8 /* AJTabbarController.swift in Sources */,
 				846D6C9622F198EA006287B8 /* registerViewController.swift in Sources */,
-				846D6C9F22F27631006287B8 /* UIButton_Extension.swift in Sources */,
 				842CC50A22F3FB7200E8B8F9 /* VersionUViewController.swift in Sources */,
 				846D6C3A22E1A66B006287B8 /* StatisticalDataViewController.swift in Sources */,
 				846D6C8222F077E0006287B8 /* loginViewController.swift in Sources */,
+				84E49A73230116E700009089 /* UIButton+Extension.swift in Sources */,
 				846D6C9C22F19935006287B8 /* emailCheckSecViewController.swift in Sources */,
 				846D6C3E22E1A693006287B8 /* SharedViewController.swift in Sources */,
 				846D6C7C22F06CE2006287B8 /* loginView.swift in Sources */,
@@ -661,14 +709,17 @@
 				846D6C3E22E1A693006287B8 /* SharedViewController.swift in Sources */,
 				846D6BFA22E14D79006287B8 /* AppDelegate.swift in Sources */,
 				8427005122FACA71008EA8AD /* AddressModel.swift in Sources */,
+				84E49A602301155E00009089 /* allPickerView.swift in Sources */,
 				846D6C8F22F15CD5006287B8 /* emailCheckView.swift in Sources */,
 				846D6C9822F19902006287B8 /* infoInputViewController.swift in Sources */,
 				846D6C7322F00854006287B8 /* valueFormatter.swift in Sources */,
+				84E49A71230116E700009089 /* UIImageView+Extension.swift in Sources */,
 				842CC50C22F4167000E8B8F9 /* PageView.swift in Sources */,
 				846D6C7522F04863006287B8 /* AJStartView.swift in Sources */,
 				846D6C2422E161FB006287B8 /* HomeViewController.swift in Sources */,
 				846D6C3022E19BD2006287B8 /* ChartHeaderView.swift in Sources */,
 				8427004F22FAAFDA008EA8AD /* BHJPickerView.swift in Sources */,
+				84E49A74230116E700009089 /* UIAlertViewController_Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -745,7 +796,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -800,7 +851,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
