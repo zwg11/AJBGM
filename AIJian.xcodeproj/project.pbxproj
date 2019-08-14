@@ -10,7 +10,6 @@
 		8427004F22FAAFDA008EA8AD /* BHJPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8427004E22FAAFDA008EA8AD /* BHJPickerView.swift */; };
 		8427005122FACA71008EA8AD /* AddressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8427005022FACA71008EA8AD /* AddressModel.swift */; };
 		8427005322FACDD3008EA8AD /* NSDate+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8427005222FACDD3008EA8AD /* NSDate+Date.swift */; };
-		8427005522FAD397008EA8AD /* city.json in Resources */ = {isa = PBXBuildFile; fileRef = 8427005422FAD397008EA8AD /* city.json */; };
 		842CC4FE22F3ED5F00E8B8F9 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842CC4FD22F3ED5F00E8B8F9 /* InfoViewController.swift */; };
 		842CC50022F3FA8700E8B8F9 /* UnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842CC4FF22F3FA8700E8B8F9 /* UnitViewController.swift */; };
 		842CC50222F3FA9E00E8B8F9 /* PassChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842CC50122F3FA9E00E8B8F9 /* PassChangeViewController.swift */; };
@@ -60,6 +59,7 @@
 		846D6C9822F19902006287B8 /* infoInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C9722F19902006287B8 /* infoInputViewController.swift */; };
 		846D6C9A22F19921006287B8 /* emailCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C9922F19921006287B8 /* emailCheckViewController.swift */; };
 		846D6C9C22F19935006287B8 /* emailCheckSecViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C9B22F19935006287B8 /* emailCheckSecViewController.swift */; };
+
 		846D6C9F22F27631006287B8 /* UIButton_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C9E22F27631006287B8 /* UIButton_Extension.swift */; };
 
 		
@@ -68,6 +68,26 @@
 		846D6CA922F3111E006287B8 /* recentTrendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6CA822F3111E006287B8 /* recentTrendView.swift */; };
 		846D6CAB22F3CD81006287B8 /* theLastCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6CAA22F3CD81006287B8 /* theLastCheckView.swift */; };
 		846D6CAD22F3CDFB006287B8 /* glucoseRecentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6CAC22F3CDFB006287B8 /* glucoseRecentView.swift */; };
+
+
+		846D6C9F22F27631006287B8 /* UIButton_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C9E22F27631006287B8 /* UIButton_Extension.swift */; };
+		8494BFD32303FD340096BE71 /* SuggestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494BFD22303FD340096BE71 /* SuggestionViewController.swift */; };
+
+		84E49A602301155E00009089 /* allPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A542301155E00009089 /* allPickerView.swift */; };
+		84E49A612301155E00009089 /* portionAndInsulinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A552301155E00009089 /* portionAndInsulinView.swift */; };
+		84E49A622301155E00009089 /* sportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A562301155E00009089 /* sportView.swift */; };
+		84E49A632301155E00009089 /* bodyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A572301155E00009089 /* bodyInfoView.swift */; };
+		84E49A642301155E00009089 /* dateAndTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A582301155E00009089 /* dateAndTimeView.swift */; };
+		84E49A662301155E00009089 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A5A2301155E00009089 /* InputView.swift */; };
+		84E49A672301155E00009089 /* glucoseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A5B2301155E00009089 /* glucoseView.swift */; };
+		84E49A682301155E00009089 /* remarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A5C2301155E00009089 /* remarkView.swift */; };
+		84E49A71230116E700009089 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A6C230116E700009089 /* UIImageView+Extension.swift */; };
+		84E49A72230116E700009089 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A6D230116E700009089 /* UILabel+Extension.swift */; };
+		84E49A73230116E700009089 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A6E230116E700009089 /* UIButton+Extension.swift */; };
+		84E49A74230116E700009089 /* UIAlertViewController_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A6F230116E700009089 /* UIAlertViewController_Extension.swift */; };
+		84E49A75230116E700009089 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A70230116E700009089 /* UITextField+Extension.swift */; };
+		84E49A772301189600009089 /* inputChoose.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84E49A762301189600009089 /* inputChoose.plist */; };
+		84E49A7923014C1F00009089 /* DataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A7823014C1F00009089 /* DataTableViewController.swift */; };
 
 		84FB492222F7F26700478287 /* quitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FB492122F7F26700478287 /* quitView.swift */; };
 		84FB492422F92AC300478287 /* BrithdayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FB492322F92AC300478287 /* BrithdayViewController.swift */; };
@@ -79,7 +99,6 @@
 		8427004E22FAAFDA008EA8AD /* BHJPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BHJPickerView.swift; sourceTree = "<group>"; };
 		8427005022FACA71008EA8AD /* AddressModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddressModel.swift; path = AIJian/Main/Mine/View/AddressModel.swift; sourceTree = SOURCE_ROOT; };
 		8427005222FACDD3008EA8AD /* NSDate+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSDate+Date.swift"; sourceTree = "<group>"; };
-		8427005422FAD397008EA8AD /* city.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = city.json; sourceTree = "<group>"; };
 		842CC4FD22F3ED5F00E8B8F9 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		842CC4FF22F3FA8700E8B8F9 /* UnitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitViewController.swift; sourceTree = "<group>"; };
 		842CC50122F3FA9E00E8B8F9 /* PassChangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassChangeViewController.swift; sourceTree = "<group>"; };
@@ -131,6 +150,7 @@
 		846D6C9722F19902006287B8 /* infoInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = infoInputViewController.swift; sourceTree = "<group>"; };
 		846D6C9922F19921006287B8 /* emailCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emailCheckViewController.swift; sourceTree = "<group>"; };
 		846D6C9B22F19935006287B8 /* emailCheckSecViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emailCheckSecViewController.swift; sourceTree = "<group>"; };
+
 		846D6C9E22F27631006287B8 /* UIButton_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton_Extension.swift; sourceTree = "<group>"; }; 
 		846D6CA022F3107B006287B8 /* manualInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = manualInputView.swift; path = "../New Group/manualInputView.swift"; sourceTree = "<group>"; };
 		846D6CA422F310CB006287B8 /* chooseDevView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseDevView.swift; sourceTree = "<group>"; };
@@ -138,6 +158,26 @@
 		846D6CA822F3111E006287B8 /* recentTrendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = recentTrendView.swift; sourceTree = "<group>"; };
 		846D6CAA22F3CD81006287B8 /* theLastCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = theLastCheckView.swift; sourceTree = "<group>"; };
 		846D6CAC22F3CDFB006287B8 /* glucoseRecentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = glucoseRecentView.swift; sourceTree = "<group>"; };
+
+
+		846D6C9E22F27631006287B8 /* UIButton_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton_Extension.swift; sourceTree = "<group>"; };
+		8494BFD22303FD340096BE71 /* SuggestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionViewController.swift; sourceTree = "<group>"; };
+
+		84E49A542301155E00009089 /* allPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = allPickerView.swift; sourceTree = "<group>"; };
+		84E49A552301155E00009089 /* portionAndInsulinView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = portionAndInsulinView.swift; sourceTree = "<group>"; };
+		84E49A562301155E00009089 /* sportView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sportView.swift; sourceTree = "<group>"; };
+		84E49A572301155E00009089 /* bodyInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = bodyInfoView.swift; sourceTree = "<group>"; };
+		84E49A582301155E00009089 /* dateAndTimeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dateAndTimeView.swift; sourceTree = "<group>"; };
+		84E49A5A2301155E00009089 /* InputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
+		84E49A5B2301155E00009089 /* glucoseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = glucoseView.swift; sourceTree = "<group>"; };
+		84E49A5C2301155E00009089 /* remarkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = remarkView.swift; sourceTree = "<group>"; };
+		84E49A6C230116E700009089 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
+		84E49A6D230116E700009089 /* UILabel+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
+		84E49A6E230116E700009089 /* UIButton+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
+		84E49A6F230116E700009089 /* UIAlertViewController_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertViewController_Extension.swift; sourceTree = "<group>"; };
+		84E49A70230116E700009089 /* UITextField+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
+		84E49A762301189600009089 /* inputChoose.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = inputChoose.plist; sourceTree = "<group>"; };
+		84E49A7823014C1F00009089 /* DataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableViewController.swift; sourceTree = "<group>"; };
 
 		84FB492122F7F26700478287 /* quitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = quitView.swift; sourceTree = "<group>"; };
 		84FB492322F92AC300478287 /* BrithdayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrithdayViewController.swift; sourceTree = "<group>"; };
@@ -188,7 +228,6 @@
 		846D6BF822E14D79006287B8 /* AIJian */ = {
 			isa = PBXGroup;
 			children = (
-				8427005422FAD397008EA8AD /* city.json */,
 				846D6BF922E14D79006287B8 /* AppDelegate.swift */,
 				846D6BFD22E14D79006287B8 /* Main.storyboard */,
 				846D6BFB22E14D79006287B8 /* ViewController.swift */,
@@ -328,6 +367,7 @@
 				842CC50722F3FB5600E8B8F9 /* AboutUsViewController.swift */,
 				842CC50922F3FB7200E8B8F9 /* VersionUViewController.swift */,
 				84FB492322F92AC300478287 /* BrithdayViewController.swift */,
+				8494BFD22303FD340096BE71 /* SuggestionViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -600,7 +640,11 @@
 			files = (
 				846D6C0422E14D89006287B8 /* LaunchScreen.storyboard in Resources */,
 				846D6C0122E14D89006287B8 /* Assets.xcassets in Resources */,
+
+				84E49A772301189600009089 /* inputChoose.plist in Resources */,
+
 				8427005522FAD397008EA8AD /* city.json in Resources */,
+
 				846D6BFF22E14D79006287B8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -726,6 +770,11 @@
 				846D6CA722F310E4006287B8 /* dateShowView.swift in Sources */,
 
 				8427004F22FAAFDA008EA8AD /* BHJPickerView.swift in Sources */,
+
+				8494BFD32303FD340096BE71 /* SuggestionViewController.swift in Sources */,
+
+				84E49A74230116E700009089 /* UIAlertViewController_Extension.swift in Sources */,
+
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

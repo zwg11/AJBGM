@@ -9,6 +9,8 @@
 import UIKit
 
 class InfoViewController: UIViewController ,PickerDelegate{
+   
+    
     
     var num:Int = 0
 
@@ -64,7 +66,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
         style = UITableViewCell.CellStyle.value1
         cell = UITableViewCell(style: style, reuseIdentifier: "infocell")
         cell!.accessoryType = .disclosureIndicator
-        cell?.textLabel?.text = infoArray[(indexPath as NSIndexPath).row]
+        cell?.textLabel?.text = infoArray[(indexPath as NSIndexPath).row] 
   
         //放真实数据,右边value
         if(indexPath.row == 2){   //2为体重
@@ -280,7 +282,17 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
         self.present(alertController, animated: true, completion: nil)
     }
     
+    func selectedBlood(_ pickerView: BHJPickerView, _ bloodStr: String) {
+        
+    }
     
+    func selectedWeight(_ pickerView: BHJPickerView, _ weightStr: String) {
+        
+    }
+    
+    func selectedPressure(_ pickerView: BHJPickerView, _ pressureStr: String) {
+        
+    }
     func selectedAddress(_ pickerView: BHJPickerView, _ procince: AddressModel, _ city: AddressModel, _ area: AddressModel) {
       //选择地址
     }
