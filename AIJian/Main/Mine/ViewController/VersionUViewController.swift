@@ -9,6 +9,9 @@
 import UIKit
 import SnapKit
 
+/*版本更新界面
+ */
+
 class VersionUViewController: UIViewController {
         
         //列表数据
@@ -23,7 +26,7 @@ class VersionUViewController: UIViewController {
             
             
             let tableview:UITableView = {
-                let tableView = UITableView.init(frame: CGRect(x: 0, y: navigationBarHeight, width: AJScreenWidth, height: AJScreenHeight/3 * 5))
+                let tableView = UITableView.init(frame: CGRect(x: 0, y: navigationBarHeight, width: AJScreenWidth, height: AJScreenHeight/3))
                 return tableView
             }()
             //将CELL的标识，在此处进行设置
@@ -41,13 +44,7 @@ class VersionUViewController: UIViewController {
         @objc private func back(){
             self.navigationController?.popViewController(animated: true)
         }
-        
-//        public lazy var clickArray: [UIViewController] = {
-//            return [InfoViewController(),UnitViewController(),PassChangeViewController(),BloodSetViewController(), UseDirViewController(),AboutUsViewController(),VersionUViewController()
-//            ]
-//        }()
     
-        
     }
 extension VersionUViewController:UITableViewDelegate,UITableViewDataSource{
         
@@ -73,22 +70,25 @@ extension VersionUViewController:UITableViewDelegate,UITableViewDataSource{
     
     
     
-        //    //回调方法，监听点击事件
-        //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //        //行
-        //        let row = indexPath.section
-        //        //列
-        //        let col = indexPath.row
-        //        if indexPath.section == 0 {
-        //            self.navigationController?.pushViewController(clickArray[col], animated: false)
-        //            print(clickArray[col])
-        //            print(col)
-        //        }else{
-        //            self.navigationController?.pushViewController(clickArray[col+row+3], animated: false)
-        //            print(clickArray[col+row+3])
-        //            print(col+row+3)
-        //        }
-        //    }
+        //回调方法，监听点击事件
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            //行
+//            let row = indexPath.section
+            //列
+            let row = indexPath.row
+            switch row {
+                case 0:
+                    print("第一行")
+                case 1:
+                    self.navigationController?.pushViewController(SuggestionViewController(), animated: false)
+                case 2:
+                    print("第三行")
+                case 3:
+                    print("第四行")
+                default:
+                    print("第五行")
+               }
+          }
         //    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         //        let footview = UIView()
         //        footview.backgroundColor = FooterViewColor
@@ -97,6 +97,5 @@ extension VersionUViewController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return AJScreenHeight/15
     }
-    }
 
-
+}

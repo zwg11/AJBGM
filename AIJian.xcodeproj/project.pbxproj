@@ -10,7 +10,6 @@
 		8427004F22FAAFDA008EA8AD /* BHJPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8427004E22FAAFDA008EA8AD /* BHJPickerView.swift */; };
 		8427005122FACA71008EA8AD /* AddressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8427005022FACA71008EA8AD /* AddressModel.swift */; };
 		8427005322FACDD3008EA8AD /* NSDate+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8427005222FACDD3008EA8AD /* NSDate+Date.swift */; };
-		8427005522FAD397008EA8AD /* city.json in Resources */ = {isa = PBXBuildFile; fileRef = 8427005422FAD397008EA8AD /* city.json */; };
 		842CC4FE22F3ED5F00E8B8F9 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842CC4FD22F3ED5F00E8B8F9 /* InfoViewController.swift */; };
 		842CC50022F3FA8700E8B8F9 /* UnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842CC4FF22F3FA8700E8B8F9 /* UnitViewController.swift */; };
 		842CC50222F3FA9E00E8B8F9 /* PassChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842CC50122F3FA9E00E8B8F9 /* PassChangeViewController.swift */; };
@@ -61,6 +60,7 @@
 		846D6C9A22F19921006287B8 /* emailCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C9922F19921006287B8 /* emailCheckViewController.swift */; };
 		846D6C9C22F19935006287B8 /* emailCheckSecViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C9B22F19935006287B8 /* emailCheckSecViewController.swift */; };
 		846D6C9F22F27631006287B8 /* UIButton_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C9E22F27631006287B8 /* UIButton_Extension.swift */; };
+		8494BFD32303FD340096BE71 /* SuggestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494BFD22303FD340096BE71 /* SuggestionViewController.swift */; };
 		84FB492222F7F26700478287 /* quitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FB492122F7F26700478287 /* quitView.swift */; };
 		84FB492422F92AC300478287 /* BrithdayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FB492322F92AC300478287 /* BrithdayViewController.swift */; };
 		C51C8BD65C07AB3DB20DF1D9 /* Pods_AIJian.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB88905D4BA97B5422D8CCA1 /* Pods_AIJian.framework */; };
@@ -70,7 +70,6 @@
 		8427004E22FAAFDA008EA8AD /* BHJPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BHJPickerView.swift; sourceTree = "<group>"; };
 		8427005022FACA71008EA8AD /* AddressModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddressModel.swift; path = AIJian/Main/Mine/View/AddressModel.swift; sourceTree = SOURCE_ROOT; };
 		8427005222FACDD3008EA8AD /* NSDate+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSDate+Date.swift"; sourceTree = "<group>"; };
-		8427005422FAD397008EA8AD /* city.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = city.json; sourceTree = "<group>"; };
 		842CC4FD22F3ED5F00E8B8F9 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		842CC4FF22F3FA8700E8B8F9 /* UnitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitViewController.swift; sourceTree = "<group>"; };
 		842CC50122F3FA9E00E8B8F9 /* PassChangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassChangeViewController.swift; sourceTree = "<group>"; };
@@ -123,6 +122,7 @@
 		846D6C9922F19921006287B8 /* emailCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emailCheckViewController.swift; sourceTree = "<group>"; };
 		846D6C9B22F19935006287B8 /* emailCheckSecViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emailCheckSecViewController.swift; sourceTree = "<group>"; };
 		846D6C9E22F27631006287B8 /* UIButton_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton_Extension.swift; sourceTree = "<group>"; };
+		8494BFD22303FD340096BE71 /* SuggestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionViewController.swift; sourceTree = "<group>"; };
 		84FB492122F7F26700478287 /* quitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = quitView.swift; sourceTree = "<group>"; };
 		84FB492322F92AC300478287 /* BrithdayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrithdayViewController.swift; sourceTree = "<group>"; };
 		A92ED38E7290A71018D96804 /* Pods-AIJian.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AIJian.debug.xcconfig"; path = "Target Support Files/Pods-AIJian/Pods-AIJian.debug.xcconfig"; sourceTree = "<group>"; };
@@ -171,7 +171,6 @@
 		846D6BF822E14D79006287B8 /* AIJian */ = {
 			isa = PBXGroup;
 			children = (
-				8427005422FAD397008EA8AD /* city.json */,
 				846D6BF922E14D79006287B8 /* AppDelegate.swift */,
 				846D6BFD22E14D79006287B8 /* Main.storyboard */,
 				846D6BFB22E14D79006287B8 /* ViewController.swift */,
@@ -306,6 +305,7 @@
 				842CC50722F3FB5600E8B8F9 /* AboutUsViewController.swift */,
 				842CC50922F3FB7200E8B8F9 /* VersionUViewController.swift */,
 				84FB492322F92AC300478287 /* BrithdayViewController.swift */,
+				8494BFD22303FD340096BE71 /* SuggestionViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -561,7 +561,6 @@
 			files = (
 				846D6C0422E14D89006287B8 /* LaunchScreen.storyboard in Resources */,
 				846D6C0122E14D89006287B8 /* Assets.xcassets in Resources */,
-				8427005522FAD397008EA8AD /* city.json in Resources */,
 				846D6BFF22E14D79006287B8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -669,6 +668,7 @@
 				846D6C2422E161FB006287B8 /* HomeViewController.swift in Sources */,
 				846D6C3022E19BD2006287B8 /* ChartHeaderView.swift in Sources */,
 				8427004F22FAAFDA008EA8AD /* BHJPickerView.swift in Sources */,
+				8494BFD32303FD340096BE71 /* SuggestionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
