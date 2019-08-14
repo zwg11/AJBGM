@@ -1,6 +1,6 @@
 //
 //  HomeViewController.swift
-//  AIJian
+//  AIJianma
 //
 //  Created by ADMIN on 2019/7/19.
 //  Copyright © 2019 apple. All rights reserved.
