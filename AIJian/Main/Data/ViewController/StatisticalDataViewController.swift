@@ -7,41 +7,44 @@
 //
 
 import UIKit
-import SnapKit
+//import SnapKit
 
 class StatisticalDataViewController: UIViewController,UIScrollViewDelegate {
+//    enum style{
+//        case total
+//        case perMeal
+//        case afterMeal
+//    }
 
     var scrollView:UIScrollView?
     // 平均统计视图
     lazy var averageview:averageView = {
         let view = averageView()
         view.setupUI()
-        //view.backgroundColor = UIColor.yellow
         return view
     }()
     // 总体检测结果视图
-    lazy var totalview:totalCheckView = {
-        let view = totalCheckView()
+    lazy var totalview:perAndAfterMealTests = {
+        let view = perAndAfterMealTests()
+        // 注，先设置style，再运行 setupUI()
+        view.style = .total
         view.setupUI()
-        //view.backgroundColor = UIColor.gray
         return view
     }()
     // 餐前检测结果视图
     lazy var perMeal:perAndAfterMealTests = {
         let view = perAndAfterMealTests()
+        // 注，先设置style，再运行 setupUI()
+        view.style = .perMeal
         view.setupUI()
-        view.isPerMeal = true
-        view.titleChange()
-        //view.backgroundColor = UIColor.blue
         return view
     }()
     // 餐后检测结果视图
     lazy var afterMeal:perAndAfterMealTests = {
         let view = perAndAfterMealTests()
+        // 注，先设置style，再运行 setupUI()
+        view.style = .afterMeal
         view.setupUI()
-        view.isPerMeal = false
-        view.titleChange()
-        //view.backgroundColor = UIColor.red
         return view
     }()
     override func viewDidLoad() {
@@ -112,25 +115,6 @@ class StatisticalDataViewController: UIViewController,UIScrollViewDelegate {
         self.scrollView?.contentOffset = CGPoint(x: 0, y: 0)
     }
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-//    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
-//        let inter = UIApplication.shared.statusBarOrientation
-//        if(inter == UIInterfaceOrientation.portrait){
-//            print("shuping")
-//
-//        }
-//        else{
-//            scrollView?.frame.size.height = UIScreen.main.bounds.height-108
-//
-//        }
-//    }
 
 }

@@ -15,8 +15,7 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
     var date:String?
     // 记录i姓名
     var name:String?
-    // 记录邮箱
-    var email:String?
+
     
     private lazy var picker : pickerView = {
         let view = pickerView()
@@ -29,33 +28,18 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
     private lazy var shareV:SharedView = {
         let view = SharedView()
         view.setupUI()
-        view.emailTextField.delegate = self
         view.nameTextField.delegate = self
         view.birthdayButton.addTarget(self, action: #selector(chooseDate), for: .touchUpInside)
         return view
     }()
     var topConstraint:Constraint?
     var bottomConstraint:Constraint?
-//    lazy var shareScrollView:UIScrollView = {
-//        let view = UIScrollView()
-//        view.contentSize = CGSize(width: 300, height: self.view.frame.size.height*2)
-//        view.alwaysBounceVertical = true
-//        view.showsVerticalScrollIndicator = true
-//        view.backgroundColor = UIColor.yellow
-//        return view
-//    }()
-    
-    //    override func loadView() {
-    //        let myview = UIScrollView()
-    //        //myview.setupUI()
-    //        myview.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height * 2)
-    //        view = myview
-    //    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         let sharedScrollView = UIScrollView()
         // 设置内容高度为屏幕的3/2,显示滚动条，d能上下滚动，背景为白色
-        sharedScrollView.contentSize = CGSize(width: AJScreenWidth, height: AJScreenWidth*3/2)
+        sharedScrollView.contentSize = CGSize(width: AJScreenWidth, height: AJScreenWidth)
         sharedScrollView.alwaysBounceVertical = true
         sharedScrollView.showsVerticalScrollIndicator = true
         sharedScrollView.backgroundColor = UIColor.white
@@ -81,18 +65,6 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
             }
             
         }
-        //        share.setupUI()
-        //        sharedScrollView.addSubview(share)
-        //        // 这样设置约束是可以的，能够自适应，但为什么？***************************
-        //          //此处也未设置view的高度Y和顶部位置，但默认顶部置顶，不知为什么
-        // ***********************如果没有设置高度，那么该视图的按钮、文本框等都不能点击******************
-        //        share.snp.makeConstraints{(make) in
-        //            make.left.equalTo(self.view.snp.left)
-        //            make.right.equalTo(self.view.snp.right)
-        ////            make.height.equalTo(self.view.frame.size.height/2)
-        ////            make.top.equalTo(self.view.safeAreaLayoutGuide.layoutFrame.minX)
-        //
-        //        }
         
         
         
@@ -209,10 +181,7 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
         shareV.birthdayButton.setTitle(date, for: .normal)
         
         UIView.animate(withDuration: 0.5, animations: dismiss)
-        //        self.pickDateView.snp.makeConstraints{(make) in
-        //            make.top.equalTo(self.snp.bottom)
-        //
-        //        }
+
         print("sure button clicked")
         
     }
@@ -220,13 +189,9 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         print(textField.text ?? "")
         
-        // 判断是哪个文本框，将内容赋值给对应的字符串
-        if textField == shareV.nameTextField{
-            name = textField.text
-        }
-        else if textField == shareV.emailTextField{
-            email = textField.text
-        }
+        // 将内容赋值给对应的字符串
+        name = textField.text
+
         // 收起键盘
         textField.resignFirstResponder()
         return true

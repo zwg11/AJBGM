@@ -14,7 +14,7 @@ public extension Date {
     ///
     /// - Parameter fromDate: 时间
     /// - Returns: 返回字符串
-    public func dateStringWithDate(_ fromDate : Date) -> String{
+    func dateStringWithDate(_ fromDate : Date) -> String{
         
         let timeZone = TimeZone.init(identifier: "UTC")
         let formatter = DateFormatter()
@@ -29,7 +29,7 @@ public extension Date {
     ///
     /// - Parameter fromDate: 开始时间
     /// - Returns: 返回时间差
-    public func daltaFrom(_ fromDate : Date)  -> DateComponents{
+    func daltaFrom(_ fromDate : Date)  -> DateComponents{
         
         /// 获取当前日历
         let calendar = Calendar.current
@@ -50,7 +50,7 @@ public extension Date {
     /// 是否是今天的时间
     ///
     /// - Returns: Bool
-    public func isToday() -> Bool{
+    func isToday() -> Bool{
         
         let currentTime = Date().timeIntervalSince1970
         
@@ -62,7 +62,7 @@ public extension Date {
     /// 是否是昨天的时间
     ///
     /// - Returns: Bool
-    public func isYesToday() -> Bool {
+    func isYesToday() -> Bool {
         
         let currentTime = Date().timeIntervalSince1970
         
