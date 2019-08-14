@@ -58,10 +58,10 @@
 		846D6C9822F19902006287B8 /* infoInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C9722F19902006287B8 /* infoInputViewController.swift */; };
 		846D6C9A22F19921006287B8 /* emailCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C9922F19921006287B8 /* emailCheckViewController.swift */; };
 		846D6C9C22F19935006287B8 /* emailCheckSecViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C9B22F19935006287B8 /* emailCheckSecViewController.swift */; };
-<<<<<<< HEAD
+
 		846D6C9F22F27631006287B8 /* UIButton_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C9E22F27631006287B8 /* UIButton_Extension.swift */; };
 		8494BFD32303FD340096BE71 /* SuggestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494BFD22303FD340096BE71 /* SuggestionViewController.swift */; };
-=======
+
 		84E49A602301155E00009089 /* allPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A542301155E00009089 /* allPickerView.swift */; };
 		84E49A612301155E00009089 /* portionAndInsulinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A552301155E00009089 /* portionAndInsulinView.swift */; };
 		84E49A622301155E00009089 /* sportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A562301155E00009089 /* sportView.swift */; };
@@ -77,7 +77,7 @@
 		84E49A75230116E700009089 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A70230116E700009089 /* UITextField+Extension.swift */; };
 		84E49A772301189600009089 /* inputChoose.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84E49A762301189600009089 /* inputChoose.plist */; };
 		84E49A7923014C1F00009089 /* DataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A7823014C1F00009089 /* DataTableViewController.swift */; };
->>>>>>> 42588dabdfa09486cdb2b7154afc17724193d2aa
+
 		84FB492222F7F26700478287 /* quitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FB492122F7F26700478287 /* quitView.swift */; };
 		84FB492422F92AC300478287 /* BrithdayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FB492322F92AC300478287 /* BrithdayViewController.swift */; };
 		C51C8BD65C07AB3DB20DF1D9 /* Pods_AIJian.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB88905D4BA97B5422D8CCA1 /* Pods_AIJian.framework */; };
@@ -137,10 +137,10 @@
 		846D6C9722F19902006287B8 /* infoInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = infoInputViewController.swift; sourceTree = "<group>"; };
 		846D6C9922F19921006287B8 /* emailCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emailCheckViewController.swift; sourceTree = "<group>"; };
 		846D6C9B22F19935006287B8 /* emailCheckSecViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emailCheckSecViewController.swift; sourceTree = "<group>"; };
-<<<<<<< HEAD
+
 		846D6C9E22F27631006287B8 /* UIButton_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton_Extension.swift; sourceTree = "<group>"; };
 		8494BFD22303FD340096BE71 /* SuggestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionViewController.swift; sourceTree = "<group>"; };
-=======
+
 		84E49A542301155E00009089 /* allPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = allPickerView.swift; sourceTree = "<group>"; };
 		84E49A552301155E00009089 /* portionAndInsulinView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = portionAndInsulinView.swift; sourceTree = "<group>"; };
 		84E49A562301155E00009089 /* sportView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sportView.swift; sourceTree = "<group>"; };
@@ -156,7 +156,7 @@
 		84E49A70230116E700009089 /* UITextField+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		84E49A762301189600009089 /* inputChoose.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = inputChoose.plist; sourceTree = "<group>"; };
 		84E49A7823014C1F00009089 /* DataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableViewController.swift; sourceTree = "<group>"; };
->>>>>>> 42588dabdfa09486cdb2b7154afc17724193d2aa
+
 		84FB492122F7F26700478287 /* quitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = quitView.swift; sourceTree = "<group>"; };
 		84FB492322F92AC300478287 /* BrithdayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrithdayViewController.swift; sourceTree = "<group>"; };
 		A92ED38E7290A71018D96804 /* Pods-AIJian.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AIJian.debug.xcconfig"; path = "Target Support Files/Pods-AIJian/Pods-AIJian.debug.xcconfig"; sourceTree = "<group>"; };
@@ -607,11 +607,11 @@
 			files = (
 				846D6C0422E14D89006287B8 /* LaunchScreen.storyboard in Resources */,
 				846D6C0122E14D89006287B8 /* Assets.xcassets in Resources */,
-<<<<<<< HEAD
-=======
+
+
 				84E49A772301189600009089 /* inputChoose.plist in Resources */,
 				8427005522FAD397008EA8AD /* city.json in Resources */,
->>>>>>> 42588dabdfa09486cdb2b7154afc17724193d2aa
+
 				846D6BFF22E14D79006287B8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -730,11 +730,11 @@
 				846D6C2422E161FB006287B8 /* HomeViewController.swift in Sources */,
 				846D6C3022E19BD2006287B8 /* ChartHeaderView.swift in Sources */,
 				8427004F22FAAFDA008EA8AD /* BHJPickerView.swift in Sources */,
-<<<<<<< HEAD
+
 				8494BFD32303FD340096BE71 /* SuggestionViewController.swift in Sources */,
-=======
+
 				84E49A74230116E700009089 /* UIAlertViewController_Extension.swift in Sources */,
->>>>>>> 42588dabdfa09486cdb2b7154afc17724193d2aa
+
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -30,7 +30,7 @@ class loginViewController: UIViewController,UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.navigationController?.navigationBar.barTintColor = UIColor.blue
-        self.title = "登录"
+        self.title = "登  录"
         self.view.addSubview(loginview)
         loginview.snp.makeConstraints{(make) in
             make.height.equalTo(AJScreenHeight)

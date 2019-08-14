@@ -27,18 +27,7 @@ class MineViewController: UIViewController {
         return [InfoViewController(),UnitViewController(),PassChangeViewController(),BloodSetViewController(), UseDirViewController(),AboutUsViewController(),VersionUViewController()
         ]
     }()
-//    private lazy var mineTableView:AJMineTableView = {
-//        let view = AJMineTableView()
-//        view.tableview.delegate = self
-//        view.tableview.dataSource = self
-//        return view
-//    }()
-//    private lazy var quitLogin:quitView={
-//        let quitLogin = quitView()
-//        quitLogin.setupUI()
-//        quitLogin.quitButton.addTarget(self, action: #selector(loginOff), for: .touchUpInside)
-//        return quitLogin
-//    }()
+
     public lazy var quitButton:UIButton = {
         let quitLogin = UIButton(type:.system)
         quitLogin.backgroundColor = UIColor.red
@@ -57,7 +46,11 @@ class MineViewController: UIViewController {
         //将所有按钮添加到scrollview中，还需要修改相对布局
         
         let headview = AJMineHeaderView(frame: CGRect(x: 0, y: 0, width: AJScreenWidth, height: AJScreenHeight/3))
-
+//        headview.setUpUI()
+//        headview.textLabel
+        headview.textButton.addTarget(self, action: #selector(MineLogin), for: .touchUpInside)
+        
+        print(headview)
         let tableview = AJMineTableView(frame: CGRect(x: 0, y:  AJScreenHeight/3, width: AJScreenWidth, height: AJScreenHeight/3*2))
         //将CELL的标识，在此处进行设置
         tableview.tableview.register(UITableViewCell.self, forCellReuseIdentifier:"cell")
@@ -87,11 +80,16 @@ class MineViewController: UIViewController {
     }
 
     
-    
+    @objc public func MineLogin(){
+//        self.navigationController?.pushViewController(loginViewController(), animated: false)
+        self.present(loginViewController(), animated: true, completion: nil)
+    }
     
     @objc public func loginOff(){
         print("退出成功")
-        self.navigationController?.pushViewController(loginViewController(), animated: false)
+        //self.present(loginNavigationController(), animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
+//        self.navigationController?.pushViewController(loginViewController(), animated: false)
     }
    
 }

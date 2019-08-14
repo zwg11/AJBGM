@@ -5,6 +5,11 @@
 //  Created by ADMIN on 2019/7/31.
 //  Copyright © 2019 apple. All rights reserved.
 //
+/*
+修改密码     要求输入新密码和确认密码
+ 
+ */
+
 
 import UIKit
 import SnapKit

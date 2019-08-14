@@ -11,7 +11,7 @@ import UIKit
 class AJMineHeaderView:UIView{
     
     //头像
-    private lazy var titleImage:UIImageView = {
+     lazy var titleImage:UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named:"defaultUserImage")
         imageView.layer.cornerRadius = (AJScreenWidth*0.3)/2   //将圆角设置成半径
@@ -20,13 +20,15 @@ class AJMineHeaderView:UIView{
     }()
     
     //点击登录,label无法直接添加addtarger
-    private lazy var textLabel:UILabel = {
-        let label = UILabel()
-        label.text = "Click Login"
-        label.textColor = UIColor.white
-        label.font = UIFont.systemFont(ofSize: 24)
-        
-        return label
+    lazy var textButton:UIButton = {
+        let button = UIButton()
+        button.setTitle("Click Login", for: .init())
+        button.backgroundColor = UIColor.init(red:18.0/255.0,green: 73/255.0,blue:212/255.0,alpha: 1)
+        button.titleLabel?.font = UIFont.systemFont(ofSize:24)
+        button.titleLabel?.textColor = UIColor.white
+//        button.textColor = UIColor.white
+//        button.font = UIFont.systemFont(ofSize: 24)
+        return button
     }()
     
     override init(frame: CGRect) {
@@ -48,8 +50,8 @@ class AJMineHeaderView:UIView{
         }
         
         //字体约束
-        self.addSubview(self.textLabel)
-        self.textLabel.snp.makeConstraints{ (make) in
+        self.addSubview(self.textButton)
+        self.textButton.snp.makeConstraints{ (make) in
             make.top.equalTo((AJScreenHeight/3 - AJScreenWidth*0.2)/2 + 20)
             make.left.equalToSuperview().offset((AJScreenWidth/7 + AJScreenWidth*0.3)+20)
         }
