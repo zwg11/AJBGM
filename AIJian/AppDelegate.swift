@@ -23,6 +23,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // tabBarController子视图控制器集合
         //tabBarController.viewControllers = [weChat,addressBook,find]
         // 添加到rootViewController
+        /*
+         此处需要判断是否为第一次登陆？
+         如果是，则跳到登陆界面。
+         如果否，则跳到首页界面。
+         */     
         let viewController = loginViewController()
         let nv = loginNavigationController(rootViewController: viewController)
         window?.rootViewController = nv

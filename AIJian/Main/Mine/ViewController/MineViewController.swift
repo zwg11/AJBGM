@@ -79,16 +79,23 @@ class MineViewController: UIViewController {
         
     }
 
-    
+    //点击登录，不允许跳转
     @objc public func MineLogin(){
 //        self.navigationController?.pushViewController(loginViewController(), animated: false)
-        self.present(loginViewController(), animated: true, completion: nil)
+//        self.present(loginViewController(), animated: true, completion: nil)
     }
-    
+    /*
+     如果是第一次登陆的话，需要dismiss。登陆的界面
+     如果不是第一次登陆的话，还需要判断界面中有无登陆界面的底下。
+    如有则，dismiss
+    如果只有tabbarcontroller。可以直接present.
+     每个present,都需要对应一个dismiss.
+     */
     @objc public func loginOff(){
         print("退出成功")
         //self.present(loginNavigationController(), animated: true, completion: nil)
         self.dismiss(animated: true, completion: nil)
+//        self.presentationController
 //        self.navigationController?.pushViewController(loginViewController(), animated: false)
     }
    

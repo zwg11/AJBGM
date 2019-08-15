@@ -58,10 +58,11 @@
 		846D6C9822F19902006287B8 /* infoInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C9722F19902006287B8 /* infoInputViewController.swift */; };
 		846D6C9A22F19921006287B8 /* emailCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C9922F19921006287B8 /* emailCheckViewController.swift */; };
 		846D6C9C22F19935006287B8 /* emailCheckSecViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C9B22F19935006287B8 /* emailCheckSecViewController.swift */; };
-
-		846D6C9F22F27631006287B8 /* UIButton_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846D6C9E22F27631006287B8 /* UIButton_Extension.swift */; };
 		8494BFD32303FD340096BE71 /* SuggestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494BFD22303FD340096BE71 /* SuggestionViewController.swift */; };
-
+		8494BFD9230537780096BE71 /* CustomAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494BFD8230537780096BE71 /* CustomAlertController.swift */; };
+		8494BFDB2305473A0096BE71 /* URL_Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494BFDA2305473A0096BE71 /* URL_Address.swift */; };
+		8494BFDD23054E2A0096BE71 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494BFDC23054E2A0096BE71 /* User.swift */; };
+		8494BFE1230584210096BE71 /* Eventhing_response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494BFE0230584210096BE71 /* Eventhing_response.swift */; };
 		84E49A602301155E00009089 /* allPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A542301155E00009089 /* allPickerView.swift */; };
 		84E49A612301155E00009089 /* portionAndInsulinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A552301155E00009089 /* portionAndInsulinView.swift */; };
 		84E49A622301155E00009089 /* sportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A562301155E00009089 /* sportView.swift */; };
@@ -77,7 +78,6 @@
 		84E49A75230116E700009089 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A70230116E700009089 /* UITextField+Extension.swift */; };
 		84E49A772301189600009089 /* inputChoose.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84E49A762301189600009089 /* inputChoose.plist */; };
 		84E49A7923014C1F00009089 /* DataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E49A7823014C1F00009089 /* DataTableViewController.swift */; };
-
 		84FB492222F7F26700478287 /* quitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FB492122F7F26700478287 /* quitView.swift */; };
 		84FB492422F92AC300478287 /* BrithdayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FB492322F92AC300478287 /* BrithdayViewController.swift */; };
 		C51C8BD65C07AB3DB20DF1D9 /* Pods_AIJian.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB88905D4BA97B5422D8CCA1 /* Pods_AIJian.framework */; };
@@ -137,10 +137,11 @@
 		846D6C9722F19902006287B8 /* infoInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = infoInputViewController.swift; sourceTree = "<group>"; };
 		846D6C9922F19921006287B8 /* emailCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emailCheckViewController.swift; sourceTree = "<group>"; };
 		846D6C9B22F19935006287B8 /* emailCheckSecViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emailCheckSecViewController.swift; sourceTree = "<group>"; };
-
-		846D6C9E22F27631006287B8 /* UIButton_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton_Extension.swift; sourceTree = "<group>"; };
 		8494BFD22303FD340096BE71 /* SuggestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionViewController.swift; sourceTree = "<group>"; };
-
+		8494BFD8230537780096BE71 /* CustomAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertController.swift; sourceTree = "<group>"; };
+		8494BFDA2305473A0096BE71 /* URL_Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL_Address.swift; sourceTree = "<group>"; };
+		8494BFDC23054E2A0096BE71 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = User.swift; path = AIJian/Networking/User.swift; sourceTree = SOURCE_ROOT; };
+		8494BFE0230584210096BE71 /* Eventhing_response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Eventhing_response.swift; sourceTree = "<group>"; };
 		84E49A542301155E00009089 /* allPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = allPickerView.swift; sourceTree = "<group>"; };
 		84E49A552301155E00009089 /* portionAndInsulinView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = portionAndInsulinView.swift; sourceTree = "<group>"; };
 		84E49A562301155E00009089 /* sportView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sportView.swift; sourceTree = "<group>"; };
@@ -156,7 +157,6 @@
 		84E49A70230116E700009089 /* UITextField+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		84E49A762301189600009089 /* inputChoose.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = inputChoose.plist; sourceTree = "<group>"; };
 		84E49A7823014C1F00009089 /* DataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableViewController.swift; sourceTree = "<group>"; };
-
 		84FB492122F7F26700478287 /* quitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = quitView.swift; sourceTree = "<group>"; };
 		84FB492322F92AC300478287 /* BrithdayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrithdayViewController.swift; sourceTree = "<group>"; };
 		A92ED38E7290A71018D96804 /* Pods-AIJian.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AIJian.debug.xcconfig"; path = "Target Support Files/Pods-AIJian/Pods-AIJian.debug.xcconfig"; sourceTree = "<group>"; };
@@ -205,12 +205,14 @@
 		846D6BF822E14D79006287B8 /* AIJian */ = {
 			isa = PBXGroup;
 			children = (
+				8494BFD7230537380096BE71 /* Tools */,
 				846D6BF922E14D79006287B8 /* AppDelegate.swift */,
 				846D6BFD22E14D79006287B8 /* Main.storyboard */,
 				846D6BFB22E14D79006287B8 /* ViewController.swift */,
 				846D6C1022E15276006287B8 /* const.swift */,
 				846D6C0C22E15108006287B8 /* Main */,
 				846D6C0222E14D89006287B8 /* LaunchScreen.storyboard */,
+				8494BFD62304FF810096BE71 /* Networking */,
 				84E49A6B230116E700009089 /* extension */,
 				846D6C0022E14D89006287B8 /* Assets.xcassets */,
 				846D6C0522E14D89006287B8 /* Info.plist */,
@@ -468,6 +470,7 @@
 		846D6C8022F06D94006287B8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8494BFDC23054E2A0096BE71 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -522,6 +525,23 @@
 				846D6C9B22F19935006287B8 /* emailCheckSecViewController.swift */,
 			);
 			path = PasswordForget;
+			sourceTree = "<group>";
+		};
+		8494BFD62304FF810096BE71 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				8494BFDA2305473A0096BE71 /* URL_Address.swift */,
+				8494BFE0230584210096BE71 /* Eventhing_response.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		8494BFD7230537380096BE71 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				8494BFD8230537780096BE71 /* CustomAlertController.swift */,
+			);
+			path = Tools;
 			sourceTree = "<group>";
 		};
 		84E49A6B230116E700009089 /* extension */ = {
@@ -607,11 +627,7 @@
 			files = (
 				846D6C0422E14D89006287B8 /* LaunchScreen.storyboard in Resources */,
 				846D6C0122E14D89006287B8 /* Assets.xcassets in Resources */,
-
-
 				84E49A772301189600009089 /* inputChoose.plist in Resources */,
-				8427005522FAD397008EA8AD /* city.json in Resources */,
-
 				846D6BFF22E14D79006287B8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -713,28 +729,29 @@
 				846D6C3A22E1A66B006287B8 /* StatisticalDataViewController.swift in Sources */,
 				846D6C8222F077E0006287B8 /* loginViewController.swift in Sources */,
 				84E49A73230116E700009089 /* UIButton+Extension.swift in Sources */,
+				8494BFDD23054E2A0096BE71 /* User.swift in Sources */,
 				846D6C9C22F19935006287B8 /* emailCheckSecViewController.swift in Sources */,
 				846D6C3E22E1A693006287B8 /* SharedViewController.swift in Sources */,
 				846D6C7C22F06CE2006287B8 /* loginView.swift in Sources */,
 				846D6C3A22E1A66B006287B8 /* StatisticalDataViewController.swift in Sources */,
 				846D6C3E22E1A693006287B8 /* SharedViewController.swift in Sources */,
+				8494BFD9230537780096BE71 /* CustomAlertController.swift in Sources */,
 				846D6BFA22E14D79006287B8 /* AppDelegate.swift in Sources */,
+				8494BFDB2305473A0096BE71 /* URL_Address.swift in Sources */,
 				8427005122FACA71008EA8AD /* AddressModel.swift in Sources */,
 				84E49A602301155E00009089 /* allPickerView.swift in Sources */,
 				846D6C8F22F15CD5006287B8 /* emailCheckView.swift in Sources */,
 				846D6C9822F19902006287B8 /* infoInputViewController.swift in Sources */,
 				846D6C7322F00854006287B8 /* valueFormatter.swift in Sources */,
+				8494BFE1230584210096BE71 /* Eventhing_response.swift in Sources */,
 				84E49A71230116E700009089 /* UIImageView+Extension.swift in Sources */,
 				842CC50C22F4167000E8B8F9 /* PageView.swift in Sources */,
 				846D6C7522F04863006287B8 /* AJStartView.swift in Sources */,
 				846D6C2422E161FB006287B8 /* HomeViewController.swift in Sources */,
 				846D6C3022E19BD2006287B8 /* ChartHeaderView.swift in Sources */,
 				8427004F22FAAFDA008EA8AD /* BHJPickerView.swift in Sources */,
-
 				8494BFD32303FD340096BE71 /* SuggestionViewController.swift in Sources */,
-
 				84E49A74230116E700009089 /* UIAlertViewController_Extension.swift in Sources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
