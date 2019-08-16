@@ -78,8 +78,10 @@ class loginViewController: UIViewController,UITextFieldDelegate {
                         /// json转model
                         /// 写法一：responseModel.deserialize(from: jsonString)
                         /// 写法二：用JSONDeserializer<T>
+                        /*
+                           利用JSONDeserializer封装成一个对象。然后再把这个对象解析为
+                         */
                         if let responseModel = JSONDeserializer<responseModel>.deserializeFrom(json: jsonString) {
-                            
                             /// model转json 为了方便在控制台查看
                             print(responseModel.toJSONString(prettyPrint: true)!)
                             print(responseModel.code)
