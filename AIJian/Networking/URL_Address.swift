@@ -9,3 +9,11 @@ let BASE_URL = "http://10.65.1.213:8080/"
 //登录api
 let Login_api =  BASE_URL + "app/login"
 
+//获取验证码
+let get_Code = BASE_URL + "app/sendCode"
+
+//修改密码之前的，邮箱验证
+let ChangP_VFcode = BASE_URL + "app/passwordRetrieveFirst"
+
+//验证邮箱之后，进行密码修改
+let PasswordChangeNeedCode = BASE_URL + "app/passwordRetrieveSecond"

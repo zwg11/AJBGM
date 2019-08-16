@@ -21,11 +21,11 @@ class registerView: UIView {
         return imageView
     }()
     
-    // 输入用户文本框
-    lazy var userNameTextField:UITextField = {
-        let textField = initTextField(placeholder: " 输入用户名",keyboardType: .default)
-        return textField
-    }()
+//    // 输入用户文本框
+//    lazy var userNameTextField:UITextField = {
+//        let textField = initTextField(placeholder: " 输入用户名",keyboardType: .default)
+//        return textField
+//    }()
     
     // 输入邮箱文本框
     lazy var emailTextField:UITextField = {
@@ -100,23 +100,23 @@ class registerView: UIView {
             make.height.equalTo(AJScreenWidth/3*2)
         }
         
-        // 输入用户文本框布局
-        self.addSubview(userNameTextField)
-        userNameTextField.snp.makeConstraints{(make) in
-            make.left.equalToSuperview().offset(AJScreenWidth/7)
-            make.right.equalToSuperview().offset(-AJScreenWidth/7)
-            make.height.equalTo(AJScreenWidth/12)
-            make.top.equalTo(AJImageView.snp.bottom).offset(AJScreenWidth/20)
-        }
+//        // 输入用户文本框布局
+//        self.addSubview(userNameTextField)
+//        userNameTextField.snp.makeConstraints{(make) in
+//            make.left.equalToSuperview().offset(AJScreenWidth/7)
+//            make.right.equalToSuperview().offset(-AJScreenWidth/7)
+//            make.height.equalTo(AJScreenWidth/12)
+//            make.top.equalTo(AJImageView.snp.bottom).offset(AJScreenWidth/20)
+//        }
         
         // 输入邮箱文本框布局
         self.addSubview(emailTextField)
         emailTextField.snp.makeConstraints{(make) in
-//            make.left.equalToSuperview().offset(AJScreenWidth/7)
-//            make.right.equalToSuperview().offset(-AJScreenWidth/7)
-            make.left.right.equalTo(userNameTextField)
+//            make.left.right.equalTo(userNameTextField)
+            make.left.equalToSuperview().offset(AJScreenWidth/7)
+            make.right.equalToSuperview().offset(-AJScreenWidth/7)
             make.height.equalTo(AJScreenWidth/12)
-            make.top.equalTo(userNameTextField.snp.bottom).offset(AJScreenWidth/20)
+            make.top.equalTo(AJImageView.snp.bottom).offset(AJScreenWidth/20)
         }
         
         // 输入验证码文本框布局
@@ -142,7 +142,7 @@ class registerView: UIView {
         passwordTextField.snp.makeConstraints{(make) in
 //            make.left.equalToSuperview().offset(AJScreenWidth/7)
 //            make.right.equalToSuperview().offset(-AJScreenWidth/7)
-            make.left.right.equalTo(userNameTextField)
+            make.left.right.equalTo(emailTextField)
             make.height.equalTo(AJScreenWidth/12)
             make.top.equalTo(authCodeTextField.snp.bottom).offset(AJScreenWidth/20)
         }
@@ -152,7 +152,7 @@ class registerView: UIView {
         passwordSecTextField.snp.makeConstraints{(make) in
 //            make.left.equalToSuperview().offset(AJScreenWidth/7)
 //            make.right.equalToSuperview().offset(-AJScreenWidth/7)
-            make.left.right.equalTo(userNameTextField)
+            make.left.right.equalTo(emailTextField)
             make.height.equalTo(AJScreenWidth/12)
             make.top.equalTo(passwordTextField.snp.bottom).offset(AJScreenWidth/20)
         }
@@ -160,7 +160,7 @@ class registerView: UIView {
         // 下一步按钮
         self.addSubview(nextButton)
         nextButton.snp.makeConstraints{(make) in
-            make.left.right.equalTo(userNameTextField)
+            make.left.right.equalTo(emailTextField)
             //make.right.equalTo(passwordTextField.snp.right)
             make.height.equalTo(AJScreenWidth/12)
             make.top.equalTo(passwordSecTextField.snp.bottom).offset(AJScreenWidth/20)

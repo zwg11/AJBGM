@@ -63,8 +63,7 @@ class loginViewController: UIViewController,UITextFieldDelegate {
             print("密码不能为空")
             return
         }else if validateEmail(email: email!) == true{
-            //程序到达此处，说明其他的验证已经成功
-//            let jsonString = "{\"email\":\(String(email!)),\"password\":\(String(password!)) }"
+            //程序到达此处，说明其他的验证已经成功,然后对数据进行校验
             let dictString:Dictionary = [ "email":String(email!),"password":String(password!)]
 //            let user = User.deserialize(from: jsonString)
             print(dictString)
@@ -93,9 +92,7 @@ class loginViewController: UIViewController,UITextFieldDelegate {
                             }else{
                                 alertController.custom(self,"Attention", "邮箱或密码不正确")
                             }
-                            print(responseModel.code)
-                            print(responseModel.msg)
-                            print(responseModel.data)
+                           
                         }
                     }
                 }
@@ -111,7 +108,9 @@ class loginViewController: UIViewController,UITextFieldDelegate {
     }
     @objc func forgetPassword(){
         print("forgetPassword clicked.")
-        self.navigationController?.pushViewController(emailCheckViewController(), animated: true)
+        
+        //测试过程中，修改密码时，先跳到第二页
+        self.navigationController?.pushViewController(emailCheckSecViewController(), animated: true)
     }
     @objc func register(){
         print("register clicked.")
