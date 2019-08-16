@@ -11,8 +11,17 @@
 
 import UIKit
 import SnapKit
+import Alamofire
+import HandyJSON
 
 class emailCheckViewController: UIViewController,UITextFieldDelegate {
+    
+    // 记录邮箱
+    var email:String?
+    // 记录邮箱验证码
+    var email_code:String?
+    
+//    var EmailAndEmailCode =
     
     private lazy var emailCheck:emailCheckView = {
         let view = emailCheckView()
@@ -29,6 +38,7 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
 
         self.view.backgroundColor = UIColor.white
         self.title = "邮箱验证"
+        print("到达邮箱验证界面")
         self.view.addSubview(emailCheck)
         emailCheck.snp.makeConstraints{(make) in
             make.height.equalTo(AJScreenHeight)
@@ -43,15 +53,73 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
         // Do any additional setup after loading the view.
     }
     
-
+    //点击下一页
     @objc func nextAction(){
-        self.navigationController?.pushViewController(emailCheckSecViewController(), animated: true)
-    }
+        email = emailCheck.emailTextField.text!
+        email_code = emailCheck.authCodeTextField.text!
+        let alertController = CustomAlertController()
+        //获得email和验证码
+        //邮箱不能为空
+        if email == ""{
+            alertController.custom(self, "Attention", "邮箱不能为空")
+        }else{
+            let dictString:Dictionary = [ "email":String(email!),"verifyCode":String(email_code!)]
+            print(dictString)
+            Alamofire.request(ChangP_VFcode,method: .post,parameters: dictString).responseString{ (response) in
+                if response.result.isSuccess {
+                    if let jsonString = response.result.value {
+                        print("进入验证过程")
+                        // json转model
+                        // 写法一：responseModel.deserialize(from: jsonString)
+                        // 写法二：用JSONDeserializer<T>
+                        /*
+                         利用JSONDeserializer封装成一个对象。然后再解析这个对象
+                         */
+                        if let responseModel = JSONDeserializer<responseModel>.deserializeFrom(json: jsonString) {
+                            /// model转json 为了方便在控制台查看
+                            print(responseModel.toJSONString(prettyPrint: true)!)
+                            /*  此处为跳转和控制逻辑
+                             */
+                            if(responseModel.code == 1 ){
+                                print("登录成功")
+                                print("跳转到修改密码那一页")
+                                self.navigationController?.pushViewController(emailCheckSecViewController(), animated: true)
+                            }else{
+                                alertController.custom(self,"Attention", "邮箱或密码不正确")
+                            }
+                        } //end of letif
+                    }
+                }
+            }//end of request
+        }
 
-    @objc func getAuthCode(){
-        emailCheck.getAuthCodeButton.countDown(count: 10)
-    }
+    }  //end of nextAction
     
+    //点击获取验证码
+    @objc func getAuthCode(){
+        print("点击获取验证码")
+        let alertController = CustomAlertController()
+        email = emailCheck.emailTextField.text!
+        print(email!)
+        /*
+         需要判断邮箱不为空才能获取验证码
+         */
+        if email == ""{
+            alertController.custom(self, "Attention", "邮箱不能为空")
+        }else{
+            print("如果不为空的话",email!)
+            let  dictString:Dictionary = [ "email":String(email!)]
+            print(dictString)
+            Alamofire.request(get_Code,method: .post,parameters: dictString).responseString{ (response) in
+                if response.result.isSuccess {
+                    if let jsonString = response.result.value {
+                        print("获取验证码阶段")
+                    }
+                }
+            }//end of request
+            emailCheck.getAuthCodeButton.countDown(count: 10)
+        }
+    }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // 收起键盘
         textField.resignFirstResponder()

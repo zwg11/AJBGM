@@ -16,7 +16,7 @@ class registerViewController: UIViewController,UITextFieldDelegate {
         view.setupUI()
 
         // 以下代理本想单独拿出来写进函数中，但是不知为什么老是内存溢出
-        view.userNameTextField.delegate = self
+//        view.userNameTextField.delegate = self
         view.emailTextField.delegate = self
         view.authCodeTextField.delegate = self
         view.passwordTextField.delegate = self
@@ -31,7 +31,7 @@ class registerViewController: UIViewController,UITextFieldDelegate {
         super.viewDidLoad()
 
         self.view.backgroundColor = UIColor.blue
-        self.title = "注册"
+        self.title = "注 册"
         self.view.addSubview(register)
         register.snp.makeConstraints{(make) in
             make.height.equalTo(AJScreenHeight)
