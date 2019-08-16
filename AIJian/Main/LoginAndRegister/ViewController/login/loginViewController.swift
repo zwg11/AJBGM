@@ -84,6 +84,15 @@ class loginViewController: UIViewController,UITextFieldDelegate {
                         if let responseModel = JSONDeserializer<responseModel>.deserializeFrom(json: jsonString) {
                             /// model转json 为了方便在控制台查看
                             print(responseModel.toJSONString(prettyPrint: true)!)
+                            
+                            /*  此处为跳转和控制逻辑
+                              */
+                            if(responseModel.code == 1 ){
+                                print("登录成功")
+                                self.present(AJTabbarController(), animated: false, completion: nil)
+                            }else{
+                                alertController.custom(self,"Attention", "邮箱或密码不正确")
+                            }
                             print(responseModel.code)
                             print(responseModel.msg)
                             print(responseModel.data)
