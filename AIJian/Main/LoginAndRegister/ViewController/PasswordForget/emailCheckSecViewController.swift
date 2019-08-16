@@ -4,7 +4,11 @@
 //
 //  Created by ADMIN on 2019/7/31.
 //  Copyright © 2019 apple. All rights reserved.
-//
+ /*
+    密码修改：邮箱校验的第二个界面
+    功能：要求输入新密码和确认密码
+ */
+
 
 import UIKit
 import SnapKit
