@@ -17,3 +17,9 @@ let ChangP_VFcode = BASE_URL + "app/passwordRetrieveFirst"
 
 //验证邮箱之后，进行密码修改
 let PasswordChangeNeedCode = BASE_URL + "app/passwordRetrieveSecond"
+
+//用户注册
+let UserRegister = BASE_URL + "app/userRegister"
+
+//用户注册完成后，填写个人信息
+let FillUserInfo = BASE_URL + "app/inputUserInfo"

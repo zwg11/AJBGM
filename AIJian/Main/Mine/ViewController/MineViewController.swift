@@ -4,7 +4,7 @@
 //
 //  Created by ADMIN on 2019/7/19.
 //  Copyright © 2019 apple. All rights reserved.
-//
+//  我的tab页
 
 import UIKit
 
@@ -22,7 +22,7 @@ class MineViewController: UIViewController {
                  ["icon":"aboutUs", "title": "版本更新"]]
         ]
     }()
-    
+    //点击跳转对应页面
     public lazy var clickArray: [UIViewController] = {
         return [InfoViewController(),UnitViewController(),PassChangeViewController(),BloodSetViewController(), UseDirViewController(),AboutUsViewController(),VersionUViewController()
         ]
