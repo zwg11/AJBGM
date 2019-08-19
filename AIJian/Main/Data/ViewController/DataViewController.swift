@@ -55,6 +55,7 @@ class DataViewController: UIViewController {
         // 添加导航栏左按钮
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
         
+        
         // 添加标题视图
         let titleview = pageViewManager.titleView
         view.addSubview(titleview)
@@ -99,7 +100,7 @@ class DataViewController: UIViewController {
 
         }
 
-        self.view.backgroundColor = UIColor.blue
+        self.view.backgroundColor = UIColor.white
         
     }
     
