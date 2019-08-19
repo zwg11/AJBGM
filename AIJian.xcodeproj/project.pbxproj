@@ -394,12 +394,9 @@
 		A5DD3FE1F7573AE037CCC4AFDD18B7E6 /* View */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
-=======
 				0AE9E229BA78C6BCCE60166625ACCCC4 /* glucoseRecentView.swift */,
 				299B8A71C73EA6E88B488D991BF75352 /* recentTrendView.swift */,
 				41EF5D8FD2B9D003CECE58B3F112A42B /* theLastCheckView.swift */,
->>>>>>> 6485e062138da558ca88d6b5648888a5240f55a1
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -575,10 +572,9 @@
 			isa = PBXGroup;
 			children = (
 				044715989F31C24AE1950899878B6046 /* CustomAlertController.swift */,
-<<<<<<< HEAD
+
 				8462103C23079D95008107F4 /* format_method.swift */,
-=======
->>>>>>> 6485e062138da558ca88d6b5648888a5240f55a1
+
 			);
 			path = Tools;
 			sourceTree = "<group>";
