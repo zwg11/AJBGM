@@ -2,9 +2,9 @@
 //  PageView.swift
 //  page
 //
-//  Created by ADMIN on 2019/8/5.
+//  Created by zzz on 2019/8/5.
 //  Copyright © 2019 xiaozuo. All rights reserved.
-//
+//  使用帮助中的轮播图
 
 import UIKit
 import AVFoundation

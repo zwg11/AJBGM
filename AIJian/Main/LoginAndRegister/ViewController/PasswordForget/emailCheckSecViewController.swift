@@ -21,7 +21,10 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
     var  password:String?
     //输入确认密码
     var  passwordSec:String?
-    
+    //认证字符串
+    var verifyString:String?
+    //修改谁的邮箱，由前一页传过来的
+    var email:String?
     private lazy var emailCheckSec:emailCheckSecondView = {
         let view = emailCheckSecondView()
         view.passwordTextField.delegate = self
@@ -32,6 +35,8 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
+//        let x = emailCheckViewController()
+//        let y = x.email
 
         self.view.backgroundColor = UIColor.white
         self.title = "修改密码"
@@ -55,16 +60,19 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
         password = emailCheckSec.passwordTextField.text!
         passwordSec = emailCheckSec.passwordSecTextField.text!
         let email:String = "1115824104@qq.com"
-        print(password)
-        print(passwordSec)
+//        print(password)
+//        print(passwordSec)
         if password == ""{
              alertController.custom(self, "Attention", "新密码不能为空")
+            return
         }else if passwordSec == "" {
              alertController.custom(self, "Attention", "确认密码不能为空")
+            return
         }else if password != passwordSec{
              alertController.custom(self, "Attention", "两次密码不同")
+            return
         }else{//经过前端验证之后，需要进行后端验证
-             let dictString:Dictionary = [ "newPassword":String(password!),"email":String(email)]
+            let dictString:Dictionary = [ "newPassword":String(password!),"email":String(email),"verifyString":String(verifyString!)]
              print(dictString)
              Alamofire.request(PasswordChangeNeedCode,method: .post,parameters: dictString).responseString{ (response) in
                 if response.result.isSuccess {
@@ -84,9 +92,10 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
                             if(responseModel.code == 1 ){
                                 print("登录成功")
                                 print("跳转到修改密码那一页")
-//                              self.navigationController?.pushViewController(emailCheckSecViewController(), animated: true)
+                                self.navigationController?.popToViewController(loginViewController(), animated: true)
                             }else{
                                 alertController.custom(self,"Attention", "修改失败")
+                                self.navigationController?.popToViewController(loginViewController(), animated: true)
                             }
                         } //end of letif
                     }
@@ -96,7 +105,7 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
         
         
           //如果修改成功，就直接跳转登录界面
-//        self.navigationController?.popToViewController(loginViewController(), animated: true)
+        
     }
 
     

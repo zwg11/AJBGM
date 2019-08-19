@@ -6,11 +6,13 @@
 //  Copyright © 2019 apple. All rights reserved.
 //
 
+/*版本更新界面
+ */
+
 import UIKit
 import SnapKit
 
-/*版本更新界面
- */
+
 
 class VersionUViewController: UIViewController {
         

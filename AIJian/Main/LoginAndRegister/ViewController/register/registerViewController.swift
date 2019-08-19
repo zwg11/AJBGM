@@ -2,15 +2,29 @@
 //  registerViewController.swift
 //  AIJian
 //
-//  Created by ADMIN on 2019/7/31.
+//  Created by zzz on 2019/7/31.
 //  Copyright © 2019 apple. All rights reserved.
-//
+/**
+    功能：认证邮箱注册，填入密码
+ 
+ ***/
 
 import UIKit
 import SnapKit
+import Alamofire
+import HandyJSON
 
 class registerViewController: UIViewController,UITextFieldDelegate {
 
+    //输入新密码
+    var  password:String?
+    //输入确认密码
+    var  passwordSec:String?
+    // 记录邮箱
+    var email:String?
+    // 记录邮箱验证码
+    var email_code:String?
+    
     private lazy var register:registerView = {
         let view = registerView()
         view.setupUI()
@@ -42,6 +56,61 @@ class registerViewController: UIViewController,UITextFieldDelegate {
     
 
     @objc func nextAction(){
+//        password = register.passwordTextField.text!
+//        passwordSec = register.passwordSecTextField.text!
+//        email = register.emailTextField.text!
+//        print(password)
+//        print(passwordSec)
+//        let alertController = CustomAlertController()
+//        
+//        if password == ""{
+//            alertController.custom(self, "Attention", "新密码不能为空")
+//            return
+//        }else if passwordSec == "" {
+//            alertController.custom(self, "Attention", "确认密码不能为空")
+//            return
+//        }else if password != passwordSec{
+//            alertController.custom(self, "Attention", "两次密码不同")
+//            return
+//        }else if email == ""{
+//            
+//        }else{
+//            let dictString:Dictionary = [ "email":String(email!),"verifyCode":String(email_code!),"password":String(password!)]
+//            //            let user = User.deserialize(from: jsonString)
+//            print(dictString)
+//            //  此处的参数需要传入一个字典类型
+//            Alamofire.request(Login_api,method: .post,parameters: dictString).responseString{ (response) in
+//                
+//                if response.result.isSuccess {
+//                    
+//                    if let jsonString = response.result.value {
+//                        
+//                        /// json转model
+//                        /// 写法一：responseModel.deserialize(from: jsonString)
+//                        /// 写法二：用JSONDeserializer<T>
+//                        /*
+//                         利用JSONDeserializer封装成一个对象。然后再把这个对象解析为
+//                         */
+//                        if let responseModel = JSONDeserializer<responseModel>.deserializeFrom(json: jsonString) {
+//                            /// model转json 为了方便在控制台查看
+//                            print(responseModel.toJSONString(prettyPrint: true)!)
+//                            
+//                            /*  此处为跳转和控制逻辑
+//                             */
+//                            if(responseModel.code == 1 ){
+//                                print("登录成功")
+//                                self.present(AJTabbarController(), animated: false, completion: nil)
+//                            }else{
+//                                alertController.custom(self,"Attention", "邮箱或密码不正确")
+//                            }
+//                            
+//                        }
+//                    }
+//                }
+//            }
+//        }  
+//        
+//        let nv = infoInputViewController()
         self.navigationController?.pushViewController(infoInputViewController(), animated: true)
     }
     
@@ -51,7 +120,29 @@ class registerViewController: UIViewController,UITextFieldDelegate {
     }
 
     @objc func getAuthCode(){
-        register.getAuthCodeButton.countDown(count: 10)
+        let alertController = CustomAlertController()
+        email = register.emailTextField.text!
+//        email = emailCheck.emailTextField.text!
+        if email == ""{
+            alertController.custom(self, "Attention", "邮箱不能为空")
+        }else if FormatMethodUtil.validateEmail(email: email!) == true{
+            print("获取验证码阶段")
+//            print("如果不为空的话",email!)
+//            let  dictString:Dictionary = [ "email":String(email!)]
+//            print(dictString)
+//            Alamofire.request(get_Code,method: .post,parameters: dictString).responseString{ (response) in
+//                if response.result.isSuccess {
+//                    if let jsonString = response.result.value {
+//                        print("获取验证码阶段")
+//                    }
+//                }
+//            }//end of request
+            register.getAuthCodeButton.countDown(count: 10)
+        }else{
+            alertController.custom(self,"Attention", "邮箱格式错误")
+            print("邮箱格式错误")
+            return
+        }
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // 收起键盘

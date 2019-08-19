@@ -173,10 +173,7 @@ class BrithdayViewController: UIViewController {
                 date = dateFormatter.string(from: picker.datePicker.date)
                 
                 UIView.animate(withDuration: 0.5, animations: dismiss)
-                //        self.pickDateView.snp.makeConstraints{(make) in
-                //            make.top.equalTo(self.snp.bottom)
-                //
-                //        }
+                
                 print("sure button clicked")
                 
             }
