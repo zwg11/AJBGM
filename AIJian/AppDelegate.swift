@@ -30,7 +30,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          */     
         let viewController = loginViewController()
         let nv = loginNavigationController(rootViewController: viewController)
-        window?.rootViewController = nv
+        // 如果已经登录了那么就直接跳转到主页，否则跳转到登录界面
+        // window?.rootViewController = nv
+        window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
         
 

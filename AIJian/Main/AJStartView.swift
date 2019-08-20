@@ -26,9 +26,6 @@ class AJStartView: UIView {
         // 设置动画，逐渐消失，动画结束后该页面从父页面移除
         UIView.animate(withDuration: TimeInterval(seconds), animations: {
             self.alpha = 0.5
-        })
-        UIView.animate(withDuration: 0.5, animations: {
-            self.alpha = 0
         }){
             (finish) in
             self.removeFromSuperview()

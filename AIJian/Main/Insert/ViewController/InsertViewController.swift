@@ -16,8 +16,21 @@ class InsertViewController: UIViewController {
         return view
     }()
     
+    // 设置导航栏左按钮x样式
+    private lazy var leftButton:UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        button.setImage(UIImage(named: "back"), for: .normal)
+        //button.setTitleColor(UIColor.blue, for: .normal)
+        button.addTarget(self, action: #selector(leftButtonClick), for: .touchUpInside)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // 添加导航栏左按钮
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
         
         self.view.addSubview(input)
         input.snp.makeConstraints{(make) in
@@ -37,8 +50,8 @@ class InsertViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         // 显示导航控制器的工具栏
-        self.navigationController?.isToolbarHidden = false
-        self.navigationController?.toolbar.tintColor = UIColor.gray
+//        self.navigationController?.isToolbarHidden = false
+//        self.navigationController?.toolbar.tintColor = UIColor.gray
         
         let leftButton = UIButton(frame: CGRect(x: 0, y: 0, width: AJScreenWidth/2-AJScreenWidth/20, height: 40))
         leftButton.backgroundColor = UIColor.gray
@@ -61,7 +74,7 @@ class InsertViewController: UIViewController {
         rightButton.layer.borderWidth = 1
         
         let item2 = UIBarButtonItem(customView: rightButton)
-        self.toolbarItems = [item1,item2]
+        //self.toolbarItems = [item1,item2]
     }
     @objc func cancel(){
         self.navigationController?.popViewController(animated: true)
@@ -81,6 +94,20 @@ class InsertViewController: UIViewController {
     @objc func dismissKeyboard(){
         self.view.endEditing(true)
         
+    }
+    
+    @objc func leftButtonClick(){
+        // 设置返回首页
+        self.tabBarController?.selectedIndex = 0
+        //self.dismiss(animated: true, completion: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
     }
 
 }
