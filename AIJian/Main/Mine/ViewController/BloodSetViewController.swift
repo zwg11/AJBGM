@@ -14,7 +14,6 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
         lazy var emptyStomach_left:UITextField = {
             let emptyStomach_left = UITextField()
             emptyStomach_left.font = UIFont.systemFont(ofSize: 14)
-//            emptyStomach_left.background = UIColor.red
             emptyStomach_left.allowsEditingTextAttributes = false
             emptyStomach_left.borderStyle = .line
             return emptyStomach_left
@@ -27,10 +26,9 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             emptyStomach_right.borderStyle = .line
             return emptyStomach_right
         }()
-    
+
         lazy var emptyUnit_label:UILabel = {
             let emptyUnit_label = UILabel(frame: CGRect())
-            emptyUnit_label.text = "mg/dl"
             emptyUnit_label.font = UIFont.systemFont(ofSize: 14)
             return emptyUnit_label
         }()
@@ -54,7 +52,6 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
     
         lazy var beforeUnit_label:UILabel = {
             let beforeUnit_label = UILabel(frame: CGRect())
-            beforeUnit_label.text = "mg/dl"
             beforeUnit_label.font = UIFont.systemFont(ofSize: 14)
             return beforeUnit_label
         }()
@@ -78,11 +75,10 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
     
         lazy var afterUnit_label:UILabel = {
             let afterUnit_label = UILabel(frame: CGRect())
-            afterUnit_label.text = "mg/dl"
             afterUnit_label.font = UIFont.systemFont(ofSize: 14)
             return afterUnit_label
         }()
-    
+
          //随机相关的全局变量
         lazy var randomDinner_left:UITextField = {
             let randomDinner_left = UITextField()
@@ -100,8 +96,8 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
         }()
         lazy var randomUnit_label:UILabel = {
             let randomUnit_label = UILabel(frame: CGRect())
-            randomUnit_label.text = "mg/dl"
             randomUnit_label.font = UIFont.systemFont(ofSize: 14)
+            self.view.addSubview(randomUnit_label)
             return randomUnit_label
         }()
     
@@ -136,6 +132,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             // Do any additional setup after loading the view.
             self.view.backgroundColor = UIColor.white
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(title:"back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back))
+           
             
             //空腹
             let emptyStomach_label = UILabel(frame: CGRect())
@@ -181,6 +178,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             }
             
             //空腹的单位标签
+       
             self.view.addSubview(emptyUnit_label)
             emptyUnit_label.snp.makeConstraints{ (make) in
                 make.height.equalTo(AJScreenHeight/20)
@@ -233,7 +231,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                 make.top.equalTo(beforeDinner_label.snp.bottom).offset(5)
             }
             
-           
+
             self.view.addSubview(beforeUnit_label)
             beforeUnit_label.snp.makeConstraints{ (make) in
                 make.height.equalTo(AJScreenHeight/20)
@@ -284,7 +282,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                 make.top.equalTo(afterDinner_label.snp.bottom).offset(5)
             }
             
-           
+    
             self.view.addSubview(afterUnit_label)
             afterUnit_label.snp.makeConstraints{ (make) in
                 make.height.equalTo(AJScreenHeight/20)
@@ -337,8 +335,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                 make.top.equalTo(randomDinner_label.snp.bottom).offset(5)
             }
             
-            
-            self.view.addSubview(randomUnit_label)
+           
             randomUnit_label.snp.makeConstraints{ (make) in
                 make.height.equalTo(AJScreenHeight/15)
                 make.width.equalTo(AJScreenWidth/5)
@@ -370,13 +367,27 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                 make.left.equalTo(AJScreenWidth/5)
             }
         }
-        
+    
+        override func viewWillAppear(_ animated: Bool) {
+            let path = Bundle.main.path(forResource: "UnitSetting", ofType: "plist")
+            let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path!)!
+            let unit = data["BloodUnit"]! as! String
+            print(unit)
+            emptyUnit_label.text = unit
+            beforeUnit_label.text = unit
+            afterUnit_label.text = unit
+            randomUnit_label.text = unit
+        }
+    
+    
         @objc private func back(){
             self.navigationController?.popViewController(animated: true)
         }
         @objc private func save(){
             
         }
+    
+        //恢复默认设置的按钮
         @objc private func recover(){
             
         }
