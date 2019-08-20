@@ -90,7 +90,7 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
                             /*  此处为跳转和控制逻辑
                              */
                             if(responseModel.code == 1 ){
-                                print("登录成功")
+                                print("重置成功")
                                 print("跳转到修改密码那一页")
                                 self.navigationController?.popToViewController(loginViewController(), animated: true)
                             }else{

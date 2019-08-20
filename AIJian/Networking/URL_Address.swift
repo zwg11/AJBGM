@@ -23,3 +23,10 @@ let UserRegister = BASE_URL + "app/userRegister"
 
 //用户注册完成后，填写个人信息
 let FillUserInfo = BASE_URL + "app/inputUserInfo"
+
+
+//用户意见反馈
+let UserFeedback = BASE_URL + "app/user/feedback"
+
+//已经登录之后的密码修改
+let PasswdReset = BASE_URL + "app/passwordReset"

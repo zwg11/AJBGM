@@ -73,8 +73,10 @@ class registerViewController: UIViewController,UITextFieldDelegate {
 //            alertController.custom(self, "Attention", "两次密码不同")
 //            return
 //        }else if email == ""{
-//            
-//        }else{
+//            alertController.custom(self, "Attention", "邮箱不能为空")
+//        //}else if FormatMethodUtil.validatePasswd(passwd: password!) != true{
+//              alert.custom(self, "Attention", "密码强度不够")
+//          }else{
 //            let dictString:Dictionary = [ "email":String(email!),"verifyCode":String(email_code!),"password":String(password!)]
 //            //            let user = User.deserialize(from: jsonString)
 //            print(dictString)

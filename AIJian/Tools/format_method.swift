@@ -24,4 +24,11 @@ public class FormatMethodUtil{
         let numberTest:NSPredicate = NSPredicate(format: "SELF MATCHES %@", numberRegex)
         return numberTest.evaluate(with: number)
     }
+    
+    //验证密码强度校验
+    static func validatePasswd(passwd:String) -> Bool{
+        let passwdRegex = "[\\w]{8,16}"
+        let passwdTest:NSPredicate = NSPredicate(format: "SELF MATCHES %@", passwdRegex)
+        return passwdTest.evaluate(with: passwd)
+    }
 }
