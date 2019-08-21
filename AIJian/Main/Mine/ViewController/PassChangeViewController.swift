@@ -37,7 +37,7 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
             let oldPasswd_textF = UITextField()
             oldPasswd_textF.font = UIFont.systemFont(ofSize: 16)
             oldPasswd_textF.placeholder="请填写旧密码"
-            oldPasswd_textF.keyboardType = .default
+//            oldPasswd_textF.keyboardType = .default
             oldPasswd_textF.isSecureTextEntry = true
             oldPasswd_textF.allowsEditingTextAttributes = false
             oldPasswd_textF.borderStyle = .none
@@ -223,14 +223,19 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
             
             if oldP == ""{
                 alert.custom(self, "Attention", "旧密码不能为空")
+                return
             }else if newP == ""{
                 alert.custom(self, "Attention", "新密码不能为空")
+                return
             }else if verfiedP == ""{
                 alert.custom(self, "Attention", "确认密码不能为空")
+                return
             }else if FormatMethodUtil.validatePasswd(passwd: verfiedP!) != true{
                 alert.custom(self, "Attention", "新密码强度不够")
+                return
             }else if newP != verfiedP{
-                 alert.custom(self, "Attention", "新密码和旧密码不同")
+                alert.custom(self, "Attention", "新密码和旧密码不同")
+                return
             }else{
                 let dictString:Dictionary = [ "oldPassword":String(oldP!),"newPassword":String(newP!),"email":String(email!),"token":String(token!)]
                 print(dictString)

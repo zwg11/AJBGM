@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>randomDinnerHighLimit</key>
+	<real>7.8</real>
+	<key>randomDinnerLowLimit</key>
+	<real>3.9</real>
+	<key>afterDinnerHighLimit</key>
+	<real>7.8</real>
+	<key>afterDinnerLowLimit</key>
+	<real>3.9</real>
+	<key>beforeDinnerHighLimit</key>
+	<real>7.8</real>
+	<key>beforeDinnerLowLimit</key>
+	<real>3.9</real>
+	<key>emptyStomachHighLimit</key>
+	<real>7.8</real>
+	<key>emptyStomachLowLimit</key>
+	<real>3.9</real>
+</dict>
+</plist>
