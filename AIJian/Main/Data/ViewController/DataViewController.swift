@@ -9,6 +9,9 @@
 import UIKit
 import DNSPageView
 import SnapKit
+import Alamofire
+import HandyJSON
+
 
 class DataViewController: UIViewController {
 
@@ -49,13 +52,51 @@ class DataViewController: UIViewController {
         return DNSPageViewManager(style: style, titles: titles, childViewControllers: viewControllers)
     }()
     
+    var glucoseValue:[Double] = []
+    var glucoseTime:[Data] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
         // 添加导航栏左按钮
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
+        //********
+        let day = 15
+        let userId = 6
+        let dicStr:Dictionary = ["day":day,"userId":userId,"token":token] as [String : Any]
+        print(dicStr)
+        // 请求数据，请求信息如上c字典
+        Alamofire.request(REQUEST_DATA_URL,method: .post,parameters: dicStr).responseString{ (response) in
+            if response.result.isSuccess {
+                print("收到回复")
+                if let jsonString = response.result.value {
+                    
+                    /// json转model
+                    /// 写法一：responseModel.deserialize(from: jsonString)
+                    /// 写法二：用JSONDeserializer<T>
+                    /*
+                     利用JSONDeserializer封装成一个对象。然后再把这个对象解析为
+                     */
+                    if let recordInDaysResponse = JSONDeserializer<recordInDaysResponse>.deserializeFrom(json: jsonString) {
+                        //输出得到的数据
+                        print(recordInDaysResponse)
+                        print(recordInDaysResponse.msg ?? "nothing")
+                        print(recordInDaysResponse.data ?? "none")
+                        for i in recordInDaysResponse.data!{
+                            if let value = i.bloodGlucoseMmol{
+                                self.glucoseValue.append(value)
+                                
+                            }
+                        }
+                       
+                    }
+                    print("********************")
+                    print(self.glucoseValue)
+                }
+            }
+        }
         
-        
+        //**********
         // 添加标题视图
         let titleview = pageViewManager.titleView
         view.addSubview(titleview)
