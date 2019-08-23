@@ -17,3 +17,16 @@ class User: HandyJSON {
     required init() {
     }
 }
+
+////登录响应结构
+//struct responseModel:HandyJSON{
+//    var code:Int!
+//    var msg:String!
+//    var data:String!
+//}
+//
+////密码修改成功时的响应结构
+//struct responseAModel:HandyJSON{
+//    var code:Int!
+//    var msg:String!
+//}
