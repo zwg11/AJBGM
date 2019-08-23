@@ -76,7 +76,7 @@ class portionAndInsulinView: UIView {
         // 设置视图背景颜色和边框
         self.layer.borderColor = UIColor.blue.cgColor
         self.layer.borderWidth = 1
-        self.backgroundColor = UIColor.lightGray
+        self.backgroundColor = kRGBColor(130, 154, 249, 1)
         
         // **********************进餐量***********************
         // 进餐量图标布局设置

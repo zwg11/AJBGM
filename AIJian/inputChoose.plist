@@ -17,9 +17,7 @@
 		<string>编辑条目</string>
 	</array>
 	<key>remark</key>
-	<array>
-		<string>add items</string>
-	</array>
+	<array/>
 	<key>sport</key>
 	<array>
 		<string>nothing</string>
@@ -31,7 +29,6 @@
 	</array>
 	<key>medicine</key>
 	<array>
-		<string>nothing </string>
 		<string>Asipirin</string>
 		<string>对乙酰氨基酚</string>
 	</array>
