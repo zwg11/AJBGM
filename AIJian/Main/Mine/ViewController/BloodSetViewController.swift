@@ -15,6 +15,7 @@ import UIKit
 
 class BloodSetViewController: UIViewController,UITextFieldDelegate {
     
+        //文件与文本框过渡值的存储
         var emptyStomach_left_number:NSNumber?
         var emptyStomach_right_number:NSNumber?
     
@@ -27,7 +28,18 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
         var randomDinner_left_number:NSNumber?
         var randomDinner_right_number:NSNumber?
     
+        //计算单位，所使用的过度值
+        var emptyStomach_left_Double:Double?
+        var emptyStomach_right_Double:Double?
     
+        var beforeDinner_left_Double:Double?
+        var beforeDinner_right_Double:Double?
+    
+        var afterDinner_left_Double:Double?
+        var afterDinner_right_Double:Double?
+    
+        var randomDinner_left_Double:Double?
+        var randomDinner_right_Double:Double?
        //空腹相关的全局变量
         lazy var emptyStomach_left:UITextField = {
             let emptyStomach_left = UITextField()
@@ -394,59 +406,51 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                 make.left.equalTo(AJScreenWidth/5)
             }
         }
-    
+        //视图将要出现时，调用这个方法
         override func viewWillAppear(_ animated: Bool) {
             
             //这个是加载用户血糖单位设置信息
             let unit_path = Bundle.main.path(forResource: "UnitSetting", ofType: "plist")
             let unit_data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: unit_path!)!
-            
             let unit = unit_data["BloodUnit"]! as! String
             print(unit)
-            emptyUnit_label.text = unit
-            beforeUnit_label.text = unit
-            afterUnit_label.text = unit
-            randomUnit_label.text = unit
-            /*单位设置结束*/
-            
-            emptyStomach_left.text = ""
-            emptyStomach_right.text = ""
-            
-            beforeDinner_left.text = ""
-            beforeDinner_right.text = ""
-            
-            afterDinner_left.text = ""
-            afterDinner_right.text = ""
-            
-            randomDinner_left.text = ""
-            randomDinner_right.text = ""
+            //设置用户的显示单位
+            setLabelUnit(unit: unit)
+            //清空用户的输入
+            clearEmpty()
             
             /*血糖显示*/
             let user_path = Bundle.main.path(forResource: "userBloodSetting", ofType: "plist")
             let user_data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: user_path!)!
             
-            
-            /* 设置显示过程 */
-            let a = (user_data["emptyStomachLowLimit"] as? NSNumber)?.stringValue
-            let b = (user_data["emptyStomachHighLimit"] as? NSNumber)?.stringValue
-            print(a!)
-            emptyStomach_left.placeholder  = a!
-            emptyStomach_right.placeholder = b!
-            
-            let c = (user_data["beforeDinnerLowLimit"] as? NSNumber)?.stringValue
-            let d = (user_data["beforeDinnerHighLimit"] as? NSNumber)?.stringValue
-            beforeDinner_left.placeholder  = c!
-            beforeDinner_right.placeholder = d!
-            
-            let e = (user_data["afterDinnerLowLimit"] as? NSNumber)?.stringValue
-            let f = (user_data["afterDinnerHighLimit"] as? NSNumber)?.stringValue
-            afterDinner_left.placeholder  = e!
-            afterDinner_right.placeholder = f!
-            
-            let g = (user_data["randomDinnerLowLimit"] as? NSNumber)?.stringValue
-            let h = (user_data["randomDinnerHighLimit"] as? NSNumber)?.stringValue
-            randomDinner_left.placeholder  = g!
-            randomDinner_right.placeholder = h!
+            //这些数据都是小单位的数据mmol\L
+            let a_Double:Double = Double(((user_data["emptyStomachLowLimit"] as? NSNumber)?.stringValue)!)!
+            let b_Double:Double = Double(((user_data["emptyStomachHighLimit"] as? NSNumber)?.stringValue)!)!
+            let c_Double:Double = Double(((user_data["beforeDinnerLowLimit"] as? NSNumber)?.stringValue)!)!
+            let d_Double:Double = Double(((user_data["beforeDinnerHighLimit"] as? NSNumber)?.stringValue)!)!
+            let e_Double:Double = Double(((user_data["afterDinnerLowLimit"] as? NSNumber)?.stringValue)!)!
+            let f_Double:Double = Double(((user_data["afterDinnerHighLimit"] as? NSNumber)?.stringValue)!)!
+            let g_Double:Double = Double(((user_data["randomDinnerLowLimit"] as? NSNumber)?.stringValue)!)!
+            let h_Double:Double = Double(((user_data["randomDinnerHighLimit"] as? NSNumber)?.stringValue)!)!
+//            print("显示用户的数据",a!)
+//            print("显示用户的数据的类型",type(of:a!))
+//
+//            /* 设置显示过程,显示用户设置的值 */
+//            //userBloodSetting.plist文件中，默认存储的就是mmol\L单位的数值
+            if unit == "mmol/L"{
+                 showPlaceholder(String(a_Double),String(b_Double),String(c_Double),String(d_Double),String(e_Double),String(f_Double),String(g_Double),String(h_Double))
+            }else{
+                //当单位为mg/dL
+                let a_String = floor(a_Double * 18.02)
+                let b_String = floor(b_Double * 18.02)
+                let c_String = floor(c_Double * 18.02)
+                let d_String = floor(d_Double * 18.02)
+                let e_String = floor(e_Double * 18.02)
+                let f_String = floor(f_Double * 18.02)
+                let g_String = floor(g_Double * 18.02)
+                let h_String = floor(h_Double * 18.02)
+            showPlaceholder(String(format:"%.0f",a_String),String(format:"%.0f",b_String),String(format:"%.0f",c_String),String(format:"%.0f",d_String),String(format:"%.0f",e_String),String(format:"%.0f",f_String),String(format:"%.0f",g_String),String(format:"%.0f",h_String))
+            }
         }
     
     
@@ -460,233 +464,420 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             let alert = CustomAlertController()
             let save_path = Bundle.main.path(forResource: "userBloodSetting", ofType: "plist")
             let save_data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: save_path!)!
+            
             //思路：先获取原来文件中的数值，这样就可以不管它有没有改，都可以直接覆盖。
-            
             emptyStomach_left_number  = save_data["emptyStomachLowLimit"]  as? NSNumber
-//            let aa = (save_data["emptyStomachLowLimit"]  as? NSNumber)?.stringValue
             emptyStomach_right_number = save_data["emptyStomachHighLimit"] as? NSNumber
-            
             beforeDinner_left_number  = save_data["beforeDinnerLowLimit"] as? NSNumber
             beforeDinner_right_number = save_data["beforeDinnerHighLimit"] as? NSNumber
-            
             afterDinner_left_number   = save_data["afterDinnerLowLimit"] as? NSNumber
             afterDinner_right_number  = save_data["afterDinnerHighLimit"] as? NSNumber
-            
             randomDinner_left_number  = save_data["randomDinnerLowLimit"] as? NSNumber
             randomDinner_right_number = save_data["randomDinnerHighLimit"] as? NSNumber
             
-//            print("节点")
-//            print(aa!)
-//            print(type(of:Double(aa!)!))
-//            print(emptyStomach_right_number!)
-//            print(beforeDinner_left_number!)
-//            print(beforeDinner_right_number!)
-//            print(afterDinner_left_number!)
-//            print(afterDinner_right_number!)
-//            print(randomDinner_left_number!)
-//            print(randomDinner_right_number!)
-            
+            let unit_path = Bundle.main.path(forResource: "UnitSetting", ofType: "plist")
+            let unit_data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: unit_path!)!
+            let unit_String = unit_data["BloodUnit"]! as! String
             //校验用户输入的正确性,a,b等都是个过度值，所有命名较为随意
             /*
                 注：在获取用户输入的过程中，还需要判断用户是否输入：分为只输入一部分，或者全部输入。
                     所以在这之前需要做个判空操作
              */
-            //空腹
-            //获得用户缺省值的下限
-            var a:Double = Double(((save_data["emptyStomachLowLimit"]  as? NSNumber)?.stringValue)!)!
-            print("空腹下限值",a)
-            if self.emptyStomach_left.text! != ""{
-                //判断是否为非法输入
-                if FormatMethodUtil.validateBloodNumber(number: self.emptyStomach_left.text!) == true{
-                    a = Double(self.emptyStomach_left.text!)!
-                    if a <= 7.8 && a >= 3.3{
-                        print("用户的输入",a)
-                        emptyStomach_left_number = a as NSNumber
-                        save_data.setObject(emptyStomach_left_number as Any, forKey: "emptyStomachLowLimit" as NSCopying)
-                        save_data.write(toFile: save_path!, atomically: true)
-                        alert.custom(self, "Attention", "保存成功")
-                        print(type(of: emptyStomach_left_number))
+           
+            //mmol\L的输入限制
+            if unit_String == "mmol/L"{
+                //空腹
+                //获得用户缺省值的下限
+                var a:Double = Double(((save_data["emptyStomachLowLimit"]  as? NSNumber)?.stringValue)!)!
+                print("空腹下限值",a)
+                if self.emptyStomach_left.text! != ""{
+                    //判断是否为非法输入
+                    if FormatMethodUtil.validateBloodNumber(number: self.emptyStomach_left.text!) == true{
+                        a = Double(self.emptyStomach_left.text!)!
+                        if a <= 7.8 && a >= 3.3{
+                            print("用户的输入",a)
+                            emptyStomach_left_number = a as NSNumber
+                            save_data.setObject(emptyStomach_left_number as Any, forKey: "emptyStomachLowLimit" as NSCopying)
+                            save_data.write(toFile: save_path!, atomically: true)
+                            alert.custom(self, "Attention", "保存成功")
+                            print(type(of: self.emptyStomach_left_number))
+                        }else{
+                            alert.custom(self, "Attention", "空腹血糖下限范围为3.3~7.8")
+                        }
                     }else{
-                        alert.custom(self, "Attention", "空腹血糖下限范围为3.3~7.8")
+                        alert.custom(self, "Attention", "非法输入")
                     }
                 }else{
-                    alert.custom(self, "Attention", "非法输入")
+                    print("空腹下限啥事也没干")
                 }
-            }else{
-                print("空腹下限啥事也没干")
-            }
-            
-            var b:Double = Double(((save_data["emptyStomachHighLimit"]  as? NSNumber)?.stringValue)!)!
-            print("空腹上限值",b)
-            if self.emptyStomach_right.text! != ""{
-                if FormatMethodUtil.validateBloodNumber(number: self.emptyStomach_right.text!) == true{
+                
+                var b:Double = Double(((save_data["emptyStomachHighLimit"]  as? NSNumber)?.stringValue)!)!
+                print("空腹上限值",b)
+                if self.emptyStomach_right.text! != ""{
+                    if FormatMethodUtil.validateBloodNumber(number: self.emptyStomach_right.text!) == true{
+                            b = Double(self.emptyStomach_right.text!)!
+                            if b <= 16.6 && b >= 5.0 && b > a{  //注：上限的值必须大于下限
+                                emptyStomach_right_number = b as NSNumber
+                                save_data.setObject(emptyStomach_right_number as Any, forKey: "emptyStomachHighLimit" as NSCopying)
+                            }else{
+                                alert.custom(self, "Attention", "空腹血糖上限限范围为5.0~16.6")
+                            }
+                    }else{
+                        alert.custom(self, "Attention", "非法输入")
+                    }
+                }else{
+                    print("空腹上限啥事也没干")
+                }
+                //餐前
+                var c:Double = Double(((save_data["beforeDinnerLowLimit"]  as? NSNumber)?.stringValue)!)!
+                print("餐前下限值",c)
+                if self.beforeDinner_left.text! != ""{
+                    //判断是否为非法输入
+                    if FormatMethodUtil.validateBloodNumber(number: self.beforeDinner_left.text!) == true{
+                        c = Double(self.beforeDinner_left.text!)!
+                        if c <= 7.8 && c >= 3.3{
+                            print("用户的输入",c)
+                            beforeDinner_left_number = c as NSNumber
+                            save_data.setObject(beforeDinner_left_number as Any, forKey: "beforeDinnerLowLimit" as NSCopying)
+                            print(type(of: beforeDinner_left_number))
+                        }else{
+                            alert.custom(self, "Attention", "餐前血糖下限范围为3.3~7.8")
+                        }
+                    }else{
+                        alert.custom(self, "Attention", "非法输入")
+                    }
+                }else{
+                    print("餐前下限啥事也没干")
+                }
+                
+                var d:Double = Double(((save_data["beforeDinnerHighLimit"]  as? NSNumber)?.stringValue)!)!
+                print("餐前上限值",d)
+                if self.beforeDinner_right.text! != ""{
+                    //判断是否为非法输入
+                    if FormatMethodUtil.validateBloodNumber(number: self.beforeDinner_right.text!) == true{
+                        d = Double(self.beforeDinner_right.text!)!
+                        if d <= 16.6 && d >= 5.0 && d > c{
+                            print("用户的输入",d)
+                            beforeDinner_right_number = d as NSNumber
+                            save_data.setObject(beforeDinner_right_number as Any, forKey: "beforeDinnerHighLimit" as NSCopying)
+                            print(type(of: beforeDinner_right_number))
+                        }else{
+                            alert.custom(self, "Attention", "餐前血糖上限限范围为5.0~16.6")
+                        }
+                    }else{
+                        alert.custom(self, "Attention", "非法输入")
+                    }
+                }else{
+                    print("餐前上限啥事也没干")
+                }
+               
+                //餐后
+                var e:Double = Double(((save_data["afterDinnerLowLimit"]  as? NSNumber)?.stringValue)!)!
+                print("餐后下限值",e)
+                if self.afterDinner_left.text! != ""{
+                    //判断是否为非法输入
+                    if FormatMethodUtil.validateBloodNumber(number: self.afterDinner_left.text!) == true{
+                        e = Double(self.afterDinner_left.text!)!
+                        if e <= 7.8 && e >= 3.3{
+                            print("用户的输入",e)
+                            afterDinner_left_number = e as NSNumber
+                            save_data.setObject(afterDinner_left_number as Any, forKey: "afterDinnerLowLimit" as NSCopying)
+                            print(type(of: afterDinner_left_number))
+                        }else{
+                            alert.custom(self, "Attention", "餐后血糖下限范围为3.3~7.8")
+                        }
+                    }else{
+                        alert.custom(self, "Attention", "非法输入")
+                    }
+                }else{
+                    print("餐后下限啥事也没干")
+                }
+                
+                var f:Double = Double(((save_data["afterDinnerHighLimit"]  as? NSNumber)?.stringValue)!)!
+                print("餐后上限值",f)
+                if self.afterDinner_right.text! != ""{
+                    //判断是否为非法输入
+                    if FormatMethodUtil.validateBloodNumber(number: self.afterDinner_right.text!) == true{
+                        f = Double(self.afterDinner_right.text!)!
+                        if f <= 16.6 && f >= 5.0 && f > e{
+                            print("用户的输入",f)
+                            afterDinner_right_number = f as NSNumber
+                            save_data.setObject(afterDinner_right_number as Any, forKey: "afterDinnerHighLimit" as NSCopying)
+                            print(type(of: afterDinner_right_number))
+                        }else{
+                            alert.custom(self, "Attention", "餐后血糖上限限范围为5.0~16.6")
+                        }
+                    }else{
+                        alert.custom(self, "Attention", "非法输入")
+                    }
+                }else{
+                    print("餐后上限啥事也没干")
+                }
+                //随机
+                var g:Double = Double(((save_data["randomDinnerLowLimit"]  as? NSNumber)?.stringValue)!)!
+                print("随机下限值",g)
+                if self.randomDinner_left.text! != ""{
+                    //判断是否为非法输入
+                    if FormatMethodUtil.validateBloodNumber(number: self.randomDinner_left.text!) == true{
+                        g = Double(self.randomDinner_left.text!)!
+                        if g <= 7.8 && g >= 3.3{
+                            print("用户的输入",g)
+                            randomDinner_left_number = g as NSNumber
+                            save_data.setObject(randomDinner_left_number as Any, forKey: "randomDinnerLowLimit" as NSCopying)
+                            print(type(of: randomDinner_left_number))
+                        }else{
+                            alert.custom(self, "Attention", "随机血糖下限范围为3.3~7.8")
+                        }
+                    }else{
+                        alert.custom(self, "Attention", "非法输入")
+                    }
+                }else{
+                    print("随机下限啥事也没干")
+                }
+                
+                
+                var h:Double = Double(((save_data["randomDinnerHighLimit"]  as? NSNumber)?.stringValue)!)!
+                print("随机上限值",h)
+                if self.randomDinner_right.text! != ""{
+                    //判断是否为非法输入
+                    if FormatMethodUtil.validateBloodNumber(number: self.randomDinner_right.text!) == true{
+                        h = Double(self.randomDinner_right.text!)!
+                        if h <= 16.6 && h >= 5.0 && h > g{
+                            print("用户的输入",h)
+                            randomDinner_right_number = h as NSNumber
+                            save_data.setObject(randomDinner_right_number as Any, forKey: "randomDinnerHighLimit" as NSCopying)
+                            print(type(of: randomDinner_right_number))
+                        }else{
+                            alert.custom(self, "Attention", "随机血糖上限限范围为5.0~16.6")
+                        }
+                    }else{
+                        alert.custom(self, "Attention", "非法输入")
+                    }
+                }else{
+                    print("随机上限啥事也没干")
+                }
+                
+               //第二步，保存写入userBloodSetting.plist文件中
+                save_data.write(toFile: save_path!, atomically: true)
+                //第三步，重新从文件中取数据，修改显示uitextField的placeholder的属性
+                /* 设置显示过程 */
+                let aa = (save_data["emptyStomachLowLimit"] as? NSNumber)?.stringValue
+                let bb = (save_data["emptyStomachHighLimit"] as? NSNumber)?.stringValue
+                let cc = (save_data["beforeDinnerLowLimit"] as? NSNumber)?.stringValue
+                let dd = (save_data["beforeDinnerHighLimit"] as? NSNumber)?.stringValue
+                let ee = (save_data["afterDinnerLowLimit"] as? NSNumber)?.stringValue
+                let ff = (save_data["afterDinnerHighLimit"] as? NSNumber)?.stringValue
+                let gg = (save_data["randomDinnerLowLimit"] as? NSNumber)?.stringValue
+                let hh = (save_data["randomDinnerHighLimit"] as? NSNumber)?.stringValue
+                showPlaceholder(String(aa!),String(bb!),String(cc!),String(dd!),String(ee!),String(ff!),String(gg!),String(hh!))
+                clearEmpty()
+            }else{  //此单位为mg/dL
+                //空腹
+                //获得用户缺省值的下限
+                var a:Double = Double(((save_data["emptyStomachLowLimit"]  as? NSNumber)?.stringValue)!)!
+                print("mg空腹下限值",a)
+                if self.emptyStomach_left.text! != ""{
+                    //判断是否为非法输入
+                    if FormatMethodUtil.validateMgdlBloodNumber(number: self.emptyStomach_left.text!) == true{
+                        a = Double(self.emptyStomach_left.text!)!
+                        if a <= 140 && a >= 60{
+                            print("用户的输入",a)
+                            //把得到mg/dL单位的数据转化为mmol/L单位的数据，然后存入到文件中
+                            a = UnitConversion.mgTomm(num: a)
+                            emptyStomach_left_number = a as NSNumber
+                            save_data.setObject(emptyStomach_left_number as Any, forKey: "emptyStomachLowLimit" as NSCopying)
+                            save_data.write(toFile: save_path!, atomically: true)
+                            alert.custom(self, "Attention", "保存成功")
+                            print(type(of: self.emptyStomach_left_number))
+                        }else{
+                            alert.custom(self, "Attention", "空腹血糖下限范围为60到140")
+                        }
+                    }else{
+                        alert.custom(self, "Attention", "非法输入")
+                    }
+                }else{
+                    print("空腹下限啥事也没干")
+                }
+                
+                var b:Double = Double(((save_data["emptyStomachHighLimit"]  as? NSNumber)?.stringValue)!)!
+                print("mg空腹上限值",b)
+                if self.emptyStomach_right.text! != ""{
+                    if FormatMethodUtil.validateMgdlBloodNumber(number: self.emptyStomach_right.text!) == true{
                         b = Double(self.emptyStomach_right.text!)!
-                        if b <= 16.6 && b >= 5.0 && b > a{  //注：上限的值必须大于下限
+                        if b <= 300 && b >= 90 && b > a{  //注：上限的值必须大于下限
+                            b = UnitConversion.mgTomm(num: b)
                             emptyStomach_right_number = b as NSNumber
                             save_data.setObject(emptyStomach_right_number as Any, forKey: "emptyStomachHighLimit" as NSCopying)
                         }else{
-                            alert.custom(self, "Attention", "空腹血糖上限限范围为5.0~16.6")
+                            alert.custom(self, "Attention", "空腹血糖上限限范围为90--300")
                         }
-                }else{
-                    alert.custom(self, "Attention", "非法输入")
-                }
-            }else{
-                print("空腹上限啥事也没干")
-            }
-            //餐前
-            var c:Double = Double(((save_data["beforeDinnerLowLimit"]  as? NSNumber)?.stringValue)!)!
-            print("餐前下限值",c)
-            if self.beforeDinner_left.text! != ""{
-                //判断是否为非法输入
-                if FormatMethodUtil.validateBloodNumber(number: self.beforeDinner_left.text!) == true{
-                    c = Double(self.beforeDinner_left.text!)!
-                    if c <= 7.8 && c >= 3.3{
-                        print("用户的输入",c)
-                        beforeDinner_left_number = c as NSNumber
-                        save_data.setObject(beforeDinner_left_number as Any, forKey: "beforeDinnerLowLimit" as NSCopying)
-                        print(type(of: beforeDinner_left_number))
                     }else{
-                        alert.custom(self, "Attention", "餐前血糖下限范围为3.3~7.8")
+                        alert.custom(self, "Attention", "非法输入")
                     }
                 }else{
-                    alert.custom(self, "Attention", "非法输入")
+                    print("mg空腹上限啥事也没干")
                 }
-            }else{
-                print("餐前下限啥事也没干")
-            }
-            
-            var d:Double = Double(((save_data["beforeDinnerHighLimit"]  as? NSNumber)?.stringValue)!)!
-            print("餐前上限值",d)
-            if self.beforeDinner_right.text! != ""{
-                //判断是否为非法输入
-                if FormatMethodUtil.validateBloodNumber(number: self.beforeDinner_right.text!) == true{
-                    d = Double(self.beforeDinner_right.text!)!
-                    if d <= 16.6 && d >= 5.0 && d > c{
-                        print("用户的输入",d)
-                        beforeDinner_right_number = d as NSNumber
-                        save_data.setObject(beforeDinner_right_number as Any, forKey: "beforeDinnerHighLimit" as NSCopying)
-                        print(type(of: beforeDinner_right_number))
+                //餐前
+                var c:Double = Double(((save_data["beforeDinnerLowLimit"]  as? NSNumber)?.stringValue)!)!
+                print("餐前下限值",c)
+                if self.beforeDinner_left.text! != ""{
+                    //判断是否为非法输入
+                    if FormatMethodUtil.validateMgdlBloodNumber(number: self.beforeDinner_left.text!) == true{
+                        c = Double(self.beforeDinner_left.text!)!
+                        if c <= 140 && c >= 60{
+                            print("用户的输入",c)
+                            c = UnitConversion.mgTomm(num: c)
+                            beforeDinner_left_number = c as NSNumber
+                            save_data.setObject(beforeDinner_left_number as Any, forKey: "beforeDinnerLowLimit" as NSCopying)
+                            print(type(of: beforeDinner_left_number))
+                        }else{
+                            alert.custom(self, "Attention", "餐前血糖下限范围为60--140")
+                        }
                     }else{
-                        alert.custom(self, "Attention", "餐前血糖上限限范围为5.0~16.6")
+                        alert.custom(self, "Attention", "非法输入")
                     }
                 }else{
-                    alert.custom(self, "Attention", "非法输入")
+                    print("餐前下限啥事也没干")
                 }
-            }else{
-                print("餐前上限啥事也没干")
-            }
-           
-            //餐后
-            var e:Double = Double(((save_data["afterDinnerLowLimit"]  as? NSNumber)?.stringValue)!)!
-            print("餐后下限值",e)
-            if self.afterDinner_left.text! != ""{
-                //判断是否为非法输入
-                if FormatMethodUtil.validateBloodNumber(number: self.afterDinner_left.text!) == true{
-                    e = Double(self.afterDinner_left.text!)!
-                    if e <= 7.8 && e >= 3.3{
-                        print("用户的输入",e)
-                        afterDinner_left_number = e as NSNumber
-                        save_data.setObject(afterDinner_left_number as Any, forKey: "afterDinnerLowLimit" as NSCopying)
-                        print(type(of: afterDinner_left_number))
+                
+                var d:Double = Double(((save_data["beforeDinnerHighLimit"]  as? NSNumber)?.stringValue)!)!
+                print("餐前上限值",d)
+                if self.beforeDinner_right.text! != ""{
+                    //判断是否为非法输入
+                    if FormatMethodUtil.validateMgdlBloodNumber(number: self.beforeDinner_right.text!) == true{
+                        d = Double(self.beforeDinner_right.text!)!
+                        if d <= 300 && d >= 90 && d > c{
+                            print("用户的输入",d)
+                            d = UnitConversion.mgTomm(num: d)
+                            beforeDinner_right_number = d as NSNumber
+                            save_data.setObject(beforeDinner_right_number as Any, forKey: "beforeDinnerHighLimit" as NSCopying)
+                            print(type(of: beforeDinner_right_number))
+                        }else{
+                            alert.custom(self, "Attention", "餐前血糖上限限范围为90--300")
+                        }
                     }else{
-                        alert.custom(self, "Attention", "餐后血糖下限范围为3.3~7.8")
+                        alert.custom(self, "Attention", "非法输入")
                     }
                 }else{
-                    alert.custom(self, "Attention", "非法输入")
+                    print("餐前上限啥事也没干")
                 }
-            }else{
-                print("餐后下限啥事也没干")
-            }
-            
-            var f:Double = Double(((save_data["afterDinnerHighLimit"]  as? NSNumber)?.stringValue)!)!
-            print("餐后上限值",f)
-            if self.afterDinner_right.text! != ""{
-                //判断是否为非法输入
-                if FormatMethodUtil.validateBloodNumber(number: self.afterDinner_right.text!) == true{
-                    f = Double(self.afterDinner_right.text!)!
-                    if f <= 16.6 && f >= 5.0 && f > e{
-                        print("用户的输入",f)
-                        afterDinner_right_number = f as NSNumber
-                        save_data.setObject(afterDinner_right_number as Any, forKey: "afterDinnerHighLimit" as NSCopying)
-                        print(type(of: afterDinner_right_number))
+                
+                //餐后
+                var e:Double = Double(((save_data["afterDinnerLowLimit"]  as? NSNumber)?.stringValue)!)!
+                print("餐后下限值",e)
+                if self.afterDinner_left.text! != ""{
+                    //判断是否为非法输入
+                    if FormatMethodUtil.validateMgdlBloodNumber(number: self.afterDinner_left.text!) == true{
+                        e = Double(self.afterDinner_left.text!)!
+                        if e <= 140 && e >= 60{
+                            print("用户的输入",e)
+                            e = UnitConversion.mgTomm(num: e)
+                            afterDinner_left_number = e as NSNumber
+                            save_data.setObject(afterDinner_left_number as Any, forKey: "afterDinnerLowLimit" as NSCopying)
+                            print(type(of: afterDinner_left_number))
+                        }else{
+                            alert.custom(self, "Attention", "餐后血糖下限范围为90-300")
+                        }
                     }else{
-                        alert.custom(self, "Attention", "餐后血糖上限限范围为5.0~16.6")
+                        alert.custom(self, "Attention", "非法输入")
                     }
                 }else{
-                    alert.custom(self, "Attention", "非法输入")
+                    print("餐后下限啥事也没干")
                 }
-            }else{
-                print("餐后上限啥事也没干")
-            }
-            //随机
-            var g:Double = Double(((save_data["randomDinnerLowLimit"]  as? NSNumber)?.stringValue)!)!
-            print("随机下限值",g)
-            if self.randomDinner_left.text! != ""{
-                //判断是否为非法输入
-                if FormatMethodUtil.validateBloodNumber(number: self.randomDinner_left.text!) == true{
-                    g = Double(self.randomDinner_left.text!)!
-                    if g <= 7.8 && g >= 3.3{
-                        print("用户的输入",g)
-                        randomDinner_left_number = g as NSNumber
-                        save_data.setObject(randomDinner_left_number as Any, forKey: "randomDinnerLowLimit" as NSCopying)
-                        print(type(of: randomDinner_left_number))
+                
+                var f:Double = Double(((save_data["afterDinnerHighLimit"]  as? NSNumber)?.stringValue)!)!
+                print("餐后上限值",f)
+                if self.afterDinner_right.text! != ""{
+                    //判断是否为非法输入
+                    if FormatMethodUtil.validateMgdlBloodNumber(number: self.afterDinner_right.text!) == true{
+                        f = Double(self.afterDinner_right.text!)!
+                        if f <= 300 && f >= 90 && f > e{
+                            print("用户的输入",f)
+                            f = UnitConversion.mgTomm(num: f)
+                            afterDinner_right_number = f as NSNumber
+                            save_data.setObject(afterDinner_right_number as Any, forKey: "afterDinnerHighLimit" as NSCopying)
+                            print(type(of: afterDinner_right_number))
+                        }else{
+                            alert.custom(self, "Attention", "餐后血糖上限限范围为90-300")
+                        }
                     }else{
-                        alert.custom(self, "Attention", "随机血糖下限范围为3.3~7.8")
+                        alert.custom(self, "Attention", "非法输入")
                     }
                 }else{
-                    alert.custom(self, "Attention", "非法输入")
+                    print("餐后上限啥事也没干")
                 }
-            }else{
-                print("随机下限啥事也没干")
-            }
-            
-            
-            var h:Double = Double(((save_data["randomDinnerHighLimit"]  as? NSNumber)?.stringValue)!)!
-            print("随机上限值",h)
-            if self.randomDinner_right.text! != ""{
-                //判断是否为非法输入
-                if FormatMethodUtil.validateBloodNumber(number: self.randomDinner_right.text!) == true{
-                    h = Double(self.randomDinner_right.text!)!
-                    if h <= 16.6 && h >= 5.0 && h > g{
-                        print("用户的输入",h)
-                        randomDinner_right_number = h as NSNumber
-                        save_data.setObject(randomDinner_right_number as Any, forKey: "randomDinnerHighLimit" as NSCopying)
-                        print(type(of: randomDinner_right_number))
+                //随机
+                var g:Double = Double(((save_data["randomDinnerLowLimit"]  as? NSNumber)?.stringValue)!)!
+                print("随机下限值",g)
+                if self.randomDinner_left.text! != ""{
+                    //判断是否为非法输入
+                    if FormatMethodUtil.validateMgdlBloodNumber(number: self.randomDinner_left.text!) == true{
+                        g = Double(self.randomDinner_left.text!)!
+                        if g <= 140 && g >= 60{
+                            print("用户的输入",g)
+                            g = UnitConversion.mgTomm(num: g)
+                            randomDinner_left_number = g as NSNumber
+                            save_data.setObject(randomDinner_left_number as Any, forKey: "randomDinnerLowLimit" as NSCopying)
+                            print(type(of: randomDinner_left_number))
+                        }else{
+                            alert.custom(self, "Attention", "随机血糖下限范围为60-140")
+                        }
                     }else{
-                        alert.custom(self, "Attention", "随机血糖上限限范围为5.0~16.6")
+                        alert.custom(self, "Attention", "非法输入")
                     }
                 }else{
-                    alert.custom(self, "Attention", "非法输入")
+                    print("随机下限啥事也没干")
                 }
-            }else{
-                print("随机上限啥事也没干")
+                
+                
+                var h:Double = Double(((save_data["randomDinnerHighLimit"]  as? NSNumber)?.stringValue)!)!
+                print("随机上限值",h)
+                if self.randomDinner_right.text! != ""{
+                    //判断是否为非法输入
+                    if FormatMethodUtil.validateMgdlBloodNumber(number: self.randomDinner_right.text!) == true{
+                        h = Double(self.randomDinner_right.text!)!
+                        if h <= 300 && h >= 90 && h > g{
+                            print("用户的输入",h)
+                            h = UnitConversion.mgTomm(num: h)
+                            randomDinner_right_number = h as NSNumber
+                            save_data.setObject(randomDinner_right_number as Any, forKey: "randomDinnerHighLimit" as NSCopying)
+                            print(type(of: randomDinner_right_number))
+                        }else{
+                            alert.custom(self, "Attention", "随机血糖上限限范围为5.0~16.6")
+                        }
+                    }else{
+                        alert.custom(self, "Attention", "非法输入")
+                    }
+                }else{
+                    print("随机上限啥事也没干")
+                }
+                
+                
+                //结果写入文件中
+                save_data.write(toFile: save_path!, atomically: true)
+                //取出来的为，mmmol\L类型的数据
+                let a_Double:Double = Double(((save_data["emptyStomachLowLimit"] as? NSNumber)?.stringValue)!)!
+                let b_Double:Double = Double(((save_data["emptyStomachHighLimit"] as? NSNumber)?.stringValue)!)!
+                let c_Double:Double = Double(((save_data["beforeDinnerLowLimit"] as? NSNumber)?.stringValue)!)!
+                let d_Double:Double = Double(((save_data["beforeDinnerHighLimit"] as? NSNumber)?.stringValue)!)!
+                let e_Double:Double = Double(((save_data["afterDinnerLowLimit"] as? NSNumber)?.stringValue)!)!
+                let f_Double:Double = Double(((save_data["afterDinnerHighLimit"] as? NSNumber)?.stringValue)!)!
+                let g_Double:Double = Double(((save_data["randomDinnerLowLimit"] as? NSNumber)?.stringValue)!)!
+                let h_Double:Double = Double(((save_data["randomDinnerHighLimit"] as? NSNumber)?.stringValue)!)!
+                
+                //mmol/L转mg/dL
+                let a_big:Int = UnitConversion.mmTomg(num: a_Double)
+                let b_big:Int = UnitConversion.mmTomg(num: b_Double)
+                let c_big:Int = UnitConversion.mmTomg(num: c_Double)
+                let d_big:Int = UnitConversion.mmTomg(num: d_Double)
+                let e_big:Int = UnitConversion.mmTomg(num: e_Double)
+                let f_big:Int = UnitConversion.mmTomg(num: f_Double)
+                let g_big:Int = UnitConversion.mmTomg(num: g_Double)
+                let h_big:Int = UnitConversion.mmTomg(num: h_Double)
+                showPlaceholder(String(a_big),String(b_big),String(c_big),String(d_big),String(e_big),String(f_big),String(g_big),String(h_big))
+                clearEmpty()
+                
             }
-            
-           //第二步，保存写入userBloodSetting.plist文件中
-            save_data.write(toFile: save_path!, atomically: true)
-            //第三步，修改显示uitextField的placeholder的属性
-            /* 设置显示过程 */
-            let aa = (save_data["emptyStomachLowLimit"] as? NSNumber)?.stringValue
-            let bb = (save_data["emptyStomachHighLimit"] as? NSNumber)?.stringValue
-            print(aa!)
-            emptyStomach_left.placeholder  = aa!
-            emptyStomach_right.placeholder = bb!
-            
-            let cc = (save_data["beforeDinnerLowLimit"] as? NSNumber)?.stringValue
-            let dd = (save_data["beforeDinnerHighLimit"] as? NSNumber)?.stringValue
-            beforeDinner_left.placeholder  = cc!
-            beforeDinner_right.placeholder = dd!
-            
-            let ee = (save_data["afterDinnerLowLimit"] as? NSNumber)?.stringValue
-            let ff = (save_data["afterDinnerHighLimit"] as? NSNumber)?.stringValue
-            afterDinner_left.placeholder  = ee!
-            afterDinner_right.placeholder = ff!
-            
-            let gg = (save_data["randomDinnerLowLimit"] as? NSNumber)?.stringValue
-            let hh = (save_data["randomDinnerHighLimit"] as? NSNumber)?.stringValue
-            randomDinner_left.placeholder  = gg!
-            randomDinner_right.placeholder = hh!
-            
         }
     
         //恢复默认设置的按钮
@@ -703,47 +894,78 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             //这个是加载用户设置血糖上下限信息
             let path_user = Bundle.main.path(forResource: "userBloodSetting", ofType: "plist")
             let data_user:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path_user!)!
-            
+            //读取单位
+            let unit_path = Bundle.main.path(forResource: "UnitSetting", ofType: "plist")
+            let unit_data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: unit_path!)!
+            let unit = unit_data["BloodUnit"]! as! String
             
             //空腹覆盖过程
             data_user["emptyStomachLowLimit"]  = data_default["emptyStomachLowLimit"]
             data_user["emptyStomachHighLimit"] = data_default["emptyStomachHighLimit"]
-
             //餐前覆盖过程
             data_user["beforeDinnerLowLimit"]  = data_default["beforeDinnerLowLimit"]
             data_user["beforeDinnerHighLimit"] = data_default["beforeDinnerHighLimit"]
-
             //餐后覆盖过程
             data_user["afterDinnerLowLimit"]  = data_default["afterDinnerLowLimit"]
             data_user["afterDinnerHighLimit"] = data_default["afterDinnerHighLimit"]
-
             //随机覆盖过程
             data_user["randomDinnerLowLimit"]  = data_default["randomDinnerLowLimit"]
             data_user["randomDinnerHighLimit"] = data_default["randomDinnerHighLimit"]
-
             data_user.write(toFile: path_user!, atomically: true)
             
-            /* 设置显示过程 */
-            let a = (data_user["emptyStomachLowLimit"] as? NSNumber)?.stringValue
-            let b = (data_user["emptyStomachHighLimit"] as? NSNumber)?.stringValue
-            print(a!)
-            emptyStomach_left.placeholder  = a!
-            emptyStomach_right.placeholder = b!
-
-            let c = (data_user["beforeDinnerLowLimit"] as? NSNumber)?.stringValue
-            let d = (data_user["beforeDinnerHighLimit"] as? NSNumber)?.stringValue
-            beforeDinner_left.placeholder  = c!
-            beforeDinner_right.placeholder = d!
-
-            let e = (data_user["afterDinnerLowLimit"] as? NSNumber)?.stringValue
-            let f = (data_user["afterDinnerHighLimit"] as? NSNumber)?.stringValue
-            afterDinner_left.placeholder  = e!
-            afterDinner_right.placeholder = f!
-
-            let g = (data_user["randomDinnerLowLimit"] as? NSNumber)?.stringValue
-            let h = (data_user["randomDinnerHighLimit"] as? NSNumber)?.stringValue
-            randomDinner_left.placeholder  = g!
-            randomDinner_right.placeholder = h!
+            let a_Double:Double = Double(((data_user["emptyStomachLowLimit"] as? NSNumber)?.stringValue)!)!
+            let b_Double:Double = Double(((data_user["emptyStomachHighLimit"] as? NSNumber)?.stringValue)!)!
+            let c_Double:Double = Double(((data_user["beforeDinnerLowLimit"] as? NSNumber)?.stringValue)!)!
+            let d_Double:Double = Double(((data_user["beforeDinnerHighLimit"] as? NSNumber)?.stringValue)!)!
+            let e_Double:Double = Double(((data_user["afterDinnerLowLimit"] as? NSNumber)?.stringValue)!)!
+            let f_Double:Double = Double(((data_user["afterDinnerHighLimit"] as? NSNumber)?.stringValue)!)!
+            let g_Double:Double = Double(((data_user["randomDinnerLowLimit"] as? NSNumber)?.stringValue)!)!
+            let h_Double:Double = Double(((data_user["randomDinnerHighLimit"] as? NSNumber)?.stringValue)!)!
+ 
+            if unit == "mmol/L"{
+                showPlaceholder(String(a_Double),String(b_Double),String(c_Double),String(d_Double),String(e_Double),String(f_Double),String(g_Double),String(h_Double))
+            }else{
+                //当单位为mg/dL
+                let a_String = floor(a_Double * 18.02)
+                let b_String = floor(b_Double * 18.02)
+                let c_String = floor(c_Double * 18.02)
+                let d_String = floor(d_Double * 18.02)
+                let e_String = floor(e_Double * 18.02)
+                let f_String = floor(f_Double * 18.02)
+                let g_String = floor(g_Double * 18.02)
+                let h_String = floor(h_Double * 18.02)
+            showPlaceholder(String(format:"%.0f",a_String),String(format:"%.0f",b_String),String(format:"%.0f",c_String),String(format:"%.0f",d_String),String(format:"%.0f",e_String),String(format:"%.0f",f_String),String(format:"%.0f",g_String),String(format:"%.0f",h_String))
+            }
+           
         }
-
+        //函数功能：清空用户在文本框中的输入
+        func clearEmpty(){
+            emptyStomach_left.text  = ""
+            emptyStomach_right.text = ""
+            beforeDinner_left.text  = ""
+            beforeDinner_right.text = ""
+            afterDinner_left.text   = ""
+            afterDinner_right.text  = ""
+            randomDinner_left.text  = ""
+            randomDinner_right.text = ""
+        }
+        //函数功能：设置Label的单位
+        func setLabelUnit(unit:String){
+            emptyUnit_label.text  = unit
+            beforeUnit_label.text = unit
+            afterUnit_label.text  = unit
+            randomUnit_label.text = unit
+        }
+        //函数功能：设置text的placeholder显示,函数参数可匿名
+        func showPlaceholder(_ a:String,_ b:String,_ c:String,_ d:String,_ e:String,_ f:String,_ g:String,_ h:String){
+            emptyStomach_left.placeholder  = a
+            emptyStomach_right.placeholder = b
+            beforeDinner_left.placeholder  = c
+            beforeDinner_right.placeholder = d
+            afterDinner_left.placeholder   = e
+            afterDinner_right.placeholder  = f
+            randomDinner_left.placeholder  = g
+            randomDinner_right.placeholder = h
+        }
+    
 }
