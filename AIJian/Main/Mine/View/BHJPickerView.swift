@@ -206,7 +206,7 @@ class BHJPickerView: UIView , UIPickerViewDelegate, UIPickerViewDataSource{
         }else if pickerStyle == .weight{
             pickerDelegate?.selectedWeight(self, selectedWeight)
         }else{
-            pickerDelegate?.selectedPressure(self, selectedGender)
+            pickerDelegate?.selectedPressure(self, selectedPressure)
         }
         self.pickerViewHidden()
     }

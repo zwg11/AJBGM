@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		003263799B683595EE9B154587776A9E /* AJGuidePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D6B7CCDE92018CDCC88D28D843A752 /* AJGuidePageView.swift */; };
+		0C071CF1378E0EEF78ED9B5D27C8C0BE /* defaultBloodSetting.plist in Resources */ = {isa = PBXBuildFile; fileRef = 367F547FD8A2D05AB23C071F7752C480 /* defaultBloodSetting.plist */; };
 		0E835E57A6F34BDC4B6AA25CB303D3B4 /* bodyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BAE5242D4EA9B456D06DAC9947B1AB /* bodyInfoView.swift */; };
 		0FCF3B6597088D36328606A7EE666F3D /* dataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271D9A9F1ADE04BDD9B630AC333B2CD8 /* dataTableViewCell.swift */; };
 		118364DE28A5C0A3CA349A0D2E3D470B /* emailCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0F86DE8B8A0BA75326372D7E7F827A /* emailCheckView.swift */; };
@@ -38,6 +39,7 @@
 		649F0A76802800B779DEF7E1AEBBF048 /* theLastCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EF5D8FD2B9D003CECE58B3F112A42B /* theLastCheckView.swift */; };
 		6909EE6FFC2BE982D2396BEDD6D91E75 /* remarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D547385BBF4921804514C136B71543B8 /* remarkView.swift */; };
 		6ECA98075DA8031CC3E4FCCF8A969285 /* const.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FC2F51C9CAE9D3C768C8D06AE069A2 /* const.swift */; };
+		71937B70E5629695BD05C1C077D5607B /* UnitSetting.plist in Resources */ = {isa = PBXBuildFile; fileRef = 946C4B448C4368010D25171286A04DC5 /* UnitSetting.plist */; };
 		74BAA950DB2E4C75BE286CCA00B3A027 /* SharedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B95A250C5649E01E8B1CE6F8AD5E85 /* SharedViewController.swift */; };
 		7E55D14C065E24471D59E71862D56472 /* UseDirViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67085F8C516527849C0A634158BE78B7 /* UseDirViewController.swift */; };
 		82229929AE907526C16AFB7C3B976565 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428DE12BF8AED7060D2DACBB1BDB9E15 /* AppDelegate.swift */; };
@@ -66,6 +68,7 @@
 		BDE0D575B5810095374503C425635030 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0573F222075DF96B4FF70AAFC7703230 /* User.swift */; };
 		C070FFB8E1701A5D899D48322ADE1A1C /* loginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505FC95DADCDA30414C138D4F216674B /* loginViewController.swift */; };
 		C09A68B5ACCA1FF372DB3D8F6C23A872 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDBFD961B14C40710FE24938097E7B6 /* UILabel+Extension.swift */; };
+		C0B2EB14159CEE413014D980058B4127 /* userBloodSetting.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7BD87968C7A6DBA89B736444D0C1C80C /* userBloodSetting.plist */; };
 		C2CBA0DB1212C80B70711093478F6D50 /* CustomAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044715989F31C24AE1950899878B6046 /* CustomAlertController.swift */; };
 		C45133C15650E0A758BE9274BD83AC47 /* perAndAfterMealTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1045C7B12598B6BDF9051A059F6A49 /* perAndAfterMealTests.swift */; };
 		C701921CAA5E7D6176A633628D36FCD2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21A6D55DCBB198190A95457237730BD /* HomeViewController.swift */; };
@@ -110,6 +113,7 @@
 		2D59532ACFD02776540EC329BDAE9813 /* loginNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginNavigationController.swift; sourceTree = "<group>"; };
 		2F79A682359F8FBF1FF34EF2B75A0A78 /* quitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = quitView.swift; sourceTree = "<group>"; };
 		31B95A250C5649E01E8B1CE6F8AD5E85 /* SharedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedViewController.swift; sourceTree = "<group>"; };
+		367F547FD8A2D05AB23C071F7752C480 /* defaultBloodSetting.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaultBloodSetting.plist; sourceTree = "<group>"; };
 		3ACDB27DDBFA6BA1FEA8A6864CE435C5 /* NSDate+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSDate+Date.swift"; sourceTree = "<group>"; };
 		3B122EE08303781538E0581FB9B0AF84 /* AJMineHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AJMineHeaderView.swift; sourceTree = "<group>"; };
 		3F99F9209E1FDDAF8A0D336AF41223B4 /* AddressModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddressModel.swift; path = AIJian/Main/Mine/View/AddressModel.swift; sourceTree = SOURCE_ROOT; };
@@ -134,6 +138,7 @@
 		760452171F68DFBAE73622584ED2C38F /* dateAndTimeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dateAndTimeView.swift; sourceTree = "<group>"; };
 		7913A53032178A4B8556F90346B73A35 /* sportView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sportView.swift; sourceTree = "<group>"; };
 		7A16F36F9537243E6B7560D1B9FF77A0 /* allPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = allPickerView.swift; sourceTree = "<group>"; };
+		7BD87968C7A6DBA89B736444D0C1C80C /* userBloodSetting.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = userBloodSetting.plist; sourceTree = "<group>"; };
 		7DA56B56203F9AF89A686A66EBE1C21E /* loginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loginView.swift; sourceTree = "<group>"; };
 		7F0F86DE8B8A0BA75326372D7E7F827A /* emailCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emailCheckView.swift; sourceTree = "<group>"; };
 		802706582BF2DD3F2F165BE6CC4B129F /* UnitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitViewController.swift; sourceTree = "<group>"; };
@@ -141,6 +146,7 @@
 		8AD251DA1D7683298B03830243680EC8 /* format_method.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = format_method.swift; sourceTree = "<group>"; };
 		8DAC43428B46DC799E1E39FE86BB375D /* InfoInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoInputView.swift; sourceTree = "<group>"; };
 		934C03A16BAD1A90B8D792A740D0BE1B /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
+		946C4B448C4368010D25171286A04DC5 /* UnitSetting.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = UnitSetting.plist; sourceTree = "<group>"; };
 		9793C8E8D4581432CB83EE79CF209C56 /* PassChangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassChangeViewController.swift; sourceTree = "<group>"; };
 		9CC343A4BFCBECD9056D60A82B6F7115 /* glucoseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = glucoseView.swift; sourceTree = "<group>"; };
 		9CCA193DA6A5E1E858111B284800163C /* BloodSetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BloodSetViewController.swift; sourceTree = "<group>"; };
@@ -190,11 +196,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		03703B9D5A4517C1D27073C4C4F20A55 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				946C4B448C4368010D25171286A04DC5 /* UnitSetting.plist */,
+				367F547FD8A2D05AB23C071F7752C480 /* defaultBloodSetting.plist */,
+				7BD87968C7A6DBA89B736444D0C1C80C /* userBloodSetting.plist */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
 		206ED36DDB2B08FEBFF69272A4801034 /* AIJian */ = {
 			isa = PBXGroup;
 			children = (
 				6B4C41AA49F4BA8383C452B7BC7DE4A4 /* Main */,
 				CBA0E3058B80836A656EDC0DE36C4A89 /* Networking */,
+				03703B9D5A4517C1D27073C4C4F20A55 /* Storage */,
 				F9662D194C68061F859B49F34545F0DF /* Tools */,
 				740973640689B3902B55C2DE31E7B66A /* extension */,
 				428DE12BF8AED7060D2DACBB1BDB9E15 /* AppDelegate.swift */,
@@ -649,7 +666,10 @@
 				404DF41E22F23B418B99982210F28297 /* Assets.xcassets in Resources */,
 				2C9DC80088BFE63075C792E21BA74909 /* LaunchScreen.storyboard in Resources */,
 				DAB75D62191E7B20DE8D9FC833830F2D /* Main.storyboard in Resources */,
+				71937B70E5629695BD05C1C077D5607B /* UnitSetting.plist in Resources */,
+				0C071CF1378E0EEF78ED9B5D27C8C0BE /* defaultBloodSetting.plist in Resources */,
 				ED175445285BB026FA95BC133E8DB41B /* inputChoose.plist in Resources */,
+				C0B2EB14159CEE413014D980058B4127 /* userBloodSetting.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

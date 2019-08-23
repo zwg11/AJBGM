@@ -10,13 +10,136 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AIJian/Main/LoginAndRegister/ViewController/register/infoInputViewController.swift"
-            timestampString = "587900990.291525"
+            timestampString = "588045418.254586"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "244"
             endingLineNumber = "244"
             landmarkName = "finish()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AIJian/Main/Data/ViewController/SharedViewController.swift"
+            timestampString = "587965393.376897"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "SharedViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AIJian.SharedViewController.(picker in _CA62D6A293F0517F2241A47CEF3A2F9B).getter : AIJian.pickerView"
+                  moduleName = "AIJian"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ADMIN/Desktop/swift1/AIJian/Main/Data/ViewController/SharedViewController.swift"
+                  timestampString = "587963832.416436"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "206">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AIJian.SharedViewController.(picker in _CA62D6A293F0517F2241A47CEF3A2F9B).setter : AIJian.pickerView"
+                  moduleName = "AIJian"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ADMIN/Desktop/swift1/AIJian/Main/Data/ViewController/SharedViewController.swift"
+                  timestampString = "587963832.419996"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "128">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AIJian.SharedViewController.(picker in _CA62D6A293F0517F2241A47CEF3A2F9B).modify : AIJian.pickerView"
+                  moduleName = "AIJian"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ADMIN/Desktop/swift1/AIJian/Main/Data/ViewController/SharedViewController.swift"
+                  timestampString = "587963832.422166"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "26">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AIJian.SharedViewController.(picker in _CA62D6A293F0517F2241A47CEF3A2F9B).modify : AIJian.pickerView with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "AIJian"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ADMIN/Desktop/swift1/AIJian/Main/Data/ViewController/SharedViewController.swift"
+                  timestampString = "587963832.423972"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "27">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AIJian.SharedViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; AIJian.SharedViewController"
+                  moduleName = "AIJian"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ADMIN/Desktop/swift1/AIJian/Main/Data/ViewController/SharedViewController.swift"
+                  timestampString = "587963832.425732"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "398">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AIJian.SharedViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;AIJian.SharedViewController&gt;"
+                  moduleName = "AIJian"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ADMIN/Desktop/swift1/AIJian/Main/Data/ViewController/SharedViewController.swift"
+                  timestampString = "587963832.428499"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "318">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; AIJian.pickerView in AIJian.SharedViewController.(picker in _CA62D6A293F0517F2241A47CEF3A2F9B).getter : AIJian.pickerView"
+                  moduleName = "AIJian"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ADMIN/Desktop/swift1/AIJian/Main/Data/ViewController/SharedViewController.swift"
+                  timestampString = "587963832.4300539"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "26">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -24,4 +24,18 @@ public class FormatMethodUtil{
         let numberTest:NSPredicate = NSPredicate(format: "SELF MATCHES %@", numberRegex)
         return numberTest.evaluate(with: number)
     }
+    
+    //验证密码强度校验
+    static func validatePasswd(passwd:String) -> Bool{
+        let passwdRegex = "[\\w]{8,16}"
+        let passwdTest:NSPredicate = NSPredicate(format: "SELF MATCHES %@", passwdRegex)
+        return passwdTest.evaluate(with: passwd)
+    }
+    //判断是否为合法数字
+    static func validateBloodNumber(number:String) -> Bool{
+        //表示小数点前面两位，小数点后面一位
+        let numberRegex = "[0-9]{1,2}\\.[0-9]{0,1}"
+        let numberTest:NSPredicate = NSPredicate(format: "SELF MATCHES %@", numberRegex)
+        return numberTest.evaluate(with: number)
+    }
 }
