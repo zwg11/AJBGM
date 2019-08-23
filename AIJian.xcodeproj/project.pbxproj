@@ -37,6 +37,7 @@
 		55EBF230C8DD14A232D18B95A37D8202 /* PassChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9793C8E8D4581432CB83EE79CF209C56 /* PassChangeViewController.swift */; };
 		56ACC92032D24C9E3DE0AB02415266D6 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A34F9A4CB476E221493BFF4FA2AA03 /* UIImageView+Extension.swift */; };
 		649F0A76802800B779DEF7E1AEBBF048 /* theLastCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EF5D8FD2B9D003CECE58B3F112A42B /* theLastCheckView.swift */; };
+		66BB9F6F934FD29C16C16494B87E8F62 /* UnitConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7250934CF2E058D7C85B4FC0C9FFCED6 /* UnitConversion.swift */; };
 		6909EE6FFC2BE982D2396BEDD6D91E75 /* remarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D547385BBF4921804514C136B71543B8 /* remarkView.swift */; };
 		6ECA98075DA8031CC3E4FCCF8A969285 /* const.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FC2F51C9CAE9D3C768C8D06AE069A2 /* const.swift */; };
 		71937B70E5629695BD05C1C077D5607B /* UnitSetting.plist in Resources */ = {isa = PBXBuildFile; fileRef = 946C4B448C4368010D25171286A04DC5 /* UnitSetting.plist */; };
@@ -135,6 +136,7 @@
 		67085F8C516527849C0A634158BE78B7 /* UseDirViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseDirViewController.swift; sourceTree = "<group>"; };
 		6944C88A1CC67791001D6E2AB70AF8DE /* totalCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = totalCheckView.swift; sourceTree = "<group>"; };
 		6B3F1C67C1613AC9C10DED88BFBF2E7D /* URL_Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL_Address.swift; sourceTree = "<group>"; };
+		7250934CF2E058D7C85B4FC0C9FFCED6 /* UnitConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConversion.swift; sourceTree = "<group>"; };
 		760452171F68DFBAE73622584ED2C38F /* dateAndTimeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dateAndTimeView.swift; sourceTree = "<group>"; };
 		7913A53032178A4B8556F90346B73A35 /* sportView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sportView.swift; sourceTree = "<group>"; };
 		7A16F36F9537243E6B7560D1B9FF77A0 /* allPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = allPickerView.swift; sourceTree = "<group>"; };
@@ -598,6 +600,7 @@
 			isa = PBXGroup;
 			children = (
 				044715989F31C24AE1950899878B6046 /* CustomAlertController.swift */,
+				7250934CF2E058D7C85B4FC0C9FFCED6 /* UnitConversion.swift */,
 				8AD251DA1D7683298B03830243680EC8 /* format_method.swift */,
 			);
 			path = Tools;
@@ -762,6 +765,7 @@
 				C09A68B5ACCA1FF372DB3D8F6C23A872 /* UILabel+Extension.swift in Sources */,
 				875E6FED57826107D84E47853B2A507F /* UITextField+Extension.swift in Sources */,
 				F1647D90FE006C35DDD2C91362D4AE2F /* URL_Address.swift in Sources */,
+				66BB9F6F934FD29C16C16494B87E8F62 /* UnitConversion.swift in Sources */,
 				3F209594276298C7CF2E79AB8D42762D /* UnitViewController.swift in Sources */,
 				7E55D14C065E24471D59E71862D56472 /* UseDirViewController.swift in Sources */,
 				BDE0D575B5810095374503C425635030 /* User.swift in Sources */,

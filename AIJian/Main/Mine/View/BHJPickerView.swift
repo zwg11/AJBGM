@@ -169,7 +169,7 @@ class BHJPickerView: UIView , UIPickerViewDelegate, UIPickerViewDataSource{
                     dataArray = NSMutableArray.init(array: ["男","女"])
                     self.pickerView(genderPicker, didSelectRow: 0, inComponent: 0)
                 case 1: //血糖
-                    dataArray = NSMutableArray.init(array: ["mg/dL","mmol/g"])
+                    dataArray = NSMutableArray.init(array: ["mg/dL","mmol/L"])
                     self.pickerView(bloodPicker, didSelectRow: 0, inComponent: 0)
                 case 2:  //体重
                     dataArray = NSMutableArray.init(array: ["kg","lbs"])
