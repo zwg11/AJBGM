@@ -75,7 +75,7 @@ class sportView: UIView ,UITextFieldDelegate{
         // 设置视图背景颜色和边框
         self.layer.borderColor = UIColor.gray.cgColor
         self.layer.borderWidth = 1
-        self.backgroundColor = UIColor.lightGray
+        self.backgroundColor = kRGBColor(130, 154, 249, 1)
         
         //***********************运动********************
         // 运动图标布局设置

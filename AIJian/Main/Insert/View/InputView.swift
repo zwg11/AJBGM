@@ -20,11 +20,8 @@ class InputView: UIView,UIScrollViewDelegate {
         case portions    //进餐量
         case insulin    // 胰岛素
         
-        case medicine   // 药物
-        
         case sport      // 运动
         case exerintensity     // 运动强度
-        case remark     // 备注
     }
     
     private var style = pickerStyle.date
@@ -37,18 +34,19 @@ class InputView: UIView,UIScrollViewDelegate {
     private lazy var dateAndTime:dateAndTimeView = {
         let view = dateAndTimeView()
         view.setupUI()
-        view.backgroundColor = UIColor.yellow
+        view.backgroundColor = kRGBColor(255, 251, 186, 1)
         view.dateButton.addTarget(self, action: #selector(chooseDate), for: .touchUpInside)
         view.timeButton.addTarget(self, action: #selector(chooseTime), for: .touchUpInside)
         return view
     }()
     
-    private lazy var picker:allPickerView = {
+    lazy var picker:allPickerView = {
         let view = allPickerView()
         view.setupUI()
-        view.backgroundColor = UIColor.blue
+        view.backgroundColor = UIColor.white
         view.sureButton.addTarget(self, action: #selector(pickViewSelected), for: .touchUpInside)
         view.cancelButton.addTarget(self, action: #selector(pickViewDismiss), for: .touchUpInside)
+        //view.frame = CGRect(x: 0, y: self.frame.maxY-10,width: AJScreenWidth,height: AJScreenHeight/3)
         return view
     }()
     
@@ -70,7 +68,6 @@ class InputView: UIView,UIScrollViewDelegate {
     lazy var bodyInfo:bodyInfoView = {
         let view = bodyInfoView()
         view.setupUI()
-        view.medicineChooseButton.addTarget(self, action: #selector(chooseMedicine), for: .touchUpInside)
         return view
     }()
     
@@ -82,10 +79,9 @@ class InputView: UIView,UIScrollViewDelegate {
         return view
     }()
     
-    private lazy var remark:remarkView = {
+    lazy var remark:remarkView = {
         let view = remarkView()
         view.setupUI()
-        view.remarkChooseButton.addTarget(self, action: #selector(chooseRemark), for: .touchUpInside)
         return view
     }()
     
@@ -98,7 +94,6 @@ class InputView: UIView,UIScrollViewDelegate {
     }()
     
     func setupUI() {
-
         self.backgroundColor = UIColor.white
         
         // 设置滚动视图属性
@@ -115,13 +110,13 @@ class InputView: UIView,UIScrollViewDelegate {
         
         // 时间选择器视图设置
         self.addSubview(picker)
-        
+
         // 设置时间选择器界面约束，之后会修改此约束达到界面显现和消失的效果
         picker.snp_makeConstraints{(make) in
             make.left.equalTo(self.snp.left)
             make.right.equalTo(self.snp.right)
-            make.height.equalTo(AJScreenHeight/3)
-            self.topConstraint = make.top.equalTo(self.snp.bottom).constraint
+            make.height.equalTo(AJScreenHeight*0.3)
+            self.topConstraint = make.top.equalTo(self.snp.bottom).offset(50).constraint
         }
         
         // dateAndTime 视图设置
@@ -149,7 +144,7 @@ class InputView: UIView,UIScrollViewDelegate {
             //make.left.right.equalToSuperview()
             make.left.right.equalTo(self)
             make.top.equalTo(glucose.snp.bottom)
-            make.height.equalTo(AJScreenWidth/2 - AJScreenWidth/15 + AJScreenWidth/40)
+            make.height.equalTo(AJScreenWidth/2-AJScreenWidth/15+AJScreenWidth/40)
         }
         
         // bodyInfo 视图布局
@@ -187,6 +182,8 @@ class InputView: UIView,UIScrollViewDelegate {
     @objc func chooseDate(){
         print("choose date button clicked,appear done.")
         style = .date
+        // 添加背景按钮
+        self.addSubview(backButton)
         UIView.animate(withDuration: 0.5, animations: appear)
     }
     
@@ -194,6 +191,8 @@ class InputView: UIView,UIScrollViewDelegate {
     @objc func chooseTime(){
         print("choose time button clicked,appear done.")
         style = .time
+        // 添加背景按钮
+        self.addSubview(backButton)
         UIView.animate(withDuration: 0.5, animations: appear)
     }
     
@@ -201,6 +200,8 @@ class InputView: UIView,UIScrollViewDelegate {
     @objc func chooseOccurTime(){
         print("choose occurTime button clicked,appear done.")
         style = .occurTime
+        // 添加背景按钮
+        self.addSubview(backButton)
         UIView.animate(withDuration: 0.5, animations: appear)
     }
     
@@ -208,6 +209,8 @@ class InputView: UIView,UIScrollViewDelegate {
     @objc func choosePortion(){
         print("choose occurTime button clicked,appear done.")
         style = .portions
+        // 添加背景按钮
+        self.addSubview(backButton)
         UIView.animate(withDuration: 0.5, animations: appear)
     }
     
@@ -215,13 +218,8 @@ class InputView: UIView,UIScrollViewDelegate {
     @objc func chooseInsulin(){
         print("choose occurTime button clicked,appear done.")
         style = .insulin
-        UIView.animate(withDuration: 0.5, animations: appear)
-    }
-    
-    // 选择 药物 按钮被点击时的动作
-    @objc func chooseMedicine(){
-        print("choose medicine button clicked,appear done.")
-        style = .medicine
+        // 添加背景按钮
+        self.addSubview(backButton)
         UIView.animate(withDuration: 0.5, animations: appear)
     }
     
@@ -229,6 +227,8 @@ class InputView: UIView,UIScrollViewDelegate {
     @objc func chooseSport(){
         print("choose sport button clicked,appear done.")
         style = .sport
+        // 添加背景按钮
+        self.addSubview(backButton)
         UIView.animate(withDuration: 0.5, animations: appear)
     }
     
@@ -236,20 +236,24 @@ class InputView: UIView,UIScrollViewDelegate {
     @objc func chooseExerIntensity(){
         print("choose sport button clicked,appear done.")
         style = .exerintensity
+        // 添加背景按钮
+        self.addSubview(backButton)
         UIView.animate(withDuration: 0.5, animations: appear)
     }
     
-    // 选择 备注 按钮被点击时的动作
-    @objc func chooseRemark(){
-        print("choose remark button clicked,appear done.")
-        style = .remark
-        UIView.animate(withDuration: 0.5, animations: appear)
-    }
     
     
     func dismiss(){
         // 移除背景按钮
-        self.backButton.removeFromSuperview()
+        backButton.removeFromSuperview()
+        // 移除选择器界面
+//        UIView.animate(withDuration: 0.5, animations: {
+//            self.picker.frame.origin = CGPoint(x: 0, y: self.frame.maxY-10)
+//        }, completion: { _ in
+//            //self.picker.removeFromSuperview()
+//
+//        })
+        //self.picker.removeFromSuperview()
         // 重新布置约束
         // 时间选择器界面移到屏幕外，视觉效果为消失
         print("func dismiss done.")
@@ -257,7 +261,9 @@ class InputView: UIView,UIScrollViewDelegate {
         self.bottomConstraint?.uninstall()
         picker.snp_makeConstraints{(make) in
             // 添加底部约束为与视图底部相同
-            self.topConstraint = make.top.equalTo(self.snp.bottom).constraint
+            
+            self.topConstraint = make.top.equalTo(self.snp.bottom).offset(50).constraint
+            
         }
         animationPickerViewDismiss()
         // 告诉当前控制器的View要更新约束了，动态更新约束，没有这句的话更新约束就没有动画效果
@@ -267,7 +273,12 @@ class InputView: UIView,UIScrollViewDelegate {
     func appear(){
         
         // 添加背景按钮
-        self.addSubview(backButton)
+        //self.addSubview(backButton)
+        // 添加选择器视图
+//        self.addSubview(picker)
+//        UIView.animate(withDuration: 0.5, animations: {
+//            self.picker.frame.origin = CGPoint(x: 0, y: self.frame.maxY-self.picker.frame.height)
+//        }, completion: nil)
         // 设置picker在视图最前面，避免被按钮覆盖
         self.bringSubviewToFront(picker)
         // 重新布置约束
@@ -291,20 +302,17 @@ class InputView: UIView,UIScrollViewDelegate {
             picker.bringSubviewToFront(picker.insulinPicker)
             animatePickerViewAppear(button: porAndIns.insulinButton)
             
-        case .medicine:
-            picker.bringSubviewToFront(picker.medicinePicker)
-            animatePickerViewAppear(button: bodyInfo.medicineChooseButton)
-            
         case .sport:
             picker.bringSubviewToFront(picker.sportPicker)
             animatePickerViewAppear(button: sport.sportButton)
-        case .exerintensity:
+//        case .exerintensity:
+//            picker.bringSubviewToFront(picker.exerIntensyPicker)
+//            animatePickerViewAppear(button: sport.exerIntensityButton)
+            
+        default:
             picker.bringSubviewToFront(picker.exerIntensyPicker)
             animatePickerViewAppear(button: sport.exerIntensityButton)
             
-        default:
-            picker.bringSubviewToFront(picker.remarkPicker)
-            animatePickerViewAppear(button: remark.remarkChooseButton)
         }
         //picker.bringSubviewToFront(picker.timePicker)
         print("func appear done.")
@@ -347,8 +355,7 @@ class InputView: UIView,UIScrollViewDelegate {
             // 绑定一个时间选择器，并按格式返回时间
             let time = dateFormatter.string(from: picker.timePicker.date)
             print(time)
-            dateAndTime.timeButton.setTitle(time, for: .normal)            
-            //UIView.animate(withDuration: 0.5, animations: dismiss)
+            dateAndTime.timeButton.setTitle(time, for: .normal)
             
         case .occurTime:
             glucose.eventButton.setTitle(picker.eventStr, for: .normal)
@@ -358,35 +365,20 @@ class InputView: UIView,UIScrollViewDelegate {
         case .insulin:
             porAndIns.insulinButton.setTitle(picker.insulinStr, for: .normal)
             
-        case .medicine:
-            bodyInfo.medicineChooseButton.setTitle(picker.medicineStr, for: .normal)
             
         case .sport:
             sport.sportButton.setTitle(picker.sportStr, for: .normal)
-        case .exerintensity:
-            sport.exerIntensityButton.setTitle(picker.exerItensityStr, for: .normal)
-            
+//        case .exerintensity:
+//            sport.exerIntensityButton.setTitle(picker.exerItensityStr, for: .normal)
         default:
-            remark.remarkChooseButton.setTitle(picker.remarkStr, for: .normal)
+            sport.exerIntensityButton.setTitle(picker.exerItensityStr, for: .normal)
             
         }
         UIView.animate(withDuration: 0.5, animations: dismiss)
         print("sure button clicked")
         
     }
-//    func hideKeyboardWhenTappedAround(){
-//        let tap:UITapGestureRecognizer = UITapGestureRecognizer(target: scrollView, action: #selector(dismissKeyboard))
-//        tap.cancelsTouchesInView = false
-//        scrollView.addGestureRecognizer(tap)
-//    }
-//
-//    @objc func dismissKeyboard(){
-//        self.endEditing(true)
-//    }
-//
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        self.endEditing(true)
-//    }
+
     var offset:CGFloat?
     func animationPickerViewDismiss(){
         if let dy = offset{
@@ -422,7 +414,7 @@ class InputView: UIView,UIScrollViewDelegate {
         self.scrollView.contentOffset = CGPoint(x: 0, y: offset! + movement)
         UIView.commitAnimations()
     }
-
+    
     
     
 }

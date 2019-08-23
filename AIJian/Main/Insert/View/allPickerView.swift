@@ -9,20 +9,22 @@
 import UIKit
 import SnapKit
 
-
-
+// 为方便操作，设为全局变量
+// 读取配置文件，获取不同选择器的内容
+let path = Bundle.main.path(forResource: "inputChoose", ofType: "plist")
+let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path!)!
 
 
 class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
     
     // 使用以下步骤获取plist文件的数据
-//    let path = Bundle.main.path(forResource: "inputChoose", ofType: "plist")
-//    let data:NSDictionary = NSDictionary.init(contentsOfFile: path!)!
-//
-//    var sport:NSArray = NSArray()
-//    sport = data["sport"] as! NSArray
-//
-//    print(sport[0])
+    //    let path = Bundle.main.path(forResource: "inputChoose", ofType: "plist")
+    //    let data:NSDictionary = NSDictionary.init(contentsOfFile: path!)!
+    //
+    //    var sport:NSArray = NSArray()
+    //    sport = data["sport"] as! NSArray
+    //
+    //    print(sport[0])
     
     // 记录不同的选择器的内容的数组
     private var event:NSArray = NSArray()
@@ -30,21 +32,18 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
     private var portion:NSArray = NSArray()
     private var insulin:NSArray = NSArray()
     
-    private var medicine:NSArray = NSArray()
-    
     private var sport:NSArray = NSArray()
     private var exerIntensity:NSArray = NSArray()
     
-    private var remark:NSArray = NSArray()
+
     
     // 记录不同选择器选择的内容
     var eventStr:String = String()
     var portionStr:String = String()
     var insulinStr:String = String()
-    var medicineStr:String = String()
     var sportStr:String = String()
     var exerItensityStr:String = String()
-    var remarkStr:String = String()
+
     
     // 返回列数
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -53,24 +52,22 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
     // 返回行数,根据选择器的不同设置不同的行数
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch pickerView {
-
+            
         case eventPicker:
             return event.count
-
+            
         case portionPicker:
             return portion.count
         case insulinPicker:
             return insulin.count
             
-        case medicinePicker:
-            return medicine.count
-
         case sportPicker:
             return sport.count
         case exerIntensyPicker:
             return exerIntensity.count
         default:
-            return remark.count
+            return 0
+
         }
         
     }
@@ -88,21 +85,19 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         case insulinPicker:
             return insulin[row] as? String
             
-        case medicinePicker:
-            return medicine[row] as? String
-            
         case sportPicker:
             return sport[row] as? String
         case exerIntensyPicker:
             return exerIntensity[row] as? String
+
         default:
-            return remark[row] as? String
+            return "error"
         }
     }
     
     // 记录下每个选择器选择的内容
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        // 选择器停止转动时调用
+        // s选择器停止转动时调用
         switch pickerView {
             
         case eventPicker:
@@ -113,18 +108,16 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         case insulinPicker:
             insulinStr = insulin[insulinPicker.selectedRow(inComponent: 0)] as! String
             
-        case medicinePicker:
-            medicineStr = medicine[medicinePicker.selectedRow(inComponent: 0)] as! String
-            
         case sportPicker:
             sportStr = sport[sportPicker.selectedRow(inComponent: 0)] as! String
         case exerIntensyPicker:
             exerItensityStr = exerIntensity[exerIntensyPicker.selectedRow(inComponent: 0)] as! String
+
         default:
-            remarkStr = remark[remarkPicker.selectedRow(inComponent: 0)] as! String
+            print("error in picker didSelectRow.")
         }
     }
-
+    
     // 确定按钮和取消按钮
     // 确定按钮
     lazy var sureButton:UIButton = {
@@ -144,7 +137,7 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         button.setTitle("cancel", for: .normal)
         button.setTitleColor(UIColor.red, for: .normal)
         button.contentHorizontalAlignment = .left
-        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: UIScreen.main.bounds.width/20, bottom: 0, right: 0)       
+        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: UIScreen.main.bounds.width/20, bottom: 0, right: 0)
         return button
     }()
     
@@ -155,6 +148,7 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         datePicker.datePickerMode = .date
         datePicker.backgroundColor = UIColor.white
         datePicker.maximumDate = Date()
+        datePicker.date = Date()
         datePicker.layer.borderColor = UIColor.gray.cgColor
         datePicker.layer.borderWidth = 1
         return datePicker
@@ -164,7 +158,7 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
     // 创建 时间 选择器
     lazy var timePicker:UIDatePicker = {
         let timePicker = UIDatePicker()
-
+        
         timePicker.calendar = Calendar.current
         timePicker.locale = Locale(identifier: "en_GB")
         timePicker.timeZone = .current
@@ -203,15 +197,6 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         return pickerView
     }()
     
-    // 创建 药物 选择器
-    lazy var medicinePicker:UIPickerView = {
-        let pickerView = UIPickerView()
-        pickerView.dataSource = self
-        pickerView.delegate = self
-        initPickerView(pickerView: pickerView)
-        return pickerView
-    }()
-    
     // 创建 运动 选择器
     lazy var sportPicker:UIPickerView = {
         let pickerView = UIPickerView()
@@ -230,15 +215,7 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         return pickerView
     }()
     
-    // 创建 备注 选择器
-    lazy var remarkPicker:UIPickerView = {
-        let pickerView = UIPickerView()
-        pickerView.dataSource = self
-        pickerView.delegate = self
-        initPickerView(pickerView: pickerView)
-        return pickerView
-    }()
-
+    
     // 设置选择器统一外观
     func initPickerView(pickerView:UIPickerView){
         // 背景颜色为白色，一定要设置，因为默认为透明
@@ -249,21 +226,16 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
     }
     
     func setupUI(){
-        
-        // 读取配置文件，获取不同选择器的内容
-        let path = Bundle.main.path(forResource: "inputChoose", ofType: "plist")
-        let data:NSDictionary = NSDictionary.init(contentsOfFile: path!)!
+
         event = data["event"] as! NSArray
         
         portion = data["portion"] as! NSArray
         insulin = data["insulin"] as! NSArray
         
-        medicine = data["medicine"] as! NSArray
-        
         sport = data["sport"] as! NSArray
         exerIntensity = data["exerIntensity"] as! NSArray
         
-        remark = data["remark"] as! NSArray
+
         
         
         // 设置视图背景、边框
@@ -285,23 +257,23 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
             make.width.equalTo(UIScreen.main.bounds.width/3)
             make.top.equalToSuperview()
             make.height.equalTo(UIScreen.main.bounds.height/15)
-    
+            
         }
         // 日期 选择器布局
         self.addSubview(datePicker)
         self.datePicker.snp.makeConstraints{(make) in
             make.right.left.bottom.equalToSuperview()
-
+            
             make.top.equalTo(sureButton.snp.bottom)
             //make.height.equalTo(self.frame.size.height/3 - UIScreen.main.bounds.height/15)
         }
-
+        
         // 时间 选择器布局
         self.addSubview(timePicker)
         self.timePicker.snp.makeConstraints{(make) in
-//            make.right.left.bottom.equalToSuperview()
-//
-//            make.top.equalTo(sureButton.snp.bottom)
+            //            make.right.left.bottom.equalToSuperview()
+            //
+            //            make.top.equalTo(sureButton.snp.bottom)
             make.edges.equalTo(datePicker)
             //make.height.equalTo(self.frame.size.height/3 - UIScreen.main.bounds.height/15)
         }
@@ -324,12 +296,6 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
             make.edges.equalTo(datePicker)
         }
         
-        // 药物 选择器布局
-        self.addSubview(medicinePicker)
-        self.medicinePicker.snp.makeConstraints{(make) in
-            make.edges.equalTo(datePicker)
-        }
-        
         // 运动 选择器布局
         self.addSubview(sportPicker)
         self.sportPicker.snp.makeConstraints{(make) in
@@ -342,16 +308,10 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
             make.edges.equalTo(datePicker)
         }
         
-        // 备注 选择器布局
-        self.addSubview(remarkPicker)
-        self.remarkPicker.snp.makeConstraints{(make) in
-            make.edges.equalTo(datePicker)
-        }
-        
     }
     
     
-
     
-
+    
+    
 }

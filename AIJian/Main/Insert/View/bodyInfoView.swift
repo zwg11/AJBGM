@@ -145,7 +145,14 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
     }()
     
     // 药物编辑按钮
-    private lazy var medicineEditButton:UIButton = {
+    lazy var medicineEditButton:UIButton = {
+        let button = UIButton()
+        button.NorStyle(title: "编辑")
+        return button
+    }()
+    
+    // 药物编辑按钮
+    private lazy var medicineDeleteButton:UIButton = {
         let button = UIButton()
         button.NorStyle(title: "编辑")
         return button
@@ -156,7 +163,7 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
         // 设置视图背景颜色和边框
         self.layer.borderColor = UIColor.gray.cgColor
         self.layer.borderWidth = 1
-        self.backgroundColor = UIColor.lightGray
+        self.backgroundColor = kRGBColor(130, 154, 249, 1)
         
         //***********************体重********************
         // 体重图标布局设置

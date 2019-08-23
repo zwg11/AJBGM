@@ -32,7 +32,7 @@ class remarkView: UIView {
     }()
     
     // 备注编辑按钮
-    private lazy var remarkEditButton:UIButton = {
+    lazy var remarkEditButton:UIButton = {
         let button = UIButton()
         button.NorStyle(title: "编辑")
         return button
@@ -41,7 +41,7 @@ class remarkView: UIView {
     
     func setupUI(){
         //*********************备注**********************
-        self.backgroundColor = UIColor.lightGray
+        self.backgroundColor = kRGBColor(130, 154, 249, 1)
         // 备注图标布局
         self.addSubview(remarkImageView)
         remarkImageView.snp.makeConstraints{(make) in

@@ -22,6 +22,7 @@ class VDChartAxisValueFormatter: NSObject,IAxisValueFormatter {
         if values == nil {
             return "\(value)";
         }
+        
         return values?.object(at: Int(value)) as! String;
     }
 }
