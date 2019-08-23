@@ -8,9 +8,9 @@ target 'AIJian' do
   pod 'Alamofire'
   pod 'SnapKit'
   pod ‘HandyJSON','5.0.0-beta'
-  pod 'SwiftyMenu'
   pod 'Charts'
   pod 'DNSPageView'
+  pod 'SwiftDate'
   # Pods for AIJian
 
 end
