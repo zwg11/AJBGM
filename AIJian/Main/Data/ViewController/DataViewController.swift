@@ -20,7 +20,6 @@ class DataViewController: UIViewController {
         let button = UIButton.init(type: .custom)
         button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         button.setImage(UIImage(named: "back"), for: .normal)
-        //button.setTitleColor(UIColor.blue, for: .normal)
         button.addTarget(self, action: #selector(leftButtonClick), for: .touchUpInside)
         return button
     }()
@@ -41,7 +40,7 @@ class DataViewController: UIViewController {
         style.bottomLineHeight = 2
         
         // 标题内容
-        let titles = ["chart","statistical data","table","shared"]
+        let titles = ["Chart","Statistics","Datalist","Share"]
         // 设置每个标题对应的ViewController
         let viewControllers:[UIViewController] = [ChartViewController(),StatisticalDataViewController(),DataTableViewController(),SharedViewController()]
         let y = UIApplication.shared.statusBarFrame.height + (navigationController?.navigationBar.frame.height ?? 0)
@@ -52,51 +51,34 @@ class DataViewController: UIViewController {
         return DNSPageViewManager(style: style, titles: titles, childViewControllers: viewControllers)
     }()
     
-    var glucoseValue:[Double] = []
-    var glucoseTime:[Data] = []
+    private lazy var rangePickerButton:UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(chooseDate), for: .touchUpInside)
+        button.setTitle("最近7天", for: .normal)
+        button.frame.size = CGSize(width: AJScreenWidth/5, height: 44)
+        return button
+    }()
+
+    // 日期范围选择器
+    private lazy var dateRangePicker:dateRangePickerView = {
+        let view = dateRangePickerView()
+        view.setupUI()
+        view.cancelButton.addTarget(self, action: #selector(pickViewDismiss), for: .touchUpInside)
+        view.sureButton.addTarget(self, action: #selector(pickViewSelected), for: .touchUpInside)
+        return view
+    }()
+    
+    var topConstraint:Constraint?
+    var bottomConstraint:Constraint?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
         // 添加导航栏左按钮
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
-        //********
-        let day = 15
-        let userId = 6
-        let dicStr:Dictionary = ["day":day,"userId":userId,"token":token] as [String : Any]
-        print(dicStr)
-        // 请求数据，请求信息如上c字典
-        Alamofire.request(REQUEST_DATA_URL,method: .post,parameters: dicStr).responseString{ (response) in
-            if response.result.isSuccess {
-                print("收到回复")
-                if let jsonString = response.result.value {
-                    
-                    /// json转model
-                    /// 写法一：responseModel.deserialize(from: jsonString)
-                    /// 写法二：用JSONDeserializer<T>
-                    /*
-                     利用JSONDeserializer封装成一个对象。然后再把这个对象解析为
-                     */
-                    if let recordInDaysResponse = JSONDeserializer<recordInDaysResponse>.deserializeFrom(json: jsonString) {
-                        //输出得到的数据
-                        print(recordInDaysResponse)
-                        print(recordInDaysResponse.msg ?? "nothing")
-                        print(recordInDaysResponse.data ?? "none")
-                        for i in recordInDaysResponse.data!{
-                            if let value = i.bloodGlucoseMmol{
-                                self.glucoseValue.append(value)
-                                
-                            }
-                        }
-                       
-                    }
-                    print("********************")
-                    print(self.glucoseValue)
-                }
-            }
-        }
+        // 添加导航栏右按钮
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rangePickerButton)
         
-        //**********
         // 添加标题视图
         let titleview = pageViewManager.titleView
         view.addSubview(titleview)
@@ -136,16 +118,23 @@ class DataViewController: UIViewController {
                 // Fallback on earlier versions
                 make.bottom.equalTo(bottomLayoutGuide.snp.top)
             }
-            //make.height.equalToSuperview()
-
 
         }
-
-        self.view.backgroundColor = UIColor.white
         
-    }
-    
+        self.view.addSubview(dateRangePicker)
+        dateRangePicker.snp.makeConstraints{(make) in
+            make.left.right.equalToSuperview()
+            make.height.equalTo(UIScreen.main.bounds.height/4)
+            if #available(iOS 11.0, *) {
+                self.topConstraint = make.top.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(40).constraint
+            } else {
+                // Fallback on earlier versions
+                self.topConstraint = make.top.equalTo(bottomLayoutGuide.snp.bottom).offset(40).constraint
+            }
+        }
 
+        self.view.backgroundColor = UIColor.white   
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
@@ -157,38 +146,71 @@ class DataViewController: UIViewController {
     @objc func leftButtonClick(){
         // 设置返回首页
         self.tabBarController?.selectedIndex = 0
-        //self.dismiss(animated: true, completion: nil)
     }
     
-    // 以下原来是用来解决转屏时的约束问题，现在不需要了
+    // MARK: - 以下为时间范围选择器显示和消失的按钮动作
+    // 选择出生日期按钮被点击时的动作
+    @objc func chooseDate(){
+        print("choose date button clicked,appear done.")
+        UIView.animate(withDuration: 0.5, animations: appear)
+    }
     
-//    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
-//
-//        //*****************************************
-//        // 转屏时的动画太丑了，想个办法美化下
-//        UIView.animate(withDuration: 0, animations: changeSizeAndOrigin)
-//        pageViewManager.titleView.frame.size.width = UIScreen.main.bounds.width
-//        if #available(iOS 11.0, *) {
-//            pageViewManager.titleView.frame.origin.y = self.view.safeAreaLayoutGuide.layoutFrame.minY
-//        } else {
-//            // Fallback on earlier versions
-//            pageViewManager.titleView.frame.origin.y = 44
-//        }
-//        //let inter = UIApplication.shared.statusBarOrientation
-////        if(inter == UIInterfaceOrientation.portrait){
-////            print("shuping")
-////        }
-////        else{
-////            pageViewManager.titleView.frame.size.width = UIScreen.main.bounds.width
-////        }
-//    }
-//    @objc func changeSizeAndOrigin(){
-//        pageViewManager.titleView.frame.size.width = UIScreen.main.bounds.width
-//        if #available(iOS 11.0, *) {
-//            pageViewManager.titleView.frame.origin.y = self.view.safeAreaLayoutGuide.layoutFrame.minY
-//        } else {
-//            // Fallback on earlier versions
-//            pageViewManager.titleView.frame.origin.y = 44
-//        }
-//    }
+    // 点击取消按钮，时间选择器界面移到屏幕外，视觉效果为消失
+    @objc func pickViewDismiss(){
+        UIView.animate(withDuration: 0.5, animations: dismiss)
+        
+        print("cancel button clicked")
+    }
+    
+    // 点击确定按钮，选择器界面移到屏幕外，视觉效果为消失，按钮文本显示被选项
+    // 根据被选项内容执行不同的动作
+    @objc func pickViewSelected(){
+        UIView.animate(withDuration: 0.5, animations: dismiss)
+        rangePickerButton.setTitle(dateRangePicker.selectedContent, for: .normal)
+        print("sure button clicked")
+    }
+    
+    // 选择器消失
+    func dismiss(){
+        // 重新布置约束
+        // 时间选择器界面移到屏幕外，视觉效果为消失
+        //shareV.pickDateView.frame.origin = CGPoint(x: 0, y: shareV.snp.bottom)
+        print("func dismiss done.")
+        // 删除顶部约束
+        self.bottomConstraint?.uninstall()
+        dateRangePicker.snp_makeConstraints{(make) in
+            
+            // 添加底部约束
+            if #available(iOS 11.0, *) {
+                self.topConstraint = make.top.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(40).constraint
+            } else {
+                // Fallback on earlier versions
+                self.topConstraint = make.top.equalTo(bottomLayoutGuide.snp.bottom).offset(40).constraint
+            }
+        }
+        // 告诉当前控制器的View要更新约束了，动态更新约束，没有这句的话更新约束就没有动画效果
+        self.view.layoutIfNeeded()
+    }
+    
+    //选择器显示
+    func appear(){
+        
+        // 重新布置约束
+        // 时间选择器界面移到屏幕内底部，视觉效果为出现
+        print("func appear done.")
+        // 删除顶部约束
+        self.topConstraint?.uninstall()
+        dateRangePicker.snp_makeConstraints{(make) in
+            
+            // 添加底部约束
+            if #available(iOS 11.0, *) {
+                self.bottomConstraint = make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).constraint
+            } else {
+                // Fallback on earlier versions
+                self.bottomConstraint = make.bottom.equalTo(bottomLayoutGuide.snp.top).constraint
+            }
+        }
+        self.view.layoutIfNeeded()
+    }
 }
+

@@ -246,14 +246,6 @@ class InputView: UIView,UIScrollViewDelegate {
     func dismiss(){
         // 移除背景按钮
         backButton.removeFromSuperview()
-        // 移除选择器界面
-//        UIView.animate(withDuration: 0.5, animations: {
-//            self.picker.frame.origin = CGPoint(x: 0, y: self.frame.maxY-10)
-//        }, completion: { _ in
-//            //self.picker.removeFromSuperview()
-//
-//        })
-        //self.picker.removeFromSuperview()
         // 重新布置约束
         // 时间选择器界面移到屏幕外，视觉效果为消失
         print("func dismiss done.")
@@ -274,11 +266,6 @@ class InputView: UIView,UIScrollViewDelegate {
         
         // 添加背景按钮
         //self.addSubview(backButton)
-        // 添加选择器视图
-//        self.addSubview(picker)
-//        UIView.animate(withDuration: 0.5, animations: {
-//            self.picker.frame.origin = CGPoint(x: 0, y: self.frame.maxY-self.picker.frame.height)
-//        }, completion: nil)
         // 设置picker在视图最前面，避免被按钮覆盖
         self.bringSubviewToFront(picker)
         // 重新布置约束

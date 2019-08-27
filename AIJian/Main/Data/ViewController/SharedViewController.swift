@@ -35,6 +35,11 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
     var topConstraint:Constraint?
     var bottomConstraint:Constraint?
 
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(false)
+        dismiss()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let sharedScrollView = UIScrollView()

@@ -20,6 +20,9 @@ class ChartViewController: UIViewController {
         let view = ChartView()
         view.backgroundColor = UIColor.red
         view.setupUI()
+        view.lineChartView.xAxis.axisMaximum = 7
+        view.drawLineChart(xAxisArray: xAxisArray(Days: 7) as NSArray,days: 7,xAxisData: recentDaysData(Days: 7))
+        view.addLimitLine(13, "限制线",UIColor.red)
         return view
     }()
 

@@ -14,7 +14,7 @@ class ChartHeaderView: UIView {
     // title
     private lazy var textLabel:UILabel = {
        let label = UILabel()
-        label.text = "Trend chart of blood sugar"
+        label.text = "Trend"
         label.textColor = UIColor.black
         label.font = UIFont.systemFont(ofSize: 18)
         return label
@@ -28,20 +28,22 @@ class ChartHeaderView: UIView {
     
     
     func setUpUI(){
-        self.addSubview(self.textLabel)
-        self.textLabel.snp.makeConstraints{ (make) in
-            make.left.equalToSuperview().offset(20)
-            make.height.equalTo(30)
-            make.width.equalTo(230)
-            make.centerY.equalTo(25)
-            
-        }
+        
         
         self.addSubview(self.titleImageView)
         self.titleImageView.snp.makeConstraints{ (make) in
-            make.left.equalTo(self.textLabel.snp.right)
-            make.height.width.equalTo(self.textLabel.snp.height)
-            make.centerY.equalTo(self.textLabel.snp.centerY)
+            make.left.equalToSuperview().offset(AJScreenWidth/15)
+            make.width.height.equalTo(30)
+            make.centerY.equalToSuperview()
+
+        }
+        
+        self.addSubview(self.textLabel)
+        self.textLabel.snp.makeConstraints{ (make) in
+            make.left.equalTo(titleImageView.snp.right).offset(AJScreenWidth/40)
+ 
+            make.bottom.height.equalTo(titleImageView)
+            
         }
     }
     
