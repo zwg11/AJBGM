@@ -11,6 +11,7 @@ target 'AIJian' do
   pod 'Charts'
   pod 'DNSPageView'
   pod 'SwiftDate'
+  pod 'SQLite.swift'
   # Pods for AIJian
 
 end
