@@ -26,6 +26,7 @@
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="glucoseInfos" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="class">
+        <attribute name="attribute" optional="YES" syncable="YES"/>
         <attribute name="brithday" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
@@ -40,7 +41,7 @@
         <relationship name="glucoseInfos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Glucose" inverseName="user" inverseEntity="Glucose" syncable="YES"/>
     </entity>
     <elements>
-        <element name="User" positionX="-647.9765625" positionY="-145.9609375" width="128" height="223"/>
         <element name="Glucose" positionX="-54" positionY="72" width="128" height="388"/>
+        <element name="User" positionX="-647.9765625" positionY="-145.9609375" width="128" height="238"/>
     </elements>
 </model>
