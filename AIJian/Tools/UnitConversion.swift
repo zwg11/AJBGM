@@ -27,7 +27,7 @@ public class UnitConversion{
     static func mmTomg(num:Double) -> Int {
         var a:Double = num
         a = num * 18.02
-        let num:Int = Int(a)
-        return num
+        let num1:Int = Int(a)
+        return num1
     }
 }

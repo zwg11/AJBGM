@@ -4,12 +4,16 @@
 //
 //  Created by ADMIN on 2019/8/9.
 //  Copyright © 2019 apple. All rights reserved.
-//
+//  总体的滑动视图，将其他的view加入到这个scrollview中
 
 import UIKit
 import SnapKit
 
 class InputView: UIView,UIScrollViewDelegate {
+    
+    var dateString:String?
+    var timeString:String?
+    
     
     enum pickerStyle {
         case date       // 日期
@@ -31,6 +35,7 @@ class InputView: UIView,UIScrollViewDelegate {
     
     var scrollView:UIScrollView = UIScrollView()
     
+    //第一部分：时间与日期
     private lazy var dateAndTime:dateAndTimeView = {
         let view = dateAndTimeView()
         view.setupUI()
@@ -39,7 +44,7 @@ class InputView: UIView,UIScrollViewDelegate {
         view.timeButton.addTarget(self, action: #selector(chooseTime), for: .touchUpInside)
         return view
     }()
-    
+    //组件：点击下弹窗
     lazy var picker:allPickerView = {
         let view = allPickerView()
         view.setupUI()
@@ -50,14 +55,16 @@ class InputView: UIView,UIScrollViewDelegate {
         return view
     }()
     
-    private lazy var glucose:glucoseView = {
+    //第二部分：血糖值和事件
+     lazy var glucose:glucoseView = {
         let view = glucoseView()
         view.setupUI()
         view.eventButton.addTarget(self, action: #selector(chooseOccurTime), for: .touchUpInside)
         return view
     }()
     
-    private lazy var porAndIns:portionAndInsulinView = {
+    //第三部分：进餐量与胰岛素
+     lazy var porAndIns:portionAndInsulinView = {
         let view = portionAndInsulinView()
         view.setupUI()
         view.portionButton.addTarget(self, action: #selector(choosePortion), for: .touchUpInside)
@@ -65,13 +72,15 @@ class InputView: UIView,UIScrollViewDelegate {
         return view
     }()
     
+    //第四部分：体重，身高，血压和药物
     lazy var bodyInfo:bodyInfoView = {
         let view = bodyInfoView()
         view.setupUI()
         return view
     }()
     
-    private lazy var sport:sportView = {
+    //第五部分：运动相关
+     lazy var sport:sportView = {
         let view = sportView()
         view.setupUI()
         view.sportButton.addTarget(self, action: #selector(chooseSport), for: .touchUpInside)
@@ -79,6 +88,7 @@ class InputView: UIView,UIScrollViewDelegate {
         return view
     }()
     
+    //第六部分：备注
     lazy var remark:remarkView = {
         let view = remarkView()
         view.setupUI()
@@ -92,12 +102,41 @@ class InputView: UIView,UIScrollViewDelegate {
         button.frame = CGRect(x: 0, y: 0, width: AJScreenWidth, height: AJScreenHeight)
         return button
     }()
+    //第七部分：左侧按钮
+      lazy var leftButton:UIButton = {
+        let leftButton = UIButton.init(type: .system)
+        leftButton.backgroundColor = UIColor.gray
+        leftButton.setTitle("取消", for: .normal)
+        leftButton.setTitleColor(UIColor.white, for: .normal)
+        leftButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        leftButton.layer.cornerRadius = 5
+        leftButton.layer.masksToBounds = true
+        return leftButton
+    }()
+    //第七部分：右侧按钮
+     lazy var rightButton:UIButton = {
+        let rightButton = UIButton.init(type: .system)
+        rightButton.backgroundColor = UIColor.gray
+        rightButton.setTitle("保存", for: .normal)
+        rightButton.setTitleColor(UIColor.white, for: .normal)
+        rightButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        rightButton.layer.cornerRadius = 5
+        rightButton.layer.masksToBounds = true
+        return rightButton
+    }()
     
+    
+    
+    //视图约束
     func setupUI() {
         self.backgroundColor = UIColor.white
         
+        //在这个地方对时间进行初始化
+        dateString = dateAndTime.dateButton.currentTitle
+        timeString = dateAndTime.timeButton.currentTitle
+        
         // 设置滚动视图属性
-        scrollView.contentSize = CGSize(width: AJScreenWidth, height: AJScreenWidth/15*41)
+        scrollView.contentSize = CGSize(width: AJScreenWidth, height: AJScreenWidth/15*43)
         scrollView.showsVerticalScrollIndicator = true
         scrollView.backgroundColor = UIColor.white
         
@@ -170,6 +209,24 @@ class InputView: UIView,UIScrollViewDelegate {
             make.left.right.equalTo(self)
             make.top.equalTo(sport.snp.bottom)
             make.height.equalTo(AJScreenWidth/4)
+        }
+        
+        //leftButton左侧按钮：取消
+        self.scrollView.addSubview(leftButton)
+        leftButton.snp.makeConstraints{ (make) in
+            make.left.equalTo(AJScreenWidth/2)
+            make.height.equalTo(AJScreenWidth/15*2)
+            make.width.equalTo(AJScreenWidth/2-4)
+            make.top.equalTo(remark.snp.bottom)
+        }
+   
+        //rightButton右侧按钮:保存
+        self.scrollView.addSubview(rightButton)
+        rightButton.snp.makeConstraints{ (make) in
+            make.right.equalTo(AJScreenWidth/2)
+            make.height.equalTo(AJScreenWidth/15*2)
+            make.width.equalTo(AJScreenWidth/2-4)
+            make.top.equalTo(remark.snp.bottom)
         }
         
         
@@ -346,6 +403,7 @@ class InputView: UIView,UIScrollViewDelegate {
             // 绑定一个时间选择器，并按格式返回时间
             let date = dateFormatter.string(from: picker.datePicker.date)
             dateAndTime.dateButton.setTitle(date, for: .normal)
+            dateString = date  //当用户选择日期时，进行赋值
             print(date)
         case .time:
             // 创建一个时间格式器
@@ -354,24 +412,25 @@ class InputView: UIView,UIScrollViewDelegate {
             dateFormatter.dateFormat="HH:mm"
             // 绑定一个时间选择器，并按格式返回时间
             let time = dateFormatter.string(from: picker.timePicker.date)
-            print(time)
             dateAndTime.timeButton.setTitle(time, for: .normal)
-            
+            timeString = time  //当用户选择时间时，进行赋值
+        //事件
         case .occurTime:
-            glucose.eventButton.setTitle(picker.eventStr, for: .normal)
-            
+            glucose.eventButton.setTitle(picker.eventStr ?? "Nothing", for: .normal)
+        //进餐量
         case .portions:
-            porAndIns.portionButton.setTitle(picker.portionStr, for: .normal)
+            porAndIns.portionButton.setTitle(picker.portionStr ?? "No Meal", for: .normal)
+        //胰岛素
         case .insulin:
-            porAndIns.insulinButton.setTitle(picker.insulinStr, for: .normal)
+            porAndIns.insulinButton.setTitle(picker.insulinStr ?? "Nothing", for: .normal)
             
             
         case .sport:
-            sport.sportButton.setTitle(picker.sportStr, for: .normal)
+            sport.sportButton.setTitle(picker.sportStr ?? "Nothing", for: .normal)
 //        case .exerintensity:
 //            sport.exerIntensityButton.setTitle(picker.exerItensityStr, for: .normal)
         default:
-            sport.exerIntensityButton.setTitle(picker.exerItensityStr, for: .normal)
+            sport.exerIntensityButton.setTitle(picker.exerItensityStr ?? "Nothing" , for: .normal)
             
         }
         UIView.animate(withDuration: 0.5, animations: dismiss)
@@ -415,6 +474,174 @@ class InputView: UIView,UIScrollViewDelegate {
         UIView.commitAnimations()
     }
     
+    /*********重新设置单位***************/
+    func resetUnit(){
+        //重新设置血糖单位
+        glucose.resetGlucoseUnit()
+        //重新设置血压和体重单位
+        bodyInfo.resetWeightAndPressureUnit()
+        
+    }
+    
+    /************************************************/
+    //时间和日期的设置和获取方法
+    func getData()->String{
+        return dateString!
+    }
+    
+    func setData(_ str:String){
+        dateAndTime.dateButton.setTitle(str, for: .normal)
+    }
+    
+    func getTime()->String{
+        return timeString!
+    }
+    
+    func setTime(_ str:String){
+        dateAndTime.timeButton.setTitle(str, for: .normal)
+    }
+    
+   
+    /************************************************/
+    //获取血糖值
+//    func getGlucoseValue()->Double{
+//        let glucoseValue = (Double(glucose.XTTextfield.text!))!
+//        return glucoseValue
+//    }
+//    //设置血糖值
+//    func setGlucoseValue(_ num:String){
+//        glucose.XTTextfield.text! = num
+//        glucose.XTSlider.value = Float(Double((Double(num))!))
+//    }
+    
+    //获取事件
+    func getEventValue()->String{
+        let str = glucose.eventButton.currentTitle!
+        return str
+    }
+    //设置事件
+    func setEventValue(_ str:String){
+        glucose.eventButton.setTitle(str, for: .normal)
+    }
+    /************************************************/
+    //获取进餐量
+    func getPorValue()->String{
+        let str = porAndIns.portionButton.currentTitle!
+        return str
+    }
+    //设置进餐量
+    func setPorValue(_ str:String){
+        porAndIns.portionButton.setTitle(str, for: .normal)
+    }
+    
+    //获取胰岛素类型
+    func getInsValue()->String{
+        let str = porAndIns.insulinButton.currentTitle!
+        return str
+    }
+    //设置胰岛素类型
+    func setInsValue(_ str:String){
+        porAndIns.insulinButton.setTitle(str, for: .normal)
+    }
+    //获取胰岛素量
+    func getInsNumValue()->Double{
+        let alert = CustomAlertController()
+        var a:Double? = 0
+        if porAndIns.insulinTextfield.text! != ""{
+            if FormatMethodUtil.validateBloodNumber(number: porAndIns.insulinTextfield.text!) == true{
+                a = Double(porAndIns.insulinTextfield.text!)!
+                return a!
+            }else{
+                alert.custom(UIViewController(), "Attention", "非法输入")
+            }
+        }
+        return a!
+    }
+    //设置胰岛素量
+    func setInsNumValue(_ str:String){
+       porAndIns.insulinTextfield.text! = str
+    }
+    /************************************************/
+    //获取体重值
+    func getWeightValue()->String{
+        let str = bodyInfo.weightTextfield.text!
+        return str
+    }
+    //设置体重值
+    func setWeightValue(_ str:String){
+        bodyInfo.weightTextfield.text! = str
+    }
+    //获取身高值
+    func getHeightValue()->String{
+        let str = bodyInfo.heightTextfield.text!
+        return str
+    }
+    //设置身高值
+    func setHeightValue(_ str:String){
+        bodyInfo.heightTextfield.text! = str
+    }
+    
+    //药物获取写到的alertViewController里面
+    
+    //得到运动类型
+    func getSportType()->String{
+        let a = sport.sportButton.currentTitle!
+        return a
+    }
+    //得到运动时间
+    func getSportTime()->String{
+        let a = sport.timeOfDurationTextfield.text!
+        return a
+    }
+    //得到运动强度
+    func getSportStrength()->String{
+        let a = sport.exerIntensityButton.currentTitle!
+        return a
+    }
+    
+    //设置运动类型
+    func setSportType()->String{
+        let a = sport.sportButton.currentTitle!
+        return a
+    }
+    //设置运动时间
+    func setSportTime()->String{
+        let a = sport.timeOfDurationTextfield.text!
+        return a
+    }
+    //设置运动强度
+    func setSportStrength()->String{
+        let a = sport.exerIntensityButton.currentTitle!
+        return a
+    }
+    
+    func getRemark(){
+        
+    }
     
     
+    
+    
+    
+    
+    /************************************************/
+    //获取收缩压
+    func getSysValue()->String{
+        let str = bodyInfo.blood_sysPressureTextfield.text!
+        return str
+    }
+    //设置收缩压
+    func setSysValue(_ str:String){
+        bodyInfo.blood_sysPressureTextfield.text! = str
+    }
+    //获取舒张压
+    func getDiaValue()->String{
+        let str = bodyInfo.blood_diaPressureTextfield.text!
+        return str
+    }
+    //设置舒张压
+    func setDiaValue(_ str:String){
+        bodyInfo.blood_diaPressureTextfield.text! = str
+    }
+    /************************************************/
 }

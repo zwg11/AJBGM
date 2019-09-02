@@ -24,17 +24,17 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
         return label
     }()
     // 体重值输入文本框
-    private lazy var weightTextfield:UITextField = {
+     lazy var weightTextfield:UITextField = {
         let textfield = UITextField()
         textfield.norStyle(placeholder: "")
-        textfield.keyboardType = .numbersAndPunctuation
+//        textfield.keyboardType = .numbersAndPunctuation
         textfield.textAlignment = .center
         //textfield.font = UIFont.systemFont(ofSize: 16)
         return textfield
     }()
     
     // 体重单位label
-    private lazy var weightUnitLabel:UILabel = {
+    private  var weightUnitLabel:UILabel = {
         let label = UILabel()
         label.normalLabel(text: "kg")
         label.font = UIFont.systemFont(ofSize: 16)
@@ -50,16 +50,17 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
         return imageView
     }()
     // 身高label
-    private lazy var heightLabel:UILabel = {
+     lazy var heightLabel:UILabel = {
         let label = UILabel()
         label.normalLabel(text: "身高")
         return label
     }()
     // 身高值输入文本框
-    private lazy var heightTextfield:UITextField = {
+     lazy var heightTextfield:UITextField = {
         let textfield = UITextField()
         textfield.norStyle(placeholder: "")
-        textfield.keyboardType = .numbersAndPunctuation
+        textfield.keyboardType = UIKeyboardType.decimalPad
+//        textfield.keyboardType = .numbersAndPunctuation
         textfield.textAlignment = .center
         //textfield.font = UIFont.systemFont(ofSize: 16)
         return textfield
@@ -88,19 +89,19 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
         return label
     }()
     // 收缩压 血压值输入文本框
-    private lazy var blood_sysPressureTextfield:UITextField = {
+     lazy var blood_sysPressureTextfield:UITextField = {
         let textfield = UITextField()
         textfield.norStyle(placeholder: "")
-        textfield.keyboardType = .numberPad
+//        textfield.keyboardType = .numberPad
         textfield.textAlignment = .center
         //textfield.font = UIFont.systemFont(ofSize: 16)
         return textfield
     }()
     // 舒张压 血压值输入文本框
-    private lazy var blood_diaPressureTextfield:UITextField = {
+     lazy var blood_diaPressureTextfield:UITextField = {
         let textfield = UITextField()
         textfield.norStyle(placeholder: "")
-        textfield.keyboardType = .numberPad
+//        textfield.keyboardType = .numberPad
         textfield.textAlignment = .center
         //textfield.font = UIFont.systemFont(ofSize: 16)
         return textfield
@@ -151,7 +152,7 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
         return button
     }()
     
-    // 药物编辑按钮
+    // 药物删除编辑按钮
     private lazy var medicineDeleteButton:UIButton = {
         let button = UIButton()
         button.NorStyle(title: "编辑")
@@ -329,5 +330,31 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    //重新设置单位
+    func resetWeightAndPressureUnit(){
+        //设置体重单位
+        if GetUnit.getWeightUnit() == "kg"{
+            self.weightUnitLabel.normalLabel(text: "kg")
+            self.weightTextfield.keyboardType = UIKeyboardType.decimalPad //弹出带小数点的文本框
+            
+            
+        }else{
+            self.weightUnitLabel.normalLabel(text: "lbs")
+            self.weightTextfield.keyboardType = UIKeyboardType.numberPad  //弹出不带小数点的文本框
+        }
+        //设置血压单位
+        if GetUnit.getPressureUnit() == "mmHg"{
+            self.bloodPressureUnitLabel.normalLabel(text: "mmHg")
+            //不能有小数
+            self.blood_sysPressureTextfield.keyboardType = UIKeyboardType.numberPad  //收缩压
+            self.blood_diaPressureTextfield.keyboardType = UIKeyboardType.numberPad  //舒张压
+        }else{
+            self.bloodPressureUnitLabel.normalLabel(text: "kPa")
+            //可以有小数
+            self.blood_sysPressureTextfield.keyboardType = UIKeyboardType.decimalPad
+            self.blood_diaPressureTextfield.keyboardType = UIKeyboardType.decimalPad
+        }
     }
 }

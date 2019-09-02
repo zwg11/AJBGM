@@ -11,8 +11,9 @@ import SnapKit
 
 class glucoseView: UIView ,UITextFieldDelegate{
 
-    // 记录h血糖值
-    var glucoseValue:Double = 0
+    // 记录血糖值
+    var glucoseValueMM:Double = 0
+    var glucoseValueMG:Int = 0
     //***********************血糖********************
     // 血糖图标
     private lazy var XTimageView:UIImageView = {
@@ -26,38 +27,41 @@ class glucoseView: UIView ,UITextFieldDelegate{
         label.normalLabel(text: "血糖")
         return label
     }()
-    // 血糖值输入文本框
-    private lazy var XTTextfield:UITextField = {
+    // 血糖值mmol/L小数输入文本框
+     lazy var XTTextfield:UITextField = {
         let textfield = UITextField()
         textfield.norStyle(placeholder: "")
-        textfield.keyboardType = .numbersAndPunctuation
         textfield.textAlignment = .center
         textfield.addTarget(self, action: #selector(tfvalueChange), for: UIControl.Event.editingChanged)
         textfield.font = UIFont.systemFont(ofSize: 20)
         return textfield
     }()
-    
+    //当这个输入框的值改变时
     @objc func tfvalueChange(){
         if XTTextfield.text != nil{
-            XTSlider.value = (XTTextfield.text! as NSString).floatValue
+            if GetUnit.getBloodUnit() == "mmol/L"{
+                XTSlider.value = (XTTextfield.text! as NSString).floatValue
+                glucoseValueMM = Double(XTSlider.value)
+            }else{
+                let a = (XTTextfield.text! as NSString).intValue
+                glucoseValueMG = Int(a)
+                XTSlider.value = Float(a)
+            }
         }
-        
     }
     // 血糖单位label
-    private lazy var XTUnitLabel:UILabel = {
+     lazy var XTUnitLabel:UILabel = {
         let label = UILabel()
-        label.normalLabel(text: "mmol/L")
+//        label.normalLabel(text: "mmol/L")
         label.font = UIFont.systemFont(ofSize: 16)
         
         return label
     }()
     
     // 血糖滑块
-    private lazy var XTSlider:UISlider = {
+     lazy var XTSlider:UISlider = {
         let slider = UISlider()
         slider.isContinuous = true
-        slider.minimumValue = 0.6
-        slider.maximumValue = 16.6
         slider.minimumTrackTintColor = UIColor.blue
         slider.maximumTrackTintColor = UIColor.white
         slider.addTarget(self, action: #selector(valueChange), for: UIControl.Event.valueChanged)
@@ -66,9 +70,13 @@ class glucoseView: UIView ,UITextFieldDelegate{
     }()
     // 血糖滑块的动作
     @objc func valueChange(){
-        glucoseValue = Double(XTSlider.value)
-        // 结果保留1位小数
-        XTTextfield.text = String(format:"%.1f",glucoseValue)
+        if GetUnit.getBloodUnit() == "mmol/L"{
+            glucoseValueMM = Double(XTSlider.value)
+            // 结果保留1位小数
+            XTTextfield.text = String(format:"%.1f",glucoseValueMM)
+        }else{
+            
+        }
     }
     // 滑块左侧 - 符号
     private lazy var reduceLabel:UILabel = {
@@ -201,4 +209,24 @@ class glucoseView: UIView ,UITextFieldDelegate{
         textField.resignFirstResponder()
         return true
     }
+    //设置单位
+    func resetGlucoseUnit(){
+        //设置血糖单位
+        if GetUnit.getBloodUnit() == "mmol/L"{
+            //设置单位
+            self.XTUnitLabel.normalLabel(text: "mmol/L")
+            //设置范围
+            self.XTSlider.minimumValue = 0.6
+            self.XTSlider.maximumValue = 16.6
+            self.XTTextfield.keyboardType = UIKeyboardType.decimalPad
+            
+        }else{
+            self.XTUnitLabel.normalLabel(text: "mg/dL")
+            //设置范围
+            self.XTSlider.minimumValue = 10
+            self.XTSlider.maximumValue = 300
+            self.XTTextfield.keyboardType = UIKeyboardType.numberPad
+        }
+    }
+    
 }

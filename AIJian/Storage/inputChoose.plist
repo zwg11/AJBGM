@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>exerIntensity</key>
+	<array>
+		<string>Nothing</string>
+		<string>Light</string>
+		<string>Medium</string>
+		<string>Hard</string>
+	</array>
+	<key>insulin</key>
+	<array>
+		<string>Nothing</string>
+		<string>胰岛素1通用追加</string>
+		<string>胰岛素2长秀霖</string>
+		<string>胰岛素3 20/80(预混)</string>
+		<string>编辑条目</string>
+	</array>
+	<key>remark</key>
+	<array/>
+	<key>sport</key>
+	<array>
+		<string>Nothing</string>
+		<string>Swimming</string>
+		<string>Running</string>
+		<string>Walking</string>
+		<string>Riding</string>
+		<string>Others</string>
+	</array>
+	<key>medicine</key>
+	<array>
+		<string>Asipirin</string>
+		<string>对乙酰氨基酚</string>
+	</array>
+	<key>portion</key>
+	<array>
+		<string>No Meal</string>
+		<string>Too Much</string>
+		<string>Normal</string>
+		<string>Little</string>
+	</array>
+	<key>event</key>
+	<array>
+		<string>Nothing</string>
+		<string>AfterMeal</string>
+		<string>BeforeMeal</string>
+		<string>AfterFasting</string>
+		<string>BeforeFasting</string>
+		<string>AfterDinner</string>
+		<string>BeforeDinner</string>
+		<string>AfterSnacks</string>
+		<string>BeforeSnacks</string>
+		<string>AfterNight</string>
+		<string>Empty</string>
+		<string>Other</string>
+	</array>
+</dict>
+</plist>

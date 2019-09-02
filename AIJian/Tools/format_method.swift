@@ -45,4 +45,37 @@ public class FormatMethodUtil{
         let numberTest:NSPredicate = NSPredicate(format: "SELF MATCHES %@", numberRegex)
         return numberTest.evaluate(with: number)
     }
+    //手动输入中，验证胰岛素输入量的为合法值的函数    小数点前后都是两位数
+    static func validateInsulinNum(number:String) -> Bool{
+        //表示前后都是两位
+        let insulinRegex = "[0-9]{0,2}\\.[0-9]{0,2}"
+        let insulinTest:NSPredicate = NSPredicate(format: "SELF MATCHES %@", insulinRegex)
+        return insulinTest.evaluate(with: number)
+    }
+    
+    //手动输入中，验证胰岛素输入量的为合法值的函数    小数点前后都是两位数
+    static func validateHeightNum(number:String) -> Bool{
+        //表示前后都是两位
+        let heightRegex = "[0-9]{0,3}\\.[0-9]{0,2}"
+        let heightTest:NSPredicate = NSPredicate(format: "SELF MATCHES %@", heightRegex)
+        return heightTest.evaluate(with: number)
+    }
+    
+    //校验体重合法值的函数   小数点前三位，小数点后一位
+    static func validateWeightKgNum(number:String) -> Bool{
+        //表示前后都是两位
+        let heightRegex = "[0-9]{1,3}\\.[0-9]{0,2}"
+        let heightTest:NSPredicate = NSPredicate(format: "SELF MATCHES %@", heightRegex)
+        return heightTest.evaluate(with: number)
+    }
+    //校验血压合法值的函数
+    static func validatePressNum(number:String) -> Bool{
+        //表示前后都是两位
+        let heightRegex = "[0-9]{1,3}\\.[0-9]{0,2}"
+        let heightTest:NSPredicate = NSPredicate(format: "SELF MATCHES %@", heightRegex)
+        return heightTest.evaluate(with: number)
+    }
+    //Double保留两位小数
+    
+    
 }

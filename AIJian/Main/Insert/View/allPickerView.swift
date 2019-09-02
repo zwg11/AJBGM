@@ -38,11 +38,11 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
 
     
     // 记录不同选择器选择的内容
-    var eventStr:String = String()
-    var portionStr:String = String()
-    var insulinStr:String = String()
-    var sportStr:String = String()
-    var exerItensityStr:String = String()
+    var eventStr:String?
+    var portionStr:String?
+    var insulinStr:String?
+    var sportStr:String?
+    var exerItensityStr:String?
 
     
     // 返回列数
@@ -52,17 +52,20 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
     // 返回行数,根据选择器的不同设置不同的行数
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch pickerView {
-            
+           
+         //事件
         case eventPicker:
             return event.count
-            
+        //进餐量
         case portionPicker:
             return portion.count
+        //胰岛素
         case insulinPicker:
             return insulin.count
-            
+        //运动
         case sportPicker:
             return sport.count
+        //运动强度
         case exerIntensyPicker:
             return exerIntensity.count
         default:
@@ -97,22 +100,25 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
     
     // 记录下每个选择器选择的内容
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        // s选择器停止转动时调用
+        //选择器停止转动时调用
         switch pickerView {
-            
+        //事件选择器
         case eventPicker:
             eventStr = event[eventPicker.selectedRow(inComponent: 0)] as! String
-            
+            print("事件选择器",eventStr)
+        //进餐量选择器
         case portionPicker:
-            portionStr = sport[sportPicker.selectedRow(inComponent: 0)] as! String
+            portionStr = portion[portionPicker.selectedRow(inComponent: 0)] as! String
+        //胰岛素选择器
         case insulinPicker:
             insulinStr = insulin[insulinPicker.selectedRow(inComponent: 0)] as! String
-            
+        //运动选择器
         case sportPicker:
             sportStr = sport[sportPicker.selectedRow(inComponent: 0)] as! String
+        //运动强度选择器（低，中，高）
         case exerIntensyPicker:
             exerItensityStr = exerIntensity[exerIntensyPicker.selectedRow(inComponent: 0)] as! String
-
+        //事件选择器
         default:
             print("error in picker didSelectRow.")
         }

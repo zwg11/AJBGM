@@ -27,7 +27,7 @@ class sportView: UIView ,UITextFieldDelegate{
     // 运动选择按钮
     lazy var sportButton:UIButton = {
         let button = UIButton()
-        button.NorStyle(title: "无")
+        button.NorStyle(title: "Nothing")
         return button
     }()
     //******************持续时间*****************
@@ -38,10 +38,11 @@ class sportView: UIView ,UITextFieldDelegate{
         return label
     }()
     // 持续时间输入文本框
-    private lazy var timeOfDurationTextfield:UITextField = {
+     lazy var timeOfDurationTextfield:UITextField = {
         let textfield = UITextField()
         textfield.norStyle(placeholder: "")
-        textfield.keyboardType = .numbersAndPunctuation
+//        textfield.keyboardType = .numbersAndPunctuation
+        textfield.keyboardType = UIKeyboardType.numberPad
         textfield.textAlignment = .center
         //textfield.font = UIFont.systemFont(ofSize: 16)
         return textfield

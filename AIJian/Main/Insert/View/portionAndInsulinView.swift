@@ -53,10 +53,10 @@ class portionAndInsulinView: UIView {
     }()
     
     // 胰岛素量输入文本框
-    private lazy var insulinTextfield:UITextField = {
+    lazy var insulinTextfield:UITextField = {
         let textfield = UITextField()
         textfield.norStyle(placeholder: "")
-        textfield.keyboardType = .numberPad
+        textfield.keyboardType = UIKeyboardType.decimalPad
         textfield.textAlignment = .center
         //textfield.font = UIFont.systemFont(ofSize: 16)
         return textfield
