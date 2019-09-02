@@ -25,29 +25,29 @@ public class DBSQLiteManager:NSObject{
     let country      = Expression<String?>("country")
     let phone_number = Expression<String?>("phone_number")
     
-    let blood_glucose_record           = Table("blood_glucose_record")
-    let blood_glucose_record_id        = Expression<Int64>("blood_glucose_record_id")  //血糖ID
-    let user_blood_id                  = Expression<Int64>("user_id")                  //用户ID
+    let glucose_record           = Table("glucose_record")
+    let glucose_record_id        = Expression<Int64>("glucose_record_id")  //血糖ID
+    let user_glucose_id                  = Expression<Int64>("user_id")                  //用户ID
     let create_time                    = Expression<String>("create_time")             //创建时间
     let detection_time                 = Expression<Int64?>("detection_time")  //探测时间段血糖检测时段（0-无，1-早餐前，2-早餐后，3-午餐前，4-午餐后，5-晚餐前，6-晚餐后，7-进食零食前，8-进食零食后，9-就寝前，10-空腹，11-其他）（0-255）
-    let blood_glucose_mmol             = Expression<Double>("blood_glucose_mmol")  //血糖值(mmol/L)
-    let blood_glucose_mg               = Expression<Double>("blood_glucose_mg")     //血糖值(mg/dL)
-    let eat_type                       = Expression<String>("eat_type")//进餐类型
+    let glucose_mmol             = Expression<Double>("glucose_mmol")  //血糖值(mmol/L)
+    let glucose_mg               = Expression<Int64>("glucose_mg")     //血糖值(mg/dL)
+    let eat_type                       = Expression<String?>("eat_type")//进餐类型
     let eat_num                        = Expression<Int64?>("eat_num")//进餐量---(0-无，1-小，2-中，3-大)
-    let insulin_type                   = Expression<String>("insulin_type")//胰岛素类型
-    let insulin_num                    = Expression<Double>("insulin_num")//胰岛素用量，单位U
-    let systolic_pressure_mmhg         = Expression<Int64>("systolic_pressure_mmhg")//收缩压(mmHg)
-    let diastolic_pressure_mmhg        = Expression<Int64>("diastolic_pressure_mmhg")//舒张压(mmHg)
-    let systolic_pressure_kpa          = Expression<Double>("systolic_pressure_kpa")
-    let diastolic_pressure_kpa         = Expression<Double>("diastolic_pressure_kpa")
+    let insulin_type                   = Expression<String?>("insulin_type")//胰岛素类型
+    let insulin_num                    = Expression<Double?>("insulin_num")//胰岛素用量，单位U
+    let systolic_pressure_mmhg         = Expression<Double?>("systolic_pressure_mmhg")//收缩压(mmHg)
+    let diastolic_pressure_mmhg        = Expression<Double?>("diastolic_pressure_mmhg")//舒张压(mmHg)
+    let systolic_pressure_kpa          = Expression<Double?>("systolic_pressure_kpa")
+    let diastolic_pressure_kpa         = Expression<Double?>("diastolic_pressure_kpa")
     let medicine                       = Expression<String?>("medicine")//药物
     let sport_type                     = Expression<String?>("sport_type")  //运动类型
-    let sport_time                     = Expression<Int64>("sport_time")//运动持续时间（单位：分）
-    let sport_strength                     = Expression<String?>("sport_strength")//运动强度(0-无，1-低，2-中，3-高)
+    let sport_time                     = Expression<Int64?>("sport_time")//运动持续时间（单位：分）
+    let sport_strength                 = Expression<Int64?>("sport_strength")//运动强度(0-无，1-低，2-中，3-高)
     let inputType                      = Expression<Int64?>("inputType")//该数据输入类型（0-蓝牙，1-手工）
     let remark                         = Expression<String?>("remark")//备注
     let record_type                    = Expression<Int64?>("record_type")//本条记录状态（1可见，0不可见）
-    let machine_id                     = Expression<String>("machine_id")//如果输入类型是机器，机器ID
+    let machine_id                     = Expression<String?>("machine_id")//如果输入类型是机器，机器ID
     
     
     
@@ -92,14 +92,14 @@ public class DBSQLiteManager:NSObject{
         })
         )
         
-        try! db.run(blood_glucose_record.create(temporary:false,ifNotExists: true,withoutRowid: false,block: { (t) in
-            t.column(blood_glucose_record_id,primaryKey: true)
-            t.column(user_blood_id,references:user,user_id)
-            //相当于外键，'user_blood_id' integer references 'user'('user_id')
+        try! db.run(glucose_record.create(temporary:false,ifNotExists: true,withoutRowid: false,block: { (t) in
+            t.column(glucose_record_id,primaryKey: true)
+            t.column(user_glucose_id,references:user,user_id)
+            //相当于外键，'user_id' integer references 'user'('user_id')
             t.column(create_time)
             t.column(detection_time)
-            t.column(blood_glucose_mmol)
-            t.column(blood_glucose_mg)
+            t.column(glucose_mmol)
+            t.column(glucose_mg)
             t.column(eat_type)
             t.column(eat_num)
             t.column(insulin_type)
@@ -120,12 +120,30 @@ public class DBSQLiteManager:NSObject{
         })
         )
     }
+    // MARK: - 由于对数据库的数据插入和更新，对应的值不能为nil
+    // 但在实际操作中对结构体中元素是否为空很不好判断
+    // 所以在此指定规则：
+    // （1）字符串插入或更新为nil时z设置默认值 ”“
+    // （2）数字插入或更新时为nil时z设置默认值为 -1
     //增加一条用户记录
     //直接传入带有用户user_id的用户对象，即可添加一条用户记录
     //可以插入为空的数据
     func addUserRecord(_ userObject:USER){
         let db = DBSQLiteManager.shareManager().openDB()
-        try! db.run(user.insert(or: .replace, user_id <- userObject.user_id!,email <- userObject.email!,token <- userObject.token!,user_name <- userObject.user_name,head_img <- userObject.head_img!,gender <- userObject.gender!,birthday <- userObject.birthday!,height <- userObject.height,weight_kg <- userObject.weight_kg!,weight_lbs <- userObject.weight_lbs!,country <- userObject.country!,phone_number <- userObject.phone_number!))
+        try! db.run(user.insert(or: .replace
+            , user_id <- userObject.user_id!
+            ,email <- userObject.email!
+            ,token <- userObject.token!
+            ,user_name <- userObject.user_name
+            ,head_img <- userObject.head_img
+            ,gender <- userObject.gender
+            ,birthday <- userObject.birthday
+            ,height <- userObject.height
+            ,weight_kg <- userObject.weight_kg
+            ,weight_lbs <- userObject.weight_lbs
+            ,country <- userObject.country
+            ,phone_number <- userObject.phone_number
+        ))
         print("成功增加一条用户信息")
     }
     //删除一条用户记录
@@ -143,7 +161,8 @@ public class DBSQLiteManager:NSObject{
     //直接输入一个USER的对象，即可更新为传过来的对象内容
     func updateUserRecord(_ userObject:USER){
         let db = DBSQLiteManager.shareManager().openDB()
-        try! db.run(user.update( user_id <- userObject.user_id!,email <- userObject.email!,user_name <- userObject.user_name,head_img <- userObject.head_img!,gender <- userObject.gender!,birthday <- userObject.birthday!,height <- userObject.height,weight_kg <- userObject.weight_kg!,weight_lbs <- userObject.weight_lbs!,country <- userObject.country!,phone_number <- userObject.phone_number!))
+        let updateData = user.filter(user_id == userObject.user_id!)
+        try! db.run(updateData.update( user_id <- userObject.user_id!,email <- userObject.email!,user_name <- userObject.user_name,head_img <- userObject.head_img!,gender <- userObject.gender!,birthday <- userObject.birthday!,height <- userObject.height,weight_kg <- userObject.weight_kg!,weight_lbs <- userObject.weight_lbs!,country <- userObject.country!,phone_number <- userObject.phone_number!))
         print("成功更新一条用户信息")
     }
     
@@ -199,23 +218,185 @@ public class DBSQLiteManager:NSObject{
     }
     
     
-    //增加一条血糖记录
-    func addBloodRecord(){
+    // 增加血糖记录
+    // 在数据变化或增加时，向服务器请求数据后
+    // 将数据添加到数据库，或替换原有数据
+    func addGlucoseRecords(add:[glucoseDate]){
+        let db = DBSQLiteManager.shareManager().openDB()
+
+        for i in add{
+            try! db.run(glucose_record.insert(or: .replace
+                ,glucose_record_id <- i.bloodGlucoseRecordId!
+                ,user_glucose_id <- i.userId!
+                ,create_time <- i.createTime!
+                ,detection_time <- i.detectionTime
+                ,glucose_mmol <- i.bloodGlucoseMmol!
+                ,glucose_mg <- i.bloodGlucoseMg!
+                ,eat_type <- i.eatType
+                ,eat_num <- i.eatNum
+                ,insulin_type <- i.insulinType
+                ,insulin_num <- i.insulinNum
+                ,systolic_pressure_mmhg <- i.systolicPressureMmhg
+                ,diastolic_pressure_mmhg <- i.diastolicPressureMmhg
+                ,systolic_pressure_kpa <- i.systolicPressureKpa
+                ,diastolic_pressure_kpa <- i.diastolicPressureKpa
+                ,medicine <- i.medicine
+                ,sport_type <- i.sportType
+                ,sport_time <- i.sportTime
+                ,sport_strength <- i.sportStrength
+                ,inputType <- i.inputType
+                ,remark <- i.remark
+                ,record_type <- i.recordType
+                ,machine_id <- i.machineId
+            ))
+            print("添加一条记录")
+        }
         
     }
     //删除一条血糖记录
-    func deleteBloodRecord(){
-        
+    func deleteGlucoseRecord(_ glucoseId:Int64){
+        let db = DBSQLiteManager.shareManager().openDB()
+
+        let query = glucose_record.filter(glucose_record_id == glucoseId)
+        do {
+            // DELETE FROM "glucose_record" WHERE ("glucose_record_id" = glucoseId)
+            if try db.run(query.delete()) > 0{
+                print("删除记录成功")
+            }else{
+                print("未找到对应记录")
+            }
+        }catch{
+            print("删除失败:\(error)")
+        }
     }
     //更新一条血糖记录
-    func updateBloodRecord(){
+    func updateGlucoseRecord(data:glucoseDate){
+        let db = DBSQLiteManager.shareManager().openDB()
+        // SELECT * FROM glucose_record WHERE
+        // "user_glucose_id" == data.userId AND "glucose_record_id" == data.bloodGlucoseRecordId
+        let record = glucose_record.filter(user_glucose_id == data.userId! && glucose_record_id == data.bloodGlucoseRecordId!)
+        do{
+            // update data,if failer,it will print error information
+            if try db.run(record.update(glucose_record_id <- data.bloodGlucoseRecordId!
+                ,user_glucose_id <- data.userId!
+                ,create_time <- data.createTime!
+                ,detection_time <- data.detectionTime
+                ,glucose_mmol <- data.bloodGlucoseMmol!
+                ,glucose_mg <- data.bloodGlucoseMg!
+                ,eat_type <- data.eatType
+                ,eat_num <- data.eatNum
+                ,insulin_type <- data.insulinType
+                ,insulin_num <- data.insulinNum
+                ,systolic_pressure_mmhg <- data.systolicPressureMmhg
+                ,diastolic_pressure_mmhg <- data.diastolicPressureMmhg
+                ,systolic_pressure_kpa <- data.systolicPressureKpa
+                ,diastolic_pressure_kpa <- data.diastolicPressureKpa
+                ,medicine <- data.medicine
+                ,sport_type <- data.sportType
+                ,sport_time <- data.sportTime
+                ,sport_strength <- data.sportStrength
+                ,inputType <- data.inputType
+                ,remark <- data.remark
+                ,record_type <- data.recordType
+                ,machine_id <- data.machineId
+            )) > 0{
+                print("UPDATE record")
+            }else{
+                print("record NOT FOUND")
+            }
+        }catch{
+            print("UPDATE FAILED:\(error)")
+        }
         
     }
-    //查询一条血糖记录
-    func selectBloodRecord() {
+    //查询一条最新血糖记录
+    func selectLastGlucoseRecord(_ userId:Int64) -> glucoseDate{
+        let db = DBSQLiteManager.shareManager().openDB()
+        var dataGlucose = glucoseDate()
+        // 数据库中的数据按 create_time 降序排列,注意过滤用户
+        let query = glucose_record.order(create_time.desc).filter(user_id == userId)
+        // SELECT FROM query LIMIT 1
+        if let record = try! db.pluck(query){
+            dataGlucose.bloodGlucoseRecordId  = record[glucose_record_id]
+            dataGlucose.userId                = record[user_glucose_id]
+            dataGlucose.createTime            = record[create_time]
+            dataGlucose.detectionTime         = record[detection_time]
+            dataGlucose.bloodGlucoseMmol      = record[glucose_mmol]
+            dataGlucose.bloodGlucoseMg        = record[glucose_mg]
+            dataGlucose.eatType               = record[eat_type]
+            dataGlucose.eatNum                = record[eat_num]
+            dataGlucose.insulinType           = record[insulin_type]
+            dataGlucose.insulinNum            = record[insulin_num]
+            dataGlucose.systolicPressureMmhg  = record[systolic_pressure_mmhg]
+            dataGlucose.systolicPressureKpa   = record[systolic_pressure_kpa]
+            dataGlucose.diastolicPressureMmhg = record[diastolic_pressure_mmhg]
+            dataGlucose.diastolicPressureKpa  = record[diastolic_pressure_kpa]
+            dataGlucose.medicine              = record[medicine]
+            dataGlucose.sportType             = record[sport_type]
+            dataGlucose.sportTime             = record[sport_time]
+            dataGlucose.sportStrength         = record[sport_strength]
+            dataGlucose.inputType             = record[inputType]
+            dataGlucose.remark                = record[remark]
+            dataGlucose.recordType            = record[record_type]
+            dataGlucose.machineId             = record[machine_id]
+        }
+        return dataGlucose
         
     }
     
+    // 查询某一时间范围的血糖记录
+    func selectGlucoseRecordInRange(start:Date,end:Date,userId:Int64) -> [glucoseDate]{
+        let db = DBSQLiteManager.shareManager().openDB()
+        // 由于数据库中的 create_time 为字符串，这里要将时间转为字符串
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        // 此处在日期转字符串时完了8小时
+        let st = dateFormatter.string(from: start)
+        let en = dateFormatter.string(from: end)
+        var datasOfGlucose:[glucoseDate] = []
+        
+        for record in try! db.prepare(glucose_record){
+            print(record[create_time])
+        }
+        // SELECT * FROM glucose_record WHERE BETWEEN (st,en) ORDERED BY DESCENDING
+        let query = glucose_record.filter(create_time < en && create_time >= st).order(create_time.desc)
+        do{
+            for record in try db.prepare(query){
+                print(record[create_time])
+                var dataGlucose:glucoseDate = glucoseDate()
+                dataGlucose.bloodGlucoseRecordId  = record[glucose_record_id]
+                dataGlucose.userId                = record[user_glucose_id]
+                dataGlucose.createTime            = record[create_time]
+                dataGlucose.detectionTime         = record[detection_time]
+                dataGlucose.bloodGlucoseMmol      = record[glucose_mmol]
+                dataGlucose.bloodGlucoseMg        = record[glucose_mg]
+                dataGlucose.eatType               = record[eat_type]
+                dataGlucose.eatNum                = record[eat_num]
+                dataGlucose.insulinType           = record[insulin_type]
+                dataGlucose.insulinNum            = record[insulin_num]
+                dataGlucose.systolicPressureMmhg  = record[systolic_pressure_mmhg]
+                dataGlucose.systolicPressureKpa   = record[systolic_pressure_kpa]
+                dataGlucose.diastolicPressureMmhg = record[diastolic_pressure_mmhg]
+                dataGlucose.diastolicPressureKpa  = record[diastolic_pressure_kpa]
+                dataGlucose.medicine              = record[medicine]
+                dataGlucose.sportType             = record[sport_type]
+                dataGlucose.sportTime             = record[sport_time]
+                dataGlucose.sportStrength         = record[sport_strength]
+                dataGlucose.inputType             = record[inputType]
+                dataGlucose.remark                = record[remark]
+                dataGlucose.recordType            = record[record_type]
+                dataGlucose.machineId             = record[machine_id]
+                
+                
+                datasOfGlucose.append(dataGlucose)
+            }
+        }
+        catch{
+            print("no record")
+        }
+        return datasOfGlucose
+        
+    }
     
     //    //关闭数据库
     //    func  closeDB(){

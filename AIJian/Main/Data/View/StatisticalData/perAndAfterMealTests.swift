@@ -149,19 +149,26 @@ class perAndAfterMealTests: UIView {
         return label
     }()
     
+    // 设置label显示内容
+    // 根据style的不同显示不同的标题和label内容
+    func setupLabel(){
+        // 初始化 检测次数，根据detectionTime处理数据
+        checkInit()
+        switch style {
+        case .total:
+            totalInit()
+        case .perMeal:
+            perMealInit()
+        default:
+            afterMealInit()
+        }
+    }
     
     
     // MARK: - 设置所有部件的布局约束
+    // setupUI() start
     func setupUI(){
-        // 设置标题显示内容，根据style的不同显示不同的标题
-        switch style {
-        case .total:
-            checkViewTitle.text = String("Total - 0 tests")
-        case .perMeal:
-            checkViewTitle.text = String("PerMeal - 0 tests")
-        default:
-            checkViewTitle.text = String("AfterMeal - 0 tests")
-        }
+        
         
         // 设置 标题 布局
         self.addSubview(checkViewTitle)
@@ -338,5 +345,154 @@ class perAndAfterMealTests: UIView {
             
         }
         
+        
+        
+    }// setupUI() end
+    
+    // 用于记录饭前、总体饭后检测次数
+    var perMealNum:Int = 0
+    var perMealData:[glucoseDate] = []
+    var totalNum:Int = 0
+    var afterMealNum:Int = 0
+    var afterMealData:[glucoseDate] = []
+    // 检测视图检测次数初始化
+    func checkInit(){
+        perMealNum = 0
+        afterMealNum = 0
+        var per:[glucoseDate] = []
+        var after:[glucoseDate] = []
+        totalNum = sortedByDateOfData!.count
+        if totalNum > 0{
+            for i in sortedByDateOfData!{
+                switch i.detectionTime{
+                case 1,3,5,7:
+                    perMealNum += 1
+                    per.append(i)
+                case 2,4,6,8:
+                    afterMealNum += 1
+                    after.append(i)
+                default:
+                    print("")
+                    
+                }
+            }
+            perMealData = per
+            afterMealData = after
+        }
+    }
+    // 总体检测视图内容初始化
+    func totalInit(){
+        checkViewTitle.text = "Total - \(totalNum) Tests"
+        var low = 0     // 低血糖
+        var lower = 0   // 低于
+        var normal = 0  // 正常
+        var high = 0    // 高于
+        // 遍历数据，根据范围得到对应的次数
+        if totalNum > 0{
+            for i in sortedByDateOfData!{
+                if i.bloodGlucoseMmol! < 15.0{
+                    low += 1
+                }else if i.bloodGlucoseMmol! < 20{
+                    
+                    lower += 1
+                }else if i.bloodGlucoseMmol! < 30{
+                    
+                    normal += 1
+                }else{
+                    high += 1
+                }
+            }
+        }
+        
+        // 初始化label，如果有数据则初始化，没有就全为0
+        initLabel(low: low, lower: lower, normal: normal, high: high, total: totalNum)
+    }
+    // 餐前检测视图内容初始化
+    func perMealInit(){
+        checkViewTitle.text = "Before Meal - \(perMealNum) Tests"
+        
+        var low = 0     // 低血糖
+        var lower = 0   // 低于
+        var normal = 0  // 正常
+        var high = 0    // 高于
+        // 遍历餐前数据，根据范围得到对应的次数
+        if perMealNum > 0{
+            for i in perMealData{
+                if i.bloodGlucoseMmol! < 15.0{
+                    low += 1
+                }else if i.bloodGlucoseMmol! < 20{
+                    
+                    lower += 1
+                }else if i.bloodGlucoseMmol! < 30{
+                    
+                    normal += 1
+                }else{
+                    high += 1
+                }
+            }
+        }
+        
+        // 初始化label，如果有数据则初始化，没有就全为0
+        initLabel(low: low, lower: lower, normal: normal, high: high, total: perMealNum)
+    }
+    // 餐后检测视图内容初始化
+    func afterMealInit(){
+        checkViewTitle.text = "After Meal - \(afterMealNum) Tests"
+        var low = 0     // 低血糖
+        var lower = 0   // 低于
+        var normal = 0  // 正常
+        var high = 0    // 高于
+        // 遍历餐后数据，根据范围得到对应的次数
+        if afterMealNum > 0{
+            for i in afterMealData{
+                if i.bloodGlucoseMmol! < 15.0{
+                    low += 1
+                }else if i.bloodGlucoseMmol! < 20{
+                    
+                    lower += 1
+                }else if i.bloodGlucoseMmol! < 30{
+                    
+                    normal += 1
+                }else{
+                    high += 1
+                }
+            }
+        }
+        // 初始化label，如果有数据则初始化，没有就全为0
+        initLabel(low: low, lower: lower, normal: normal, high: high, total: afterMealNum)
+    }
+    // 初始化label
+    func initLabel(low:Int,lower:Int,normal:Int,high:Int,total:Int){
+        initLabelToZero()
+        if total > 0{
+            if low > 0{
+                lowValue.text = "\(low)"
+                lowPercent.text = String(Int(Double(low)/Double(total)*100)) + "%"
+            }
+            if lower > 0{
+                lowerNormalValue.text = "\(lower)"
+                lowerNormalPercent.text = String(Int(Double(lower)/Double(total)*100)) + "%"
+            }
+            if normal > 0{
+                normalValue.text = "\(normal)"
+                normalPercent.text = String(Int(Double(normal)/Double(total)*100)) + "%"
+            }
+            if low > 0{
+                higherNormalValue.text = "\(high)"
+                higherNormalPercent.text = String(Int(Double(high)/Double(total)*100)) + "%"
+            }
+        }
+    }
+    
+    // 将label全初始化为0
+    func initLabelToZero(){
+        lowValue.text = "0"
+        lowPercent.text = "0%"
+        lowerNormalValue.text = "0"
+        lowerNormalPercent.text = "0%"
+        normalValue.text = "0"
+        normalPercent.text = "0%"
+        higherNormalValue.text = "0"
+        higherNormalPercent.text = "0%"
     }
 }

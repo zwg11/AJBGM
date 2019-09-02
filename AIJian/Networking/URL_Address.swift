@@ -6,6 +6,8 @@
 
 let BASE_URL = "http://10.65.1.213:8080/"
 
+let OTHER_URL = "http://120.78.167.239:8080/"
+
 //登录api
 let Login_api =  BASE_URL + "app/login"
 
@@ -30,3 +32,6 @@ let UserFeedback = BASE_URL + "app/user/feedback"
 
 //已经登录之后的密码修改
 let PasswdReset = BASE_URL + "app/passwordReset"
+
+// 请求数据
+let REQUEST_DATA_URL = OTHER_URL + "app/bloodGlucoseRecord/queryRecord"
