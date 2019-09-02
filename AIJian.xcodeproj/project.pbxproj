@@ -95,11 +95,10 @@
 		DED73D531E1A93CEAA15FA41DA1EA16F /* inputChoose.plist in Resources */ = {isa = PBXBuildFile; fileRef = 327249D87EBD50F9CA3CF88F34F49D5F /* inputChoose.plist */; };
 		E74705A4B4520AF2BB983AE3A49DEDCB /* totalCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944C88A1CC67791001D6E2AB70AF8DE /* totalCheckView.swift */; };
 		EB124FCC433EB346A85B636F483673B3 /* loginNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D59532ACFD02776540EC329BDAE9813 /* loginNavigationController.swift */; };
-<<<<<<< HEAD
-=======
+
 		ED175445285BB026FA95BC133E8DB41B /* inputChoose.plist in Resources */ = {isa = PBXBuildFile; fileRef = E465CCDDB70749AEEDF3BC6DA3A03EE3 /* inputChoose.plist */; };
 		F0A6F0F1CF20A1EA46FA373138B695E8 /* customRangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE202E3593E8C04C492C3EE879A1902 /* customRangeView.swift */; };
->>>>>>> 4c181f9dc0727422f3c59ec1e159288891f2a1ea
+
 		F0CC7B621011F02A6C445F2D4CFD4002 /* AJTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2549D6C67890470A3C4246AC4EF841 /* AJTabbarController.swift */; };
 		F0DAF1CF8A457C4B9BC70BD93C0596F3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2493D86F57E107E55042AE03E1128300 /* ViewController.swift */; };
 		F1647D90FE006C35DDD2C91362D4AE2F /* URL_Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3F1C67C1613AC9C10DED88BFBF2E7D /* URL_Address.swift */; };
@@ -142,11 +141,11 @@
 		367F547FD8A2D05AB23C071F7752C480 /* defaultBloodSetting.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaultBloodSetting.plist; sourceTree = "<group>"; };
 		3ACDB27DDBFA6BA1FEA8A6864CE435C5 /* NSDate+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSDate+Date.swift"; sourceTree = "<group>"; };
 		3B122EE08303781538E0581FB9B0AF84 /* AJMineHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AJMineHeaderView.swift; sourceTree = "<group>"; };
-<<<<<<< HEAD
+
 		3C5E47CB62AAB8FA3205A5903BDDA347 /* PressureUnitChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressureUnitChange.swift; sourceTree = "<group>"; };
-=======
+
 		3DD4A500110CCA25E61A95066330D220 /* dateRangePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dateRangePickerView.swift; sourceTree = "<group>"; };
->>>>>>> 4c181f9dc0727422f3c59ec1e159288891f2a1ea
+
 		41BAE5242D4EA9B456D06DAC9947B1AB /* bodyInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = bodyInfoView.swift; sourceTree = "<group>"; };
 		41EF5D8FD2B9D003CECE58B3F112A42B /* theLastCheckView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = theLastCheckView.swift; path = AIJian/Main/Home/theLastCheckView.swift; sourceTree = SOURCE_ROOT; };
 		428DE12BF8AED7060D2DACBB1BDB9E15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -209,11 +208,10 @@
 		DE608F63498A45B84C3679D6251C8601 /* BHJPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BHJPickerView.swift; sourceTree = "<group>"; };
 		DFF8BC16AAE563F372E92457F2E7AAC1 /* GetUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUnit.swift; sourceTree = "<group>"; };
 		E052E7AE76BD935D91BC473CA6AE9623 /* AJNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AJNavigationController.swift; sourceTree = "<group>"; };
-<<<<<<< HEAD
-=======
+
 		E465CCDDB70749AEEDF3BC6DA3A03EE3 /* inputChoose.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = inputChoose.plist; sourceTree = "<group>"; };
 		E59A10BC763D4D5E27D2541D481F5390 /* GetSortedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSortedData.swift; sourceTree = "<group>"; };
->>>>>>> 4c181f9dc0727422f3c59ec1e159288891f2a1ea
+
 		E731F2F93D9C7386E8E695DA24772AFA /* VersionUViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionUViewController.swift; sourceTree = "<group>"; };
 		E7D6B7CCDE92018CDCC88D28D843A752 /* AJGuidePageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AJGuidePageView.swift; sourceTree = "<group>"; };
 		E92B055FDB94E9B3CE4F1214F3F6A1DC /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
@@ -652,12 +650,12 @@
 				114081AB7B0ED40CD96B4D28D031951A /* GetBloodLimit.swift */,
 				E59A10BC763D4D5E27D2541D481F5390 /* GetSortedData.swift */,
 				DFF8BC16AAE563F372E92457F2E7AAC1 /* GetUnit.swift */,
-<<<<<<< HEAD
+
 				8FEA8DF68F3C84CF024089E90716B37E /* IntensityChange.swift */,
 				3C5E47CB62AAB8FA3205A5903BDDA347 /* PressureUnitChange.swift */,
-=======
+
 				00D287CC8A0FC80342CF6F1B6AC824DD /* GetUserInfo.swift */,
->>>>>>> 4c181f9dc0727422f3c59ec1e159288891f2a1ea
+
 				7250934CF2E058D7C85B4FC0C9FFCED6 /* UnitConversion.swift */,
 				067A7A62F94650792A578D0D5BE6D1BE /* WeightUnitChange.swift */,
 				8AD251DA1D7683298B03830243680EC8 /* format_method.swift */,
