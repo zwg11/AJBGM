@@ -41,10 +41,35 @@ class HomeViewController: UIViewController {
         return view
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+//        // 初始化用户信息
+//        getUserInfo()
+//        // 向数据库插入用户信息
+//        let sqliteManager = DBSQLiteManager()
+//        sqliteManager.createTable()
+//        var user1 = USER()
+//        user1.user_id = userId!
+//        user1.token = token
+//        user1.email = "zzmmshang@qq.com"
+//        sqliteManager.addUserRecord(user1)
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        requestData(day: 7)
+        // 初始化用户信息
+        getUserInfo()
+        // 向数据库插入用户信息
+        let sqliteManager = DBSQLiteManager()
+        sqliteManager.createTable()
+        var user1 = USER()
+        user1.user_id = userId!
+        user1.token = token
+        user1.email = "zzmmshang@qq.com"
+        sqliteManager.addUserRecord(user1)
+        
+        requestData(day: 30)
         
         self.view.backgroundColor = UIColor.white
         
@@ -88,10 +113,12 @@ class HomeViewController: UIViewController {
     func requestData(day:Int){
         //********
         let day = day
-        let userId = 6
-        let dicStr:Dictionary = ["day":day,"userId":userId,"token":token] as [String : Any]
+        let usr_id = userId!
+        let tk = token
+        // 设置信息请求字典
+        let dicStr:Dictionary = ["day":day,"userId":usr_id,"token":tk] as [String : Any]
         print(dicStr)
-        // 请求数据，请求信息如上c字典
+        // 请求数据，请求信息如上字典
         Alamofire.request(REQUEST_DATA_URL,method: .post,parameters: dicStr).responseString{ (response) in
             if response.result.isSuccess {
                 print("收到回复")
@@ -104,39 +131,26 @@ class HomeViewController: UIViewController {
                      利用JSONDeserializer封装成一个对象。然后再把这个对象解析为
                      */
                     if let recordInDaysResponse = JSONDeserializer<recordInDaysResponse>.deserializeFrom(json: jsonString) {
-                        // 数据按 创建时间降序 排列，将结果赋值给一个数组
-                        sortedByDateOfData = recordInDaysResponse.data?.sorted(by: {(data1,data2) -> Bool in
-                            return data1.createTime!.toDate()!.date > data2.createTime!.toDate()!.date
-                        })
-//                        for x in sortedByDateOfData!{
-//                            print("********sortedByDateOfData*********")
-//                            print(x.createTime)
-//                        }
-
-                        // 将排好序的数据进行处理，得到我们想要的数组，用于表格显示
-                        sortedTimeOfData()
-                        
-                        // 为画图表，提取含有血糖值的数据，只提取时间和血糖值
-                        for i in recordInDaysResponse.data!{
-                            
-                            // 只有在有血糖数据时才导入
-                            if let value = i.bloodGlucoseMmol{
-                                //glucoseValue.append(value)
-                                let date11 = i.createTime!.toDate()?.date
-                                glucoseTime.append(date11!)
-                                glucoseTimeAndValue.updateValue(value, forKey: date11!)
-                                
-                            }
+                        // 如果 返回信息说明 请求数据失败，则弹出警示框宝报错
+                        if recordInDaysResponse.code != 1{
+                            print(recordInDaysResponse.code)
+                            let alert = CustomAlertController()
+                            alert.custom(self, "警告", "\(recordInDaysResponse.msg!)")
+                            return
                         }
+                        
+                        // ******** 将得到的所有数据都添加到数据库 ***********
+                        let sqliteManager = DBSQLiteManager()
+                        // 创建表
+                        sqliteManager.createTable()
+                        // 如果服务器中有对应用户的数据，将数据添加到数据库
+                        if recordInDaysResponse.data != nil{
+                            sqliteManager.addGlucoseRecords(add: recordInDaysResponse.data!)
+                        }
+                        
                         // 改变值刷新UI
                         self.reload = "reload"
                     }
-//                    print("**********glucoseValue**********")
-//                    print(glucoseValue)
-//                    print("**********glucoseTime**********")
-//                    print(glucoseTime)
-//                    print("**********glucoseTimeAndValue**********")
-//                    print(glucoseTimeAndValue)
                 } 
             }
         }

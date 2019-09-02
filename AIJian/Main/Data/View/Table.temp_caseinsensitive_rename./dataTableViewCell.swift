@@ -30,12 +30,12 @@ class dataTableViewCell: UITableViewCell {
         self.init(style: style, reuseIdentifier: reuseIdentifier)
         
         glucoseLabel.text = (sortedData[secion][row].bloodGlucoseMmol != nil) ? String(sortedData[secion][row].bloodGlucoseMmol!):"-"
-        eventLabel.text = (sortedData[secion][row].weightKg != nil) ? String(sortedData[secion][row].bloodGlucoseMmol!):"-"
-        appetiteLabel.text = (sortedData[secion][row].eatType != nil) ? String(sortedData[secion][row].eatNum!):"-"
+        eventLabel.text = (sortedData[secion][row].eatType != nil) ? String(sortedData[secion][row].eatType!):"-"
+        appetiteLabel.text = (sortedData[secion][row].eatNum != nil) ? String(sortedData[secion][row].eatNum!):"-"
         isulinLabel.text = (sortedData[secion][row].insulinType != nil) ? String(sortedData[secion][row].insulinNum!):"-"
         
         weightLabel.text = (sortedData[secion][row].weightKg != nil) ? String(sortedData[secion][row].weightKg!):"-"
-        bloodPressureLabel.text = (sortedData[secion][row].weightKg != nil) ? String(sortedData[secion][row].systolicPressureMmhg!) + "/" + String(sortedData[secion][row].diastolicPressureMnhg!):"-"
+        bloodPressureLabel.text = (sortedData[secion][row].systolicPressureMmhg != nil) ? String(sortedData[secion][row].systolicPressureMmhg!) + "/" + String(sortedData[secion][row].diastolicPressureMmhg!):"-"
         medicineLabel.text = sortedData[secion][row].medicine ?? "-"
         if sortedData[secion][row].sportTime != nil{
             sportLabel.text = String(sortedData[secion][row].sportType!) + "\n" + String(sortedData[secion][row].sportTime!)

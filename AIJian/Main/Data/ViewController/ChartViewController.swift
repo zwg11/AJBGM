@@ -9,6 +9,7 @@
 import UIKit
 
 class ChartViewController: UIViewController {
+    
     private lazy var headerView:ChartHeaderView = {
         let view = ChartHeaderView()
         view.backgroundColor = UIColor.white
@@ -16,13 +17,11 @@ class ChartViewController: UIViewController {
         return view
     }()
     
-    private lazy var lineChartView:ChartView = {
+    lazy var lineChartView:ChartView = {
         let view = ChartView()
-        view.backgroundColor = UIColor.red
         view.setupUI()
-        view.lineChartView.xAxis.axisMaximum = 7
-        view.drawLineChart(xAxisArray: xAxisArray(Days: 7) as NSArray,days: 7,xAxisData: recentDaysData(Days: 7))
-        view.addLimitLine(13, "限制线",UIColor.red)
+
+        view.lineChartView.xAxis.labelCount = 4
         return view
     }()
 
@@ -41,7 +40,7 @@ class ChartViewController: UIViewController {
         self.lineChartView.snp.makeConstraints{(make) in
             make.left.equalToSuperview().offset(AJScreenWidth/30)
             make.right.equalToSuperview().offset(-AJScreenWidth/30)
-
+            
             make.top.equalTo(self.headerView.snp.bottom)
             if #available(iOS 11.0, *) {
                 make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
@@ -51,24 +50,56 @@ class ChartViewController: UIViewController {
             }
             
         }
+        
         self.view.backgroundColor = UIColor.init(red: 255/255.0, green: 251/255.0, blue: 186/255.0, alpha: 1)
         // Do any additional setup after loading the view.
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(test), name: NSNotification.Name(rawValue: "reload"), object: nil)
+    }
+    @objc func test(){
+        initChart()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         print("chartViewController appear.")
         
+        initChart()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewWillDisappear(_ animated: Bool) {
+        // 界面消失时，重新加载页面
+        //lineChartView.removeFromSuperview()
+        //initChart()
     }
-    */
+    
+    func initChart(){
+        //let title = DataViewController().rangePickerButton.title(for:.normal)
+        
+        // 初始化 图标所需要的数据
+        let array = xAxisArray(Days: daysNum!)
+        let data1 = recentDaysData(Days: daysNum!)
+        switch pickerSelectedRow{
+            case 1:
+                lineChartView.lineChartView.xAxis.axisMaximum = Double(daysNum!)
+//                let array = xAxisArray(Days: daysNum!)
+//                let data1 = recentDaysData(Days: daysNum!)
+                lineChartView.drawLineChart(xAxisArray: array as NSArray,xAxisData: data1)
+                lineChartView.addLimitLine(13, "限制线",UIColor.red)
+            case 2:
+                lineChartView.lineChartView.xAxis.axisMaximum = 7
+                lineChartView.drawLineChart(xAxisArray: array as NSArray,xAxisData: data1)
+                lineChartView.addLimitLine(13, "限制线",UIColor.red)
+            case 3:
+                lineChartView.lineChartView.xAxis.axisMaximum = 30
+                lineChartView.drawLineChart(xAxisArray: array as NSArray,xAxisData: data1)
+                lineChartView.addLimitLine(13, "限制线",UIColor.red)
+            default:
+                lineChartView.lineChartView.xAxis.axisMaximum = Double(daysNum!)
+                lineChartView.drawLineChart(xAxisArray: xAxisArray(startDate: startD!, endDate: endD!) as NSArray,xAxisData: DateToData(startD!, endD!))
+                lineChartView.addLimitLine(13, "限制线",UIColor.red)
+        }
+    }
+
+    
 
 }

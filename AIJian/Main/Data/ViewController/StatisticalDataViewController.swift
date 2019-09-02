@@ -7,14 +7,10 @@
 //
 
 import UIKit
-//import SnapKit
+import SnapKit
+import SwiftDate
 
 class StatisticalDataViewController: UIViewController,UIScrollViewDelegate {
-//    enum style{
-//        case total
-//        case perMeal
-//        case afterMeal
-//    }
 
     var scrollView:UIScrollView?
     // 平均统计视图
@@ -107,14 +103,60 @@ class StatisticalDataViewController: UIViewController,UIScrollViewDelegate {
             make.top.equalTo(perMeal.snp.bottom)
             make.height.equalTo(140)
         }
-        
+    // 设置通知，当选择日期范围改变时执行动作来更新视图内容
+        NotificationCenter.default.addObserver(self, selector: #selector(test), name: NSNotification.Name(rawValue: "reload"), object: nil)
     }
-    
+    // 更新视图内容
+    @objc func test(){
+        initContent()
+    }
     // 设置视图每次出现时滚动视图都回到顶部
     override func viewWillAppear(_ animated: Bool) {
         self.scrollView?.contentOffset = CGPoint(x: 0, y: 0)
+        initContent()
+        
+        
     }
 
 
+    func initContent(){
+
+        
+        let today = DateInRegion().dateAt(.endOfDay).date
+        let end = today + 1.seconds
+        // 监听导航栏右按钮的文本，对于不同的文本生成对应的数据
+        switch pickerSelectedRow{
+            
+        case 1:
+            let start = end - 3.days
+            initDataSortedByDate(startDate: start, endDate: end, userId: userId!)
+            //sortedTimeOfData()
+
+        case 2:
+            let start = end - 7.days
+            initDataSortedByDate(startDate: start, endDate: end, userId: userId!)
+            //sortedTimeOfData()
+
+        case 3:
+            let start = end - 30.days
+            initDataSortedByDate(startDate: start, endDate: end, userId: userId!)
+            //sortedTimeOfData()
+
+        default:
+            print("zidingyi ")
+            
+        }
+        
+        // 平均视图初始化
+        averageview.labelUpdate()
+        // 对检测视图的数据进行初步处理
+        totalview.checkInit()
+        // 总体检测视图初始化
+        totalview.totalInit()
+        // 饭前检测视图初始化
+        perMeal.perMealInit()
+        // 饭后s检测视图初始化
+        afterMeal.afterMealInit()
+    }
 
 }

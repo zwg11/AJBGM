@@ -11,10 +11,33 @@ import DNSPageView
 import SnapKit
 import Alamofire
 import HandyJSON
+import SwiftDate
 
+// 用于对数据库数据的提取和各个页面显示内容的初始化
+// start 和 end 分别表示时间范围的开始时间和结束时间
+var startD:Date?
+var endD:Date?
+//  表示该时间范围的天数
+var daysNum:Int?
+
+// 范围选择器选中的目标，作为标志位
+var pickerSelectedRow = 2
 
 class DataViewController: UIViewController {
 
+    // 该按钮为时间范围选择器出现时的背景
+    // 实现点击背景选择器消失的效果
+    private lazy var backButton:UIButton = {
+        let button = UIButton.init(type: .system)
+        button.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.2)
+        button.addTarget(self, action: #selector(pickViewDismiss), for: .touchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: AJScreenWidth, height: AJScreenHeight)
+        return button
+    }()
+    
+    
+    
+    
     // 设置导航栏左按钮x样式
     private lazy var leftButton:UIButton = {
         let button = UIButton.init(type: .custom)
@@ -51,13 +74,16 @@ class DataViewController: UIViewController {
         return DNSPageViewManager(style: style, titles: titles, childViewControllers: viewControllers)
     }()
     
-    private lazy var rangePickerButton:UIButton = {
+    // 导航栏有按钮，用于弹出时间范围选择器
+    lazy var rangePickerButton:UIButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(chooseDate), for: .touchUpInside)
+
         button.setTitle("最近7天", for: .normal)
         button.frame.size = CGSize(width: AJScreenWidth/5, height: 44)
         return button
     }()
+    
 
     // 日期范围选择器
     private lazy var dateRangePicker:dateRangePickerView = {
@@ -74,13 +100,13 @@ class DataViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
-        // 添加导航栏左按钮
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
-        // 添加导航栏右按钮
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rangePickerButton)
+        
+        // 设置pickerView初始位置
+        dateRangePicker.rangePicker.selectRow(1, inComponent: 0, animated: false)
         
         // 添加标题视图
         let titleview = pageViewManager.titleView
+       
         view.addSubview(titleview)
         // 设置标题视图左右约束为对齐屏幕，顶部对齐导航栏，高度为44
         titleview.snp.makeConstraints{(make )in
@@ -136,10 +162,24 @@ class DataViewController: UIViewController {
         self.view.backgroundColor = UIColor.white   
     }
     
+    // 页面出现，tabbar隐藏
     override func viewWillAppear(_ animated: Bool) {
+        // 隐藏 tabbar
         self.tabBarController?.tabBar.isHidden = true
+        
+        
+        
+        // 添加导航栏左按钮
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
+        // 添加导航栏右按钮
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rangePickerButton)
+        
+        // 识别 导航栏右按钮标题，做出相应值的设置
+        setDaysAndRange()
+        
     }
 
+    // 页面消失，tabbar隐藏
     override func viewWillDisappear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
     }
@@ -149,26 +189,100 @@ class DataViewController: UIViewController {
     }
     
     // MARK: - 以下为时间范围选择器显示和消失的按钮动作
-    // 选择出生日期按钮被点击时的动作
+    // 选择日期按钮被点击时的动作
     @objc func chooseDate(){
-        print("choose date button clicked,appear done.")
+        print("choose range date button clicked,appear done.")
+
+        // 添加背景按钮
+        self.view.addSubview(backButton)
+        self.view.bringSubviewToFront(dateRangePicker)
         UIView.animate(withDuration: 0.5, animations: appear)
     }
     
+    // 该视图用来设置自定义选择日期范围的视图
+    
+    private lazy var customRange:customRangeView = {
+        let view = customRangeView()
+        view.setupUI()
+        view.endbutton.addTarget(self, action: #selector(selectCustomRange), for: .touchUpInside)
+        return view
+    }()
+    // 自定义选择日期的 设置日期按钮被选中时 的动作
+    @objc func selectCustomRange(){
+        
+        print("select CustomRange")
+        
+        
+        print("开始时间：\(customRange.startDatePicker.date)")
+        print("结束时间：\(customRange.endDatePicker.date)")
+        
+        if customRange.startDatePicker.date >= customRange.endDatePicker.date{
+            let alert = CustomAlertController()
+            alert.custom(self, "注意", "开始日期必须早于结束日期")
+        }else{
+            // 选择日期范围视图移除
+            customRange.removeFromSuperview()
+            // 更新按钮标题
+            rangePickerButton.setTitle(dateRangePicker.selectedContent, for: .normal)
+            // 设置开始时间和结束时间
+            // 开始时间
+            startD = customRange.startDatePicker.date.dateAt(.startOfDay)
+            // 结束时间
+            endD = customRange.endDatePicker.date.dateAt(.endOfDay)
+            // 设定被选中的标志位
+            pickerSelectedRow = 4
+            
+            // 执行对日期范围选定后的数据处理
+            setDaysAndRange()
+            // 打印 开始时间 和 结束时间
+            print("startD:\(startD),endD:\(endD)")
+        }
+        
+        
+        
+    }
+    // ************ 选择器的出现和消失 ****************
     // 点击取消按钮，时间选择器界面移到屏幕外，视觉效果为消失
     @objc func pickViewDismiss(){
+        backButton.removeFromSuperview()
         UIView.animate(withDuration: 0.5, animations: dismiss)
         
         print("cancel button clicked")
     }
     
-    // 点击确定按钮，选择器界面移到屏幕外，视觉效果为消失，按钮文本显示被选项
+    // 点击确定按钮，时间范围选择器界面移到屏幕外，视觉效果为消失，按钮文本显示被选项
     // 根据被选项内容执行不同的动作
     @objc func pickViewSelected(){
+        backButton.removeFromSuperview()
         UIView.animate(withDuration: 0.5, animations: dismiss)
-        rangePickerButton.setTitle(dateRangePicker.selectedContent, for: .normal)
+        // 如果选择了自定义，那么弹出2个时间选择器供用户选择时间范围
+        if dateRangePicker.selectedContent == "自定义"{
+            self.view.addSubview(customRange)
+        }// 否则更新按钮标题
+        else{
+            // 更新按钮标题
+            rangePickerButton.setTitle(dateRangePicker.selectedContent ?? "最近7天", for: .normal)
+            
+            // 监听导航栏右按钮的文本，对于不同的文本设定不同的标志位
+            switch dateRangePicker.selectedContent{
+                
+            case "最近3天":
+                pickerSelectedRow = 1
+            case "最近7天":
+                pickerSelectedRow = 2
+            case "最近30天":
+                pickerSelectedRow = 3
+            default:
+                print("error.No selelcted row in picker.")
+                
+            }
+            // 识别 导航栏右按钮标题，做出相应值的设置
+            setDaysAndRange()
+        }
+        
         print("sure button clicked")
-    }
+    }// 根据被选项内容执行不同的动作
+    
     
     // 选择器消失
     func dismiss(){
@@ -190,7 +304,8 @@ class DataViewController: UIViewController {
         }
         // 告诉当前控制器的View要更新约束了，动态更新约束，没有这句的话更新约束就没有动画效果
         self.view.layoutIfNeeded()
-    }
+    }// 选择器消失
+    
     
     //选择器显示
     func appear(){
@@ -211,6 +326,56 @@ class DataViewController: UIViewController {
             }
         }
         self.view.layoutIfNeeded()
+    }//选择器显示
+    
+    
+    // 对于导航栏右按钮的标题不同，做不同的事情
+    func setDaysAndRange(){
+        
+        let today = DateInRegion().dateAt(.endOfDay).date
+        endD = today + 1.seconds
+        // 监听导航栏右按钮的文本，对于不同的文本生成对应的数据
+        switch pickerSelectedRow{
+            
+        case 1:
+            startD = endD! - 3.days
+            daysNum = 3
+            // 向数据库索取一定时间范围的数据，并将其按时间降序排序
+            initDataSortedByDate(startDate: startD!, endDate: endD!, userId: userId!)
+            // 处理出为展示表格的数据
+            sortedTimeOfData()
+            // 处理出为展示图表的数据
+            chartData()
+        case 2:
+            startD = endD! - 7.days
+            daysNum = 7
+            initDataSortedByDate(startDate: startD!, endDate: endD!, userId: userId!)
+            sortedTimeOfData()
+            chartData()
+        case 3:
+            startD = endD! - 30.days
+            daysNum = 30
+            initDataSortedByDate(startDate: startD!, endDate: endD!, userId: userId!)
+            sortedTimeOfData()
+            chartData()
+        default:
+            let components = Calendar.current.dateComponents([.day], from: startD!, to: endD!)
+            daysNum = components.day
+            print("daysNum:\(String(describing: daysNum))")
+            initDataSortedByDate(startDate: startD!, endDate: endD!, userId: userId!)
+            sortedTimeOfData()
+            chartData()
+            
+        }
+
+        // 设置通知，通知其他控制器重新加载他们的界面
+        NotificationCenter.default.post(name: NSNotification.Name("reload"), object: self, userInfo: nil)
+
+    
     }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
 }
 

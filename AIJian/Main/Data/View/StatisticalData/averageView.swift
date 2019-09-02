@@ -13,6 +13,9 @@ import SnapKit
 class averageView: UIView {
     let greenColor = UIColor.init(red: 97.0/255.0, green: 213.0/255.0, blue: 96.0/255.0, alpha: 1)
 
+    var avgGlucoseValue:Double?
+    var avgCheckNum:Double?
+    var standardDaviation:Double?
     // 标题
     private lazy var averageTitle:UILabel = {
         let label = UILabel()
@@ -21,7 +24,7 @@ class averageView: UIView {
         label.textAlignment = .left
         return label
     }()
-    
+    // 平均值视图
     private lazy var avgView:UIView = {
         let view = UIView()
         view.layer.borderWidth = 1
@@ -29,8 +32,8 @@ class averageView: UIView {
         view.layer.cornerRadius = 5
         return view
     }()
-    
-    private lazy var label1:UILabel = {
+    // 血糖label
+    private lazy var glucoseLabel:UILabel = {
         let label = UILabel()
         label.text = "blood sugar"
         label.textColor = UIColor.black
@@ -39,8 +42,8 @@ class averageView: UIView {
         return label
         
     }()
-   
-    private lazy var label2:UILabel = {
+   // 标准差label
+    private lazy var sDLabel:UILabel = {
         let label = UILabel()
         label.text = "standard deviation"
         label.textColor = UIColor.black
@@ -49,18 +52,8 @@ class averageView: UIView {
         return label
         
     }()
-    
-    private lazy var label3:UILabel = {
-        let label = UILabel()
-        label.text = "min/max sugar blood"
-        label.textColor = UIColor.black
-        label.font = UIFont.systemFont(ofSize: 16)
-        label.textAlignment = .left
-        return label
-        
-    }()
-    
-    private lazy var label4:UILabel = {
+    // 每天检测次数label
+    private lazy var checkNumLabel:UILabel = {
         let label = UILabel()
         label.text = "tests number per day"
         label.textColor = UIColor.black
@@ -73,11 +66,9 @@ class averageView: UIView {
     // MARK: - content of the view
     // 显示统计数据
     
-    // ***************************注意***************************
-    // 由于未进行数据初始化暂时使用其他数据表示
-    private lazy var sugarBloodValue:UILabel = {
+    private lazy var glucoseValue:UILabel = {
         let label = UILabel()
-        label.text = String("8.7")
+        label.text = String(avgGlucoseValue ?? 0)
         label.textColor = greenColor
         label.font = UIFont.systemFont(ofSize: 20)
         label.textAlignment = .center
@@ -87,8 +78,8 @@ class averageView: UIView {
         return label
         
     }()
-    
-    private lazy var sugarBloodUnit:UILabel = {
+    // 单位
+    private lazy var glucoseUnit:UILabel = {
         let label = UILabel()
         label.text = "mmol/L"
         label.textColor = UIColor.black
@@ -97,31 +88,22 @@ class averageView: UIView {
         return label
         
     }()
-    
+    // 标准差
     private lazy var standardDeValue:UILabel = {
         let label = UILabel()
-        label.text = String("1.2")
+        label.text = String(standardDaviation ?? 0)
         label.textColor = UIColor.black
         label.font = UIFont.systemFont(ofSize: 16)
         label.textAlignment = .center
         return label
         
     }()
+
     
-    private lazy var minAndMaxSBValue:UILabel = {
-        let label = UILabel()
-        label.text = String("- / -")
-        label.textColor = UIColor.black
-        label.font = UIFont.systemFont(ofSize: 16)
-        label.textAlignment = .center
-        return label
-        
-    }()
-    
-   
+   // 每天检测次数
     private lazy var testNum:UILabel = {
         let label = UILabel()
-        label.text = "0.5"
+        label.text = String(avgCheckNum ?? 0)
         label.textColor = UIColor.black
         label.font = UIFont.systemFont(ofSize: 16)
         label.textAlignment = .center
@@ -140,19 +122,19 @@ class averageView: UIView {
             make.width.equalTo((AJScreenWidth-20)/4)
             
         }
-        
+        // 平均值视图布局
         self.addSubview(avgView)
         self.avgView.snp.makeConstraints{ (make) in
             make.left.equalToSuperview().offset(10)
             make.right.equalToSuperview().offset(-10)
             make.top.equalTo(averageTitle.snp.bottom)
-            make.height.equalTo(145)
+            make.height.equalTo(115)
             //make.width.equalTo(AJScreenWidth-20)
             
         }
-        
-        self.avgView.addSubview(label1)
-        self.label1.snp.makeConstraints{ (make) in
+        // 血糖label布局
+        self.avgView.addSubview(glucoseLabel)
+        self.glucoseLabel.snp.makeConstraints{ (make) in
             make.left.equalToSuperview().offset(15)
             make.top.equalToSuperview().offset(20)
             make.height.equalTo(20)
@@ -160,79 +142,108 @@ class averageView: UIView {
             
         }
 
-        
-        self.avgView.addSubview(label2)
-        self.label2.snp.makeConstraints{ (make) in
-            make.left.equalTo(label1.snp.left)
-            make.top.equalTo(label1.snp.bottom).offset(10)
-            make.height.equalTo(label1.snp.height)
+        // 标准差label布局
+        self.avgView.addSubview(sDLabel)
+        self.sDLabel.snp.makeConstraints{ (make) in
+            make.left.equalTo(glucoseLabel.snp.left)
+            make.top.equalTo(glucoseLabel.snp.bottom).offset(10)
+            make.height.equalTo(glucoseLabel.snp.height)
             make.width.equalTo((AJScreenWidth-20)/2 )
             
             
         }
-        
-        self.avgView.addSubview(label3)
-        self.label3.snp.makeConstraints{ (make) in
-            make.left.equalTo(label1.snp.left)
-            make.top.equalTo(label2.snp.bottom).offset(10)
-            make.height.equalTo(label1.snp.height)
+
+        // 每天检测次数label布局
+        self.avgView.addSubview(checkNumLabel)
+        self.checkNumLabel.snp.makeConstraints{ (make) in
+            make.left.equalTo(glucoseLabel.snp.left)
+            make.top.equalTo(sDLabel.snp.bottom).offset(10)
+            make.height.equalTo(glucoseLabel.snp.height)
             make.width.equalTo((AJScreenWidth-20)/2 )
             
         }
-        
-        self.avgView.addSubview(label4)
-        self.label4.snp.makeConstraints{ (make) in
-            make.left.equalTo(label1.snp.left)
-            make.top.equalTo(label3.snp.bottom).offset(10)
-            make.height.equalTo(label1.snp.height)
-            make.width.equalTo((AJScreenWidth-20)/2 )
-            
-        }
-        
-        self.avgView.addSubview(sugarBloodUnit)
-        self.sugarBloodUnit.snp.makeConstraints{ (make) in
+        // 血糖单位label布局
+        self.avgView.addSubview(glucoseUnit)
+        self.glucoseUnit.snp.makeConstraints{ (make) in
             make.right.equalToSuperview().offset(-10)
-            make.bottom.equalTo(label1.snp.bottom)
-            make.height.equalTo(label1.snp.height)
+            make.bottom.equalTo(glucoseLabel.snp.bottom)
+            make.height.equalTo(glucoseLabel.snp.height)
             make.width.equalTo((AJScreenWidth-20)/6 )
             
         }
-        
-        self.avgView.addSubview(sugarBloodValue)
-        self.sugarBloodValue.snp.makeConstraints{ (make) in
-            make.right.equalTo(sugarBloodUnit.snp.left)
-            make.bottom.equalTo(label1.snp.bottom)
+        // 血糖值label布局
+        self.avgView.addSubview(glucoseValue)
+        self.glucoseValue.snp.makeConstraints{ (make) in
+            make.right.equalTo(glucoseUnit.snp.left)
+            make.bottom.equalTo(glucoseLabel.snp.bottom)
             make.height.width.equalTo(35)
             
         }
-        
+        // 标准差label布局
         self.avgView.addSubview(standardDeValue)
         self.standardDeValue.snp.makeConstraints{ (make) in
-            make.centerX.equalTo(sugarBloodUnit.snp.centerX)
-            make.bottom.equalTo(label2.snp.bottom)
-            make.height.equalTo(label2.snp.height)
+            make.centerX.equalTo(glucoseUnit.snp.centerX)
+            make.bottom.equalTo(sDLabel.snp.bottom)
+            make.height.equalTo(sDLabel.snp.height)
             make.width.equalTo((AJScreenWidth-20)/8 )
             
         }
-        
-        self.avgView.addSubview(minAndMaxSBValue)
-        self.minAndMaxSBValue.snp.makeConstraints{ (make) in
-            make.centerX.equalTo(sugarBloodUnit.snp.centerX)
-            make.bottom.equalTo(label3.snp.bottom)
-            make.height.equalTo(20)
-            make.width.equalTo((AJScreenWidth-20)/4 )
-            
-        }
-        
+        // 检测次数label布局
         self.avgView.addSubview(testNum)
         self.testNum.snp.makeConstraints{ (make) in
             make.centerX.equalTo(standardDeValue.snp.centerX)
-            make.bottom.equalTo(label4.snp.bottom)
+            make.bottom.equalTo(checkNumLabel.snp.bottom)
             make.height.equalTo(20)
             make.width.equalTo((AJScreenWidth-20)/8 )
             
         }
 
+    }
+    
+
+    // 初始化视图数据
+    func labelUpdate(){
+        // 如果有数据
+        if sortedByDateOfData!.count > 0{
+            // 计算各个label应有的内容
+            // 总血糖值
+            var sumBloodGlucoseValue = 0.0
+            // 总检测次数
+            var sumCheckNum = 0
+            // 总标准差和
+            var sumStandardDaviation = 0.0
+            // 总检测次数
+            for i in 0..<sortedTime.count{
+                sumCheckNum += sortedTime[i].count
+                
+            }
+            // 平均检测次数
+            avgCheckNum = Double(sumCheckNum)/Double(daysNum!)
+            
+            // 检测血糖值总和
+            for i in sortedByDateOfData!{
+                sumBloodGlucoseValue += i.bloodGlucoseMmol!
+            }
+            // 血糖平均值
+            avgGlucoseValue = sumBloodGlucoseValue/Double(sumCheckNum)
+            
+            // 标准差
+            for i in sortedByDateOfData!{
+                sumStandardDaviation += (avgGlucoseValue! - i.bloodGlucoseMmol!)*(avgGlucoseValue! - i.bloodGlucoseMmol!)
+            }
+            standardDaviation = sumStandardDaviation/Double(sumCheckNum)
+            
+            // 将计算结果赋值给对应的label
+            glucoseValue.text = String(format: "% .1f", avgGlucoseValue!)
+            standardDeValue.text = String(format: "% .1f", standardDaviation!)
+            testNum.text = String(format: "% .1f", avgCheckNum!)
+ 
+        }else{
+            // 如果e没数据，则至为 ” - “
+            glucoseValue.text = "-"
+            standardDeValue.text = "-"
+            testNum.text = "-"
+        }
     }
     
 
