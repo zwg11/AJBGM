@@ -13,16 +13,16 @@ import HandyJSON
 
 class PassChangeViewController: UIViewController,UITextFieldDelegate {
     
-        var email:String?
+        var email:String = ""
         var oldP:String?
         var newP:String?
         var verfiedP:String?
-        var token:String?
+        var token:String = ""
     
         lazy var text_email:UILabel = {
             let text_email = UILabel()
             text_email.font = UIFont.systemFont(ofSize: 16)
-            text_email.text = "11147852@qq.com"
+            text_email.text = email
             return text_email
         }()
     
@@ -70,6 +70,14 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
            self.newPasswd_textF.text! = ""
            self.verfiedPasswd_textF.text! = ""
         }
+         //当视图出现了，直接从文件中获取email和token信息
+        override func viewWillAppear(_ animated: Bool) {
+            let path = Bundle.main.path(forResource: "User", ofType: "plist")
+            let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path!)!
+            email = data["email"] as! String
+            token = data["token"] as! String
+        }
+    
         override func viewDidLoad() {
             super.viewDidLoad()
             self.title = "pass"
@@ -217,8 +225,8 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
             oldP = self.oldPasswd_textF.text!
             newP = self.newPasswd_textF.text!
             verfiedP = self.verfiedPasswd_textF.text!
-            email = "6666"
-            token = "666"
+//            email = "6666"
+//            token = "666"
             
             
             if oldP == ""{
@@ -237,10 +245,10 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
                 alert.custom(self, "Attention", "新密码和旧密码不同")
                 return
             }else{
-                let dictString:Dictionary = [ "oldPassword":String(oldP!),"newPassword":String(newP!),"email":String(email!),"token":String(token!)]
+                let dictString:Dictionary = [ "oldPassword":String(oldP!),"newPassword":String(newP!),"email":String(email),"token":String(token)]
                 print(dictString)
               //  此处的参数需要传入一个字典类型
-                Alamofire.request(PasswdReset,method: .post,parameters: dictString).responseString{ (response) in
+                Alamofire.request(PASSWDRESET,method: .post,parameters: dictString).responseString{ (response) in
                     
                     if response.result.isSuccess {
                         
@@ -253,7 +261,7 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
                                 /*  此处为跳转和控制逻辑*/
                                 if(responseModel.code == 1 ){
                                     print("登录成功")
-                                    alert.custom(self,"Attention", "感谢您的反馈")
+                                    alert.custom(self,"Attention", "密码修改成功")
                                     self.navigationController?.popViewController(animated: true)
                                 }else{
                                     alert.custom(self,"Attention", "密码修改失败")

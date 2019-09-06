@@ -3,7 +3,7 @@
  
  */
 import HandyJSON
-//登录响应结构
+//所有这样的有三个字段的响应结构
 struct responseModel:HandyJSON{
     var code:Int!
     var msg:String!
@@ -15,6 +15,20 @@ struct responseAModel:HandyJSON{
     var code:Int!
     var msg:String!
 }
+
+//登陆响应当中的data
+struct userDataPart:HandyJSON{
+    var userId:Int?
+    var token:String?
+}
+
+//点击登陆时，服务器传过来的响应体
+struct loginResponse:HandyJSON{
+    var code:Int!
+    var msg:String!
+    var data:userDataPart?
+}
+
 
 // 请求最近几天的血糖记录的请求参数
 struct glucoseRecordInDays: HandyJSON{
@@ -57,4 +71,30 @@ struct glucoseDate: HandyJSON {
     var remark:String?
     var recordType:Int64?
     var machineId:String?
+}
+
+struct glDate{
+
+    
+
+    
+    var bloodGlucoseRecordId:String?
+    var userId:Int64?
+    var bloodGlucoseMmol:Double?
+    var bloodGlucoseMg:Int64?
+    
+    init(bgid:String,usierid:Int64,dgmmol:Double,bgmg:Int64){
+        self.bloodGlucoseRecordId = bgid
+        self.userId = usierid
+        self.bloodGlucoseMmol = dgmmol
+        self.bloodGlucoseMg = bgmg
+    }
+}
+
+class st111:HandyJSON{
+    var token:String?
+    var userId:Int64?
+    var userBloodGlucoseRecords:[glDate]?
+    
+    required init(){}
 }

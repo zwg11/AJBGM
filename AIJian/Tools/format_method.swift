@@ -31,6 +31,7 @@ public class FormatMethodUtil{
         let passwdTest:NSPredicate = NSPredicate(format: "SELF MATCHES %@", passwdRegex)
         return passwdTest.evaluate(with: passwd)
     }
+    //血糖范围设置中的的验证血糖合法性函数
     //判断是否为合法的mmol\L为单位的血糖数据
     static func validateBloodNumber(number:String) -> Bool{
         //表示小数点前面两位，小数点后面一位
@@ -41,7 +42,7 @@ public class FormatMethodUtil{
     //判断是否为合法的mg/dL为单位的血糖数据
     static func validateMgdlBloodNumber(number:String) -> Bool{
         //表示三位整数
-        let numberRegex = "[0-9]{0,3}"
+        let numberRegex = "[0-9]{1,3}\\.[0-9]{0,1}"
         let numberTest:NSPredicate = NSPredicate(format: "SELF MATCHES %@", numberRegex)
         return numberTest.evaluate(with: number)
     }

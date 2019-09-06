@@ -38,15 +38,15 @@ class SharedView: UIView {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         button.backgroundColor = UIColor.gray
         
-        button.addTarget(self, action: #selector(sendCheck), for: .touchUpInside)
+        //button.addTarget(self, action: #selector(sendCheck), for: .touchUpInside)
         return button
     }()
     
     // 发送报告的动作
-    @objc func sendCheck(){
-        print("send.")
-        sendButton.setTitleColor(UIColor.red, for: .highlighted)
-    }
+//    @objc func sendCheck(){
+//        print("send.")
+//        sendButton.setTitleColor(UIColor.red, for: .highlighted)
+//    }
     
     // MARK: - 报告内容大致信息说明
     // view框

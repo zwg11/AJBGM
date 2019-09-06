@@ -6,8 +6,7 @@
 //  Copyright © 2019 apple. All rights reserved.
 //
 
-/*版本更新界面
- */
+/*版本更新界面*/
 
 import UIKit
 import SnapKit
@@ -17,7 +16,7 @@ import SnapKit
 class VersionUViewController: UIViewController {
         
         //列表数据
-        public lazy var versionDataArray: Array = ["当前版本","反馈","去评分","版本更新","软件供应商"]
+        public lazy var versionDataArray: Array = ["当前版本","反馈","去评分","版本更新"]
         
         override func viewDidLoad() {
             super.viewDidLoad()
@@ -27,20 +26,16 @@ class VersionUViewController: UIViewController {
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(title:"back", style:.plain, target: self, action: #selector(back))
             
             
-            let tableview:UITableView = {
-                let tableView = UITableView.init(frame: CGRect(x: 0, y: navigationBarHeight, width: AJScreenWidth, height: AJScreenHeight/3))
-                return tableView
-            }()
+            
+            let tableview = UITableView.init(frame: CGRect(x: 0, y: navigationBarHeight, width: AJScreenWidth, height: AJScreenHeight/15*4))
+            
             //将CELL的标识，在此处进行设置
             tableview.backgroundColor = UIColor.white
             tableview.isScrollEnabled = false
             tableview.register(UITableViewCell.self, forCellReuseIdentifier:"versioncell")
             tableview.delegate = self
             tableview.dataSource = self
-            tableview.snp.makeConstraints{ (make) in
-                make.width.equalTo(AJScreenWidth)
-                make.height.equalTo(AJScreenHeight)
-            }
+            
             self.view.addSubview(tableview)
         }
         @objc private func back(){
@@ -79,15 +74,19 @@ extension VersionUViewController:UITableViewDelegate,UITableViewDataSource{
             //列
             let row = indexPath.row
             switch row {
-                case 0:
+                case 0:  //跳转到当前版本页面
+                    //取出本地版本
+                    let localVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+                    print(localVersion)
+                    self.navigationController?.pushViewController(CurrentVersion(), animated: true)
                     print("第一行")
-                case 1:
-                    self.navigationController?.pushViewController(SuggestionViewController(), animated: false)
-                case 2:
+                case 1:  //跳转到反馈页面
+                    self.navigationController?.pushViewController(SuggestionViewController(), animated: true)
+                case 2:  //跳转到去评分界面
                     print("第三行")
-                case 3:
+                case 3:  //跳转到版本更新
                     print("第四行")
-                default:
+                default:  //缺省不跳
                     print("第五行")
                }
           }

@@ -52,7 +52,7 @@ class HomeViewController: UIViewController {
 //        user1.token = token
 //        user1.email = "zzmmshang@qq.com"
 //        sqliteManager.addUserRecord(user1)
-        
+        print("这个东西到底是什么东西",SHIFT!)
     }
     
     override func viewDidLoad() {
@@ -152,7 +152,11 @@ class HomeViewController: UIViewController {
                         self.reload = "reload"
                     }
                 } 
+            }else{
+                print("没网了")
             }
+            
+            
         }
         //**********
     }

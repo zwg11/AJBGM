@@ -25,13 +25,33 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
         return view
     }()
     
+//    private lazy var shareV:SharedView = {
+//        let view = SharedView()
+//        view.setupUI()
+//        view.nameTextField.delegate = self
+//        view.birthdayButton.addTarget(self, action: #selector(chooseDate), for: .touchUpInside)
+//        return view
+//    }()
+    
     private lazy var shareV:SharedView = {
         let view = SharedView()
         view.setupUI()
+//        view.emailTextField.delegate = self
         view.nameTextField.delegate = self
         view.birthdayButton.addTarget(self, action: #selector(chooseDate), for: .touchUpInside)
+        view.sendButton.addTarget(self, action: #selector(sendCheck(_:)), for: .touchUpInside)
         return view
     }()
+    
+    // 发送报告的动作
+    @objc func sendCheck(_ sender:UIButton){
+        print("send.")
+        let textShared = "要分享的标题"
+        let activityItems = [textShared]
+        let toVC = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+        self.present(toVC, animated: true, completion: nil)
+        sender.setTitleColor(UIColor.red, for: .highlighted)
+    }
     var topConstraint:Constraint?
     var bottomConstraint:Constraint?
 

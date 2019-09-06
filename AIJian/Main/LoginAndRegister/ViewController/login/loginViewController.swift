@@ -34,6 +34,7 @@ class loginViewController: UIViewController,UITextFieldDelegate {
         super.viewDidLoad()
         //self.navigationController?.navigationBar.barTintColor = UIColor.blue
         //navigation顶部的title
+        self.navigationController?.navigationItem.leftBarButtonItem = nil
         self.title = "登  录"
         self.view.addSubview(loginview)
         loginview.snp.makeConstraints{(make) in
@@ -43,12 +44,14 @@ class loginViewController: UIViewController,UITextFieldDelegate {
     }
     
     /*
-     功能：点击登录的动作
-     
+     功能：点击登录按钮的动作
      */
     @objc func login(){
         print("login clicked.")
-        self.present(AJTabbarController(), animated: false, completion: nil)
+        let path = Bundle.main.path(forResource: "User", ofType: "plist")
+        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path!)!
+
+//        self.present(AJTabbarController(), animated: false, completion: nil)
         //在此处获取邮箱和密码最为恰当
         let alertController = CustomAlertController()
         email = loginview.userNameTextField.text!
@@ -69,7 +72,7 @@ class loginViewController: UIViewController,UITextFieldDelegate {
 //            let user = User.deserialize(from: jsonString)
             print(dictString)
             //  此处的参数需要传入一个字典类型
-            Alamofire.request(Login_api,method: .post,parameters: dictString).responseString{ (response) in
+            Alamofire.request(LOGIN_API,method: .post,parameters: dictString).responseString{ (response) in
 
                 if response.result.isSuccess {
 
@@ -81,21 +84,35 @@ class loginViewController: UIViewController,UITextFieldDelegate {
                         /*
                            利用JSONDeserializer封装成一个对象。然后再把这个对象解析为
                          */
-                        if let responseModel = JSONDeserializer<responseModel>.deserializeFrom(json: jsonString) {
+                        if let responseModel = JSONDeserializer<loginResponse>.deserializeFrom(json: jsonString) {
                             /// model转json 为了方便在控制台查看
                             print(responseModel.toJSONString(prettyPrint: true)!)
 
                             /*  此处为跳转和控制逻辑
                               */
                             if(responseModel.code == 1 ){
-                                print("登录成功")
+                                print("登陆成功",responseModel)
+                                print("返回的code为1，登录成功")
+//                                print(responseModel.data)
+                                data["userId"] = responseModel.data?.userId!
+                                data["token"] = responseModel.data?.token!
+                                data["email"] = self.email!
+                                data.setObject(responseModel.data?.userId! as Any, forKey: "userId" as NSCopying )
+                                data.setObject(responseModel.data?.token! as Any, forKey: "token" as NSCopying )
+                                data.setObject(self.email!, forKey: "email" as NSCopying )
+                                data.write(toFile: path!, atomically: true)
+                                userId = data["userId"] as? Int64
+                                token = data["token"] as! String
                                 self.present(AJTabbarController(), animated: false, completion: nil)
                             }else{
+                                print(responseModel)
+//                                  print(responseModel.data)
                                 alertController.custom(self,"Attention", "邮箱或密码不正确")
                             }
-
                         }
                     }
+                }else{
+                    alertController.custom(self,"Attention", "网络连接失败，请稍后重试！")
                 }
             }
             print("邮箱格式正确,登录成功")
@@ -105,13 +122,13 @@ class loginViewController: UIViewController,UITextFieldDelegate {
             print("邮箱格式错误")
             return
         }
-       self.present(AJTabbarController(), animated: true, completion: nil)
+//       self.present(AJTabbarController(), animated: true, completion: nil)
     }
     @objc func forgetPassword(){
         print("forgetPassword clicked.")
         
         //测试过程中，修改密码时，先跳到第二页
-        self.navigationController?.pushViewController(emailCheckSecViewController(), animated: true)
+        self.navigationController?.pushViewController(emailCheckViewController(), animated: true)
     }
     
     //跳转到注册界面

@@ -9,16 +9,19 @@ let BASE_URL = "http://10.65.1.213:8080/"
 let OTHER_URL = "http://120.78.167.239:8080/"
 
 //登录api
-let Login_api =  BASE_URL + "app/login"
+let LOGIN_API =  BASE_URL + "app/login"
+
+//判断token是否过期
+let CHECK_TOKEN = BASE_URL + "app/checkToken"
 
 //获取验证码
 let get_Code = BASE_URL + "app/sendCode"
 
 //修改密码之前的，邮箱验证
-let ChangP_VFcode = BASE_URL + "app/passwordRetrieveFirst"
+let RETRIEVEFIRST = BASE_URL + "app/passwordRetrieveFirst"
 
 //验证邮箱之后，进行密码修改
-let PasswordChangeNeedCode = BASE_URL + "app/passwordRetrieveSecond"
+let RETRIEVESECOND = BASE_URL + "app/passwordRetrieveSecond"
 
 //用户注册
 let UserRegister = BASE_URL + "app/userRegister"
@@ -31,7 +34,10 @@ let FillUserInfo = BASE_URL + "app/inputUserInfo"
 let UserFeedback = BASE_URL + "app/user/feedback"
 
 //已经登录之后的密码修改
-let PasswdReset = BASE_URL + "app/passwordReset"
+let PASSWDRESET = BASE_URL + "app/passwordReset"
 
 // 请求数据
 let REQUEST_DATA_URL = OTHER_URL + "app/bloodGlucoseRecord/queryRecord"
+
+//用户插入一条血糖记录
+let INSERTRECORD = BASE_URL + "app/bloodGlucoseRecord/insertRecord"

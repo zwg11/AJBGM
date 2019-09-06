@@ -93,10 +93,16 @@ class MineViewController: UIViewController {
      */
     @objc public func loginOff(){
         print("退出成功")
-        //self.present(loginNavigationController(), animated: true, completion: nil)
+        //用do...catch语句来做。。。无论怎么样，都进行dismiss。如果出错了，就直接present
         self.dismiss(animated: true, completion: nil)
-//        self.presentationController
-//        self.navigationController?.pushViewController(loginViewController(), animated: false)
+        let viewController = loginViewController()
+        let nv = loginNavigationController(rootViewController: viewController)
+        self.present(nv, animated: true, completion: nil)
+        let path = Bundle.main.path(forResource: "User", ofType: "plist")
+        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path!)!
+        //退出登录，需要把token清空
+        data.setObject("", forKey: "token" as NSCopying )
+        data.write(toFile: path!, atomically: true)
     }
    
 }

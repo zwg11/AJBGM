@@ -55,6 +55,7 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
     
     //点击下一页
     @objc func nextAction(){
+        let secViewController:emailCheckSecViewController = emailCheckSecViewController()
         email = emailCheck.emailTextField.text!
         email_code = emailCheck.authCodeTextField.text!
         let alertController = CustomAlertController()
@@ -65,7 +66,8 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
         }else{
             let dictString:Dictionary = [ "email":String(email!),"verifyCode":String(email_code!)]
             print(dictString)
-            Alamofire.request(ChangP_VFcode,method: .post,parameters: dictString).responseString{ (response) in
+            //找回密码第一步
+            Alamofire.request(RETRIEVEFIRST,method: .post,parameters: dictString).responseString{ (response) in
                 if response.result.isSuccess {
                     if let jsonString = response.result.value {
                         print("进入验证过程")
@@ -83,8 +85,13 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
                             if(responseModel.code == 1 ){
                                 print("登录成功")
                                 print("跳转到修改密码那一页")
-                                self.navigationController?.pushViewController(emailCheckSecViewController(), animated: true)
+                                secViewController.email = self.email
+                                secViewController.verifyString = responseModel.data
+                                self.navigationController?.pushViewController(secViewController, animated: true)
                             }else{
+                                secViewController.email = self.email
+                                secViewController.verifyString = "gy riut u"
+                                self.navigationController?.pushViewController(secViewController, animated: true)
                                 alertController.custom(self,"Attention", "邮箱或密码不正确")
                             }
                         } //end of letif
@@ -113,11 +120,25 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
             Alamofire.request(get_Code,method: .post,parameters: dictString).responseString{ (response) in
                 if response.result.isSuccess {
                     if let jsonString = response.result.value {
-                        print("获取验证码阶段")
-                    }
-                }
+                        if let responseModel = JSONDeserializer<responseModel>.deserializeFrom(json: jsonString) {
+                            /// model转json 为了方便在控制台查看
+                            print(responseModel.toJSONString(prettyPrint: true)!)
+                            /*  此处为跳转和控制逻辑
+                             */
+                            if(responseModel.code == 1 ){
+                                //返回1，让其倒计时
+                                self.emailCheck.getAuthCodeButton.countDown(count: 10)
+                            }else{
+                                alertController.custom(self,"Attention", "邮箱或密码不正确")
+                            }
+                            print("注册时，获取验证码阶段")
+                        }
+                    }//end of response.result.value
+                }else{
+                    alertController.custom(self, "Attention", "网络请求失败")
+                }//end of response.result.isSuccess
             }//end of request
-            emailCheck.getAuthCodeButton.countDown(count: 10)
+           
         }
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

@@ -13,7 +13,7 @@ class glucoseView: UIView ,UITextFieldDelegate{
 
     // 记录血糖值
     var glucoseValueMM:Double = 0
-    var glucoseValueMG:Int = 0
+    var glucoseValueMG:Double = 0
     //***********************血糖********************
     // 血糖图标
     private lazy var XTimageView:UIImageView = {
@@ -44,7 +44,7 @@ class glucoseView: UIView ,UITextFieldDelegate{
                 glucoseValueMM = Double(XTSlider.value)
             }else{
                 let a = (XTTextfield.text! as NSString).intValue
-                glucoseValueMG = Int(a)
+//                glucoseValueMG = Int(a)
                 XTSlider.value = Float(a)
             }
         }
@@ -75,7 +75,9 @@ class glucoseView: UIView ,UITextFieldDelegate{
             // 结果保留1位小数
             XTTextfield.text = String(format:"%.1f",glucoseValueMM)
         }else{
-            
+            glucoseValueMG = Double(XTSlider.value)
+            // 结果保留1位小数
+            XTTextfield.text = String(format:"%.1f",glucoseValueMG)
         }
     }
     // 滑块左侧 - 符号

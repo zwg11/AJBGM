@@ -15,7 +15,7 @@ class InfoViewController: UIViewController ,PickerDelegate{
     var num:Int = 0
 
     //列表数据
-    public lazy var infoArray: Array = ["用户名","性    别","体    重","身    高","生    日","国    家","电    话"]
+    public lazy var infoArray: Array = ["姓    名","性    别","体    重","身    高","生    日","国    家","电    话"]
     
     public lazy var infoDataArray : NSMutableArray = ["xxx","男","45","170","2019-02-08","中国","123456"]
 
@@ -41,8 +41,18 @@ class InfoViewController: UIViewController ,PickerDelegate{
         self.view.addSubview(tableview)
     }
     @objc private func back(){
+        //按返回的时候，需要将数据进行更新
+        
+        
        self.navigationController?.popViewController(animated: true)
     }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        //当每一次视图将要出现的时候，都要重新reload一下体重，防止那边换了单位，这边的信息还没换
+        self.tableview.reloadRows(at: [IndexPath(row:2,section:0)], with: .fade)
+    }
+    
     
 }
 extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
@@ -70,9 +80,11 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
   
         //放真实数据,右边value
         if(indexPath.row == 2){   //2为体重
-            cell?.detailTextLabel?.text = (infoDataArray[(indexPath as NSIndexPath).row] as? String)! + weightUnit
+            print("进入到体重这里")
+            cell?.detailTextLabel?.text = (infoDataArray[(indexPath as NSIndexPath).row] as? String)! + GetUnit.getWeightUnit()
+            print("体重这里，体重单位是什么",GetUnit.getWeightUnit())
         }else if(indexPath.row == 3){  //3为身高
-            cell?.detailTextLabel?.text = (infoDataArray[(indexPath as NSIndexPath).row] as? String)! + heightUnit
+            cell?.detailTextLabel?.text = (infoDataArray[(indexPath as NSIndexPath).row] as? String)! + "cm"
             print(infoDataArray[(indexPath as NSIndexPath).row] )
         }else{
             cell?.detailTextLabel?.text = infoDataArray[(indexPath as NSIndexPath).row] as? String
@@ -296,7 +308,6 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
     func selectedAddress(_ pickerView: BHJPickerView, _ procince: AddressModel, _ city: AddressModel, _ area: AddressModel) {
       //选择地址
     }
-    
     
   
 }

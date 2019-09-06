@@ -15,30 +15,14 @@ public class EvenChang{
     static func evenTonum(_ str:String)->Int{
         var a:Int
         switch str {
-            case "nothing":
+            case "Before Meal":
                  a = 0
-            case "AfterMeal":
+            case "After Meal":
                  a = 1
-            case "BeforeMeal":
+            case "Fasting":
                  a = 2
-            case "AfterFasting":
+            case "Random":
                  a = 3
-            case "BeforeFasting":
-                 a = 4
-            case "AfterDinner":
-                 a = 5
-            case "BeforeDinner":
-                 a = 6
-            case "AfterSnacks":
-                 a = 7
-            case "BeforeSnacks":
-                 a = 8
-            case "AfterNight":
-                 a = 9
-            case "Empty":
-                 a = 10
-            case "Other":
-                 a = 11
             default:
                  a = 0
         }
@@ -49,31 +33,15 @@ public class EvenChang{
         var a:String = "nothing"
         switch num {
             case 0:
-                a = "nothing"
+                a = "Before Meal"
             case 1:
-                a = "AfterMeal"
+                a = "After Meal"
             case 2:
-                a = "BeforeMeal"
+                a = "Fasting"
             case 3:
-                a = "AfterFasting"
-            case 4:
-                a = "BeforeFasting"
-            case 5:
-                a = "AfterDinner"
-            case 6:
-                a = "BeforeDinner"
-            case 7:
-                a = "AfterSnacks"
-            case 8:
-                a = "BeforeSnacks"
-            case 9:
-                a = "AfterNight"
-            case 10:
-                a = "Empty"
-            case 11:
-                a = "Other"
+                a = "Random"
             default:
-                a = "Nothing"
+                a = "Before Meal"
         }
         return a
     }

@@ -7,7 +7,8 @@
 //  用户手动输入界面
 
 import UIKit
-
+import Alamofire
+import HandyJSON
 class InsertViewController: UIViewController {
 
     private lazy var input:InputView = {
@@ -259,49 +260,57 @@ class InsertViewController: UIViewController {
     //点击保存
     @objc func save(){
         let alert = CustomAlertController()
-        let data = input.getData()
+        let date = input.getData()
         let time = input.getTime()
-        print("获得日期:",data)
+        print("获得日期:",date)
         print("获得时间:",time)
-//        let glucoseValue:Double? = (Double(input.glucose.XTTextfield.text!))!
-        
-        //如果血糖的单位为mg/dl,则范围为10到600
-        //如果血糖的单位为mmol/l,则范围为0.6到33.3
-//        if GetUnit.getBloodUnit() == "mg/dL"{
-//            print("此时进入了mg/dl这个血糖单位")
-//            if input.glucose.glucoseValueMG != Int(0){
-//                print("不为空时的内容",input.glucose.glucoseValueMG)
-//                if input.glucose.glucoseValueMG >= 10 && input.glucose.glucoseValueMG <= 600{
-//                     print("成功获取血糖值")
-//                }else{
-//                    alert.custom(self, "Attention", "血糖的范围应该在10到600之间")
-//                    return
-//                }
-//            }else{
-//                print("为空时的内容",input.glucose.XTTextfield.text!)
-//                print(input.glucose.glucoseValueMG)
-//                print("类型",type(of:input.glucose.glucoseValueMG))
-//                alert.custom(self, "Attention", "血糖不能为空")
-//                return
-//            }
-//        }else{ //mmol/L 单位
-//            print("此时进入了mmol/l这个血糖单位")
-//            if input.glucose.glucoseValueMM != Double(0){
-//                if input.glucose.XTTextfield.text! != ""{  //在保证不为空，里面进行判断
-//                    if input.glucose.glucoseValueMM >= 0.6 && input.glucose.glucoseValueMM <= 33.0{
-//                        print("成功获取到mmol/l单位的值",input.glucose.glucoseValueMM)
-//                    }else{
-//                        alert.custom(self, "Attention", "血糖的范围应该在0.6到33.3之间")
-//                        return
-//                    }
-//                }
-//            }else{//为空时
-//                print("mmol/L单位为空时的内容",input.glucose.XTTextfield.text!)
-//                print(input.glucose.glucoseValueMM)
-//                alert.custom(self, "Attention", "血糖不能为空")
-//                return
-//            }
-//        }
+        let createTime = date + " " + time + ":00"
+        print("存入到数据库的时间",createTime)
+        var bloodGlucoseValueMmol:Double?
+        var bloodGlucoseValueMg:Double?
+//        如果血糖的单位为mg/dl,则范围为10到600
+//        如果血糖的单位为mmol/l,则范围为0.6到33.3
+        if GetUnit.getBloodUnit() == "mg/dL"{
+            print("此时进入了mg/dl这个血糖单位")
+            if input.glucose.XTTextfield.text! != ""{   //先判断空
+                if FormatMethodUtil.validateMgdlBloodNumber(number: input.glucose.XTTextfield.text!) == true{
+                    if Double(input.glucose.XTTextfield.text!)! >= 10 && Double(input.glucose.XTTextfield.text!)! <= 600{
+                        bloodGlucoseValueMg = Double(input.glucose.XTTextfield.text!)!
+                        bloodGlucoseValueMmol = UnitConversion.mgTomm(num: bloodGlucoseValueMg!)
+                        print("血糖mg值",bloodGlucoseValueMg as Any)
+                        print("血糖mmol值",bloodGlucoseValueMmol as Any)
+                    }else{
+                        alert.custom(self, "Attention", "血糖的范围为10~600")
+                    }
+                }else{
+                    alert.custom(self, "Attention", "请正确输入血糖值")
+                    return
+                }
+            }else{
+                alert.custom(self, "Attention", "血糖不能为空")
+                return
+            }
+        }else{ //mmol/L 单位
+            print("此时进入了mmol/l这个血糖单位")
+            if input.glucose.XTTextfield.text! != ""{   //先判断空
+                if FormatMethodUtil.validateMgdlBloodNumber(number: input.glucose.XTTextfield.text!) == true{
+                    if Double(input.glucose.XTTextfield.text!)! >= 0.6 && Double(input.glucose.XTTextfield.text!)! <= 33.3{
+                        bloodGlucoseValueMmol = Double(input.glucose.XTTextfield.text!)!
+                        bloodGlucoseValueMg = UnitConversion.mmTomgDouble(num: bloodGlucoseValueMmol!)
+                        print("血糖mg值",bloodGlucoseValueMg as Any)
+                        print("血糖mmol值",bloodGlucoseValueMmol as Any)
+                    }else{
+                        alert.custom(self, "Attention", "血糖的范围为0.6~33.3")
+                    }
+                }else{
+                    alert.custom(self, "Attention", "请正确输入血糖值")
+                    return
+                }
+            }else{
+                alert.custom(self, "Attention", "血糖不能为空")
+                return
+            }
+        }
         let event = input.getEventValue()
         print("获得事件的值，并将其转为int类型的值",EvenChang.evenTonum(event))
         print("胰岛素的事件调试成功*********************")
@@ -313,7 +322,7 @@ class InsertViewController: UIViewController {
         print("胰岛素的类型调试成功*********************")
         var insulin_num:Double? = 0
         if input.porAndIns.insulinTextfield.text! != ""{
-            if FormatMethodUtil.validateBloodNumber(number: input.porAndIns.insulinTextfield.text!) == true{
+            if FormatMethodUtil.validateInsulinNum(number: input.porAndIns.insulinTextfield.text!) == true{
                 if Double(input.porAndIns.insulinTextfield.text!)! > 100.0{
                     alert.custom(self, "Attention", "输入胰岛素的值不能超过100")
                     return
@@ -327,25 +336,10 @@ class InsertViewController: UIViewController {
         }
         print("胰岛素的量",insulin_num!)
         print("胰岛素的量调试成功*********************")
-//        if input.getPorValue()
-//        let even = input.getEventValue()
-//        let insulin = input.getInsValue()
-//        let insulint_num = input.getInsNumValue()
-//        let weight = input.getWeightValue()
-//        let height = input.getHeightValue()
-//        let sysnum = input.getSysValue()
-//        let dianum = input.getDiaValue()
-//        let medicine = getMedicineArray()
-//        let sport = input.getSportType()
-//        let sport_time = input.getSportTime()
-//        let sport_strength = input.getSportStrength()
-
-//        print("获得血糖",type(of: input.getGlucoseValue()))
+       
         
-        
-        
-        let weight_kg:Double?
-        let weight_lbs:Double?
+        var weight_kg:Double? = 0
+        var weight_lbs:Double? = 0
         if input.bodyInfo.weightTextfield.text! != ""{  //如果不为空，才做这件事情
             if GetUnit.getWeightUnit() == "kg"{
                 if FormatMethodUtil.validateWeightKgNum(number: input.bodyInfo.weightTextfield.text!) == true{
@@ -379,7 +373,8 @@ class InsertViewController: UIViewController {
             }
             
         }
-        
+//        weight_lbs = weight_lbs!
+//        weight_kg = weight_kg!s
         
         print("体重调试成功")
         
@@ -482,10 +477,112 @@ class InsertViewController: UIViewController {
         
         let sport_strength = IntensityChange.intensityTonum(input.getSportStrength())
         print("获得运动强度转换后的值:",sport_strength)
-        //let arr:[String] = medicineChooseAlert.getMedicineArray()
-//        let arrtemp:[String] = ["dd","aa","dda","Asipirin"]
-//        setMedicineArray(arrtemp)
-//        print(getMedicineArray())
+
+        let no:String = ""
+        
+//        let test = st111()
+//        test.token = token
+//        test.userId = userId!
+//        test.userBloodGlucoseRecords = [glDate(bgid:"",
+//                                               usierid:userId!,
+//                                               dgmmol:bloodGlucoseValueMmol!,
+//                                               bgmg:Int64(bloodGlucoseValueMg!))]
+//        let jsonStr = test.toJSON()
+//        print(jsonStr)
+//
+//        let data = [[
+//            "userId":userId! as Any,
+//            "createTime":createTime,
+//            "datectionTime":EvenChang.evenTonum(event),
+//            "bloodGlucoseMmol":bloodGlucoseValueMmol! as Any,
+//            "bloodGlucoseMg":bloodGlucoseValueMg! as Any,
+//            "eatType":no,
+//            "eatNum":EatNumChange.eatTonum(eat_num),
+//            "insulinType":insulin_type,
+//            "insulinNum":insulin_num! as Any,
+//            "height":height! as Any,
+//            "weightKg":weight_kg! as Any,
+//            "weightLbs":weight_lbs! as Any,
+//            "systolicPressureMmhg":sys_press_mmHg! as Any,
+//            "systolicPressureKpa":sys_press_kPa! as Any,
+//            "diastolicPressureMmhg":dis_press_mmHg! as Any,
+//            "diastolicPressureKpa":dis_press_kPa! as Any,
+//            "medicine":medicine_string,
+//            "sportType":sport,
+//            "sportTime":sport_time! as Any,
+//            "sportStrength":sport_strength,
+//            "inputType":1,
+//            "remark": no ,
+//            "mechineId":no
+//        ]]
+        //手动输入数据，请求部分
+        let dictString = [ "token":token,
+                                      "userId":userId! as Any,
+                                      "userBloodGlucoseRecords":
+                                        [[
+                                        "userId":userId! as Any,
+                                        "createTime":createTime,
+                                        "datectionTime":EvenChang.evenTonum(event),
+                                        "bloodGlucoseMmol":bloodGlucoseValueMmol! as Any,
+                                        "bloodGlucoseMg":bloodGlucoseValueMg! as Any,
+                                        "eatType":no,
+                                        "eatNum":EatNumChange.eatTonum(eat_num),
+                                        "insulinType":insulin_type,
+                                        "insulinNum":insulin_num! as Any,
+                                        "height":height! as Any,
+                                        "weightKg":weight_kg! as Any,
+                                        "weightLbs":weight_lbs! as Any,
+                                        "systolicPressureMmhg":sys_press_mmHg! as Any,
+                                        "systolicPressureKpa":sys_press_kPa! as Any,
+                                        "diastolicPressureMmhg":dis_press_mmHg! as Any,
+                                        "diastolicPressureKpa":dis_press_kPa! as Any,
+                                        "medicine":medicine_string,
+                                        "sportType":sport,
+                                        "sportTime":sport_time! as Any,
+                                        "sportStrength":sport_strength,
+                                        "inputType":1,
+                                        "remark": no,
+                                        "mechineId":no
+            ]]
+                                    ] as [String : Any]
+        print(dictString)
+        Alamofire.request(INSERTRECORD,method: .post,parameters: dictString).responseString{ (response) in
+            
+//            print(response.request?.httpBody)
+            
+            if response.result.isSuccess {
+                if let jsonString = response.result.value {
+                    print("进入验证过程")
+                    print(jsonString)
+                    
+                    
+                    // json转model
+                    // 写法一：responseModel.deserialize(from: jsonString)
+                    // 写法二：用JSONDeserializer<T>
+                    /*
+                     利用JSONDeserializer封装成一个对象。然后再解析这个对象，此处返回的不同，需要封装成responseAModel的响应体
+                     //                         */
+                    if let responseModel = JSONDeserializer<responseModel>.deserializeFrom(json: jsonString) {
+                        /// model转json 为了方便在控制台查看
+                        print("瞧瞧输出的是什么",responseModel.toJSONString(prettyPrint: true)!)
+                        /*  此处为跳转和控制逻辑
+                         */
+                        if(responseModel.code == 1 ){
+                            print(responseModel.code)
+                            print("插入成功")
+                            //跳转到首页
+                        }else{
+                            print(responseModel.code)
+                            print("插入失败")
+                            //跳转到首页
+                        }
+                    } //end of letif
+                }
+            }
+        }//end of request
+        
+        
+        
         print("点击了保存")
         
         //        self.navigationController?.popViewController(animated: true)
@@ -531,7 +628,7 @@ class InsertViewController: UIViewController {
         }
         return arr
     }
-    //设置药物名称,需要传入一个String数组     数据回写
+    //设置药物名称,需要传入一个String数组     数据回写    xxx,xxxx,xxx    
     func setMedicineArray(_ arr:Array<String>){
         let initLength:Int = medicineChooseAlert.alertData.count
         var arrtemp = arr
