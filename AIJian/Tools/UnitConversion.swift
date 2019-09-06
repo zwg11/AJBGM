@@ -30,4 +30,11 @@ public class UnitConversion{
         let num1:Int = Int(a)
         return num1
     }
+    //mmol/L转mg/dL，为小单位转大单位，乘以18.02  保留一位小数
+    static func mmTomgDouble(num:Double) -> Double {
+        var a:Double = num
+        let x = String(format: "%03.1f", num * 18.02)
+        a = Double(x)!
+        return a
+    }
 }

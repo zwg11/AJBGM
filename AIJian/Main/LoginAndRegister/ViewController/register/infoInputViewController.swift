@@ -13,14 +13,17 @@ import HandyJSON
 
 class infoInputViewController: UIViewController,UITextFieldDelegate {
 
+    
+   
+    
     //邮箱，来自上一步传过来的
-    var email:String? = "1115824104@qq.com"
+    var email:String?
     //用户名
     var userName:String? = ""
     //标志位,用来设置性别的
     var flag:Bool = true
-    //性别
-    var gender:String? = "男"
+    //性别  男为1   女为0
+    var gender:String? = "1"
     //身高
     var height:String? = ""
     //体重
@@ -69,10 +72,15 @@ class infoInputViewController: UIViewController,UITextFieldDelegate {
     
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         self.title = "填写个人信息"
         self.view.backgroundColor = UIColor.white
         // Do any additional setup after loading the view.
+        
+//        email = register.email
+//        verifyString = register.data
+     
         
         self.view.addSubview(infoinputView)
         infoinputView.snp.makeConstraints{(make) in
@@ -111,7 +119,7 @@ class infoInputViewController: UIViewController,UITextFieldDelegate {
    
         infoinputView.gender_man_button.setImage(UIImage(named: "selected"), for: .normal)
         infoinputView.gender_woman_button.setImage(UIImage(named: "unselected"), for: .normal)
-        gender = "男"
+        gender = "1"
        
         
     }
@@ -119,7 +127,7 @@ class infoInputViewController: UIViewController,UITextFieldDelegate {
     @objc func genderWoman(){
         infoinputView.gender_woman_button.setImage(UIImage(named: "selected"), for: .normal)
         infoinputView.gender_man_button.setImage(UIImage(named: "unselected"), for: .normal)
-        gender = "女"
+        gender = "0"
     }
     
     //选择出生日期
@@ -203,6 +211,7 @@ class infoInputViewController: UIViewController,UITextFieldDelegate {
     
     //完成的点击方法
     @objc func finish(){
+        print("点击了完成方法")
         let alertController = CustomAlertController()
         //用户名
        userName = infoinputView.userNameTextField.text!
@@ -215,7 +224,7 @@ class infoInputViewController: UIViewController,UITextFieldDelegate {
         //国家
         country = infoinputView.nationTextField.text!
         //电话
-        phoneNumber = infoinputView.nationTextField.text!
+        phoneNumber = infoinputView.phoneTextField.text!
         //时间
 //        brithday =
         if userName == ""{
@@ -224,12 +233,6 @@ class infoInputViewController: UIViewController,UITextFieldDelegate {
         }else if country == ""{
              alertController.custom(self, "Attention", "国家不能为空")
             return
-        }else if height != ""{
-//            if Double(height) > 300.0{
-//                alertController.custom(self, "Attention", "身高只能填写最多只能填写小于300的数")
-//                return
-//            }
-            return
         }else{  //经过验证之后的请求
             print(userName!)
             print("性别为",gender!)
@@ -237,7 +240,21 @@ class infoInputViewController: UIViewController,UITextFieldDelegate {
             print(weightKg!)
             print(country!)
             print(phoneNumber!)
-            let dictString:Parameters = ["user":["email":String(email!),"userName":String(userName!),"gender":String(gender!),"birthday":String(brithday!),"height":String(height!),"weightKg":String(weightKg!),"country":String(country!),"phoneNumber":String(phoneNumber!)],"verifyString":String(verifyString!)]
+            print("从前一个页面传过来的email",email!)
+            print("从前一个页面传过来的data",verifyString!)
+            let dictString:Parameters = [
+                "user":[
+                    "email":String(email!),
+                    "userName":String(userName!),
+                    "gender":String(gender!),
+                    "birthday":String(brithday!),
+                    "height":String(height!),
+                    "weightKg":String(weightKg!),
+                    "country":String(country!),
+                    "phoneNumber":String(phoneNumber!)
+                     ],
+                "verifyString":String(verifyString!)
+                   ]
             print(dictString)
             Alamofire.request(FillUserInfo,method: .post,parameters: dictString).responseString{ (response) in
                 if response.result.isSuccess {
@@ -258,12 +275,15 @@ class infoInputViewController: UIViewController,UITextFieldDelegate {
                             /*  此处为跳转和控制逻辑
                              */
                             if(responseModel.code == 1 ){
-                                print("登录成功")
-                                print("跳转到修改密码那一页")
-                                //                              self.navigationController?.pushViewController(emailCheckSecViewController(), animated: true)
+                                print(responseModel.code)
+                                 self.navigationController?.popToRootViewController(animated: true)
+                                alertController.custom(self,"Attention", "返回1，注册成功")
+                               
                             }else{
                                 print(responseModel.code)
-                                alertController.custom(self,"Attention", "修改失败")
+                                self.navigationController?.popToRootViewController(animated: true)
+                                alertController.custom(self,"Attention", "返回0，注册成功")
+                                
                             }
                         } //end of letif
                     }
@@ -272,12 +292,8 @@ class infoInputViewController: UIViewController,UITextFieldDelegate {
             
             
         }
- 
         
-        
-        
-        
-    }
+    }  //函数结束
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // 收起键盘
         textField.resignFirstResponder()

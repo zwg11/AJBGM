@@ -42,18 +42,10 @@
 	</array>
 	<key>event</key>
 	<array>
-		<string>Nothing</string>
-		<string>AfterMeal</string>
-		<string>BeforeMeal</string>
-		<string>AfterFasting</string>
-		<string>BeforeFasting</string>
-		<string>AfterDinner</string>
-		<string>BeforeDinner</string>
-		<string>AfterSnacks</string>
-		<string>BeforeSnacks</string>
-		<string>AfterNight</string>
-		<string>Empty</string>
-		<string>Other</string>
+		<string>Before Meal</string>
+		<string>After Meal</string>
+		<string>Fasting</string>
+		<string>Random</string>
 	</array>
 </dict>
 </plist>

@@ -43,10 +43,10 @@ class SharedView: UIView {
     }()
     
     // 发送报告的动作
-    @objc func sendCheck(){
-        print("send.")
-        sendButton.setTitleColor(UIColor.red, for: .highlighted)
-    }
+//    @objc func sendCheck(){
+//        print("send.")
+//        sendButton.setTitleColor(UIColor.red, for: .highlighted)
+//    }
     
     // MARK: - 报告内容大致信息说明
     // view框

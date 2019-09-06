@@ -163,7 +163,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             recoverBlood.titleLabel?.textColor = UIColor.white
             return recoverBlood
         }()
-    
+    /*****************************************************************************************************/
         override func viewDidLoad() {
             super.viewDidLoad()
             self.title = "bloodsetting"
@@ -171,6 +171,18 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             self.view.backgroundColor = UIColor.white
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(title:"back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back))
            
+            let information = UILabel(frame: CGRect())
+            information.text = "BG Targets"
+            information.textAlignment = .center
+            information.font = UIFont.systemFont(ofSize: 18)
+            information.layer.borderWidth = 0.5
+            self.view.addSubview(information)
+            information.snp.makeConstraints{ (make) in
+                make.height.equalTo(AJScreenHeight/15)
+                make.width.equalTo(AJScreenWidth)
+               make.top.equalTo(navigationBarHeight)
+            }
+            
             
             //空腹
             let emptyStomach_label = UILabel(frame: CGRect())
@@ -182,7 +194,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                 make.height.equalTo(AJScreenWidth/15)
                 make.width.equalTo(AJScreenWidth/8)
                 make.left.equalTo(AJScreenWidth/7)
-                make.top.equalTo(navigationBarHeight+AJScreenWidth/10)
+                make.top.equalTo(information.snp.bottom).offset(AJScreenWidth/10)
             }
             
             //空腹左侧输入框

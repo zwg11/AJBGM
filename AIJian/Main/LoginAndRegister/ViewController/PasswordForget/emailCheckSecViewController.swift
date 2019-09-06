@@ -38,6 +38,9 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
 //        let x = emailCheckViewController()
 //        let y = x.email
 
+        print("上一页传过来的email",email)
+        
+        print("上一页传过来的verifyString",verifyString)
         self.view.backgroundColor = UIColor.white
         self.title = "修改密码"
         self.view.addSubview(emailCheckSec)
@@ -59,7 +62,7 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
         let alertController = CustomAlertController()
         password = emailCheckSec.passwordTextField.text!
         passwordSec = emailCheckSec.passwordSecTextField.text!
-        let email:String = "1115824104@qq.com"
+//        let email:String = "1115824104@qq.com"
 //        print(password)
 //        print(passwordSec)
         if password == ""{
@@ -72,9 +75,11 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
              alertController.custom(self, "Attention", "两次密码不同")
             return
         }else{//经过前端验证之后，需要进行后端验证
-            let dictString:Dictionary = [ "newPassword":String(password!),"email":String(email),"verifyString":String(verifyString!)]
+            print(email!)
+            print(verifyString!)
+            let dictString:Dictionary = [ "newPassword":String(password!),"email":String(email!),"verifyString":String(verifyString!)]
              print(dictString)
-             Alamofire.request(PasswordChangeNeedCode,method: .post,parameters: dictString).responseString{ (response) in
+             Alamofire.request(RETRIEVESECOND,method: .post,parameters: dictString).responseString{ (response) in
                 if response.result.isSuccess {
                     if let jsonString = response.result.value {
                         print("进入验证过程")
@@ -92,10 +97,12 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
                             if(responseModel.code == 1 ){
                                 print("重置成功")
                                 print("跳转到修改密码那一页")
-                                self.navigationController?.popToViewController(loginViewController(), animated: true)
+                                self.navigationController?.popToRootViewController(animated: true)
                             }else{
+                                //先转，后弹
+                                self.navigationController?.popToRootViewController(animated: true)
                                 alertController.custom(self,"Attention", "修改失败")
-                                self.navigationController?.popToViewController(loginViewController(), animated: true)
+                                
                             }
                         } //end of letif
                     }

@@ -10,6 +10,8 @@ import Foundation
 public class GetUnit{
     
     static let instance = GetUnit()
+    
+    
     //获取当前血压单位
     static func getPressureUnit() -> String{
         let unit_path = Bundle.main.path(forResource: "UnitSetting", ofType: "plist")

@@ -69,6 +69,7 @@
 		A489FE1D1E209499E7F9EA11DD91D8C1 /* StatisticDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3143243F11C6CB31301BDE5B0B1EAC /* StatisticDate.swift */; };
 		A4ED7886092801F8747BE1A2182D7314 /* ChartHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9EECDFBBCC15B19BB9A7310C3C5FC1 /* ChartHeaderView.swift */; };
 		A51D1EDF287FD5220248DC6C355A5AC8 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F58ECE090CC8932E95E703B01B4E2B /* InputView.swift */; };
+		A51F9B8EA9488DBFC4F727ED5E91473F /* CurrentVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD500821F545519203F5A1882AD77ED1 /* CurrentVersion.swift */; };
 		A87003F858AAC758556FC11B84E22CC6 /* NSDate+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACDB27DDBFA6BA1FEA8A6864CE435C5 /* NSDate+Date.swift */; };
 		AB27A7600A1A69D96B3C0BDEEBA411E6 /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281577697E4B5C8A234B003E370ABACA /* AboutUsViewController.swift */; };
 		AE5F885CE9A2327A38A50458E467EBE8 /* AJMineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B122EE08303781538E0581FB9B0AF84 /* AJMineHeaderView.swift */; };
@@ -89,6 +90,7 @@
 		C701921CAA5E7D6176A633628D36FCD2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21A6D55DCBB198190A95457237730BD /* HomeViewController.swift */; };
 		C8C584C14E41F381E1E0B5BA0C387AE8 /* UIAlertViewController_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BB31FFA0EA717578FBF645BF4D701F /* UIAlertViewController_Extension.swift */; };
 		CDAE1F2D93FE04AAC0DB578104CB6109 /* User.plist in Resources */ = {isa = PBXBuildFile; fileRef = A5A1585583F171AC210D37D0F2F28C6E /* User.plist */; };
+		CE7A682B87979E6CD2FFAF3C097ED6F8 /* GlobalValue.plist in Resources */ = {isa = PBXBuildFile; fileRef = 961092F618DFD3A23C3E2C9E1F14FB00 /* GlobalValue.plist */; };
 		D04F636417EB92069574FA06715E5F33 /* SuggestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A18E98B74565B5E695548D96DE09E13 /* SuggestionViewController.swift */; };
 		D3598BAB73CFEA38A43DA2264E156B52 /* GetBloodLimit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114081AB7B0ED40CD96B4D28D031951A /* GetBloodLimit.swift */; };
 		D4479E94DAB95BEB3DED8B7DF7B6BB68 /* sportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7913A53032178A4B8556F90346B73A35 /* sportView.swift */; };
@@ -186,6 +188,7 @@
 		934C03A16BAD1A90B8D792A740D0BE1B /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
 		9401A41A7EAE912E80D8ED43EB312202 /* LastResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LastResultTableViewCell.swift; path = AIJian/Main/Home/LastResultTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		946C4B448C4368010D25171286A04DC5 /* UnitSetting.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = UnitSetting.plist; sourceTree = "<group>"; };
+		961092F618DFD3A23C3E2C9E1F14FB00 /* GlobalValue.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = GlobalValue.plist; sourceTree = "<group>"; };
 		9793C8E8D4581432CB83EE79CF209C56 /* PassChangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassChangeViewController.swift; sourceTree = "<group>"; };
 		9CC343A4BFCBECD9056D60A82B6F7115 /* glucoseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = glucoseView.swift; sourceTree = "<group>"; };
 		9CCA193DA6A5E1E858111B284800163C /* BloodSetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BloodSetViewController.swift; sourceTree = "<group>"; };
@@ -204,6 +207,7 @@
 		B9FC2F51C9CAE9D3C768C8D06AE069A2 /* const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = const.swift; sourceTree = "<group>"; };
 		BD0D1AC2632CAB8219D398832954F62F /* ChartDrawFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDrawFunc.swift; sourceTree = "<group>"; };
 		BD1FFFCEAEB20DEFEC8716743912DE93 /* pickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pickerView.swift; sourceTree = "<group>"; };
+		BD500821F545519203F5A1882AD77ED1 /* CurrentVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentVersion.swift; sourceTree = "<group>"; };
 		C21A6D55DCBB198190A95457237730BD /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		CA2549D6C67890470A3C4246AC4EF841 /* AJTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AJTabbarController.swift; sourceTree = "<group>"; };
 		CC1045C7B12598B6BDF9051A059F6A49 /* perAndAfterMealTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = perAndAfterMealTests.swift; sourceTree = "<group>"; };
@@ -244,6 +248,7 @@
 		03703B9D5A4517C1D27073C4C4F20A55 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
+				961092F618DFD3A23C3E2C9E1F14FB00 /* GlobalValue.plist */,
 				946C4B448C4368010D25171286A04DC5 /* UnitSetting.plist */,
 				A5A1585583F171AC210D37D0F2F28C6E /* User.plist */,
 				367F547FD8A2D05AB23C071F7752C480 /* defaultBloodSetting.plist */,
@@ -389,6 +394,7 @@
 				281577697E4B5C8A234B003E370ABACA /* AboutUsViewController.swift */,
 				9CCA193DA6A5E1E858111B284800163C /* BloodSetViewController.swift */,
 				069125044C84D4B9A10D2EFF9A2057BB /* BrithdayViewController.swift */,
+				BD500821F545519203F5A1882AD77ED1 /* CurrentVersion.swift */,
 				E99EF319B2FAC2A3CB837B6E08BAC6D7 /* InfoViewController.swift */,
 				531A0A352EC54333AE6CC2C50FF28F11 /* MineViewController.swift */,
 				9793C8E8D4581432CB83EE79CF209C56 /* PassChangeViewController.swift */,
@@ -740,6 +746,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				404DF41E22F23B418B99982210F28297 /* Assets.xcassets in Resources */,
+				CE7A682B87979E6CD2FFAF3C097ED6F8 /* GlobalValue.plist in Resources */,
 				2C9DC80088BFE63075C792E21BA74909 /* LaunchScreen.storyboard in Resources */,
 				4C433DFBF324335CF5426A76C3A8C0E6 /* Localization.strings in Resources */,
 				DAB75D62191E7B20DE8D9FC833830F2D /* Main.storyboard in Resources */,
@@ -816,6 +823,7 @@
 				A4ED7886092801F8747BE1A2182D7314 /* ChartHeaderView.swift in Sources */,
 				1DE16FE45BBA038D234EB138172EFDA9 /* ChartView.swift in Sources */,
 				4EA8F5F3B9FD7A60E6A46D35F6C6792C /* ChartViewController.swift in Sources */,
+				A51F9B8EA9488DBFC4F727ED5E91473F /* CurrentVersion.swift in Sources */,
 				C2CBA0DB1212C80B70711093478F6D50 /* CustomAlertController.swift in Sources */,
 				2303D6B254DB0D5874889FB3A5EFC415 /* DBSQLiteManager.swift in Sources */,
 				8FA5DCA84D635AA4D80C1A78D6EF2D17 /* DataTableViewController.swift in Sources */,
@@ -1054,7 +1062,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+
 				DEVELOPMENT_TEAM = U556FBGR65;
+
 				INFOPLIST_FILE = AIJian/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1074,7 +1084,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+
 				DEVELOPMENT_TEAM = U556FBGR65;
+
 				INFOPLIST_FILE = AIJian/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (

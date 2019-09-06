@@ -4,7 +4,7 @@
 //
 //  Created by ADMIN on 2019/8/29.
 //  Copyright © 2019 apple. All rights reserved.
-//
+//   获取用户最原始的token信息和userId信息
 
 import Foundation
 

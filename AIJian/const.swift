@@ -9,6 +9,12 @@
 import Foundation
 import UIKit
 
+//全局登录逻辑值
+let shift_path = Bundle.main.path(forResource: "GlobalValue", ofType: "plist")
+let shift_data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: shift_path!)!
+
+let SHIFT = shift_data["shift"]
+
 
 let AJScreenWidth = UIScreen.main.bounds.width
 let AJScreenHeight = UIScreen.main.bounds.height

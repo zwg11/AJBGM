@@ -9,6 +9,7 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
+<<<<<<< HEAD
             filePath = "AIJian/Main/Data/ViewController/SharedViewController.swift"
             timestampString = "589433381.485852"
             startingColumnNumber = "9223372036854775807"
@@ -493,6 +494,14 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "176"
             endingLineNumber = "176"
+=======
+            filePath = "AIJian/Main/Home/ViewController/HomeViewController.swift"
+            timestampString = "589343739.0579441"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
+>>>>>>> 94a8c1575440233a20e4cf78c202ed203c6fe81a
             landmarkName = "requestData(day:)"
             landmarkType = "7">
          </BreakpointContent>

@@ -535,7 +535,7 @@ class InputView: UIView,UIScrollViewDelegate {
         let alert = CustomAlertController()
         var a:Double? = 0
         if porAndIns.insulinTextfield.text! != ""{
-            if FormatMethodUtil.validateBloodNumber(number: porAndIns.insulinTextfield.text!) == true{
+            if FormatMethodUtil.validateInsulinNum(number: porAndIns.insulinTextfield.text!) == true{
                 a = Double(porAndIns.insulinTextfield.text!)!
                 return a!
             }else{
