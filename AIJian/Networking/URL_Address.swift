@@ -35,3 +35,6 @@ let PasswdReset = BASE_URL + "app/passwordReset"
 
 // 请求数据
 let REQUEST_DATA_URL = OTHER_URL + "app/bloodGlucoseRecord/queryRecord"
+
+// 删除数据
+let DELETE_DATA_URL = OTHER_URL + "app/bloodGlucoseRecord/deleteRecord"

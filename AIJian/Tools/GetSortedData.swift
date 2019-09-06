@@ -90,22 +90,23 @@ func chartData(){
     // 如果有数据，那么得到适合生成图表的数组
     
     if sortedByDateOfData!.count > 0{
-        
-        
         for i in sortedByDateOfData!{
             //glucoseValue.append(value)
             let date11 = i.createTime!.toDate()?.date
             Time.append(date11!)
-            TimeAndValue.updateValue(i.bloodGlucoseMmol!, forKey: date11!)
-            
+            // 判断单位设定，根据不同的单位封装不同的数据
+            if GetUnit.getBloodUnit() == "mmol/L"{
+                // updateValue函数在字典中有对应key时更新value，没有对应key时添加
+                TimeAndValue.updateValue(i.bloodGlucoseMmol!, forKey: date11!)
+            }else{
+                TimeAndValue.updateValue(Double(i.bloodGlucoseMg!), forKey: date11!)
+            }
         }
-        
     }
     
     // 将处理好的数组赋值给对应数组
     glucoseTime = Time
     glucoseTimeAndValue = TimeAndValue
-    
     print("glucoseTimeAndValue:\(glucoseTimeAndValue)")
     
 }

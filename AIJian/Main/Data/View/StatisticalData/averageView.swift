@@ -74,14 +74,14 @@ class averageView: UIView {
         label.textAlignment = .center
         label.layer.borderColor = borderColor.cgColor
         label.layer.borderWidth = 1
-        label.layer.cornerRadius = 17.5
+        label.layer.cornerRadius = AJScreenWidth/20
         return label
         
     }()
     // 单位
     private lazy var glucoseUnit:UILabel = {
         let label = UILabel()
-        label.text = "mmol/L"
+        label.text = GetUnit.getBloodUnit()
         label.textColor = UIColor.black
         label.font = UIFont.systemFont(ofSize: 16)
         label.textAlignment = .right
@@ -149,8 +149,6 @@ class averageView: UIView {
             make.top.equalTo(glucoseLabel.snp.bottom).offset(10)
             make.height.equalTo(glucoseLabel.snp.height)
             make.width.equalTo((AJScreenWidth-20)/2 )
-            
-            
         }
 
         // 每天检测次数label布局
@@ -160,25 +158,27 @@ class averageView: UIView {
             make.top.equalTo(sDLabel.snp.bottom).offset(10)
             make.height.equalTo(glucoseLabel.snp.height)
             make.width.equalTo((AJScreenWidth-20)/2 )
-            
         }
+        
         // 血糖单位label布局
         self.avgView.addSubview(glucoseUnit)
+        glucoseUnit.sizeToFit()
         self.glucoseUnit.snp.makeConstraints{ (make) in
             make.right.equalToSuperview().offset(-10)
             make.bottom.equalTo(glucoseLabel.snp.bottom)
             make.height.equalTo(glucoseLabel.snp.height)
-            make.width.equalTo((AJScreenWidth-20)/6 )
-            
+            //make.width.equalTo((AJScreenWidth-20)/6)
         }
+        
         // 血糖值label布局
         self.avgView.addSubview(glucoseValue)
         self.glucoseValue.snp.makeConstraints{ (make) in
-            make.right.equalTo(glucoseUnit.snp.left)
+            make.right.equalTo(glucoseUnit.snp.left).offset(AJScreenWidth/30)
             make.bottom.equalTo(glucoseLabel.snp.bottom)
-            make.height.width.equalTo(35)
+            make.height.width.equalTo(AJScreenWidth/10)
             
         }
+        
         // 标准差label布局
         self.avgView.addSubview(standardDeValue)
         self.standardDeValue.snp.makeConstraints{ (make) in
@@ -188,6 +188,7 @@ class averageView: UIView {
             make.width.equalTo((AJScreenWidth-20)/8 )
             
         }
+        
         // 检测次数label布局
         self.avgView.addSubview(testNum)
         self.testNum.snp.makeConstraints{ (make) in
@@ -221,9 +222,17 @@ class averageView: UIView {
             avgCheckNum = Double(sumCheckNum)/Double(daysNum!)
             
             // 检测血糖值总和
-            for i in sortedByDateOfData!{
-                sumBloodGlucoseValue += i.bloodGlucoseMmol!
+            // 别忘了判断单位
+            if GetUnit.getBloodUnit() == "mg/dL"{
+                for i in sortedByDateOfData!{
+                    sumBloodGlucoseValue += Double(i.bloodGlucoseMg!)
+                }
+            }else{
+                for i in sortedByDateOfData!{
+                    sumBloodGlucoseValue += i.bloodGlucoseMmol!
+                }
             }
+            
             // 血糖平均值
             avgGlucoseValue = sumBloodGlucoseValue/Double(sumCheckNum)
             

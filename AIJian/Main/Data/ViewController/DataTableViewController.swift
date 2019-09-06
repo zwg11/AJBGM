@@ -9,9 +9,10 @@
 import UIKit
 import SnapKit
 import SwiftDate
+import Alamofire
+import HandyJSON
 
 class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //  如果列表章节数大于0
@@ -70,7 +71,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         DATETableView.isScrollEnabled = false
         
         
-        NotificationCenter.default.addObserver(self, selector: #selector(test), name: NSNotification.Name(rawValue: "reload"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(test), name: NSNotification.Name(rawValue: "reloadTable"), object: nil)
         
     }
     
@@ -125,7 +126,11 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
     // 表格章节数依据数据里的日期，有几天有数据就是几个章节
     func numberOfSections(in tableView: UITableView) -> Int {
         if (sortedTime.count != 0) {
-            print("num of section:\(sortedTime.count)")
+            if tableView == DATATableView{
+                print("DATATableView num of section:\(sortedTime.count)")
+            }else{
+                print("num of section:\(sortedTime.count)")
+            }
             return sortedTime.count
         }
         else{
@@ -138,8 +143,18 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         // 设置点击单元格有选中z动画，手指松开时变为未选中
         tableView.deselectRow(at: indexPath, animated: true)
         let alert = UIAlertController(title: "您是想选择", message: "", preferredStyle: .alert)
-        let editAction = UIAlertAction(title: "编辑", style: .default, handler: nil)
-        let deleteAction = UIAlertAction(title: "删除", style: .destructive, handler: nil)
+        // 该动作编辑一条记录
+        let editAction = UIAlertAction(title: "编辑", style: .default, handler: {(UIAlertAction)->Void in
+
+            self.present(InsertViewController(), animated: true, completion: nil)
+            
+        })
+        // 该动作删除一条记录，先删除服务器的，再删除本地数据库，最后删除全局变量的
+        let deleteAction = UIAlertAction(title: "删除", style: .destructive, handler: {(UIAlertAction)->Void in
+            // 进行删除操作
+            self.deleteData(section: indexPath.section, row: indexPath.row)
+            
+        })
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
         alert.addAction(editAction)
         alert.addAction(deleteAction)
@@ -191,7 +206,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         
         
         //let scroll = UIScrollView(frame: CGRect(x: 70, y: 10, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height-100))
-        scroll.contentSize = CGSize(width: 640, height: scHeight)
+        scroll.contentSize = CGSize(width: 720, height: scHeight)
         scroll.showsHorizontalScrollIndicator = true
         scroll.indicatorStyle = .black
         scroll.bounces = false
@@ -217,29 +232,99 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         DATATableView.isScrollEnabled = false
         scroll.addSubview(DATATableView)
     }
-    
+    private lazy var label:UILabel = {
+        let label = UILabel()
+        label.text = "No Data"
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 20)
+        //label.center = self.view.center
+        label.frame.size = CGSize(width: 200, height: 200)
+        return label
+    }()
     func initTable(){
-        //let title = DataViewController().rangePickerButton.title(for:.normal)
-
-//        let today = DateInRegion().dateAt(.endOfDay).date
-//        let end = today + 1.seconds
-        // 监听导航栏右按钮的文本，对于不同的文本生成对应的数据
-//        switch pickerSelectedRow{
-//         // 如果是最近几天的数据，向数据库要数据并处理
-//        case 1,2,3:
-//
-//            initDataSortedByDate(startDate: startD!, endDate: endD!, userId: userId!)
-//            sortedTimeOfData()
-//
-//        default:
-//            print("zidingyi ")
-//
-//        }
-        
+        self.view.addSubview(label)
+        label.snp.makeConstraints{(make) in
+            make.left.right.equalToSuperview()
+            make.centerY.equalToSuperview()
+        }
         // 重新加载表格内容
         DATATableView.reloadData()
         DATETableView.reloadData()
+        if sortedTime.count > 0{
+            label.removeFromSuperview()
+        }
+        
     }
-    
+}
 
+
+extension DataTableViewController{
+    // 该函数向服务器请求删除y某一条数据并进行一定程度的数据处理
+    // 包括对本地数据库的删除、全局变量的删除
+    // deleteData()
+    func deleteData(section:Int,row:Int){
+        
+        let gluData = sortedData[section][row]
+        let recordId = gluData.bloodGlucoseRecordId!
+        let usr_id = userId!
+        let tk = token!
+        // 设置信息请求字典
+        let dicStr:Dictionary = ["bloodGlucoseRecordId":recordId,"token":tk,"userId":usr_id] as [String : Any]
+        print(dicStr)
+        let parameters:Parameters = [
+            "token":token!,
+            "userId":userId!,
+            "userBloodGlucoseRecords":[
+                [
+                    "userId":userId!
+                    
+                ]
+            ]
+        ]
+        // 请求删除数据，请求信息如上字典
+        //********
+        Alamofire.request(DELETE_DATA_URL,method: .post,parameters: dicStr).responseString{ (response) in
+            // 如果请求得到回复
+            if response.result.isSuccess {
+                print("收到删除的回复")
+                if let jsonString = response.result.value {
+                    
+                    /// json转model
+                    /// 写法一：responseModel.deserialize(from: jsonString)
+                    /// 写法二：用JSONDeserializer<T>
+                    /*
+                     利用JSONDeserializer封装成一个对象。然后再把这个对象解析为
+                     */
+                    if let deleteResponse = JSONDeserializer<deleteResponse>.deserializeFrom(json: jsonString) {
+                        // 如果 返回信息说明 请删除失败，则弹出警示框报错
+                        if deleteResponse.code != 1{
+                            let alert = CustomAlertController()
+                            alert.custom(self, "警告", "删除失败，请稍后重试")
+                            // 删除失败函数直接退出
+                            return
+                        }else{
+                            // 如果删除成功
+                            // ******** 删除数据库对应的数据 ***********
+                            let dbSql = DBSQLiteManager()
+                            if dbSql.deleteGlucoseRecord(gluData.bloodGlucoseRecordId!){
+                                sortedData[section].remove(at: row)
+                            }
+                        }
+                        
+                        
+                    }
+                }
+            }// 如果请求得到回复
+                
+                // 如果请求未得到回复
+            else{
+                // 弹出警示框，提示用户
+                let alert = CustomAlertController()
+                alert.custom(self, "错误", "网络异常，请重新操作")
+                return
+            }// 如果请求未得到回复
+        }
+        //**********
+    }
+    // deleteData() end
 }

@@ -1,0 +1,203 @@
+/* 
+  Localization.strings
+  AIJian
+
+  Created by ADMIN on 2019/9/2.
+  Copyright © 2019 apple. All rights reserved.
+*/
+/******** 注：有些页面的字段重复出现，如前面已定义过，那么就会注释掉 ********/
+
+/*  登录  */
+"Email" = "Email";
+"Password" = "Password";
+"Forgot Password" = "Forgot Password";
+"Sign In" = "Sign In";
+"New here?Sign up" = "New here? Sign up";
+
+/*  注册  */
+"Sign up" = "Sign up";
+"Name" = "Name";
+//"Email" = "Email";
+"Set Password" = "Set Password";
+"Confirm the Password" = "Confirm the Password";
+"Next" = "Next";
+// 同意注册协议
+"Agreed Protocol" = "Agreed 'Registration Protocol' and submit the information";
+
+/*  填写个人信息  */
+"Personal Information" = "Personal Information";
+//"Name" = "Name"
+"Gender" = "Gender";
+"Male" = "Male";
+"Female" = "Female";
+"Country" = "Country";
+"Phone" = "Phone";
+"Date of Birth" = "Date of Birth";
+//"Sign up" = "Sign up"
+
+/*  邮箱验证  */
+"Email Vertification" = "Email Vertification";
+"Code" = "Code";
+"Send Code" = "Send Code";
+//"Next" = "Next"
+
+/*  修改密码  */
+"Change Password" = "Change Password";
+"New Password" = "New Password";
+//"Confirm the Password" = "Confirm the Password"
+"OK" = "OK";
+
+/*  首页  */
+"Latest BG" = "Latest BG";
+"BG" = "BG";
+"Last 7 days" = "Last 7 days";
+"Average" = "Average";
+"Times" = "Times";
+"Trend" = "Trend";
+
+/*  TABBAR  */
+"Home" = "Home";
+"Data" = "Data";
+"Add" = "Add";
+"My" = "My";
+
+/*  手动输入  */
+
+// glucoseView
+"Add Data" = "Add Data";
+"Blood Glucose" = "Blood Glucose";
+"Before Meal" = "Before Meal";
+"After Meal" = "After Meal";
+"Fasting" = "Fasting";
+"Random" = "Random";
+
+// portionAndInsulinView
+"Food" = "Food";
+"No Meal" = "No Meal";
+"Too Much" = "Too Much";
+"Normal" = "Normal";
+"Little" = "Little";
+"Insulin" = "Insulin";
+
+// bodyInfoView
+"Weight" = "Weight";
+"Blood Pressure" = "Blood Pressure";
+"Medicine" = "Medicine";
+"Edit" = "Edit";
+"Aspirin" = "Aspirin";
+
+// sportView
+"Exercise" = "Exercise";
+"None" = "None";
+"Walking" = "Walking";
+"Bicycling" = "Bicycling";
+"Running" = "Running";
+"Swimming" = "Swimming";
+"Other" = "Other";
+"Duration" = "Duration";
+"Minutes" = "Minutes";
+"intensity" = "intensity";
+"Light" = "Light";
+"Medium" = "Medium";
+"Hard" = "Hard";
+
+// remarkView
+"Remark" = "Remark";
+//"Edit" = "Edit"
+
+// Button
+"Cancel" = "Cancel";
+"Save" = "Save";
+
+/*  数据  */
+// titleView
+"Charts" = "Charts";
+"Statistics" = "Statistics";
+"Datalist" = "Datalist";
+"Share" = "Share";
+
+// Charts
+"Trend" = "Trend";
+
+// Statistics
+//"Average" = "Average"
+//"Blood Glucose" = "Blood Glucose";
+"Standard Deviation" = "Standard Deviation";
+"Frequency/Day" = "Frequency/Day";
+
+"Total - " = "Total - ";
+"Test" = "Test";
+"Low" = "Low";
+"Normal" = "Normal";
+"Hyper" = "Hyper";
+
+"Before Meal - " = "Before Meal - ";
+"After Meal - " = "After Meal - ";
+
+// Share
+"Share the Report by Email" = "Share the Report by Email";
+"Send" = "Send";
+"Information Including" = "Information Including";
+"Name" = "Name";
+"Date of Birth" = "Date of Birth";
+"Please Select" = "Please Select";
+
+/*  蓝牙传输  */
+"Available Devices" = "Available Devices";
+"Scan Device" = "Scan Device";
+"Data Transfer" = "Data Transfer";
+"Datalist" = "Datalist";
+"Turn on BlueTooth" = "Turn on BlueTooth";
+"Setting" = "Setting";
+"OK" = "OK";
+
+/*  个人  */
+//"Sign In" = "Sign In";
+"User Info" = "User Info";
+"Units Setup" = "Units Setup";
+"Change Password" = "Change Password";
+"Target Setting" = "Target Setting";
+"Instructions" = "Instructions";
+"About Us" = "About Us";
+"Update" = "Update";
+"Sign Out" = "Sign Out";
+
+/*  版本更新  */
+"Current Version" = "Current Version";
+"Feedback" = "Feedback";
+"Score" = "Score";
+"Version Update" = "Version Update";
+"Developer" = "Developer";
+
+/*  血糖设置  */
+"BG Targets" = "BG Targets";
+//"Before Meal" = "Before Meal";
+//"After Meal" = "After Meal";
+//"Fasting" = "Fasting";
+//"Random" = "Random";
+//"Save" = "Save"
+"Default Setting" = "Default Setting";
+
+/*  密码修改  */
+//"Name" = "Name"
+//"Old Password" = "Old Password";
+"New Password" = "New Password";
+//"Confirm the Password" = "Confirm the Password";
+
+/*  信息管理  */
+//"Name" = "Name";
+//"Gender" = "Gender";
+//"Weight" = "Weight";
+"Height" = "Height";
+//"Email" = "Email";
+//"Date of Birth" = "Date of Birth";
+"Country" = "Country";
+"Phone" = "Phone";
+
+
+
+
+/*  单位设置  */
+"Glucose Unit" = "Glucose Unit";
+//"Weight" = "Weight";
+//"Blood Pressure" = "Blood Pressure";

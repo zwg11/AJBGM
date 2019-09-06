@@ -254,7 +254,7 @@ public class DBSQLiteManager:NSObject{
         
     }
     //删除一条血糖记录
-    func deleteGlucoseRecord(_ glucoseId:Int64){
+    func deleteGlucoseRecord(_ glucoseId:Int64) -> Bool{
         let db = DBSQLiteManager.shareManager().openDB()
 
         let query = glucose_record.filter(glucose_record_id == glucoseId)
@@ -262,11 +262,14 @@ public class DBSQLiteManager:NSObject{
             // DELETE FROM "glucose_record" WHERE ("glucose_record_id" = glucoseId)
             if try db.run(query.delete()) > 0{
                 print("删除记录成功")
+                return true
             }else{
                 print("未找到对应记录")
+                return false
             }
         }catch{
             print("删除失败:\(error)")
+            return false
         }
     }
     //更新一条血糖记录

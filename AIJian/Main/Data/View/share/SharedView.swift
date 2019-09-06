@@ -24,7 +24,7 @@ class SharedView: UIView {
     // 按钮说明
     private lazy var explainLabel:UILabel = {
         let label = UILabel()
-        label.text = "通过以下按钮，您可以使用电子邮件发送本报告"
+        label.text = "Shared the Report by Email"
         label.font = UIFont.systemFont(ofSize: 16)
         label.textAlignment = .center
         label.numberOfLines = 0
@@ -33,12 +33,12 @@ class SharedView: UIView {
     // 按钮，用来发d送报告
     lazy var sendButton:UIButton = {
         let button = UIButton(type: .custom)
-        button.setTitle("发送", for: .normal)
+        button.setTitle("Send", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         button.backgroundColor = UIColor.gray
         
-        button.addTarget(self, action: #selector(sendCheck), for: .touchUpInside)
+        //button.addTarget(self, action: #selector(sendCheck), for: .touchUpInside)
         return button
     }()
     
@@ -60,7 +60,7 @@ class SharedView: UIView {
     // 标题说明
     private lazy var infoExpLabel:UILabel = {
         let label = UILabel()
-        label.text = "本报告包含以下内容"
+        label.text = "Information Including"
         label.font = UIFont.systemFont(ofSize: 16)
         label.textAlignment = .center
         return label
@@ -68,7 +68,7 @@ class SharedView: UIView {
     // 姓名label
     private lazy var nameLabel:UILabel = {
         let label = UILabel()
-        label.text = "姓名："
+        label.text = "Name："
         label.textAlignment = .left
         return label
     }()
@@ -76,7 +76,7 @@ class SharedView: UIView {
     lazy var nameTextField:UITextField = {
 
         let textField = UITextField()
-        textField.placeholder = " 请输入姓名"
+        textField.placeholder = " Please Input"
         textField.textAlignment = .left
         textField.keyboardType = .default
         textField.layer.borderColor = UIColor.gray.cgColor
@@ -88,7 +88,7 @@ class SharedView: UIView {
     // 出生日期label
     private lazy var birthdayLabel:UILabel = {
         let label = UILabel()
-        label.text = "出生日期："
+        label.text = "Date of Birth："
         label.textAlignment = .left
         return label
         
@@ -100,7 +100,7 @@ class SharedView: UIView {
         //button.addTarget(chatViewController.self, action: #selector(chatViewController.chooseDate), for: .touchUpInside)
         button.layer.borderColor = UIColor.gray.cgColor
         button.layer.borderWidth = 1
-        button.setTitle(date ?? "请选择日期", for: .normal)
+        button.setTitle(date ?? "Please Select", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         return button
     }()
