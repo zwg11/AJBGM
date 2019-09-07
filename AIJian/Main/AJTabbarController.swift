@@ -51,8 +51,8 @@ class AJTabbarController: UITabBarController {
         nv4.tabBarItem.title = "Mine"
         self.addChild(nv4)
         
-        // 设置tabbar颜色
-        self.tabBar.tintColor = barDefaultColor
+        // 设置tabbar背景颜色
+        self.tabBar.backgroundColor = barDefaultColor
     }
     
 

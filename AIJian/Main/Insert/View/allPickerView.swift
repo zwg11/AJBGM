@@ -9,12 +9,6 @@
 import UIKit
 import SnapKit
 
-// 为方便操作，设为全局变量
-// 读取配置文件，获取不同选择器的内容
-let path = Bundle.main.path(forResource: "inputChoose", ofType: "plist")
-let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path!)!
-
-
 class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
     
     // 使用以下步骤获取plist文件的数据
@@ -27,6 +21,8 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
     //    print(sport[0])
     
     // 记录不同的选择器的内容的数组
+    
+   
     private var event:NSArray = NSArray()
     
     private var portion:NSArray = NSArray()
@@ -233,7 +229,11 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
     
     func setupUI(){
 
+        // 读取配置文件，获取不同选择器的内容
+        let path = Bundle.main.path(forResource: "inputChoose", ofType: "plist")
+        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path!)!
         
+        // 设置选择器的内容
         event = data["event"] as! NSArray
         
         portion = data["portion"] as! NSArray

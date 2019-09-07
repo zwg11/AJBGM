@@ -21,11 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         let tabBarController = AJTabbarController()
-        // tabBarController的主题颜色
-        tabBarController.tabBar.tintColor = UIColor.init(red: 9.0/255.0, green: 187.0/255.0, blue: 7.0/255.0, alpha: 0.5)
-        // tabBarController子视图控制器集合
-        //tabBarController.viewControllers = [weChat,addressBook,find]
-        // 添加到rootViewController
        
         /*
          此处需要判断是否为第一次登陆？
@@ -37,38 +32,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //判断文件中的token是否为空。  如果为空时，则为第一次登陆。
         //如果不为空时，则需要再次判断
-//        if UserInfo.getToken() == ""{  //跳转到登陆界面
-//            print("token为空")
-//            window?.rootViewController = nv
-//        }else{
-//            print("token不为空")
-//            //此处分为两种情况：一种是判断token过没过期。第二种是没有网络怎么办
-//            let dictString:Dictionary = [ "userId":UserInfo.getUserId() ,"token":UserInfo.getToken()] as [String : Any]
-//            Alamofire.request(CHECK_TOKEN,method: .post,parameters: dictString).responseString{ (response) in
-//                if response.result.isSuccess {
-//                    if let jsonString = response.result.value {
-//                        if let responseModel = JSONDeserializer<responseModel>.deserializeFrom(json: jsonString) {
-//                            print(responseModel.toJSONString(prettyPrint: true)!)
-//                            if(responseModel.code == 1 ){  //token没过期
-//                                //没过期，允许使用，跳转到tabBar这个地方
-//                                self.window?.rootViewController = tabBarController
-//                            }else{  //token过期了,不让用
-//                                //过期了，需要清空app文件中的token
-//                                UserInfo.setToken("")
-//                                self.window?.rootViewController = nv
-//                            }
-//                        }
-//                    }
-//                }else{  //没网的时候
-//                    self.window?.rootViewController = tabBarController  //没网的时候也跳到选择界面
-//                    //具体的提示，homeViewController   自己会做
-//                }
-//            }
-//        }
+        if UserInfo.getToken() == ""{  //跳转到登陆界面
+            print("token为空")
+            window?.rootViewController = nv
+        }else{
+            print("token不为空")
+            //此处分为两种情况：一种是判断token过没过期。第二种是没有网络怎么办
+            let dictString:Dictionary = [ "userId":UserInfo.getUserId() ,"token":UserInfo.getToken()] as [String : Any]
+            Alamofire.request(CHECK_TOKEN,method: .post,parameters: dictString).responseString{ (response) in
+                if response.result.isSuccess {
+                    if let jsonString = response.result.value {
+                        if let responseModel = JSONDeserializer<responseModel>.deserializeFrom(json: jsonString) {
+                            print(responseModel.toJSONString(prettyPrint: true)!)
+                            if(responseModel.code == 1 ){  //token没过期
+                                //没过期，允许使用，跳转到tabBar这个地方
+                                self.window?.rootViewController = tabBarController
+                            }else{  //token过期了,不让用
+                                //过期了，需要清空app文件中的token
+                                UserInfo.setToken("")
+                                self.window?.rootViewController = nv
+                            }
+                        }
+                    }
+                }else{  //没网的时候
+                    self.window?.rootViewController = tabBarController  //没网的时候也跳到选择界面
+                    //具体的提示，homeViewController   自己会做
+                }
+            }
+        }
         
-        
-        // window?.rootViewController = nv
-        window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
         
 

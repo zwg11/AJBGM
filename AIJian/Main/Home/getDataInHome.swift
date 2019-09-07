@@ -69,7 +69,8 @@ class getDataInHome{
                 }
             }
             avgValue = avgValue/Double(checkNum)
-            result.append(avgValue)
+            let x = String(format: "%.1f", avgValue)
+            result.append(x)
             result.append(checkNum)
             result.append(highestValue)
             result.append(lowestValue)

@@ -70,8 +70,10 @@ class averageView: UIView {
         let label = UILabel()
         label.text = String(avgGlucoseValue ?? 0)
         label.textColor = greenColor
-        label.font = UIFont.systemFont(ofSize: 20)
+        //label.font = UIFont.systemFont(ofSize: 20)
         label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.backgroundColor = UIColor.yellow
         label.layer.borderColor = borderColor.cgColor
         label.layer.borderWidth = 1
         label.layer.cornerRadius = AJScreenWidth/20
@@ -172,20 +174,22 @@ class averageView: UIView {
         
         // 血糖值label布局
         self.avgView.addSubview(glucoseValue)
+        
         self.glucoseValue.snp.makeConstraints{ (make) in
-            make.right.equalTo(glucoseUnit.snp.left).offset(AJScreenWidth/30)
+            make.right.equalTo(glucoseUnit.snp.left).offset(-10)
             make.bottom.equalTo(glucoseLabel.snp.bottom)
             make.height.width.equalTo(AJScreenWidth/10)
-            
+            make.width.equalTo(AJScreenWidth/10)
         }
         
         // 标准差label布局
         self.avgView.addSubview(standardDeValue)
+        standardDeValue.sizeToFit()
         self.standardDeValue.snp.makeConstraints{ (make) in
             make.centerX.equalTo(glucoseUnit.snp.centerX)
             make.bottom.equalTo(sDLabel.snp.bottom)
             make.height.equalTo(sDLabel.snp.height)
-            make.width.equalTo((AJScreenWidth-20)/8 )
+            //make.width.equalTo((AJScreenWidth-20)/8 )
             
         }
         
@@ -237,9 +241,16 @@ class averageView: UIView {
             avgGlucoseValue = sumBloodGlucoseValue/Double(sumCheckNum)
             
             // 标准差
-            for i in sortedByDateOfData!{
-                sumStandardDaviation += (avgGlucoseValue! - i.bloodGlucoseMmol!)*(avgGlucoseValue! - i.bloodGlucoseMmol!)
+            if GetUnit.getBloodUnit() == "mg/dL"{
+                for i in sortedByDateOfData!{
+                    sumStandardDaviation += (avgGlucoseValue! - i.bloodGlucoseMg!)*(avgGlucoseValue! - i.bloodGlucoseMg!)
+                }
+            }else{
+                for i in sortedByDateOfData!{
+                    sumStandardDaviation += (avgGlucoseValue! - i.bloodGlucoseMmol!)*(avgGlucoseValue! - i.bloodGlucoseMmol!)
+                }
             }
+            
             standardDaviation = sumStandardDaviation/Double(sumCheckNum)
             
             // 将计算结果赋值给对应的label
