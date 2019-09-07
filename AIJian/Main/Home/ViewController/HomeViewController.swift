@@ -42,13 +42,13 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             let cell = UITableViewCell(style: .value1, reuseIdentifier: id)
             cell.selectionStyle = .none
             cell.textLabel?.text = "最近一次"
-            // 在数据库取出最近c一次的血糖记录
+            // 在数据库取出最近一次的血糖记录
             let x = DBSQLiteManager.shareManager()
-            let data = x.selectLastGlucoseRecord(userId!)
-//            let dateformat = DateFormatter()
-//            dateformat.dateFormat = "yyyy-MM-dd HH-mm"
+            let data = x.selectLastGlucoseRecord(UserInfo.getUserId())
+
+            // 显示时间
             if let date = data.createTime{
-                cell.detailTextLabel?.text = data.createTime!
+                cell.detailTextLabel?.text = date
             }
             
             return cell
@@ -134,14 +134,13 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         homeTableView.dataSource = self
         self.view.addSubview(homeTableView)
         // 初始化用户信息
-        getUserInfo()
         // 向数据库插入用户信息
         let sqliteManager = DBSQLiteManager()
         sqliteManager.createTable()
         var user1 = USER()
-        user1.user_id = userId!
-        user1.token = token!
-        user1.email = "zzmmshang@qq.com"
+        user1.user_id = UserInfo.getUserId()
+        user1.token = UserInfo.getToken()
+        user1.email = UserInfo.getEmail()
         sqliteManager.addUserRecord(user1)
         
         requestData(day: 3)
@@ -160,8 +159,8 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     func requestData(day:Int){
         //********
         let day = day
-        let usr_id = userId!
-        let tk = token!
+        let usr_id = UserInfo.getUserId()
+        let tk = UserInfo.getToken()
         // 设置信息请求字典
         let dicStr:Dictionary = ["day":day,"userId":usr_id,"token":tk] as [String : Any]
         print(dicStr)

@@ -84,7 +84,7 @@
 		C070FFB8E1701A5D899D48322ADE1A1C /* loginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505FC95DADCDA30414C138D4F216674B /* loginViewController.swift */; };
 		C09A68B5ACCA1FF372DB3D8F6C23A872 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDBFD961B14C40710FE24938097E7B6 /* UILabel+Extension.swift */; };
 		C0B2EB14159CEE413014D980058B4127 /* userBloodSetting.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7BD87968C7A6DBA89B736444D0C1C80C /* userBloodSetting.plist */; };
-		C27D0F4CFD2C4D6A6952A5496AF65F95 /* GetUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D287CC8A0FC80342CF6F1B6AC824DD /* GetUserInfo.swift */; };
+		C27D0F4CFD2C4D6A6952A5496AF65F95 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D287CC8A0FC80342CF6F1B6AC824DD /* UserInfo.swift */; };
 		C2CBA0DB1212C80B70711093478F6D50 /* CustomAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044715989F31C24AE1950899878B6046 /* CustomAlertController.swift */; };
 		C45133C15650E0A758BE9274BD83AC47 /* perAndAfterMealTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1045C7B12598B6BDF9051A059F6A49 /* perAndAfterMealTests.swift */; };
 		C701921CAA5E7D6176A633628D36FCD2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21A6D55DCBB198190A95457237730BD /* HomeViewController.swift */; };
@@ -118,7 +118,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		00D287CC8A0FC80342CF6F1B6AC824DD /* GetUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserInfo.swift; sourceTree = "<group>"; };
+		00D287CC8A0FC80342CF6F1B6AC824DD /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		02A0B4B2762DA7C7B818FCE47ADB08C6 /* infoInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = infoInputViewController.swift; sourceTree = "<group>"; };
 		044715989F31C24AE1950899878B6046 /* CustomAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertController.swift; sourceTree = "<group>"; };
 		0557E67341EF86431E047CAF50A62A92 /* SharedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedView.swift; sourceTree = "<group>"; };
@@ -341,6 +341,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		5DB6D41E1DBD4DEE62BD6AEFE4B29F64 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				D0112232D48380E271D8987FB869BBE8 /* Localization.strings */,
+				66D0691B2A92F5426840985B16F5D286 /* LocalizationTool.swift */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
 		5F05B32BB69EA0CFC66CEEB528840C4C /* login */ = {
 			isa = PBXGroup;
 			children = (
@@ -427,15 +436,6 @@
 				3DD4A500110CCA25E61A95066330D220 /* dateRangePickerView.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		5DB6D41E1DBD4DEE62BD6AEFE4B29F64 /* Localization */ = {
-			isa = PBXGroup;
-			children = (
-				D0112232D48380E271D8987FB869BBE8 /* Localization.strings */,
-				66D0691B2A92F5426840985B16F5D286 /* LocalizationTool.swift */,
-			);
-			path = Localization;
 			sourceTree = "<group>";
 		};
 		9981F23105401ED460A32BF2E0D28AA2 /* Products */ = {
@@ -673,7 +673,7 @@
 				114081AB7B0ED40CD96B4D28D031951A /* GetBloodLimit.swift */,
 				E59A10BC763D4D5E27D2541D481F5390 /* GetSortedData.swift */,
 				DFF8BC16AAE563F372E92457F2E7AAC1 /* GetUnit.swift */,
-				00D287CC8A0FC80342CF6F1B6AC824DD /* GetUserInfo.swift */,
+				00D287CC8A0FC80342CF6F1B6AC824DD /* UserInfo.swift */,
 				8FEA8DF68F3C84CF024089E90716B37E /* IntensityChange.swift */,
 				3C5E47CB62AAB8FA3205A5903BDDA347 /* PressureUnitChange.swift */,
 				7250934CF2E058D7C85B4FC0C9FFCED6 /* UnitConversion.swift */,
@@ -836,7 +836,7 @@
 				D3598BAB73CFEA38A43DA2264E156B52 /* GetBloodLimit.swift in Sources */,
 				DE3CF4606A6A4080C7331A8EA9ABB889 /* GetSortedData.swift in Sources */,
 				7B688513106D061646CE9E2BEA32A1AB /* GetUnit.swift in Sources */,
-				C27D0F4CFD2C4D6A6952A5496AF65F95 /* GetUserInfo.swift in Sources */,
+				C27D0F4CFD2C4D6A6952A5496AF65F95 /* UserInfo.swift in Sources */,
 				C701921CAA5E7D6176A633628D36FCD2 /* HomeViewController.swift in Sources */,
 				B1B6272E57821B47FDE1B83E20D3D080 /* InfoInputView.swift in Sources */,
 				BA52FED03B80B15A0F3460206CDC2279 /* InfoViewController.swift in Sources */,
@@ -1062,9 +1062,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-
 				DEVELOPMENT_TEAM = U556FBGR65;
-
 				INFOPLIST_FILE = AIJian/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1084,9 +1082,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-
 				DEVELOPMENT_TEAM = U556FBGR65;
-
 				INFOPLIST_FILE = AIJian/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (

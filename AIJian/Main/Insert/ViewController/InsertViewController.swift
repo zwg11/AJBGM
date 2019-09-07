@@ -483,7 +483,7 @@ class InsertViewController: UIViewController {
         
         //第一步：先封装成一个对象
         var  insertData:glucoseDate = glucoseDate()
-        insertData.userId = userId
+        insertData.userId = UserInfo.getUserId()
         let uuid = UUID().uuidString.components(separatedBy: "-").joined()
         insertData.bloodGlucoseRecordId = uuid
         insertData.createTime = createTime
@@ -514,7 +514,7 @@ class InsertViewController: UIViewController {
         //第三步：再将这个数组直接toString
         let GlucoseJsonData = tempArray.toJSONString()!
         //手动输入数据，请求部分
-        let dictString = [ "token":token,"userId":userId! as Any,"userBloodGlucoseRecords":GlucoseJsonData] as [String : Any]
+        let dictString = [ "token":UserInfo.getToken(),"userId":UserInfo.getUserId() as Any,"userBloodGlucoseRecords":GlucoseJsonData] as [String : Any]
         print(dictString)
         Alamofire.request(INSERTRECORD,method: .post,parameters: dictString).responseString{ (response) in
             if response.result.isSuccess {

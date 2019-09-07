@@ -101,8 +101,8 @@ class loginViewController: UIViewController,UITextFieldDelegate {
                                 data.setObject(responseModel.data?.token! as Any, forKey: "token" as NSCopying )
                                 data.setObject(self.email!, forKey: "email" as NSCopying )
                                 data.write(toFile: path!, atomically: true)
-                                userId = data["userId"] as? Int64
-                                token = data["token"] as! String
+//                                userId = data["userId"] as? Int64
+//                                token = data["token"] as! String
                                 self.present(AJTabbarController(), animated: false, completion: nil)
                             }else{
                                 print(responseModel)

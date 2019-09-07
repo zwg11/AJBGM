@@ -320,29 +320,34 @@ public class DBSQLiteManager:NSObject{
         // 数据库中的数据按 create_time 降序排列,注意过滤用户
         let query = glucose_record.order(create_time.desc).filter(user_id == userId)
         // SELECT FROM query LIMIT 1
-        if let record = try! db.pluck(query){
-            dataGlucose.bloodGlucoseRecordId  = record[glucose_record_id]
-            dataGlucose.userId                = record[user_glucose_id]
-            dataGlucose.createTime            = record[create_time]
-            dataGlucose.detectionTime         = record[detection_time]
-            dataGlucose.bloodGlucoseMmol      = record[glucose_mmol]
-            dataGlucose.bloodGlucoseMg        = record[glucose_mg]
-            dataGlucose.eatType               = record[eat_type]
-            dataGlucose.eatNum                = record[eat_num]
-            dataGlucose.insulinType           = record[insulin_type]
-            dataGlucose.insulinNum            = record[insulin_num]
-            dataGlucose.systolicPressureMmhg  = record[systolic_pressure_mmhg]
-            dataGlucose.systolicPressureKpa   = record[systolic_pressure_kpa]
-            dataGlucose.diastolicPressureMmhg = record[diastolic_pressure_mmhg]
-            dataGlucose.diastolicPressureKpa  = record[diastolic_pressure_kpa]
-            dataGlucose.medicine              = record[medicine]
-            dataGlucose.sportType             = record[sport_type]
-            dataGlucose.sportTime             = record[sport_time]
-            dataGlucose.sportStrength         = record[sport_strength]
-            dataGlucose.inputType             = record[inputType]
-            dataGlucose.remark                = record[remark]
-            dataGlucose.recordType            = record[record_type]
-            dataGlucose.machineId             = record[machine_id]
+        do{
+            let record = try db.pluck(query)
+            dataGlucose.bloodGlucoseRecordId  = record?[glucose_record_id]
+            dataGlucose.userId                = record?[user_glucose_id]
+            dataGlucose.createTime            = record?[create_time]
+            dataGlucose.detectionTime         = record?[detection_time]
+            dataGlucose.bloodGlucoseMmol      = record?[glucose_mmol]
+            dataGlucose.bloodGlucoseMg        = record?[glucose_mg]
+            dataGlucose.eatType               = record?[eat_type]
+            dataGlucose.eatNum                = record?[eat_num]
+            dataGlucose.insulinType           = record?[insulin_type]
+            dataGlucose.insulinNum            = record?[insulin_num]
+            dataGlucose.systolicPressureMmhg  = record?[systolic_pressure_mmhg]
+            dataGlucose.systolicPressureKpa   = record?[systolic_pressure_kpa]
+            dataGlucose.diastolicPressureMmhg = record?[diastolic_pressure_mmhg]
+            dataGlucose.diastolicPressureKpa  = record?[diastolic_pressure_kpa]
+            dataGlucose.medicine              = record?[medicine]
+            dataGlucose.sportType             = record?[sport_type]
+            dataGlucose.sportTime             = record?[sport_time]
+            dataGlucose.sportStrength         = record?[sport_strength]
+            dataGlucose.inputType             = record?[inputType]
+            dataGlucose.remark                = record?[remark]
+            dataGlucose.recordType            = record?[record_type]
+            dataGlucose.machineId             = record?[machine_id]
+            
+            
+        }catch{
+            print("当前用户无数据")
         }
         return dataGlucose
         

@@ -1,0 +1,65 @@
+//
+//  GetUserInfo.swift
+//  AIJian
+//
+//  Created by ADMIN on 2019/8/29.
+//  Copyright © 2019 apple. All rights reserved.
+//   获取用户最原始的token信息和userId信息
+
+import Foundation
+
+class UserInfo{
+    
+    // 从plist 文件中提取 userId
+    static func getUserId() -> Int64{
+        let path = Bundle.main.path(forResource: "User", ofType: "plist")
+        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path!)!
+        var userId:Int64
+        userId = data["userId"] as! Int64
+        return userId
+    }
+
+    // 从plist 文件中提取 token
+    static func getToken() -> String{
+        let path = Bundle.main.path(forResource: "User", ofType: "plist")
+        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path!)!
+        var token:String
+        token = data["token"] as! String
+        return token
+    }
+    
+    // 从plist 文件中提取 email
+    static func getEmail() -> String{
+        let path = Bundle.main.path(forResource: "User", ofType: "plist")
+        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path!)!
+        var email:String
+        email = data["email"] as! String
+        return email
+    }
+    
+    // 设置plist 文件中的 userId
+    static func setUserId(_ id:Int64){
+        let path = Bundle.main.path(forResource: "User", ofType: "plist")
+        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path!)!
+    
+        data["userId"] = id
+        data.write(toFile: path!, atomically: true)
+    }
+    
+    // 设置plist 文件中的 token
+    static func setToken(_ token:String){
+        let path = Bundle.main.path(forResource: "User", ofType: "plist")
+        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path!)!
+        data["token"] = token
+        data.write(toFile: path!, atomically: true)
+    }
+    
+    // 设置plist 文件中的 email
+    static func setEmail(_ email:String){
+        let path = Bundle.main.path(forResource: "User", ofType: "plist")
+        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path!)!
+        data["email"] = email
+        data.write(toFile: path!, atomically: true)
+    }
+}
+

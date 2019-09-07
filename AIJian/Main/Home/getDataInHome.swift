@@ -16,7 +16,7 @@ class getDataInHome{
     // 获取最近一次的血糖值
     static func getLastGlucoseValue() -> String{
         // 在数据库取出最近c一次的血糖记录
-        let data = x.selectLastGlucoseRecord(userId!)
+        let data = x.selectLastGlucoseRecord(UserInfo.getUserId())
         
         let str:String?
         // // 判断单位，根据相应单位取出最近一次的值
@@ -34,13 +34,14 @@ class getDataInHome{
         let end = today + 1.seconds
         let start = end - 7.days
         // 取出最近7天的数据
-        let data = x.selectGlucoseRecordInRange(start: start, end: end, userId: userId!)
+        let data = x.selectGlucoseRecordInRange(start: start, end: end, userId: UserInfo.getUserId())
         
         var result:[Any] = []
         var avgValue = 0.0
         let checkNum = data.count
         var highestValue = 0.0
         var lowestValue = 1000.0
+        // 如果有数据，则显示
         if checkNum > 0{
             if GetUnit.getBloodUnit() == "mmol/L"{
                 for i in data{

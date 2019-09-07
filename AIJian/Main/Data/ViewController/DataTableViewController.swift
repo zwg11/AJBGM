@@ -275,8 +275,8 @@ extension DataTableViewController{
         
         let gluData = sortedData[section][row]
         let recordId = gluData.bloodGlucoseRecordId!
-        let usr_id = userId!
-        let tk = token!
+        let usr_id = UserInfo.getUserId()
+        let tk = UserInfo.getToken()
         // 设置信息请求字典
         let dicStr:Dictionary = ["bloodGlucoseRecordId":recordId,"token":tk,"userId":usr_id] as [String : Any]
         print(dicStr)

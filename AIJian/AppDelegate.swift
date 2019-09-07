@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // tabBarController子视图控制器集合
         //tabBarController.viewControllers = [weChat,addressBook,find]
         // 添加到rootViewController
-        getUserInfo()  //此函数在Tools-->GetUserInfo.swfit
+       
         /*
          此处需要判断是否为第一次登陆？
          如果是，则跳到登陆界面。
@@ -37,13 +37,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //判断文件中的token是否为空。  如果为空时，则为第一次登陆。
         //如果不为空时，则需要再次判断
-//        if token == ""{  //跳转到登陆界面
+//        if UserInfo.getToken() == ""{  //跳转到登陆界面
 //            print("token为空")
 //            window?.rootViewController = nv
 //        }else{
 //            print("token不为空")
 //            //此处分为两种情况：一种是判断token过没过期。第二种是没有网络怎么办
-//            let dictString:Dictionary = [ "userId":userId ,"token":token] as [String : Any]
+//            let dictString:Dictionary = [ "userId":UserInfo.getUserId() ,"token":UserInfo.getToken()] as [String : Any]
 //            Alamofire.request(CHECK_TOKEN,method: .post,parameters: dictString).responseString{ (response) in
 //                if response.result.isSuccess {
 //                    if let jsonString = response.result.value {
@@ -54,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                                self.window?.rootViewController = tabBarController
 //                            }else{  //token过期了,不让用
 //                                //过期了，需要清空app文件中的token
-//                                data.setObject("", forKey: "token" as NSCopying )
+//                                UserInfo.setToken("")
 //                                self.window?.rootViewController = nv
 //                            }
 //                        }
@@ -72,8 +72,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
 
-        let startImageView = AJStartView.init(imageName: "startView-1", timer: 3)
-        self.window?.rootViewController?.view.addSubview(startImageView)
+//        let startImageView = AJStartView.init(imageName: "startView-1", timer: 3)
+//        self.window?.rootViewController?.view.addSubview(startImageView)
         isFirstStart = false
         if isFirstStart == true{
             self.setStaticGuidePage()

@@ -343,7 +343,7 @@ class DataViewController: UIViewController {
             startD = endD! - 3.days
             daysNum = 3
             // 向数据库索取一定时间范围的数据，并将其按时间降序排序
-            initDataSortedByDate(startDate: startD!, endDate: endD!, userId: userId!)
+            initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())
             // 处理出为展示表格的数据
             sortedTimeOfData()
             // 处理出为展示图表的数据
@@ -351,20 +351,20 @@ class DataViewController: UIViewController {
         case 2:
             startD = endD! - 7.days
             daysNum = 7
-            initDataSortedByDate(startDate: startD!, endDate: endD!, userId: userId!)
+            initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())
             sortedTimeOfData()
             chartData()
         case 3:
             startD = endD! - 30.days
             daysNum = 30
-            initDataSortedByDate(startDate: startD!, endDate: endD!, userId: userId!)
+            initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())
             sortedTimeOfData()
             chartData()
         default:
             let components = Calendar.current.dateComponents([.day], from: startD!, to: endD!)
             daysNum = components.day
             print("daysNum:\(String(describing: daysNum))")
-            initDataSortedByDate(startDate: startD!, endDate: endD!, userId: userId!)
+            initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())
             sortedTimeOfData()
             chartData()
             

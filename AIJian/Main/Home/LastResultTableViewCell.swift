@@ -28,7 +28,8 @@ class LastResultTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 60)
         label.textAlignment = .center
-        label.text = "-"
+        // 标签显示数据库中日期最晚的血糖值
+        label.text = getDataInHome.getLastGlucoseValue()
         label.adjustsFontSizeToFitWidth = true
         label.backgroundColor = UIColor.gray
         return label
@@ -83,15 +84,15 @@ class LastResultTableViewCell: UITableViewCell {
         content.addSubview(glucoseValueLabel)
 
         
-        // 在数据库取出最近c一次的血糖记录
-        let x = DBSQLiteManager.shareManager()
-        let data = x.selectLastGlucoseRecord(userId!)
-        // // 判断单位，根据相应单位取出最近一次的值
-        if GetUnit.getBloodUnit() == "mmol/L"{
-            glucoseValueLabel.text = (data.bloodGlucoseMmol != nil) ? String(data.bloodGlucoseMmol!):"-"
-        }else{
-            glucoseValueLabel.text = (data.bloodGlucoseMg != nil) ? String(data.bloodGlucoseMg!):"-"
-        }
+//        // 在数据库取出最近一次的血糖记录
+//        let x = DBSQLiteManager.shareManager()
+//        let data = x.selectLastGlucoseRecord(UserInfo.getUserId())
+//        // // 判断单位，根据相应单位取出最近一次的值
+//        if GetUnit.getBloodUnit() == "mmol/L"{
+//            glucoseValueLabel.text = (data.bloodGlucoseMmol != nil) ? String(data.bloodGlucoseMmol!):"-"
+//        }else{
+//            glucoseValueLabel.text = (data.bloodGlucoseMg != nil) ? String(data.bloodGlucoseMg!):"-"
+//        }
         
         
         

@@ -63,7 +63,7 @@ func recentDaysData(Days:Int)->[Double]{
     let end = today + 1.seconds
     let start = end - Days.days
     // 向数据库提取近些天的数据
-    initDataSortedByDate(startDate: start, endDate: end, userId: userId!)
+    initDataSortedByDate(startDate: start, endDate: end, userId: UserInfo.getUserId())
     // 将数据处理成 图表所需的数据
     chartData()
     
@@ -116,7 +116,7 @@ func xAxisArray(startDate:Date,endDate:Date)->[String]{
 func DateToData(_ start:Date,_ end:Date)->[Double]{
     
     // 向数据库提取近些天的数据
-    initDataSortedByDate(startDate: start, endDate: end, userId: userId!)
+    initDataSortedByDate(startDate: start, endDate: end, userId: UserInfo.getUserId())
     // 将数据处理成 图表所需的数据
     chartData()
     

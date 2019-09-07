@@ -129,17 +129,17 @@ class StatisticalDataViewController: UIViewController,UIScrollViewDelegate {
             
         case 1:
             let start = end - 3.days
-            initDataSortedByDate(startDate: start, endDate: end, userId: userId!)
+            initDataSortedByDate(startDate: start, endDate: end, userId: UserInfo.getUserId())
             //sortedTimeOfData()
 
         case 2:
             let start = end - 7.days
-            initDataSortedByDate(startDate: start, endDate: end, userId: userId!)
+            initDataSortedByDate(startDate: start, endDate: end, userId: UserInfo.getUserId())
             //sortedTimeOfData()
 
         case 3:
             let start = end - 30.days
-            initDataSortedByDate(startDate: start, endDate: end, userId: userId!)
+            initDataSortedByDate(startDate: start, endDate: end, userId: UserInfo.getUserId())
             //sortedTimeOfData()
 
         default:

@@ -72,10 +72,12 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
         }
          //当视图出现了，直接从文件中获取email和token信息
         override func viewWillAppear(_ animated: Bool) {
-            let path = Bundle.main.path(forResource: "User", ofType: "plist")
-            let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path!)!
-            email = data["email"] as! String
-            token = data["token"] as! String
+//            let path = Bundle.main.path(forResource: "User", ofType: "plist")
+//            let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path!)!
+//            email = data["email"] as! String
+//            token = data["token"] as! String
+            email = UserInfo.getEmail()
+            token = UserInfo.getToken()
         }
     
         override func viewDidLoad() {
