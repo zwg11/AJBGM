@@ -104,7 +104,7 @@ class StatisticalDataViewController: UIViewController,UIScrollViewDelegate {
             make.height.equalTo(140)
         }
     // 设置通知，当选择日期范围改变时执行动作来更新视图内容
-        NotificationCenter.default.addObserver(self, selector: #selector(test), name: NSNotification.Name(rawValue: "reload"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(test), name: NSNotification.Name(rawValue: "reloadData"), object: nil)
     }
     // 更新视图内容
     @objc func test(){

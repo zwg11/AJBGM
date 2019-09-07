@@ -15,6 +15,7 @@ class dataTableViewCell: UITableViewCell {
     var appetiteLabel:UILabel = UILabel()
     var isulinLabel:UILabel = UILabel()
     
+    var heightLabel:UILabel = UILabel()
     var weightLabel:UILabel = UILabel()
     var bloodPressureLabel:UILabel = UILabel()
     var medicineLabel: UILabel = UILabel()
@@ -32,15 +33,31 @@ class dataTableViewCell: UITableViewCell {
         glucoseLabel.text = (sortedData[secion][row].bloodGlucoseMmol != nil) ? String(sortedData[secion][row].bloodGlucoseMmol!):"-"
         eventLabel.text = (sortedData[secion][row].eatType != nil) ? String(sortedData[secion][row].eatType!):"-"
         appetiteLabel.text = (sortedData[secion][row].eatNum != nil) ? String(sortedData[secion][row].eatNum!):"-"
-        isulinLabel.text = (sortedData[secion][row].insulinType != nil) ? String(sortedData[secion][row].insulinNum!):"-"
         
+        // 先判断有没有胰岛素量，若没有再判断有没有胰岛素类型
+        if sortedData[secion][row].insulinNum != nil{
+            isulinLabel.text = String(sortedData[secion][row].insulinNum!) + "U\n" +  String(sortedData[secion][row].insulinType!)
+            isulinLabel.font = UIFont.systemFont(ofSize: 10)
+        }else if sortedData[secion][row].insulinType != nil{
+            isulinLabel.text = String(sortedData[secion][row].insulinType!)
+        }
+        else{
+            isulinLabel.text = "-"
+        }
+        
+        heightLabel.text = (sortedData[secion][row].height != nil) ? String(sortedData[secion][row].height!):"-"
         weightLabel.text = (sortedData[secion][row].weightKg != nil) ? String(sortedData[secion][row].weightKg!):"-"
         bloodPressureLabel.text = (sortedData[secion][row].systolicPressureMmhg != nil) ? String(sortedData[secion][row].systolicPressureMmhg!) + "/" + String(sortedData[secion][row].diastolicPressureMmhg!):"-"
         medicineLabel.text = sortedData[secion][row].medicine ?? "-"
+        
+        // 先判断有没有运动量，若没有再判断有没有运动类型
         if sortedData[secion][row].sportTime != nil{
             sportLabel.text = String(sortedData[secion][row].sportType!) + "\n" + String(sortedData[secion][row].sportTime!)
             sportLabel.font = UIFont.systemFont(ofSize: 10)
-        }else{
+        }else if sortedData[secion][row].sportType != nil{
+            sportLabel.text = String(sortedData[secion][row].sportType!)
+        }
+        else{
             sportLabel.text = "-"
         }
         

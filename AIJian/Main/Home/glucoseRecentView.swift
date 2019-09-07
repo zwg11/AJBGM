@@ -10,91 +10,52 @@ import UIKit
 
 class glucoseRecentView: UIView {
 
-    private lazy var titleLabel:UILabel = {
-        let label = initLabel(textContent: "血糖-最近7天", textFont: 20)
-        return label
-    }()
-    
-    private lazy var avgValueLabel:UILabel = {
-        let label = initLabel(textContent: "6.0mmol/L", textFont: 18)
-
-        return label
-    }()
-    
-    private lazy var avgLabel:UILabel = {
-        let label = initLabel(textContent: "平均值", textFont: 18)
-        return label
-    }()
-    
-    private lazy var checkNumLabel:UILabel = {
-        let label = initLabel(textContent: "2",textFont: 18)
-
-        label.sizeToFit()
-        return label
-    }()
-    
-    private lazy var checkLabel:UILabel = {
-        let label = initLabel(textContent: "检测次数", textFont: 18)
-        return label
-    }()
-    
-    // 为方便初始化label
-    func initLabel(textContent string:String,textFont font:CGFloat)->UILabel{
+    lazy var ValueLabel:UILabel = {
         let label = UILabel()
-        label.text = string
-        label.font = UIFont.systemFont(ofSize: font)
-        label.textAlignment = .left
-        label.backgroundColor = UIColor.yellow
-        label.textColor = UIColor.black
-        
+        label.font = UIFont.systemFont(ofSize: 30)
+        label.textAlignment = .center
         return label
-    }
+    }()
+    private lazy var TitleLabel:UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 20)
+        label.textAlignment = .center
+        return label
+    }()
     
-    func setupUI(){
-        self.addSubview(titleLabel)
-        // 设置视图边框
-        self.layer.borderColor = borderColor.cgColor
-        self.layer.borderWidth = 1
+    private lazy var UnitLabel:UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 15)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    func setupUI(title:String,value:String,unit:String){
+        ValueLabel.text = value
+        TitleLabel.text = title
+        UnitLabel.text = unit
         
-        titleLabel.snp.makeConstraints{(make) in
-            make.left.equalToSuperview().offset(AJScreenWidth/20)
-            make.width.equalTo(AJScreenWidth/2)
-            make.top.equalToSuperview().offset(AJScreenWidth/20)
-            make.height.equalTo(AJScreenWidth/15)
-        }
+        self.addSubview(TitleLabel)
+        self.addSubview(ValueLabel)
+        self.addSubview(UnitLabel)
         
-        self.addSubview(avgValueLabel)
-        avgValueLabel.snp.makeConstraints{(make) in
-            make.left.equalTo(titleLabel.snp.left)
+        TitleLabel.snp.makeConstraints{(make) in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(AJScreenWidth/30)
+            make.height.equalTo(AJScreenWidth/20)
             make.width.equalTo(AJScreenWidth/4)
-            make.top.equalTo(titleLabel.snp.bottom).offset(AJScreenWidth/20)
-            make.height.equalTo(AJScreenWidth/15)
         }
-        
-        self.addSubview(avgLabel)
-        avgLabel.snp.makeConstraints{(make) in
-            make.left.equalTo(titleLabel.snp.left)
-            make.width.equalTo(AJScreenWidth/4)
-            make.top.equalTo(avgValueLabel.snp.bottom).offset(AJScreenWidth/40)
-            make.height.equalTo(AJScreenWidth/15)
+        ValueLabel.sizeToFit()
+        ValueLabel.snp.makeConstraints{(make) in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(TitleLabel.snp.bottom).offset(AJScreenWidth/30)
+            make.bottom.equalToSuperview().offset(-AJScreenWidth/30)
         }
-        
-        self.addSubview(checkNumLabel)
-        checkNumLabel.snp.makeConstraints{(make) in
-            make.left.equalTo(self.snp.centerX).offset(AJScreenWidth/20)
-            //make.width.equalTo(AJScreenWidth/4)
-            make.top.equalTo(avgValueLabel.snp.top)
-            make.height.equalTo(AJScreenWidth/15)
+        UnitLabel.sizeToFit()
+        UnitLabel.snp.makeConstraints{(make) in
+            make.left.equalTo(ValueLabel.snp.right).offset(10)
+            make.top.equalTo(ValueLabel.snp.centerY)
         }
-        
-        self.addSubview(checkLabel)
-        checkLabel.snp.makeConstraints{(make) in
-            make.left.equalTo(checkNumLabel.snp.left)
-            make.width.equalTo(AJScreenWidth/4)
-            make.top.equalTo(avgLabel.snp.top)
-            make.height.equalTo(AJScreenWidth/15)
-        }
-        
     }
 
 }

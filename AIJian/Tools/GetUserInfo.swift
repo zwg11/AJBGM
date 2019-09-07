@@ -8,16 +8,17 @@
 
 import Foundation
 
+
 // 用户id
 var userId:Int64? = 0
 
 // 用户token
-var token = ""
+var token:String?
 
 // 从plist 文件中提取 userId 和 token
 func getUserInfo(){
     let path = Bundle.main.path(forResource: "User", ofType: "plist")
     let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path!)!
     userId = data["userId"] as? Int64
-    token = data["token"] as! String
+    token = data["token"] as? String
 }

@@ -97,6 +97,8 @@ class DataViewController: UIViewController {
     var topConstraint:Constraint?
     var bottomConstraint:Constraint?
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
@@ -166,6 +168,7 @@ class DataViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         // 隐藏 tabbar
         self.tabBarController?.tabBar.isHidden = true
+        self.pageViewManager.titleView.currentIndex = 0
         
         
         
@@ -235,7 +238,7 @@ class DataViewController: UIViewController {
             // 执行对日期范围选定后的数据处理
             setDaysAndRange()
             // 打印 开始时间 和 结束时间
-            print("startD:\(startD),endD:\(endD)")
+            //print("startD:\(startD),endD:\(endD)")
         }
         
         
@@ -246,7 +249,6 @@ class DataViewController: UIViewController {
     @objc func pickViewDismiss(){
         backButton.removeFromSuperview()
         UIView.animate(withDuration: 0.5, animations: dismiss)
-        
         print("cancel button clicked")
     }
     
@@ -368,14 +370,28 @@ class DataViewController: UIViewController {
             
         }
 
+        // 根据当前所在的页面刷新对应页面的数据显示
+        switch self.pageViewManager.titleView.currentIndex{
+        case 0:// 设置通知，通知控制器重新加载他的界面
+            NotificationCenter.default.post(name: NSNotification.Name("reloadChart"), object: self, userInfo: nil)
+        case 1:// 设置通知，通知控制器重新加载他的界面
+            NotificationCenter.default.post(name: NSNotification.Name("reloadData"), object: self, userInfo: nil)
+        case 2:// 设置通知，通知控制器重新加载他的界面
+            NotificationCenter.default.post(name: NSNotification.Name("reloadTable"), object: self, userInfo: nil)
+        default:// 设置通知，通知控制器重新加载他的界面
+            NotificationCenter.default.post(name: NSNotification.Name("reloadView"), object: self, userInfo: nil)
+            
+        }
         // 设置通知，通知其他控制器重新加载他们的界面
-        NotificationCenter.default.post(name: NSNotification.Name("reload"), object: self, userInfo: nil)
+        //NotificationCenter.default.post(name: NSNotification.Name("reload"), object: self, userInfo: nil)
 
     
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
+    
+    
     
 }
 

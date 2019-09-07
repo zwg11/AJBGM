@@ -37,6 +37,13 @@ struct glucoseRecordInDays: HandyJSON{
     var token:String?
 }
 
+// 请求删除的相应内容
+struct deleteResponse: HandyJSON {
+    var code:Int64?
+    var msg:String?
+    var data:String?
+}
+
 // 请求响应内容
 struct recordInDaysResponse: HandyJSON {
     var code:Int64?

@@ -23,7 +23,7 @@ class ChartView: UIView {
         
         _lineChartView.noDataText = "暂无数据"
         _lineChartView.noDataTextColor = UIColor.gray
-        _lineChartView.noDataFont = UIFont.boldSystemFont(ofSize: 14)
+        _lineChartView.noDataFont = UIFont.boldSystemFont(ofSize: 20)
         // 是否显示图表左下角的图例，变false使得其不显示
         _lineChartView.legend.enabled = false
         // 是否支持拖拽
@@ -42,8 +42,12 @@ class ChartView: UIView {
         leftAxis.labelTextColor = UIColor.black
         leftAxis.labelFont = UIFont.systemFont(ofSize: 10)
         leftAxis.labelPosition = .outsideChart
-        leftAxis.gridColor = UIColor.init(red: 233/255.0, green: 233/255.0, blue: 233/255.0, alpha: 1.0)//网格
+        //leftAxis.gridColor = UIColor.init(red: 233/255.0, green: 233/255.0, blue: 233/255.0, alpha: 1.0)//网格
+        leftAxis.gridColor = UIColor.lightGray
         leftAxis.gridAntialiasEnabled = false//抗锯齿
+        if GetUnit.getBloodUnit() == "mg/dL"{
+            
+        }
         leftAxis.axisMaximum = 17//最大值
         leftAxis.axisMinimum = 0
         leftAxis.labelCount = 7//多少等分
@@ -56,7 +60,8 @@ class ChartView: UIView {
         xAxis.labelFont = UIFont.systemFont(ofSize: 10.0)
         xAxis.labelPosition = .bottom
         xAxis.labelRotatedHeight = 2
-        xAxis.gridColor = UIColor.init(red: 233/255.0, green: 233/255.0, blue: 233/255.0, alpha: 1.0)
+        //xAxis.gridColor = UIColor.init(red: 233/255.0, green: 233/255.0, blue: 233/255.0, alpha: 1.0)
+        xAxis.gridColor = UIColor.lightGray
         xAxis.axisLineColor = UIColor.black
         xAxis.axisMinimum = 0
         // ********该处需随需求变动************
@@ -66,14 +71,56 @@ class ChartView: UIView {
         return _lineChartView
     }()
     
-    // 该函数应传值 x轴坐标和
+    // 该函数应传值 x轴坐标 和 x轴对应label
     func drawLineChart(xAxisArray:NSArray,xAxisData:[Double]){
-        
-        
+
         // 根据日期范围生成对应的x轴的label,这里需自定义 x轴坐标显示
         lineChartView.xAxis.valueFormatter = VDChartAxisValueFormatter.init(xAxisArray)
+
+        // 图表数据数组
+        var yDataArray1 = [ChartDataEntry]()
         
+        let xData = xAxisData
+        //xData.sort()
+        print("xdata:\(xData)")
+        // 先检查是否有数据，若没有则不添加，若有则添加
+        if glucoseTime.count != 0{
+            for i in 0...glucoseTime.count-1 {
+                let j = glucoseTime.count-1-i
+                // 生成图表数据结构，根据 x的位置 和 y的位置。
+                // y 的位置为 glucoseTimeAndValue 根据时间读取对应的血糖值
+                // 注意坐标的 axisMinimum 和 axisMaximum 属性
+                // 点的位置要相对于 这两个属性来画出
+                let entry = ChartDataEntry.init(x: xData[j], y: glucoseTimeAndValue[glucoseTime[j]]!)
+                // 将数据添加到图表数据数组中
+                yDataArray1.append(entry)
+            }
+        }
+        print(yDataArray1)
+        let set1 = LineChartDataSet.init(entries: yDataArray1, label: "")
+        // 设置线 的颜色
+        set1.colors = [UIColor.black]
+        // 设置 点的样式
+        set1.drawCirclesEnabled = true//绘制转折点
+        set1.drawCircleHoleEnabled = false
+        set1.circleColors = [UIColor.green]
+        set1.circleRadius = 5
+        set1.lineWidth = 2.0
         
+        // 初始化折线图数据
+        let data = LineChartData.init(dataSets: [set1])
+        
+        lineChartView.data = data
+        // 设置画图动画
+        lineChartView.animate(xAxisDuration: 1.0, yAxisDuration: 1.0, easingOption: .easeInBack)
+    }
+    
+    // 该函数应传值 x轴坐标和
+    func drawLineChartWithoutAnimate(xAxisArray:NSArray,xAxisData:[Double]){
+          
+        // 根据日期范围生成对应的x轴的label,这里需自定义 x轴坐标显示
+        lineChartView.xAxis.valueFormatter = VDChartAxisValueFormatter.init(xAxisArray)
+
         // 图表数据数组
         var yDataArray1 = [ChartDataEntry]()
         
@@ -105,16 +152,16 @@ class ChartView: UIView {
         let data = LineChartData.init(dataSets: [set1])
         
         lineChartView.data = data
-        // 设置画图动画
-        lineChartView.animate(xAxisDuration: 1.0, yAxisDuration: 1.0, easingOption: .easeInBack)
     }
+    
+    
     // 限制线的添加
     func addLimitLine(_ value:Double, _ desc:String,_ color:UIColor) {
         let limitLine = ChartLimitLine.init(limit: value, label: desc)
         //线
         limitLine.lineWidth = 1
         limitLine.lineColor = color
-        limitLine.lineDashLengths = [2.0,2.0]
+        limitLine.lineDashLengths = [4.0,0]
         //文字
         limitLine.valueFont = UIFont.systemFont(ofSize: 10.0)
         limitLine.valueTextColor = UIColor.black
@@ -124,8 +171,6 @@ class ChartView: UIView {
     
     func setupUI(){
         self.addSubview(lineChartView)
-//        self.drawLineChart(xAxisArray: xAxisArray(Days: 15) as NSArray)
-//        self.addLimitLine(13, "限制线",UIColor.red)
         self.lineChartView.snp_makeConstraints{(make) in
             make.edges.equalToSuperview()
         }

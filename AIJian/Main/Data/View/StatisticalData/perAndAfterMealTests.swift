@@ -23,9 +23,8 @@ class perAndAfterMealTests: UIView {
 
     // 初始化字体颜色，红 黄 绿 蓝
     let greenColor = UIColor.init(red: 97.0/255.0, green: 213.0/255.0, blue: 96.0/255.0, alpha: 1)
-    let redColor = UIColor.init(red: 229.0/255.0, green: 28.0/255.0, blue: 35.0/255.0, alpha: 1)
     let yellowColor = UIColor.init(red: 229.0/255.0, green: 217.0/255.0, blue: 28.0/255.0, alpha: 1)
-    let blueColor = UIColor.init(red: 139.0/255.0, green: 159.0/255.0, blue: 74.0/255.0, alpha: 1)
+    let blueColor = UIColor.init(red: 97.0/255.0, green: 112.0/255.0, blue: 227.0/255.0, alpha: 1)
 
 
     
@@ -79,46 +78,27 @@ class perAndAfterMealTests: UIView {
         view.layer.borderColor = borderColor.cgColor
         return view
     }()
-    
-    // 为方便布局，再创建两个辅助视图，将检测视图一分为二
-    private lazy var view1:UIView = UIView()
-    private lazy var view2:UIView = UIView()
-    
-    //***********低血糖*************
-    private lazy var low:UILabel = {
-        let label = initLabel(setTextColor: redColor, setText: "低血糖")
-        return label
-    }()
-    
-    private lazy var lowValue:UILabel = {
-        let label = initLabel(setTextColor: redColor, setText: "0")
-        return label
-    }()
-    
-    private lazy var lowPercent:UILabel = {
-        let label = initLabel(setTextColor: redColor, setText: "0%")
-        return label
-    }()
+
     
     //***********低于正常值*************
-    private lazy var lowerNormal:UILabel = {
-        let label = initLabel(setTextColor: yellowColor, setText: "低于")
+    private lazy var lower:UILabel = {
+        let label = initLabel(setTextColor: yellowColor, setText: "Low")
         return label
     }()
     
-    private lazy var lowerNormalValue:UILabel = {
+    private lazy var lowerValue:UILabel = {
         let label = initLabel(setTextColor: yellowColor, setText: "0")
         return label
     }()
     
-    private lazy var lowerNormalPercent:UILabel = {
+    private lazy var lowerPercent:UILabel = {
         let label = initLabel(setTextColor: yellowColor, setText: "0%")
         return label
     }()
     
     //***********正常*************
     private lazy var normal:UILabel = {
-        let label = initLabel(setTextColor: greenColor, setText: "正常")
+        let label = initLabel(setTextColor: greenColor, setText: "Normal")
         return label
     }()
     
@@ -134,7 +114,7 @@ class perAndAfterMealTests: UIView {
     
     //***********高于正常值*************
     private lazy var higherNormal:UILabel = {
-        let label = initLabel(setTextColor: blueColor, setText: "高于")
+        let label = initLabel(setTextColor: blueColor, setText: "Hyper")
         return label
     }()
     
@@ -190,68 +170,32 @@ class perAndAfterMealTests: UIView {
             
         }
         
-        // 设置 辅助视图 布局
-        testView.addSubview(view1)
-        testView.addSubview(view2)
-        view1.snp.makeConstraints{(make) in
-            make.left.top.bottom.equalToSuperview()
-            make.right.equalTo(testView.snp.centerX)
-        }
-        view2.snp.makeConstraints{(make) in
-            make.right.top.bottom.equalToSuperview()
-            make.left.equalTo(testView.snp.centerX)
-        }
         
         // MARK: - Label布局约束
         // 所有Label 高30 宽testView的 1/4
-        // ***************************低血糖*****************************
-        self.testView.addSubview(low)
-        self.low.snp.makeConstraints{ (make) in
-            make.left.equalToSuperview()
-            make.top.equalToSuperview()
-            make.height.equalTo(30)
-            make.right.equalTo(view1.snp.centerX)
-            
-        }
-        
-        self.testView.addSubview(lowValue)
-        self.lowValue.snp.makeConstraints{ (make) in
-            make.left.right.equalTo(low)
-            make.top.equalTo(low.snp.bottom)
-            make.height.equalTo(30)
-            
-        }
-        
-        self.testView.addSubview(lowPercent)
-        self.lowPercent.snp.makeConstraints{ (make) in
-            make.left.right.equalTo(low)
-            make.top.equalTo(lowValue.snp.bottom)
-            make.height.equalTo(30)
-            
-        }
         
         // ***************************低于*****************************
-        self.testView.addSubview(lowerNormal)
-        self.lowerNormal.snp.makeConstraints{ (make) in
-            make.left.equalTo(low.snp.right)
-            make.top.equalToSuperview()
+        self.testView.addSubview(lower)
+        self.lower.snp.makeConstraints{ (make) in
+            
+            make.left.top.equalToSuperview()
             make.height.equalTo(30)
-            make.right.equalTo(view1.snp.right)
+            make.width.equalToSuperview().dividedBy(3)
             
         }
         
-        self.testView.addSubview(lowerNormalValue)
-        self.lowerNormalValue.snp.makeConstraints{ (make) in
-            make.left.right.equalTo(lowerNormal)
-            make.top.equalTo(lowerNormal.snp.bottom)
+        self.testView.addSubview(lowerValue)
+        self.lowerValue.snp.makeConstraints{ (make) in
+            make.left.right.equalTo(lower)
+            make.top.equalTo(lower.snp.bottom)
             make.height.equalTo(30)
             
         }
         
-        self.testView.addSubview(lowerNormalPercent)
-        self.lowerNormalPercent.snp.makeConstraints{ (make) in
-            make.left.right.equalTo(lowerNormal)
-            make.top.equalTo(lowerNormalValue.snp.bottom)
+        self.testView.addSubview(lowerPercent)
+        self.lowerPercent.snp.makeConstraints{ (make) in
+            make.left.right.equalTo(lower)
+            make.top.equalTo(lowerValue.snp.bottom)
             make.height.equalTo(30)
             
         }
@@ -259,10 +203,10 @@ class perAndAfterMealTests: UIView {
         // ***************************正常*****************************
         self.testView.addSubview(normal)
         self.normal.snp.makeConstraints{ (make) in
-            make.left.equalTo(lowerNormal.snp.right)
+            make.left.equalTo(lower.snp.right)
             make.top.equalToSuperview()
-            make.height.equalTo(low.snp.height)
-            make.right.equalTo(view2.snp.centerX)
+            make.width.height.equalTo(lower)
+            
             
         }
         
@@ -270,7 +214,7 @@ class perAndAfterMealTests: UIView {
         self.normalValue.snp.makeConstraints{ (make) in
             make.left.right.equalTo(normal)
             make.top.equalTo(normal.snp.bottom)
-            make.height.equalTo(low.snp.height)
+            make.width.height.equalTo(lower)
             
         }
         
@@ -278,7 +222,7 @@ class perAndAfterMealTests: UIView {
         self.normalPercent.snp.makeConstraints{ (make) in
             make.left.right.equalTo(normal)
             make.top.equalTo(normalValue.snp.bottom)
-            make.height.equalTo(low.snp.height)
+            make.width.height.equalTo(lower)
             
         }
         
@@ -287,7 +231,7 @@ class perAndAfterMealTests: UIView {
         self.higherNormal.snp.makeConstraints{ (make) in
             make.left.equalTo(normal.snp.right)
             make.top.equalToSuperview()
-            make.height.equalTo(low.snp.height)
+            make.height.equalTo(lower)
             make.right.equalToSuperview()
             
         }
@@ -296,7 +240,7 @@ class perAndAfterMealTests: UIView {
         self.higherNormalValue.snp.makeConstraints{ (make) in
             make.left.right.equalTo(higherNormal)
             make.top.equalTo(higherNormal.snp.bottom)
-            make.height.equalTo(low.snp.height)
+            make.height.equalTo(lower)
             
         }
         
@@ -304,25 +248,18 @@ class perAndAfterMealTests: UIView {
         self.higherNormalPercent.snp.makeConstraints{ (make) in
             make.left.right.equalTo(higherNormal)
             make.top.equalTo(higherNormalValue.snp.bottom)
-            make.height.equalTo(low.snp.height)
+            make.height.equalTo(lower)
 
             
         }
         
         // ***************************下划线******************************
-        self.testView.addSubview(lineView1)
-        self.lineView1.snp.makeConstraints{ (make) in
-            make.left.equalTo(low).offset(AJScreenWidth/40)
-            make.right.equalTo(low).offset(-AJScreenWidth/40)
-            make.centerY.equalTo(lowValue.snp.bottom)
-            make.height.equalTo(2)
-        }
         
         self.testView.addSubview(lineView2)
         self.lineView2.snp.makeConstraints{ (make) in
-            make.left.equalTo(lowerNormal).offset(AJScreenWidth/40)
-            make.right.equalTo(lowerNormal).offset(-AJScreenWidth/40)
-            make.centerY.equalTo(lowerNormalValue.snp.bottom)
+            make.left.equalTo(lower).offset(AJScreenWidth/40)
+            make.right.equalTo(lower).offset(-AJScreenWidth/40)
+            make.centerY.equalTo(lowerValue.snp.bottom)
             make.height.equalTo(2)
             
         }
@@ -349,18 +286,23 @@ class perAndAfterMealTests: UIView {
         
     }// setupUI() end
     
-    // 用于记录饭前、总体饭后检测次数
+    // 用于记录饭前、总体饭后检测次数和对应数据
     var perMealNum:Int = 0
     var perMealData:[glucoseDate] = []
     var totalNum:Int = 0
     var afterMealNum:Int = 0
     var afterMealData:[glucoseDate] = []
+    var otherNum:Int = 0
+    var otherData:[glucoseDate] = []
     // 检测视图检测次数初始化
     func checkInit(){
+        // 全部s初始化为0，避免受之前的值的影响
         perMealNum = 0
         afterMealNum = 0
+        otherNum = 0
         var per:[glucoseDate] = []
         var after:[glucoseDate] = []
+        var other:[glucoseDate] = []
         totalNum = sortedByDateOfData!.count
         if totalNum > 0{
             for i in sortedByDateOfData!{
@@ -372,112 +314,222 @@ class perAndAfterMealTests: UIView {
                     afterMealNum += 1
                     after.append(i)
                 default:
-                    print("")
+                    otherNum += 1
+                    other.append(i)
                     
                 }
             }
             perMealData = per
             afterMealData = after
+            otherData = other
         }
     }
     // 总体检测视图内容初始化
     func totalInit(){
         checkViewTitle.text = "Total - \(totalNum) Tests"
-        var low = 0     // 低血糖
         var lower = 0   // 低于
         var normal = 0  // 正常
         var high = 0    // 高于
         // 遍历数据，根据范围得到对应的次数
+        // 由于餐前餐后和随机其正常血糖范围不一致
+        // 因此需依次判断
         if totalNum > 0{
-            for i in sortedByDateOfData!{
-                if i.bloodGlucoseMmol! < 15.0{
-                    low += 1
-                }else if i.bloodGlucoseMmol! < 20{
-                    
-                    lower += 1
-                }else if i.bloodGlucoseMmol! < 30{
-                    
-                    normal += 1
-                }else{
-                    high += 1
+            if GetUnit.getBloodUnit() == "mg/dL"{
+                
+                if perMealNum > 0{
+                    // perMeal
+                    for i in perMealData{
+                        if Double(i.bloodGlucoseMg!) < GetBloodLimit.getBeforeDinnerLow(){
+                            
+                            lower += 1
+                        }else if Double(i.bloodGlucoseMg!) < GetBloodLimit.getBeforeDinnerTop(){
+                            
+                            normal += 1
+                        }else{
+                            high += 1
+                        }
+                    }
                 }
+                
+                if afterMealNum > 0{
+                    // afterMeal
+                    for i in afterMealData{
+                        if Double(i.bloodGlucoseMg!) < GetBloodLimit.getAfterDinnerLow(){
+                            lower += 1
+                        }else if Double(i.bloodGlucoseMg!) < GetBloodLimit.getAfterDinnerTop(){
+                            
+                            normal += 1
+                        }else{
+                            high += 1
+                        }
+                    }
+
+                }
+                
+                if otherNum > 0{
+                    // other
+                    for i in otherData{
+                        if Double(i.bloodGlucoseMg!) < GetBloodLimit.getRandomDinnerLow(){
+                            lower += 1
+                        }else if Double(i.bloodGlucoseMg!) < GetBloodLimit.getRandomDinnerTop(){
+                            
+                            normal += 1
+                        }else{
+                            high += 1
+                        }
+                    }
+                }
+                
+                
+            }else{
+                if perMealNum > 0{
+                    // perMeal
+                    for i in perMealData{
+                        if i.bloodGlucoseMmol! < GetBloodLimit.getBeforeDinnerLow(){
+                            
+                            lower += 1
+                        }else if i.bloodGlucoseMmol! < GetBloodLimit.getBeforeDinnerTop(){
+                            
+                            normal += 1
+                        }else{
+                            high += 1
+                        }
+                    }
+                }
+                
+                
+                if afterMealNum > 0{
+                    // afterMeal
+                    for i in afterMealData{
+                        if i.bloodGlucoseMmol! < GetBloodLimit.getAfterDinnerLow(){
+                            
+                            lower += 1
+                        }else if i.bloodGlucoseMmol! < GetBloodLimit.getAfterDinnerTop(){
+                            
+                            normal += 1
+                        }else{
+                            high += 1
+                        }
+                    }
+                }
+                
+                
+                if otherNum > 0{
+                    // other
+                    for i in otherData{
+                        if i.bloodGlucoseMmol! < GetBloodLimit.getRandomDinnerLow(){
+                            
+                            lower += 1
+                        }else if i.bloodGlucoseMmol! < GetBloodLimit.getRandomDinnerTop(){
+                            
+                            normal += 1
+                        }else{
+                            high += 1
+                        }
+                    }
+                }
+                
             }
         }
         
         // 初始化label，如果有数据则初始化，没有就全为0
-        initLabel(low: low, lower: lower, normal: normal, high: high, total: totalNum)
+        initLabel(lower: lower, normal: normal, high: high, total: totalNum)
     }
     // 餐前检测视图内容初始化
     func perMealInit(){
         checkViewTitle.text = "Before Meal - \(perMealNum) Tests"
         
-        var low = 0     // 低血糖
         var lower = 0   // 低于
         var normal = 0  // 正常
         var high = 0    // 高于
         // 遍历餐前数据，根据范围得到对应的次数
         if perMealNum > 0{
-            for i in perMealData{
-                if i.bloodGlucoseMmol! < 15.0{
-                    low += 1
-                }else if i.bloodGlucoseMmol! < 20{
-                    
-                    lower += 1
-                }else if i.bloodGlucoseMmol! < 30{
-                    
-                    normal += 1
-                }else{
-                    high += 1
+            if GetUnit.getBloodUnit() == "mg/dL"{
+                for i in perMealData{
+                    if Double(i.bloodGlucoseMg!) < GetBloodLimit.getBeforeDinnerLow(){
+                        
+                        lower += 1
+                    }else if Double(i.bloodGlucoseMg!) < GetBloodLimit.getBeforeDinnerTop(){
+                        
+                        normal += 1
+                    }else{
+                        high += 1
+                    }
                 }
+            }else{
+                // perMeal
+                for i in perMealData{
+                    if i.bloodGlucoseMmol! < GetBloodLimit.getBeforeDinnerLow(){
+                        
+                        lower += 1
+                    }else if i.bloodGlucoseMmol! < GetBloodLimit.getBeforeDinnerTop(){
+                        
+                        normal += 1
+                    }else{
+                        high += 1
+                    }
+                }
+                
             }
+            
         }
         
         // 初始化label，如果有数据则初始化，没有就全为0
-        initLabel(low: low, lower: lower, normal: normal, high: high, total: perMealNum)
+        initLabel(lower: lower, normal: normal, high: high, total: perMealNum)
     }
     // 餐后检测视图内容初始化
     func afterMealInit(){
         checkViewTitle.text = "After Meal - \(afterMealNum) Tests"
-        var low = 0     // 低血糖
+
         var lower = 0   // 低于
         var normal = 0  // 正常
         var high = 0    // 高于
         // 遍历餐后数据，根据范围得到对应的次数
         if afterMealNum > 0{
-            for i in afterMealData{
-                if i.bloodGlucoseMmol! < 15.0{
-                    low += 1
-                }else if i.bloodGlucoseMmol! < 20{
-                    
-                    lower += 1
-                }else if i.bloodGlucoseMmol! < 30{
-                    
-                    normal += 1
-                }else{
-                    high += 1
+            
+            if GetUnit.getBloodUnit() == "mg/dL"{
+                for i in afterMealData{
+                    if Double(i.bloodGlucoseMg!) < GetBloodLimit.getAfterDinnerLow(){
+                        lower += 1
+                    }else if Double(i.bloodGlucoseMg!) < GetBloodLimit.getAfterDinnerTop(){
+                            
+                        normal += 1
+                    }else{
+                        high += 1
+                    }
                 }
+            }else{
+                for i in afterMealData{
+                    if i.bloodGlucoseMmol! < GetBloodLimit.getAfterDinnerLow(){
+                            
+                        lower += 1
+                    }else if i.bloodGlucoseMmol! < GetBloodLimit.getAfterDinnerTop(){
+                            
+                        normal += 1
+                    }else{
+                        high += 1
+                    }
+                }
+                
             }
         }
         // 初始化label，如果有数据则初始化，没有就全为0
-        initLabel(low: low, lower: lower, normal: normal, high: high, total: afterMealNum)
+        initLabel(lower: lower, normal: normal, high: high, total: afterMealNum)
     }
     // 初始化label
-    func initLabel(low:Int,lower:Int,normal:Int,high:Int,total:Int){
+    func initLabel(lower:Int,normal:Int,high:Int,total:Int){
         initLabelToZero()
+        // 可直接得到次数，但百分比需计算
         if total > 0{
-            if low > 0{
-                lowValue.text = "\(low)"
-                lowPercent.text = String(Int(Double(low)/Double(total)*100)) + "%"
-            }
             if lower > 0{
-                lowerNormalValue.text = "\(lower)"
-                lowerNormalPercent.text = String(Int(Double(lower)/Double(total)*100)) + "%"
+                lowerValue.text = "\(lower)"
+                lowerPercent.text = String(Int(Double(lower)/Double(total)*100)) + "%"
             }
             if normal > 0{
                 normalValue.text = "\(normal)"
                 normalPercent.text = String(Int(Double(normal)/Double(total)*100)) + "%"
             }
-            if low > 0{
+            if high > 0{
                 higherNormalValue.text = "\(high)"
                 higherNormalPercent.text = String(Int(Double(high)/Double(total)*100)) + "%"
             }
@@ -486,10 +538,8 @@ class perAndAfterMealTests: UIView {
     
     // 将label全初始化为0
     func initLabelToZero(){
-        lowValue.text = "0"
-        lowPercent.text = "0%"
-        lowerNormalValue.text = "0"
-        lowerNormalPercent.text = "0%"
+        lowerValue.text = "0"
+        lowerPercent.text = "0%"
         normalValue.text = "0"
         normalPercent.text = "0%"
         higherNormalValue.text = "0"

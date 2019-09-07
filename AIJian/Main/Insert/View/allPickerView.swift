@@ -233,6 +233,7 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
     
     func setupUI(){
 
+        
         event = data["event"] as! NSArray
         
         portion = data["portion"] as! NSArray

@@ -39,22 +39,58 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
 //        view.emailTextField.delegate = self
         view.nameTextField.delegate = self
         view.birthdayButton.addTarget(self, action: #selector(chooseDate), for: .touchUpInside)
-        view.sendButton.addTarget(self, action: #selector(sendCheck(_:)), for: .touchUpInside)
+
+        view.sendButton.addTarget(self, action: #selector(sendImage), for: .touchUpInside)
+        return view
+    }()
+    private lazy var general:GeneralStatusView = {
+       let view = GeneralStatusView()
+        view.setupUI()
         return view
     }()
     
-    // 发送报告的动作
-    @objc func sendCheck(_ sender:UIButton){
-        print("send.")
+    override func viewWillAppear(_ animated: Bool) {
+        self.view.addSubview(general)
+    }
+    
+    @objc func sendImage(){
+        // 将shareV视图生成为图片
+        
+        // 将视图生成文件
+        let image = viewToImage.getImageFromView(view: general)
+        // 将图片放入相册
+        UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.savedPhotosAlbum(_:didFinishSavingWithError:contextInfo:)), nil)
+        // 设置分享内容
         let textShared = "要分享的标题"
+        // 要分享的内容封装成数组
         let activityItems = [textShared]
+        // 创建
         let toVC = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
         self.present(toVC, animated: true, completion: nil)
-        sender.setTitleColor(UIColor.red, for: .highlighted)
     }
+    
+    //保存图片
+    @objc func savedPhotosAlbum(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: AnyObject) {
+        
+        if error != nil {
+            let alert = CustomAlertController()
+            alert.custom(self, "", "图片生成失败")
+            print("savw failed")
+            
+        } else {
+            let alert = CustomAlertController()
+            alert.custom(self, "", "图片生成成功")
+            print("savw success")
+            
+        }
+    }
+    
+
     var topConstraint:Constraint?
     var bottomConstraint:Constraint?
 
+    
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(false)
         dismiss()
@@ -62,6 +98,9 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.clipsToBounds = true
+        //general.setupUI()
+        
         let sharedScrollView = UIScrollView()
         // 设置内容高度为屏幕的3/2,显示滚动条，d能上下滚动，背景为白色
         sharedScrollView.contentSize = CGSize(width: AJScreenWidth, height: AJScreenWidth)
