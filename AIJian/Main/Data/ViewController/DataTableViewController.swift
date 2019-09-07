@@ -214,8 +214,8 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         }
         
         
-        //let scroll = UIScrollView(frame: CGRect(x: 70, y: 10, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height-100))
-        scroll.contentSize = CGSize(width: 720, height: scHeight)
+        // 设置数据滚动视图内容的大小，该滚动视图只允许横向滚动
+        scroll.contentSize = CGSize(width: 640, height: scHeight)
         scroll.showsHorizontalScrollIndicator = true
         scroll.indicatorStyle = .black
         scroll.bounces = false

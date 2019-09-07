@@ -94,15 +94,28 @@ class loginViewController: UIViewController,UITextFieldDelegate {
                                 print("登陆成功",responseModel)
                                 print("返回的code为1，登录成功")
 //                                print(responseModel.data)
+                                // 将返回的用户信息写入配置文件
                                 data["userId"] = responseModel.data?.userId!
                                 data["token"] = responseModel.data?.token!
                                 data["email"] = self.email!
-                                data.setObject(responseModel.data?.userId! as Any, forKey: "userId" as NSCopying )
-                                data.setObject(responseModel.data?.token! as Any, forKey: "token" as NSCopying )
-                                data.setObject(self.email!, forKey: "email" as NSCopying )
+//                                data.setObject(responseModel.data?.userId! as Any, forKey: "userId" as NSCopying )
+//                                data.setObject(responseModel.data?.token! as Any, forKey: "token" as NSCopying )
+//                                data.setObject(self.email!, forKey: "email" as NSCopying )
+                                // 保存
                                 data.write(toFile: path!, atomically: true)
-//                                userId = data["userId"] as? Int64
-//                                token = data["token"] as! String
+
+                                // ******************* 初始化数据库 *******************
+                                // 创建表，包括用户信息表 和 血糖记录表
+                                let sqliteManager = DBSQLiteManager()
+                                sqliteManager.createTable()
+                                
+                                // 向数据库插入用户信息
+                                var user1 = USER()
+                                user1.user_id = UserInfo.getUserId()
+                                user1.token = UserInfo.getToken()
+                                user1.email = UserInfo.getEmail()
+                                sqliteManager.addUserRecord(user1)
+                                
                                 self.present(AJTabbarController(), animated: false, completion: nil)
                             }else{
                                 print(responseModel)

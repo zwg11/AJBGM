@@ -133,17 +133,9 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         homeTableView.delegate = self
         homeTableView.dataSource = self
         self.view.addSubview(homeTableView)
-        // 初始化用户信息
-        // 向数据库插入用户信息
-        let sqliteManager = DBSQLiteManager()
-        sqliteManager.createTable()
-        var user1 = USER()
-        user1.user_id = UserInfo.getUserId()
-        user1.token = UserInfo.getToken()
-        user1.email = UserInfo.getEmail()
-        sqliteManager.addUserRecord(user1)
+
         
-        requestData(day: 3)
+        requestData(day: 30)
         
         self.view.backgroundColor = UIColor.white
         
@@ -199,6 +191,8 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                     }
                 } 
             }else{
+                let alert = CustomAlertController()
+                alert.custom(self, "警告", "网络异常，请稍后重试")
                 print("没网了")
             }
             
