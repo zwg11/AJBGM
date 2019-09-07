@@ -273,7 +273,7 @@ class InsertViewController: UIViewController {
         if GetUnit.getBloodUnit() == "mg/dL"{
             print("此时进入了mg/dl这个血糖单位")
             if input.glucose.XTTextfield.text! != ""{   //先判断空
-                if FormatMethodUtil.validateMgdlBloodNumber(number: input.glucose.XTTextfield.text!) == true{
+                if FormatMethodUtil.validateMgdlBloodNumber(number: input.glucose.XTTextfield.text!) == true || FormatMethodUtil.validateMgdlBloodNumberOther(number:input.glucose.XTTextfield.text!) == true{ 
                     if Double(input.glucose.XTTextfield.text!)! >= 10 && Double(input.glucose.XTTextfield.text!)! <= 600{
                         bloodGlucoseValueMg = Double(input.glucose.XTTextfield.text!)!
                         bloodGlucoseValueMmol = UnitConversion.mgTomm(num: bloodGlucoseValueMg!)
@@ -478,84 +478,49 @@ class InsertViewController: UIViewController {
         let sport_strength = IntensityChange.intensityTonum(input.getSportStrength())
         print("获得运动强度转换后的值:",sport_strength)
 
+        
         let no:String = ""
         
-//        let test = st111()
-//        test.token = token
-//        test.userId = userId!
-//        test.userBloodGlucoseRecords = [glDate(bgid:"",
-//                                               usierid:userId!,
-//                                               dgmmol:bloodGlucoseValueMmol!,
-//                                               bgmg:Int64(bloodGlucoseValueMg!))]
-//        let jsonStr = test.toJSON()
-//        print(jsonStr)
-//
-//        let data = [[
-//            "userId":userId! as Any,
-//            "createTime":createTime,
-//            "datectionTime":EvenChang.evenTonum(event),
-//            "bloodGlucoseMmol":bloodGlucoseValueMmol! as Any,
-//            "bloodGlucoseMg":bloodGlucoseValueMg! as Any,
-//            "eatType":no,
-//            "eatNum":EatNumChange.eatTonum(eat_num),
-//            "insulinType":insulin_type,
-//            "insulinNum":insulin_num! as Any,
-//            "height":height! as Any,
-//            "weightKg":weight_kg! as Any,
-//            "weightLbs":weight_lbs! as Any,
-//            "systolicPressureMmhg":sys_press_mmHg! as Any,
-//            "systolicPressureKpa":sys_press_kPa! as Any,
-//            "diastolicPressureMmhg":dis_press_mmHg! as Any,
-//            "diastolicPressureKpa":dis_press_kPa! as Any,
-//            "medicine":medicine_string,
-//            "sportType":sport,
-//            "sportTime":sport_time! as Any,
-//            "sportStrength":sport_strength,
-//            "inputType":1,
-//            "remark": no ,
-//            "mechineId":no
-//        ]]
+        //第一步：先封装成一个对象
+        var  insertData:glucoseDate = glucoseDate()
+        insertData.userId = userId
+        let uuid = UUID().uuidString.components(separatedBy: "-").joined()
+        insertData.bloodGlucoseRecordId = uuid
+        insertData.createTime = createTime
+        insertData.detectionTime =  Int64(EvenChang.evenTonum(event))
+        insertData.bloodGlucoseMmol = bloodGlucoseValueMmol!
+        insertData.bloodGlucoseMg = bloodGlucoseValueMg!
+        insertData.eatType = nil
+        insertData.eatNum = Int64(EatNumChange.eatTonum(eat_num))
+        insertData.insulinType = insulin_type
+        insertData.insulinNum = insulin_num!
+        insertData.height = height!
+        insertData.weightKg = weight_kg!
+        insertData.weightLbs = weight_lbs!
+        insertData.systolicPressureMmhg = sys_press_mmHg!
+        insertData.systolicPressureKpa = sys_press_kPa!
+        insertData.diastolicPressureMmhg = sys_press_mmHg!
+        insertData.diastolicPressureKpa = sys_press_kPa!
+        insertData.medicine = medicine_string
+        insertData.sportType = sport
+        insertData.sportTime = Int64(sport_time!)
+        insertData.sportStrength = Int64(sport_strength)
+        insertData.inputType = 1
+        insertData.remark = no
+        insertData.machineId = no
+     
+        //第二步:再封装成一个数组
+        let tempArray = [insertData]
+        //第三步：再将这个数组直接toString
+        let GlucoseJsonData = tempArray.toJSONString()!
         //手动输入数据，请求部分
-        let dictString = [ "token":token,
-                                      "userId":userId! as Any,
-                                      "userBloodGlucoseRecords":
-                                        [[
-                                        "userId":userId! as Any,
-                                        "createTime":createTime,
-                                        "datectionTime":EvenChang.evenTonum(event),
-                                        "bloodGlucoseMmol":bloodGlucoseValueMmol! as Any,
-                                        "bloodGlucoseMg":bloodGlucoseValueMg! as Any,
-                                        "eatType":no,
-                                        "eatNum":EatNumChange.eatTonum(eat_num),
-                                        "insulinType":insulin_type,
-                                        "insulinNum":insulin_num! as Any,
-                                        "height":height! as Any,
-                                        "weightKg":weight_kg! as Any,
-                                        "weightLbs":weight_lbs! as Any,
-                                        "systolicPressureMmhg":sys_press_mmHg! as Any,
-                                        "systolicPressureKpa":sys_press_kPa! as Any,
-                                        "diastolicPressureMmhg":dis_press_mmHg! as Any,
-                                        "diastolicPressureKpa":dis_press_kPa! as Any,
-                                        "medicine":medicine_string,
-                                        "sportType":sport,
-                                        "sportTime":sport_time! as Any,
-                                        "sportStrength":sport_strength,
-                                        "inputType":1,
-                                        "remark": no,
-                                        "mechineId":no
-            ]]
-                                    ] as [String : Any]
+        let dictString = [ "token":token,"userId":userId! as Any,"userBloodGlucoseRecords":GlucoseJsonData] as [String : Any]
         print(dictString)
         Alamofire.request(INSERTRECORD,method: .post,parameters: dictString).responseString{ (response) in
-            
-//            print(response.request?.httpBody)
-            
             if response.result.isSuccess {
                 if let jsonString = response.result.value {
                     print("进入验证过程")
                     print(jsonString)
-                    
-                    
                     // json转model
                     // 写法一：responseModel.deserialize(from: jsonString)
                     // 写法二：用JSONDeserializer<T>

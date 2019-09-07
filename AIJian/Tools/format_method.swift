@@ -46,6 +46,13 @@ public class FormatMethodUtil{
         let numberTest:NSPredicate = NSPredicate(format: "SELF MATCHES %@", numberRegex)
         return numberTest.evaluate(with: number)
     }
+    //以mg/dL为单位的血糖数据，也可以用整数表示
+    static func validateMgdlBloodNumberOther(number:String) -> Bool{
+        //表示三位整数
+        let numberRegex = "[0-9]{1,3}"
+        let numberTest:NSPredicate = NSPredicate(format: "SELF MATCHES %@", numberRegex)
+        return numberTest.evaluate(with: number)
+    }
     //手动输入中，验证胰岛素输入量的为合法值的函数    小数点前后都是两位数
     static func validateInsulinNum(number:String) -> Bool{
         //表示前后都是两位
@@ -54,7 +61,7 @@ public class FormatMethodUtil{
         return insulinTest.evaluate(with: number)
     }
     
-    //手动输入中，验证胰岛素输入量的为合法值的函数    小数点前后都是两位数
+    //手动输入中，验证身高的为合法值的函数    小数点前后都是两位数
     static func validateHeightNum(number:String) -> Bool{
         //表示前后都是两位
         let heightRegex = "[0-9]{0,3}\\.[0-9]{0,2}"

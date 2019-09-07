@@ -46,19 +46,19 @@ struct recordInDaysResponse: HandyJSON {
 
 // 响应内容中的数据
 struct glucoseDate: HandyJSON {
-    var bloodGlucoseRecordId:Int64?
+    var bloodGlucoseRecordId:String?
     var userId:Int64?
     var createTime:String?
     var detectionTime:Int64?
     var bloodGlucoseMmol:Double?
-    var bloodGlucoseMg:Int64?
+    var bloodGlucoseMg:Double?
     var eatType:String?
     var eatNum:Int64?
     var insulinType:String?
     var insulinNum:Double?
-    var height:Int64?
-    var weightKg:Int64?
-    var weightLbs:Int64?
+    var height:Double?
+    var weightKg:Double?
+    var weightLbs:Double?
     var systolicPressureMmhg:Double?
     var systolicPressureKpa:Double?
     var diastolicPressureMmhg:Double?
@@ -73,28 +73,26 @@ struct glucoseDate: HandyJSON {
     var machineId:String?
 }
 
-struct glDate{
-
-    
-
-    
-    var bloodGlucoseRecordId:String?
-    var userId:Int64?
-    var bloodGlucoseMmol:Double?
-    var bloodGlucoseMg:Int64?
-    
-    init(bgid:String,usierid:Int64,dgmmol:Double,bgmg:Int64){
-        self.bloodGlucoseRecordId = bgid
-        self.userId = usierid
-        self.bloodGlucoseMmol = dgmmol
-        self.bloodGlucoseMg = bgmg
-    }
-}
-
-class st111:HandyJSON{
-    var token:String?
-    var userId:Int64?
-    var userBloodGlucoseRecords:[glDate]?
-    
-    required init(){}
-}
+//struct glDate{
+//
+//    
+//
+//    
+//    var bloodGlucoseRecordId:String?
+//    var userId:Int64?
+//    var bloodGlucoseMmol:Double?
+//    var bloodGlucoseMg:Int64?
+//    
+//    init(bgid:String,usierid:Int64,dgmmol:Double,bgmg:Int64){
+//        self.bloodGlucoseRecordId = bgid
+//        self.userId = usierid
+//        self.bloodGlucoseMmol = dgmmol
+//        self.bloodGlucoseMg = bgmg
+//    }
+//}
+//
+//struct st111:HandyJSON{
+//    var token:String?
+//    var userId:Int64?
+//    var userBloodGlucoseRecords:[glucoseDate]?
+//}

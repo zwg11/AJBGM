@@ -26,12 +26,12 @@ public class DBSQLiteManager:NSObject{
     let phone_number = Expression<String?>("phone_number")
     
     let glucose_record           = Table("glucose_record")
-    let glucose_record_id        = Expression<Int64>("glucose_record_id")  //血糖ID
+    let glucose_record_id        = Expression<String>("glucose_record_id")  //血糖ID
     let user_glucose_id                  = Expression<Int64>("user_id")                  //用户ID
     let create_time                    = Expression<String>("create_time")             //创建时间
     let detection_time                 = Expression<Int64?>("detection_time")  //探测时间段血糖检测时段（0-无，1-早餐前，2-早餐后，3-午餐前，4-午餐后，5-晚餐前，6-晚餐后，7-进食零食前，8-进食零食后，9-就寝前，10-空腹，11-其他）（0-255）
     let glucose_mmol             = Expression<Double>("glucose_mmol")  //血糖值(mmol/L)
-    let glucose_mg               = Expression<Int64>("glucose_mg")     //血糖值(mg/dL)
+    let glucose_mg               = Expression<Double>("glucose_mg")     //血糖值(mg/dL)
     let eat_type                       = Expression<String?>("eat_type")//进餐类型
     let eat_num                        = Expression<Int64?>("eat_num")//进餐量---(0-无，1-小，2-中，3-大)
     let insulin_type                   = Expression<String?>("insulin_type")//胰岛素类型
@@ -254,7 +254,7 @@ public class DBSQLiteManager:NSObject{
         
     }
     //删除一条血糖记录
-    func deleteGlucoseRecord(_ glucoseId:Int64){
+    func deleteGlucoseRecord(_ glucoseId:String){
         let db = DBSQLiteManager.shareManager().openDB()
 
         let query = glucose_record.filter(glucose_record_id == glucoseId)

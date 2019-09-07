@@ -69,7 +69,7 @@ class HomeViewController: UIViewController {
         user1.email = "zzmmshang@qq.com"
         sqliteManager.addUserRecord(user1)
         
-        requestData(day: 30)
+        requestData(day: 3)
         
         self.view.backgroundColor = UIColor.white
         
@@ -130,6 +130,7 @@ class HomeViewController: UIViewController {
                     /*
                      利用JSONDeserializer封装成一个对象。然后再把这个对象解析为
                      */
+                    print("jsonString:\(jsonString)")
                     if let recordInDaysResponse = JSONDeserializer<recordInDaysResponse>.deserializeFrom(json: jsonString) {
                         // 如果 返回信息说明 请求数据失败，则弹出警示框宝报错
                         if recordInDaysResponse.code != 1{
