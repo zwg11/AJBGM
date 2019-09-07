@@ -84,7 +84,6 @@
 		C070FFB8E1701A5D899D48322ADE1A1C /* loginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505FC95DADCDA30414C138D4F216674B /* loginViewController.swift */; };
 		C09A68B5ACCA1FF372DB3D8F6C23A872 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDBFD961B14C40710FE24938097E7B6 /* UILabel+Extension.swift */; };
 		C0B2EB14159CEE413014D980058B4127 /* userBloodSetting.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7BD87968C7A6DBA89B736444D0C1C80C /* userBloodSetting.plist */; };
-		C27D0F4CFD2C4D6A6952A5496AF65F95 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D287CC8A0FC80342CF6F1B6AC824DD /* UserInfo.swift */; };
 		C2CBA0DB1212C80B70711093478F6D50 /* CustomAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044715989F31C24AE1950899878B6046 /* CustomAlertController.swift */; };
 		C45133C15650E0A758BE9274BD83AC47 /* perAndAfterMealTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1045C7B12598B6BDF9051A059F6A49 /* perAndAfterMealTests.swift */; };
 		C701921CAA5E7D6176A633628D36FCD2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21A6D55DCBB198190A95457237730BD /* HomeViewController.swift */; };
@@ -113,12 +112,12 @@
 		F4D79598A7AC12B94FAF293367A9D4A8 /* PressureUnitChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5E47CB62AAB8FA3205A5903BDDA347 /* PressureUnitChange.swift */; };
 		F6F14613E32F06BD8AB1AD10CFAE5D1A /* valueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C037DF823B6F425FC3F63663F2201B7 /* valueFormatter.swift */; };
 		F8D900CB7E2F47FE299816A83594072D /* EatNumChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CDAAA2B9326C327A7B5413ACA26EB4 /* EatNumChange.swift */; };
+		FC5423243A15C385AA367ABAB67D6C09 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D612F090DA61DB57678E74F261C68D6 /* UserInfo.swift */; };
 		FCCEE755960724D4B2A42D7EAA32CBFA /* tableViewCellCustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6614F4AA0A8E37F9E3E5385A5D65B09C /* tableViewCellCustomLabel.swift */; };
 		FDAFE0FF13FCD63DCA4CD8CCF7F22C1A /* emailCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61998C98501114BD8486D9458CBAF983 /* emailCheckViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		00D287CC8A0FC80342CF6F1B6AC824DD /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		02A0B4B2762DA7C7B818FCE47ADB08C6 /* infoInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = infoInputViewController.swift; sourceTree = "<group>"; };
 		044715989F31C24AE1950899878B6046 /* CustomAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertController.swift; sourceTree = "<group>"; };
 		0557E67341EF86431E047CAF50A62A92 /* SharedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedView.swift; sourceTree = "<group>"; };
@@ -128,6 +127,7 @@
 		0AE9E229BA78C6BCCE60166625ACCCC4 /* glucoseRecentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = glucoseRecentView.swift; path = AIJian/Main/Home/glucoseRecentView.swift; sourceTree = SOURCE_ROOT; };
 		0C037DF823B6F425FC3F63663F2201B7 /* valueFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = valueFormatter.swift; sourceTree = "<group>"; };
 		0D1AD2E1A3464A9CE95EFDBA19470A40 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		0D612F090DA61DB57678E74F261C68D6 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		114081AB7B0ED40CD96B4D28D031951A /* GetBloodLimit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetBloodLimit.swift; sourceTree = "<group>"; };
 		12334E6F67A1C77D5D81A3AA8A2BEB74 /* alertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alertViewController.swift; sourceTree = "<group>"; };
 		13E708809ACCA305E2B4107ADF6D21D4 /* InsertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertViewController.swift; sourceTree = "<group>"; };
@@ -673,10 +673,10 @@
 				114081AB7B0ED40CD96B4D28D031951A /* GetBloodLimit.swift */,
 				E59A10BC763D4D5E27D2541D481F5390 /* GetSortedData.swift */,
 				DFF8BC16AAE563F372E92457F2E7AAC1 /* GetUnit.swift */,
-				00D287CC8A0FC80342CF6F1B6AC824DD /* UserInfo.swift */,
 				8FEA8DF68F3C84CF024089E90716B37E /* IntensityChange.swift */,
 				3C5E47CB62AAB8FA3205A5903BDDA347 /* PressureUnitChange.swift */,
 				7250934CF2E058D7C85B4FC0C9FFCED6 /* UnitConversion.swift */,
+				0D612F090DA61DB57678E74F261C68D6 /* UserInfo.swift */,
 				067A7A62F94650792A578D0D5BE6D1BE /* WeightUnitChange.swift */,
 				8AD251DA1D7683298B03830243680EC8 /* format_method.swift */,
 				E2F07FB865C1B45AC2F704BE6D7A4BF4 /* viewToImage.swift */,
@@ -836,7 +836,6 @@
 				D3598BAB73CFEA38A43DA2264E156B52 /* GetBloodLimit.swift in Sources */,
 				DE3CF4606A6A4080C7331A8EA9ABB889 /* GetSortedData.swift in Sources */,
 				7B688513106D061646CE9E2BEA32A1AB /* GetUnit.swift in Sources */,
-				C27D0F4CFD2C4D6A6952A5496AF65F95 /* UserInfo.swift in Sources */,
 				C701921CAA5E7D6176A633628D36FCD2 /* HomeViewController.swift in Sources */,
 				B1B6272E57821B47FDE1B83E20D3D080 /* InfoInputView.swift in Sources */,
 				BA52FED03B80B15A0F3460206CDC2279 /* InfoViewController.swift in Sources */,
@@ -865,6 +864,7 @@
 				3F209594276298C7CF2E79AB8D42762D /* UnitViewController.swift in Sources */,
 				7E55D14C065E24471D59E71862D56472 /* UseDirViewController.swift in Sources */,
 				BDE0D575B5810095374503C425635030 /* User.swift in Sources */,
+				FC5423243A15C385AA367ABAB67D6C09 /* UserInfo.swift in Sources */,
 				F2E3E078A8AFB14D3459CFD205D09431 /* VersionUViewController.swift in Sources */,
 				F0DAF1CF8A457C4B9BC70BD93C0596F3 /* ViewController.swift in Sources */,
 				8D0150E7B9638EA09BE3CB6256FF8845 /* WeightUnitChange.swift in Sources */,
