@@ -43,6 +43,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         return cell1!
     }
 
+
     // 日期tableView
     var DATETableView:UITableView = UITableView()
     // 数据tableView
@@ -146,7 +147,9 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         // 该动作编辑一条记录
         let editAction = UIAlertAction(title: "编辑", style: .default, handler: {(UIAlertAction)->Void in
 
-            self.present(InsertViewController(), animated: true, completion: nil)
+            let insert = InsertViewController()
+            
+            self.navigationController?.pushViewController(insert, animated: true)
             
         })
         // 该动作删除一条记录，先删除服务器的，再删除本地数据库，最后删除全局变量的
@@ -162,6 +165,12 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         self.present(alert, animated: true, completion: nil)
         
     }
+    
+    class func EditData(){
+        
+    }
+    
+
     
     
     // 设置视图每次出现时滚动视图都回到顶部
@@ -271,16 +280,6 @@ extension DataTableViewController{
         // 设置信息请求字典
         let dicStr:Dictionary = ["bloodGlucoseRecordId":recordId,"token":tk,"userId":usr_id] as [String : Any]
         print(dicStr)
-        let parameters:Parameters = [
-            "token":token!,
-            "userId":userId!,
-            "userBloodGlucoseRecords":[
-                [
-                    "userId":userId!
-                    
-                ]
-            ]
-        ]
         // 请求删除数据，请求信息如上字典
         //********
         Alamofire.request(DELETE_DATA_URL,method: .post,parameters: dicStr).responseString{ (response) in

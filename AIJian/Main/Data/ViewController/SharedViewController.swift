@@ -39,7 +39,7 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
 //        view.emailTextField.delegate = self
         view.nameTextField.delegate = self
         view.birthdayButton.addTarget(self, action: #selector(chooseDate), for: .touchUpInside)
-<<<<<<< HEAD
+
         view.sendButton.addTarget(self, action: #selector(sendImage), for: .touchUpInside)
         return view
     }()
@@ -54,19 +54,9 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
     }
     
     @objc func sendImage(){
-//        let scroll = UIScrollView(frame: CGRect(x: 0, y: 0, width: AJScreenWidth-200, height: 100))
-//
-//        self.view.addSubview(scroll)
-//        scroll.contentSize = CGSize(width: 1000, height: 2000)
-//
-//        scroll.addSubview(general)
-        
-//        print("send.")
-
-        
         // 将shareV视图生成为图片
         
-        //sleep(2)
+        // 将视图生成文件
         let image = viewToImage.getImageFromView(view: general)
         // 将图片放入相册
         UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.savedPhotosAlbum(_:didFinishSavingWithError:contextInfo:)), nil)
@@ -95,21 +85,7 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
         }
     }
     
-=======
-        view.sendButton.addTarget(self, action: #selector(sendCheck(_:)), for: .touchUpInside)
-        return view
-    }()
-    
-    // 发送报告的动作
-    @objc func sendCheck(_ sender:UIButton){
-        print("send.")
-        let textShared = "要分享的标题"
-        let activityItems = [textShared]
-        let toVC = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
-        self.present(toVC, animated: true, completion: nil)
-        sender.setTitleColor(UIColor.red, for: .highlighted)
-    }
->>>>>>> 94a8c1575440233a20e4cf78c202ed203c6fe81a
+
     var topConstraint:Constraint?
     var bottomConstraint:Constraint?
 

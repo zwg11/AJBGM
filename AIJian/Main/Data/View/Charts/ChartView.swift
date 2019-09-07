@@ -161,7 +161,7 @@ class ChartView: UIView {
         //线
         limitLine.lineWidth = 1
         limitLine.lineColor = color
-        limitLine.lineDashLengths = [4.0,2.0]
+        limitLine.lineDashLengths = [4.0,0]
         //文字
         limitLine.valueFont = UIFont.systemFont(ofSize: 10.0)
         limitLine.valueTextColor = UIColor.black

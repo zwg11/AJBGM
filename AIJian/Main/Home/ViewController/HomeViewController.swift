@@ -108,9 +108,8 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }()
     
     override func viewWillAppear(_ animated: Bool) {
-<<<<<<< HEAD
         
-=======
+
 //        // 初始化用户信息
 //        getUserInfo()
 //        // 向数据库插入用户信息
@@ -122,7 +121,7 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
 //        user1.email = "zzmmshang@qq.com"
 //        sqliteManager.addUserRecord(user1)
         print("这个东西到底是什么东西",SHIFT!)
->>>>>>> 94a8c1575440233a20e4cf78c202ed203c6fe81a
+
     }
     
     var homeTableView:UITableView = UITableView()
