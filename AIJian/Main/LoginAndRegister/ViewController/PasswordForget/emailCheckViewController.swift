@@ -83,16 +83,17 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
                             /*  此处为跳转和控制逻辑
                              */
                             if(responseModel.code == 1 ){
-                                print("登录成功")
+                                print("邮箱验证成功")
                                 print("跳转到修改密码那一页")
                                 secViewController.email = self.email
                                 secViewController.verifyString = responseModel.data
                                 self.navigationController?.pushViewController(secViewController, animated: true)
                             }else{
-                                secViewController.email = self.email
-                                secViewController.verifyString = "gy riut u"
-                                self.navigationController?.pushViewController(secViewController, animated: true)
+//                                secViewController.email = self.email
+//                                secViewController.verifyString = "gy riut u"
+//                                self.navigationController?.pushViewController(secViewController, animated: true)
                                 alertController.custom(self,"Attention", "邮箱或密码不正确")
+                                return
                             }
                         } //end of letif
                     }

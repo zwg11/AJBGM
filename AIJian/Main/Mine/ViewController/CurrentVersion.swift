@@ -11,8 +11,16 @@ import SnapKit
 
 class CurrentVersion:UIViewController{
     
+    
+    
    
     override func viewDidLoad() {
+        
+        
+        self.title = "当前版本"
+        self.view.backgroundColor = UIColor.white
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title:"back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back))
+      
         
         //图标
         let glucoseImage = UIImageView()
@@ -49,6 +57,12 @@ class CurrentVersion:UIViewController{
             make.top.equalTo(line.snp.bottom).offset(5)
         }
         
+    }
+    @objc private func back(){
+        //按返回的时候，需要将数据进行更新
+        
+        
+        self.navigationController?.popViewController(animated: true)
     }
     
     
