@@ -126,7 +126,7 @@ class InfoInputView: UIView {
     
     // 输入电话文本框
     lazy var phoneTextField:UITextField = {
-        let textField = initTextField(placeholder: " 输入邮箱",keyboardType: .emailAddress)
+        let textField = initTextField(placeholder: " 输入电话",keyboardType: .emailAddress)
         return textField
     }()
     

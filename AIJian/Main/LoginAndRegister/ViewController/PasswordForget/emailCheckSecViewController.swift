@@ -97,11 +97,12 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
                             if(responseModel.code == 1 ){
                                 print("重置成功")
                                 print("跳转到修改密码那一页")
+                                alertController.custom(self,"Attention", "密码重置成功")
                                 self.navigationController?.popToRootViewController(animated: true)
                             }else{
                                 //先转，后弹
                                 self.navigationController?.popToRootViewController(animated: true)
-                                alertController.custom(self,"Attention", "修改失败")
+                                
                                 
                             }
                         } //end of letif
