@@ -30,7 +30,7 @@ public class EvenChang{
     }
     //将数字转为事件
     static func numToeven(_ num:Int)->String{
-        var a:String = "nothing"
+        var a:String
         switch num {
             case 0:
                 a = "Before Meal"

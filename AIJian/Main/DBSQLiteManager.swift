@@ -51,7 +51,7 @@ public class DBSQLiteManager:NSObject{
     
     
     
-    private static let manager: DBSQLiteManager = DBSQLiteManager()
+    static let manager: DBSQLiteManager = DBSQLiteManager()
     //单例  共享管理
     class func shareManager() -> DBSQLiteManager{
         return manager
@@ -174,46 +174,34 @@ public class DBSQLiteManager:NSObject{
     }
     
     //查询一条用户记录
-    func selectUserRecord()->USER{
+    func selectUserRecord(userId:Int64)->USER{
         let db = DBSQLiteManager.shareManager().openDB()
         var dataCollection = USER()
-        let query = user.select(*).order(user_id.desc)
-        for user in try! db.prepare(query){
+        let query = user.filter(user_id == userId)
+        do{
+           let user = try db.pluck(query)
             var tempUser = USER()
-            //            print(tempUser as Any)
             //除了这两个不能为空，其他的都可以为空
-            tempUser.user_id     = user[user_id]
-            tempUser.email       = user[email]
-            tempUser.token       = user[token]
-            if user[user_name] != nil{
-                tempUser.user_name   = user[user_name]!
-            }
-            if user[head_img]  != nil{
-                tempUser.head_img    = user[head_img]!
-            }
-            if user[gender]  != nil{
-                tempUser.gender      = user[gender]!
-            }
-            if user[birthday] != nil{
-                tempUser.birthday    = user[birthday]!
-            }
-            if user[height] != nil{
-                tempUser.height      = user[height]!
-            }
-            if user[weight_kg] != nil{
-                tempUser.weight_kg   = user[weight_kg]!
-            }
-            if user[weight_lbs] != nil{
-                tempUser.weight_lbs  = user[weight_lbs]!
-            }
-            if  user[country] != nil{
-                tempUser.country     = user[country]!
-            }
-            if user[phone_number] != nil{
-                tempUser.phone_number = user[phone_number]!
-            }
+            tempUser.user_id     = user![user_id]
+            tempUser.email       = user![email]
+            tempUser.token       = user![token]
+            
+            // 以下都可以为空
+            tempUser.user_name   = user![user_name]
+            tempUser.head_img    = user![head_img]
+            tempUser.gender      = user![gender]
+            tempUser.birthday    = user![birthday]
+            tempUser.height      = user![height]
+            tempUser.weight_kg   = user![weight_kg]
+            tempUser.weight_lbs  = user![weight_lbs]
+            tempUser.country     = user![country]
+            tempUser.phone_number = user![phone_number]
+            
             dataCollection = tempUser
+        }catch{
+            print("查询失败，本地无相关信息")
         }
+        
         return dataCollection
     }
     

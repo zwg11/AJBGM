@@ -139,7 +139,8 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
             return 0
         }
     }
-    
+    // 由于编辑需要向手动输入界面传值，在此声明
+    let insert = InsertViewController()
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 设置点击单元格有选中z动画，手指松开时变为未选中
         tableView.deselectRow(at: indexPath, animated: true)
@@ -147,9 +148,9 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         // 该动作编辑一条记录
         let editAction = UIAlertAction(title: "编辑", style: .default, handler: {(UIAlertAction)->Void in
 
-            let insert = InsertViewController()
-            
-            self.navigationController?.pushViewController(insert, animated: true)
+            // 将当前单元格的内容传入手动输入界面
+            self.EditData(indexPath.section,indexPath.row)
+            self.navigationController?.pushViewController(self.insert, animated: true)
             
         })
         // 该动作删除一条记录，先删除服务器的，再删除本地数据库，最后删除全局变量的
@@ -165,8 +166,77 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         self.present(alert, animated: true, completion: nil)
         
     }
-    
-    class func EditData(){
+    // 将当前单元格的内容传入手动输入界面
+    func EditData(_ section:Int,_ row:Int){
+        let x = sortedData[section][row]
+        let dateAndTime = x.createTime!.components(separatedBy: " ")
+        // 手动输入标志位设置
+        insert.isInsert = false
+        // 时间
+        insert.input.setData(dateAndTime[0])
+        insert.input.setTime(dateAndTime[1])
+        // 血糖量
+        if let value = x.bloodGlucoseMmol{
+            if GetUnit.getBloodUnit() == "mmol/L"{
+                insert.input.setGlucoseValue("\(value)")
+            }else{
+                insert.input.setGlucoseValue("\(x.bloodGlucoseMg!)")
+            }
+        }
+
+        // 检测时间段
+        insert.input.setEventValue(EvenChang.numToeven(Int(x.detectionTime ?? 0)))
+        // 进餐量
+        insert.input.setPorValue(EatNumChange.numToeat(Int(x.eatNum ?? 0)))
+        // 胰岛素量
+        if let insNum = x.insulinNum{
+            insert.input.setInsNumValue("\(insNum)")
+        }
+        // 胰岛素类型
+        insert.input.setInsValue(x.insulinType ?? "Nothing")
+        
+        // 体重
+        if let weight = x.weightKg{
+            if GetUnit.getWeightUnit() == "kg"{
+                insert.input.setWeightValue("\(weight)")
+            }else{
+                insert.input.setWeightValue("\(x.weightLbs!)")
+            }
+        }
+        
+        // 身高
+        if let height = x.height{
+            insert.input.setHeightValue("\(x.height)")
+        }
+        
+        insert.input.setSportType(x.sportType ?? "Nothing")
+        // 血压
+        if let sysValue = x.systolicPressureKpa{
+            if GetUnit.getPressureUnit() == "mmHg"{
+                insert.input.setSysValue("\(x.systolicPressureMmhg!)")
+                insert.input.setDiaValue("\(x.diastolicPressureMmhg!)")
+            }else{
+                insert.input.setSysValue("\(sysValue)")
+                insert.input.setDiaValue("\(x.diastolicPressureKpa!)")
+            }
+        }
+        // 药物
+        if let medicine = x.medicine{
+            let medicineArr = medicine.components(separatedBy: ",")
+            insert.setMedicineArray(medicineArr as Array)
+        }
+        
+        // 运动
+        insert.input.setSportType(x.sportType ?? "Nothing")
+        
+        
+        // 运动时间
+        if let sportTime = x.sportTime{
+            insert.input.setSportTime("\(sportTime)")
+        }
+        // 运动强度
+        let strength = ["无","低","中","高"]
+        insert.input.setSportStrength(strength[Int(x.sportStrength ?? 0)])
         
     }
     
@@ -241,6 +311,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         DATATableView.isScrollEnabled = false
         scroll.addSubview(DATATableView)
     }
+    // 没有数据时在视图中心显示该标签
     private lazy var label:UILabel = {
         let label = UILabel()
         label.text = "No Data"
@@ -250,6 +321,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         label.frame.size = CGSize(width: 200, height: 200)
         return label
     }()
+    
     func initTable(){
         self.view.addSubview(label)
         label.snp.makeConstraints{(make) in
@@ -259,6 +331,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         // 重新加载表格内容
         DATATableView.reloadData()
         DATETableView.reloadData()
+        // o有数据时移除该标签
         if sortedTime.count > 0{
             label.removeFromSuperview()
         }
@@ -306,7 +379,18 @@ extension DataTableViewController{
                             // ******** 删除数据库对应的数据 ***********
                             let dbSql = DBSQLiteManager()
                             if dbSql.deleteGlucoseRecord(gluData.bloodGlucoseRecordId!){
-                                sortedData[section].remove(at: row)
+                                // 弹出警示框，提示用户
+                                let alert = CustomAlertController()
+                                alert.custom(self, "", "删除成功")
+                                // 初始化展示数据
+                                initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())
+                                // 表格数据初始化
+                                sortedTimeOfData()
+                                // 图表数据初始化
+                                chartData()
+                                // 重新布局表格视图
+                                self.initTable()
+                                self.initScroll()
                             }
                         }
                         

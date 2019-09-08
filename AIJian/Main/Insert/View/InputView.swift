@@ -495,11 +495,11 @@ class InputView: UIView,UIScrollViewDelegate {
 //        let glucoseValue = (Double(glucose.XTTextfield.text!))!
 //        return glucoseValue
 //    }
-//    //设置血糖值
-//    func setGlucoseValue(_ num:String){
-//        glucose.XTTextfield.text! = num
-//        glucose.XTSlider.value = Float(Double((Double(num))!))
-//    }
+    //设置血糖值
+    func setGlucoseValue(_ num:String){
+        glucose.XTTextfield.text! = num
+        glucose.XTSlider.value = Float(Double((Double(num))!))
+    }
     
     //获取事件
     func getEventValue()->String{
@@ -531,9 +531,9 @@ class InputView: UIView,UIScrollViewDelegate {
         porAndIns.insulinButton.setTitle(str, for: .normal)
     }
     //获取胰岛素量
-    func getInsNumValue()->Double{
+    func getInsNumValue()->Double?{
         let alert = CustomAlertController()
-        var a:Double? = 0
+        var a:Double?
         if porAndIns.insulinTextfield.text! != ""{
             if FormatMethodUtil.validateInsulinNum(number: porAndIns.insulinTextfield.text!) == true{
                 a = Double(porAndIns.insulinTextfield.text!)!
@@ -542,7 +542,7 @@ class InputView: UIView,UIScrollViewDelegate {
                 alert.custom(UIViewController(), "Attention", "非法输入")
             }
         }
-        return a!
+        return a
     }
     //设置胰岛素量
     func setInsNumValue(_ str:String){
@@ -587,19 +587,18 @@ class InputView: UIView,UIScrollViewDelegate {
     }
     
     //设置运动类型
-    func setSportType()->String{
-        let a = sport.sportButton.currentTitle!
-        return a
+    func setSportType(_ type:String){
+        sport.sportButton.setTitle(type, for: .normal)
+        
     }
     //设置运动时间
-    func setSportTime()->String{
-        let a = sport.timeOfDurationTextfield.text!
-        return a
+    func setSportTime(_ time:String){
+        sport.timeOfDurationTextfield.text = time
     }
     //设置运动强度
-    func setSportStrength()->String{
-        let a = sport.exerIntensityButton.currentTitle!
-        return a
+    func setSportStrength(_ strength:String){
+        sport.exerIntensityButton.setTitle(strength, for: .normal)
+        
     }
     
     func getRemark(){

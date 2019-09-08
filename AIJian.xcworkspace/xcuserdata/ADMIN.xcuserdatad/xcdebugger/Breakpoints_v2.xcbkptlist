@@ -58,7 +58,7 @@
                   moduleName = "AIJian"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ADMIN/Desktop/ios%E9%A1%B9%E7%9B%AE%E8%AF%95%E9%AA%8C/AIJian/AIJian/AppDelegate.swift"
-                  timestampString = "589527638.302016"
+                  timestampString = "589605581.012324"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "42"
@@ -73,7 +73,7 @@
                   moduleName = "AIJian"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ADMIN/Desktop/ios%E9%A1%B9%E7%9B%AE%E8%AF%95%E9%AA%8C/AIJian/AIJian/AppDelegate.swift"
-                  timestampString = "589527638.303538"
+                  timestampString = "589605581.0139"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "43"
@@ -234,7 +234,7 @@
                   moduleName = "AIJian"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ADMIN/Desktop/ios%E9%A1%B9%E7%9B%AE%E8%AF%95%E9%AA%8C/AIJian/AIJian/Main/LoginAndRegister/ViewController/login/loginViewController.swift"
-                  timestampString = "589527638.507553"
+                  timestampString = "589605581.043106"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "75"
@@ -249,7 +249,7 @@
                   moduleName = "AIJian"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ADMIN/Desktop/ios%E9%A1%B9%E7%9B%AE%E8%AF%95%E9%AA%8C/AIJian/AIJian/Main/LoginAndRegister/ViewController/login/loginViewController.swift"
-                  timestampString = "589527638.5090491"
+                  timestampString = "589605581.0446"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "77"
@@ -432,6 +432,22 @@
             startingLineNumber = "128"
             endingLineNumber = "128"
             landmarkName = "login()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AIJian/Main/Insert/ViewController/InsertViewController.swift"
+            timestampString = "589605577.416891"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "461"
+            endingLineNumber = "461"
+            landmarkName = "save()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

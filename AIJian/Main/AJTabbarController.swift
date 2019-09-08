@@ -35,12 +35,12 @@ class AJTabbarController: UITabBarController {
         nv2.tabBarItem.title = "Data"
         self.addChild(nv2)
         
-        let Insert = InsertViewController()
-        let nv3 = AJNavigationController(rootViewController: Insert)
-        Insert.navigationItem.title = "Insert"
+        let BLE = BLEViewController()
+        let nv3 = AJNavigationController(rootViewController: BLE)
+        BLE.navigationItem.title = "Data Transfer"
         nv3.tabBarItem.image = UIImage(named: "shuru.png")?.withRenderingMode(.alwaysOriginal)
         nv3.tabBarItem.selectedImage = UIImage(named: "shuru-2.png")?.withRenderingMode(.alwaysOriginal)
-        nv3.tabBarItem.title = "Insert"
+        nv3.tabBarItem.title = "Add"
         self.addChild(nv3)
         
         let Mine = MineViewController()

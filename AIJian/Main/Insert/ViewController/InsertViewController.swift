@@ -11,7 +11,7 @@ import Alamofire
 import HandyJSON
 class InsertViewController: UIViewController {
 
-    private lazy var input:InputView = {
+    lazy var input:InputView = {
         let view = InputView()
         view.setupUI()
         // 由于药物栏的按钮需弹出 UIAlertController，所以要将动作在viewcontroller层中设置
@@ -31,6 +31,9 @@ class InsertViewController: UIViewController {
         view.rightButton.addTarget(self, action: #selector(save), for: .touchUpInside) //点击保存
         return view
     }()
+    
+    // 该页面是编辑还是输入
+    var isInsert: Bool = true
     
     // 选择药物按钮弹出的alert
     private var medicineChooseAlert = alertViewController()
@@ -259,7 +262,7 @@ class InsertViewController: UIViewController {
     
     @objc func leftButtonClick(){
         // 设置返回首页
-        self.tabBarController?.selectedIndex = 0
+        self.navigationController?.popViewController(animated: true)
         //self.dismiss(animated: true, completion: nil)
     }
     
@@ -331,7 +334,7 @@ class InsertViewController: UIViewController {
         let insulin_type = input.getInsValue()
         print("获得胰岛素类型",insulin_type)
         print("胰岛素的类型调试成功*********************")
-        var insulin_num:Double? = 0
+        var insulin_num:Double?
         if input.porAndIns.insulinTextfield.text! != ""{
             if FormatMethodUtil.validateInsulinNum(number: input.porAndIns.insulinTextfield.text!) == true{
                 if Double(input.porAndIns.insulinTextfield.text!)! > 100.0{
@@ -345,12 +348,12 @@ class InsertViewController: UIViewController {
                 return
             }
         }
-        print("胰岛素的量",insulin_num!)
+        print("胰岛素的量",insulin_num ?? "nothing")
         print("胰岛素的量调试成功*********************")
        
         
-        var weight_kg:Double? = 0
-        var weight_lbs:Double? = 0
+        var weight_kg:Double?
+        var weight_lbs:Double?
         if input.bodyInfo.weightTextfield.text! != ""{  //如果不为空，才做这件事情
             if GetUnit.getWeightUnit() == "kg"{
                 if FormatMethodUtil.validateWeightKgNum(number: input.bodyInfo.weightTextfield.text!) == true{
@@ -384,14 +387,12 @@ class InsertViewController: UIViewController {
             }
             
         }
-//        weight_lbs = weight_lbs!
-//        weight_kg = weight_kg!s
         
         print("体重调试成功")
         
         
         //获取身高
-        var height:Double? = 0
+        var height:Double?
         if input.bodyInfo.heightTextfield.text! != ""{
             if FormatMethodUtil.validateHeightNum(number: input.bodyInfo.heightTextfield.text!) == true{
                 if Double(input.bodyInfo.heightTextfield.text!)! >= 999.9{
@@ -412,10 +413,10 @@ class InsertViewController: UIViewController {
         
         print("获得收缩压:",type(of:input.getSysValue()))
         print("获的舒张压:",type(of:input.getDiaValue()))
-        var sys_press_mmHg:Double? = 0
-        var sys_press_kPa:Double? = 0
-        var dis_press_mmHg:Double? = 0
-        var dis_press_kPa:Double? = 0
+        var sys_press_mmHg:Double?
+        var sys_press_kPa:Double?
+        var dis_press_mmHg:Double?
+        var dis_press_kPa:Double?
         //收缩压必须大于舒张压
         if input.bodyInfo.blood_sysPressureTextfield.text! != ""{
             if input.bodyInfo.blood_sysPressureTextfield.text! != ""{
@@ -453,9 +454,9 @@ class InsertViewController: UIViewController {
         var medicine_string:String = ""
         if medicine != []{
 //            print("药物",medicine)
-            var j:Int = 0
+            var j:Int = 1
             for i in medicine{
-                if j == 0 {
+                if j == 1 {
                     medicine_string = i
                 }else if j <= medicine.count - 1{
                     medicine_string = medicine_string + "," + i
@@ -474,23 +475,21 @@ class InsertViewController: UIViewController {
         let sport = input.getSportType()
         print("获得运动类型:",sport)
     
-        var sport_time:Int? = 0
+        var sport_time:Int64?
         if input.sport.timeOfDurationTextfield.text! != ""{
             if Int(input.sport.timeOfDurationTextfield.text!)! > 5 && Int(input.sport.timeOfDurationTextfield.text!)! < 360{
-                sport_time = Int(input.sport.timeOfDurationTextfield.text!)!
+                sport_time = Int64(input.sport.timeOfDurationTextfield.text!)
             }else{
                 print(Int(input.sport.timeOfDurationTextfield.text!)!)
                 alert.custom(self, "Attention", "有效的运动持续时间范围为5~360")
                 return
             }
         }
-        print("获得运动持续时间:",sport_time!)
+        print("获得运动持续时间:",sport_time ?? "no sport time")
         
         let sport_strength = IntensityChange.intensityTonum(input.getSportStrength())
         print("获得运动强度转换后的值:",sport_strength)
 
-        
-        let no:String = ""
         
         //第一步：先封装成一个对象
         var  insertData:glucoseDate = glucoseDate()
@@ -501,24 +500,24 @@ class InsertViewController: UIViewController {
         insertData.detectionTime =  Int64(EvenChang.evenTonum(event))
         insertData.bloodGlucoseMmol = bloodGlucoseValueMmol!
         insertData.bloodGlucoseMg = bloodGlucoseValueMg!
-        insertData.eatType = nil
+        insertData.eatType = input.getEventValue()
         insertData.eatNum = Int64(EatNumChange.eatTonum(eat_num))
-        insertData.insulinType = insulin_type
-        insertData.insulinNum = insulin_num!
-        insertData.height = height!
-        insertData.weightKg = weight_kg!
-        insertData.weightLbs = weight_lbs!
-        insertData.systolicPressureMmhg = sys_press_mmHg!
-        insertData.systolicPressureKpa = sys_press_kPa!
-        insertData.diastolicPressureMmhg = sys_press_mmHg!
-        insertData.diastolicPressureKpa = sys_press_kPa!
-        insertData.medicine = medicine_string
+        insertData.insulinType = (insulin_type == "Nothing") ? nil:insulin_type
+        insertData.insulinNum = insulin_num
+        insertData.height = height
+        insertData.weightKg = weight_kg
+        insertData.weightLbs = weight_lbs
+        insertData.systolicPressureMmhg = sys_press_mmHg
+        insertData.systolicPressureKpa = sys_press_kPa
+        insertData.diastolicPressureMmhg = sys_press_mmHg
+        insertData.diastolicPressureKpa = sys_press_kPa
+        insertData.medicine = (medicine_string == "") ? nil:medicine_string
         insertData.sportType = sport
-        insertData.sportTime = Int64(sport_time!)
+        insertData.sportTime = sport_time
         insertData.sportStrength = Int64(sport_strength)
         insertData.inputType = 1
-        insertData.remark = no
-        insertData.machineId = no
+        insertData.remark = nil
+        insertData.machineId = nil
      
         //第二步:再封装成一个数组
         let tempArray = [insertData]
@@ -527,41 +526,82 @@ class InsertViewController: UIViewController {
         //手动输入数据，请求部分
         let dictString = [ "token":UserInfo.getToken(),"userId":UserInfo.getUserId() as Any,"userBloodGlucoseRecords":GlucoseJsonData] as [String : Any]
         print(dictString)
-        Alamofire.request(INSERTRECORD,method: .post,parameters: dictString).responseString{ (response) in
-            if response.result.isSuccess {
-                if let jsonString = response.result.value {
-                    print("进入验证过程")
-                    print(jsonString)
-                    // json转model
-                    // 写法一：responseModel.deserialize(from: jsonString)
-                    // 写法二：用JSONDeserializer<T>
-                    /*
-                     利用JSONDeserializer封装成一个对象。然后再解析这个对象，此处返回的不同，需要封装成responseAModel的响应体
-                     //                         */
-                    if let responseModel = JSONDeserializer<responseModel>.deserializeFrom(json: jsonString) {
-                        /// model转json 为了方便在控制台查看
-                        print("瞧瞧输出的是什么",responseModel.toJSONString(prettyPrint: true)!)
-                        /*  此处为跳转和控制逻辑
-                         */
-                        if(responseModel.code == 1 ){
-                            print(responseModel.code)
-                            print("插入成功")
-                            //跳转到首页
-                        }else{
-                            print(responseModel.code)
-                            print("插入失败")
-                            //跳转到首页
-                        }
-                    } //end of letif
+        // 判断是修改数据还是插入数据
+        // 插入和修改的网络请求是不一样的
+        if isInsert{
+            // 向服务器申请插入数据请求
+            Alamofire.request(INSERT_RECORD,method: .post,parameters: dictString).responseString{ (response) in
+                if response.result.isSuccess {
+                    if let jsonString = response.result.value {
+                        print("进入验证过程")
+                        print(jsonString)
+                        // json转model
+                        // 写法一：responseModel.deserialize(from: jsonString)
+                        // 写法二：用JSONDeserializer<T>
+                        /*
+                         利用JSONDeserializer封装成一个对象。然后再解析这个对象，此处返回的不同，需要封装成responseAModel的响应体
+                         //                         */
+                        if let responseModel = JSONDeserializer<responseModel>.deserializeFrom(json: jsonString) {
+                            /// model转json 为了方便在控制台查看
+                            print("瞧瞧输出的是什么",responseModel.toJSONString(prettyPrint: true)!)
+                            /*  此处为跳转和控制逻辑
+                             */
+                            if(responseModel.code == 1 ){
+                                print(responseModel.code)
+                                print("插入成功")
+                                // 向数据库插入数据
+                                DBSQLiteManager.manager.addGlucoseRecords(add: tempArray)
+                                
+                            }else{
+                                print(responseModel.code)
+                                print("插入失败")
+                                
+                            }
+                        } //end of letif
+                    }
                 }
-            }
-        }//end of request
+            }//end of request
+        }else{
+            let dic = ["userBloodGlucoseRecord":insertData.toJSONString()]
+            print("dic:\(dic)")
+            // 向服务器申请更新数据请求
+            Alamofire.request(UPDATE_RECORD,method: .post,parameters: dic as Parameters).responseString{ (response) in
+                if response.result.isSuccess {
+                    if let jsonString = response.result.value {
+                        print("进入验证过程")
+                        print(jsonString)
+                        // json转model
+                        // 写法一：responseModel.deserialize(from: jsonString)
+                        // 写法二：用JSONDeserializer<T>
+                        /*
+                         利用JSONDeserializer封装成一个对象。然后再解析这个对象，此处返回的不同，需要封装成responseAModel的响应体
+                         //                         */
+                        if let responseModel = JSONDeserializer<responseModel>.deserializeFrom(json: jsonString) {
+                            /// model转json 为了方便在控制台查看
+                            print("瞧瞧输出的是什么",responseModel.toJSONString(prettyPrint: true)!)
+                            /*  此处为跳转和控制逻辑
+                             */
+                            if(responseModel.code == 1 ){
+                                print(responseModel.code)
+                                print("更新成功")
+                                // 向数据库更新数据
+                                DBSQLiteManager.manager.updateGlucoseRecord(data: insertData)
+                                
+                            }else{
+                                print(responseModel.code)
+                                print("更新失败")
+                                
+                            }
+                        } //end of letif
+                    }
+                }
+            }//end of request
+        }
         
-        
-        
+
         print("点击了保存")
-        
-        //        self.navigationController?.popViewController(animated: true)
+        // 跳转到原来的界面
+        self.navigationController?.popViewController(animated: true)
     }
     
     //视图将要出现的时候
@@ -640,6 +680,8 @@ class InsertViewController: UIViewController {
             }
         }
     }
+    
+    
     
     func getAllInfo(){
         

@@ -19,10 +19,7 @@ class InfoViewController: UIViewController ,PickerDelegate{
     
     public lazy var infoDataArray : NSMutableArray = ["xxx","男","45","170","2019-02-08","中国","123456"]
 
-    let tableview:UITableView = {
-        let tableView = UITableView.init(frame: CGRect(x: 0, y: navigationBarHeight, width: AJScreenWidth, height: AJScreenHeight/15*7))
-        return tableView
-    }()
+    let tableview = UITableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +28,7 @@ class InfoViewController: UIViewController ,PickerDelegate{
         self.view.backgroundColor = UIColor.white
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title:"back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back))
         
-        tableview.register(UITableViewCell.self, forCellReuseIdentifier:"infocell")
+       //tableview.register(UITableViewCell.self, forCellReuseIdentifier:"infocell")
         tableview.delegate = self
         tableview.dataSource = self
         tableview.isScrollEnabled = false
@@ -39,11 +36,13 @@ class InfoViewController: UIViewController ,PickerDelegate{
         
         //update.reloadRows(at: [IndexPath(row: 1, section: 1)], with: .fade)
         self.view.addSubview(tableview)
+        tableview.snp.makeConstraints{(make) in
+            make.left.right.top.equalToSuperview()
+            make.height.equalTo(AJScreenHeight/2)
+        }
     }
     @objc private func back(){
         //按返回的时候，需要将数据进行更新
-        
-        
        self.navigationController?.popViewController(animated: true)
     }
     
@@ -72,24 +71,44 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
         print("row",indexPath.row)
         //根据注册的cell类ID值获取到载体cell
         var cell = tableView.dequeueReusableCell(withIdentifier: "infocell")
-        var style: UITableViewCell.CellStyle
-        style = UITableViewCell.CellStyle.value1
-        cell = UITableViewCell(style: style, reuseIdentifier: "infocell")
+        
+        cell?.selectionStyle = .none
+        cell = UITableViewCell(style: .value1, reuseIdentifier: "infocell")
         cell!.accessoryType = .disclosureIndicator
-        cell?.textLabel?.text = infoArray[(indexPath as NSIndexPath).row] 
-  
-        //放真实数据,右边value
-        if(indexPath.row == 2){   //2为体重
-            print("进入到体重这里")
-            cell?.detailTextLabel?.text = (infoDataArray[(indexPath as NSIndexPath).row] as? String)! + GetUnit.getWeightUnit()
-            print("体重这里，体重单位是什么",GetUnit.getWeightUnit())
-        }else if(indexPath.row == 3){  //3为身高
-            cell?.detailTextLabel?.text = (infoDataArray[(indexPath as NSIndexPath).row] as? String)! + "cm"
-            print(infoDataArray[(indexPath as NSIndexPath).row] )
-        }else{
-            cell?.detailTextLabel?.text = infoDataArray[(indexPath as NSIndexPath).row] as? String
+        cell?.textLabel?.text = infoArray[indexPath.row]
+
+        let userInfo = DBSQLiteManager.manager.selectUserRecord(userId: UserInfo.getUserId())
+        switch indexPath.row{
+        case 0:
+            cell?.detailTextLabel?.text = userInfo.user_name ?? "nothing"
+        case 1:
+            if userInfo.gender != nil{
+                cell?.detailTextLabel?.text = (userInfo.gender == 0) ? "男":"女"
+            }else{
+                cell?.detailTextLabel?.text = "nothing"
+            }
+           
+        case 2:
+            if userInfo.weight_kg != nil{
+                if GetUnit.getWeightUnit() == "kg"{
+                    cell?.detailTextLabel?.text = "\(userInfo.weight_kg!)kg"
+                }else{
+                    cell?.detailTextLabel?.text = "\(userInfo.weight_lbs!)lbs"
+                }
+
+            }else{
+                cell?.detailTextLabel?.text = "nothing"
+            }
+            
+        case 3:
+            cell?.detailTextLabel?.text = (userInfo.user_name != nil) ? "\(userInfo.height!)cm":"nothing"
+        case 4:
+            cell?.detailTextLabel?.text = userInfo.birthday ?? "nothing"
+        case 5:
+            cell?.detailTextLabel?.text = userInfo.country ?? "nothing"
+        default:
+            cell?.detailTextLabel?.text = userInfo.phone_number ?? "nothing"
         }
-//         cell.selectionStyle = .default
         return cell!
     }
     

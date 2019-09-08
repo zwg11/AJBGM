@@ -84,22 +84,10 @@ class ChartViewController: UIViewController {
             // 根据所选中的时间范围器元素决定各界面的数据如何初始化
             switch pickerSelectedRow{
             case 1,2,3:
-                //lineChartView.lineChartView.xAxis.axisMaximum = Double(daysNum!)
-                
                 lineChartView.drawLineChart(xAxisArray: array as NSArray,xAxisData: data1)
-                //lineChartView.addLimitLine(13, "限制线",UIColor.red)
-                //            case 2:
-                //                lineChartView.lineChartView.xAxis.axisMaximum = 7
-                //                lineChartView.drawLineChart(xAxisArray: array as NSArray,xAxisData: data1)
-                //                //lineChartView.addLimitLine(13, "限制线",UIColor.red)
-                //            case 3:
-                //                lineChartView.lineChartView.xAxis.axisMaximum = 30
-                //                lineChartView.drawLineChart(xAxisArray: array as NSArray,xAxisData: data1)
-            //lineChartView.addLimitLine(13, "限制线",UIColor.red)
+
             default:
-                //lineChartView.lineChartView.xAxis.axisMaximum = Double(daysNum!)
                 lineChartView.drawLineChart(xAxisArray: xAxisArray(startDate: startD!, endDate: endD!) as NSArray,xAxisData: DateToData(startD!, endD!))
-                //lineChartView.addLimitLine(13, "限制线",UIColor.red)
             }
         }
         
