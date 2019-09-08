@@ -268,9 +268,11 @@ class InsertViewController: UIViewController {
     
     @objc func cancel(){
         print("点击了取消")
-        //        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
     
+    // 血糖记录ID，用于更新数据
+    var recordId:String?
     //点击保存
     @objc func save(){
         let alert = CustomAlertController()
@@ -278,7 +280,7 @@ class InsertViewController: UIViewController {
         let time = input.getTime()
         print("获得日期:",date)
         print("获得时间:",time)
-        let createTime = date + " " + time + ":00"
+        let createTime = date + " " + time
         print("存入到数据库的时间",createTime)
         var bloodGlucoseValueMmol:Double?
         var bloodGlucoseValueMg:Double?
@@ -406,7 +408,7 @@ class InsertViewController: UIViewController {
                 return
             }
         }
-        print("获得身高的值:",height!)
+        print("获得身高的值:",height ?? 0)
         print("身高的值调试成功*********************")
         
       
@@ -494,8 +496,15 @@ class InsertViewController: UIViewController {
         //第一步：先封装成一个对象
         var  insertData:glucoseDate = glucoseDate()
         insertData.userId = UserInfo.getUserId()
-        let uuid = UUID().uuidString.components(separatedBy: "-").joined()
-        insertData.bloodGlucoseRecordId = uuid
+        // 如果为添加数据，创建一个recordId
+        if isInsert{
+            let uuid = UUID().uuidString.components(separatedBy: "-").joined()
+            insertData.bloodGlucoseRecordId = uuid
+        }// 否则用从b上一页传过来的recordId
+        else{
+            insertData.bloodGlucoseRecordId = recordId!
+        }
+        
         insertData.createTime = createTime
         insertData.detectionTime =  Int64(EvenChang.evenTonum(event))
         insertData.bloodGlucoseMmol = bloodGlucoseValueMmol!
@@ -519,6 +528,7 @@ class InsertViewController: UIViewController {
         insertData.remark = nil
         insertData.machineId = nil
      
+        print("insertdata:\(insertData)")
         //第二步:再封装成一个数组
         let tempArray = [insertData]
         //第三步：再将这个数组直接toString
@@ -551,6 +561,8 @@ class InsertViewController: UIViewController {
                                 print("插入成功")
                                 // 向数据库插入数据
                                 DBSQLiteManager.manager.addGlucoseRecords(add: tempArray)
+                                // 跳转到原来的界面
+                                self.navigationController?.popViewController(animated: true)
                                 
                             }else{
                                 print(responseModel.code)
@@ -562,7 +574,7 @@ class InsertViewController: UIViewController {
                 }
             }//end of request
         }else{
-            let dic = ["userBloodGlucoseRecord":insertData.toJSONString()]
+            let dic = ["userId":UserInfo.getUserId(),"token":UserInfo.getToken(),"userBloodGlucoseRecord":insertData.toJSONString()!] as [String : Any]
             print("dic:\(dic)")
             // 向服务器申请更新数据请求
             Alamofire.request(UPDATE_RECORD,method: .post,parameters: dic as Parameters).responseString{ (response) in
@@ -586,7 +598,12 @@ class InsertViewController: UIViewController {
                                 print("更新成功")
                                 // 向数据库更新数据
                                 DBSQLiteManager.manager.updateGlucoseRecord(data: insertData)
-                                
+                                // 更新s所展示的数据
+                                initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())
+                                sortedTimeOfData()
+                                chartData()
+                                // 跳转到原来的界面
+                                self.navigationController?.popViewController(animated: true)
                             }else{
                                 print(responseModel.code)
                                 print("更新失败")
@@ -600,8 +617,7 @@ class InsertViewController: UIViewController {
         
 
         print("点击了保存")
-        // 跳转到原来的界面
-        self.navigationController?.popViewController(animated: true)
+        
     }
     
     //视图将要出现的时候

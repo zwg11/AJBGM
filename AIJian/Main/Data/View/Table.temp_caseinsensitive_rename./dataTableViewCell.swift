@@ -77,7 +77,7 @@ class dataTableViewCell: UITableViewCell {
         }
         
         
-        let labels:[UILabel] = [glucoseLabel,eventLabel,appetiteLabel,isulinLabel,weightLabel,bloodPressureLabel,medicineLabel,sportLabel]
+        let labels:[UILabel] = [glucoseLabel,eventLabel,appetiteLabel,isulinLabel,weightLabel,heightLabel,bloodPressureLabel,medicineLabel,sportLabel]
         
         var offsetX:CGFloat = 0
         for i in labels{

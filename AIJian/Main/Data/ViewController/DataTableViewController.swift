@@ -169,12 +169,14 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
     // 将当前单元格的内容传入手动输入界面
     func EditData(_ section:Int,_ row:Int){
         let x = sortedData[section][row]
-        let dateAndTime = x.createTime!.components(separatedBy: " ")
+        let y = sortedTime[section][row]
         // 手动输入标志位设置
         insert.isInsert = false
+        // 血糖记录ID
+        insert.recordId = x.bloodGlucoseRecordId!
         // 时间
-        insert.input.setData(dateAndTime[0])
-        insert.input.setTime(dateAndTime[1])
+        insert.input.setData(y.toFormat("yyyy-MM-dd"))
+        insert.input.setTime(y.toFormat("HH:mm"))
         // 血糖量
         if let value = x.bloodGlucoseMmol{
             if GetUnit.getBloodUnit() == "mmol/L"{
@@ -285,7 +287,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         
         
         // 设置数据滚动视图内容的大小，该滚动视图只允许横向滚动
-        scroll.contentSize = CGSize(width: 640, height: scHeight)
+        scroll.contentSize = CGSize(width: 720, height: scHeight)
         scroll.showsHorizontalScrollIndicator = true
         scroll.indicatorStyle = .black
         scroll.bounces = false

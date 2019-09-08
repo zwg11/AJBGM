@@ -177,6 +177,30 @@ public class DBSQLiteManager:NSObject{
         print("成功更新一条用户信息")
     }
     
+    // 请求服务器来更新u用户信息
+    //直接输入一个USER_INFO的对象，即可更新为传过来的对象内容
+    func updateUserInfo(_ userObject:USER_INFO){
+        // 将生日按照年月日的方式存入数据库
+        let userBirthday = userObject.birthday?.toDate()?.toFormat("yyy-MM-dd")
+        
+        let db = DBSQLiteManager.shareManager().openDB()
+        // 根据userId选出对应用户信息
+        let updateData = user.filter(user_id == userObject.userId!)
+        try! db.run(updateData.update( user_id <- userObject.userId!,
+                                       email <- userObject.email!,
+                                       user_name <- userObject.userName!,
+                                       head_img <- userObject.headImg,
+                                       gender <- userObject.gender,
+                                       birthday <- userBirthday,
+                                       height <- userObject.height,
+                                       weight_kg <- userObject.weightKg,
+                                       weight_lbs <- userObject.weightLbs,
+                                       country <- userObject.country,
+                                       phone_number <- userObject.phoneNumber
+        ))
+        print("成功更新一条用户信息")
+    }
+    
     //更新用户的token
     func updateUserToke(_ userObject:USER){
         let db = DBSQLiteManager.shareManager().openDB()
@@ -211,6 +235,7 @@ public class DBSQLiteManager:NSObject{
             tempUser.phone_number = user![phone_number]
             
             dataCollection = tempUser
+            print("查询用户信息成功！")
         }catch{
             print("查询失败，本地无相关信息")
         }

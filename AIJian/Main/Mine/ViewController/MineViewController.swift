@@ -43,17 +43,20 @@ class MineViewController: UIViewController {
         return quitLogin
     }()
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        //将所有按钮添加到scrollview中，还需要修改相对布局
+    override func viewWillAppear(_ animated: Bool) {
         // 检查数据库是否有相关用户的信息
         let userInfo = DBSQLiteManager.manager.selectUserRecord(userId: UserInfo.getUserId())
         // 如果得到的实体是空的，说明没有相关信息
         // 那么就需向服务器请求数据
-        if userInfo.user_id == nil{
-            
+        if userInfo.user_name == nil{
+            requestUserInfo()
         }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        //将所有按钮添加到scrollview中，还需要修改相对布局
+
         
         let headview = AJMineHeaderView(frame: CGRect(x: 0, y: 0, width: AJScreenWidth, height: AJScreenHeight/3))
 //        headview.setUpUI()
@@ -89,40 +92,45 @@ class MineViewController: UIViewController {
         
     }
     
-//    func requestUserInfo(){
-//        let dictString = ["userId":UserInfo.getUserId(),"token":UserInfo.getToken()] as [String : Any]
-//        Alamofire.request(INSERT_RECORD,method: .post,parameters: dictString).responseString{ (response) in
-//            if response.result.isSuccess {
-//                if let jsonString = response.result.value {
-//                    print("进入验证过程")
-//                    print(jsonString)
-//                    // json转model
-//                    // 写法一：responseModel.deserialize(from: jsonString)
-//                    // 写法二：用JSONDeserializer<T>
-//                    /*
-//                     利用JSONDeserializer封装成一个对象。然后再解析这个对象，此处返回的不同，需要封装成responseAModel的响应体
-//                     //                         */
-//                    if let responseModel = JSONDeserializer<responseModel>.deserializeFrom(json: jsonString) {
-//                        /// model转json 为了方便在控制台查看
-//                        print("瞧瞧输出的是什么",responseModel.toJSONString(prettyPrint: true)!)
-//                        /*  此处为跳转和控制逻辑
-//                         */
-//                        if(responseModel.code == 1 ){
-//                            print(responseModel.code)
-//                            print("插入成功")
-//                            // 向数据库插入数据
-//                            DBSQLiteManager.manager.addGlucoseRecords(add: tempArray)
-//                            
-//                        }else{
-//                            print(responseModel.code)
-//                            print("插入失败")
-//                            
-//                        }
-//                    } //end of letif
-//                }
-//            }
-//        }//end of request
-//    } //end of requestUserInfo
+    func requestUserInfo(){
+        let dictString = ["userId":UserInfo.getUserId(),"token":UserInfo.getToken()] as [String : Any]
+        Alamofire.request(USER_INFO_REQUEST,method: .post,parameters: dictString).responseString{ (response) in
+            if response.result.isSuccess {
+                if let jsonString = response.result.value {
+                    print("进入验证过程")
+                    print(jsonString)
+                    // json转model
+                    // 写法一：responseModel.deserialize(from: jsonString)
+                    // 写法二：用JSONDeserializer<T>
+                    /*
+                     利用JSONDeserializer封装成一个对象。然后再解析这个对象，此处返回的不同，需要封装成responseAModel的响应体
+                     //                         */
+                    if let responseModel = JSONDeserializer<USERINFO_REQUEST>.deserializeFrom(json: jsonString) {
+                        /// model转json 为了方便在控制台查看
+                        print("瞧瞧输出的是什么",responseModel.toJSONString(prettyPrint: true)!)
+                        /*  此处为跳转和控制逻辑
+                         */
+                        if(responseModel.code! == 1 ){
+                            print(responseModel.code!)
+                            print("插入成功")
+                            print("responseModel.data：\(responseModel.data!)")
+                            // 向数据库插入数据
+                            DBSQLiteManager.manager.updateUserInfo(responseModel.data!)
+                        }else{
+                            let alert = CustomAlertController()
+                            alert.custom(self, "Attension", "获取用户信息失败")
+                            print(responseModel.code)
+                            print("插入失败")
+                            
+                        }
+                    } //end of letif
+                }
+            }else{
+                let alert = CustomAlertController()
+                alert.custom(self, "Attension", "获取用户信息失败")
+            }
+        }//end of request
+    } //end of requestUserInfo
 
     //点击登录，不允许跳转
     @objc public func MineLogin(){
