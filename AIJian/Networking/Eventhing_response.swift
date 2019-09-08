@@ -80,6 +80,33 @@ struct glucoseDate: HandyJSON {
     var machineId:String?
 }
 
+// 请求个人用户信息
+struct USERINFO_REQUEST: HandyJSON {
+    var code:Int64?
+    var msg:String?
+    var data:USER_INFO?
+    
+}
+
+struct USER_INFO:HandyJSON{
+    var userId:Int64?
+    var email:String?
+    var userName:String?
+    var password:String?
+    var headImg:String?
+    var gender:Int64?
+    var height:Double?
+    var weightKg:Double?
+    var weightLbs:Double?
+    var birthday:String?
+    var phoneNumber:String?
+    var country:String?
+    var token:String?
+    var expireTime:String?
+    var createTime:String?
+    var status:Int64?
+}
+
 //个人用户信息
 struct USER: HandyJSON {
     var user_id:Int64?
