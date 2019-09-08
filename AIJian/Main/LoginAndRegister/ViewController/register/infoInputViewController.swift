@@ -13,9 +13,6 @@ import HandyJSON
 
 class infoInputViewController: UIViewController,UITextFieldDelegate {
 
-    
-   
-    
     //邮箱，来自上一步传过来的
     var email:String?
     //用户名
@@ -23,11 +20,11 @@ class infoInputViewController: UIViewController,UITextFieldDelegate {
     //标志位,用来设置性别的
     var flag:Bool = true
     //性别  男为1   女为0
-    var gender:String? = "1"
+    var gender:Int64 = 1
     //身高
-    var height:String? = ""
+    var height:Double?
     //体重
-    var weightKg:String? = ""
+    var weightKg:Double? 
     //国家
     var country:String? = ""
     //电话
@@ -119,7 +116,7 @@ class infoInputViewController: UIViewController,UITextFieldDelegate {
    
         infoinputView.gender_man_button.setImage(UIImage(named: "selected"), for: .normal)
         infoinputView.gender_woman_button.setImage(UIImage(named: "unselected"), for: .normal)
-        gender = "1"
+        gender = 1
        
         
     }
@@ -127,7 +124,7 @@ class infoInputViewController: UIViewController,UITextFieldDelegate {
     @objc func genderWoman(){
         infoinputView.gender_woman_button.setImage(UIImage(named: "selected"), for: .normal)
         infoinputView.gender_man_button.setImage(UIImage(named: "unselected"), for: .normal)
-        gender = "0"
+        gender = 0
     }
     
     //选择出生日期
@@ -218,9 +215,14 @@ class infoInputViewController: UIViewController,UITextFieldDelegate {
         //性别
 //        gender = infoinputView.
         //身高
-        height = infoinputView.heightTextField.text!
+        if infoinputView.heightTextField.text! != ""{
+             height = Double(infoinputView.heightTextField.text!)!
+        }
         //体重
-        weightKg = infoinputView.weightTextField.text!
+        if infoinputView.weightTextField.text! != ""{
+             weightKg = Double(infoinputView.weightTextField.text!)!
+        }
+       
         //国家
         country = infoinputView.nationTextField.text!
         //电话
@@ -234,25 +236,33 @@ class infoInputViewController: UIViewController,UITextFieldDelegate {
              alertController.custom(self, "Attention", "国家不能为空")
             return
         }else{  //经过验证之后的请求
+            //设置了国家和用户名不能为空
             print(userName!)
-            print("性别为",gender!)
-            print(height!)
-            print(weightKg!)
+//            print(height!)
+//            print(weightKg!)
             print(country!)
             print(phoneNumber!)
+//            email = "3333@qq.com"
+//            verifyString = "aekcnsoirebgregnkdnwin"
             print("从前一个页面传过来的email",email!)
             print("从前一个页面传过来的data",verifyString!)
+            var userData:USER = USER()
+            userData.email = String(email!)
+            userData.user_name = String(userName!)
+            userData.gender = gender
+            if weightKg != nil{
+                userData.weight_kg = weightKg
+            }
+            userData.country = String(country!)
+            if userData.phone_number != nil{
+                userData.phone_number = String(phoneNumber!)
+            }
+            //toJSONGString的过程
+//            let tempArray = [userData]
+            let user = userData.toJSONString()!
+            
             let dictString:Parameters = [
-                "user":[
-                    "email":String(email!),
-                    "userName":String(userName!),
-                    "gender":String(gender!),
-                    "birthday":String(brithday!),
-                    "height":String(height!),
-                    "weightKg":String(weightKg!),
-                    "country":String(country!),
-                    "phoneNumber":String(phoneNumber!)
-                     ],
+                "user":user,
                 "verifyString":String(verifyString!)
                    ]
             print(dictString)
@@ -277,12 +287,12 @@ class infoInputViewController: UIViewController,UITextFieldDelegate {
                             if(responseModel.code == 1 ){
                                 print(responseModel.code)
                                  self.navigationController?.popToRootViewController(animated: true)
-                                alertController.custom(self,"Attention", "返回1，注册成功")
+                                alertController.custom(self,"Attention", "恭喜您，注册成功！")
                                
                             }else{
                                 print(responseModel.code)
                                 self.navigationController?.popToRootViewController(animated: true)
-                                alertController.custom(self,"Attention", "返回0，注册成功")
+                                alertController.custom(self,"Attention", "恭喜您，注册成功！")
                                 
                             }
                         } //end of letif

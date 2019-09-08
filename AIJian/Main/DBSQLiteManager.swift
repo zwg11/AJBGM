@@ -21,7 +21,7 @@ public class DBSQLiteManager:NSObject{
     let birthday     = Expression<String?>("birthday")
     let height       = Expression<Double?>("height")
     let weight_kg    = Expression<Double?>("weight_kg")
-    let weight_lbs   = Expression<Int64?>("weight_lbs")
+    let weight_lbs   = Expression<Double?>("weight_lbs")
     let country      = Expression<String?>("country")
     let phone_number = Expression<String?>("phone_number")
     
@@ -162,14 +162,27 @@ public class DBSQLiteManager:NSObject{
     func updateUserRecord(_ userObject:USER){
         let db = DBSQLiteManager.shareManager().openDB()
         let updateData = user.filter(user_id == userObject.user_id!)
-        try! db.run(updateData.update( user_id <- userObject.user_id!,email <- userObject.email!,user_name <- userObject.user_name,head_img <- userObject.head_img!,gender <- userObject.gender!,birthday <- userObject.birthday!,height <- userObject.height,weight_kg <- userObject.weight_kg!,weight_lbs <- userObject.weight_lbs!,country <- userObject.country!,phone_number <- userObject.phone_number!))
+        try! db.run(updateData.update( user_id <- userObject.user_id!,
+                                       email <- userObject.email!,
+                                       user_name <- userObject.user_name,
+                                       head_img <- userObject.head_img!,
+                                       gender <- userObject.gender!,
+                                       birthday <- userObject.birthday!,
+                                       height <- userObject.height,
+                                       weight_kg <- userObject.weight_kg!,
+                                       weight_lbs <- userObject.weight_lbs!,
+                                       country <- userObject.country!,
+                                       phone_number <- userObject.phone_number!
+        ))
         print("成功更新一条用户信息")
     }
     
     //更新用户的token
     func updateUserToke(_ userObject:USER){
         let db = DBSQLiteManager.shareManager().openDB()
-        try! db.run(user.update( user_id <- userObject.user_id!,email <- userObject.email!,token <- userObject.token!))
+        try! db.run(user.update( user_id <- userObject.user_id!,
+                                 email <- userObject.email!,
+                                 token <- userObject.token!))
         print("成功更新一条用户信息")
     }
     

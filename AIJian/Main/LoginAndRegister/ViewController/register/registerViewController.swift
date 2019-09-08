@@ -112,9 +112,9 @@ class registerViewController: UIViewController,UITextFieldDelegate {
                                infoInput_next.verifyString = responseModel.data
                                self.navigationController?.pushViewController(infoInput_next, animated: true)  //然后跳转
                             }else{
-                                infoInput_next.email = self.email
-                                infoInput_next.verifyString = "edbdkeisoaoen45673"
-                                self.navigationController?.pushViewController(infoInput_next, animated: true)
+//                                infoInput_next.email = self.email
+//                                infoInput_next.verifyString = "edbdkeisoaoen45673"
+//                                self.navigationController?.pushViewController(infoInput_next, animated: true)
                                 alertController.custom(self,"Attention", "验证码错误")
                                 return 
                             }
