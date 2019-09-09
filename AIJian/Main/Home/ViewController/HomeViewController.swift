@@ -120,7 +120,10 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
 //        user1.token = token
 //        user1.email = "zzmmshang@qq.com"
 //        sqliteManager.addUserRecord(user1)
+        homeTableView.reloadData()
         print("这个东西到底是什么东西",SHIFT!)
+        // 图表重新画
+        recent7View.recentTrendView.drawLineChart(xAxisArray: xAxisArrayToWeek(Days: 7) as NSArray,xAxisData: recentDaysData(Days: 7))
 
     }
     

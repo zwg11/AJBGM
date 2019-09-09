@@ -71,13 +71,14 @@ class InsertViewController: UIViewController {
     }()
     
     // 获取配置文件路径
-    private let path = Bundle.main.path(forResource: "inputChoose", ofType: "plist")
+    //private let path = Bundle.main.path(forResource: "inputChoose", ofType: "plist")
+    private let path = PlistSetting.getFilePath(File: "inputChoose.plist")
    // let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path!)!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // 读取配置文件
-        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path!)!
+        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
         
         medicineChooseAlert = alertViewController(title: "请选择", message: "", preferredStyle: .alert)
         medicineChooseAlert.alertData = data["medicine"] as! [String]
@@ -105,7 +106,7 @@ class InsertViewController: UIViewController {
     @objc func chooseMedicine(){
         print("choose medicine button clicked,appear done.")
         // 读取配置文件
-        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path!)!
+        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
         // 由于 药物 一定是有可选项的，所以不需判断是否有可选项
         // 判断表格是否需要更新 if开始
         // 若需更新，重新加载数据和表格
@@ -135,7 +136,7 @@ class InsertViewController: UIViewController {
     // 选择 备注 按钮被点击时的动作
     @objc func chooseRemark(){
         // 读取配置文件
-        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path!)!
+        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
         print("choose remark button clicked,appear done.")
         // 将配置文件中的数据导出
         //即判断remark中是否有数据
@@ -192,7 +193,7 @@ class InsertViewController: UIViewController {
         // 添加保存按钮，将文本框中数据保存到沙盒中
         let actionSure = UIAlertAction(title: "确定", style: .destructive, handler: {(UIAlertAction)-> Void in
             // 读取配置文件
-            let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: self.path!)!
+            let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: self.path)!
             // 文本框为空，不做任何事
             if alert.textFields![0].text == "" {
                 return
@@ -204,9 +205,9 @@ class InsertViewController: UIViewController {
                 self.remarkChooseAlert.alertData.append(alert.textFields![0].text!)
                 // 改变对应的选择器的内容和沙盒中对应队列的内容
                 data["remark"] = self.remarkChooseAlert.alertData
-                print(self.path!)
+                print(self.path)
                 // 将改变后的结果写入沙盒
-                data.write(toFile: self.path!, atomically: true)
+                data.write(toFile: self.path, atomically: true)
                 print(data["remark"] ?? "no remark")
                 print("点击确定，显示添加结果",self.remarkChooseAlert.alertData)
                 // 将新添加的事件 添加到 表格状态数组中并值为 true
@@ -227,9 +228,9 @@ class InsertViewController: UIViewController {
                 
                 // 改变对应的选择器的内容和沙盒中对应队列的内容
                 data["medicine"] = self.medicineChooseAlert.alertData
-                print(self.path!)
+                print(self.path)
                 // 将改变后的结果写入沙盒
-                data.write(toFile: self.path!, atomically: true)
+                data.write(toFile: self.path, atomically: true)
                 print(data["medicine"] ?? "no medicine")
                 print(self.medicineChooseAlert.alertData)
                 // 将新添加的事件 添加到 表格状态数组中并值为 true
@@ -664,7 +665,7 @@ class InsertViewController: UIViewController {
     func setMedicineArray(_ arr:Array<String>){
         
         // 读取配置文件
-        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path!)!
+        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
         
         let initLength:Int = medicineChooseAlert.alertData.count
         var arrtemp = arr
@@ -692,7 +693,7 @@ class InsertViewController: UIViewController {
                 medicineChooseAlert.selectedNum += 1
                 //后写入到文件中
                 data["medicine"] = medicineChooseAlert.alertData
-                data.write(toFile: path!, atomically: true)
+                data.write(toFile: path, atomically: true)
             }
         }
     }

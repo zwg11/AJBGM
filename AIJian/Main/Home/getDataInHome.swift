@@ -11,10 +11,10 @@ import SwiftDate
 
 class getDataInHome{
     
-    static let x = DBSQLiteManager.shareManager()
    
     // 获取最近一次的血糖值
     static func getLastGlucoseValue() -> String{
+        let x = DBSQLiteManager.shareManager()
         // 在数据库取出最近c一次的血糖记录
         let data = x.selectLastGlucoseRecord(UserInfo.getUserId())
         
@@ -30,6 +30,7 @@ class getDataInHome{
     }
     
     static func getRecentValue() -> [Any]{
+        let x = DBSQLiteManager.shareManager()
         let today = DateInRegion().dateAt(.endOfDay).date
         let end = today + 1.seconds
         let start = end - 7.days

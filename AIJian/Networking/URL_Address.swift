@@ -32,7 +32,7 @@ let UserRegister = BASE_URL + "app/userRegister"
 let FillUserInfo = BASE_URL + "app/inputUserInfo"
 
 // 获取用户信息
-let USER_INFO_REQUEST = OTHER_URL + "app/user/getUserInfo"
+let USER_INFO_REQUEST = BASE_URL + "app/user/getUserInfo"
 
 // 用户意见反馈
 let UserFeedback = BASE_URL + "app/user/feedback"
@@ -51,7 +51,11 @@ let DELETE_DATA_URL = BASE_URL + "app/bloodGlucoseRecord/deleteRecord"
 let INSERT_RECORD = BASE_URL + "app/bloodGlucoseRecord/insertRecord"
 
 // 用户更改一条数据
-let UPDATE_RECORD = OTHER_URL + "app/bloodGlucoseRecord/updateRecord"
+let UPDATE_RECORD = BASE_URL + "app/bloodGlucoseRecord/updateRecord"
 
 // 意见反馈
 let FEEDBACK = BASE_URL + "app/user/feedback"
+
+// 更新用户信息
+let UPDATE_USERINFO = BASE_URL + "app/user/infoUpdate"
+

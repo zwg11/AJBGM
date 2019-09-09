@@ -123,29 +123,23 @@ struct USER: HandyJSON {
     var phone_number:String?
 }
 
+//个人用户信息
+struct USER_UPDATE: HandyJSON {
+    var email:String?
+    var userName:String?
+    var gender:Int64?
+    var birthday:String?
+    var height:Double?
+    var weightKg:Double?
+    var weightLbs:Double?
+    var country:String?
+    var phoneNumber:String?
+}
 
-
-
-//struct glDate{
-//
-//    
-//
-//    
-//    var bloodGlucoseRecordId:String?
-//    var userId:Int64?
-//    var bloodGlucoseMmol:Double?
-//    var bloodGlucoseMg:Int64?
-//    
-//    init(bgid:String,usierid:Int64,dgmmol:Double,bgmg:Int64){
-//        self.bloodGlucoseRecordId = bgid
-//        self.userId = usierid
-//        self.bloodGlucoseMmol = dgmmol
-//        self.bloodGlucoseMg = bgmg
-//    }
-//}
-//
-//struct st111:HandyJSON{
-//    var token:String?
-//    var userId:Int64?
-//    var userBloodGlucoseRecords:[glucoseDate]?
-//}
+// 个人用户信息
+struct USERINFO_UPDATE_RESPONSE: HandyJSON {
+    var code:Int64?
+    var msg:String?
+    var data:Any?
+    
+}

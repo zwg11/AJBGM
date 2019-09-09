@@ -77,9 +77,13 @@ class ChartViewController: UIViewController {
         // 画限制线，标明低于和高于的界限
         // 该界限获取自动适应单位，所以不需判断单位
         print("lowLimit:\(GetBloodLimit.getRandomDinnerLow())")
-        lineChartView.addLimitLine(GetBloodLimit.getRandomDinnerLow(), "低于", UIColor.yellow)
-        lineChartView.addLimitLine(GetBloodLimit.getRandomDinnerTop(), "高于", UIColor.blue)
+        let low = GetBloodLimit.getRandomDinnerLow()
+        let high = GetBloodLimit.getRandomDinnerTop()
+        lineChartView.addLimitLine(low, "\(low)", UIColor.yellow)
+        lineChartView.addLimitLine(high, "\(high)", UIColor.blue)
+        // 设置x轴的最大坐标值
         lineChartView.lineChartView.xAxis.axisMaximum = Double(daysNum!)
+        // 如果有数据，就画图；否则不画图，图表显示“No Data”
         if data1.count > 0{
             // 根据所选中的时间范围器元素决定各界面的数据如何初始化
             switch pickerSelectedRow{

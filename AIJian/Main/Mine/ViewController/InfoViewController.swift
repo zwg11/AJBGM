@@ -7,6 +7,8 @@
 //  个人信息管理页
 
 import UIKit
+import Alamofire
+import HandyJSON
 
 class InfoViewController: UIViewController ,PickerDelegate{
    
@@ -17,16 +19,40 @@ class InfoViewController: UIViewController ,PickerDelegate{
     //列表数据
     public lazy var infoArray: Array = ["姓    名","性    别","体    重","身    高","生    日","国    家","电    话"]
     
-    public lazy var infoDataArray : NSMutableArray = ["xxx","男","45","170","2019-02-08","中国","123456"]
+    public lazy var infoDataArray : [String] = ["","","","","","",""]
 
     let tableview = UITableView()
+    // 判断是否有需要更新的内容，没有则不更新,返回至上一界面
+    var updateSth = false
+    // 初始化列表数组
+    func initInfoDataArray(){
+        let userInfo = DBSQLiteManager.manager.selectUserRecord(userId: UserInfo.getUserId())
+        infoDataArray[0] = userInfo.user_name ?? ""
+        if (userInfo.height != nil){
+            infoDataArray[1] = (userInfo.height! == 0) ? "男":"女"
+        }
+        
+        if GetUnit.getWeightUnit() == "kg"{
+            infoDataArray[2] = (userInfo.weight_kg != nil) ? "\(userInfo.weight_kg!)":""
+        }else{
+            infoDataArray[2] = (userInfo.weight_lbs != nil) ? "\(userInfo.weight_lbs!)":""
+        }
+        infoDataArray[3] = (userInfo.height != nil) ? "\(userInfo.height!)":""
+        infoDataArray[4] = userInfo.birthday ?? ""
+        infoDataArray[5] = userInfo.country ?? ""
+        infoDataArray[6] = userInfo.phone_number ?? ""
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //initInfoDataArray()
+        //tableview.reloadData()
 
         self.title = "Information"
         self.view.backgroundColor = UIColor.white
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title:"back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title:"Save", style: UIBarButtonItem.Style.plain, target: self, action: #selector(saveUserInfo))
         
        //tableview.register(UITableViewCell.self, forCellReuseIdentifier:"infocell")
         tableview.delegate = self
@@ -38,7 +64,7 @@ class InfoViewController: UIViewController ,PickerDelegate{
         self.view.addSubview(tableview)
         tableview.snp.makeConstraints{(make) in
             make.left.right.top.equalToSuperview()
-            make.height.equalTo(AJScreenHeight/2)
+            make.height.equalTo(AJScreenHeight/15*9)
         }
     }
     @objc private func back(){
@@ -46,10 +72,93 @@ class InfoViewController: UIViewController ,PickerDelegate{
        self.navigationController?.popViewController(animated: true)
     }
     
+    @objc func saveUserInfo(){
+
+        if !updateSth{
+            self.navigationController?.popViewController(animated: true)
+            return
+        }
+        // 如果有需要更新的内容
+        var updateUserInfo = USER_UPDATE()
+        updateUserInfo.email = UserInfo.getEmail()
+        updateUserInfo.userName = (infoDataArray[0] == "") ? nil:infoDataArray[0]
+        updateUserInfo.gender = (infoDataArray[1] == "男") ? 0:1
+        if infoDataArray[2] != ""{
+            if GetUnit.getWeightUnit() == "kg"{
+                updateUserInfo.weightKg = Double(infoDataArray[2])
+                updateUserInfo.weightLbs = WeightUnitChange.KgToLbs(num: Double(infoDataArray[2])!)
+            }else{
+                updateUserInfo.weightLbs = Double(infoDataArray[2])
+                updateUserInfo.weightKg = WeightUnitChange.LbsToKg(num: Double(infoDataArray[2])!)
+            }
+        }
+        updateUserInfo.height = (infoDataArray[3] == "") ? nil:Double(infoDataArray[3])
+        updateUserInfo.birthday = (infoDataArray[4] == "") ? nil:infoDataArray[4]
+
+        updateUserInfo.country = (infoDataArray[5] == "") ? nil:infoDataArray[5]
+        updateUserInfo.phoneNumber = (infoDataArray[6] == "") ? nil:infoDataArray[6]
+        
+        let dictString = ["userId":UserInfo.getUserId(),"user":updateUserInfo.toJSONString()!,"token":UserInfo.getToken()] as [String : Any]
+        Alamofire.request(UPDATE_USERINFO,method: .post,parameters: dictString).responseString{ (response) in
+            if response.result.isSuccess {
+                if let jsonString = response.result.value {
+                    print("进入验证过程")
+                    print(jsonString)
+                    // json转model
+                    // 写法一：responseModel.deserialize(from: jsonString)
+                    // 写法二：用JSONDeserializer<T>
+                    /*
+                     利用JSONDeserializer封装成一个对象。然后再解析这个对象，此处返回的不同，需要封装成responseAModel的响应体
+                     //                         */
+                    if let responseModel = JSONDeserializer<USERINFO_UPDATE_RESPONSE>.deserializeFrom(json: jsonString) {
+                        /// model转json 为了方便在控制台查看
+                        print("瞧瞧输出的是什么",responseModel.toJSONString(prettyPrint: true)!)
+                        /*  此处为跳转和控制逻辑
+                         */
+                        if(responseModel.code! == 1 ){
+                            print(responseModel.code!)
+                            print("更新成功")
+                            //print("responseModel.data：\(responseModel.data!)")
+                            self.navigationController?.popViewController(animated: true)
+                            // 向数据库插入数据
+                            self.updateUserInfoInSqlite(updateUserInfo)
+                        }else{
+                            let alert = CustomAlertController()
+                            alert.custom(self, "Attension", "更新用户信息失败")
+                            print(responseModel.code!)
+                            print("更新失败")
+                            
+                        }
+                    } //end of letif
+                }
+            }else{
+                let alert = CustomAlertController()
+                alert.custom(self, "Attension", "更新用户信息失败")
+            }
+        }//end of request
+    }
+    
+    func updateUserInfoInSqlite(_ UpdateUserInfo:USER_UPDATE){
+        var info = USER_INFO()
+        info.userId = UserInfo.getUserId()
+        info.email = UserInfo.getEmail()
+        info.userName = UpdateUserInfo.userName
+        info.gender = UpdateUserInfo.gender
+        info.height = UpdateUserInfo.height
+        info.weightLbs = UpdateUserInfo.weightLbs
+        info.weightKg = UpdateUserInfo.weightKg
+        info.birthday = UpdateUserInfo.birthday
+        info.phoneNumber = UpdateUserInfo.phoneNumber
+        info.country = UpdateUserInfo.country
+        // 将更新内容放入
+        DBSQLiteManager.manager.updateUserInfo(info)
+    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         //当每一次视图将要出现的时候，都要重新reload一下体重，防止那边换了单位，这边的信息还没换
-        self.tableview.reloadRows(at: [IndexPath(row:2,section:0)], with: .fade)
+        initInfoDataArray()
+        self.tableview.reloadData()
     }
     
     
@@ -77,45 +186,30 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
         cell!.accessoryType = .disclosureIndicator
         cell?.textLabel?.text = infoArray[indexPath.row]
 
-        let userInfo = DBSQLiteManager.manager.selectUserRecord(userId: UserInfo.getUserId())
+        //let userInfo = DBSQLiteManager.manager.selectUserRecord(userId: UserInfo.getUserId())
         switch indexPath.row{
         case 0:
-            cell?.detailTextLabel?.text = userInfo.user_name ?? "nothing"
+            cell?.detailTextLabel?.text = infoDataArray[0]=="" ? "nothing":infoDataArray[0]
         case 1:
-            if userInfo.gender != nil{
-                cell?.detailTextLabel?.text = (userInfo.gender == 0) ? "男":"女"
-            }else{
-                cell?.detailTextLabel?.text = "nothing"
-            }
+            cell?.detailTextLabel?.text = infoDataArray[1]=="" ? "nothing":infoDataArray[1]
+            
            
         case 2:
-            if userInfo.weight_kg != nil{
-                if GetUnit.getWeightUnit() == "kg"{
-                    cell?.detailTextLabel?.text = "\(userInfo.weight_kg!)kg"
-                }else{
-                    cell?.detailTextLabel?.text = "\(userInfo.weight_lbs!)lbs"
-                }
+            cell?.detailTextLabel?.text = (infoDataArray[2]=="" ? "nothing":(infoDataArray[2]) + GetUnit.getWeightUnit())
 
-            }else{
-                cell?.detailTextLabel?.text = "nothing"
-            }
             
         case 3:
-            cell?.detailTextLabel?.text = (userInfo.height != nil) ? "\(userInfo.height!)cm":"nothing"
+            cell?.detailTextLabel?.text = infoDataArray[3]=="" ? "nothing":(infoDataArray[3] + "cm")
         case 4:
-            cell?.detailTextLabel?.text = userInfo.birthday ?? "nothing"
+            cell?.detailTextLabel?.text = infoDataArray[4]=="" ? "nothing":infoDataArray[4]
         case 5:
-            cell?.detailTextLabel?.text = userInfo.country ?? "nothing"
+            cell?.detailTextLabel?.text = infoDataArray[5]=="" ? "nothing":infoDataArray[5]
         default:
-            cell?.detailTextLabel?.text = userInfo.phone_number ?? "nothing"
+            cell?.detailTextLabel?.text = infoDataArray[6]=="" ? "nothing":infoDataArray[6]
         }
         return cell!
     }
     
-    
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: true)
-//    }
     //回调方法，监听点击事件
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -178,6 +272,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
                 print("用户名num是多少",self.num)
                 
                 self.tableview.reloadRows(at: [IndexPath(row:self.num,section:0)], with: .fade)
+                self.updateSth = true
                 // print("用户名：\(String(describing: UserName.text)) ")
             }
            
@@ -193,6 +288,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
         self.infoDataArray[1] = messge
         self.tableview.reloadRows(at: [IndexPath(row:1,section:0)], with: .fade)
         print(messge)
+        self.updateSth = true
     }
     //改体重
     func inputWeight(){
@@ -211,7 +307,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
             }else{
                 self.infoDataArray[2] = UserName.text!
                 print("体重num是多少",self.num)
-                
+                self.updateSth = true
                 self.tableview.reloadRows(at: [IndexPath(row:self.num,section:0)], with: .fade)
                 // print("用户名：\(String(describing: UserName.text)) ")
             }
@@ -239,7 +335,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
             }else{
                 self.infoDataArray[3] = UserName.text!
                 print("这个num是多少",self.num)
-                
+                self.updateSth = true
                 self.tableview.reloadRows(at: [IndexPath(row:self.num,section:0)], with: .fade)
                 // print("用户名：\(String(describing: UserName.text)) ")
             }
@@ -257,6 +353,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
         print("点击生日num是多少",self.num)
         self.tableview.reloadRows(at: [IndexPath(row:self.num,section:0)], with: .fade)
         print(messge)
+        self.updateSth = true
     }
     
     //改国家
@@ -276,6 +373,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
             }else{
                 self.infoDataArray[5] = UserName.text!
                 print("国家num是多少",self.num)
+                self.updateSth = true
                 self.tableview.reloadRows(at: [IndexPath(row:self.num,section:0)], with: .fade)
                 // print("用户名：\(String(describing: UserName.text)) ")
             }
@@ -303,6 +401,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
             }else{
                 self.infoDataArray[6] = UserName.text!
                 print("电话num是多少",self.num)
+                self.updateSth = true
                 self.tableview.reloadRows(at: [IndexPath(row:self.num,section:0)], with: .fade)
                 // print("用户名：\(String(describing: UserName.text)) ")
             }

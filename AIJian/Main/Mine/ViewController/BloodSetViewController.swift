@@ -422,8 +422,9 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
         override func viewWillAppear(_ animated: Bool) {
             
             //这个是加载用户血糖单位设置信息
-            let unit_path = Bundle.main.path(forResource: "UnitSetting", ofType: "plist")
-            let unit_data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: unit_path!)!
+            //let unit_path = Bundle.main.path(forResource: "UnitSetting", ofType: "plist")
+            let unit_path = PlistSetting.getFilePath(File: "UnitSetting.plist")
+            let unit_data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: unit_path)!
             let unit = unit_data["BloodUnit"]! as! String
             print(unit)
             //设置用户的显示单位
@@ -432,8 +433,9 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             clearEmpty()
             
             /*血糖显示*/
-            let user_path = Bundle.main.path(forResource: "userBloodSetting", ofType: "plist")
-            let user_data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: user_path!)!
+            //let user_path = Bundle.main.path(forResource: "userBloodSetting", ofType: "plist")
+            let user_path = PlistSetting.getFilePath(File: "userBloodSetting.plist")
+            let user_data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: user_path)!
             
             //这些数据都是小单位的数据mmol\L
             let a_Double:Double = Double(((user_data["emptyStomachLowLimit"] as? NSNumber)?.stringValue)!)!
@@ -474,8 +476,9 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
     
         @objc private func save(){
             let alert = CustomAlertController()
-            let save_path = Bundle.main.path(forResource: "userBloodSetting", ofType: "plist")
-            let save_data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: save_path!)!
+            //let save_path = Bundle.main.path(forResource: "userBloodSetting", ofType: "plist")
+            let save_path = PlistSetting.getFilePath(File: "userBloodSetting.plist")
+            let save_data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: save_path)!
             
             //思路：先获取原来文件中的数值，这样就可以不管它有没有改，都可以直接覆盖。
             emptyStomach_left_number  = save_data["emptyStomachLowLimit"]  as? NSNumber
@@ -487,8 +490,9 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             randomDinner_left_number  = save_data["randomDinnerLowLimit"] as? NSNumber
             randomDinner_right_number = save_data["randomDinnerHighLimit"] as? NSNumber
             
-            let unit_path = Bundle.main.path(forResource: "UnitSetting", ofType: "plist")
-            let unit_data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: unit_path!)!
+            //let unit_path = Bundle.main.path(forResource: "UnitSetting", ofType: "plist")
+            let unit_path = PlistSetting.getFilePath(File: "UnitSetting.plist")
+            let unit_data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: unit_path)!
             let unit_String = unit_data["BloodUnit"]! as! String
             //校验用户输入的正确性,a,b等都是个过度值，所有命名较为随意
             /*
@@ -510,7 +514,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                             print("用户的输入",a)
                             emptyStomach_left_number = a as NSNumber
                             save_data.setObject(emptyStomach_left_number as Any, forKey: "emptyStomachLowLimit" as NSCopying)
-                            save_data.write(toFile: save_path!, atomically: true)
+                            save_data.write(toFile: save_path, atomically: true)
                             alert.custom(self, "Attention", "保存成功")
                             print(type(of: self.emptyStomach_left_number))
                         }else{
@@ -670,7 +674,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                 }
                 
                //第二步，保存写入userBloodSetting.plist文件中
-                save_data.write(toFile: save_path!, atomically: true)
+                save_data.write(toFile: save_path, atomically: true)
                 //第三步，重新从文件中取数据，修改显示uitextField的placeholder的属性
                 /* 设置显示过程 */
                 let aa = (save_data["emptyStomachLowLimit"] as? NSNumber)?.stringValue
@@ -698,7 +702,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                             a = UnitConversion.mgTomm(num: a)
                             emptyStomach_left_number = a as NSNumber
                             save_data.setObject(emptyStomach_left_number as Any, forKey: "emptyStomachLowLimit" as NSCopying)
-                            save_data.write(toFile: save_path!, atomically: true)
+                            save_data.write(toFile: save_path, atomically: true)
                             alert.custom(self, "Attention", "保存成功")
                             print(type(of: self.emptyStomach_left_number))
                         }else{
@@ -866,7 +870,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                 
                 
                 //结果写入文件中
-                save_data.write(toFile: save_path!, atomically: true)
+                save_data.write(toFile: save_path, atomically: true)
                 //取出来的为，mmmol\L类型的数据
                 let a_Double:Double = Double(((save_data["emptyStomachLowLimit"] as? NSNumber)?.stringValue)!)!
                 let b_Double:Double = Double(((save_data["emptyStomachHighLimit"] as? NSNumber)?.stringValue)!)!
@@ -904,11 +908,13 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             let path_default = Bundle.main.path(forResource: "defaultBloodSetting", ofType: "plist")
             let data_default:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path_default!)!
             //这个是加载用户设置血糖上下限信息
-            let path_user = Bundle.main.path(forResource: "userBloodSetting", ofType: "plist")
-            let data_user:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path_user!)!
+            //let path_user = Bundle.main.path(forResource: "userBloodSetting", ofType: "plist")
+            let path_user = PlistSetting.getFilePath(File: "userBloodSetting.plist")
+            let data_user:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path_user)!
             //读取单位
-            let unit_path = Bundle.main.path(forResource: "UnitSetting", ofType: "plist")
-            let unit_data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: unit_path!)!
+            //let unit_path = Bundle.main.path(forResource: "UnitSetting", ofType: "plist")
+            let unit_path = PlistSetting.getFilePath(File: "UnitSetting.plist")
+            let unit_data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: unit_path)!
             let unit = unit_data["BloodUnit"]! as! String
             
             //空腹覆盖过程
@@ -923,7 +929,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             //随机覆盖过程
             data_user["randomDinnerLowLimit"]  = data_default["randomDinnerLowLimit"]
             data_user["randomDinnerHighLimit"] = data_default["randomDinnerHighLimit"]
-            data_user.write(toFile: path_user!, atomically: true)
+            data_user.write(toFile: path_user, atomically: true)
             
             let a_Double:Double = Double(((data_user["emptyStomachLowLimit"] as? NSNumber)?.stringValue)!)!
             let b_Double:Double = Double(((data_user["emptyStomachHighLimit"] as? NSNumber)?.stringValue)!)!

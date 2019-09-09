@@ -344,7 +344,7 @@ public class DBSQLiteManager:NSObject{
         let db = DBSQLiteManager.shareManager().openDB()
         var dataGlucose = glucoseDate()
         // 数据库中的数据按 create_time 降序排列,注意过滤用户
-        let query = glucose_record.order(create_time.desc).filter(user_id == userId)
+        let query = glucose_record.order(create_time.desc).filter(user_glucose_id == userId)
         // SELECT FROM query LIMIT 1
         do{
             let record = try db.pluck(query)
@@ -393,8 +393,8 @@ public class DBSQLiteManager:NSObject{
         for record in try! db.prepare(glucose_record){
             print(record[create_time])
         }
-        // SELECT * FROM glucose_record WHERE BETWEEN (st,en) ORDERED BY DESCENDING
-        let query = glucose_record.filter(create_time < en && create_time >= st).order(create_time.desc)
+        // SELECT * FROM glucose_record WHERE BETWEEN (st,en) AND user_id = userId ORDERED BY DESCENDING
+        let query = glucose_record.filter(create_time < en && create_time >= st && user_glucose_id == userId).order(create_time.desc)
         do{
             for record in try db.prepare(query){
                 print(record[create_time])
