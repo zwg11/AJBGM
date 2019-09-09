@@ -9,7 +9,7 @@
 import UIKit
 import HandyJSON
 import Alamofire
-
+import Siren
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -52,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 //过期了，需要清空app文件中的token
                                 print("你的token过期了")
                                 UserInfo.setToken("")
-                                self.window?.rootViewController = nv
+                                self.window?.rootViewController = tabBarController
                             }
                         }
                     }
@@ -64,7 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         window?.makeKeyAndVisible()
-        
+        Siren.s
 
 //        let startImageView = AJStartView.init(imageName: "startView-1", timer: 3)
 //        self.window?.rootViewController?.view.addSubview(startImageView)

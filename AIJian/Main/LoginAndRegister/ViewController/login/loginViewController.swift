@@ -41,6 +41,7 @@ class loginViewController: UIViewController,UITextFieldDelegate {
             make.height.equalTo(AJScreenHeight)
             make.left.right.top.equalToSuperview()
         }
+         hideKeyboardWhenTappedAround()
     }
     
     /*
@@ -175,4 +176,28 @@ class loginViewController: UIViewController,UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        UIView.animate(withDuration: 0.4, animations: {
+            self.loginview.frame.origin.y = -150
+        })
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.loginview.frame.origin.y = 0
+        })
+    }
+    func hideKeyboardWhenTappedAround(){
+        // 添加手势，使得点击视图键盘收回
+        let tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tap)
+    }
+    // 设置手势动作
+    @objc func dismissKeyboard(){
+        self.view.endEditing(true)
+        
+    }
+    
 }

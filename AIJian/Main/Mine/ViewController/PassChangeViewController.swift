@@ -22,7 +22,7 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
         lazy var text_email:UILabel = {
             let text_email = UILabel()
             text_email.font = UIFont.systemFont(ofSize: 16)
-            text_email.text = email
+//            text_email.text = email
             return text_email
         }()
     
@@ -78,6 +78,7 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
 //            token = data["token"] as! String
             email = UserInfo.getEmail()
             token = UserInfo.getToken()
+            text_email.text = email
         }
     
         override func viewDidLoad() {
@@ -247,7 +248,7 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
                 alert.custom(self, "Attention", "新密码和旧密码不同")
                 return
             }else{
-                let dictString:Dictionary = [ "oldPassword":String(oldP!),"newPassword":String(newP!),"email":String(email),"token":String(token)]
+                let dictString:Dictionary = [ "oldPassword":String(oldP!),"newPassword":String(newP!),"email":String(email),"token":String(token),"userId":UserInfo.getUserId()] as [String : Any]
                 print(dictString)
               //  此处的参数需要传入一个字典类型
                 Alamofire.request(PASSWDRESET,method: .post,parameters: dictString).responseString{ (response) in
@@ -262,15 +263,24 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
                                 
                                 /*  此处为跳转和控制逻辑*/
                                 if(responseModel.code == 1 ){
-                                    print("登录成功")
+                                    print("密码修改成功")
                                     alert.custom(self,"Attention", "密码修改成功")
+                                    self.oldPasswd_textF.text! = ""
+                                    self.newPasswd_textF.text! = ""
+                                    self.verfiedPasswd_textF.text! = ""
                                     self.navigationController?.popViewController(animated: true)
                                 }else{
                                     alert.custom(self,"Attention", "密码修改失败")
+                                    self.oldPasswd_textF.text! = ""
+                                    self.newPasswd_textF.text! = ""
+                                    self.verfiedPasswd_textF.text! = ""
+                                    self.navigationController?.popViewController(animated: true)
                                 }
                                 
                             }
                         }
+                    }else{
+                        alert.custom(self,"Attention", "网络异常")
                     }
                 }
             }   

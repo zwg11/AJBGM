@@ -101,7 +101,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
             }
             
         case 3:
-            cell?.detailTextLabel?.text = (userInfo.user_name != nil) ? "\(userInfo.height!)cm":"nothing"
+            cell?.detailTextLabel?.text = (userInfo.height != nil) ? "\(userInfo.height!)cm":"nothing"
         case 4:
             cell?.detailTextLabel?.text = userInfo.birthday ?? "nothing"
         case 5:

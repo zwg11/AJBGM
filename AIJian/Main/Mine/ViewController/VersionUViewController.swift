@@ -83,7 +83,19 @@ extension VersionUViewController:UITableViewDelegate,UITableViewDataSource{
                 case 1:  //跳转到反馈页面
                     self.navigationController?.pushViewController(SuggestionViewController(), animated: true)
                 case 2:  //跳转到去评分界面
-                    print("第三行")
+                    let alertController = UIAlertController(title: "觉得好用的话，给我个评价吧！",message: nil, preferredStyle: .alert)
+                    let cancelAction = UIAlertAction(title: "暂不评价", style: .cancel, handler: nil)
+                    let okAction = UIAlertAction(title: "好的", style: .default,handler: {
+                                                    action in
+                                                    print("正在请求")
+                                                    self.gotoAppStore()
+                    
+                    })
+                    alertController.addAction(cancelAction)
+                    alertController.addAction(okAction)
+                    gotoAppStore()
+                    //直接跳转
+                
                 case 3:  //跳转到版本更新
                     print("第四行")
                 default:  //缺省不跳
@@ -99,4 +111,12 @@ extension VersionUViewController:UITableViewDelegate,UITableViewDataSource{
         return AJScreenHeight/15
     }
 
+    
+    func gotoAppStore(){
+        let urlString = "itms-apps://itunes.apple.com/cn/app/id533655318"
+        print("请求函数")
+        let url = NSURL(string: urlString)
+        print(url)
+        UIApplication.shared.openURL(URL(string: urlString)!)
+    }
 }
