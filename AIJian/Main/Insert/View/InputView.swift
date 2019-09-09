@@ -132,8 +132,8 @@ class InputView: UIView,UIScrollViewDelegate {
         self.backgroundColor = UIColor.white
         
         //在这个地方对时间进行初始化
-        dateString = dateAndTime.dateButton.currentTitle
-        timeString = dateAndTime.timeButton.currentTitle
+        
+        
         
         // 设置滚动视图属性
         scrollView.contentSize = CGSize(width: AJScreenWidth, height: AJScreenWidth/15*43)
@@ -473,6 +473,7 @@ class InputView: UIView,UIScrollViewDelegate {
     /************************************************/
     //时间和日期的设置和获取方法
     func getData()->String{
+        dateString = dateAndTime.dateButton.currentTitle
         return dateString!
     }
     
@@ -481,6 +482,7 @@ class InputView: UIView,UIScrollViewDelegate {
     }
     
     func getTime()->String{
+        timeString = dateAndTime.timeButton.currentTitle
         return timeString!
     }
     

@@ -48,8 +48,10 @@ class loginViewController: UIViewController,UITextFieldDelegate {
      */
     @objc func login(){
         print("login clicked.")
-        let path = Bundle.main.path(forResource: "User", ofType: "plist")
-        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path!)!
+        //let path = Bundle.main.path(forResource: "User", ofType: "plist")
+        let path = PlistSetting.getFilePath(File: "User.plist")
+        print("path：\(path)")
+        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
 
 //        self.present(AJTabbarController(), animated: false, completion: nil)
         //在此处获取邮箱和密码最为恰当
@@ -102,7 +104,7 @@ class loginViewController: UIViewController,UITextFieldDelegate {
 //                                data.setObject(responseModel.data?.token! as Any, forKey: "token" as NSCopying )
 //                                data.setObject(self.email!, forKey: "email" as NSCopying )
                                 // 保存
-                                data.write(toFile: path!, atomically: true)
+                                data.write(toFile: path, atomically: true)
 
                                 // ******************* 初始化数据库 *******************
                                 // 创建表，包括用户信息表 和 血糖记录表

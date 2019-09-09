@@ -230,8 +230,9 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
     func setupUI(){
 
         // 读取配置文件，获取不同选择器的内容
-        let path = Bundle.main.path(forResource: "inputChoose", ofType: "plist")
-        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path!)!
+        //let path = Bundle.main.path(forResource: "inputChoose", ofType: "plist")
+        let path = PlistSetting.getFilePath(File: "inputChoose.plist")
+        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
         
         // 设置选择器的内容
         event = data["event"] as! NSArray

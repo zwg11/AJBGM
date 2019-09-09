@@ -17,7 +17,7 @@ class ChartView: UIView {
         //let _lineChartView = LineChartView.init(frame: CGRect.init(x: 0, y: 20, width: 300, height: 300))
         let _lineChartView = LineChartView()
         //_lineChartView.delegate = self//
-        _lineChartView.backgroundColor = UIColor.init(red: 230/255.0, green: 253/255.0, blue: 253/255.0, alpha: 1.0)
+        _lineChartView.backgroundColor = UIColor.white
         _lineChartView.doubleTapToZoomEnabled = false
         _lineChartView.chartDescription?.text = ""//设置为""隐藏描述文字
         
@@ -102,9 +102,15 @@ class ChartView: UIView {
         set1.colors = [UIColor.black]
         // 设置 点的样式
         set1.drawCirclesEnabled = true//绘制转折点
+        
+        // 绘制转折点内圆
         set1.drawCircleHoleEnabled = false
-        set1.circleColors = [UIColor.green]
-        set1.circleRadius = 5
+        // 转折点是否显示y轴的值
+        set1.drawValuesEnabled = false
+        // 转折点颜色
+        set1.circleColors = [kRGBColor(157, 234, 68, 0.5)]
+        // 转折点大小
+        set1.circleRadius = 4
         set1.lineWidth = 2.0
         
         // 初始化折线图数据

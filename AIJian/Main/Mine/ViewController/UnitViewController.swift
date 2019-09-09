@@ -38,8 +38,9 @@ class UnitViewController: UIViewController,PickerDelegate {
     
     //每一次视图出现，就加载
     override func viewWillAppear(_ animated: Bool) {
-        let path = Bundle.main.path(forResource: "UnitSetting", ofType: "plist")
-        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path!)!
+        //let path = Bundle.main.path(forResource: "UnitSetting", ofType: "plist")
+        let path = PlistSetting.getFilePath(File: "UnitSetting.plist")
+        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
 //        print("dkdkdkdkdkdkd",data.description)
 //        print("有几个数",data.count)
         unitDataArray[0] = data["BloodUnit"]! as! String
@@ -133,12 +134,13 @@ extension UnitViewController:UITableViewDelegate,UITableViewDataSource{
     //修改血糖单位
     func selectedBlood(_ pickerView: BHJPickerView, _ bloodStr: String) {
         let messge = bloodStr
-        let path = Bundle.main.path(forResource: "UnitSetting", ofType: "plist")
-        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path!)!
+        //let path = Bundle.main.path(forResource: "UnitSetting", ofType: "plist")
+        let path = PlistSetting.getFilePath(File: "UnitSetting.plist")
+        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
         //先更新plist文件里面的数据
         data.setObject(messge, forKey: "BloodUnit" as NSCopying)
         //接着写入到文件中
-        data.write(toFile: path!, atomically: true)
+        data.write(toFile: path, atomically: true)
         //然后再更新数组的数据
         self.unitDataArray[self.num] = messge
         //最后重新加载更新第一行数据
@@ -148,12 +150,13 @@ extension UnitViewController:UITableViewDelegate,UITableViewDataSource{
     //修改体重单位
     func selectedWeight(_ pickerView: BHJPickerView, _ weightStr: String) {
         let messge = weightStr
-        let path = Bundle.main.path(forResource: "UnitSetting", ofType: "plist")
-        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path!)!
+        //let path = Bundle.main.path(forResource: "UnitSetting", ofType: "plist")
+        let path = PlistSetting.getFilePath(File: "UnitSetting.plist")
+        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
         //先更新plist文件里面的数据
         data.setObject(messge, forKey: "WeightUnit" as NSCopying)
         //接着写入到文件中
-        data.write(toFile: path!, atomically: true)
+        data.write(toFile: path, atomically: true)
         self.unitDataArray[self.num] = messge
         //更新第一行数据
         self.tableview.reloadRows(at: [IndexPath(row:self.num,section:0)], with: .fade)
@@ -163,12 +166,13 @@ extension UnitViewController:UITableViewDelegate,UITableViewDataSource{
     func selectedPressure(_ pickerView: BHJPickerView, _ pressureStr: String) {
         let messge = pressureStr
         print(messge)
-        let path = Bundle.main.path(forResource: "UnitSetting", ofType: "plist")
-        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path!)!
+//        let path = Bundle.main.path(forResource: "UnitSetting", ofType: "plist")
+        let path = PlistSetting.getFilePath(File: "UnitSetting.plist")
+        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
         //先更新plist文件里面的数据
         data.setObject(messge, forKey: "PressureUnit" as NSCopying)
         //接着写入到文件中
-        data.write(toFile: path!, atomically: true)
+        data.write(toFile: path, atomically: true)
         self.unitDataArray[self.num] = messge
         //更新第一行数据
         print(self.num)

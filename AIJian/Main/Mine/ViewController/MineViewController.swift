@@ -147,15 +147,19 @@ class MineViewController: UIViewController {
     @objc public func loginOff(){
         print("退出成功")
         //用do...catch语句来做。。。无论怎么样，都进行dismiss。如果出错了，就直接present
+        // 回到登录界面
         self.dismiss(animated: true, completion: nil)
         let viewController = loginViewController()
         let nv = loginNavigationController(rootViewController: viewController)
         self.present(nv, animated: true, completion: nil)
-        let path = Bundle.main.path(forResource: "User", ofType: "plist")
-        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path!)!
+        
+        // 将对应的用户的token设为空
+        //let path = Bundle.main.path(forResource: "User", ofType: "plist")
+        let path = PlistSetting.getFilePath(File: "User.plist")
+        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
         //退出登录，需要把token清空
         data.setObject("", forKey: "token" as NSCopying )
-        data.write(toFile: path!, atomically: true)
+        data.write(toFile: path, atomically: true)
     }
 }
 extension MineViewController:UITableViewDelegate,UITableViewDataSource{
@@ -194,11 +198,11 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
         //列
         let col = indexPath.row
         if indexPath.section == 0 {
-            self.navigationController?.pushViewController(clickArray[col], animated: false)
+            self.navigationController?.pushViewController(clickArray[col], animated: true)
             print(clickArray[col])
             print(col)
         }else{
-            self.navigationController?.pushViewController(clickArray[col+row+3], animated: false)
+            self.navigationController?.pushViewController(clickArray[col+row+3], animated: true)
             print(clickArray[col+row+3])
             print(col+row+3)
         }

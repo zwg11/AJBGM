@@ -170,6 +170,8 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
     func EditData(_ section:Int,_ row:Int){
         let x = sortedData[section][row]
         let y = sortedTime[section][row]
+        // 设置时间选择器的位置
+        
         // 手动输入标志位设置
         insert.isInsert = false
         // 血糖记录ID
@@ -181,9 +183,12 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         if let value = x.bloodGlucoseMmol{
             if GetUnit.getBloodUnit() == "mmol/L"{
                 insert.input.setGlucoseValue("\(value)")
+                
             }else{
                 insert.input.setGlucoseValue("\(x.bloodGlucoseMg!)")
             }
+            // 设置滑块的位置
+            insert.input.glucose.XTSlider.value = Float(value)
         }
 
         // 检测时间段

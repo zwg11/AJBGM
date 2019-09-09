@@ -22,6 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         let tabBarController = AJTabbarController()
        
+        // 先确认是否初始化plist文件，没有则初始化
+        PlistSetting.initPlistFile()
+        
         /*
          此处需要判断是否为第一次登陆？
          如果是，则跳到登陆界面。

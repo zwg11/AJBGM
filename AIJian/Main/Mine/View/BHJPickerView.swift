@@ -44,7 +44,7 @@ class BHJPickerView: UIView , UIPickerViewDelegate, UIPickerViewDataSource{
     private let pickerH : CGFloat! = 260 * kScalHeight
     //底窗个数及类别
 //    private var addressPicker : UIPickerView = UIPickerView()
-    private var datePicker : UIDatePicker = UIDatePicker()
+    private lazy var datePicker : UIDatePicker = UIDatePicker()
     private var genderPicker : UIPickerView = UIPickerView()
     private var bloodPicker : UIPickerView = UIPickerView()
     private var weightPicker : UIPickerView = UIPickerView()

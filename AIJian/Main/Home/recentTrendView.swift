@@ -12,7 +12,7 @@ import Charts
 class recentTrendView: UIView {
 
     
-    private lazy var recentTrendView:ChartView = {
+    lazy var recentTrendView:ChartView = {
         let view = ChartView()
         view.setupUI()
         // 摄者y轴最大值
@@ -25,11 +25,12 @@ class recentTrendView: UIView {
         view.lineChartView.xAxis.labelFont = UIFont.systemFont(ofSize: 15)
         // 设置坐标label在顶部朝内
         view.lineChartView.xAxis.labelPosition = .topInside
-        // 画图
-        view.drawLineChart(xAxisArray: xAxisArrayToWeek(Days: 7) as NSArray,xAxisData: recentDaysData(Days: 7))
+        
         // 画限制线
-        view.addLimitLine(GetBloodLimit.getRandomDinnerLow(), "低于", UIColor.yellow)
-        view.addLimitLine(GetBloodLimit.getRandomDinnerTop(), "高于", UIColor.blue)
+        let low = GetBloodLimit.getRandomDinnerLow()
+        let high = GetBloodLimit.getRandomDinnerTop()
+        view.addLimitLine(low, "\(low)", kRGBColor(249, 158, 25, 1))
+        view.addLimitLine(high, "\(high)", kRGBColor(55, 158, 247, 1))
  
         return view
     }()
@@ -37,7 +38,8 @@ class recentTrendView: UIView {
     func setupUI(){
         
         self.addSubview(recentTrendView)
-        
+        // 画图
+        self.recentTrendView.drawLineChart(xAxisArray: xAxisArrayToWeek(Days: 7) as NSArray,xAxisData: recentDaysData(Days: 7))
         self.recentTrendView.snp_makeConstraints{(make) in
             make.edges.equalToSuperview()
         }

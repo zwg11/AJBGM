@@ -63,7 +63,7 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
         // 设置分享内容
         let textShared = "要分享的标题"
         // 要分享的内容封装成数组
-        let activityItems = [textShared]
+        let activityItems = [image]
         // 创建
         let toVC = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
         self.present(toVC, animated: true, completion: nil)
@@ -143,7 +143,7 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
             //make.left.right.top.equalToSuperview()
             make.height.equalTo(UIScreen.main.bounds.height)
             if #available(iOS 11.0, *) {
-                make.top.equalTo(self.view.safeAreaLayoutGuide.layoutFrame.minY)
+                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             } else {
                 // Fallback on earlier versions
                 make.top.equalTo(topLayoutGuide.snp.bottom)
@@ -162,7 +162,7 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
                 self.topConstraint = make.top.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).constraint
             } else {
                 // Fallback on earlier versions
-                self.topConstraint = make.top.equalTo(bottomLayoutGuide.snp.bottom).constraint
+                self.topConstraint = make.top.equalTo(bottomLayoutGuide.snp.top).constraint
             }
             //make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
         }
@@ -195,7 +195,7 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
                 self.topConstraint = make.top.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).constraint
             } else {
                 // Fallback on earlier versions
-                self.topConstraint = make.top.equalTo(bottomLayoutGuide.snp.bottom).constraint
+                self.topConstraint = make.top.equalTo(bottomLayoutGuide.snp.top).constraint
             }
         }
         // 告诉当前控制器的View要更新约束了，动态更新约束，没有这句的话更新约束就没有动画效果
