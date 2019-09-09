@@ -52,7 +52,6 @@
 		7E55D14C065E24471D59E71862D56472 /* UseDirViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67085F8C516527849C0A634158BE78B7 /* UseDirViewController.swift */; };
 		82229929AE907526C16AFB7C3B976565 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428DE12BF8AED7060D2DACBB1BDB9E15 /* AppDelegate.swift */; };
 		834EC0FF846BBFBEDD0B508B121A967D /* registerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A616AADD55093E397D7DC9D3FA45D8FA /* registerViewController.swift */; };
-		847ED0EB232644FE00B05283 /* PlistSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847ED0EA232644FE00B05283 /* PlistSet.swift */; };
 		84847BC2FE082A7DD9416B04C6429EAB /* BHJPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE608F63498A45B84C3679D6251C8601 /* BHJPickerView.swift */; };
 		85BF4AD1556507F03E9CF1AB13F34571 /* BloodSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCA193DA6A5E1E858111B284800163C /* BloodSetViewController.swift */; };
 		875E6FED57826107D84E47853B2A507F /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5C68EDC76F69EA0E7DCD122ED6AB4 /* UITextField+Extension.swift */; };
@@ -75,6 +74,7 @@
 		AB27A7600A1A69D96B3C0BDEEBA411E6 /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281577697E4B5C8A234B003E370ABACA /* AboutUsViewController.swift */; };
 		AE5F885CE9A2327A38A50458E467EBE8 /* AJMineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B122EE08303781538E0581FB9B0AF84 /* AJMineHeaderView.swift */; };
 		AFB0A1406BF5F638E880614AD3D8E27A /* portionAndInsulinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67C5D050C5D9478AF306B5A049428F1 /* portionAndInsulinView.swift */; };
+		B19FE207427413DEE020EE6B205B6B9D /* PlistSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C52548A79BC012285A79353950AF46 /* PlistSet.swift */; };
 		B1B6272E57821B47FDE1B83E20D3D080 /* InfoInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DAC43428B46DC799E1E39FE86BB375D /* InfoInputView.swift */; };
 		B1B7D2822DE19C1364753E125637AD19 /* AddressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A6EB8D8F032AF1FFD6D1E5AC4852B8 /* AddressModel.swift */; };
 		B72572AB691BA264ED8800ADFB4F6B02 /* averageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E6BF264A7759F39EE60E2FC55F2DB6 /* averageView.swift */; };
@@ -174,6 +174,7 @@
 		6B3F1C67C1613AC9C10DED88BFBF2E7D /* URL_Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL_Address.swift; sourceTree = "<group>"; };
 		6BDC9815FDD5FF4814AB913BE79B3939 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localization.strings; sourceTree = "<group>"; };
 		7250934CF2E058D7C85B4FC0C9FFCED6 /* UnitConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConversion.swift; sourceTree = "<group>"; };
+		72C52548A79BC012285A79353950AF46 /* PlistSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistSet.swift; sourceTree = "<group>"; };
 		760452171F68DFBAE73622584ED2C38F /* dateAndTimeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dateAndTimeView.swift; sourceTree = "<group>"; };
 		7913A53032178A4B8556F90346B73A35 /* sportView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sportView.swift; sourceTree = "<group>"; };
 		7A16F36F9537243E6B7560D1B9FF77A0 /* allPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = allPickerView.swift; sourceTree = "<group>"; };
@@ -182,7 +183,6 @@
 		7DA56B56203F9AF89A686A66EBE1C21E /* loginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loginView.swift; sourceTree = "<group>"; };
 		7F0F86DE8B8A0BA75326372D7E7F827A /* emailCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emailCheckView.swift; sourceTree = "<group>"; };
 		802706582BF2DD3F2F165BE6CC4B129F /* UnitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitViewController.swift; sourceTree = "<group>"; };
-		847ED0EA232644FE00B05283 /* PlistSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistSet.swift; sourceTree = "<group>"; };
 		8A18E98B74565B5E695548D96DE09E13 /* SuggestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionViewController.swift; sourceTree = "<group>"; };
 		8AD251DA1D7683298B03830243680EC8 /* format_method.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = format_method.swift; sourceTree = "<group>"; };
 		8DAC43428B46DC799E1E39FE86BB375D /* InfoInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoInputView.swift; sourceTree = "<group>"; };
@@ -679,13 +679,13 @@
 				E59A10BC763D4D5E27D2541D481F5390 /* GetSortedData.swift */,
 				DFF8BC16AAE563F372E92457F2E7AAC1 /* GetUnit.swift */,
 				8FEA8DF68F3C84CF024089E90716B37E /* IntensityChange.swift */,
+				72C52548A79BC012285A79353950AF46 /* PlistSet.swift */,
 				3C5E47CB62AAB8FA3205A5903BDDA347 /* PressureUnitChange.swift */,
 				7250934CF2E058D7C85B4FC0C9FFCED6 /* UnitConversion.swift */,
 				0D612F090DA61DB57678E74F261C68D6 /* UserInfo.swift */,
 				067A7A62F94650792A578D0D5BE6D1BE /* WeightUnitChange.swift */,
 				8AD251DA1D7683298B03830243680EC8 /* format_method.swift */,
 				E2F07FB865C1B45AC2F704BE6D7A4BF4 /* viewToImage.swift */,
-				847ED0EA232644FE00B05283 /* PlistSet.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -821,7 +821,6 @@
 				F0CC7B621011F02A6C445F2D4CFD4002 /* AJTabbarController.swift in Sources */,
 				AB27A7600A1A69D96B3C0BDEEBA411E6 /* AboutUsViewController.swift in Sources */,
 				B1B7D2822DE19C1364753E125637AD19 /* AddressModel.swift in Sources */,
-				847ED0EB232644FE00B05283 /* PlistSet.swift in Sources */,
 				82229929AE907526C16AFB7C3B976565 /* AppDelegate.swift in Sources */,
 				84847BC2FE082A7DD9416B04C6429EAB /* BHJPickerView.swift in Sources */,
 				BC83B1437A56BCF7C847128796026D49 /* BLEViewController.swift in Sources */,
@@ -856,6 +855,7 @@
 				A87003F858AAC758556FC11B84E22CC6 /* NSDate+Date.swift in Sources */,
 				15D6FA7AF2ACEF4E3D398687FDBA3FB5 /* PageView.swift in Sources */,
 				55EBF230C8DD14A232D18B95A37D8202 /* PassChangeViewController.swift in Sources */,
+				B19FE207427413DEE020EE6B205B6B9D /* PlistSet.swift in Sources */,
 				F4D79598A7AC12B94FAF293367A9D4A8 /* PressureUnitChange.swift in Sources */,
 				4103417E5D61D24965902570B01CC19F /* SharedView.swift in Sources */,
 				74BAA950DB2E4C75BE286CCA00B3A027 /* SharedViewController.swift in Sources */,
