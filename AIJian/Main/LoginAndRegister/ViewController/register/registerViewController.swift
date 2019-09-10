@@ -175,10 +175,39 @@ class registerViewController: UIViewController,UITextFieldDelegate {
             return
         }
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.register.frame.origin.y = -150
+        })
+        
+        return true
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // 收起键盘
+        UIView.animate(withDuration: 0.2, animations: {
+            self.register.frame.origin.y = -150
+        })
         textField.resignFirstResponder()
         return true
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        UIView.animate(withDuration: 0.4, animations: {
+            self.register.frame.origin.y = -150
+        })
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.register.frame.origin.y = 0
+        })
+    }
+    
 }
 

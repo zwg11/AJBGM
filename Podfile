@@ -12,6 +12,8 @@ target 'AIJian' do
   pod 'DNSPageView'
   pod 'SwiftDate'
   pod 'SQLite.swift'
+  #此文件用来做提示版本更新
+  pod 'Siren', :git => 'https://github.com/ArtSabintsev/Siren.git', :branch => 'swift4.2'
   # Pods for AIJian
 
 end

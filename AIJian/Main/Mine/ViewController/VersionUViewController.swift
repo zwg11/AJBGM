@@ -10,7 +10,7 @@
 
 import UIKit
 import SnapKit
-
+import StoreKit
 
 
 class VersionUViewController: UIViewController {
@@ -83,9 +83,13 @@ extension VersionUViewController:UITableViewDelegate,UITableViewDataSource{
                 case 1:  //跳转到反馈页面
                     self.navigationController?.pushViewController(SuggestionViewController(), animated: true)
                 case 2:  //跳转到去评分界面
-                    print("第三行")
+                    if #available(iOS 10.3, *) {
+                        SKStoreReviewController.requestReview()
+                    } else {
+                        // Fallback on earlier versions
+                    }
                 case 3:  //跳转到版本更新
-                    print("第四行")
+                    UpdateManager.init()
                 default:  //缺省不跳
                     print("第五行")
                }
@@ -98,5 +102,4 @@ extension VersionUViewController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return AJScreenHeight/15
     }
-
 }

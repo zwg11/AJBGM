@@ -9,7 +9,7 @@
 import UIKit
 import HandyJSON
 import Alamofire
-
+import Siren
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -55,6 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 //过期了，需要清空app文件中的token
                                 print("你的token过期了")
                                 UserInfo.setToken("")
+                                // 跳转到登录界面
                                 self.window?.rootViewController = nv
                             }
                         }
@@ -67,8 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         window?.makeKeyAndVisible()
-        
-
+        Siren.shared.wail()
 //        let startImageView = AJStartView.init(imageName: "startView-1", timer: 3)
 //        self.window?.rootViewController?.view.addSubview(startImageView)
         isFirstStart = false
@@ -106,12 +106,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
       
     }
-    // MARK: - Core Data stack
-    
- 
-    
-    // MARK: - Core Data Saving support
- 
 
+    
 }
-
