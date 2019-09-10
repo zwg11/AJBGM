@@ -9,7 +9,7 @@
 import UIKit
 import HandyJSON
 import Alamofire
-
+import Siren
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -67,8 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         window?.makeKeyAndVisible()
-//        Siren.s
-
+        Siren.shared.wail()
 //        let startImageView = AJStartView.init(imageName: "startView-1", timer: 3)
 //        self.window?.rootViewController?.view.addSubview(startImageView)
         isFirstStart = false
@@ -106,12 +105,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
       
     }
-    // MARK: - Core Data stack
-    
- 
-    
-    // MARK: - Core Data Saving support
- 
 
+    
 }
-

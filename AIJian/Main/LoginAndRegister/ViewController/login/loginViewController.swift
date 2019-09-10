@@ -19,6 +19,8 @@ class loginViewController: UIViewController,UITextFieldDelegate {
     var password:String?
 
 
+
+
     private lazy var loginview:loginView = {
         //从这里去寻找登录的视图
         let view = loginView()
@@ -32,7 +34,6 @@ class loginViewController: UIViewController,UITextFieldDelegate {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.navigationController?.navigationBar.barTintColor = UIColor.blue
         //navigation顶部的title
         self.navigationController?.navigationItem.leftBarButtonItem = nil
         self.title = "登  录"
@@ -52,6 +53,7 @@ class loginViewController: UIViewController,UITextFieldDelegate {
         //let path = Bundle.main.path(forResource: "User", ofType: "plist")
         let path = PlistSetting.getFilePath(File: "User.plist")
         print("path：\(path)")
+        
         let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
 
 //        self.present(AJTabbarController(), animated: false, completion: nil)
@@ -153,24 +155,6 @@ class loginViewController: UIViewController,UITextFieldDelegate {
         self.navigationController?.pushViewController(registerViewController(), animated: true)
     }
 
-//    func textFieldDidEndEditing(_ textField: UITextField) {
-//        // 判断是哪个文本框，将内容赋值给对应的字符串
-//        if textField == loginview.userNameTextField{
-//            email = textField.text
-//            print("邮箱为",email!)
-//        }
-//        if textField == loginview.passwordTextField{
-//            print("跳到密码页")
-//            password = textField.text
-//            print("密码为",password!)
-//        }
-//        // 收起键盘
-//        textField.resignFirstResponder()
-////        return true
-//    }
-//
-//
-//
     //此处只做收回键盘的动作
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         print(textField.text ?? "")
@@ -180,26 +164,32 @@ class loginViewController: UIViewController,UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        UIView.animate(withDuration: 0.4, animations: {
-            self.loginview.frame.origin.y = -150
-        })
+        if self.loginview.frame.origin.y == -150{
+
+        }else{
+            UIView.animate(withDuration: 0.4, animations: {
+                self.loginview.frame.origin.y = -150
+            })
+        }
     }
-    
+
     func textFieldDidEndEditing(_ textField: UITextField) {
         UIView.animate(withDuration: 0.2, animations: {
             self.loginview.frame.origin.y = 0
         })
     }
     func hideKeyboardWhenTappedAround(){
-        // 添加手势，使得点击视图键盘收回
+        // 添加手势，使得点击视图键盘收回/Users/ADMIN/Desktop/swift1
         let tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
     }
+ 
+
+    
     // 设置手势动作
     @objc func dismissKeyboard(){
         self.view.endEditing(true)
-        
     }
     
 }

@@ -390,9 +390,9 @@ public class DBSQLiteManager:NSObject{
         let en = dateFormatter.string(from: end)
         var datasOfGlucose:[glucoseDate] = []
         
-        for record in try! db.prepare(glucose_record){
-            print(record[create_time])
-        }
+//        for record in try! db.prepare(glucose_record){
+//            print(record[create_time])
+//        }
         // SELECT * FROM glucose_record WHERE BETWEEN (st,en) AND user_id = userId ORDERED BY DESCENDING
         let query = glucose_record.filter(create_time < en && create_time >= st && user_glucose_id == userId).order(create_time.desc)
         do{
