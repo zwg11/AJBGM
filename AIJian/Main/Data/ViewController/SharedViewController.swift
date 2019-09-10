@@ -60,8 +60,6 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
         let image = viewToImage.getImageFromView(view: general)
         // 将图片放入相册
         UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.savedPhotosAlbum(_:didFinishSavingWithError:contextInfo:)), nil)
-        // 设置分享内容
-        let textShared = "要分享的标题"
         // 要分享的内容封装成数组
         let activityItems = [image]
         // 创建
