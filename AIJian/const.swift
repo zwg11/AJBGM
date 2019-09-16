@@ -19,6 +19,20 @@ let SHIFT = shift_data["shift"]
 let AJScreenWidth = UIScreen.main.bounds.width
 let AJScreenHeight = UIScreen.main.bounds.height
 
+//页面背景主题色
+let ThemeColor = UIColor.init(red: 11/255.0, green: 41/255.0, blue: 63/255.0, alpha: 1)
+let NavBarColor = UIColor.init(red: 9/255.0, green: 39/255.0, blue: 55/255.0, alpha: 1)
+//页面字体颜色
+let TextColor = UIColor.init(red: 141/255.0, green: 177/255.0, blue: 213/255.0, alpha: 1)
+//按钮背景色
+let ButtonColor = UIColor.init(red: 14/255.0, green: 60/255.0, blue: 100/255.0, alpha: 1)
+//线的颜色
+let LineColor = UIColor.init(red: 70/255.0, green: 102/255.0, blue: 131/255.0, alpha: 1)
+//navigationBar中文字的颜色
+let NaviTitleColor = UIColor.init(red: 173/255.0, green: 176/255.0, blue: 181/255.0, alpha: 1)
+
+
+
 //白色
 let DominantColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 1)
 //黑色
@@ -32,6 +46,7 @@ let borderColor = UIColor.init(red: 187.0/255.0, green: 187.0/255.0, blue: 187.0
 
 // iphone X
 let isIphoneX = AJScreenHeight == 812 ? true : false
+
 // navigationBarHeight
 let navigationBarHeight : CGFloat = isIphoneX ? 88 : 64
 // tabBarHeight

@@ -23,4 +23,16 @@ public class CustomAlertController {
         alertController.addAction(okAction)
         viewController.present(alertController, animated: true, completion: nil)
     }
+    
+    func custom_cengji(_ viewController:UIViewController,_ title: String,_ message: String){
+        let alertController = UIAlertController(title: title,
+                                                message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: {
+            action in
+            viewController.navigationController?.popViewController(animated: true)
+        })
+        //只加入确定按钮
+        alertController.addAction(okAction)
+        viewController.present(alertController, animated: true, completion: nil)
+    }
 }

@@ -36,13 +36,19 @@ class loginViewController: UIViewController,UITextFieldDelegate {
         super.viewDidLoad()
         //navigation顶部的title
         self.navigationController?.navigationItem.leftBarButtonItem = nil
-        self.title = "登  录"
+        self.navigationController?.isNavigationBarHidden = true
+        self.navigationController?.navigationBar.backgroundColor = ThemeColor
+//        self.title = "登  录"
         self.view.addSubview(loginview)
         loginview.snp.makeConstraints{(make) in
             make.height.equalTo(AJScreenHeight)
             make.left.right.top.equalToSuperview()
         }
          hideKeyboardWhenTappedAround()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = true
     }
     
     /*
@@ -146,13 +152,13 @@ class loginViewController: UIViewController,UITextFieldDelegate {
         print("forgetPassword clicked.")
         
         //测试过程中，修改密码时，先跳到第二页
-        self.navigationController?.pushViewController(emailCheckViewController(), animated: true)
+        self.navigationController?.pushViewController(emailCheckSecViewController(), animated: true)
     }
     
     //跳转到注册界面
     @objc func register(){
         print("register clicked.")
-        self.navigationController?.pushViewController(registerViewController(), animated: true)
+        self.navigationController?.pushViewController(infoInputViewController(), animated: true)
     }
 
     //此处只做收回键盘的动作
@@ -162,22 +168,7 @@ class loginViewController: UIViewController,UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        if self.loginview.frame.origin.y == -150{
 
-        }else{
-            UIView.animate(withDuration: 0.4, animations: {
-                self.loginview.frame.origin.y = -150
-            })
-        }
-    }
-
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        UIView.animate(withDuration: 0.2, animations: {
-            self.loginview.frame.origin.y = 0
-        })
-    }
     func hideKeyboardWhenTappedAround(){
         // 添加手势，使得点击视图键盘收回/Users/ADMIN/Desktop/swift1
         let tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))

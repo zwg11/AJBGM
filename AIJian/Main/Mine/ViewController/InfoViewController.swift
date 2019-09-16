@@ -18,7 +18,8 @@ class InfoViewController: UIViewController ,PickerDelegate{
 
     //列表数据
     public lazy var infoArray: Array = ["姓    名","性    别","体    重","身    高","生    日","国    家","电    话"]
-    
+    //图标数据
+    public lazy var infoIconArray:Array = ["aboutUs","aboutUs","aboutUs","aboutUs","aboutUs","aboutUs","aboutUs"]
     public lazy var infoDataArray : [String] = ["","","","","","",""]
 
     let tableview = UITableView()
@@ -63,8 +64,9 @@ class InfoViewController: UIViewController ,PickerDelegate{
         //update.reloadRows(at: [IndexPath(row: 1, section: 1)], with: .fade)
         self.view.addSubview(tableview)
         tableview.snp.makeConstraints{(make) in
-            make.left.right.top.equalToSuperview()
-            make.height.equalTo(AJScreenHeight/15*9)
+            make.top.equalTo(AJScreenHeight/10)
+            make.left.right.equalToSuperview()
+            make.height.equalTo(AJScreenHeight/15*7)
         }
     }
     @objc private func back(){
@@ -184,6 +186,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
         cell?.selectionStyle = .none
         cell = UITableViewCell(style: .value1, reuseIdentifier: "infocell")
         cell!.accessoryType = .disclosureIndicator
+        cell?.imageView?.image = UIImage(named: infoIconArray[indexPath.row])
         cell?.textLabel?.text = infoArray[indexPath.row]
 
         //let userInfo = DBSQLiteManager.manager.selectUserRecord(userId: UserInfo.getUserId())

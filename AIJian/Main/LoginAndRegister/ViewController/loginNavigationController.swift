@@ -13,7 +13,7 @@ class loginNavigationController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setNavBarAppearence()
+//        setNavBarAppearence()
 //        let login = loginViewController()
 //        
 //        // 向导航控制器压入控制器
@@ -22,17 +22,17 @@ class loginNavigationController: UINavigationController {
 
         
     }
-    
-    func setNavBarAppearence()
-    {
-        
-        // 设置 导航栏颜色 和 标题字体颜色
-        self.navigationBar.barTintColor = barDefaultColor
-        let navigationTitleAttribute: NSDictionary = NSDictionary(object: UIColor.white, forKey: NSAttributedString.Key.foregroundColor as NSCopying)
-        self.navigationBar.titleTextAttributes = navigationTitleAttribute as? [NSAttributedString.Key : Any]
-        
-    }
-    
+//
+//    func setNavBarAppearence()
+//    {
+//
+//        // 设置 导航栏颜色 和 标题字体颜色
+//        self.navigationBar.barTintColor = barDefaultColor
+//        let navigationTitleAttribute: NSDictionary = NSDictionary(object: UIColor.white, forKey: NSAttributedString.Key.foregroundColor as NSCopying)
+//        self.navigationBar.titleTextAttributes = navigationTitleAttribute as? [NSAttributedString.Key : Any]
+//
+//    }
+//
 
     
 

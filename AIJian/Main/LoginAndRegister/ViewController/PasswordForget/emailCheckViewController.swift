@@ -21,7 +21,6 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
     // 记录邮箱验证码
     var email_code:String?
     
-//    var EmailAndEmailCode =
     
     private lazy var emailCheck:emailCheckView = {
         let view = emailCheckView()
@@ -36,6 +35,8 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationController?.navigationBar.backgroundColor = UIColor.white
         self.view.backgroundColor = UIColor.white
         self.title = "邮箱验证"
         print("到达邮箱验证界面")

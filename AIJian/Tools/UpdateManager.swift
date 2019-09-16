@@ -49,6 +49,7 @@ class UpdateManager:NSObject{
             let alertC = UIAlertController.init(title: "已经是最新版本了", message: "", preferredStyle: .alert)
             let noAction = UIAlertAction.init(title: "确定", style: .cancel, handler: nil)
             alertC.addAction(noAction)
+            
             UIApplication.shared.keyWindow?.rootViewController?.present(alertC, animated: true, completion: nil)
         }
         

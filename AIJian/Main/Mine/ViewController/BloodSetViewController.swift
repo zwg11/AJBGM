@@ -145,8 +145,6 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             saveBlood.backgroundColor = UIColor.red
             saveBlood.setTitle("保存", for:.normal)
             saveBlood.tintColor = UIColor.white
-            saveBlood.layer.cornerRadius = 8
-            saveBlood.layer.masksToBounds = true
             saveBlood.titleLabel?.font = UIFont.systemFont(ofSize:18)
             saveBlood.titleLabel?.textColor = UIColor.white
             return saveBlood
@@ -157,8 +155,6 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             recoverBlood.backgroundColor = UIColor.red
             recoverBlood.setTitle("恢复默认设置", for:.normal)
             recoverBlood.tintColor = UIColor.white
-            recoverBlood.layer.cornerRadius = 8
-            recoverBlood.layer.masksToBounds = true
             recoverBlood.titleLabel?.font = UIFont.systemFont(ofSize:18)
             recoverBlood.titleLabel?.textColor = UIColor.white
             return recoverBlood
@@ -175,12 +171,12 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             information.text = "BG Targets"
             information.textAlignment = .center
             information.font = UIFont.systemFont(ofSize: 18)
-            information.layer.borderWidth = 0.5
+//            information.layer.borderWidth = 0.5
             self.view.addSubview(information)
             information.snp.makeConstraints{ (make) in
                 make.height.equalTo(AJScreenHeight/15)
                 make.width.equalTo(AJScreenWidth)
-               make.top.equalTo(navigationBarHeight)
+               make.top.equalTo(topLayoutGuide.snp.bottom).offset(1)
             }
             
             
@@ -193,28 +189,28 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             emptyStomach_label.snp.makeConstraints{ (make) in
                 make.height.equalTo(AJScreenWidth/15)
                 make.width.equalTo(AJScreenWidth/8)
-                make.left.equalTo(AJScreenWidth/7)
-                make.top.equalTo(information.snp.bottom).offset(AJScreenWidth/10)
+                make.left.equalTo(AJScreenWidth/5)
+                make.top.equalTo(information.snp.bottom).offset(AJScreenWidth/12)
             }
             
             //空腹左侧输入框
             emptyStomach_left.delegate = self
             self.view.addSubview(emptyStomach_left)
             emptyStomach_left.snp.makeConstraints{ (make) in
-                make.height.equalTo(AJScreenHeight/20)
-                make.width.equalTo(AJScreenWidth/4)
-                make.left.equalTo(AJScreenWidth/7)
+                make.height.equalTo(AJScreenHeight/25)
+                make.width.equalTo(AJScreenWidth/6)
+                make.left.equalTo(AJScreenWidth/5)
                 make.top.equalTo(emptyStomach_label.snp.bottom).offset(1)
             }
             
             let emptyMark_label = UILabel(frame: CGRect())
-            emptyMark_label.text = "~"
+            emptyMark_label.text = "---"
             emptyMark_label.font = UIFont.systemFont(ofSize: 14)
-            //        email_label.backgroundColor = UIColor.red
+            emptyMark_label.textAlignment = .center
             self.view.addSubview(emptyMark_label)
             emptyMark_label.snp.makeConstraints{ (make) in
-                make.height.equalTo(AJScreenHeight/20)
-                make.width.equalTo(AJScreenWidth/5)
+                make.height.equalTo(AJScreenHeight/25)
+                make.width.equalTo(AJScreenWidth/8)
                 make.left.equalTo(emptyStomach_left.snp.right).offset(AJScreenWidth/25)
                 make.top.equalTo(emptyStomach_label.snp.bottom).offset(1)
             }
@@ -222,9 +218,9 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             //空腹右侧输入框
             self.view.addSubview(emptyStomach_right)
             emptyStomach_right.snp.makeConstraints{ (make) in
-                make.height.equalTo(AJScreenHeight/20)
-                make.width.equalTo(AJScreenWidth/4)
-                make.left.equalTo(emptyStomach_left.snp.right).offset(AJScreenWidth/10)
+                make.height.equalTo(AJScreenHeight/25)
+                make.width.equalTo(AJScreenWidth/6)
+                make.left.equalTo(emptyMark_label.snp.right).offset(AJScreenWidth/25)
                 make.top.equalTo(emptyStomach_label.snp.bottom).offset(1)
             }
             
@@ -232,7 +228,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
        
             self.view.addSubview(emptyUnit_label)
             emptyUnit_label.snp.makeConstraints{ (make) in
-                make.height.equalTo(AJScreenHeight/20)
+                make.height.equalTo(AJScreenHeight/25)
                 make.width.equalTo(AJScreenWidth/5)
                 make.left.equalTo(emptyStomach_right.snp.right).offset(10)
                 make.top.equalTo(emptyStomach_label.snp.bottom).offset(1)
@@ -247,28 +243,29 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             self.view.addSubview(beforeDinner_label)
             beforeDinner_label.snp.makeConstraints{ (make) in
                 make.height.equalTo(AJScreenWidth/15)
-                make.width.equalTo(AJScreenWidth/5)
-                make.left.equalTo(AJScreenWidth/7)
+                make.width.equalTo(AJScreenWidth/6)
+                make.left.equalTo(AJScreenWidth/5)
                 make.top.equalTo(emptyStomach_left.snp.bottom).offset(5)
             }
             
             
             self.view.addSubview(beforeDinner_left)
             beforeDinner_left.snp.makeConstraints{ (make) in
-                make.height.equalTo(AJScreenHeight/20)
-                make.width.equalTo(AJScreenWidth/4)
-                make.left.equalTo(AJScreenWidth/7)
+                make.height.equalTo(AJScreenHeight/25)
+                make.width.equalTo(AJScreenWidth/6)
+                make.left.equalTo(AJScreenWidth/5)
                 make.top.equalTo(beforeDinner_label.snp.bottom).offset(5)
             }
             
             let beforeMark_label = UILabel(frame: CGRect())
-            beforeMark_label.text = "~"
+            beforeMark_label.text = "---"
             beforeMark_label.font = UIFont.systemFont(ofSize: 14)
             //        email_label.backgroundColor = UIColor.red
+            beforeMark_label.textAlignment = .center
             self.view.addSubview(beforeMark_label)
             beforeMark_label.snp.makeConstraints{ (make) in
-                make.height.equalTo(AJScreenHeight/20)
-                make.width.equalTo(AJScreenWidth/5)
+                make.height.equalTo(AJScreenHeight/25)
+                make.width.equalTo(AJScreenWidth/8)
                 make.left.equalTo(beforeDinner_left.snp.right).offset(AJScreenWidth/25)
                 make.top.equalTo(beforeDinner_label.snp.bottom).offset(5)
             }
@@ -276,16 +273,16 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
           
             self.view.addSubview(beforeDinner_right)
             beforeDinner_right.snp.makeConstraints{ (make) in
-                make.height.equalTo(AJScreenHeight/20)
-                make.width.equalTo(AJScreenWidth/4)
-                make.left.equalTo(beforeDinner_left.snp.right).offset(AJScreenWidth/10)
+                make.height.equalTo(AJScreenHeight/25)
+                make.width.equalTo(AJScreenWidth/6)
+                make.left.equalTo(beforeMark_label.snp.right).offset(AJScreenWidth/25)
                 make.top.equalTo(beforeDinner_label.snp.bottom).offset(5)
             }
             
 
             self.view.addSubview(beforeUnit_label)
             beforeUnit_label.snp.makeConstraints{ (make) in
-                make.height.equalTo(AJScreenHeight/20)
+                make.height.equalTo(AJScreenHeight/25)
                 make.width.equalTo(AJScreenWidth/5)
                 make.left.equalTo(beforeDinner_right.snp.right).offset(10)
                 make.top.equalTo(beforeDinner_label.snp.bottom).offset(5)
@@ -298,28 +295,29 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             self.view.addSubview(afterDinner_label)
             afterDinner_label.snp.makeConstraints{ (make) in
                 make.height.equalTo(AJScreenWidth/15)
-                make.width.equalTo(AJScreenWidth/5)
-                make.left.equalTo(AJScreenWidth/7)
+                make.width.equalTo(AJScreenWidth/6)
+                make.left.equalTo(AJScreenWidth/5)
                 make.top.equalTo(beforeDinner_left.snp.bottom).offset(5)
             }
             
            
             self.view.addSubview(afterDinner_left)
             afterDinner_left.snp.makeConstraints{ (make) in
-                make.height.equalTo(AJScreenHeight/20)
-                make.width.equalTo(AJScreenWidth/4)
-                make.left.equalTo(AJScreenWidth/7)
+                make.height.equalTo(AJScreenHeight/25)
+                make.width.equalTo(AJScreenWidth/6)
+                make.left.equalTo(AJScreenWidth/5)
                 make.top.equalTo(afterDinner_label.snp.bottom).offset(5)
             }
             
             let afterMark_label = UILabel(frame: CGRect())
-            afterMark_label.text = "~"
+            afterMark_label.text = "---"
             afterMark_label.font = UIFont.systemFont(ofSize: 14)
+            afterMark_label.textAlignment = .center
             //email_label.backgroundColor = UIColor.red
             self.view.addSubview(afterMark_label)
             afterMark_label.snp.makeConstraints{ (make) in
-                make.height.equalTo(AJScreenHeight/20)
-                make.width.equalTo(AJScreenWidth/5)
+                make.height.equalTo(AJScreenHeight/25)
+                make.width.equalTo(AJScreenWidth/8)
                 make.left.equalTo(afterDinner_left.snp.right).offset(AJScreenWidth/25)
                 make.top.equalTo(afterDinner_label.snp.bottom).offset(5)
             }
@@ -327,16 +325,16 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
            
             self.view.addSubview(afterDinner_right)
             afterDinner_right.snp.makeConstraints{ (make) in
-                make.height.equalTo(AJScreenHeight/20)
-                make.width.equalTo(AJScreenWidth/4)
-                make.left.equalTo(afterDinner_left.snp.right).offset(AJScreenWidth/10)
+                make.height.equalTo(AJScreenHeight/25)
+                make.width.equalTo(AJScreenWidth/6)
+                make.left.equalTo(afterMark_label.snp.right).offset(AJScreenWidth/25)
                 make.top.equalTo(afterDinner_label.snp.bottom).offset(5)
             }
             
     
             self.view.addSubview(afterUnit_label)
             afterUnit_label.snp.makeConstraints{ (make) in
-                make.height.equalTo(AJScreenHeight/20)
+                make.height.equalTo(AJScreenHeight/25)
                 make.width.equalTo(AJScreenWidth/5)
                 make.left.equalTo(afterDinner_right.snp.right).offset(10)
                 make.top.equalTo(afterDinner_label.snp.bottom).offset(5)
@@ -351,28 +349,29 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             self.view.addSubview(randomDinner_label)
             randomDinner_label.snp.makeConstraints{ (make) in
                 make.height.equalTo(AJScreenWidth/15)
-                make.width.equalTo(AJScreenWidth/5)
-                make.left.equalTo(AJScreenWidth/7)
+                make.width.equalTo(AJScreenWidth/6)
+                make.left.equalTo(AJScreenWidth/5)
                 make.top.equalTo(afterDinner_left.snp.bottom).offset(5)
             }
             
            
             self.view.addSubview(randomDinner_left)
             randomDinner_left.snp.makeConstraints{ (make) in
-                make.height.equalTo(AJScreenHeight/20)
-                make.width.equalTo(AJScreenWidth/4)
-                make.left.equalTo(AJScreenWidth/7)
+                make.height.equalTo(AJScreenHeight/25)
+                make.width.equalTo(AJScreenWidth/6)
+                make.left.equalTo(AJScreenWidth/5)
                 make.top.equalTo(randomDinner_label.snp.bottom).offset(5)
             }
             
             let randomMark_label = UILabel(frame: CGRect())
-            randomMark_label.text = "~"
+            randomMark_label.text = "---"
             randomMark_label.font = UIFont.systemFont(ofSize: 14)
+            randomMark_label.textAlignment = .center
             //        email_label.backgroundColor = UIColor.red
             self.view.addSubview(randomMark_label)
             randomMark_label.snp.makeConstraints{ (make) in
-                make.height.equalTo(AJScreenHeight/20)
-                make.width.equalTo(AJScreenWidth/5)
+                make.height.equalTo(AJScreenHeight/25)
+                make.width.equalTo(AJScreenWidth/8)
                 make.left.equalTo(randomDinner_left.snp.right).offset(AJScreenWidth/25)
                 make.top.equalTo(randomDinner_label.snp.bottom).offset(5)
             }
@@ -380,15 +379,15 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
            
             self.view.addSubview(randomDinner_right)
             randomDinner_right.snp.makeConstraints{ (make) in
-                make.height.equalTo(AJScreenHeight/20)
-                make.width.equalTo(AJScreenWidth/4)
-                make.left.equalTo(randomDinner_left.snp.right).offset(AJScreenWidth/10)
+                make.height.equalTo(AJScreenHeight/25)
+                make.width.equalTo(AJScreenWidth/6)
+                make.left.equalTo(randomMark_label.snp.right).offset(AJScreenWidth/25)
                 make.top.equalTo(randomDinner_label.snp.bottom).offset(5)
             }
             
            
             randomUnit_label.snp.makeConstraints{ (make) in
-                make.height.equalTo(AJScreenHeight/15)
+                make.height.equalTo(AJScreenHeight/25)
                 make.width.equalTo(AJScreenWidth/5)
                 make.left.equalTo(randomDinner_right.snp.right).offset(10)
                 make.top.equalTo(randomDinner_label.snp.bottom).offset(5)
@@ -402,9 +401,10 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             self.view.addSubview(saveBlood)
             saveBlood.snp.makeConstraints{(make) in
                 make.height.equalTo(AJScreenWidth/10)
-                make.width.equalTo(AJScreenWidth*3/5)
-                make.top.equalTo(randomDinner_left.snp.bottom).offset(20)
-                make.left.equalTo(AJScreenWidth/5)
+//                make.width.equalTo(AJScreenWidth*3/5)
+                make.top.equalTo(randomDinner_left.snp.bottom).offset(AJScreenWidth/5)
+                make.left.equalTo(AJScreenWidth/15)
+                make.right.equalTo(-AJScreenWidth/15)
             }
        
             /*恢复默认设置按钮*/
@@ -413,9 +413,10 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             self.view.addSubview(recoverBlood)
             recoverBlood.snp.makeConstraints{(make) in
                 make.height.equalTo(AJScreenWidth/10)
-                make.width.equalTo(AJScreenWidth*3/5)
-                make.top.equalTo(saveBlood.snp.bottom).offset(10)
-                make.left.equalTo(AJScreenWidth/5)
+//                make.width.equalTo(AJScreenWidth*3/5)
+                make.top.equalTo(saveBlood.snp.bottom).offset(AJScreenWidth/10)
+                make.left.equalTo(AJScreenWidth/15)
+                make.right.equalTo(-AJScreenWidth/15)
             }
         }
         //视图将要出现时，调用这个方法
