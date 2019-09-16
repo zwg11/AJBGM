@@ -14,6 +14,8 @@ class glucoseView: UIView ,UITextFieldDelegate{
     // 记录血糖值
     var glucoseValueMM:Double = 0
     var glucoseValueMG:Double = 0
+    // 设置事件值
+    var eventNum:Int = 3
     //***********************血糖********************
     // 血糖图标
     private lazy var XTimageView:UIImageView = {
@@ -52,7 +54,7 @@ class glucoseView: UIView ,UITextFieldDelegate{
     // 血糖单位label
      lazy var XTUnitLabel:UILabel = {
         let label = UILabel()
-//        label.normalLabel(text: "mmol/L")
+        label.text = GetUnit.getBloodUnit()
         label.font = UIFont.systemFont(ofSize: 16)
         
         return label
@@ -62,10 +64,10 @@ class glucoseView: UIView ,UITextFieldDelegate{
      lazy var XTSlider:UISlider = {
         let slider = UISlider()
         slider.isContinuous = true
-        slider.minimumTrackTintColor = UIColor.blue
-        slider.maximumTrackTintColor = UIColor.white
+//        slider.minimumTrackTintColor = UIColor.blue
+//        slider.maximumTrackTintColor = UIColor.white
         slider.addTarget(self, action: #selector(valueChange), for: UIControl.Event.valueChanged)
-        slider.thumbTintColor = UIColor.blue
+        slider.thumbTintColor = UIColor.green
         return slider
     }()
     // 血糖滑块的动作
@@ -80,44 +82,93 @@ class glucoseView: UIView ,UITextFieldDelegate{
             XTTextfield.text = String(format:"%.1f",glucoseValueMG)
         }
     }
-    // 滑块左侧 - 符号
-    private lazy var reduceLabel:UILabel = {
-        let label = UILabel()
-        label.normalLabel(text: "-")
-        label.font = UIFont.systemFont(ofSize: 20)
-        label.sizeToFit()
-        return label
-    }()
-    // 滑块右侧 + 符号
-    private lazy var addLabel:UILabel = {
-        let label = UILabel()        
-        label.normalLabel(text: "+")
-        label.font = UIFont.systemFont(ofSize: 20)
-        label.sizeToFit()
-        return label
-    }()
     //**********************************事件*************************
-    // 事件图标
-    private lazy var eventImageView:UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "事件")
-        return imageView
-    }()
-    // 事件label
-    private lazy var eventLabel:UILabel = {
-        let label = UILabel()
-        label.normalLabel(text: "事件")
-        return label
-    }()
-
-    // 事件选择按钮
-    lazy var eventButton:UIButton = {
+    private lazy var BeforeButton:UIButton = {
         let button = UIButton()
-        button.NorStyle(title: "无")
+        button.setTitle("Before Meal", for: .normal)
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.setDeselected()
+        button.tag = 0
+        button.addTarget(self, action: #selector(SelectEvent(_:)), for: .touchUpInside)
         return button
     }()
     
+    private lazy var AfterButton:UIButton = {
+        let button = UIButton()
+        
+        button.setTitle("After Meal", for: .normal)
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.setDeselected()
+        button.tag = 1
+        button.addTarget(self, action: #selector(SelectEvent(_:)), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var FastingButton:UIButton = {
+        let button = UIButton()
+        button.setTitle("Fasting", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        button.setDeselected()
+        button.tag = 2
+        button.addTarget(self, action: #selector(SelectEvent(_:)), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var RandomButton:UIButton = {
+        let button = UIButton()
+        button.setTitle("Random", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        button.setDeselected()
+        button.tag = 3
+        button.addTarget(self, action: #selector(SelectEvent(_:)), for: .touchUpInside)
+        return button
+    }()
+//    // 事件图标
+//    private lazy var eventImageView:UIImageView = {
+//        let imageView = UIImageView()
+//        imageView.image = UIImage(named: "事件")
+//        return imageView
+//    }()
+//    // 事件label
+//    private lazy var eventLabel:UILabel = {
+//        let label = UILabel()
+//        label.normalLabel(text: "事件")
+//        return label
+//    }()
+
+//    // 事件选择按钮
+//    lazy var eventButton:UIButton = {
+//        let button = UIButton()
+//        button.NorStyle(title: "无")
+//        return button
+//    }()
+    
+    @objc func SelectEvent(_ sender:UIButton){
+
+        let buttons = [BeforeButton,AfterButton,FastingButton,RandomButton]
+        for i in buttons{
+            i.setDeselected()
+        }
+        sender.setSelected()
+        eventNum = sender.tag
+    }
+    
+    // 初始化事件按钮的选择
+    func initEvent(event:Int){
+        switch event {
+        case 0:
+            SelectEvent(BeforeButton)
+        case 1:
+            SelectEvent(AfterButton)
+        case 2:
+            SelectEvent(FastingButton)
+        default:
+            SelectEvent(RandomButton)
+        }
+    }
+    
     func setupUI(){
+        initEvent(event: eventNum)
         
         // 设置视图背景颜色和边框
         self.layer.borderColor = UIColor.gray.cgColor
@@ -144,7 +195,7 @@ class glucoseView: UIView ,UITextFieldDelegate{
         self.addSubview(XTTextfield)
         XTTextfield.delegate = self
         XTTextfield.snp.makeConstraints{(make) in
-            make.left.equalTo(XTLabel.snp.right).offset(AJScreenWidth/40)
+            make.left.equalTo(XTLabel)
             make.top.equalTo(XTLabel.snp.bottom).offset(AJScreenWidth/40)
             make.width.equalTo(AJScreenWidth/4)
             make.height.equalTo(AJScreenWidth/12)
@@ -160,49 +211,66 @@ class glucoseView: UIView ,UITextFieldDelegate{
         
         // 血糖值滑块布局
         self.addSubview(XTSlider)
+        initSliderColor()
         XTSlider.snp.makeConstraints{(make) in
-            make.centerX.equalToSuperview()
+            make.left.equalToSuperview().offset(AJScreenWidth/20)
+            make.right.equalToSuperview().offset(-AJScreenWidth/20)
             make.top.equalTo(XTTextfield.snp.bottom).offset(AJScreenWidth/40)
-            make.width.equalTo(AJScreenWidth/4*3)
             make.height.equalTo(AJScreenWidth/15)
         }
         
-        // 滑块两侧添加 - + 符号
-        self.addSubview(reduceLabel)
-        reduceLabel.snp.makeConstraints{(make) in
-            make.right.equalTo(XTSlider.snp.left).offset(-AJScreenWidth/40)
-            make.height.centerY.equalTo(XTSlider)
-            
-        }
+//        //***********************事件********************
+//        // 事件图标布局
+//        self.addSubview(eventImageView)
+//        eventImageView.snp.makeConstraints{(make) in
+//            make.left.right.height.equalTo(XTimageView)
+//            make.top.equalTo(XTSlider.snp.bottom).offset(AJScreenWidth/40)
+//        }
+//
+//        // 事件label布局
+//        self.addSubview(eventLabel)
+//        eventLabel.snp.makeConstraints{(make) in
+//            make.left.height.equalTo(XTLabel)
+//            make.bottom.equalTo(eventImageView)
+//        }
+//
+//        // 事件按钮布局
+//        self.addSubview(eventButton)
+//        eventButton.snp.makeConstraints{(make) in
+//            make.centerX.equalToSuperview()
+//            make.top.equalTo(eventLabel.snp.bottom).offset(AJScreenWidth/40)
+//            make.width.equalTo(AJScreenWidth/5*3)
+//            make.height.equalTo(AJScreenWidth/12)
+//        }
+        // 事件按钮布局，总共4个
+        self.addSubview(BeforeButton)
+        self.addSubview(AfterButton)
+        self.addSubview(FastingButton)
+        self.addSubview(RandomButton)
         
-        self.addSubview(addLabel)
-        addLabel.snp.makeConstraints{(make) in
-            make.left.equalTo(XTSlider.snp.right).offset(AJScreenWidth/40)
-            make.height.centerY.equalTo(XTSlider)
-            
-        }
-        //***********************事件********************
-        // 事件图标布局
-        self.addSubview(eventImageView)
-        eventImageView.snp.makeConstraints{(make) in
-            make.left.right.height.equalTo(XTimageView)
+        BeforeButton.snp.makeConstraints{(make) in
+            make.left.equalTo(XTSlider)
+            make.width.equalTo(AJScreenWidth/5)
+            make.height.equalTo(AJScreenWidth/15)
             make.top.equalTo(XTSlider.snp.bottom).offset(AJScreenWidth/40)
         }
         
-        // 事件label布局
-        self.addSubview(eventLabel)
-        eventLabel.snp.makeConstraints{(make) in
-            make.left.height.equalTo(XTLabel)
-            make.bottom.equalTo(eventImageView)
+        AfterButton.snp.makeConstraints{(make) in
+            make.left.equalTo(BeforeButton.snp.right).offset(AJScreenWidth/30)
+            make.width.equalTo(AJScreenWidth/5)
+            make.top.bottom.equalTo(BeforeButton)
         }
         
-        // 事件按钮布局
-        self.addSubview(eventButton)
-        eventButton.snp.makeConstraints{(make) in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(eventLabel.snp.bottom).offset(AJScreenWidth/40)
-            make.width.equalTo(AJScreenWidth/5*3)
-            make.height.equalTo(AJScreenWidth/12)
+        FastingButton.snp.makeConstraints{(make) in
+            make.left.equalTo(AfterButton.snp.right).offset(AJScreenWidth/30)
+            make.width.equalTo(AJScreenWidth/5)
+            make.top.bottom.equalTo(BeforeButton)
+        }
+        
+        RandomButton.snp.makeConstraints{(make) in
+            make.left.equalTo(FastingButton.snp.right).offset(AJScreenWidth/30)
+            make.width.equalTo(AJScreenWidth/5)
+            make.top.bottom.equalTo(BeforeButton)
         }
     }
     
@@ -211,24 +279,68 @@ class glucoseView: UIView ,UITextFieldDelegate{
         textField.resignFirstResponder()
         return true
     }
-    //设置单位
+    
+    //设置单位不同显示不同键盘滑块显示不同的范围
     func resetGlucoseUnit(){
         //设置血糖单位
         if GetUnit.getBloodUnit() == "mmol/L"{
-            //设置单位
-            self.XTUnitLabel.normalLabel(text: "mmol/L")
             //设置范围
             self.XTSlider.minimumValue = 0.6
             self.XTSlider.maximumValue = 16.6
+            
             self.XTTextfield.keyboardType = UIKeyboardType.decimalPad
             
         }else{
-            self.XTUnitLabel.normalLabel(text: "mg/dL")
             //设置范围
             self.XTSlider.minimumValue = 10
             self.XTSlider.maximumValue = 300
             self.XTTextfield.keyboardType = UIKeyboardType.numberPad
         }
+    }
+    
+    func initSliderColor(){
+        let first = UIColor.yellow
+        let second = UIColor.green
+        let third = UIColor.red
+        // 创建一个渐变层
+        let layer = CAGradientLayer()
+        // 设置frame
+        layer.frame = self.XTSlider.frame
+        // 设置渐变颜色
+        layer.colors = [first,second,third]
+        var location1 = 0.0
+        var location2 = 0.0
+        
+        // 分段位置
+        if GetUnit.getBloodUnit() == "mmol/L"{
+            location1 = (GetBloodLimit.getRandomDinnerLow()-0.6)/16.6
+            location2 = (GetBloodLimit.getRandomDinnerTop()-0.6)/16.6
+        }else{
+            location1 = (GetBloodLimit.getRandomDinnerLow()-10.0)/300.0
+            location2 = (GetBloodLimit.getRandomDinnerTop()-10.0)/300.0
+        }
+        
+        // 设置渐变层起点和终点
+        layer.startPoint = CGPoint(x: 0, y: 0.5)
+        layer.endPoint = CGPoint(x: 1, y: 0.5)
+        layer.locations = [location1,location2,1] as [NSNumber]
+        let image = imageGradient(gradientColors: [first,second,third])
+        XTSlider.setMinimumTrackImage(image, for: .normal)
+    }
+    
+    
+    func imageGradient(gradientColors:[UIColor], size:CGSize = CGSize(width: 10, height: 10) ) -> UIImage
+    {
+        UIGraphicsBeginImageContextWithOptions(size, true, 0)
+        let context = UIGraphicsGetCurrentContext()!
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let colors = gradientColors.map {(color: UIColor) -> AnyObject! in return color.cgColor as AnyObject! } as NSArray
+        let gradient = CGGradient(colorsSpace: colorSpace, colors: colors, locations: nil)
+        // 第二个参数是起始位置，第三个参数是终止位置
+        context.drawLinearGradient(gradient!, start: CGPoint(x: 0, y: 0), end: CGPoint(x: size.width, y: 0), options: CGGradientDrawingOptions(rawValue: 0))
+        let image = UIImage.init(cgImage:(UIGraphicsGetImageFromCurrentImageContext()?.cgImage!)!)
+        UIGraphicsEndImageContext()
+        return image
     }
     
 }

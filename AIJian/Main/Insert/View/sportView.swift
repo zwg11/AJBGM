@@ -10,6 +10,7 @@ import UIKit
 
 class sportView: UIView ,UITextFieldDelegate{
 
+    var intensityLevel = 1
     //***************************运动*************************
     // 运动图标
     private lazy var sportImageView:UIImageView = {
@@ -65,14 +66,68 @@ class sportView: UIView ,UITextFieldDelegate{
         return label
     }()
     
-    // 运动强度选择按钮
-    lazy var exerIntensityButton:UIButton = {
+//    // 运动强度选择按钮
+//    lazy var exerIntensityButton:UIButton = {
+//        let button = UIButton()
+//        button.NorStyle(title: "(未指定)")
+//        return button
+//    }()
+    private lazy var intensityLight:UIButton = {
         let button = UIButton()
-        button.NorStyle(title: "(未指定)")
+        button.setTitle("Light", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+
+        button.tag = 0
+        button.setDeselected()
+        button.addTarget(self, action: #selector(intensityChange(_:)), for: .touchUpInside)
         return button
     }()
+    
+    private lazy var intensityMedium:UIButton = {
+        let button = UIButton()
+        button.setTitle("Medium", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+
+        button.tag = 1
+        button.setDeselected()
+        button.addTarget(self, action: #selector(intensityChange(_:)), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var intensityHard:UIButton = {
+        let button = UIButton()
+        button.setTitle("Hard", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+
+        button.tag = 2
+        button.setDeselected()
+        button.addTarget(self, action: #selector(intensityChange(_:)), for: .touchUpInside)
+        return button
+    }()
+    
+    
+    // 将选中的按钮高亮，其他按钮不高亮
+    @objc func intensityChange(_ sender:UIButton){
+        let buttons = [intensityHard,intensityMedium,intensityLight]
+        for i in buttons{
+            i.setSelected()
+        }
+        sender.setDeselected()
+        intensityLevel = sender.tag
+    }
+    
+    func initIntensity(_ intensity:Int){
+        if intensity == 0 {
+            intensityChange(intensityLight)
+        }else if intensity == 1 {
+            intensityChange(intensityMedium)
+        }else{
+            intensityChange(intensityHard)
+        }
+    }
 
     func setupUI(){
+        initIntensity(intensityLevel)
         // 设置视图背景颜色和边框
         self.layer.borderColor = UIColor.gray.cgColor
         self.layer.borderWidth = 1
@@ -97,9 +152,9 @@ class sportView: UIView ,UITextFieldDelegate{
         // 运动选择按钮
         self.addSubview(sportButton)
         sportButton.snp.makeConstraints{(make) in
-            make.left.equalTo(sportLabel.snp.right).offset(AJScreenWidth/40)
+            make.left.equalToSuperview().offset(AJScreenWidth/40)
             make.top.equalTo(sportLabel.snp.bottom).offset(AJScreenWidth/40)
-            make.width.equalTo(AJScreenWidth/2)
+            make.width.equalTo(AJScreenWidth/5*3)
             make.height.equalTo(AJScreenWidth/12)
         }
         
@@ -117,9 +172,9 @@ class sportView: UIView ,UITextFieldDelegate{
         self.addSubview(timeOfDurationTextfield)
         timeOfDurationTextfield.delegate = self
         timeOfDurationTextfield.snp.makeConstraints{(make) in
-            make.left.equalTo(timeOfDurationLabel.snp.right).offset(AJScreenWidth/40)
-            make.bottom.equalTo(timeOfDurationLabel.snp.bottom)
-            make.width.equalTo(AJScreenWidth/5*2)
+            make.left.equalTo(timeOfDurationLabel)
+            make.top.equalTo(timeOfDurationLabel.snp.bottom).offset(AJScreenWidth/40)
+            make.width.equalTo(AJScreenWidth/5)
             make.height.equalTo(AJScreenWidth/12)
         }
         
@@ -127,7 +182,7 @@ class sportView: UIView ,UITextFieldDelegate{
         self.addSubview(timeOfDurationUnitLabel)
         timeOfDurationUnitLabel.snp.makeConstraints{(make) in
             make.left.equalTo(timeOfDurationTextfield.snp.right).offset(AJScreenWidth/40)
-            make.bottom.equalTo(timeOfDurationTextfield.snp.bottom)
+            make.bottom.top.equalTo(timeOfDurationTextfield)
             make.height.equalTo(timeOfDurationTextfield.snp.height)
         }
         
@@ -135,18 +190,41 @@ class sportView: UIView ,UITextFieldDelegate{
         // 运动强度label布局设置
         self.addSubview(exerIntensityLabel)
         exerIntensityLabel.snp.makeConstraints{(make) in
-            make.right.equalTo(timeOfDurationLabel)
+            make.left.equalTo(timeOfDurationLabel)
             make.top.equalTo(timeOfDurationTextfield.snp.bottom).offset(AJScreenWidth/40)
-            make.height.equalTo(AJScreenWidth/12)
+            make.height.equalTo(AJScreenWidth/15)
         }
         
         // 运动强度选择按钮布局
-        self.addSubview(exerIntensityButton)
-
-        exerIntensityButton.snp.makeConstraints{(make) in
-            make.left.right.equalTo(sportButton)
-            make.bottom.equalTo(exerIntensityLabel.snp.bottom)
-            make.height.equalTo(AJScreenWidth/12)
+//        self.addSubview(exerIntensityButton)
+//
+//        exerIntensityButton.snp.makeConstraints{(make) in
+//            make.left.right.equalTo(sportButton)
+//            make.bottom.equalTo(exerIntensityLabel.snp.top).offset(AJScreenWidth/40)
+//            make.height.equalTo(AJScreenWidth/12)
+//        }
+        
+        self.addSubview(intensityLight)
+        self.addSubview(intensityMedium)
+        self.addSubview(intensityHard)
+        
+        intensityLight.snp.makeConstraints{(make) in
+            make.left.equalTo(exerIntensityLabel)
+            make.height.equalTo(AJScreenWidth/15)
+            make.width.equalTo(AJScreenWidth/5)
+            make.top.equalTo(exerIntensityLabel.snp.bottom).offset(AJScreenWidth/40)
+        }
+        
+        intensityMedium.snp.makeConstraints{(make) in
+            make.left.equalTo(intensityLight.snp.right).offset(AJScreenWidth/30)
+            make.width.equalTo(AJScreenWidth/5)
+            make.top.bottom.equalTo(intensityLight)
+        }
+        
+        intensityHard.snp.makeConstraints{(make) in
+            make.left.equalTo(intensityMedium.snp.right).offset(AJScreenWidth/30)
+            make.width.equalTo(AJScreenWidth/5)
+            make.top.bottom.equalTo(intensityLight)
         }
     }
     

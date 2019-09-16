@@ -19,13 +19,13 @@ class InputView: UIView,UIScrollViewDelegate {
         case date       // 日期
         case time       // 时间
         
-        case occurTime  // 事件
-        
-        case portions    //进餐量
+//        case occurTime  // 事件
+//
+//        case portions    //进餐量
         case insulin    // 胰岛素
         
         case sport      // 运动
-        case exerintensity     // 运动强度
+//        case exerintensity     // 运动强度
     }
     
     private var style = pickerStyle.date
@@ -59,7 +59,7 @@ class InputView: UIView,UIScrollViewDelegate {
      lazy var glucose:glucoseView = {
         let view = glucoseView()
         view.setupUI()
-        view.eventButton.addTarget(self, action: #selector(chooseOccurTime), for: .touchUpInside)
+//        view.eventButton.addTarget(self, action: #selector(chooseOccurTime), for: .touchUpInside)
         return view
     }()
     
@@ -67,7 +67,7 @@ class InputView: UIView,UIScrollViewDelegate {
      lazy var porAndIns:portionAndInsulinView = {
         let view = portionAndInsulinView()
         view.setupUI()
-        view.portionButton.addTarget(self, action: #selector(choosePortion), for: .touchUpInside)
+//        view.portionButton.addTarget(self, action: #selector(choosePortion), for: .touchUpInside)
         view.insulinButton.addTarget(self, action: #selector(chooseInsulin), for: .touchUpInside)
         return view
     }()
@@ -84,7 +84,7 @@ class InputView: UIView,UIScrollViewDelegate {
         let view = sportView()
         view.setupUI()
         view.sportButton.addTarget(self, action: #selector(chooseSport), for: .touchUpInside)
-        view.exerIntensityButton.addTarget(self, action: #selector(chooseExerIntensity), for: .touchUpInside)
+//        view.exerIntensityButton.addTarget(self, action: #selector(chooseExerIntensity), for: .touchUpInside)
         return view
     }()
     
@@ -136,7 +136,7 @@ class InputView: UIView,UIScrollViewDelegate {
         
         
         // 设置滚动视图属性
-        scrollView.contentSize = CGSize(width: AJScreenWidth, height: AJScreenWidth/15*43)
+        scrollView.contentSize = CGSize(width: AJScreenWidth, height: AJScreenWidth*3+200)
         scrollView.showsVerticalScrollIndicator = true
         scrollView.backgroundColor = UIColor.white
         
@@ -174,7 +174,7 @@ class InputView: UIView,UIScrollViewDelegate {
             //make.left.right.equalToSuperview()
             make.left.right.equalTo(self)
             make.top.equalTo(dateAndTime.snp.bottom)
-            make.height.equalTo(AJScreenWidth/2+AJScreenWidth/20)
+            make.height.equalTo(AJScreenWidth/2)
         }
         
         // porAndIns 视图布局
@@ -192,7 +192,7 @@ class InputView: UIView,UIScrollViewDelegate {
             //make.left.right.equalToSuperview()
             make.left.right.equalTo(self)
             make.top.equalTo(porAndIns.snp.bottom)
-            make.height.equalTo(AJScreenWidth/5*4+AJScreenWidth/20)
+            make.height.equalTo(AJScreenWidth/5*3)
         }
         
         // sport 视图布局
@@ -200,7 +200,7 @@ class InputView: UIView,UIScrollViewDelegate {
         sport.snp.makeConstraints{(make) in
             make.left.right.equalTo(self)
             make.top.equalTo(bodyInfo.snp.bottom)
-            make.height.equalTo(AJScreenWidth/2 - AJScreenWidth/40)
+            make.height.equalTo(AJScreenWidth/2 + AJScreenWidth/5)
         }
         
         // remark 视图布局
@@ -253,23 +253,23 @@ class InputView: UIView,UIScrollViewDelegate {
         UIView.animate(withDuration: 0.5, animations: appear)
     }
     
-    // 选择 事件 按钮被点击时的动作
-    @objc func chooseOccurTime(){
-        print("choose occurTime button clicked,appear done.")
-        style = .occurTime
-        // 添加背景按钮
-        self.addSubview(backButton)
-        UIView.animate(withDuration: 0.5, animations: appear)
-    }
+//    // 选择 事件 按钮被点击时的动作
+//    @objc func chooseOccurTime(){
+//        print("choose occurTime button clicked,appear done.")
+//        style = .occurTime
+//        // 添加背景按钮
+//        self.addSubview(backButton)
+//        UIView.animate(withDuration: 0.5, animations: appear)
+//    }
     
     // 选择 进餐量 按钮被点击时的动作
-    @objc func choosePortion(){
-        print("choose occurTime button clicked,appear done.")
-        style = .portions
-        // 添加背景按钮
-        self.addSubview(backButton)
-        UIView.animate(withDuration: 0.5, animations: appear)
-    }
+//    @objc func choosePortion(){
+//        print("choose occurTime button clicked,appear done.")
+//        style = .portions
+//        // 添加背景按钮
+//        self.addSubview(backButton)
+//        UIView.animate(withDuration: 0.5, animations: appear)
+//    }
     
     // 选择 胰岛素 按钮被点击时的动作
     @objc func chooseInsulin(){
@@ -289,15 +289,15 @@ class InputView: UIView,UIScrollViewDelegate {
         UIView.animate(withDuration: 0.5, animations: appear)
     }
     
-    // 选择 运动强度 按钮被点击时的动作
-    @objc func chooseExerIntensity(){
-        print("choose sport button clicked,appear done.")
-        style = .exerintensity
-        // 添加背景按钮
-        self.addSubview(backButton)
-        UIView.animate(withDuration: 0.5, animations: appear)
-    }
-    
+//    // 选择 运动强度 按钮被点击时的动作
+//    @objc func chooseExerIntensity(){
+//        print("choose sport button clicked,appear done.")
+//        style = .exerintensity
+//        // 添加背景按钮
+//        self.addSubview(backButton)
+//        UIView.animate(withDuration: 0.5, animations: appear)
+//    }
+//
     
     
     func dismiss(){
@@ -336,12 +336,12 @@ class InputView: UIView,UIScrollViewDelegate {
         case .time:
             picker.bringSubviewToFront(picker.timePicker)
             
-        case .occurTime:
-            picker.bringSubviewToFront(picker.eventPicker)
-            
-        case .portions:
-            picker.bringSubviewToFront(picker.portionPicker)
-            animatePickerViewAppear(button: porAndIns.portionButton)
+//        case .occurTime:
+//            picker.bringSubviewToFront(picker.eventPicker)
+//
+//        case .portions:
+//            picker.bringSubviewToFront(picker.portionPicker)
+//            animatePickerViewAppear(button: porAndIns.portionButton)
         case .insulin:
             picker.bringSubviewToFront(picker.insulinPicker)
             animatePickerViewAppear(button: porAndIns.insulinButton)
@@ -353,9 +353,9 @@ class InputView: UIView,UIScrollViewDelegate {
 //            picker.bringSubviewToFront(picker.exerIntensyPicker)
 //            animatePickerViewAppear(button: sport.exerIntensityButton)
             
-        default:
-            picker.bringSubviewToFront(picker.exerIntensyPicker)
-            animatePickerViewAppear(button: sport.exerIntensityButton)
+//        default:
+//            picker.bringSubviewToFront(picker.exerIntensyPicker)
+//            animatePickerViewAppear(button: sport.exerIntensityButton)
             
         }
         //picker.bringSubviewToFront(picker.timePicker)
@@ -401,12 +401,12 @@ class InputView: UIView,UIScrollViewDelegate {
             let time = dateFormatter.string(from: picker.timePicker.date)
             dateAndTime.timeButton.setTitle(time, for: .normal)
             timeString = time  //当用户选择时间时，进行赋值
-        //事件
-        case .occurTime:
-            glucose.eventButton.setTitle(picker.eventStr ?? "Nothing", for: .normal)
-        //进餐量
-        case .portions:
-            porAndIns.portionButton.setTitle(picker.portionStr ?? "No Meal", for: .normal)
+//        //事件
+//        case .occurTime:
+//            glucose.eventButton.setTitle(picker.eventStr ?? "Nothing", for: .normal)
+//        //进餐量
+//        case .portions:
+//            porAndIns.portionButton.setTitle(picker.portionStr ?? "No Meal", for: .normal)
         //胰岛素
         case .insulin:
             porAndIns.insulinButton.setTitle(picker.insulinStr ?? "Nothing", for: .normal)
@@ -416,8 +416,8 @@ class InputView: UIView,UIScrollViewDelegate {
             sport.sportButton.setTitle(picker.sportStr ?? "Nothing", for: .normal)
 //        case .exerintensity:
 //            sport.exerIntensityButton.setTitle(picker.exerItensityStr, for: .normal)
-        default:
-            sport.exerIntensityButton.setTitle(picker.exerItensityStr ?? "Nothing" , for: .normal)
+//        default:
+//            sport.exerIntensityButton.setTitle(picker.exerItensityStr ?? "Nothing" , for: .normal)
             
         }
         UIView.animate(withDuration: 0.5, animations: dismiss)
@@ -504,23 +504,23 @@ class InputView: UIView,UIScrollViewDelegate {
     }
     
     //获取事件
-    func getEventValue()->String{
-        let str = glucose.eventButton.currentTitle!
+    func getEventValue()->Int{
+        let str = glucose.eventNum
         return str
     }
     //设置事件
-    func setEventValue(_ str:String){
-        glucose.eventButton.setTitle(str, for: .normal)
+    func setEventValue(_ str:Int){
+        glucose.initEvent(event: str)
     }
-    /************************************************/
+//    /************************************************/
     //获取进餐量
-    func getPorValue()->String{
-        let str = porAndIns.portionButton.currentTitle!
+    func getPorValue()->Int{
+        let str = porAndIns.PortionNum
         return str
     }
     //设置进餐量
-    func setPorValue(_ str:String){
-        porAndIns.portionButton.setTitle(str, for: .normal)
+    func setPorValue(_ str:Int){
+        porAndIns.initPortion(portion: str)
     }
     
     //获取胰岛素类型
@@ -560,15 +560,15 @@ class InputView: UIView,UIScrollViewDelegate {
     func setWeightValue(_ str:String){
         bodyInfo.weightTextfield.text! = str
     }
-    //获取身高值
-    func getHeightValue()->String{
-        let str = bodyInfo.heightTextfield.text!
-        return str
-    }
-    //设置身高值
-    func setHeightValue(_ str:String){
-        bodyInfo.heightTextfield.text! = str
-    }
+//    //获取身高值
+//    func getHeightValue()->String{
+//        let str = bodyInfo.heightTextfield.text!
+//        return str
+//    }
+//    //设置身高值
+//    func setHeightValue(_ str:String){
+//        bodyInfo.heightTextfield.text! = str
+//    }
     
     //药物获取写到的alertViewController里面
     
@@ -577,41 +577,42 @@ class InputView: UIView,UIScrollViewDelegate {
         let a = sport.sportButton.currentTitle!
         return a
     }
+    //设置运动类型
+    func setSportType(_ type:String){
+        sport.sportButton.setTitle(type, for: .normal)
+    }
+    
     //得到运动时间
     func getSportTime()->String{
         let a = sport.timeOfDurationTextfield.text!
         return a
     }
-    //得到运动强度
-    func getSportStrength()->String{
-        let a = sport.exerIntensityButton.currentTitle!
-        return a
-    }
-    
-    //设置运动类型
-    func setSportType(_ type:String){
-        sport.sportButton.setTitle(type, for: .normal)
-        
-    }
     //设置运动时间
     func setSportTime(_ time:String){
         sport.timeOfDurationTextfield.text = time
     }
+
+    //得到运动强度
+    func getSportStrength()->Int{
+        let a = sport.intensityLevel
+        return a
+    }
     //设置运动强度
-    func setSportStrength(_ strength:String){
-        sport.exerIntensityButton.setTitle(strength, for: .normal)
+    func setSportStrength(_ strength:Int){
+        sport.initIntensity(strength)
         
     }
     
-    func getRemark(){
-        
+    // 得到备注
+    func getRemark()->String{
+        let text = remark.remarkTextField.text ?? ""
+        return text
     }
-    
-    
-    
-    
-    
-    
+    // 设置备注
+    func setRemark(text:String){
+        remark.remarkTextField.text = text
+    }
+
     /************************************************/
     //获取收缩压
     func getSysValue()->String{

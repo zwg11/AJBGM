@@ -25,17 +25,11 @@ class remarkView: UIView {
     }()
     
     // 备注选择按钮
-    lazy var remarkChooseButton:UIButton = {
-        let button = UIButton()
-        button.NorStyle(title: "无")
-        return button
-    }()
-    
-    // 备注编辑按钮
-    lazy var remarkEditButton:UIButton = {
-        let button = UIButton()
-        button.NorStyle(title: "编辑")
-        return button
+    lazy var remarkTextField:UITextField = {
+        let textField = UITextField()
+        textField.placeholder = ""
+        textField.borderStyle = .line
+        return textField
     }()
     
     
@@ -57,23 +51,15 @@ class remarkView: UIView {
             make.height.equalTo(remarkImageView.snp.height)
         }
         
-        // 备注选择按钮布局
-        self.addSubview(remarkChooseButton)
-        remarkChooseButton.snp.makeConstraints{(make) in
-            make.centerX.equalToSuperview()
+        // 备注文本框布局
+        self.addSubview(remarkTextField)
+        remarkTextField.snp.makeConstraints{(make) in
+            make.left.equalTo(AJScreenWidth/20)
+            make.right.equalTo(-AJScreenWidth/20)
             make.top.equalTo(remarkLabel.snp.bottom).offset(AJScreenWidth/40)
-            make.width.equalTo(AJScreenWidth/5*3)
             make.height.equalTo(AJScreenWidth/12)
         }
         
-        // 备注添加按钮布局
-        self.addSubview(remarkEditButton)
-        remarkEditButton.snp.makeConstraints{(make) in
-            make.left.equalTo(remarkChooseButton.snp.right).offset(10)
-            make.top.equalTo(remarkChooseButton)
-            make.width.equalTo(AJScreenWidth/8)
-            make.height.equalTo(AJScreenWidth/12)
-        }
     }
 
 }

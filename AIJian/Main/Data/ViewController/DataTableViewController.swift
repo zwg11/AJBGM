@@ -53,12 +53,19 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
     var mainScrollView:UIScrollView = UIScrollView()
     // 只含有 数据tableView 的滚动视图
     var scroll:UIScrollView = UIScrollView()
+    // 刷新控件
+    var refreshControl = UIRefreshControl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.automaticallyAdjustsScrollViewInsets = false
+        // 刷新控件设置
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        refreshControl.attributedTitle = NSAttributedString(string: "松开后自动刷新")
+        mainScrollView.addSubview(refreshControl)
 
         mainScrollView.backgroundColor = kRGBColor(156, 181, 234, 1)
-        
+        mainScrollView.alwaysBounceVertical = true
         self.view.addSubview(mainScrollView)
         mainScrollView.snp.makeConstraints{(make) in
             make.edges.equalToSuperview()
@@ -74,6 +81,14 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         
         NotificationCenter.default.addObserver(self, selector: #selector(test), name: NSNotification.Name(rawValue: "reloadTable"), object: nil)
         
+    }
+    
+    @objc func refreshData(){
+        // 重新加载列表数据
+        DATATableView.reloadData()
+        DATETableView.reloadData()
+        // 结束刷新
+        refreshControl.endRefreshing()
     }
     
     @objc func test(){
@@ -166,6 +181,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         self.present(alert, animated: true, completion: nil)
         
     }
+    
     // 将当前单元格的内容传入手动输入界面
     func EditData(_ section:Int,_ row:Int){
         let x = sortedData[section][row]
@@ -188,13 +204,13 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
                 insert.input.setGlucoseValue("\(x.bloodGlucoseMg!)")
             }
             // 设置滑块的位置
-            insert.input.glucose.XTSlider.value = Float(value)
+            insert.input.glucose.XTSlider.setValue(Float(value), animated: false)
         }
 
         // 检测时间段
-        insert.input.setEventValue(EvenChang.numToeven(Int(x.detectionTime ?? 0)))
+        insert.input.setEventValue(Int(x.detectionTime!))
         // 进餐量
-        insert.input.setPorValue(EatNumChange.numToeat(Int(x.eatNum ?? 0)))
+        insert.input.setPorValue(Int(x.eatNum!))
         // 胰岛素量
         if let insNum = x.insulinNum{
             insert.input.setInsNumValue("\(insNum)")
@@ -211,10 +227,10 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
             }
         }
         
-        // 身高
-        if let height = x.height{
-            insert.input.setHeightValue("\(x.height)")
-        }
+//        // 身高
+//        if let height = x.height{
+//            insert.input.setHeightValue("\(height)")
+//        }
         
         insert.input.setSportType(x.sportType ?? "Nothing")
         // 血压
@@ -242,8 +258,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
             insert.input.setSportTime("\(sportTime)")
         }
         // 运动强度
-        let strength = ["无","低","中","高"]
-        insert.input.setSportStrength(strength[Int(x.sportStrength ?? 0)])
+        insert.input.setSportStrength(Int(x.sportStrength!))
         
     }
     
@@ -292,7 +307,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         
         
         // 设置数据滚动视图内容的大小，该滚动视图只允许横向滚动
-        scroll.contentSize = CGSize(width: 720, height: scHeight)
+        scroll.contentSize = CGSize(width: 640+200, height: scHeight)
         scroll.showsHorizontalScrollIndicator = true
         scroll.indicatorStyle = .black
         scroll.bounces = false
@@ -312,7 +327,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         
         // create a tableView
         // **********其宽度要根据计算得出，高度也是根据数据量计算得出************
-        DATATableView = UITableView(frame: CGRect(x: 0, y: 0, width: 640, height: scHeight), style: .grouped)
+        DATATableView = UITableView(frame: CGRect(x: 0, y: 0, width: 640 + 200, height: scHeight), style: .grouped)
         DATATableView.dataSource = self
         DATATableView.delegate = self
         DATATableView.isScrollEnabled = false

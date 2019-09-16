@@ -10,35 +10,23 @@ import UIKit
 import SnapKit
 
 class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
+
+   // private var event:NSArray = NSArray()
     
-    // 使用以下步骤获取plist文件的数据
-    //    let path = Bundle.main.path(forResource: "inputChoose", ofType: "plist")
-    //    let data:NSDictionary = NSDictionary.init(contentsOfFile: path!)!
-    //
-    //    var sport:NSArray = NSArray()
-    //    sport = data["sport"] as! NSArray
-    //
-    //    print(sport[0])
-    
-    // 记录不同的选择器的内容的数组
-    
-   
-    private var event:NSArray = NSArray()
-    
-    private var portion:NSArray = NSArray()
+   // private var portion:NSArray = NSArray()
     private var insulin:NSArray = NSArray()
     
     private var sport:NSArray = NSArray()
-    private var exerIntensity:NSArray = NSArray()
+   // private var exerIntensity:NSArray = NSArray()
     
 
     
     // 记录不同选择器选择的内容
-    var eventStr:String?
-    var portionStr:String?
+//    var eventStr:String?
+//    var portionStr:String?
     var insulinStr:String?
     var sportStr:String?
-    var exerItensityStr:String?
+    //var exerItensityStr:String?
 
     
     // 返回列数
@@ -49,21 +37,21 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch pickerView {
            
-         //事件
-        case eventPicker:
-            return event.count
-        //进餐量
-        case portionPicker:
-            return portion.count
+//         //事件
+//        case eventPicker:
+//            return event.count
+//        //进餐量
+//        case portionPicker:
+//            return portion.count
         //胰岛素
         case insulinPicker:
             return insulin.count
         //运动
         case sportPicker:
             return sport.count
-        //运动强度
-        case exerIntensyPicker:
-            return exerIntensity.count
+//        //运动强度
+//        case exerIntensyPicker:
+//            return exerIntensity.count
         default:
             return 0
 
@@ -76,18 +64,18 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         // 根据选择器的不同设置内容
         switch pickerView {
             
-        case eventPicker:
-            return event[row] as? String
-            
-        case portionPicker:
-            return portion[row] as? String
+//        case eventPicker:
+//            return event[row] as? String
+//
+//        case portionPicker:
+//            return portion[row] as? String
         case insulinPicker:
             return insulin[row] as? String
             
         case sportPicker:
             return sport[row] as? String
-        case exerIntensyPicker:
-            return exerIntensity[row] as? String
+//        case exerIntensyPicker:
+//            return exerIntensity[row] as? String
 
         default:
             return "error"
@@ -99,12 +87,12 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         //选择器停止转动时调用
         switch pickerView {
         //事件选择器
-        case eventPicker:
-            eventStr = event[eventPicker.selectedRow(inComponent: 0)] as! String
-            print("事件选择器",eventStr)
-        //进餐量选择器
-        case portionPicker:
-            portionStr = portion[portionPicker.selectedRow(inComponent: 0)] as! String
+//        case eventPicker:
+//            eventStr = event[eventPicker.selectedRow(inComponent: 0)] as! String
+//            print("事件选择器",eventStr)
+//        //进餐量选择器
+//        case portionPicker:
+//            portionStr = portion[portionPicker.selectedRow(inComponent: 0)] as! String
         //胰岛素选择器
         case insulinPicker:
             insulinStr = insulin[insulinPicker.selectedRow(inComponent: 0)] as! String
@@ -112,8 +100,8 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         case sportPicker:
             sportStr = sport[sportPicker.selectedRow(inComponent: 0)] as! String
         //运动强度选择器（低，中，高）
-        case exerIntensyPicker:
-            exerItensityStr = exerIntensity[exerIntensyPicker.selectedRow(inComponent: 0)] as! String
+//        case exerIntensyPicker:
+//            exerItensityStr = exerIntensity[exerIntensyPicker.selectedRow(inComponent: 0)] as! String
         //事件选择器
         default:
             print("error in picker didSelectRow.")
@@ -172,23 +160,23 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         
     }()
     
-    // 创建 事件 选择器
-    lazy var eventPicker:UIPickerView = {
-        let pickerView = UIPickerView()
-        pickerView.dataSource = self
-        pickerView.delegate = self
-        initPickerView(pickerView: pickerView)
-        return pickerView
-    }()
+//    // 创建 事件 选择器
+//    lazy var eventPicker:UIPickerView = {
+//        let pickerView = UIPickerView()
+//        pickerView.dataSource = self
+//        pickerView.delegate = self
+//        initPickerView(pickerView: pickerView)
+//        return pickerView
+//    }()
     
-    // 创建 进餐量 选择器
-    lazy var portionPicker:UIPickerView = {
-        let pickerView = UIPickerView()
-        pickerView.dataSource = self
-        pickerView.delegate = self
-        initPickerView(pickerView: pickerView)
-        return pickerView
-    }()
+//    // 创建 进餐量 选择器
+//    lazy var portionPicker:UIPickerView = {
+//        let pickerView = UIPickerView()
+//        pickerView.dataSource = self
+//        pickerView.delegate = self
+//        initPickerView(pickerView: pickerView)
+//        return pickerView
+//    }()
     
     // 创建 胰岛素 选择器
     lazy var insulinPicker:UIPickerView = {
@@ -208,14 +196,14 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         return pickerView
     }()
     
-    // 创建 运动强度 选择器
-    lazy var exerIntensyPicker:UIPickerView = {
-        let pickerView = UIPickerView()
-        pickerView.dataSource = self
-        pickerView.delegate = self
-        initPickerView(pickerView: pickerView)
-        return pickerView
-    }()
+//    // 创建 运动强度 选择器
+//    lazy var exerIntensyPicker:UIPickerView = {
+//        let pickerView = UIPickerView()
+//        pickerView.dataSource = self
+//        pickerView.delegate = self
+//        initPickerView(pickerView: pickerView)
+//        return pickerView
+//    }()
     
     
     // 设置选择器统一外观
@@ -234,14 +222,14 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         let path = PlistSetting.getFilePath(File: "inputChoose.plist")
         let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
         
-        // 设置选择器的内容
-        event = data["event"] as! NSArray
-        
-        portion = data["portion"] as! NSArray
+//        // 设置选择器的内容
+//        event = data["event"] as! NSArray
+//
+//        portion = data["portion"] as! NSArray
         insulin = data["insulin"] as! NSArray
         
         sport = data["sport"] as! NSArray
-        exerIntensity = data["exerIntensity"] as! NSArray
+//        exerIntensity = data["exerIntensity"] as! NSArray
         
 
         
@@ -286,17 +274,17 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
             //make.height.equalTo(self.frame.size.height/3 - UIScreen.main.bounds.height/15)
         }
         
-        // 事件 选择器布局
-        self.addSubview(eventPicker)
-        self.eventPicker.snp.makeConstraints{(make) in
-            make.edges.equalTo(datePicker)
-        }
-        
-        // 进餐量 选择器布局
-        self.addSubview(portionPicker)
-        self.portionPicker.snp.makeConstraints{(make) in
-            make.edges.equalTo(datePicker)
-        }
+//        // 事件 选择器布局
+//        self.addSubview(eventPicker)
+//        self.eventPicker.snp.makeConstraints{(make) in
+//            make.edges.equalTo(datePicker)
+//        }
+//
+//        // 进餐量 选择器布局
+//        self.addSubview(portionPicker)
+//        self.portionPicker.snp.makeConstraints{(make) in
+//            make.edges.equalTo(datePicker)
+//        }
         
         // 胰岛素 选择器布局
         self.addSubview(insulinPicker)
@@ -310,11 +298,11 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
             make.edges.equalTo(datePicker)
         }
         
-        // 运动强度 选择器布局
-        self.addSubview(exerIntensyPicker)
-        self.exerIntensyPicker.snp.makeConstraints{(make) in
-            make.edges.equalTo(datePicker)
-        }
+//        // 运动强度 选择器布局
+//        self.addSubview(exerIntensyPicker)
+//        self.exerIntensyPicker.snp.makeConstraints{(make) in
+//            make.edges.equalTo(datePicker)
+//        }
         
     }
     

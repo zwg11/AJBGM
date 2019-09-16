@@ -15,11 +15,12 @@ class dataTableViewCell: UITableViewCell {
     var appetiteLabel:UILabel = UILabel()
     var isulinLabel:UILabel = UILabel()
     
-    var heightLabel:UILabel = UILabel()
+//    var heightLabel:UILabel = UILabel()
     var weightLabel:UILabel = UILabel()
     var bloodPressureLabel:UILabel = UILabel()
     var medicineLabel: UILabel = UILabel()
     var sportLabel:UILabel = UILabel()
+    var remarkLabel:UILabel = UILabel()
     
     
     
@@ -52,7 +53,7 @@ class dataTableViewCell: UITableViewCell {
             isulinLabel.text = "-"
         }
         // 身高
-        heightLabel.text = (sortedData[secion][row].height != nil) ? String(sortedData[secion][row].height!):"-"
+//        heightLabel.text = (sortedData[secion][row].height != nil) ? String(sortedData[secion][row].height!):"-"
         // 体重
         weightLabel.text = (sortedData[secion][row].weightKg != nil) ? String(sortedData[secion][row].weightKg!):"-"
         // 血压
@@ -76,8 +77,14 @@ class dataTableViewCell: UITableViewCell {
             sportLabel.text = "-"
         }
         
+        if let remarkText = sortedData[secion][row].remark{
+            remarkLabel.text = remarkText
+        }else{
+            remarkLabel.text = "-"
+        }
         
-        let labels:[UILabel] = [glucoseLabel,eventLabel,appetiteLabel,isulinLabel,weightLabel,heightLabel,bloodPressureLabel,medicineLabel,sportLabel]
+        
+        let labels:[UILabel] = [glucoseLabel,eventLabel,appetiteLabel,isulinLabel,weightLabel,bloodPressureLabel,medicineLabel,sportLabel,remarkLabel]
         
         var offsetX:CGFloat = 0
         for i in labels{

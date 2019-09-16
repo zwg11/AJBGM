@@ -10,6 +10,7 @@ import UIKit
 
 class portionAndInsulinView: UIView {
 
+    var PortionNum:Int = 2
     //**********************进餐量*********************
     // 进餐量图标
     private lazy var portionImageView:UIImageView = {
@@ -24,12 +25,77 @@ class portionAndInsulinView: UIView {
         return label
     }()
     
-    // 进餐量选择按钮
-    lazy var portionButton:UIButton = {
+//    // 进餐量选择按钮
+//    lazy var portionButton:UIButton = {
+//        let button = UIButton()
+//        button.NorStyle(title: "(未指定)")
+//        return button
+//    }()
+    private lazy var portionNoButton:UIButton = {
         let button = UIButton()
-        button.NorStyle(title: "(未指定)")
+        button.setTitle("No Meal", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        button.setDeselected()
+        button.tag = 0
+        button.addTarget(self, action: #selector(intensityChange(_:)), for: .touchUpInside)
         return button
     }()
+    
+    private lazy var portionMuchButton:UIButton = {
+        let button = UIButton()
+        button.setTitle("Too Much", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        button.setDeselected()
+        button.tag = 1
+        button.addTarget(self, action: #selector(intensityChange(_:)), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var portionNormalButton:UIButton = {
+        let button = UIButton()
+        button.setTitle("Normal", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        button.setDeselected()
+        button.tag = 2
+        button.addTarget(self, action: #selector(intensityChange(_:)), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var portionLittleButton:UIButton = {
+        let button = UIButton()
+        button.setTitle("Little", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        button.setDeselected()
+        button.tag = 3
+        button.addTarget(self, action: #selector(intensityChange(_:)), for: .touchUpInside)
+        return button
+    }()
+    
+    // 将选中的按钮高亮，其他按钮不高亮
+    @objc func intensityChange(_ sender:UIButton){
+        let buttons = [portionNoButton,portionMuchButton,portionNormalButton,portionLittleButton]
+        for i in buttons{
+            i.setDeselected()
+        }
+        sender.setSelected()
+        PortionNum = sender.tag
+    }
+    
+    // 初始化进餐量按钮的选择
+    func initPortion(portion:Int){
+        switch portion {
+        case 0:
+            intensityChange(portionNoButton)
+        case 1:
+            intensityChange(portionMuchButton)
+        case 2:
+            intensityChange(portionNormalButton)
+        case 3:
+            intensityChange(portionLittleButton)
+        default:
+            intensityChange(portionLittleButton)
+        }
+    }
     
     // **********************胰岛素***********************
     // 胰岛素图标
@@ -71,8 +137,11 @@ class portionAndInsulinView: UIView {
         
         return label
     }()
+    
+    
 
     func setupUI(){
+        initPortion(portion: PortionNum)
         // 设置视图背景颜色和边框
         self.layer.borderColor = UIColor.blue.cgColor
         self.layer.borderWidth = 1
@@ -94,13 +163,43 @@ class portionAndInsulinView: UIView {
             make.height.equalTo(portionImageView.snp.height)
         }
         
-        // 进餐量选择按钮
-        self.addSubview(portionButton)
-        portionButton.snp.makeConstraints{(make) in
-            make.centerX.equalToSuperview()
+//        // 进餐量选择按钮
+//        self.addSubview(portionButton)
+//        portionButton.snp.makeConstraints{(make) in
+//            make.centerX.equalToSuperview()
+//            make.top.equalTo(portionLabel.snp.bottom).offset(AJScreenWidth/40)
+//            make.width.equalTo(AJScreenWidth/2)
+//            make.height.equalTo(AJScreenWidth/12)
+//        }
+        // 进餐量选择按钮，共4个
+        self.addSubview(portionNoButton)
+        self.addSubview(portionMuchButton)
+        self.addSubview(portionNormalButton)
+        self.addSubview(portionLittleButton)
+        
+        portionNoButton.snp.makeConstraints{(make) in
+            make.left.equalTo(portionImageView)
+            make.width.equalTo(AJScreenWidth/5)
+            make.height.equalTo(AJScreenWidth/15)
             make.top.equalTo(portionLabel.snp.bottom).offset(AJScreenWidth/40)
-            make.width.equalTo(AJScreenWidth/2)
-            make.height.equalTo(AJScreenWidth/12)
+        }
+        
+        portionMuchButton.snp.makeConstraints{(make) in
+            make.left.equalTo(portionNoButton.snp.right).offset(AJScreenWidth/30)
+            make.width.equalTo(AJScreenWidth/5)
+            make.top.bottom.equalTo(portionNoButton)
+        }
+        
+        portionNormalButton.snp.makeConstraints{(make) in
+            make.left.equalTo(portionMuchButton.snp.right).offset(AJScreenWidth/30)
+            make.width.equalTo(AJScreenWidth/5)
+            make.top.bottom.equalTo(portionNoButton)
+        }
+        
+        portionLittleButton.snp.makeConstraints{(make) in
+            make.left.equalTo(portionNormalButton.snp.right).offset(AJScreenWidth/30)
+            make.width.equalTo(AJScreenWidth/5)
+            make.top.bottom.equalTo(portionNoButton)
         }
         
         // **********************胰岛素***********************
@@ -108,7 +207,7 @@ class portionAndInsulinView: UIView {
         self.addSubview(insulinImageView)
         insulinImageView.snp.makeConstraints{(make) in
             make.left.right.height.equalTo(portionImageView)
-            make.top.equalTo(portionButton.snp.bottom).offset(AJScreenWidth/40)
+            make.top.equalTo(portionLittleButton.snp.bottom).offset(AJScreenWidth/40)
         }
         
         // 胰岛素label布局

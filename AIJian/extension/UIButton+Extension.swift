@@ -19,6 +19,22 @@ extension UIButton{
         self.layer.cornerRadius = 3
     }
     
+    // 用于手动输入页面，按钮被选中时的样式
+    func setSelected(){
+        self.setTitleColor(UIColor.white, for: .normal)
+        self.backgroundColor = UIColor.blue
+        self.layer.borderColor = UIColor.white.cgColor
+        self.layer.borderWidth = 1
+        
+    }
+    
+    // 用于手动输入页面，按钮未被选中时的样式
+    func setDeselected(){
+        self.setTitleColor(UIColor.gray, for: .normal)
+        self.backgroundColor = UIColor.white
+        self.layer.borderWidth = 0
+    }
+    
     func countDown(count: Int){
         // 倒计时开始,禁止点击事件
         isEnabled = false

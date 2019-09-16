@@ -11,7 +11,7 @@ import Charts
 import SnapKit
 import SwiftDate
 
-class ChartView: UIView {
+class ChartView: UIView ,ChartViewDelegate{
 
     lazy var lineChartView:LineChartView = {
         //let _lineChartView = LineChartView.init(frame: CGRect.init(x: 0, y: 20, width: 300, height: 300))
@@ -67,6 +67,8 @@ class ChartView: UIView {
         // ********该处需随需求变动************
         xAxis.axisMaximum = 7
         xAxis.labelCount = 5 // 标签个数，不一定是这个数，但会大约是,这也会影响标签的显示个数
+        // 设置代理，使得代理方法实现
+        _lineChartView.delegate = self
         
         return _lineChartView
     }()
@@ -108,7 +110,19 @@ class ChartView: UIView {
         // 转折点是否显示y轴的值
         set1.drawValuesEnabled = false
         // 转折点颜色
-        set1.circleColors = [kRGBColor(157, 234, 68, 0.5)]
+        var colors:[UIColor] = []
+        // 根据entry的y坐标的大小不同设置不同的颜色
+        for i in 0..<set1.count{
+            print("要画的第\(i)个点。")
+            if set1[i].y > GetBloodLimit.getRandomDinnerTop(){
+                colors.append(UIColor.red)
+            }else if set1[i].y < GetBloodLimit.getRandomDinnerLow(){
+                colors.append(UIColor.yellow)
+            }else{
+                colors.append(UIColor.green)
+            }
+        }
+        set1.circleColors = colors
         // 转折点大小
         set1.circleRadius = 4
         set1.lineWidth = 2.0
@@ -171,8 +185,30 @@ class ChartView: UIView {
         //文字
         limitLine.valueFont = UIFont.systemFont(ofSize: 10.0)
         limitLine.valueTextColor = UIColor.black
-        limitLine.labelPosition = .bottomRight
+        limitLine.labelPosition = .bottomLeft
         lineChartView.leftAxis.addLimitLine(limitLine)
+    }
+    
+    //折线上的点选中回调
+    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry,highlight: Highlight) {
+        print("选中了一个数据")
+        //显示该点的MarkerView标签
+        self.showMarkerView(value: "\(entry.y)")
+    }
+
+
+    //显示MarkerView标签
+    func showMarkerView(value:String){
+        let marker = MarkerView(frame: CGRect(x: 20, y: 20, width: 80, height: 20))
+        marker.chartView = self.lineChartView
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
+        label.text = "血糖:" + value + GetUnit.getBloodUnit()
+        label.textColor = UIColor.white
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.backgroundColor = UIColor.gray
+        label.textAlignment = .center
+        marker.addSubview(label)
+        self.lineChartView.marker = marker
     }
     
     func setupUI(){

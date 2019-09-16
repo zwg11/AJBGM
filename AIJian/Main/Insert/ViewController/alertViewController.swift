@@ -77,14 +77,9 @@ class alertViewController: UIAlertController,UITableViewDelegate,UITableViewData
             cell?.imageView?.image = UIImage(named: "unselected")
             selectedNum -= 1
         }
-        // 存储当前表格的选中状态
-        //boolArray[indexPath.row] = !boolArray[indexPath.row]
+
     }// 点击单元格函数结束
-    // 设置单元格取消选中时动作
-//    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-//        // 存储当前表格的选中状态
-//        boolArray[indexPath.row] = false
-//    }
+
     func setupUI(){
         // 设置单元格允许多选
         tabelView.allowsMultipleSelection = true
@@ -144,32 +139,5 @@ class alertViewController: UIAlertController,UITableViewDelegate,UITableViewData
         self.addAction(cancelAction)
         self.addAction(okAction)
     }
-//    //获得药物名称
-//    func getMedicineArray()->Array<String>{
-//        var arr:[String] = []
-//        var j:Int = 0
-//        for i in self.boolarr{
-//            if i{
-//               print("药物")
-//               print(i)
-//               arr.append(alertData[j])
-//            }
-//            j = j+1
-//        }
-//        return arr
-//    }
-//    //设置药物名称,需要传入一个String数组     数据回写
-//    func setMedicineArray(_ arr:Array<String>){
-//        let initLength:Int = alertData.count
-//        let fromLength:Int = arr.count
-//        //如果alertData的数据元素，与传入的数据元素相等的话。则将元素对应的boolarr设置成true
-//            for i in 0..<initLength{
-//                for j in 0..<fromLength{
-//                    if alertData[i] == arr[j]{
-//                        boolarr[i] = true
-//                    }
-//                }
-//            }
-//    }
     
 }
