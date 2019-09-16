@@ -45,11 +45,12 @@ class registerViewController: UIViewController,UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.view.backgroundColor = UIColor.blue
         self.navigationController?.isNavigationBarHidden = false
-        self.navigationController?.navigationBar.backgroundColor = ThemeColor
-        self.title = "注 册"
+        self.navigationController?.navigationBar.barTintColor = ThemeColor
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: NaviTitleColor]
+        self.view.backgroundColor = ThemeColor
+        self.title = "Sign Up"
         self.view.addSubview(register)
         register.snp.makeConstraints{(make) in
             make.height.equalTo(AJScreenHeight)
@@ -188,9 +189,9 @@ class registerViewController: UIViewController,UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // 收起键盘
-        UIView.animate(withDuration: 0.2, animations: {
-            self.register.frame.origin.y = -150
-        })
+//        UIView.animate(withDuration: 0.2, animations: {
+//            self.register.frame.origin.y = -150
+//        })
         textField.resignFirstResponder()
         return true
     }
@@ -199,17 +200,17 @@ class registerViewController: UIViewController,UITextFieldDelegate {
         view.endEditing(true)
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        UIView.animate(withDuration: 0.4, animations: {
-            self.register.frame.origin.y = -150
-        })
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        UIView.animate(withDuration: 0.2, animations: {
-            self.register.frame.origin.y = 0
-        })
-    }
+//    func textFieldDidBeginEditing(_ textField: UITextField) {
+//        UIView.animate(withDuration: 0.4, animations: {
+//            self.register.frame.origin.y = -150
+//        })
+//    }
+//
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//        UIView.animate(withDuration: 0.2, animations: {
+//            self.register.frame.origin.y = 0
+//        })
+//    }
     
 }
 

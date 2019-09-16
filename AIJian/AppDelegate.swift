@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             if(responseModel.code == 1 ){  //token没过期
                                 //没过期，允许使用，跳转到tabBar这个地方
                                 print("你的token还能用")
-                                self.window?.rootViewController = nv
+                                self.window?.rootViewController = tabBarController
                             }else{  //token过期了,不让用
                                 //过期了，需要清空app文件中的token
                                 print("你的token过期了")

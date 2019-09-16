@@ -21,38 +21,41 @@ class registerView: UIView {
         return imageView
     }()
     
-    //登录的文字
-    private lazy var label:UILabel = {
-        let information = UILabel(frame: CGRect())
-        information.text = "Sign Up"
-        information.textAlignment = .center
-        information.font = UIFont.systemFont(ofSize: 18)
-        return information
-    }()
+//    //登录的文字
+//    private lazy var label:UILabel = {
+//        let information = UILabel(frame: CGRect())
+//        information.text = "Sign Up"
+//        information.textAlignment = .center
+//        information.font = UIFont.systemFont(ofSize: 18)
+//        information.textColor = TextColor
+//        return information
+//    }()
     
     // 输入邮箱文本框
     lazy var emailTextField:UITextField = {
-        let textField = initTextField(placeholder: " 输入邮箱",keyboardType: .emailAddress)
+        let textField = initTextField(placeholder: " Email",keyboardType: .emailAddress)
         let imageView = UIImageView(image: UIImage(named: "email"))
         textField.leftView = imageView
         textField.leftViewMode = .always
+        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
         return textField
     }()
     
     // 输入验证码文本框
     lazy var authCodeTextField:UITextField = {
-        let textField = initTextField(placeholder: " 输入验证码",keyboardType: .numberPad)
+        let textField = initTextField(placeholder: " Code",keyboardType: .numberPad)
         let imageView = UIImageView(image: UIImage(named: "email"))
         textField.leftView = imageView
         textField.leftViewMode = .always
+        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
         return textField
     }()
     
     // 获取验证码按钮
     lazy var getAuthCodeButton:UIButton = {
         let button = UIButton(type: .custom)
-        button.setTitle(" 获取验证码", for: .normal)
-        button.backgroundColor = UIColor.blue
+        button.setTitle(" Send Code", for: .normal)
+        button.backgroundColor = SendButtonColor
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         return button
@@ -60,29 +63,31 @@ class registerView: UIView {
     
     // 输入密码文本框
     lazy var passwordTextField:UITextField = {
-        let textField = initTextField(placeholder: " 密码",keyboardType: .default)
+        let textField = initTextField(placeholder: " Password",keyboardType: .default)
         textField.isSecureTextEntry = true
         let imageView = UIImageView(image: UIImage(named: "email"))
         textField.leftView = imageView
         textField.leftViewMode = .always
+        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
         return textField
     }()
     
     // 输入确认密码文本框
     lazy var passwordSecTextField:UITextField = {
-        let textField = initTextField(placeholder: " 确认密码",keyboardType: .default)
+        let textField = initTextField(placeholder: " Confirm the Password",keyboardType: .default)
         textField.isSecureTextEntry = true
         let imageView = UIImageView(image: UIImage(named: "email"))
         textField.leftView = imageView
         textField.leftViewMode = .always
+        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
         return textField
     }()
     
     // 下一步按钮
     lazy var nextButton:UIButton = {
         let button = UIButton()
-        button.setTitle("下一步", for: .normal)
-        button.backgroundColor = UIColor.blue
+        button.setTitle("Next", for: .normal)
+        button.backgroundColor = ButtonColor
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         return button
@@ -100,7 +105,7 @@ class registerView: UIView {
     }
     
     func setupUI(){
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = ThemeColor
         // 艾康图标布局
         self.addSubview(AJImageView)
         AJImageView.snp.makeConstraints{(make) in
@@ -108,17 +113,17 @@ class registerView: UIView {
             make.height.equalTo(AJScreenWidth/5)
             make.left.equalTo(AJScreenWidth/4)
             make.right.equalTo(-AJScreenWidth/4)
-            make.top.equalTo(navigationBarHeight)
+            make.top.equalTo(AJScreenWidth/8)
         }
         
-        //登录文字布局
-        self.addSubview(label)
-        label.snp.makeConstraints{ (make) in
-            make.height.equalTo(20)
-            make.left.equalToSuperview().offset(AJScreenWidth/5)
-            make.right.equalToSuperview().offset(-AJScreenWidth/5)
-            make.top.equalTo(AJImageView.snp.bottom).offset(20)
-        }
+//        //登录文字布局
+//        self.addSubview(label)
+//        label.snp.makeConstraints{ (make) in
+//            make.height.equalTo(20)
+//            make.left.equalToSuperview().offset(AJScreenWidth/5)
+//            make.right.equalToSuperview().offset(-AJScreenWidth/5)
+//            make.top.equalTo(AJImageView.snp.bottom).offset(20)
+//        }
         
         // 输入邮箱文本框布局
         self.addSubview(emailTextField)
@@ -127,11 +132,11 @@ class registerView: UIView {
             make.left.equalToSuperview().offset(AJScreenWidth/15)
             make.right.equalToSuperview().offset(-AJScreenWidth/15)
             make.height.equalTo(AJScreenWidth/12)
-            make.top.equalTo(label.snp.bottom).offset(40)
+            make.top.equalTo(AJImageView.snp.bottom).offset(40)
         }
         
         let line_frame1 = UIView(frame: CGRect())
-        line_frame1.backgroundColor = UIColor.black
+        line_frame1.backgroundColor = LineColor
         self.addSubview(line_frame1)
         line_frame1.snp.makeConstraints{ (make) in
             make.height.equalTo(0.5)
@@ -152,7 +157,7 @@ class registerView: UIView {
         }
         
         let line_frame2 = UIView(frame: CGRect())
-        line_frame2.backgroundColor = UIColor.black
+        line_frame2.backgroundColor = LineColor
         self.addSubview(line_frame2)
         line_frame2.snp.makeConstraints{ (make) in
             make.height.equalTo(0.5)
@@ -181,7 +186,7 @@ class registerView: UIView {
         }
         
         let line_frame3 = UIView(frame: CGRect())
-        line_frame3.backgroundColor = UIColor.black
+        line_frame3.backgroundColor = LineColor
         self.addSubview(line_frame3)
         line_frame3.snp.makeConstraints{ (make) in
             make.height.equalTo(0.5)
@@ -202,7 +207,7 @@ class registerView: UIView {
         }
         
         let line_frame4 = UIView(frame: CGRect())
-        line_frame4.backgroundColor = UIColor.black
+        line_frame4.backgroundColor = LineColor
         self.addSubview(line_frame4)
         line_frame4.snp.makeConstraints{ (make) in
             make.height.equalTo(0.5)
@@ -217,7 +222,7 @@ class registerView: UIView {
         nextButton.snp.makeConstraints{(make) in
             make.left.right.equalTo(emailTextField)
             //make.right.equalTo(passwordTextField.snp.right)
-            make.height.equalTo(AJScreenWidth/12)
+            make.height.equalTo(AJScreenWidth/10)
             make.top.equalTo(passwordSecTextField.snp.bottom).offset(AJScreenHeight/8)
         }
         
