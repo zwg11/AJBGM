@@ -53,7 +53,6 @@
 		7E55D14C065E24471D59E71862D56472 /* UseDirViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67085F8C516527849C0A634158BE78B7 /* UseDirViewController.swift */; };
 		82229929AE907526C16AFB7C3B976565 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428DE12BF8AED7060D2DACBB1BDB9E15 /* AppDelegate.swift */; };
 		84847BC2FE082A7DD9416B04C6429EAB /* BHJPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE608F63498A45B84C3679D6251C8601 /* BHJPickerView.swift */; };
-		84FD2F58232F1EA60062154E /* PressureUnitChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD60A3BECD368606104E505681C9CAD /* PressureUnitChange.swift */; };
 		85BF4AD1556507F03E9CF1AB13F34571 /* BloodSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCA193DA6A5E1E858111B284800163C /* BloodSetViewController.swift */; };
 		875E6FED57826107D84E47853B2A507F /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5C68EDC76F69EA0E7DCD122ED6AB4 /* UITextField+Extension.swift */; };
 		88B422202CF871BF6F10A6D4FD24F651 /* GetUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3389A85E5BFB5D3E18B8DAA0516CC7 /* GetUnit.swift */; };
@@ -97,6 +96,7 @@
 		CD1234E30F7C4689A1783E8E01C09116 /* UpdateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ECE95E879F310D822741002FFB8089 /* UpdateManager.swift */; };
 		CDAE1F2D93FE04AAC0DB578104CB6109 /* User.plist in Resources */ = {isa = PBXBuildFile; fileRef = A5A1585583F171AC210D37D0F2F28C6E /* User.plist */; };
 		CE7A682B87979E6CD2FFAF3C097ED6F8 /* GlobalValue.plist in Resources */ = {isa = PBXBuildFile; fileRef = 961092F618DFD3A23C3E2C9E1F14FB00 /* GlobalValue.plist */; };
+		CFBA26BE628FD16512A0D472E74AC909 /* PressureUnitChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD60A3BECD368606104E505681C9CAD /* PressureUnitChange.swift */; };
 		D04F636417EB92069574FA06715E5F33 /* SuggestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A18E98B74565B5E695548D96DE09E13 /* SuggestionViewController.swift */; };
 		D140B268899B7C34FE91E8B62F5A2755 /* emailCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9194DA23A92362E3AC5BCFD8094F8DBC /* emailCheckView.swift */; };
 		D3598BAB73CFEA38A43DA2264E156B52 /* GetBloodLimit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114081AB7B0ED40CD96B4D28D031951A /* GetBloodLimit.swift */; };
@@ -699,8 +699,8 @@
 			isa = PBXGroup;
 			children = (
 				7C3389A85E5BFB5D3E18B8DAA0516CC7 /* GetUnit.swift */,
-				B7C52F310EC78F0CAFCE223C140C228D /* UnitConversion.swift */,
 				0DD60A3BECD368606104E505681C9CAD /* PressureUnitChange.swift */,
+				B7C52F310EC78F0CAFCE223C140C228D /* UnitConversion.swift */,
 				9333124ACDB51FBDDC929EEAD032D6D3 /* WeightUnitChange.swift */,
 			);
 			path = Unit;
@@ -892,6 +892,7 @@
 				15D6FA7AF2ACEF4E3D398687FDBA3FB5 /* PageView.swift in Sources */,
 				55EBF230C8DD14A232D18B95A37D8202 /* PassChangeViewController.swift in Sources */,
 				B19FE207427413DEE020EE6B205B6B9D /* PlistSet.swift in Sources */,
+				CFBA26BE628FD16512A0D472E74AC909 /* PressureUnitChange.swift in Sources */,
 				C88FB686223BB5A94898D1B74AAF1FF6 /* QuitCellView.swift in Sources */,
 				4103417E5D61D24965902570B01CC19F /* SharedView.swift in Sources */,
 				74BAA950DB2E4C75BE286CCA00B3A027 /* SharedViewController.swift in Sources */,
@@ -930,7 +931,6 @@
 				2B176AC33E91C2CFDB77A8DC10A64B36 /* format_method.swift in Sources */,
 				30E983804395F9F8A70B9E14F4E3D7DB /* getDataInHome.swift in Sources */,
 				18F0313CE9FBB4D24BE3EB41E867AE4B /* glucoseRecentView.swift in Sources */,
-				84FD2F58232F1EA60062154E /* PressureUnitChange.swift in Sources */,
 				12FD0BE7E50C8B635C32E575FFC6214F /* glucoseView.swift in Sources */,
 				C8F5100D99CC101199D1703D63BC02A4 /* infoInputViewController.swift in Sources */,
 				558080D97A62B5A3560E31B66D54F008 /* loginNavigationController.swift in Sources */,
