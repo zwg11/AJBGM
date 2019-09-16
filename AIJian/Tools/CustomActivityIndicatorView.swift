@@ -20,7 +20,8 @@ class CustomIndicatorView: UIView {
         let view = UIActivityIndicatorView(style: .whiteLarge)
         // 使得控件不转时隐藏
         view.hidesWhenStopped = true
-        view.backgroundColor = UIColor.yellow
+        view.color = UIColor.red
+        //view.backgroundColor = UIColor.yellow
         return view
     }()
     // 风火轮控件开始旋转
@@ -46,16 +47,21 @@ class CustomIndicatorView: UIView {
     
     // 传入label的文本内容
     func setupUI(_ text:String){
+        // 设置背景为浅灰色
+        self.backgroundColor = UIColor.lightGray
+        // 设置透明度为0.8
+        self.alpha = 0.8
         label.text = text
         self.addSubview(label)
         self.addSubview(Indicator)
         Indicator.snp.makeConstraints{(make) in
-            make.left.right.top.equalToSuperview()
-            make.height.equalTo(50)
+            make.center.equalToSuperview()
+            make.height.width.equalTo(40)
         }
         label.snp.makeConstraints{(make) in
-            make.left.right.bottom.equalToSuperview()
+            make.left.right.equalToSuperview()
             make.top.equalTo(Indicator.snp.bottom)
+            make.height.equalTo(20)
             
         }
     }

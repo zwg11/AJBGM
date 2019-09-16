@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import SwiftDate
 
 class recentTableViewCell: UITableViewCell {
 
-    let result = getDataInHome.getRecentValue()
+    // 即result存贮最近7天的数据的 平均值、检测次数、最高值、最低值
+    let result = getDataInHome.getRecentValue(DateInRegion().dateAt(.endOfDay).date + 1.seconds - 7.days,DateInRegion().dateAt(.endOfDay).date + 1.seconds)
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

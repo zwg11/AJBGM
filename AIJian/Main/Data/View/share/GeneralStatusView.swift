@@ -104,20 +104,11 @@ class GeneralStatusView: UIView,UITableViewDelegate,UITableViewDataSource {
 
     // 标题字符串
     let str = "Trend-Blood Glucose"
-    // 姓名字符串
-    var name:String?
-    // 出生日期字符串
-    var birthday:String?
+
     // 姓名label
-    private lazy  var nameLabel:UILabel = {
-        let label = initLabel(name ?? "name")
-        return label
-    }()
+    lazy  var nameLabel = UILabel()
     // 出生日期label
-    private lazy  var birthLabel:UILabel = {
-        let label = initLabel(birthday ?? "2123311")
-        return label
-    }()
+    lazy  var birthLabel = UILabel()
     // 标题label
     private lazy  var titleLabel:UILabel = {
         let label = initLabel(str)
@@ -131,10 +122,7 @@ class GeneralStatusView: UIView,UITableViewDelegate,UITableViewDataSource {
         return label
     }
     // 时间范围label
-    private lazy  var rangeLabel:UILabel = {
-        let label = initLabel(name ?? "name")
-        return label
-    }()
+    lazy  var rangeLabel = UILabel()
     
     private lazy var chart = ChartView()
     

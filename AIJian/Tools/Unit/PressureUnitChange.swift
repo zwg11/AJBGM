@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 public class PressureUnitChange{
     
     static let instance = PressureUnitChange()
@@ -26,6 +27,5 @@ public class PressureUnitChange{
         a = Double(x)!
         return a
     }
-    
     
 }

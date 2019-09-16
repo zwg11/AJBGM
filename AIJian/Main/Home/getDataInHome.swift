@@ -29,13 +29,14 @@ class getDataInHome{
         return str!
     }
     
-    static func getRecentValue() -> [Any]{
+    // 给一段时间，返回数组，分别为该段时间血糖的 平均值、检测次数、最高值、最低值
+    static func getRecentValue(_ startDate:Date,_ endDate:Date) -> [Any]{
         let x = DBSQLiteManager.shareManager()
-        let today = DateInRegion().dateAt(.endOfDay).date
-        let end = today + 1.seconds
-        let start = end - 7.days
+//        let today = DateInRegion().dateAt(.endOfDay).date
+//        let end = today + 1.seconds
+//        let start = end - 7.days
         // 取出最近7天的数据
-        let data = x.selectGlucoseRecordInRange(start: start, end: end, userId: UserInfo.getUserId())
+        let data = x.selectGlucoseRecordInRange(start: startDate, end: endDate, userId: UserInfo.getUserId())
         
         var result:[Any] = []
         var avgValue = 0.0

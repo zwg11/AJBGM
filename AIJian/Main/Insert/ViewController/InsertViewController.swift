@@ -20,13 +20,7 @@ class InsertViewController: UIViewController {
         view.bodyInfo.medicineEditButton.addTarget(self, action: #selector(edit(sender:)), for: .touchUpInside)
         // 设置标记，识别按钮  用来的标识不同的button。默认button的初始化的tag的值为0
         view.bodyInfo.medicineEditButton.tag = 8
-        
-        // 由于备注栏的按钮需弹出 UIAlertController，所以要将动作在viewcontroller层中设置
-        view.remark.remarkChooseButton.addTarget(self, action: #selector(chooseRemark), for: .touchUpInside)
-        //编辑备注的方法
-        view.remark.remarkEditButton.addTarget(self, action: #selector(edit(sender:)), for: .touchUpInside)
-        // 设置标记，识别按钮
-        view.remark.remarkEditButton.tag = 6
+
         view.leftButton.addTarget(self, action: #selector(cancel), for: .touchUpInside)    //点击取消
         view.rightButton.addTarget(self, action: #selector(save), for: .touchUpInside) //点击保存
         return view
@@ -38,8 +32,6 @@ class InsertViewController: UIViewController {
     // 选择药物按钮弹出的alert
     private var medicineChooseAlert = alertViewController()
     
-    // 选择备注按钮弹出的alert
-    private var remarkChooseAlert = alertViewController()
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         // 设置当选中的表格个数改变时，使得对应的按钮显示已选择的表格数
@@ -49,16 +41,10 @@ class InsertViewController: UIViewController {
         }else{
             input.bodyInfo.medicineChooseButton.setTitle("无", for: .normal)
         }
-        //选择备注
-        if remarkChooseAlert.selectedNum>0{
-            input.remark.remarkChooseButton.setTitle("\(remarkChooseAlert.selectedNum)个选项已选择", for: .normal)
-        }else{
-            input.remark.remarkChooseButton.setTitle("无", for: .normal)
-        }
+
     }
     
     private var isMedicineUpdate = true
-    private var isRemarkUpdate = true
     
     // 设置导航栏左按钮x样式
     private lazy var leftButton:UIButton = {
@@ -85,13 +71,6 @@ class InsertViewController: UIViewController {
         medicineChooseAlert.setupUI()
         // 添加监听器监听选中的表格的个数
         medicineChooseAlert.addObserver(self, forKeyPath: "selectedNum", options: [.new], context: nil)
-        
-        //******************
-        remarkChooseAlert = alertViewController(title: "请选择", message: "", preferredStyle: .alert)
-        remarkChooseAlert.alertData = data["remark"] as! [String]
-        remarkChooseAlert.setupUI()
-        // 添加监听器监听选中的表格的个数
-        remarkChooseAlert.addObserver(self, forKeyPath: "selectedNum", options: [.new], context: nil)
         
         
         // 添加导航栏左按钮
@@ -132,52 +111,6 @@ class InsertViewController: UIViewController {
         
     }
     
-    // ****************  备注栏按钮动作 *****************
-    // 选择 备注 按钮被点击时的动作
-    @objc func chooseRemark(){
-        // 读取配置文件
-        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
-        print("choose remark button clicked,appear done.")
-        // 将配置文件中的数据导出
-        //即判断remark中是否有数据
-        if data["remark"] != nil{
-            remarkChooseAlert.alertData = data["remark"] as! [String]
-        }
-        
-        // 如果数据量大于0，显示备注事件列表
-        // ****** start ******
-        if remarkChooseAlert.alertData.count > 0{
-            print("备注内部的数据",remarkChooseAlert.alertData.count)
-            print("备注初始化的数据",self.remarkChooseAlert.boolarr)
-            print("备注更新的数据",self.remarkChooseAlert.boolArray)
-            // 判断表格是否需要更新 if开始
-            if isRemarkUpdate{
-                
-                // 设置框的高度，根据单元格数量和表格上下约束计算得出
-                // 直接设置 height 失败，提示 height 为 get属性
-                remarkChooseAlert.view.snp.updateConstraints{(make) in
-                    make.height.equalTo(remarkChooseAlert.alertData.count*35+90)
-                }
-                // 更新单元格
-                remarkChooseAlert.tabelView.reloadData()
-                // 显示 警示框
-                self.present(remarkChooseAlert, animated: true, completion: nil)
-                // 设置更新 为false，避免下次再重新加载浪费时间
-                isRemarkUpdate = false
-            }// 判断表格是否需要更新 if结束
-            else{
-                self.present(remarkChooseAlert, animated: true, completion: nil)
-            }
-            
-        }// ****** end ******
-            // 如果数据量小于0，提示没有可供选择的事件
-        else{ //即不初始化数据
-            let alert = UIAlertController(title: "提示", message: "无备注事件供选择", preferredStyle: .alert)
-            let actionSure = UIAlertAction(title: "sure", style: .default, handler: nil)
-            alert.addAction(actionSure)
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
     
     // 选择 备注/药物 编辑 按钮被点击时的动作
     // ********* 备注/药物 编辑 按钮 *********
@@ -198,48 +131,25 @@ class InsertViewController: UIViewController {
             if alert.textFields![0].text == "" {
                 return
             }
-            // 通过gtag识别按钮，如果为 remark 的
-            if sender!.tag == 6{
+
                 
-                // 使得另一个警示框的表格数据更新
-                self.remarkChooseAlert.alertData.append(alert.textFields![0].text!)
-                // 改变对应的选择器的内容和沙盒中对应队列的内容
-                data["remark"] = self.remarkChooseAlert.alertData
-                print(self.path)
-                // 将改变后的结果写入沙盒
-                data.write(toFile: self.path, atomically: true)
-                print(data["remark"] ?? "no remark")
-                print("点击确定，显示添加结果",self.remarkChooseAlert.alertData)
-                // 将新添加的事件 添加到 表格状态数组中并值为 true
-                self.remarkChooseAlert.boolarr.append(true)
+            // 使得另一个警示框的表格数据更新
+            self.medicineChooseAlert.alertData.append(alert.textFields![0].text!)
                 
-                self.remarkChooseAlert.boolArray.append(true)
-                print("初始化的arry",self.remarkChooseAlert.boolarr)
-                print("被设置的arry",self.remarkChooseAlert.boolArray)
-                self.remarkChooseAlert.selectedNum += 1  //新添加的默认被选择
-                // 备注表格需更新
-                self.isRemarkUpdate = true
-            }
-            // 通过gtag识别按钮，如果为 medicine 的
-            if sender!.tag == 8{
-                
-                // 使得另一个警示框的表格数据更新
-                self.medicineChooseAlert.alertData.append(alert.textFields![0].text!)
-                
-                // 改变对应的选择器的内容和沙盒中对应队列的内容
-                data["medicine"] = self.medicineChooseAlert.alertData
-                print(self.path)
-                // 将改变后的结果写入沙盒
-                data.write(toFile: self.path, atomically: true)
-                print(data["medicine"] ?? "no medicine")
-                print(self.medicineChooseAlert.alertData)
-                // 将新添加的事件 添加到 表格状态数组中并值为 true
-                self.medicineChooseAlert.boolarr.append(true)
-                self.medicineChooseAlert.boolArray.append(true)
-                self.medicineChooseAlert.selectedNum += 1
-                // 药物表格需更新
-                self.isMedicineUpdate = true
-            }
+            // 改变对应的选择器的内容和沙盒中对应队列的内容
+            data["medicine"] = self.medicineChooseAlert.alertData
+            print(self.path)
+            // 将改变后的结果写入沙盒
+            data.write(toFile: self.path, atomically: true)
+            print(data["medicine"] ?? "no medicine")
+            print(self.medicineChooseAlert.alertData)
+            // 将新添加的事件 添加到 表格状态数组中并值为 true
+            self.medicineChooseAlert.boolarr.append(true)
+            self.medicineChooseAlert.boolArray.append(true)
+            self.medicineChooseAlert.selectedNum += 1
+            // 药物表格需更新
+            self.isMedicineUpdate = true
+            
             
         })
         // 添加2个按钮到 警示框中
@@ -329,10 +239,8 @@ class InsertViewController: UIViewController {
             }
         }
         let event = input.getEventValue()
-        print("获得事件的值，并将其转为int类型的值",EvenChang.evenTonum(event))
         print("胰岛素的事件调试成功*********************")
         let eat_num = input.getPorValue()
-        print("获得进餐量的值，并将其转为int类型的值",EatNumChange.eatTonum(eat_num))
         print("胰岛素的进餐量调试成功*********************")
         let insulin_type = input.getInsValue()
         print("获得胰岛素类型",insulin_type)
@@ -394,23 +302,23 @@ class InsertViewController: UIViewController {
         print("体重调试成功")
         
         
-        //获取身高
-        var height:Double?
-        if input.bodyInfo.heightTextfield.text! != ""{
-            if FormatMethodUtil.validateHeightNum(number: input.bodyInfo.heightTextfield.text!) == true{
-                if Double(input.bodyInfo.heightTextfield.text!)! >= 999.9{
-                    alert.custom(self, "Attention", "身高有效范围为0.0~999.9")
-                    return
-                }else{
-                    height = Double(input.bodyInfo.heightTextfield.text!)!
-                }
-            }else{
-                alert.custom(self, "Attention", "请正确输入身高值")
-                return
-            }
-        }
-        print("获得身高的值:",height ?? 0)
-        print("身高的值调试成功*********************")
+//        //获取身高
+//        var height:Double?
+//        if input.bodyInfo.heightTextfield.text! != ""{
+//            if FormatMethodUtil.validateHeightNum(number: input.bodyInfo.heightTextfield.text!) == true{
+//                if Double(input.bodyInfo.heightTextfield.text!)! >= 999.9{
+//                    alert.custom(self, "Attention", "身高有效范围为0.0~999.9")
+//                    return
+//                }else{
+//                    height = Double(input.bodyInfo.heightTextfield.text!)!
+//                }
+//            }else{
+//                alert.custom(self, "Attention", "请正确输入身高值")
+//                return
+//            }
+//        }
+//        print("获得身高的值:",height ?? 0)
+//        print("身高的值调试成功*********************")
         
       
         
@@ -490,8 +398,8 @@ class InsertViewController: UIViewController {
         }
         print("获得运动持续时间:",sport_time ?? "no sport time")
         
-        let sport_strength = IntensityChange.intensityTonum(input.getSportStrength())
-        print("获得运动强度转换后的值:",sport_strength)
+        let sport_strength = input.getSportStrength()
+//        print("获得运动强度转换后的值:",sport_strength)
 
         
         //第一步：先封装成一个对象
@@ -507,14 +415,13 @@ class InsertViewController: UIViewController {
         }
         
         insertData.createTime = createTime
-        insertData.detectionTime =  Int64(EvenChang.evenTonum(event))
+        insertData.detectionTime =  Int64(event)
         insertData.bloodGlucoseMmol = bloodGlucoseValueMmol!
         insertData.bloodGlucoseMg = bloodGlucoseValueMg!
-        insertData.eatType = input.getEventValue()
-        insertData.eatNum = Int64(EatNumChange.eatTonum(eat_num))
+        insertData.eatNum = Int64(eat_num)
         insertData.insulinType = (insulin_type == "Nothing") ? nil:insulin_type
         insertData.insulinNum = insulin_num
-        insertData.height = height
+//        insertData.height = height
         insertData.weightKg = weight_kg
         insertData.weightLbs = weight_lbs
         insertData.systolicPressureMmhg = sys_press_mmHg
@@ -526,7 +433,7 @@ class InsertViewController: UIViewController {
         insertData.sportTime = sport_time
         insertData.sportStrength = Int64(sport_strength)
         insertData.inputType = 1
-        insertData.remark = nil
+        insertData.remark = input.getRemark()
         insertData.machineId = nil
      
         print("insertdata:\(insertData)")
@@ -623,6 +530,9 @@ class InsertViewController: UIViewController {
     
     //视图将要出现的时候
     override func viewWillAppear(_ animated: Bool) {
+        // 每次进入界面滚动视图都是在最顶部
+        self.input.scrollView.contentOffset = CGPoint(x: 0, y: 0)
+        
         self.tabBarController?.tabBar.isHidden = true
         //重新判断加载视图
         //input.reloadInputViews()

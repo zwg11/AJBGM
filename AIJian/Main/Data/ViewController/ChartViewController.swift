@@ -24,6 +24,13 @@ class ChartViewController: UIViewController {
         view.lineChartView.xAxis.labelCount = 4
         return view
     }()
+    
+    private lazy var staticV:StaticView = {
+        let view = StaticView()
+        view.setupUI()
+        view.initLabelText()
+        return view
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,28 +43,35 @@ class ChartViewController: UIViewController {
             
         }
         
-        self.view.addSubview(lineChartView)
-        self.lineChartView.snp.makeConstraints{(make) in
-            make.left.equalToSuperview().offset(AJScreenWidth/30)
-            make.right.equalToSuperview().offset(-AJScreenWidth/30)
-            
-            make.top.equalTo(self.headerView.snp.bottom)
+        self.view.addSubview(staticV)
+        staticV.snp.makeConstraints{(make) in
+            make.left.right.equalToSuperview()
+            make.height.equalTo(AJScreenWidth/6)
             if #available(iOS 11.0, *) {
                 make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
             } else {
                 // Fallback on earlier versions
                 make.bottom.equalTo(bottomLayoutGuide.snp.top)
             }
+        }
+        
+        self.view.addSubview(lineChartView)
+        self.lineChartView.snp.makeConstraints{(make) in
+            make.left.equalToSuperview().offset(AJScreenWidth/30)
+            make.right.equalToSuperview().offset(-AJScreenWidth/30)
             
+            make.top.equalTo(self.headerView.snp.bottom)
+            make.bottom.equalTo(staticV.snp.top)
         }
         
         self.view.backgroundColor = UIColor.init(red: 255/255.0, green: 251/255.0, blue: 186/255.0, alpha: 1)
         // Do any additional setup after loading the view.
-        
+        // 监听所选时间范围的变化
         NotificationCenter.default.addObserver(self, selector: #selector(test), name: NSNotification.Name(rawValue: "reloadChart"), object: nil)
     }
     @objc func test(){
         initChart()
+        staticV.initLabelText()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,6 +80,7 @@ class ChartViewController: UIViewController {
         lineChartView.lineChartView.leftAxis.axisMaximum = GetBloodLimit.getRandomDinnerTop() * 2
         
         initChart()
+        staticV.initLabelText()
     }
     
     

@@ -138,7 +138,7 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         self.view.addSubview(homeTableView)
 
         
-        requestData(day: 30)
+        //requestData(day: 30)
         
         self.view.backgroundColor = UIColor.white
         
@@ -148,62 +148,6 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
 
     
-    // 该函数向服务器请求数据并进行一定程度的数据处理
-    // 包括对数据根据日期进行排序，之后分出日期和时间、分健康信息等
-    // requestData()
-    func requestData(day:Int){
-        //********
-        let day = day
-        let usr_id = UserInfo.getUserId()
-        let tk = UserInfo.getToken()
-        // 设置信息请求字典
-        let dicStr:Dictionary = ["day":day,"userId":usr_id,"token":tk] as [String : Any]
-        print(dicStr)
-        // 请求数据，请求信息如上字典
-        Alamofire.request(REQUEST_DATA_URL,method: .post,parameters: dicStr).responseString{ (response) in
-            if response.result.isSuccess {
-                print("收到回复")
-                if let jsonString = response.result.value {
-                    
-                    /// json转model
-                    /// 写法一：responseModel.deserialize(from: jsonString)
-                    /// 写法二：用JSONDeserializer<T>
-                    /*
-                     利用JSONDeserializer封装成一个对象。然后再把这个对象解析为
-                     */
-                    print("jsonString:\(jsonString)")
-                    if let recordInDaysResponse = JSONDeserializer<recordInDaysResponse>.deserializeFrom(json: jsonString) {
-                        // 如果 返回信息说明 请求数据失败，则弹出警示框宝报错
-                        if recordInDaysResponse.code != 1{
-                            let alert = CustomAlertController()
-                            alert.custom(self, "警告", "\(recordInDaysResponse.msg!)")
-                            return
-                        }
-                        
-                        // ******** 将得到的所有数据都添加到数据库 ***********
-                        let sqliteManager = DBSQLiteManager()
-                        // 创建表
-                        sqliteManager.createTable()
-                        // 如果服务器中有对应用户的数据，将数据添加到数据库
-                        if recordInDaysResponse.data != nil{
-                            sqliteManager.addGlucoseRecords(add: recordInDaysResponse.data!)
-                            
-                        }
-                        // 重新加载表格内容
-                        self.homeTableView.reloadData()
-                    }
-                } 
-            }else{
-                let alert = CustomAlertController()
-                alert.custom(self, "警告", "网络异常，请稍后重试")
-                print("没网了")
-            }
-            
-            
-        }
-        //**********
-    }
-    // requestData() end
-
+    
 }
 

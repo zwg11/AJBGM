@@ -9,18 +9,10 @@
 import UIKit
 import SnapKit
 
-class SharedView: UIView {
+class SharedView: UIView ,UITextFieldDelegate{
     
     var date:String?
     // MARK: - 共享界面发送按钮及其说明
-    // view框
-    private lazy var explainView:UIView = {
-        let view = UIView()
-        view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor.gray.cgColor
-        //view.layer.cornerRadius = AJScreenWidth/40
-        return view
-    }()
     // 按钮说明
     private lazy var explainLabel:UILabel = {
         let label = UILabel()
@@ -61,14 +53,14 @@ class SharedView: UIView {
     private lazy var infoExpLabel:UILabel = {
         let label = UILabel()
         label.text = "Information Including"
-        label.font = UIFont.systemFont(ofSize: 16)
-        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 17)
+        label.textAlignment = .left
         return label
     }()
     // 姓名label
     private lazy var nameLabel:UILabel = {
         let label = UILabel()
-        label.text = "Name："
+        label.text = "Name"
         label.textAlignment = .left
         return label
     }()
@@ -76,76 +68,47 @@ class SharedView: UIView {
     lazy var nameTextField:UITextField = {
 
         let textField = UITextField()
-        textField.placeholder = " Please Input"
+        //textField.placeholder = " Please Input"
+        textField.textAlignment = .left
+        textField.keyboardType = .default
+        textField.layer.borderColor = UIColor.gray.cgColor
+        textField.layer.borderWidth = 1
+        textField.borderStyle = .line
+        textField.delegate = self
+        textField.setValue(NSNumber(value: 10), forKey: "paddingLeft")
+        return textField
+    }()
+    // 电话label
+    private lazy var birthdayLabel:UILabel = {
+        let label = UILabel()
+        label.text = "Phone"
+        label.textAlignment = .left
+        return label
+        
+    }()
+    // 电话文本框
+    lazy var phoneTextField:UITextField = {
+        let textField = UITextField()
         textField.textAlignment = .left
         textField.keyboardType = .default
         textField.layer.borderColor = UIColor.gray.cgColor
         textField.layer.borderWidth = 1
         textField.borderStyle = .line
         textField.setValue(NSNumber(value: 10), forKey: "paddingLeft")
+        textField.delegate = self
         return textField
     }()
-    // 出生日期label
-    private lazy var birthdayLabel:UILabel = {
-        let label = UILabel()
-        label.text = "Date of Birth："
-        label.textAlignment = .left
-        return label
-        
-    }()
-    // 选择出生日期的按钮，其实现弹出时间选择器视图
-    lazy var birthdayButton:UIButton = {
-        let button = UIButton()
-        // 此处修改了***************************************
-        //button.addTarget(chatViewController.self, action: #selector(chatViewController.chooseDate), for: .touchUpInside)
-        button.layer.borderColor = UIColor.gray.cgColor
-        button.layer.borderWidth = 1
-        button.setTitle(date ?? "Please Select", for: .normal)
-        button.setTitleColor(UIColor.black, for: .normal)
-        return button
-    }()
-    
-
-    
+  
     func setupUI(){
 
         self.backgroundColor = UIColor.white
-        UIView.setAnimationCurve(.linear)
-        
-        // MARK: - 发送按钮及其说明框
-        self.addSubview(explainView)
-        // 说明文本布局
-        self.explainView.addSubview(explainLabel)
-        self.explainLabel.snp.makeConstraints{ (make) in
-            make.left.right.equalToSuperview()
-            make.top.equalToSuperview().offset(AJScreenWidth/40)
-            make.height.equalTo(AJScreenWidth/15)
-            
-        }
-        // 发送按钮布局
-        self.explainView.addSubview(sendButton)
-        self.sendButton.snp.makeConstraints{ (make) in
-            make.left.equalToSuperview().offset(AJScreenWidth/40)
-            make.right.equalToSuperview().offset(-AJScreenWidth/40)
-            make.top.equalTo(explainLabel.snp.bottom).offset(AJScreenWidth/40)
-            make.height.equalTo(AJScreenWidth/12)
-            
-        }
-        // 框布局
-        self.explainView.snp.makeConstraints{
-            (make) in
-            make.left.equalToSuperview().offset(AJScreenWidth/40)
-            make.right.equalToSuperview().offset(-AJScreenWidth/40)
-            make.top.equalToSuperview().offset(AJScreenWidth/40)
-            make.height.equalTo(AJScreenWidth/4)
-        }
-        
+
         // MARK: - 发送报告信息框
         self.addSubview(reportInfo)
         // 标题说明布局
-        self.reportInfo.addSubview(infoExpLabel)
+        self.addSubview(infoExpLabel)
         self.infoExpLabel.snp.makeConstraints{(make) in
-            make.centerX.equalToSuperview()
+            make.left.equalToSuperview().offset(AJScreenWidth/20)
             make.top.equalToSuperview().offset(AJScreenWidth/40)
             make.height.equalTo(AJScreenWidth/15)
             make.width.equalToSuperview()
@@ -154,8 +117,8 @@ class SharedView: UIView {
         self.reportInfo.addSubview(nameLabel)
         self.nameLabel.snp.makeConstraints{(make) in
             make.left.equalToSuperview().offset(AJScreenWidth/40)
-            make.top.equalTo(infoExpLabel.snp.bottom).offset(AJScreenWidth/40)
-            make.height.equalTo(AJScreenWidth/15)
+            make.top.equalToSuperview().offset(AJScreenWidth/30)
+            make.height.equalTo(AJScreenWidth/18)
             make.right.equalTo(infoExpLabel.snp.centerX)
         }
         // 姓名文本框
@@ -170,45 +133,51 @@ class SharedView: UIView {
         self.reportInfo.addSubview(birthdayLabel)
         self.birthdayLabel.snp.makeConstraints{(make) in
             make.left.equalToSuperview().offset(AJScreenWidth/40)
-            make.top.equalTo(nameTextField.snp.bottom).offset(AJScreenWidth/40)
-            make.height.equalTo(AJScreenWidth/15)
+            make.top.equalTo(nameTextField.snp.bottom).offset(AJScreenWidth/30)
+            make.height.equalTo(AJScreenWidth/18)
             make.right.equalTo(infoExpLabel.snp.centerX)
         }
         // 设置出生日期按钮
-        self.reportInfo.addSubview(birthdayButton)
-        self.birthdayButton.snp.makeConstraints{(make) in
+        self.reportInfo.addSubview(phoneTextField)
+        phoneTextField.snp.makeConstraints{(make) in
             make.left.equalToSuperview().offset(AJScreenWidth/40)
             make.right.equalToSuperview().offset(-AJScreenWidth/40)
             make.top.equalTo(birthdayLabel.snp.bottom).offset(AJScreenWidth/40)
             make.height.equalTo(AJScreenWidth/12)
         }
-//        // 邮箱label
-//        self.reportInfo.addSubview(emailLabel)
-//        self.emailLabel.snp.makeConstraints{(make) in
-//            make.left.equalToSuperview().offset(AJScreenWidth/40)
-//            make.top.equalTo(birthdayButton.snp.bottom).offset(AJScreenWidth/40)
-//            make.height.equalTo(AJScreenWidth/15)
-//            make.right.equalTo(infoExpLabel.snp.centerX)
-//        }
-//        // 邮箱文本框
-//        self.reportInfo.addSubview(emailTextField)
-//        self.emailTextField.snp.makeConstraints{(make) in
-//            make.left.equalToSuperview().offset(AJScreenWidth/40)
-//            make.right.equalToSuperview().offset(-AJScreenWidth/40)
-//            make.top.equalTo(emailLabel.snp.bottom).offset(AJScreenWidth/40)
-//            make.height.equalTo(AJScreenWidth/12)
-//        }
         
         //发送报告信息框布局
         self.reportInfo.snp.makeConstraints{(make) in
-            make.left.equalToSuperview().offset(AJScreenWidth/40)
-            make.right.equalToSuperview().offset(-AJScreenWidth/40)
-            make.top.equalTo(explainView.snp.bottom).offset(AJScreenWidth/20)
-            make.height.equalTo(AJScreenWidth/20*11)
+            make.left.equalToSuperview().offset(AJScreenWidth/20)
+            make.right.equalToSuperview().offset(-AJScreenWidth/20)
+            make.top.equalTo(infoExpLabel.snp.bottom).offset(AJScreenWidth/40)
+            make.height.equalTo(AJScreenWidth/2-AJScreenWidth/20)
+        }
+        
+        // 说明文本布局
+        self.addSubview(explainLabel)
+        explainLabel.snp.makeConstraints{ (make) in
+            make.left.equalTo(reportInfo)
+            make.top.equalTo(reportInfo.snp.bottom).offset(AJScreenWidth/40)
+            make.height.equalTo(AJScreenWidth/15)
+            
+        }
+        
+        // 发送按钮布局
+        self.addSubview(sendButton)
+        sendButton.snp.makeConstraints{ (make) in
+            make.left.right.equalTo(reportInfo)
+            make.top.equalTo(explainLabel.snp.bottom).offset(AJScreenWidth/40)
+            make.height.equalTo(AJScreenWidth/10)
+            
         }
 
     }
 
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
 
 

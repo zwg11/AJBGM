@@ -10,6 +10,7 @@ import UIKit
 
 class AJTabbarController: UITabBarController {
 
+    var isLogin = false
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -53,6 +54,14 @@ class AJTabbarController: UITabBarController {
         
         // 设置tabbar背景颜色
         self.tabBar.backgroundColor = barDefaultColor
+    }
+    
+    func isLoadData(){
+        if isLogin{
+            // 加载数据
+        }else{
+            
+        }
     }
     
 

@@ -36,7 +36,7 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
     // 体重单位label
     private  var weightUnitLabel:UILabel = {
         let label = UILabel()
-        label.normalLabel(text: "kg")
+        label.text = GetUnit.getWeightUnit()
         label.font = UIFont.systemFont(ofSize: 16)
         
         return label
@@ -49,31 +49,31 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
         imageView.image = UIImage(named: "iconxt")
         return imageView
     }()
-    // 身高label
-     lazy var heightLabel:UILabel = {
-        let label = UILabel()
-        label.normalLabel(text: "身高")
-        return label
-    }()
-    // 身高值输入文本框
-     lazy var heightTextfield:UITextField = {
-        let textfield = UITextField()
-        textfield.norStyle(placeholder: "")
-        textfield.keyboardType = UIKeyboardType.decimalPad
-//        textfield.keyboardType = .numbersAndPunctuation
-        textfield.textAlignment = .center
-        //textfield.font = UIFont.systemFont(ofSize: 16)
-        return textfield
-    }()
-    
-    // 身高单位label
-    private lazy var heightUnitLabel:UILabel = {
-        let label = UILabel()
-        label.normalLabel(text: "cm")
-        label.font = UIFont.systemFont(ofSize: 16)
-        
-        return label
-    }()
+//    // 身高label
+//     lazy var heightLabel:UILabel = {
+//        let label = UILabel()
+//        label.normalLabel(text: "身高")
+//        return label
+//    }()
+//    // 身高值输入文本框
+//     lazy var heightTextfield:UITextField = {
+//        let textfield = UITextField()
+//        textfield.norStyle(placeholder: "")
+//        textfield.keyboardType = UIKeyboardType.decimalPad
+////        textfield.keyboardType = .numbersAndPunctuation
+//        textfield.textAlignment = .center
+//        //textfield.font = UIFont.systemFont(ofSize: 16)
+//        return textfield
+//    }()
+//    
+//    // 身高单位label
+//    private lazy var heightUnitLabel:UILabel = {
+//        let label = UILabel()
+//        label.normalLabel(text: "cm")
+//        label.font = UIFont.systemFont(ofSize: 16)
+//        
+//        return label
+//    }()
     
     //***********************血压***********************
     // 血压图标
@@ -118,7 +118,7 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
     // 血压单位label
     private lazy var bloodPressureUnitLabel:UILabel = {
         let label = UILabel()
-        label.normalLabel(text: "mmHg")
+        label.text = GetUnit.getPressureUnit()
         label.font = UIFont.systemFont(ofSize: 16)
         
         return label
@@ -186,9 +186,9 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
         self.addSubview(weightTextfield)
         weightTextfield.delegate = self
         weightTextfield.snp.makeConstraints{(make) in
-            make.left.equalTo(weightLabel.snp.right).offset(AJScreenWidth/40)
+            make.left.equalTo(weightLabel.snp.left)
             make.top.equalTo(weightLabel.snp.bottom).offset(AJScreenWidth/40)
-            make.width.equalTo(AJScreenWidth/5*2)
+            make.width.equalTo(AJScreenWidth/5)
             make.height.equalTo(AJScreenWidth/12)
         }
         
@@ -200,47 +200,47 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
             make.height.equalTo(weightTextfield.snp.height)
         }
         
-        //***********************身高********************
-        // 身高图标布局设置
-        self.addSubview(heightImageView)
-        heightImageView.snp.makeConstraints{(make) in
-            make.left.equalToSuperview().offset(AJScreenWidth/20)
-            make.top.equalTo(weightTextfield.snp.bottom).offset(AJScreenWidth/40)
-            make.height.width.equalTo(AJScreenWidth/15)
-        }
-        
-        // 身高label布局z设置
-        self.addSubview(heightLabel)
-        heightLabel.snp.makeConstraints{(make) in
-            make.left.equalTo(heightImageView.snp.right).offset(AJScreenWidth/40)
-            make.centerY.equalTo(heightImageView.snp.centerY)
-            make.height.equalTo(heightImageView.snp.height)
-        }
-        
-        // 身高值输入框布局
-        self.addSubview(heightTextfield)
-        heightTextfield.delegate = self
-        heightTextfield.snp.makeConstraints{(make) in
-            make.left.right.equalTo(weightTextfield)
-            make.top.equalTo(heightLabel.snp.bottom).offset(AJScreenWidth/40)
-            //make.width.equalTo(AJScreenWidth/5*2)
-            make.height.equalTo(AJScreenWidth/12)
-        }
-        
-        // 身高单位label布局
-        self.addSubview(heightUnitLabel)
-        heightUnitLabel.snp.makeConstraints{(make) in
-            make.left.equalTo(heightTextfield.snp.right).offset(AJScreenWidth/40)
-            make.bottom.equalTo(heightTextfield.snp.bottom)
-            make.height.equalTo(heightTextfield.snp.height)
-        }
+//        //***********************身高********************
+//        // 身高图标布局设置
+//        self.addSubview(heightImageView)
+//        heightImageView.snp.makeConstraints{(make) in
+//            make.left.equalToSuperview().offset(AJScreenWidth/20)
+//            make.top.equalTo(weightTextfield.snp.bottom).offset(AJScreenWidth/40)
+//            make.height.width.equalTo(AJScreenWidth/15)
+//        }
+//
+//        // 身高label布局z设置
+//        self.addSubview(heightLabel)
+//        heightLabel.snp.makeConstraints{(make) in
+//            make.left.equalTo(heightImageView.snp.right).offset(AJScreenWidth/40)
+//            make.centerY.equalTo(heightImageView.snp.centerY)
+//            make.height.equalTo(heightImageView.snp.height)
+//        }
+//
+//        // 身高值输入框布局
+//        self.addSubview(heightTextfield)
+//        heightTextfield.delegate = self
+//        heightTextfield.snp.makeConstraints{(make) in
+//            make.left.equalTo(weightLabel.snp.left)
+//            make.top.equalTo(heightLabel.snp.bottom).offset(AJScreenWidth/40)
+//            make.width.equalTo(AJScreenWidth/5)
+//            make.height.equalTo(AJScreenWidth/12)
+//        }
+//
+//        // 身高单位label布局
+//        self.addSubview(heightUnitLabel)
+//        heightUnitLabel.snp.makeConstraints{(make) in
+//            make.left.equalTo(heightTextfield.snp.right).offset(AJScreenWidth/40)
+//            make.bottom.equalTo(heightTextfield.snp.bottom)
+//            make.height.equalTo(heightTextfield.snp.height)
+//        }
         
         //***********************血压********************
         // 血压图标布局设置
         self.addSubview(bloodPressureImageView)
         bloodPressureImageView.snp.makeConstraints{(make) in
             make.left.equalToSuperview().offset(AJScreenWidth/20)
-            make.top.equalTo(heightTextfield.snp.bottom).offset(AJScreenWidth/40)
+            make.top.equalTo(weightTextfield.snp.bottom).offset(AJScreenWidth/40)
             make.height.width.equalTo(AJScreenWidth/15)
         }
         
@@ -258,9 +258,9 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
         self.addSubview(blood_diaPressureTextfield)
         blood_diaPressureTextfield.delegate = self
         blood_diaPressureTextfield.snp.makeConstraints{(make) in
-            make.right.equalTo(weightTextfield)
+            make.left.equalTo(weightTextfield.snp.right).offset(AJScreenWidth/20)
             make.top.equalTo(bloodPressureLabel.snp.bottom).offset(AJScreenWidth/40)
-            make.width.equalTo(AJScreenWidth/6)
+            make.width.equalTo(AJScreenWidth/5)
             make.height.equalTo(AJScreenWidth/12)
         }
         
@@ -268,9 +268,9 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
         self.addSubview(blood_sysPressureTextfield)
         blood_sysPressureTextfield.delegate = self
         blood_sysPressureTextfield.snp.makeConstraints{(make) in
-            make.left.equalTo(weightTextfield)
+            make.left.right.equalTo(weightTextfield)
             make.top.equalTo(bloodPressureLabel.snp.bottom).offset(AJScreenWidth/40)
-            make.width.equalTo(AJScreenWidth/6)
+            //make.width.equalTo(AJScreenWidth/5)
             make.height.equalTo(AJScreenWidth/12)
         }
         
@@ -279,8 +279,7 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
         spaceLabel.snp.makeConstraints{(make) in
             make.right.equalTo(blood_diaPressureTextfield.snp.left)
             make.left.equalTo(blood_sysPressureTextfield.snp.right)
-            make.top.equalTo(bloodPressureLabel.snp.bottom).offset(AJScreenWidth/40)
-            make.height.equalTo(AJScreenWidth/12)
+            make.top.bottom.equalTo(blood_diaPressureTextfield)
         }
         
         // 血压单位label布局  在收缩压右边
@@ -288,8 +287,8 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
         bloodPressureUnitLabel.snp.makeConstraints{(make) in
             make.left.equalTo(blood_diaPressureTextfield.snp.right).offset(AJScreenWidth/40)
 
-            make.bottom.equalTo(blood_diaPressureTextfield.snp.bottom)
-            make.height.equalTo(blood_diaPressureTextfield.snp.height)
+            make.bottom.top.equalTo(blood_diaPressureTextfield)
+
         }
         
         //***********************药物********************
@@ -310,7 +309,7 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
         // 药物选择按钮布局
         self.addSubview(medicineChooseButton)
         medicineChooseButton.snp.makeConstraints{(make) in
-            make.centerX.equalToSuperview()
+            make.left.equalTo(medicineImageView.snp.left)
             make.top.equalTo(medidineLabel.snp.bottom).offset(AJScreenWidth/40)
             make.width.equalTo(AJScreenWidth/5*3)
             make.height.equalTo(AJScreenWidth/12)
