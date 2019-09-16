@@ -14,27 +14,30 @@ class emailCheckView: UIView {
     
     // 输入邮箱文本框
     lazy var emailTextField:UITextField = {
-        let textField = initTextField(placeholder: " 输入邮箱",keyboardType: .emailAddress)
+        let textField = initTextField(placeholder: " Email",keyboardType: .emailAddress)
         let imageView = UIImageView(image: UIImage(named: "email"))
         textField.leftView = imageView
         textField.leftViewMode = .always
+        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
         return textField
     }()
     
     // 输入验证码文本框
     lazy var authCodeTextField:UITextField = {
-        let textField = initTextField(placeholder: " 输入验证码",keyboardType: .numberPad)
+        let textField = initTextField(placeholder: " Code",keyboardType: .numberPad)
         let imageView = UIImageView(image: UIImage(named: "email"))
         textField.leftView = imageView
         textField.leftViewMode = .always
+        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
         return textField
     }()
     
     // 获取验证码按钮
     lazy var getAuthCodeButton:UIButton = {
         let button = UIButton(type: .custom)
-        button.setTitle(" 获取验证码", for: .normal)
-        button.backgroundColor = UIColor.blue
+        button.setTitle(" Send Code", for: .normal)
+        //这个验证码按钮的颜色，和其他按钮的颜色不同
+        button.backgroundColor = SendButtonColor
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         return button
@@ -43,8 +46,8 @@ class emailCheckView: UIView {
     // 下一步按钮
     lazy var nextButton:UIButton = {
         let button = UIButton()
-        button.setTitle("下一步", for: .normal)
-        button.backgroundColor = UIColor.blue
+        button.setTitle("Next", for: .normal)
+        button.backgroundColor = ButtonColor
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         return button
@@ -71,7 +74,7 @@ class emailCheckView: UIView {
             make.top.equalToSuperview().offset(AJScreenHeight/12)
         }
         let line_frame1 = UIView(frame: CGRect())
-        line_frame1.backgroundColor = UIColor.black
+        line_frame1.backgroundColor = LineColor
         self.addSubview(line_frame1)
         line_frame1.snp.makeConstraints{ (make) in
             make.height.equalTo(0.5)
@@ -90,7 +93,7 @@ class emailCheckView: UIView {
         }
         
         let line_frame2 = UIView(frame: CGRect())
-        line_frame2.backgroundColor = UIColor.black
+        line_frame2.backgroundColor = LineColor
         self.addSubview(line_frame2)
         line_frame2.snp.makeConstraints{ (make) in
             make.height.equalTo(0.5)

@@ -183,13 +183,13 @@ class loginViewController: UIViewController,UITextFieldDelegate {
         print("forgetPassword clicked.")
         
         //测试过程中，修改密码时，先跳到第二页
-        self.navigationController?.pushViewController(emailCheckSecViewController(), animated: true)
+        self.navigationController?.pushViewController(emailCheckViewController(), animated: true)
     }
     
     //跳转到注册界面
     @objc func register(){
         print("register clicked.")
-        self.navigationController?.pushViewController(infoInputViewController(), animated: true)
+        self.navigationController?.pushViewController(registerViewController(), animated: true)
     }
 
     //此处只做收回键盘的动作
