@@ -77,7 +77,7 @@ class infoInputViewController: UIViewController,UITextFieldDelegate {
 //        self.navigationController?.navigationBar.backgroundColor = ThemeColor
         self.navigationController?.navigationBar.barTintColor = ThemeColor
         self.navigationController?.navigationBar.isTranslucent = false
-        
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: NaviTitleColor]
         self.view.addSubview(infoinputView)
         infoinputView.snp.makeConstraints{(make) in
             make.height.equalTo(AJScreenHeight)

@@ -36,9 +36,11 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
         super.viewDidLoad()
 
         self.navigationController?.isNavigationBarHidden = false
-        self.navigationController?.navigationBar.backgroundColor = UIColor.white
-        self.view.backgroundColor = UIColor.white
-        self.title = "邮箱验证"
+        self.navigationController?.navigationBar.barTintColor = ThemeColor
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: NaviTitleColor]
+        self.view.backgroundColor = ThemeColor
+        self.title = "Email Verification"
         print("到达邮箱验证界面")
         self.view.addSubview(emailCheck)
         emailCheck.snp.makeConstraints{(make) in

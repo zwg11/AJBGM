@@ -43,6 +43,7 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
         print("上一页传过来的verifyString",verifyString)
         self.navigationController?.isNavigationBarHidden = false
         self.navigationController?.navigationBar.backgroundColor = NavBarColor
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: NaviTitleColor]
         self.title = "Change Password"
 //        self.navigationController?.navigationBar.tintColor = TextColor
         self.view.addSubview(emailCheckSec)

@@ -30,7 +30,8 @@ let ButtonColor = UIColor.init(red: 14/255.0, green: 60/255.0, blue: 100/255.0, 
 let LineColor = UIColor.init(red: 70/255.0, green: 102/255.0, blue: 131/255.0, alpha: 1)
 //navigationBar中文字的颜色
 let NaviTitleColor = UIColor.init(red: 173/255.0, green: 176/255.0, blue: 181/255.0, alpha: 1)
-
+//send code 按钮背景色
+let SendButtonColor = UIColor.init(red: 26/255.0, green: 90/255.0, blue: 145/255.0, alpha: 1)
 
 
 //白色
