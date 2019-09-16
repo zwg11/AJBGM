@@ -17,6 +17,7 @@ class recentTrendView: UIView {
         view.setupUI()
         // 摄者y轴最大值
         view.lineChartView.leftAxis.axisMaximum = GetBloodLimit.getRandomDinnerTop()*2
+        view.lineChartView.leftAxis.drawLabelsEnabled = false
         // 设置x轴坐标数
         view.lineChartView.xAxis.labelCount = 7
         // 设置x坐标轴最大值
@@ -31,6 +32,7 @@ class recentTrendView: UIView {
         let high = GetBloodLimit.getRandomDinnerTop()
         view.addLimitLine(low, "\(low)", kRGBColor(249, 158, 25, 1))
         view.addLimitLine(high, "\(high)", kRGBColor(55, 158, 247, 1))
+        view.backgroundColor = UIColor.clear
  
         return view
     }()

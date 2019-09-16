@@ -59,19 +59,19 @@ class recentTableViewCell: UITableViewCell {
     
     private lazy var horizonLine:UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.red
+        view.backgroundColor = UIColor.gray
         return view
     }()
     
     private lazy var verLine1:UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.red
+        view.backgroundColor = UIColor.gray
         return view
     }()
     
     private lazy var verLine2:UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.red
+        view.backgroundColor = UIColor.gray
         return view
     }()
     
