@@ -42,6 +42,8 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             let cell = UITableViewCell(style: .value1, reuseIdentifier: id)
             cell.selectionStyle = .none
             cell.textLabel?.text = "最近一次"
+            cell.backgroundColor = UIColor.clear
+            cell.textLabel?.textColor = UIColor.white
             // 在数据库取出最近一次的血糖记录
             let x = DBSQLiteManager.shareManager()
             let data = x.selectLastGlucoseRecord(UserInfo.getUserId())
@@ -58,6 +60,7 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             let cell = LastResultTableViewCell(style: .value1, reuseIdentifier: id)
             cell.selectionStyle = .none
 
+            cell.backgroundColor = UIColor.clear
             return cell
         case 2:
             //var cell = tableView.dequeueReusableCell(withIdentifier: id)
@@ -65,27 +68,24 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             let cell = UITableViewCell(style: .default, reuseIdentifier: id)
             cell.selectionStyle = .none
             cell.textLabel?.text = "最近7天"
-            
+            cell.textLabel?.textColor = UIColor.white
+            cell.backgroundColor = UIColor.clear
             return cell
         case 3:
-            //var cell = tableView.dequeueReusableCell(withIdentifier: id)
             
             let cell = recentTableViewCell(style: .default, reuseIdentifier: id)
             cell.selectionStyle = .none
-            //cell?.textLabel?.text = "最近7天"
-            cell.backgroundColor = UIColor.yellow
+            cell.backgroundColor = UIColor.clear
             return cell
         case 4:
-            //var cell = tableView.dequeueReusableCell(withIdentifier: id)
             
             let cell = UITableViewCell(style: .default, reuseIdentifier: id)
             cell.selectionStyle = .none
-            //cell.imageView?.image = UIImage(named: "tend_pic")
             cell.textLabel?.text = "血糖趋势"
-            
+            cell.textLabel?.textColor = UIColor.white
+            cell.backgroundColor = UIColor.clear
             return cell
         default:
-            //var cell = tableView.dequeueReusableCell(withIdentifier: id)
             
             let cell = UITableViewCell(style: .default, reuseIdentifier: id)
             cell.selectionStyle = .none
@@ -93,6 +93,7 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             recent7View.snp.makeConstraints{(make) in
                 make.edges.equalToSuperview()
             }
+            cell.backgroundColor = UIColor.clear
             return cell
         }
         
@@ -103,7 +104,7 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         let view = recentTrendView()
         
         view.setupUI()
-        
+        view.backgroundColor = UIColor.clear
         return view
     }()
     
@@ -132,15 +133,23 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        homeTableView.frame = CGRect(x: 0, y: 0, width: AJScreenWidth, height: AJScreenHeight)
+        homeTableView.snp.makeConstraints{(make) in
+            make.left.right.equalToSuperview()
+            make.top.equalToSuperview()
+            if #available(iOS 11.0, *) {
+                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+            } else {
+                make.bottom.equalTo(bottomLayoutGuide.snp.top)
+                // Fallback on earlier versions
+            }
+        }
         homeTableView.delegate = self
         homeTableView.dataSource = self
+        homeTableView.backgroundColor = UIColor.clear
+        homeTableView.isScrollEnabled = true
         self.view.addSubview(homeTableView)
+        self.view.backgroundColor = ThemeColor
 
-        
-        //requestData(day: 30)
-        
-        self.view.backgroundColor = UIColor.white
         
         
         

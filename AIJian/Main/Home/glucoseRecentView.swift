@@ -14,12 +14,14 @@ class glucoseRecentView: UIView {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 30)
         label.textAlignment = .center
+        label.textColor = UIColor.white
         return label
     }()
     private lazy var TitleLabel:UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 20)
         label.textAlignment = .center
+        label.textColor = UIColor.white
         return label
     }()
     
@@ -27,10 +29,13 @@ class glucoseRecentView: UIView {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 15)
         label.textAlignment = .center
+        label.textColor = UIColor.white
         return label
     }()
     
     func setupUI(title:String,value:String,unit:String){
+        self.backgroundColor = UIColor.clear
+        
         ValueLabel.text = value
         TitleLabel.text = title
         UnitLabel.text = unit

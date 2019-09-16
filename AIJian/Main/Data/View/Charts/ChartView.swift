@@ -17,7 +17,7 @@ class ChartView: UIView ,ChartViewDelegate{
         //let _lineChartView = LineChartView.init(frame: CGRect.init(x: 0, y: 20, width: 300, height: 300))
         let _lineChartView = LineChartView()
         //_lineChartView.delegate = self//
-        _lineChartView.backgroundColor = UIColor.white
+        _lineChartView.backgroundColor = UIColor.clear
         _lineChartView.doubleTapToZoomEnabled = false
         _lineChartView.chartDescription?.text = ""//设置为""隐藏描述文字
         
@@ -42,8 +42,9 @@ class ChartView: UIView ,ChartViewDelegate{
         leftAxis.labelTextColor = UIColor.black
         leftAxis.labelFont = UIFont.systemFont(ofSize: 10)
         leftAxis.labelPosition = .outsideChart
-        //leftAxis.gridColor = UIColor.init(red: 233/255.0, green: 233/255.0, blue: 233/255.0, alpha: 1.0)//网格
-        leftAxis.gridColor = UIColor.lightGray
+        //网格
+        //leftAxis.gridColor = UIColor.init(red: 233/255.0, green: 233/255.0, blue: 233/255.0, alpha: 1.0)
+        //leftAxis.gridColor = UIColor.lightGray
         leftAxis.gridAntialiasEnabled = false//抗锯齿
         if GetUnit.getBloodUnit() == "mg/dL"{
             
@@ -56,7 +57,7 @@ class ChartView: UIView ,ChartViewDelegate{
         //x轴
         let xAxis = _lineChartView.xAxis
         xAxis.granularityEnabled = true
-        xAxis.labelTextColor = UIColor.red
+        xAxis.labelTextColor = UIColor.lightGray
         xAxis.labelFont = UIFont.systemFont(ofSize: 10.0)
         xAxis.labelPosition = .bottom
         xAxis.labelRotatedHeight = 2
@@ -101,7 +102,7 @@ class ChartView: UIView ,ChartViewDelegate{
         print(yDataArray1)
         let set1 = LineChartDataSet.init(entries: yDataArray1, label: "")
         // 设置线 的颜色
-        set1.colors = [UIColor.black]
+        set1.colors = [UIColor.green]
         // 设置 点的样式
         set1.drawCirclesEnabled = true//绘制转折点
         
@@ -184,7 +185,7 @@ class ChartView: UIView ,ChartViewDelegate{
         limitLine.lineDashLengths = [4.0,0]
         //文字
         limitLine.valueFont = UIFont.systemFont(ofSize: 10.0)
-        limitLine.valueTextColor = UIColor.black
+        limitLine.valueTextColor = UIColor.white
         limitLine.labelPosition = .bottomLeft
         lineChartView.leftAxis.addLimitLine(limitLine)
     }

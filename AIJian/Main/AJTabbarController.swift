@@ -17,6 +17,10 @@ class AJTabbarController: UITabBarController {
         // Do any additional setup after loading the view.
         let Home = HomeViewController()
         let nv1 = AJNavigationController(rootViewController: Home)
+        // 设置导航栏背景色，并且不渲染
+        nv1.navigationBar.barTintColor = ThemeColor
+        nv1.navigationBar.isTranslucent = false
+        // 设置导航栏标题
         Home.navigationItem.title = "Home"
         Home.navigationController?.navigationBar.tintColor = barDefaultColor
         //未选中状态的图标
@@ -30,6 +34,8 @@ class AJTabbarController: UITabBarController {
         
         let Data = DataViewController()
         let nv2 = AJNavigationController(rootViewController: Data)
+        nv2.navigationBar.barTintColor = ThemeColor
+        nv2.navigationBar.isTranslucent = false
         Data.navigationItem.title = "Data"
         nv2.tabBarItem.image = UIImage(named: "shuju.png")?.withRenderingMode(.alwaysOriginal)
         nv2.tabBarItem.selectedImage = UIImage(named: "shuju-2.png")?.withRenderingMode(.alwaysOriginal)
@@ -38,6 +44,8 @@ class AJTabbarController: UITabBarController {
         
         let BLE = BLEViewController()
         let nv3 = AJNavigationController(rootViewController: BLE)
+        nv3.navigationBar.barTintColor = ThemeColor
+        nv3.navigationBar.isTranslucent = false
         BLE.navigationItem.title = "Data Transfer"
         nv3.tabBarItem.image = UIImage(named: "shuru.png")?.withRenderingMode(.alwaysOriginal)
         nv3.tabBarItem.selectedImage = UIImage(named: "shuru-2.png")?.withRenderingMode(.alwaysOriginal)
@@ -46,6 +54,8 @@ class AJTabbarController: UITabBarController {
         
         let Mine = MineViewController()
         let nv4 = AJNavigationController(rootViewController: Mine)
+        nv4.navigationBar.barTintColor = ThemeColor
+        nv4.navigationBar.isTranslucent = false
         Mine.navigationItem.title = "Mine"
         nv4.tabBarItem.image = UIImage(named: "wode.png")?.withRenderingMode(.alwaysOriginal)
         nv4.tabBarItem.selectedImage = UIImage(named: "wode-2.png")?.withRenderingMode(.alwaysOriginal)

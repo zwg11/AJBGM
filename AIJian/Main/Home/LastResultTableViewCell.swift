@@ -32,6 +32,7 @@ class LastResultTableViewCell: UITableViewCell {
         label.text = getDataInHome.getLastGlucoseValue()
         label.adjustsFontSizeToFitWidth = true
         label.backgroundColor = UIColor.gray
+        label.textColor = UIColor.white
         return label
     }()
     
@@ -42,6 +43,7 @@ class LastResultTableViewCell: UITableViewCell {
         label.textAlignment = .center
         label.sizeToFit()
         label.backgroundColor = UIColor.gray
+        label.textColor = UIColor.white
         return label
     }()
     
@@ -53,6 +55,7 @@ class LastResultTableViewCell: UITableViewCell {
         label.textAlignment = .center
         label.sizeToFit()
         label.backgroundColor = UIColor.gray
+        label.textColor = UIColor.white
         return label
     }()
     override func setSelected(_ selected: Bool, animated: Bool) {
