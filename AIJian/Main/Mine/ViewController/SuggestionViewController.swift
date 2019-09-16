@@ -33,7 +33,7 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return AJScreenHeight/15
     }
-    
+    //放对应的内容
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         print("获得tableview的内容")

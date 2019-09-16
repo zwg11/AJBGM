@@ -44,8 +44,8 @@ class infoInputViewController: UIViewController,UITextFieldDelegate {
         // 以下代理本想单独拿出来写进函数中，但是不知为什么老是内存溢出
         //所有的textField的代理方法
         view.userNameTextField.delegate = self  //用户名
-        view.heightTextField.delegate = self    //身高
-        view.weightTextField.delegate = self    //体重
+//        view.heightTextField.delegate = self    //身高
+//        view.weightTextField.delegate = self    //体重
         view.nationTextField.delegate = self    //国家
         view.phoneTextField.delegate = self     //电话
         initDelegate()
@@ -71,18 +71,17 @@ class infoInputViewController: UIViewController,UITextFieldDelegate {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        self.title = "填写个人信息"
-        self.view.backgroundColor = UIColor.white
-        // Do any additional setup after loading the view.
-        
-//        email = register.email
-//        verifyString = register.data
-     
+        self.title = "Personal Information"
+//        self.view.backgroundColor = UIColor.white
+        self.navigationController?.isNavigationBarHidden = false
+//        self.navigationController?.navigationBar.backgroundColor = ThemeColor
+        self.navigationController?.navigationBar.barTintColor = ThemeColor
+        self.navigationController?.navigationBar.isTranslucent = false
         
         self.view.addSubview(infoinputView)
         infoinputView.snp.makeConstraints{(make) in
             make.height.equalTo(AJScreenHeight)
-            make.top.equalTo(navigationBarHeight)
+            make.top.equalToSuperview()
             make.left.right.equalToSuperview()
         }
         
@@ -214,14 +213,14 @@ class infoInputViewController: UIViewController,UITextFieldDelegate {
        userName = infoinputView.userNameTextField.text!
         //性别
 //        gender = infoinputView.
-        //身高
-        if infoinputView.heightTextField.text! != ""{
-             height = Double(infoinputView.heightTextField.text!)!
-        }
-        //体重
-        if infoinputView.weightTextField.text! != ""{
-             weightKg = Double(infoinputView.weightTextField.text!)!
-        }
+//        //身高
+//        if infoinputView.heightTextField.text! != ""{
+//             height = Double(infoinputView.heightTextField.text!)!
+//        }
+//        //体重
+//        if infoinputView.weightTextField.text! != ""{
+//             weightKg = Double(infoinputView.weightTextField.text!)!
+//        }
        
         //国家
         country = infoinputView.nationTextField.text!

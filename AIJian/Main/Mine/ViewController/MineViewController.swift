@@ -14,34 +14,17 @@ import SnapKit
 class MineViewController: UIViewController {
     
     //列表数据
-    public lazy var MineArray: Array = {
-        return [[["icon":"aboutUs", "title": "信息管理"],
-                 ["icon":"aboutUs", "title": "单位设置"],
-                 ["icon":"aboutUs", "title": "密码修改"],
-                 ["icon":"aboutUs", "title": "血糖设置"]],
-                
-                [["icon":"aboutUs", "title": "使用说明"],
-                 ["icon":"aboutUs", "title": "关于我们"],
-                 ["icon":"aboutUs", "title": "版本更新"]]
-        ]
-    }()
+    
+    let _titleArr = ["信息管理","单位管理","密码修改","血糖设置","使用说明","关于我们","版本更新"]
+    let _imgArr   = ["aboutUs","aboutUs","aboutUs","aboutUs","aboutUs","aboutUs","aboutUs",]
+    
+
     //点击跳转对应页面
     public lazy var clickArray: [UIViewController] = {
         return [InfoViewController(),UnitViewController(),PassChangeViewController(),BloodSetViewController(), UseDirViewController(),AboutUsViewController(),VersionUViewController()
         ]
     }()
 
-    public lazy var quitButton:UIButton = {
-        let quitLogin = UIButton(type:.system)
-        quitLogin.backgroundColor = UIColor.red
-        quitLogin.setTitle("退出登录", for:.normal)
-        quitLogin.layer.cornerRadius = 8
-        quitLogin.layer.masksToBounds = true
-        quitLogin.titleLabel?.font = UIFont.systemFont(ofSize:18)
-        quitLogin.titleLabel?.textColor = UIColor.white
-        quitLogin.addTarget(self, action: #selector(loginOff), for: .touchUpInside)
-        return quitLogin
-    }()
     
     override func viewWillAppear(_ animated: Bool) {
         // 检查数据库是否有相关用户的信息
@@ -57,38 +40,40 @@ class MineViewController: UIViewController {
         super.viewDidLoad()
         //将所有按钮添加到scrollview中，还需要修改相对布局
 
+//
+//        let headview = AJMineHeaderView(frame: CGRect(x: 0, y: 0, width: AJScreenWidth, height: AJScreenHeight/5))
+////        headview.setUpUI()
+////        headview.textLabel
+//        headview.textButton.addTarget(self, action: #selector(MineLogin), for: .touchUpInside)
+//
+//        print(headview)
         
-        let headview = AJMineHeaderView(frame: CGRect(x: 0, y: 0, width: AJScreenWidth, height: AJScreenHeight/3))
-//        headview.setUpUI()
-//        headview.textLabel
-        headview.textButton.addTarget(self, action: #selector(MineLogin), for: .touchUpInside)
-        
-        print(headview)
-        let tableview = AJMineTableView(frame: CGRect(x: 0, y:  AJScreenHeight/3, width: AJScreenWidth, height: AJScreenHeight/3*2))
+//        let tableview = AJMineTableView(frame: CGRect(x: 0, y:  AJScreenHeight/5, width: AJScreenWidth, height: AJScreenHeight/3*2))
+        let tableview = UITableView(frame: CGRect(x: 0, y:  0, width: AJScreenWidth, height: AJScreenHeight*7/10+AJScreenHeight/5+50))
         //将CELL的标识，在此处进行设置
-        tableview.tableview.register(UITableViewCell.self, forCellReuseIdentifier:"cell")
-        tableview.tableview.delegate = self
-        tableview.tableview.dataSource = self
+        tableview.register(UITableViewCell.self, forCellReuseIdentifier:"cell")
+        tableview.delegate = self
+        tableview.dataSource = self
 //        self.view.addSubview(tableview)
     
     
       
         
-        let scrollView = UIScrollView(frame: CGRect(x: 0, y: 64, width: AJScreenWidth, height: AJScreenHeight-64))
-        scrollView.contentSize = CGSize(width: AJScreenWidth, height: AJScreenHeight - AJScreenHeight/35)
-
-        scrollView.showsVerticalScrollIndicator = true
-        scrollView.addSubview(headview)
-        scrollView.addSubview(tableview)
-        scrollView.addSubview(quitButton)
-        quitButton.snp.makeConstraints{ (make) in
-            make.top.equalTo(AJScreenHeight-AJScreenHeight/9)
-            make.centerX.equalToSuperview()
-            make.height.equalTo(AJScreenHeight/15)
-            make.width.equalTo(AJScreenWidth)
-        }
+//        let scrollView = UIScrollView(frame: CGRect(x: 0, y: navigationBarHeight, width: AJScreenWidth, height: AJScreenHeight-64))
+//        scrollView.contentSize = CGSize(width: AJScreenWidth, height: AJScreenHeight*7/10+AJScreenHeight/5)
+//
+//        scrollView.showsVerticalScrollIndicator = true
+////        scrollView.addSubview(headview)
+//        scrollView.addSubview(tableview)
+//        scrollView.addSubview(quitButton)
+//        quitButton.snp.makeConstraints{ (make) in
+//            make.top.equalTo(AJScreenHeight-AJScreenHeight/9)
+//            make.centerX.equalToSuperview()
+//            make.height.equalTo(AJScreenHeight/15)
+//            make.width.equalTo(AJScreenWidth)
+//        }
         
-        self.view.addSubview(scrollView)
+        self.view.addSubview(tableview)
         
     }
     
@@ -166,51 +151,127 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
     
     //设置有几个分区
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
-    //每个分区有几行
+    //每个分区有几行 头部+7个cell+退出登录
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(section == 0){
-            return 4
-        }
-        return 3
+        return 9
     }
     //每一个cell，里面的内容
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print("这是什么东东", indexPath)
+        print(indexPath.row)
+        let cellid = "another"
+        let cellquit = "quitbutton"
         //indexPath为一个数组
         //根据注册的cell类ID值获取到载体cell
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
-        cell.selectionStyle = .none
-        //判断有几组
-        let sectionArray = MineArray[indexPath.section]
-        //indexpath的[section][row]
-        let dict:[String:String] = sectionArray[indexPath.row]
-        cell.imageView?.image = UIImage(named: dict["icon"] ?? "")
-        cell.textLabel?.text = dict["title"]
-        cell.accessoryType = .disclosureIndicator
-        return cell
+        switch indexPath.row{
+            case 0:
+//                let headview = AJMineHeaderView(frame: CGRect(x: 0, y: 0, width: AJScreenWidth, height: AJScreenHeight/5))
+//                headview.textButton.addTarget(self, action: #selector(MineLogin), for: .touchUpInside)
+                let cell = AJMineHeaderView(style: .value1, reuseIdentifier: cellid)
+                cell.selectionStyle = .none
+                return cell
+            case 1:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
+                cell.selectionStyle = .none
+                cell.imageView?.image = UIImage(named: _imgArr[0])
+                cell.textLabel?.text = _titleArr[0]
+                cell.accessoryType = .disclosureIndicator
+                return cell
+            case 2:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
+                cell.selectionStyle = .none
+                cell.imageView?.image = UIImage(named: _imgArr[1])
+                cell.textLabel?.text = _titleArr[1]
+                cell.accessoryType = .disclosureIndicator
+                return cell
+            case 3:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
+                cell.selectionStyle = .none
+                cell.imageView?.image = UIImage(named: _imgArr[2])
+                cell.textLabel?.text = _titleArr[2]
+                cell.accessoryType = .disclosureIndicator
+                return cell
+            case 4:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
+                cell.selectionStyle = .none
+                cell.imageView?.image = UIImage(named: _imgArr[3])
+                cell.textLabel?.text = _titleArr[3]
+                cell.accessoryType = .disclosureIndicator
+                return cell
+            case 5:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
+                cell.selectionStyle = .none
+                cell.imageView?.image = UIImage(named: _imgArr[4])
+                cell.textLabel?.text = _titleArr[4]
+                cell.accessoryType = .disclosureIndicator
+                return cell
+            case 6:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
+                cell.selectionStyle = .none
+                cell.imageView?.image = UIImage(named: _imgArr[5])
+                cell.textLabel?.text = _titleArr[5]
+                cell.accessoryType = .disclosureIndicator
+                return cell
+            case 7:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
+                cell.selectionStyle = .none
+                cell.imageView?.image = UIImage(named: _imgArr[6])
+                cell.textLabel?.text = _titleArr[6]
+                cell.accessoryType = .disclosureIndicator
+                return cell
+            case 8:
+                let cell = QuitCellView(style: .value1, reuseIdentifier: cellquit)
+                cell.selectionStyle = .none
+                cell.quitButton.addTarget(self, action: #selector(loginOff), for: .touchUpInside)
+                return cell
+            default:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
+                cell.selectionStyle = .none
+                cell.imageView?.image = UIImage(named: _imgArr[3])
+                cell.textLabel?.text = _titleArr[3]
+                cell.accessoryType = .disclosureIndicator
+                return cell
+            
+        }
     }
     //回调方法，监听点击事件
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //行
-        let row = indexPath.section
-        //列
         let col = indexPath.row
-        if indexPath.section == 0 {
-            self.navigationController?.pushViewController(clickArray[col], animated: true)
-            print(clickArray[col])
-            print(col)
+        
+        if col == 0{
+            
+        }else if col == 8{
+            
         }else{
-            self.navigationController?.pushViewController(clickArray[col+row+3], animated: true)
-            print(clickArray[col+row+3])
-            print(col+row+3)
+            self.navigationController?.pushViewController(clickArray[col-1], animated: true)
         }
+        
+//        if indexPath.section == 0 {
+//            self.navigationController?.pushViewController(clickArray[col], animated: true)
+//            print(clickArray[col])
+//            print(col)
+//        }else{
+//            self.navigationController?.pushViewController(clickArray[col+row+3], animated: true)
+//            print(clickArray[col+row+3])
+//            print(col+row+3)
+//        }
     }
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footview = UIView()
-        footview.backgroundColor = FooterViewColor
+        footview.backgroundColor = UIColor.white
         return footview
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.row {
+            case 0:
+                return AJScreenWidth*0.35 + 35
+            case 8:
+                return AJScreenHeight/15+20
+            default:
+                return AJScreenHeight/12
+        }
     }
    
 }

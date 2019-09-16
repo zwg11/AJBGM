@@ -33,7 +33,7 @@ class sugComponent: UIView {
         self.addSubview(textField)
         
         imageView.snp.makeConstraints{ (make) in
-            make.width.equalTo(AJScreenWidth/15)
+            make.width.equalTo(AJScreenHeight/15)
             make.height.equalTo(AJScreenHeight/15)
             make.left.equalTo(AJScreenWidth/25)
         }

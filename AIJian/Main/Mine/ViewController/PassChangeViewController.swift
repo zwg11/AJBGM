@@ -23,15 +23,16 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
             let text_email = UILabel()
             text_email.font = UIFont.systemFont(ofSize: 16)
 //            text_email.text = email
+            text_email.backgroundColor = UIColor.red
             return text_email
         }()
-    
-        lazy var oldPasswd_label:UILabel = {
-            let oldPasswd_label = UILabel(frame: CGRect())
-            oldPasswd_label.text = "旧 密 码"
-            oldPasswd_label.font = UIFont.systemFont(ofSize: 18)
-            return oldPasswd_label
-        }()
+//
+//        lazy var oldPasswd_label:UILabel = {
+//            let oldPasswd_label = UILabel(frame: CGRect())
+//            oldPasswd_label.text = "旧 密 码"
+//            oldPasswd_label.font = UIFont.systemFont(ofSize: 18)
+//            return oldPasswd_label
+//        }()
     
         lazy var oldPasswd_textF:UITextField = {
             let oldPasswd_textF = UITextField()
@@ -41,6 +42,9 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
             oldPasswd_textF.isSecureTextEntry = true
             oldPasswd_textF.allowsEditingTextAttributes = false
             oldPasswd_textF.borderStyle = .none
+            let imageView = UIImageView(image: UIImage(named: "email"))
+            oldPasswd_textF.leftView = imageView
+            oldPasswd_textF.leftViewMode = .always
             return oldPasswd_textF
         }()
     
@@ -51,6 +55,9 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
             newPasswd_textF.allowsEditingTextAttributes = false
             newPasswd_textF.isSecureTextEntry = true
             newPasswd_textF.borderStyle = .none
+            let imageView = UIImageView(image: UIImage(named: "email"))
+            newPasswd_textF.leftView = imageView
+            newPasswd_textF.leftViewMode = .always
             return newPasswd_textF
         }()
     
@@ -61,7 +68,19 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
             verfiedPasswd_textF.allowsEditingTextAttributes = false
             verfiedPasswd_textF.isSecureTextEntry = true
             verfiedPasswd_textF.borderStyle = .none
+            let imageView = UIImageView(image: UIImage(named: "email"))
+            verfiedPasswd_textF.leftView = imageView
+            verfiedPasswd_textF.leftViewMode = .always
             return verfiedPasswd_textF
+        }()
+    
+        lazy var saveButton:UIButton = {
+            let button = UIButton()
+            button.setTitle("save", for: .normal)
+            button.backgroundColor = UIColor.blue
+            button.setTitleColor(UIColor.white, for: .normal)
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+            return button
         }()
     
         //视图消失，就是退出这个密码修改页面的时候。避免每次进入的时候都要删除原来的字符串。
@@ -72,10 +91,6 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
         }
          //当视图出现了，直接从文件中获取email和token信息
         override func viewWillAppear(_ animated: Bool) {
-//            let path = Bundle.main.path(forResource: "User", ofType: "plist")
-//            let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path!)!
-//            email = data["email"] as! String
-//            token = data["token"] as! String
             email = UserInfo.getEmail()
             token = UserInfo.getToken()
             text_email.text = email
@@ -86,49 +101,58 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
             self.title = "pass"
             self.view.backgroundColor = UIColor.white
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(title:"back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back))
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: UIBarButtonItem.Style.plain, target: self, action: #selector(save))
-            
-            /*第一行开始*/
-            let email_label = UILabel(frame: CGRect())
-            email_label.text = "邮      箱"
-            email_label.font = UIFont.systemFont(ofSize: 18)
-            self.view.addSubview(email_label)
-            email_label.snp.makeConstraints{ (make) in
-                make.height.equalTo(AJScreenHeight/15)
-                make.width.equalTo(AJScreenWidth/5)
-                make.left.equalTo(AJScreenWidth/15)
-                make.top.equalTo(navigationBarHeight)
+//            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: UIBarButtonItem.Style.plain, target: self, action: #selector(save))
+            if AJScreenHeight == 812{
+                print("相等")
+            }else{
+                print("不相等")
             }
+            print("iphone x 的高度",AJScreenHeight)
             
-            //邮箱信息布局约束
-            self.view.addSubview(text_email)
-            text_email.snp.makeConstraints{ (make) in
-                make.height.equalTo(AJScreenHeight/15)
-                make.width.equalTo(AJScreenWidth/2)
-                make.left.equalTo(email_label.snp.right).offset(AJScreenWidth/10)
-                make.top.equalTo(navigationBarHeight)
-            }
             
-            //第一条线
-            let line_frame1 = UIView(frame: CGRect())
-            line_frame1.backgroundColor = UIColor.black
-            self.view.addSubview(line_frame1)
-            line_frame1.snp.makeConstraints{ (make) in
-                make.height.equalTo(0.1)
-                make.width.equalTo(AJScreenWidth)
-                make.left.equalTo(AJScreenWidth/15)
-                make.top.equalTo(navigationBarHeight+AJScreenHeight/15+0.2)
-            }
+//            /*第一行开始*/
+//            let email_label = UILabel(frame: CGRect())
+//            email_label.text = ""
+//            email_label.font = UIFont.systemFont(ofSize: 18)
+//            self.view.addSubview(email_label)
+//            email_label.snp.makeConstraints{ (make) in
+//                make.height.equalTo(AJScreenHeight/15)
+//                make.width.equalTo(AJScreenWidth/5)
+//                make.left.equalTo(AJScreenWidth/15)
+//                make.top.equalTo(topLayoutGuide.snp.bottom)
+//            }
+//            print("距离上面的高度",navigationBarHeight)
+//
+//            //邮箱信息布局约束
+//            self.view.addSubview(text_email)
+//            text_email.snp.makeConstraints{ (make) in
+//                make.height.equalTo(AJScreenHeight/15)
+//                make.width.equalTo(AJScreenWidth/2)
+//                make.left.equalTo(email_label.snp.right).offset(AJScreenWidth/10)
+//                make.top.equalTo(topLayoutGuide.snp.bottom)
+//            }
+//
+//            //第一条线
+//            let line_frame1 = UIView(frame: CGRect())
+//            line_frame1.backgroundColor = UIColor.black
+//            self.view.addSubview(line_frame1)
+//            line_frame1.snp.makeConstraints{ (make) in
+//                make.height.equalTo(0.5)
+//                make.width.equalTo(AJScreenWidth)
+//                make.left.equalTo(AJScreenWidth/15)
+//                make.top.equalTo(text_email.snp.bottom).offset(1)
+////                make.top.equalTo(navigationBarHeight+AJScreenHeight/15+0.2)
+//            }
             /*第一行结束*/
-            
-            //第二行
-            self.view.addSubview(oldPasswd_label)
-            oldPasswd_label.snp.makeConstraints{ (make) in
-                make.left.equalTo(AJScreenWidth/15)
-                make.height.equalTo(AJScreenHeight/15)
-                make.width.equalTo(AJScreenWidth/5)
-                make.top.equalTo(navigationBarHeight+AJScreenHeight/15+0.3)
-            }
+//
+//            //第二行
+//            self.view.addSubview(oldPasswd_label)
+//            oldPasswd_label.snp.makeConstraints{ (make) in
+//                make.left.equalTo(AJScreenWidth/15)
+//                make.height.equalTo(AJScreenHeight/15)
+//                make.width.equalTo(AJScreenWidth/5)
+//                make.top.equalTo(line_frame1.snp.bottom).offset(1)
+//            }
             
             //旧密码内容
             oldPasswd_textF.delegate = self
@@ -136,8 +160,9 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
             oldPasswd_textF.snp.makeConstraints{ (make) in
                 make.height.equalTo(AJScreenHeight/15)
                 make.width.equalTo(AJScreenWidth/2)
-                make.left.equalTo(email_label.snp.right).offset(AJScreenWidth/10)
-                make.top.equalTo(navigationBarHeight+AJScreenHeight/15+0.3)
+                make.left.equalTo(AJScreenWidth/15)
+                make.right.equalTo(-AJScreenWidth/15)
+                make.top.equalTo(topLayoutGuide.snp.bottom).offset(50)
             }
             
             //第二条线
@@ -145,23 +170,24 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
             line_frame2.backgroundColor = UIColor.black
             self.view.addSubview(line_frame2)
             line_frame2.snp.makeConstraints{ (make) in
-                make.height.equalTo(0.1)
-                make.left.equalTo(AJScreenWidth/15)
+                make.height.equalTo(0.5)
                 make.width.equalTo(AJScreenWidth)
-                make.top.equalTo(navigationBarHeight+AJScreenHeight/15*2+0.3)
-            }
-            //第三行
-            let newPasswd_label = UILabel(frame: CGRect())
-            newPasswd_label.text = "新 密 码"
-            newPasswd_label.font = UIFont.systemFont(ofSize: 18)
-            //        newPasswd_label.backgroundColor = UIColor.red
-            self.view.addSubview(newPasswd_label)
-            newPasswd_label.snp.makeConstraints{ (make) in
                 make.left.equalTo(AJScreenWidth/15)
-                make.height.equalTo(AJScreenHeight/15)
-                make.width.equalTo(AJScreenWidth/5)
-                make.top.equalTo(navigationBarHeight+AJScreenHeight/15*2+0.4)
+                make.right.equalTo(-AJScreenWidth/15)
+                make.top.equalTo(oldPasswd_textF.snp.bottom).offset(1)
             }
+//            //第三行
+//            let newPasswd_label = UILabel(frame: CGRect())
+//            newPasswd_label.text = "新 密 码"
+//            newPasswd_label.font = UIFont.systemFont(ofSize: 18)
+//            //        newPasswd_label.backgroundColor = UIColor.red
+//            self.view.addSubview(newPasswd_label)
+//            newPasswd_label.snp.makeConstraints{ (make) in
+//                make.left.equalTo(AJScreenWidth/15)
+//                make.height.equalTo(AJScreenHeight/15)
+//                make.width.equalTo(AJScreenWidth/5)
+//                make.top.equalTo(line_frame2.snp.bottom).offset(1)
+//            }
             
             //新密码内容
             newPasswd_textF.delegate = self
@@ -169,33 +195,35 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
             newPasswd_textF.snp.makeConstraints{ (make) in
                 make.height.equalTo(AJScreenHeight/15)
                 make.width.equalTo(AJScreenWidth/2)
-                make.left.equalTo(email_label.snp.right).offset(AJScreenWidth/10)
-                make.top.equalTo(navigationBarHeight+AJScreenHeight/15*2+0.4)
+                make.left.equalTo(AJScreenWidth/15)
+                make.right.equalTo(-AJScreenWidth/15)
+                make.top.equalTo(line_frame2.snp.bottom).offset(AJScreenWidth/11)
             }
             //第三条线
             let line_frame3 = UIView(frame: CGRect())
             line_frame3.backgroundColor = UIColor.black
             self.view.addSubview(line_frame3)
             line_frame3.snp.makeConstraints{ (make) in
-                make.height.equalTo(0.1)
-                make.left.equalTo(AJScreenWidth/15)
+                make.height.equalTo(0.5)
                 make.width.equalTo(AJScreenWidth)
-                make.top.equalTo(navigationBarHeight+AJScreenHeight/15*3+0.3)
+                make.left.equalTo(AJScreenWidth/15)
+                make.right.equalTo(-AJScreenWidth/15)
+                make.top.equalTo(newPasswd_textF.snp.bottom).offset(1)
             }
             
             ////        //第四行
-            //        let verfiedPasswd_label = UILabel(frame: CGRect())
-            let verfiedPasswd_label = UILabel(frame: CGRect())
-            verfiedPasswd_label.text = "确认密码"
-            verfiedPasswd_label.font = UIFont.systemFont(ofSize: 18)
-            //        verfiedPasswd_label.backgroundColor = UIColor.red
-            self.view.addSubview(verfiedPasswd_label)
-            verfiedPasswd_label.snp.makeConstraints{ (make) in
-                make.left.equalTo(AJScreenWidth/15)
-                make.height.equalTo(AJScreenHeight/15)
-                make.width.equalTo(AJScreenWidth/5)
-                make.top.equalTo(navigationBarHeight+AJScreenHeight/15*3+0.4)
-            }
+//            //        let verfiedPasswd_label = UILabel(frame: CGRect())
+//            let verfiedPasswd_label = UILabel(frame: CGRect())
+//            verfiedPasswd_label.text = "确认密码"
+//            verfiedPasswd_label.font = UIFont.systemFont(ofSize: 18)
+//            //        verfiedPasswd_label.backgroundColor = UIColor.red
+//            self.view.addSubview(verfiedPasswd_label)
+//            verfiedPasswd_label.snp.makeConstraints{ (make) in
+//                make.left.equalTo(AJScreenWidth/15)
+//                make.height.equalTo(AJScreenHeight/15)
+//                make.width.equalTo(AJScreenWidth/5)
+//                make.top.equalTo(line_frame3.snp.bottom).offset(1)
+//            }
             
             //确认密码
             verfiedPasswd_textF.delegate = self
@@ -203,8 +231,9 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
             verfiedPasswd_textF.snp.makeConstraints{ (make) in
                 make.height.equalTo(AJScreenHeight/15)
                 make.width.equalTo(AJScreenWidth/2)
-                make.left.equalTo(email_label.snp.right).offset(AJScreenWidth/10)
-                make.top.equalTo(navigationBarHeight+AJScreenHeight/15*3+0.4)
+                make.left.equalTo(AJScreenWidth/15)
+                make.right.equalTo(-AJScreenWidth/15)
+                make.top.equalTo(line_frame3.snp.bottom).offset(AJScreenWidth/11)
             }
             //第四条线
             let line_frame4 = UIView(frame: CGRect())
@@ -212,11 +241,23 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
             self.view.addSubview(line_frame4)
             line_frame4.snp.makeConstraints{ (make) in
                 make.height.equalTo(0.5)
-                make.left.equalTo(AJScreenWidth/15)
                 make.width.equalTo(AJScreenWidth)
-                make.top.equalTo(navigationBarHeight+AJScreenHeight/15*4+2)
+                make.left.equalTo(AJScreenWidth/15)
+                make.right.equalTo(-AJScreenWidth/15)
+                make.top.equalTo(verfiedPasswd_textF.snp.bottom).offset(1)
             }
-            //
+            
+            saveButton.addTarget(self, action: #selector(save), for: .touchUpInside)
+            self.view.addSubview(saveButton)
+            saveButton.snp.makeConstraints{ (make) in
+                make.left.equalToSuperview().offset(AJScreenWidth/15)
+                make.right.equalToSuperview().offset(-AJScreenWidth/15)
+                make.height.equalTo(AJScreenHeight/15)
+                make.top.equalTo(line_frame4.snp.bottom).offset(AJScreenHeight*3/15)
+            }
+            
+            
+            
         }
         
         
@@ -264,17 +305,17 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
                                 /*  此处为跳转和控制逻辑*/
                                 if(responseModel.code == 1 ){
                                     print("密码修改成功")
-                                    alert.custom(self,"Attention", "密码修改成功")
+                                    alert.custom_cengji(self,"Attention", "密码修改成功")
                                     self.oldPasswd_textF.text! = ""
                                     self.newPasswd_textF.text! = ""
                                     self.verfiedPasswd_textF.text! = ""
-                                    self.navigationController?.popViewController(animated: true)
+                                
                                 }else{
-                                    alert.custom(self,"Attention", "密码修改失败")
+                                    alert.custom_cengji(self,"Attention", "密码修改失败")
                                     self.oldPasswd_textF.text! = ""
                                     self.newPasswd_textF.text! = ""
                                     self.verfiedPasswd_textF.text! = ""
-                                    self.navigationController?.popViewController(animated: true)
+                           
                                 }
                                 
                             }

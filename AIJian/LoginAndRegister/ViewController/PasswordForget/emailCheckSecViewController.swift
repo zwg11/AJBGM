@@ -41,8 +41,10 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
         print("上一页传过来的email",email)
         
         print("上一页传过来的verifyString",verifyString)
-        self.view.backgroundColor = UIColor.white
-        self.title = "修改密码"
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationController?.navigationBar.backgroundColor = NavBarColor
+        self.title = "Change Password"
+//        self.navigationController?.navigationBar.tintColor = TextColor
         self.view.addSubview(emailCheckSec)
         emailCheckSec.snp.makeConstraints{(make) in
             make.height.equalTo(AJScreenHeight)
@@ -54,7 +56,7 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
                 make.top.equalTo(topLayoutGuide.snp.bottom)
             }
         }
-        // Do any additional setup after loading the view.
+       hideKeyboardWhenTappedAround()
     }
     
     //点击确认修改按钮
@@ -122,4 +124,17 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+
+    
+    func hideKeyboardWhenTappedAround(){
+        // 添加手势，使得点击视图键盘收回/Users/ADMIN/Desktop/swift1
+        let tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tap)
+    }
+    // 设置手势动作
+    @objc func dismissKeyboard(){
+        self.view.endEditing(true)
+    }
+    
 }

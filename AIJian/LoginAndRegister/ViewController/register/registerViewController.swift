@@ -47,6 +47,8 @@ class registerViewController: UIViewController,UITextFieldDelegate {
         super.viewDidLoad()
 
         self.view.backgroundColor = UIColor.blue
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationController?.navigationBar.backgroundColor = ThemeColor
         self.title = "注 册"
         self.view.addSubview(register)
         register.snp.makeConstraints{(make) in
