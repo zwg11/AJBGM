@@ -63,7 +63,6 @@
 		913C5A050E557527D087A3E79934646B /* IntensityChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8E8D0A6CA3F03313B4B856827E97DD /* IntensityChange.swift */; };
 		936A597C2AC4773B5A725A4B47936B31 /* viewToImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F07FB865C1B45AC2F704BE6D7A4BF4 /* viewToImage.swift */; };
 		957A7C093476F2DD3E1D27A459DA5B62 /* emailCheckSecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F6BFF01153E17E98228FE2B6DE05A3 /* emailCheckSecondView.swift */; };
-		97F478D21CB6D2B948BD70BAB0B72FC6 /* quitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F79A682359F8FBF1FF34EF2B75A0A78 /* quitView.swift */; };
 		9A52EC121DB581CF229AB2E3F50BBAE6 /* Eventhing_response.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C3FB678C55445CDE289E6C4AF9E0F1 /* Eventhing_response.swift */; };
 		9B3DAB77A3DC41F8FAC306F8E17CF1C1 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA336323AF93C849D90681604D2147DF /* UIButton+Extension.swift */; };
 		9C767C7693EECAAA36FB83D2D98D581F /* loginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CD12C84AD248DAFB41C4466E30E5F0 /* loginView.swift */; };
@@ -150,7 +149,6 @@
 		281577697E4B5C8A234B003E370ABACA /* AboutUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
 		299B8A71C73EA6E88B488D991BF75352 /* recentTrendView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = recentTrendView.swift; path = AIJian/Main/Home/recentTrendView.swift; sourceTree = SOURCE_ROOT; };
 		2B20E6C74C7069BCCED010C7F429CCBA /* DataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableViewController.swift; sourceTree = "<group>"; };
-		2F79A682359F8FBF1FF34EF2B75A0A78 /* quitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = quitView.swift; sourceTree = "<group>"; };
 		3100BA3D03C73A4C3825AD32D66C7DEF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = User.swift; path = AIJian/Networking/User.swift; sourceTree = SOURCE_ROOT; };
 		31AEF430201820312861BE1C5F10CF0B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localization.strings"; sourceTree = "<group>"; };
 		31B95A250C5649E01E8B1CE6F8AD5E85 /* SharedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedViewController.swift; sourceTree = "<group>"; };
@@ -354,7 +352,6 @@
 				3ACDB27DDBFA6BA1FEA8A6864CE435C5 /* NSDate+Date.swift */,
 				934C03A16BAD1A90B8D792A740D0BE1B /* PageView.swift */,
 				9D6CD8071B1953BFC8FC49D0C07E5B17 /* QuitCellView.swift */,
-				2F79A682359F8FBF1FF34EF2B75A0A78 /* quitView.swift */,
 				8FB165FA9B5B4F5C13436FA707111C57 /* sugComponent.swift */,
 			);
 			path = View;
@@ -939,7 +936,6 @@
 				C45133C15650E0A758BE9274BD83AC47 /* perAndAfterMealTests.swift in Sources */,
 				3196F5B95AA6AA6CBF111CFD2DE7E61B /* pickerView.swift in Sources */,
 				AFB0A1406BF5F638E880614AD3D8E27A /* portionAndInsulinView.swift in Sources */,
-				97F478D21CB6D2B948BD70BAB0B72FC6 /* quitView.swift in Sources */,
 				E984F8552E1FF381F5828A63501263CC /* recentTableViewCell.swift in Sources */,
 				BC289F6EACFB2BCADEB1685DE0F10A6D /* recentTrendView.swift in Sources */,
 				ECCDAB6AF9B53630AF5186D28430395B /* registerView.swift in Sources */,

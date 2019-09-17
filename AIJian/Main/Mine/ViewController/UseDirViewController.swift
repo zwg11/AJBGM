@@ -16,14 +16,19 @@ class UseDirViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title="Direction for use"
+        self.title="Instruction"
         
-        self.view.backgroundColor = UIColor.white
+        self.view.backgroundColor = ThemeColor
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title:"back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back))
         
         let imageNameArray: [String] = ["yindao01", "yindao02","yindao03"]
         let guideView = PageView.init(imageNameArray: imageNameArray)
         self.view.addSubview(guideView)
+        guideView.snp.remakeConstraints{ (make) in
+            make.width.equalToSuperview()
+            make.height.equalToSuperview()
+            make.top.equalTo(topLayoutGuide.snp.bottom)
+        }
         
     }
     

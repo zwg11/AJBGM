@@ -65,38 +65,6 @@
             endingLineNumber = "86"
             landmarkName = "login()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "AIJian.loginViewController.login() -&gt; ()"
-                  moduleName = "AIJian"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ADMIN/Desktop/ios%E9%A1%B9%E7%9B%AE%E8%AF%95%E9%AA%8C/AIJian/AIJian/Main/LoginAndRegister/ViewController/login/loginViewController.swift"
-                  timestampString = "589895545.879374"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "86"
-                  endingLineNumber = "86"
-                  offsetFromSymbolStart = "5299">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (SnapKit.ConstraintMaker) -&gt; () in AIJian.loginViewController.login() -&gt; ()"
-                  moduleName = "AIJian"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ADMIN/Desktop/ios%E9%A1%B9%E7%9B%AE%E8%AF%95%E9%AA%8C/AIJian/AIJian/Main/LoginAndRegister/ViewController/login/loginViewController.swift"
-                  timestampString = "589895545.881058"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "87"
-                  endingLineNumber = "87"
-                  offsetFromSymbolStart = "22">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -113,38 +81,6 @@
             endingLineNumber = "99"
             landmarkName = "login()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "AIJian.loginViewController.login() -&gt; ()"
-                  moduleName = "AIJian"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ADMIN/Desktop/ios%E9%A1%B9%E7%9B%AE%E8%AF%95%E9%AA%8C/AIJian/AIJian/Main/LoginAndRegister/ViewController/login/loginViewController.swift"
-                  timestampString = "589895545.88546"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "99"
-                  endingLineNumber = "99"
-                  offsetFromSymbolStart = "6469">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Alamofire.DataResponse&lt;Swift.String&gt;) -&gt; () in AIJian.loginViewController.login() -&gt; ()"
-                  moduleName = "AIJian"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ADMIN/Desktop/ios%E9%A1%B9%E7%9B%AE%E8%AF%95%E9%AA%8C/AIJian/AIJian/Main/LoginAndRegister/ViewController/login/loginViewController.swift"
-                  timestampString = "589895545.887349"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "101"
-                  endingLineNumber = "101"
-                  offsetFromSymbolStart = "446">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -305,38 +241,6 @@
             endingLineNumber = "243"
             landmarkName = "requestData(day:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "AIJian.loginViewController.requestData(day: Swift.Int) -&gt; ()"
-                  moduleName = "AIJian"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ADMIN/Desktop/ios%E9%A1%B9%E7%9B%AE%E8%AF%95%E9%AA%8C/AIJian/AIJian/Main/LoginAndRegister/ViewController/login/loginViewController.swift"
-                  timestampString = "589895545.949266"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "243"
-                  endingLineNumber = "243"
-                  offsetFromSymbolStart = "778">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Swift.String&gt;) -&gt; () in AIJian.loginViewController.requestData(day: Swift.Int) -&gt; ()"
-                  moduleName = "AIJian"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ADMIN/Desktop/ios%E9%A1%B9%E7%9B%AE%E8%AF%95%E9%AA%8C/AIJian/AIJian/Main/LoginAndRegister/ViewController/login/loginViewController.swift"
-                  timestampString = "589895545.95096"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "244"
-                  endingLineNumber = "244"
-                  offsetFromSymbolStart = "260">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -655,7 +559,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "82"
             endingLineNumber = "82"
-            landmarkName = "viewDidLoad()"
+            landmarkName = "viewWillAppear(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -671,7 +575,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "87"
             endingLineNumber = "87"
-            landmarkName = "test()"
+            landmarkName = "initChart()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -848,6 +752,38 @@
             startingLineNumber = "376"
             endingLineNumber = "376"
             landmarkName = "setDaysAndRange()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AIJian/AppDelegate.swift"
+            timestampString = "590383101.055142"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "application(_:didFinishLaunchingWithOptions:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AIJian/AppDelegate.swift"
+            timestampString = "590383101.0552059"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "application(_:didFinishLaunchingWithOptions:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

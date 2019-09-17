@@ -41,16 +41,23 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
         case 0:
             let cell = UITableViewCell(style: .default, reuseIdentifier: id)
             emailCommponent.textField.delegate = self
-            emailCommponent.setupUI(title: "请输入邮箱")
+            emailCommponent.textField.isEnabled = false
+            emailCommponent.setupUI(title: "")
+            emailCommponent.textField.text = UserInfo.getEmail()
+            emailCommponent.textField.textColor = TextColor
             cell.contentView.addSubview(emailCommponent)
+            cell.textLabel?.textColor = TextColor
+            cell.backgroundColor = ThemeColor
             cell.selectionStyle = .none
             return cell
         case 1:
             let cell = UITableViewCell(style: .default, reuseIdentifier: id)
             telephoneCommponent.textField.delegate = self
-            telephoneCommponent.setupUI(title: "请输入电话号码")
+            telephoneCommponent.setupUI(title: "Please Enter Your Phone Number")
             cell.contentView.addSubview(telephoneCommponent)
             cell.selectionStyle = .none
+            cell.textLabel?.textColor = TextColor
+            cell.backgroundColor = ThemeColor
             return cell
         case 2:
             let cell = UITableViewCell(style: .default, reuseIdentifier: id)
@@ -58,6 +65,8 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
             nationComponent.setupUI(title: "请输入国家")
             cell.contentView.addSubview(nationComponent)
             cell.selectionStyle = .none
+            cell.textLabel?.textColor = TextColor
+            cell.backgroundColor = ThemeColor
             return cell
         default:
             let cell = UITableViewCell(style: .default, reuseIdentifier: id)
@@ -73,54 +82,55 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
         super.viewDidLoad()
         
         self.title = "Suggestion"
-        self.view.backgroundColor = UIColor.white
+        self.view.backgroundColor = ThemeColor
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title:"back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back))
         print("到达意见反馈页。。。。。。。。。。。。")
         
-        content_field.placeholder = "请输入你的建议"
-        content_field.backgroundColor = UIColor.white
+        content_field.placeholder = "Please Enter Your Comments"
+        content_field.backgroundColor = ThemeColor
         content_field.font = UIFont.boldSystemFont(ofSize: 16)
-        content_field.textColor = UIColor.black
+        content_field.textColor = TextColor
         content_field.isEditable = true
         content_field.textAlignment = .left
-        content_field.layer.borderColor = UIColor(red: 60/255, green: 40/255, blue: 129/255, alpha: 1).cgColor
+        content_field.layer.borderColor = UIColor(red: 141/255, green: 177/255, blue: 213/255, alpha: 1).cgColor
         content_field.layer.borderWidth = 0.5
         self.view.addSubview(content_field)
         content_field.snp.makeConstraints{ (make) in
             make.height.equalTo(AJScreenHeight/3)
-            make.left.equalTo(1)
-            make.width.equalTo(AJScreenWidth-2)
-            make.top.equalTo(navigationBarHeight+5)
+            make.left.equalTo(AJScreenWidth/15)
+            make.right.equalTo(-AJScreenWidth/15)
+            make.top.equalTo(topLayoutGuide.snp.bottom).offset(10)
         }
         
         
-        sugTableView.frame = CGRect(x:0, y:navigationBarHeight+AJScreenHeight/5+5,width: AJScreenWidth,height: AJScreenHeight/5)
+//        sugTableView.frame = CGRect(x:0, y:navigationBarHeight+AJScreenHeight/5+5,width: AJScreenWidth,height: AJScreenHeight/5)
         sugTableView.delegate = self
         sugTableView.dataSource = self
-        sugTableView.backgroundColor = UIColor.blue
+        sugTableView.backgroundColor = ThemeColor
+        sugTableView.isScrollEnabled = false
         self.view.addSubview(sugTableView)
         sugTableView.snp.makeConstraints{  (make) in
             make.top.equalTo(content_field.snp.bottom).offset(5)
-            make.width.equalTo(AJScreenWidth)
-            make.height.equalTo(AJScreenHeight/5)
+            make.left.equalTo(AJScreenWidth/15)
+            make.right.equalTo(-AJScreenWidth/15)
+            make.height.equalTo(AJScreenHeight/5+10)
         }
         
         /*提交按钮*/
         let submit_button = UIButton(type:.system)
-        submit_button.backgroundColor = UIColor.red
-        submit_button.setTitle("保  存", for:.normal)
+        submit_button.backgroundColor = ButtonColor
+        submit_button.setTitle("Submit", for:.normal)
         submit_button.tintColor = UIColor.white
-        submit_button.layer.cornerRadius = 8
-        submit_button.layer.masksToBounds = true
         submit_button.titleLabel?.font = UIFont.systemFont(ofSize:18)
         submit_button.titleLabel?.textColor = UIColor.white
+        submit_button.setTitleColor(UIColor.white, for: .normal)
         submit_button.addTarget(self, action: #selector(save), for: .touchUpInside)
         self.view.addSubview(submit_button)
         submit_button.snp.makeConstraints{(make) in
             make.height.equalTo(AJScreenHeight/15)
-            make.width.equalTo(AJScreenWidth*2/5)
-            make.top.equalTo(sugTableView.snp.bottom).offset(10)
-            make.left.equalTo(AJScreenWidth*3/10)
+            make.left.equalTo(AJScreenWidth/15)
+            make.right.equalTo(-AJScreenWidth/15)
+            make.top.equalTo(sugTableView.snp.bottom).offset(AJScreenHeight/7)
         }
         
         
@@ -135,17 +145,20 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
         
         if content_field.text! == ""{
             print("内容不能为空！")
+            alert.custom(self, "Attention", "内容不能为空！")
             return
         }
         print(content_field.text!.count)
         if content_field.text!.count >= 300{
             print("输入的字数不能超过300！")
+            alert.custom(self, "Attention", "输入的字数不能超过300！")
             return
         }
-        if emailCommponent.textField.text! == ""{
-            print("为了方便我们联系您，邮箱不能为空！")
-            return
-        }
+//        if emailCommponent.textField.text! == ""{
+//            print("为了方便我们联系您，邮箱不能为空！")
+//            alert.custom(self, "Attention", "内容不能为空！")
+//            return
+//        }
         
         //网络请求
         let dictString:Dictionary = [ "email":String(emailCommponent.textField.text!),"phoneNumber":String(telephoneCommponent.textField.text!),"country":String(nationComponent.textField.text!),"feedback":String(content_field.text!),"token":UserInfo.getToken(),"userId":UserInfo.getUserId()] as [String : Any]

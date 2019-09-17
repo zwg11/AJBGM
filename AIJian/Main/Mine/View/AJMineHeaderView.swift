@@ -24,9 +24,9 @@ class AJMineHeaderView:UITableViewCell{
     lazy var textButton:UIButton = {
         let button = UIButton()
         button.setTitle("Click Login", for: .init())
-        button.backgroundColor = UIColor.init(red:18.0/255.0,green: 73/255.0,blue:212/255.0,alpha: 1)
+//        button.backgroundColor = UIColor.init(red:18.0/255.0,green: 73/255.0,blue:212/255.0,alpha: 1)
         button.titleLabel?.font = UIFont.systemFont(ofSize:20)
-        button.titleLabel?.textColor = UIColor.white
+        button.titleLabel?.textColor = MineNameTextColor
         return button
     }()
     override func awakeFromNib() {
@@ -35,7 +35,7 @@ class AJMineHeaderView:UITableViewCell{
     }
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.backgroundColor = UIColor.init(red:18.0/255.0,green: 73/255.0,blue:212/255.0,alpha: 1)
+//        self.backgroundColor = UIColor.init(red:18.0/255.0,green: 73/255.0,blue:212/255.0,alpha: 1)
         setupUI()
     }
 //    override init(frame: CGRect) {

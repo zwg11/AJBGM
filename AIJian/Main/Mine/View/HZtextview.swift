@@ -12,7 +12,7 @@ class HZTextView: UITextView {
     /// 占位文字
     var placeholder: String?
     /// 占位文字颜色
-    var placeholderColor: UIColor? = UIColor.lightGray
+    var placeholderColor: UIColor? = TextColor
     
     override init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)

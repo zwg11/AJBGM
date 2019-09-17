@@ -132,7 +132,7 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.view.addSubview(homeTableView)
         homeTableView.snp.makeConstraints{(make) in
             make.left.right.equalToSuperview()
             make.top.equalToSuperview()
@@ -147,7 +147,7 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         homeTableView.dataSource = self
         homeTableView.backgroundColor = UIColor.clear
         homeTableView.isScrollEnabled = true
-        self.view.addSubview(homeTableView)
+        
         self.view.backgroundColor = ThemeColor
 
         

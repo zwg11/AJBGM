@@ -40,6 +40,10 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
     
         var randomDinner_left_Double:Double?
         var randomDinner_right_Double:Double?
+    
+        let UIPAGEColor = UIColor.init(red: 128/255.0, green: 136/255.0, blue: 146/255.0, alpha: 1)
+        let UITITLEColor = UIColor.init(red: 136/255.0, green: 172/255.0, blue: 207/255.0, alpha: 1)
+        let AnotherColor = UIColor.init(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 1)
        //空腹相关的全局变量
         lazy var emptyStomach_left:UITextField = {
             let emptyStomach_left = UITextField()
@@ -47,6 +51,9 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             emptyStomach_left.allowsEditingTextAttributes = false
             emptyStomach_left.keyboardType = UIKeyboardType.decimalPad
             emptyStomach_left.borderStyle = .line
+            emptyStomach_left.textAlignment = .center
+            emptyStomach_left.layer.borderColor = UIColor.white.cgColor
+            emptyStomach_left.layer.borderWidth = 1
             return emptyStomach_left
         }()
     
@@ -56,12 +63,16 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             emptyStomach_right.allowsEditingTextAttributes = false
             emptyStomach_right.keyboardType = UIKeyboardType.decimalPad
             emptyStomach_right.borderStyle = .line
+            emptyStomach_right.textAlignment = .center
+            emptyStomach_right.layer.borderColor = UIColor.white.cgColor
+            emptyStomach_right.layer.borderWidth = 1
             return emptyStomach_right
         }()
 
         lazy var emptyUnit_label:UILabel = {
             let emptyUnit_label = UILabel(frame: CGRect())
             emptyUnit_label.font = UIFont.systemFont(ofSize: 14)
+            emptyUnit_label.textColor = TextColor
             return emptyUnit_label
         }()
     
@@ -72,6 +83,9 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             beforeDinner_left.allowsEditingTextAttributes = false
             beforeDinner_left.keyboardType = UIKeyboardType.decimalPad
             beforeDinner_left.borderStyle = .line
+            beforeDinner_left.textAlignment = .center
+            beforeDinner_left.layer.borderColor = UIColor.white.cgColor
+            beforeDinner_left.layer.borderWidth = 1
             return beforeDinner_left
         }()
     
@@ -81,12 +95,16 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             beforeDinner_right.allowsEditingTextAttributes = false
             beforeDinner_right.keyboardType = UIKeyboardType.decimalPad
             beforeDinner_right.borderStyle = .line
+            beforeDinner_right.textAlignment = .center
+            beforeDinner_right.layer.borderColor = UIColor.white.cgColor
+            beforeDinner_right.layer.borderWidth = 1
             return beforeDinner_right
         }()
     
         lazy var beforeUnit_label:UILabel = {
             let beforeUnit_label = UILabel(frame: CGRect())
             beforeUnit_label.font = UIFont.systemFont(ofSize: 14)
+            beforeUnit_label.textColor = TextColor
             return beforeUnit_label
         }()
     
@@ -97,6 +115,9 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             afterDinner_left.allowsEditingTextAttributes = false
             afterDinner_left.keyboardType = UIKeyboardType.decimalPad
             afterDinner_left.borderStyle = .line
+            afterDinner_left.textAlignment = .center
+            afterDinner_left.layer.borderColor = UIColor.white.cgColor
+            afterDinner_left.layer.borderWidth = 1
             return afterDinner_left
         }()
     
@@ -106,12 +127,16 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             afterDinner_right.allowsEditingTextAttributes = false
             afterDinner_right.keyboardType = UIKeyboardType.decimalPad
             afterDinner_right.borderStyle = .line
+            afterDinner_right.textAlignment = .center
+            afterDinner_right.layer.borderColor = UIColor.white.cgColor
+            afterDinner_right.layer.borderWidth = 1
             return afterDinner_right
         }()
     
         lazy var afterUnit_label:UILabel = {
             let afterUnit_label = UILabel(frame: CGRect())
             afterUnit_label.font = UIFont.systemFont(ofSize: 14)
+            afterUnit_label.textColor = TextColor
             return afterUnit_label
         }()
 
@@ -122,6 +147,9 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             randomDinner_left.allowsEditingTextAttributes = false
             randomDinner_left.keyboardType = UIKeyboardType.decimalPad
             randomDinner_left.borderStyle = .line
+            randomDinner_left.textAlignment = .center
+            randomDinner_left.layer.borderColor = UIColor.white.cgColor
+            randomDinner_left.layer.borderWidth = 1
             return randomDinner_left
         }()
         lazy var randomDinner_right:UITextField = {
@@ -130,11 +158,15 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             randomDinner_right.allowsEditingTextAttributes = false
             randomDinner_right.keyboardType = UIKeyboardType.decimalPad
             randomDinner_right.borderStyle = .line
+            randomDinner_right.textAlignment = .center
+            randomDinner_right.layer.borderColor = UIColor.white.cgColor
+            randomDinner_right.layer.borderWidth = 1
             return randomDinner_right
         }()
         lazy var randomUnit_label:UILabel = {
             let randomUnit_label = UILabel(frame: CGRect())
             randomUnit_label.font = UIFont.systemFont(ofSize: 14)
+            randomUnit_label.textColor = TextColor
             self.view.addSubview(randomUnit_label)
             return randomUnit_label
         }()
@@ -142,8 +174,8 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
         //保存和恢复默认设置按钮
         lazy var saveBlood:UIButton = {
             let saveBlood = UIButton(type:.system)
-            saveBlood.backgroundColor = UIColor.red
-            saveBlood.setTitle("保存", for:.normal)
+            saveBlood.backgroundColor = ButtonColor
+            saveBlood.setTitle("Save", for:.normal)
             saveBlood.tintColor = UIColor.white
             saveBlood.titleLabel?.font = UIFont.systemFont(ofSize:18)
             saveBlood.titleLabel?.textColor = UIColor.white
@@ -152,26 +184,28 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
     
         lazy var recoverBlood:UIButton = {
             let recoverBlood = UIButton(type:.system)
-            recoverBlood.backgroundColor = UIColor.red
-            recoverBlood.setTitle("恢复默认设置", for:.normal)
-            recoverBlood.tintColor = UIColor.white
+            recoverBlood.backgroundColor = ThemeColor
+            recoverBlood.setTitle("Default Settings", for:.normal)
+            recoverBlood.tintColor = UIColor.init(red: 28/255.0, green: 97/255.0, blue: 157/255.0, alpha: 1)
             recoverBlood.titleLabel?.font = UIFont.systemFont(ofSize:18)
             recoverBlood.titleLabel?.textColor = UIColor.white
+            recoverBlood.layer.borderWidth = 0.5
+            recoverBlood.layer.borderColor = UIColor.init(red: 28/255.0, green: 97/255.0, blue: 157/255.0, alpha: 1).cgColor
             return recoverBlood
         }()
     /*****************************************************************************************************/
         override func viewDidLoad() {
             super.viewDidLoad()
-            self.title = "bloodsetting"
+            self.title = "Targets Setting"
             // Do any additional setup after loading the view.
-            self.view.backgroundColor = UIColor.white
+            self.view.backgroundColor = ThemeColor
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(title:"back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back))
            
             let information = UILabel(frame: CGRect())
             information.text = "BG Targets"
             information.textAlignment = .center
+            information.textColor = TextColor
             information.font = UIFont.systemFont(ofSize: 18)
-//            information.layer.borderWidth = 0.5
             self.view.addSubview(information)
             information.snp.makeConstraints{ (make) in
                 make.height.equalTo(AJScreenHeight/15)
@@ -182,13 +216,14 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             
             //空腹
             let emptyStomach_label = UILabel(frame: CGRect())
-            emptyStomach_label.text = "空腹"
+            emptyStomach_label.text = "Fasting"
             emptyStomach_label.font = UIFont.systemFont(ofSize: 14)
+            emptyStomach_label.textColor = UITITLEColor
 //            emptyStomach_label.backgroundColor = UIColor.red
             self.view.addSubview(emptyStomach_label)
             emptyStomach_label.snp.makeConstraints{ (make) in
                 make.height.equalTo(AJScreenWidth/15)
-                make.width.equalTo(AJScreenWidth/8)
+                make.width.equalTo(AJScreenWidth/6)
                 make.left.equalTo(AJScreenWidth/5)
                 make.top.equalTo(information.snp.bottom).offset(AJScreenWidth/12)
             }
@@ -205,6 +240,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             
             let emptyMark_label = UILabel(frame: CGRect())
             emptyMark_label.text = "---"
+            emptyMark_label.textColor = UIColor.white
             emptyMark_label.font = UIFont.systemFont(ofSize: 14)
             emptyMark_label.textAlignment = .center
             self.view.addSubview(emptyMark_label)
@@ -237,13 +273,14 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             
             /* 餐前开始 */
             let beforeDinner_label = UILabel(frame: CGRect())
-            beforeDinner_label.text = "餐前"
+            beforeDinner_label.text = "Before Meal"
+            beforeDinner_label.textColor = UITITLEColor
             beforeDinner_label.font = UIFont.systemFont(ofSize: 14)
             //        email_label.backgroundColor = UIColor.red
             self.view.addSubview(beforeDinner_label)
             beforeDinner_label.snp.makeConstraints{ (make) in
                 make.height.equalTo(AJScreenWidth/15)
-                make.width.equalTo(AJScreenWidth/6)
+                make.width.equalTo(AJScreenWidth/4)
                 make.left.equalTo(AJScreenWidth/5)
                 make.top.equalTo(emptyStomach_left.snp.bottom).offset(5)
             }
@@ -259,6 +296,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             
             let beforeMark_label = UILabel(frame: CGRect())
             beforeMark_label.text = "---"
+            beforeMark_label.textColor = UIColor.white
             beforeMark_label.font = UIFont.systemFont(ofSize: 14)
             //        email_label.backgroundColor = UIColor.red
             beforeMark_label.textAlignment = .center
@@ -290,12 +328,13 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             /* 餐前结束 */
             /* 餐后开始 */
             let afterDinner_label = UILabel(frame: CGRect())
-            afterDinner_label.text = "餐后"
+            afterDinner_label.text = "After Meal"
+            afterDinner_label.textColor = UITITLEColor
             afterDinner_label.font = UIFont.systemFont(ofSize: 14)
             self.view.addSubview(afterDinner_label)
             afterDinner_label.snp.makeConstraints{ (make) in
                 make.height.equalTo(AJScreenWidth/15)
-                make.width.equalTo(AJScreenWidth/6)
+                make.width.equalTo(AJScreenWidth/4)
                 make.left.equalTo(AJScreenWidth/5)
                 make.top.equalTo(beforeDinner_left.snp.bottom).offset(5)
             }
@@ -311,6 +350,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             
             let afterMark_label = UILabel(frame: CGRect())
             afterMark_label.text = "---"
+            afterMark_label.textColor = UIColor.white
             afterMark_label.font = UIFont.systemFont(ofSize: 14)
             afterMark_label.textAlignment = .center
             //email_label.backgroundColor = UIColor.red
@@ -344,12 +384,14 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             
             /* 随机开始 */
             let randomDinner_label = UILabel(frame: CGRect())
-            randomDinner_label.text = "随机"
+            randomDinner_label.text = "Random"
+            randomDinner_label.textColor = UITITLEColor
             randomDinner_label.font = UIFont.systemFont(ofSize: 14)
+            randomUnit_label.textColor = TextColor
             self.view.addSubview(randomDinner_label)
             randomDinner_label.snp.makeConstraints{ (make) in
                 make.height.equalTo(AJScreenWidth/15)
-                make.width.equalTo(AJScreenWidth/6)
+                make.width.equalTo(AJScreenWidth/4)
                 make.left.equalTo(AJScreenWidth/5)
                 make.top.equalTo(afterDinner_left.snp.bottom).offset(5)
             }
@@ -365,6 +407,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             
             let randomMark_label = UILabel(frame: CGRect())
             randomMark_label.text = "---"
+            randomMark_label.textColor = UIColor.white
             randomMark_label.font = UIFont.systemFont(ofSize: 14)
             randomMark_label.textAlignment = .center
             //        email_label.backgroundColor = UIColor.red
@@ -465,6 +508,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                 let g_String = floor(g_Double * 18.02)
                 let h_String = floor(h_Double * 18.02)
             showPlaceholder(String(format:"%.0f",a_String),String(format:"%.0f",b_String),String(format:"%.0f",c_String),String(format:"%.0f",d_String),String(format:"%.0f",e_String),String(format:"%.0f",f_String),String(format:"%.0f",g_String),String(format:"%.0f",h_String))
+                emptyStomach_left.setValue(AnotherColor, forKeyPath: "_placeholderLabel.textColor")
             }
         }
     
@@ -978,13 +1022,21 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
         //函数功能：设置text的placeholder显示,函数参数可匿名
         func showPlaceholder(_ a:String,_ b:String,_ c:String,_ d:String,_ e:String,_ f:String,_ g:String,_ h:String){
             emptyStomach_left.placeholder  = a
+            emptyStomach_left.setValue(AnotherColor, forKeyPath: "_placeholderLabel.textColor")
             emptyStomach_right.placeholder = b
+            emptyStomach_right.setValue(AnotherColor, forKeyPath: "_placeholderLabel.textColor")
             beforeDinner_left.placeholder  = c
+            beforeDinner_left.setValue(AnotherColor, forKeyPath: "_placeholderLabel.textColor")
             beforeDinner_right.placeholder = d
+            beforeDinner_right.setValue(AnotherColor, forKeyPath: "_placeholderLabel.textColor")
             afterDinner_left.placeholder   = e
+            afterDinner_left.setValue(AnotherColor, forKeyPath: "_placeholderLabel.textColor")
             afterDinner_right.placeholder  = f
+            afterDinner_right.setValue(AnotherColor, forKeyPath: "_placeholderLabel.textColor")
             randomDinner_left.placeholder  = g
+            randomDinner_left.setValue(AnotherColor, forKeyPath: "_placeholderLabel.textColor")
             randomDinner_right.placeholder = h
+            randomDinner_right.setValue(AnotherColor, forKeyPath: "_placeholderLabel.textColor")
         }
     
 }

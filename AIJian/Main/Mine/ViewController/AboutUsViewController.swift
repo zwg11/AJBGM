@@ -13,17 +13,23 @@ class AboutUsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "AboutUs"
-        self.view.backgroundColor = UIColor.white
+        self.view.backgroundColor = ThemeColor
          self.navigationItem.leftBarButtonItem = UIBarButtonItem(title:"back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back))
         
-        let textView = UITextView(frame: CGRect(x: 0, y: navigationBarHeight, width: AJScreenWidth, height: AJScreenHeight))
-        textView.backgroundColor = UIColor.white
+//        let textView = UITextView(frame: CGRect(x: 0, y: navigationBarHeight, width: AJScreenWidth, height: AJScreenHeight))
+        let textView = UITextView()
+        textView.backgroundColor = ThemeColor
         textView.font = UIFont.boldSystemFont(ofSize: 16)
-        textView.textColor = UIColor.black
+        textView.textColor = TextColor
         textView.isEditable = false
         textView.textAlignment = .left
         textView.text = ABOUTUS_STRING
         self.view.addSubview(textView)
+        textView.snp.remakeConstraints{ (make) in
+            make.width.equalToSuperview()
+            make.height.equalToSuperview()
+            make.top.equalTo(topLayoutGuide.snp.bottom)
+        }
         
     }
     

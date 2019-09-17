@@ -15,7 +15,8 @@ class MineViewController: UIViewController {
     
     //列表数据
     
-    let _titleArr = ["信息管理","单位管理","密码修改","血糖设置","使用说明","关于我们","版本更新"]
+    
+    let _titleArr = ["User Info","Units Setup","Change Password","Targets Setting","Instructions","About Us","Update"]
     let _imgArr   = ["aboutUs","aboutUs","aboutUs","aboutUs","aboutUs","aboutUs","aboutUs",]
     
 
@@ -29,6 +30,7 @@ class MineViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         // 检查数据库是否有相关用户的信息
         let userInfo = DBSQLiteManager.manager.selectUserRecord(userId: UserInfo.getUserId())
+        
         // 如果得到的实体是空的，说明没有相关信息
         // 那么就需向服务器请求数据
         if userInfo.user_name == nil{
@@ -38,6 +40,7 @@ class MineViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = ThemeColor
         //将所有按钮添加到scrollview中，还需要修改相对布局
 
 //
@@ -54,6 +57,8 @@ class MineViewController: UIViewController {
         tableview.register(UITableViewCell.self, forCellReuseIdentifier:"cell")
         tableview.delegate = self
         tableview.dataSource = self
+        tableview.backgroundColor = ThemeColor
+//        tableview.tintColor = ThemeColor
 //        self.view.addSubview(tableview)
     
     
@@ -169,8 +174,11 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
             case 0:
 //                let headview = AJMineHeaderView(frame: CGRect(x: 0, y: 0, width: AJScreenWidth, height: AJScreenHeight/5))
 //                headview.textButton.addTarget(self, action: #selector(MineLogin), for: .touchUpInside)
+                let userInfo = DBSQLiteManager.manager.selectUserRecord(userId: UserInfo.getUserId())
                 let cell = AJMineHeaderView(style: .value1, reuseIdentifier: cellid)
+                cell.textButton.setTitle(userInfo.user_name, for: .normal)
                 cell.selectionStyle = .none
+                cell.backgroundColor = ThemeColor
                 return cell
             case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
@@ -178,6 +186,8 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
                 cell.imageView?.image = UIImage(named: _imgArr[0])
                 cell.textLabel?.text = _titleArr[0]
                 cell.accessoryType = .disclosureIndicator
+                cell.textLabel?.textColor = TextColor
+                cell.backgroundColor = ThemeColor
                 return cell
             case 2:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
@@ -185,6 +195,8 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
                 cell.imageView?.image = UIImage(named: _imgArr[1])
                 cell.textLabel?.text = _titleArr[1]
                 cell.accessoryType = .disclosureIndicator
+                cell.textLabel?.textColor = TextColor
+                 cell.backgroundColor = ThemeColor
                 return cell
             case 3:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
@@ -192,6 +204,8 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
                 cell.imageView?.image = UIImage(named: _imgArr[2])
                 cell.textLabel?.text = _titleArr[2]
                 cell.accessoryType = .disclosureIndicator
+                cell.textLabel?.textColor = TextColor
+                 cell.backgroundColor = ThemeColor
                 return cell
             case 4:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
@@ -199,6 +213,8 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
                 cell.imageView?.image = UIImage(named: _imgArr[3])
                 cell.textLabel?.text = _titleArr[3]
                 cell.accessoryType = .disclosureIndicator
+                cell.textLabel?.textColor = TextColor
+                 cell.backgroundColor = ThemeColor
                 return cell
             case 5:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
@@ -206,6 +222,8 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
                 cell.imageView?.image = UIImage(named: _imgArr[4])
                 cell.textLabel?.text = _titleArr[4]
                 cell.accessoryType = .disclosureIndicator
+                cell.textLabel?.textColor = TextColor
+                 cell.backgroundColor = ThemeColor
                 return cell
             case 6:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
@@ -213,6 +231,8 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
                 cell.imageView?.image = UIImage(named: _imgArr[5])
                 cell.textLabel?.text = _titleArr[5]
                 cell.accessoryType = .disclosureIndicator
+                cell.textLabel?.textColor = TextColor
+                 cell.backgroundColor = ThemeColor
                 return cell
             case 7:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
@@ -220,11 +240,14 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
                 cell.imageView?.image = UIImage(named: _imgArr[6])
                 cell.textLabel?.text = _titleArr[6]
                 cell.accessoryType = .disclosureIndicator
+                cell.textLabel?.textColor = TextColor
+                 cell.backgroundColor = ThemeColor
                 return cell
             case 8:
                 let cell = QuitCellView(style: .value1, reuseIdentifier: cellquit)
                 cell.selectionStyle = .none
                 cell.quitButton.addTarget(self, action: #selector(loginOff), for: .touchUpInside)
+                 cell.backgroundColor = ThemeColor
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
@@ -260,7 +283,7 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footview = UIView()
-        footview.backgroundColor = UIColor.white
+        footview.backgroundColor = ThemeColor
         return footview
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
