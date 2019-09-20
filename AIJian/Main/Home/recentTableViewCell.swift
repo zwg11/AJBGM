@@ -116,21 +116,21 @@ class recentTableViewCell: UITableViewCell {
             make.left.equalToSuperview().offset(AJScreenWidth/20)
             make.right.equalToSuperview().offset(-AJScreenWidth/20)
             make.centerY.equalToSuperview()
-            make.height.equalTo(2)
+            make.height.equalTo(1)
         }
         
         verLine1.snp.makeConstraints{(make) in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview().offset(10)
             make.bottom.equalTo(self.snp.centerY).offset(-10)
-            make.width.equalTo(2)
+            make.width.equalTo(1)
         }
         
         verLine2.snp.makeConstraints{(make) in
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview().offset(-10)
             make.top.equalTo(self.snp.centerY).offset(10)
-            make.width.equalTo(2)
+            make.width.equalTo(1)
         }
         
         

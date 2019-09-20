@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Bolus Insulin</key>
+	<array>
+		<string>Humulin R(Short-acting)</string>
+		<string>Novolin R(Short-acting)</string>
+		<string>Regular (Short-acting)</string>
+		<string>Apidra (Rapid-acting)</string>
+		<string>Generic Bolus (Rapid-acting)</string>
+		<string>Humalog (Rapid-acting)</string>
+		<string>Insulin Aspart (Rapid-acting)</string>
+		<string>Insulin Glulisine (Rapid-acting)</string>
+		<string>Insulin Lispro (Rapid-acting)</string>
+		<string>Novolog (Rapid-acting)</string>
+	</array>
+	<key>Basal Insulin</key>
+	<array>
+		<string>Generic Basal (Long-acting)</string>
+		<string>Insulin Determir (Long-acting)</string>
+		<string>Insulin Glargine (Long-acting)</string>
+		<string>Lantus (Long-acting)</string>
+		<string>Levemir (Long-acting)</string>
+		<string>Ultralente (Long-acting)</string>
+	</array>
+	<key>Other Insulin</key>
+	<array>
+		<string>Unspecified</string>
+		<string>10/90 (Premixed)</string>
+		<string>20/80 (Premixed)</string>
+		<string>25/75 (Premixed)</string>
+		<string>30/70 (Premixed)</string>
+		<string>40/60 (Premixed)</string>
+		<string>50/50 (Premixed)</string>
+		<string>60/40 (Premixed)</string>
+		<string>70/30 (Premixed)</string>
+		<string>75/25 (Premixed)</string>
+		<string>80/20 (Premixed)</string>
+		<string>90/10 (Premixed)</string>
+		<string>Humalog Mix 50/50 (Premixed)</string>
+		<string>Humalog Mix 75/25 (Premixed)</string>
+		<string>Humanlog Mix25 (Premixed)</string>
+		<string>Humanlog Mix50 (Premixed)</string>
+		<string>Humulin 30/70 (Premixed)</string>
+		<string>Humulin 70/30 (Premixed)</string>
+		<string>Novamix 30 (Premixed)</string>
+		<string>Novolin 70/30 (Premixed)</string>
+		<string>Novolog 70/30 (Premixed)</string>
+		<string>Humulin N (Intermediete-acting)</string>
+		<string>Lente (Intermediate-acting)</string>
+		<string>Novolin N (Intermediate-acting)</string>
+		<string>NPH (Intermediate-acting)</string>
+	</array>
+</dict>
+</plist>

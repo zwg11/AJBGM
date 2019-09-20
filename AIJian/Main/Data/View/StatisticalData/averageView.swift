@@ -21,6 +21,8 @@ class averageView: UIView {
         let label = UILabel()
         label.text = "Average"
         label.font = UIFont.systemFont(ofSize: 18)
+        label.minimumScaleFactor = 0.5
+        label.textColor = UIColor.white
         label.textAlignment = .left
         return label
     }()
@@ -36,7 +38,7 @@ class averageView: UIView {
     private lazy var glucoseLabel:UILabel = {
         let label = UILabel()
         label.text = "blood sugar"
-        label.textColor = UIColor.black
+        label.textColor = UIColor.white
         label.font = UIFont.systemFont(ofSize: 16)
         label.textAlignment = .left
         return label
@@ -46,7 +48,7 @@ class averageView: UIView {
     private lazy var sDLabel:UILabel = {
         let label = UILabel()
         label.text = "standard deviation"
-        label.textColor = UIColor.black
+        label.textColor = UIColor.white
         label.font = UIFont.systemFont(ofSize: 16)
         label.textAlignment = .left
         return label
@@ -56,7 +58,7 @@ class averageView: UIView {
     private lazy var checkNumLabel:UILabel = {
         let label = UILabel()
         label.text = "tests number per day"
-        label.textColor = UIColor.black
+        label.textColor = UIColor.white
         label.font = UIFont.systemFont(ofSize: 16)
         label.textAlignment = .left
         return label
@@ -73,10 +75,10 @@ class averageView: UIView {
         //label.font = UIFont.systemFont(ofSize: 20)
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
-        label.backgroundColor = UIColor.yellow
+        label.backgroundColor = UIColor.clear
         label.layer.borderColor = borderColor.cgColor
         label.layer.borderWidth = 1
-        label.layer.cornerRadius = AJScreenWidth/20
+        label.layer.cornerRadius = AJScreenWidth/24
         return label
         
     }()
@@ -84,7 +86,7 @@ class averageView: UIView {
     private lazy var glucoseUnit:UILabel = {
         let label = UILabel()
         label.text = GetUnit.getBloodUnit()
-        label.textColor = UIColor.black
+        label.textColor = UIColor.white
         label.font = UIFont.systemFont(ofSize: 16)
         label.textAlignment = .right
         return label
@@ -94,7 +96,7 @@ class averageView: UIView {
     private lazy var standardDeValue:UILabel = {
         let label = UILabel()
         label.text = String(standardDaviation ?? 0)
-        label.textColor = UIColor.black
+        label.textColor = UIColor.white
         label.font = UIFont.systemFont(ofSize: 16)
         label.textAlignment = .center
         return label
@@ -106,7 +108,7 @@ class averageView: UIView {
     private lazy var testNum:UILabel = {
         let label = UILabel()
         label.text = String(avgCheckNum ?? 0)
-        label.textColor = UIColor.black
+        label.textColor = UIColor.white
         label.font = UIFont.systemFont(ofSize: 16)
         label.textAlignment = .center
         return label
@@ -115,6 +117,7 @@ class averageView: UIView {
     
     
     func setupUI(){
+        self.backgroundColor = UIColor.clear
         // 标题布局设置
         self.addSubview(averageTitle)
         self.averageTitle.snp.makeConstraints{ (make) in
@@ -178,8 +181,8 @@ class averageView: UIView {
         self.glucoseValue.snp.makeConstraints{ (make) in
             make.right.equalTo(glucoseUnit.snp.left).offset(-10)
             make.bottom.equalTo(glucoseLabel.snp.bottom)
-            make.height.width.equalTo(AJScreenWidth/10)
-            make.width.equalTo(AJScreenWidth/10)
+            make.height.width.equalTo(AJScreenWidth/12)
+            make.width.equalTo(AJScreenWidth/12)
         }
         
         // 标准差label布局

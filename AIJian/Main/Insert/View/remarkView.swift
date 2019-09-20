@@ -11,44 +11,45 @@ import UIKit
 class remarkView: UIView {
 
     // ***********************备注*********************
-    // 备注图标
-    private lazy var remarkImageView:UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "事件")
-        return imageView
-    }()
+//    // 备注图标
+//    private lazy var remarkImageView:UIImageView = {
+//        let imageView = UIImageView()
+//        imageView.image = UIImage(named: "事件")
+//        return imageView
+//    }()
     // 备注label
     private lazy var remarkLabel:UILabel = {
         let label = UILabel()
-        label.normalLabel(text: "备注")
+        label.normalLabel(text: "Remark")
         return label
     }()
     
     // 备注选择按钮
     lazy var remarkTextField:UITextField = {
         let textField = UITextField()
-        textField.placeholder = ""
-        textField.borderStyle = .line
+        textField.norStyle(placeholder: "")
         return textField
     }()
     
     
     func setupUI(){
         //*********************备注**********************
-        self.backgroundColor = kRGBColor(130, 154, 249, 1)
-        // 备注图标布局
-        self.addSubview(remarkImageView)
-        remarkImageView.snp.makeConstraints{(make) in
-            make.left.top.equalToSuperview().offset(AJScreenWidth/20)
-            make.height.width.equalTo(AJScreenWidth/15)
-        }
+        self.backgroundColor = UIColor.clear
+        self.layer.borderColor = UIColor.darkGray.cgColor
+        self.layer.borderWidth = 1
+//        // 备注图标布局
+//        self.addSubview(remarkImageView)
+//        remarkImageView.snp.makeConstraints{(make) in
+//            make.left.top.equalToSuperview().offset(AJScreenWidth/20)
+//            make.height.width.equalTo(AJScreenWidth/15)
+//        }
         
         // 备注label布局
         self.addSubview(remarkLabel)
         remarkLabel.snp.makeConstraints{(make) in
-            make.left.equalTo(remarkImageView.snp.right).offset(AJScreenWidth/40)
-            make.centerY.equalTo(remarkImageView.snp.centerY)
-            make.height.equalTo(remarkImageView.snp.height)
+            make.left.top.equalToSuperview().offset(AJScreenWidth/20)
+            make.width.equalTo(AJScreenWidth/15*2)
+            make.height.equalTo(AJScreenWidth/15)
         }
         
         // 备注文本框布局

@@ -18,6 +18,7 @@ class SharedView: UIView ,UITextFieldDelegate{
         let label = UILabel()
         label.text = "Shared the Report by Email"
         label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = UIColor.white
         label.textAlignment = .center
         label.numberOfLines = 0
         return label
@@ -26,7 +27,7 @@ class SharedView: UIView ,UITextFieldDelegate{
     lazy var sendButton:UIButton = {
         let button = UIButton(type: .custom)
         button.setTitle("Send", for: .normal)
-        button.setTitleColor(UIColor.black, for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         button.backgroundColor = UIColor.gray
         
@@ -54,6 +55,7 @@ class SharedView: UIView ,UITextFieldDelegate{
         let label = UILabel()
         label.text = "Information Including"
         label.font = UIFont.systemFont(ofSize: 17)
+        label.textColor = UIColor.white
         label.textAlignment = .left
         return label
     }()
@@ -61,6 +63,7 @@ class SharedView: UIView ,UITextFieldDelegate{
     private lazy var nameLabel:UILabel = {
         let label = UILabel()
         label.text = "Name"
+        label.textColor = UIColor.white
         label.textAlignment = .left
         return label
     }()
@@ -82,6 +85,7 @@ class SharedView: UIView ,UITextFieldDelegate{
     private lazy var birthdayLabel:UILabel = {
         let label = UILabel()
         label.text = "Phone"
+        label.textColor = UIColor.white
         label.textAlignment = .left
         return label
         
@@ -101,7 +105,7 @@ class SharedView: UIView ,UITextFieldDelegate{
   
     func setupUI(){
 
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = UIColor.clear
 
         // MARK: - 发送报告信息框
         self.addSubview(reportInfo)

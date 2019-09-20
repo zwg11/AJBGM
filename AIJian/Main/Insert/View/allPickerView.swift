@@ -14,7 +14,7 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
    // private var event:NSArray = NSArray()
     
    // private var portion:NSArray = NSArray()
-    private var insulin:NSArray = NSArray()
+//    private var insulin:NSArray = NSArray()
     
     private var sport:NSArray = NSArray()
    // private var exerIntensity:NSArray = NSArray()
@@ -45,6 +45,9 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
 //            return portion.count
         //胰岛素
         case insulinPicker:
+            let path = PlistSetting.getFilePath(File: "inputChoose.plist")
+            let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
+            let insulin = data["insulin"] as! NSArray
             return insulin.count
         //运动
         case sportPicker:
@@ -70,6 +73,9 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
 //        case portionPicker:
 //            return portion[row] as? String
         case insulinPicker:
+            let path = PlistSetting.getFilePath(File: "inputChoose.plist")
+            let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
+            let insulin = data["insulin"] as! NSArray
             return insulin[row] as? String
             
         case sportPicker:
@@ -95,10 +101,13 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
 //            portionStr = portion[portionPicker.selectedRow(inComponent: 0)] as! String
         //胰岛素选择器
         case insulinPicker:
-            insulinStr = insulin[insulinPicker.selectedRow(inComponent: 0)] as! String
+            let path = PlistSetting.getFilePath(File: "inputChoose.plist")
+            let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
+            let insulin = data["insulin"] as! NSArray
+            insulinStr = insulin[insulinPicker.selectedRow(inComponent: 0)] as? String
         //运动选择器
         case sportPicker:
-            sportStr = sport[sportPicker.selectedRow(inComponent: 0)] as! String
+            sportStr = sport[sportPicker.selectedRow(inComponent: 0)] as? String
         //运动强度选择器（低，中，高）
 //        case exerIntensyPicker:
 //            exerItensityStr = exerIntensity[exerIntensyPicker.selectedRow(inComponent: 0)] as! String
@@ -226,7 +235,7 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
 //        event = data["event"] as! NSArray
 //
 //        portion = data["portion"] as! NSArray
-        insulin = data["insulin"] as! NSArray
+        
         
         sport = data["sport"] as! NSArray
 //        exerIntensity = data["exerIntensity"] as! NSArray

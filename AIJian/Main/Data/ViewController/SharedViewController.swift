@@ -84,6 +84,7 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = ThemeColor
         self.view.clipsToBounds = true
         //general.setupUI()
         
@@ -92,7 +93,7 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
         sharedScrollView.contentSize = CGSize(width: AJScreenWidth, height: AJScreenWidth)
         sharedScrollView.alwaysBounceVertical = true
         sharedScrollView.showsVerticalScrollIndicator = true
-        sharedScrollView.backgroundColor = UIColor.white
+        sharedScrollView.backgroundColor = UIColor.clear
         self.view.addSubview(sharedScrollView)
         sharedScrollView.snp.makeConstraints{(make) in
             make.left.right.equalToSuperview()

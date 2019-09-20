@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import HandyJSON
+
 class InsertViewController: UIViewController {
 
     lazy var input:InputView = {
@@ -18,11 +19,9 @@ class InsertViewController: UIViewController {
         view.bodyInfo.medicineChooseButton.addTarget(self, action: #selector(chooseMedicine), for: .touchUpInside)
          //编辑药物的方法
         view.bodyInfo.medicineEditButton.addTarget(self, action: #selector(edit(sender:)), for: .touchUpInside)
-        // 设置标记，识别按钮  用来的标识不同的button。默认button的初始化的tag的值为0
-        view.bodyInfo.medicineEditButton.tag = 8
 
-        view.leftButton.addTarget(self, action: #selector(cancel), for: .touchUpInside)    //点击取消
-        view.rightButton.addTarget(self, action: #selector(save), for: .touchUpInside) //点击保存
+//        view.leftButton.addTarget(self, action: #selector(cancel), for: .touchUpInside)    //点击取消
+//        view.rightButton.addTarget(self, action: #selector(save), for: .touchUpInside) //点击保存
         return view
     }()
     
@@ -31,28 +30,35 @@ class InsertViewController: UIViewController {
     
     // 选择药物按钮弹出的alert
     private var medicineChooseAlert = alertViewController()
-    
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         // 设置当选中的表格个数改变时，使得对应的按钮显示已选择的表格数
-        //药物数
+        //药物数已被设置为可观察
         if medicineChooseAlert.selectedNum>0{
             input.bodyInfo.medicineChooseButton.setTitle("\(medicineChooseAlert.selectedNum)个选项已选择", for: .normal)
         }else{
-            input.bodyInfo.medicineChooseButton.setTitle("无", for: .normal)
+            input.bodyInfo.medicineChooseButton.setTitle("Nothing", for: .normal)
         }
 
     }
     
-    private var isMedicineUpdate = true
-    
-    // 设置导航栏左按钮x样式
+    // 设置导航栏左按钮样式
     private lazy var leftButton:UIButton = {
         let button = UIButton.init(type: .custom)
         button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         button.setImage(UIImage(named: "back"), for: .normal)
         //button.setTitleColor(UIColor.blue, for: .normal)
         button.addTarget(self, action: #selector(leftButtonClick), for: .touchUpInside)
+        return button
+    }()
+    
+    // 设置导航栏右按钮样式
+    private lazy var rightButton:UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        button.setTitle("Save", for: .normal)
+        //button.setTitleColor(UIColor.blue, for: .normal)
+        button.addTarget(self, action: #selector(save), for: .touchUpInside)
         return button
     }()
     
@@ -63,6 +69,9 @@ class InsertViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = ThemeColor
+        self.title = "Add Data"
+//        self.navigationController?.navigationBar.titleTextAttributes = []
         // 读取配置文件
         let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
         
@@ -75,8 +84,22 @@ class InsertViewController: UIViewController {
         
         // 添加导航栏左按钮
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
+        // 添加导航栏右按钮
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
         // 实现点击屏幕键盘收回
         hideKeyboardWhenTappedAround()
+        // 设置监听器，监听是否需要编辑胰岛素条目
+        NotificationCenter.default.addObserver(self, selector: #selector(test), name: NSNotification.Name(rawValue: "chooseInsulin"), object: nil)
+        // 设置监听器，监听是否要重新加载胰岛素选择器条目
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadPicker), name: NSNotification.Name(rawValue: "reload"), object: nil)
+    }
+    
+    @objc func test(){
+        self.navigationController?.pushViewController(InsulinViewController(), animated: true)
+    }
+    
+    @objc func reloadPicker(){
+        input.picker.insulinPicker.reloadComponent(0)
     }
 
     
@@ -87,33 +110,27 @@ class InsertViewController: UIViewController {
         // 读取配置文件
         let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
         // 由于 药物 一定是有可选项的，所以不需判断是否有可选项
-        // 判断表格是否需要更新 if开始
         // 若需更新，重新加载数据和表格
-        if isMedicineUpdate{
-            
-            medicineChooseAlert.alertData = data["medicine"] as! [String]
-            // 设置框的高度，根据单元格数量和表格上下约束计算得出
-            medicineChooseAlert.view.snp.updateConstraints{(make) in
-                make.height.equalTo(medicineChooseAlert.alertData.count*35+90)
-            }
-            // 更新单元格
-            medicineChooseAlert.tabelView.reloadData()
-            // 显示 警示框
-            self.present(medicineChooseAlert, animated: true, completion: nil)
-            // 设置更新 为false，避免下次再重新加载浪费时间
-            isMedicineUpdate = false
-        }// 判断表格是否需要更新 if结束
-            // 若不需要更新，直接显示警示框
-        else{
-            // 显示 警示框
-            self.present(medicineChooseAlert, animated: true, completion: nil)
+    
+        medicineChooseAlert.alertData = data["medicine"] as! [String]
+        // 设置框的高度，根据单元格数量和表格上下约束计算得出
+        medicineChooseAlert.view.snp.updateConstraints{(make) in
+            make.height.equalTo(medicineChooseAlert.alertData.count*35+90)
         }
+        // 更新单元格
+        medicineChooseAlert.tabelView.reloadData()
+        // 显示 警示框
+        self.present(medicineChooseAlert, animated: true, completion: nil)
+        
+        // 显示 警示框
+        self.present(medicineChooseAlert, animated: true, completion: nil)
+        
         
     }
     
     
-    // 选择 备注/药物 编辑 按钮被点击时的动作
-    // ********* 备注/药物 编辑 按钮 *********
+    // 选择 药物 编辑 按钮被点击时的动作
+    // ********* 药物 编辑 按钮 *********
     @objc func edit(sender:UIButton?){
         
         let alert = UIAlertController(title: "添加备注", message: "", preferredStyle: .alert)
@@ -147,10 +164,7 @@ class InsertViewController: UIViewController {
             self.medicineChooseAlert.boolarr.append(true)
             self.medicineChooseAlert.boolArray.append(true)
             self.medicineChooseAlert.selectedNum += 1
-            // 药物表格需更新
-            self.isMedicineUpdate = true
-            
-            
+   
         })
         // 添加2个按钮到 警示框中
         alert.addAction(actionCancel)
@@ -184,15 +198,20 @@ class InsertViewController: UIViewController {
     
     // 血糖记录ID，用于更新数据
     var recordId:String?
-    //点击保存
+    //********************* 点击保存 ********************
     @objc func save(){
         let alert = CustomAlertController()
-        let date = input.getData()
+        // 记录需要警告的内容
+        var Message:String = ""
+        let date = input.getDate()
         let time = input.getTime()
         print("获得日期:",date)
         print("获得时间:",time)
+        // ********* 记录时间 *********
         let createTime = date + " " + time
         print("存入到数据库的时间",createTime)
+        
+        // ********* 记录血糖 *********
         var bloodGlucoseValueMmol:Double?
         var bloodGlucoseValueMg:Double?
 //        如果血糖的单位为mg/dl,则范围为10到600
@@ -200,103 +219,82 @@ class InsertViewController: UIViewController {
         if GetUnit.getBloodUnit() == "mg/dL"{
             print("此时进入了mg/dl这个血糖单位")
             if input.glucose.XTTextfield.text! != ""{   //先判断空
-                if FormatMethodUtil.validateMgdlBloodNumber(number: input.glucose.XTTextfield.text!) == true || FormatMethodUtil.validateMgdlBloodNumberOther(number:input.glucose.XTTextfield.text!) == true{ 
-                    if Double(input.glucose.XTTextfield.text!)! >= 10 && Double(input.glucose.XTTextfield.text!)! <= 600{
-                        bloodGlucoseValueMg = Double(input.glucose.XTTextfield.text!)!
-                        bloodGlucoseValueMmol = UnitConversion.mgTomm(num: bloodGlucoseValueMg!)
-                        print("血糖mg值",bloodGlucoseValueMg as Any)
-                        print("血糖mmol值",bloodGlucoseValueMmol as Any)
-                    }else{
-                        alert.custom(self, "Attention", "血糖的范围为10~600")
-                    }
+                if Double(input.glucose.XTTextfield.text!)! >= 10 && Double(input.glucose.XTTextfield.text!)! <= 600{
+                    bloodGlucoseValueMg = Double(input.glucose.XTTextfield.text!)!
+                    bloodGlucoseValueMmol = UnitConversion.mgTomm(num: bloodGlucoseValueMg!)
+                    print("血糖mg值",bloodGlucoseValueMg as Any)
+                    print("血糖mmol值",bloodGlucoseValueMmol as Any)
                 }else{
-                    alert.custom(self, "Attention", "请正确输入血糖值")
-                    return
+                    Message += "\n血糖的范围为10~600"
+//                    alert.custom(self, "Attention", "血糖的范围为10~600")
                 }
-            }else{
-                alert.custom(self, "Attention", "血糖不能为空")
-                return
+            }
+            else{
+                Message += "\n血糖不能为空"
+//                alert.custom(self, "Attention", "血糖不能为空")
+//                return
             }
         }else{ //mmol/L 单位
             print("此时进入了mmol/l这个血糖单位")
             if input.glucose.XTTextfield.text! != ""{   //先判断空
-                if FormatMethodUtil.validateMgdlBloodNumber(number: input.glucose.XTTextfield.text!) == true{
-                    if Double(input.glucose.XTTextfield.text!)! >= 0.6 && Double(input.glucose.XTTextfield.text!)! <= 33.3{
-                        bloodGlucoseValueMmol = Double(input.glucose.XTTextfield.text!)!
-                        bloodGlucoseValueMg = UnitConversion.mmTomgDouble(num: bloodGlucoseValueMmol!)
-                        print("血糖mg值",bloodGlucoseValueMg as Any)
-                        print("血糖mmol值",bloodGlucoseValueMmol as Any)
-                    }else{
-                        alert.custom(self, "Attention", "血糖的范围为0.6~33.3")
-                    }
+                if Double(input.glucose.XTTextfield.text!)! >= 0.6 && Double(input.glucose.XTTextfield.text!)! <= 33.3{
+                    bloodGlucoseValueMmol = Double(input.glucose.XTTextfield.text!)!
+                    bloodGlucoseValueMg = UnitConversion.mmTomgDouble(num: bloodGlucoseValueMmol!)
+                    print("血糖mg值",bloodGlucoseValueMg as Any)
+                    print("血糖mmol值",bloodGlucoseValueMmol as Any)
                 }else{
-                    alert.custom(self, "Attention", "请正确输入血糖值")
-                    return
+                    Message += "\n血糖的范围为0.6~33.3"
+//                    alert.custom(self, "Attention", "血糖的范围为0.6~33.3")
                 }
+            
             }else{
-                alert.custom(self, "Attention", "血糖不能为空")
-                return
+                Message += "\n血糖不能为空"
+//                alert.custom(self, "Attention", "血糖不能为空")
+//                return
             }
         }
+        
+        // **************** 检测时间段，非空 **************
         let event = input.getEventValue()
         print("胰岛素的事件调试成功*********************")
+        // **************** 进餐量，非空 *****************
         let eat_num = input.getPorValue()
         print("胰岛素的进餐量调试成功*********************")
+        // **************** 胰岛素类型，非空 ******************
         let insulin_type = input.getInsValue()
         print("获得胰岛素类型",insulin_type)
         print("胰岛素的类型调试成功*********************")
-        var insulin_num:Double?
-        if input.porAndIns.insulinTextfield.text! != ""{
-            if FormatMethodUtil.validateInsulinNum(number: input.porAndIns.insulinTextfield.text!) == true{
-                if Double(input.porAndIns.insulinTextfield.text!)! > 100.0{
-                    alert.custom(self, "Attention", "输入胰岛素的值不能超过100")
-                    return
-                }else{
-                    insulin_num = Double(input.porAndIns.insulinTextfield.text!)!
-                }
-            }else{
-                alert.custom(self, "Attention", "正确输入胰岛素的值")
-                return
+        // ****************** 胰岛素使用量 ******************
+        let insulin_num:Double? = input.getInsNumValue()
+        if insulin_num != nil{
+            if insulin_type == "Nothing"{
+                Message += "\n胰岛素类型未选择"
+            }else if insulin_num! > 100.0{
+                Message += "\n输入胰岛素的值不能超过100"
             }
         }
-        print("胰岛素的量",insulin_num ?? "nothing")
+        print("胰岛素的量",insulin_num ?? "no")
         print("胰岛素的量调试成功*********************")
        
-        
+        // ******************** 体重 ********************
         var weight_kg:Double?
         var weight_lbs:Double?
-        if input.bodyInfo.weightTextfield.text! != ""{  //如果不为空，才做这件事情
-            if GetUnit.getWeightUnit() == "kg"{
-                if FormatMethodUtil.validateWeightKgNum(number: input.bodyInfo.weightTextfield.text!) == true{
-                    if Double(input.bodyInfo.weightTextfield.text!)! >= 454 && Double(input.bodyInfo.weightTextfield.text!)! <= 0 {
-                        //不合法
-                        alert.custom(self, "Attention", "体重有效的范围为0~454")
-                        return
-                    }else{
-                        weight_kg = Double(input.bodyInfo.weightTextfield.text!)!
-                        weight_lbs = WeightUnitChange.KgToLbs(num: weight_kg!)
-                    }
+        if GetUnit.getWeightUnit() == "kg"{
+            // 体重不为空
+            weight_kg = input.getWeightValue()
+            if weight_kg != nil{
+                if weight_kg! >= 454.0{
+                    Message += "\n体重有效的范围为0~454"
                 }else{
-                    alert.custom(self, "Attention", "请正确输入体重值")
-                    return
+                    weight_lbs = WeightUnitChange.KgToLbs(num: weight_kg!)
                 }
-            }else{  //单位：lbs
-                if FormatMethodUtil.validateWeightKgNum(number: input.bodyInfo.weightTextfield.text!) == true{
-                    if Double(input.bodyInfo.weightTextfield.text!)! >= 1000 && Double(input.bodyInfo.weightTextfield.text!)! <= 0 {
-                        //不合法
-                        alert.custom(self, "Attention", "体重有效的范围为0~1000")
-                        return
-                    }else{
-                        weight_lbs = Double(input.bodyInfo.weightTextfield.text!)!
-                        weight_kg = WeightUnitChange.LbsToKg(num: weight_lbs!)
-                    }
-                }else{
-                    alert.custom(self, "Attention", "请正确输入体重值")
-                    return
-                }
-                
             }
-            
+        }else{
+            weight_lbs = input.getWeightValue()
+            // 体重不为空
+            if weight_lbs != nil{
+                weight_kg = WeightUnitChange.KgToLbs(num: weight_lbs!)
+            }
         }
         
         print("体重调试成功")
@@ -321,46 +319,57 @@ class InsertViewController: UIViewController {
 //        print("身高的值调试成功*********************")
         
       
-        
+        // ***************** 血压 *******************
         print("获得收缩压:",type(of:input.getSysValue()))
         print("获的舒张压:",type(of:input.getDiaValue()))
         var sys_press_mmHg:Double?
         var sys_press_kPa:Double?
         var dis_press_mmHg:Double?
         var dis_press_kPa:Double?
-        //收缩压必须大于舒张压
-        if input.bodyInfo.blood_sysPressureTextfield.text! != ""{
-            if input.bodyInfo.blood_sysPressureTextfield.text! != ""{
-                if FormatMethodUtil.validatePressNum(number: input.bodyInfo.blood_sysPressureTextfield.text!) == true && FormatMethodUtil.validatePasswd(passwd: input.bodyInfo.blood_diaPressureTextfield.text!) == true{//限定格式
-                    if GetUnit.getPressureUnit() == "mmHg"{  //限定单位
-                        if Double(input.bodyInfo.blood_sysPressureTextfield.text!)! >= 45 && Double(input.bodyInfo.blood_sysPressureTextfield.text!)! <= 300 && Double(input.bodyInfo.blood_diaPressureTextfield.text!)! >= 45 && Double(input.bodyInfo.blood_diaPressureTextfield.text!)! <= 300 && Double(input.bodyInfo.blood_sysPressureTextfield.text!)! > Double(input.bodyInfo.blood_diaPressureTextfield.text!)!{
-                            sys_press_mmHg = Double(input.bodyInfo.blood_sysPressureTextfield.text!)!
-                            dis_press_mmHg = Double(input.bodyInfo.blood_diaPressureTextfield.text!)!
-                            sys_press_kPa = PressureUnitChange.mmHgTokPa(num: sys_press_mmHg!)
-                            dis_press_kPa = PressureUnitChange.kPaTommHg(num: dis_press_mmHg!)
-                            print(sys_press_mmHg as Any)
-                        }else{
-                            alert.custom(self, "Attention", "血压的范围在45~300之间")
-                        }
-                    }else{ //kPa
-                        if Double(input.bodyInfo.blood_sysPressureTextfield.text!)! >= 6 && Double(input.bodyInfo.blood_sysPressureTextfield.text!)! <= 40 && Double(input.bodyInfo.blood_diaPressureTextfield.text!)! >= 6 && Double(input.bodyInfo.blood_diaPressureTextfield.text!)! <= 40 && Double(input.bodyInfo.blood_sysPressureTextfield.text!)! > Double(input.bodyInfo.blood_diaPressureTextfield.text!)!{
-                            sys_press_kPa = Double(input.bodyInfo.blood_sysPressureTextfield.text!)!
-                            dis_press_kPa = Double(input.bodyInfo.blood_diaPressureTextfield.text!)!
-                            sys_press_mmHg = PressureUnitChange.mmHgTokPa(num: sys_press_kPa!)
-                            dis_press_mmHg = PressureUnitChange.kPaTommHg(num: dis_press_kPa!)
-
-                        }else{
-                            alert.custom(self, "Attention", "血压的范围在45~300之间")
-                        }
+        // 单位为 mmHg
+        if GetUnit.getPressureUnit() == "mmHg"{
+            sys_press_mmHg = input.getSysValue()
+            dis_press_mmHg = input.getDiaValue()
+            // 如果不都为空
+            if sys_press_mmHg != nil || dis_press_mmHg != nil{
+                // 如果都不为空
+                if sys_press_mmHg != nil && dis_press_mmHg != nil{
+                    if sys_press_mmHg! < 45 || sys_press_mmHg! > 300
+                        || dis_press_mmHg! < 45 || dis_press_mmHg! > 300{
+                        Message += "\n血压的范围在45~300之间"
+                    }else if dis_press_mmHg! >= sys_press_mmHg!{
+                        Message += "\n舒张压要大于收缩压"
+                    }else{
+                        sys_press_kPa = PressureUnitChange.mmHgTokPa(num: sys_press_mmHg!)
+                        dis_press_kPa = PressureUnitChange.mmHgTokPa(num: dis_press_mmHg!)
                     }
                 }else{
-                    alert.custom(self, "Attention", "输入的血压格式不正确")
+                    Message += "\n舒张压或舒张压不能只填写一个"
                 }
-            }else{
-                alert.custom(self, "Attention", "舒张压不能为空")
-                return
+            }
+            
+        }// 单位为 kPa
+        else{
+            sys_press_kPa = input.getSysValue()
+            dis_press_kPa = input.getDiaValue()
+            if sys_press_kPa != nil || dis_press_kPa != nil{
+                if sys_press_kPa != nil && dis_press_kPa != nil{
+                    if sys_press_kPa! < 6 || sys_press_kPa! > 40
+                        || dis_press_kPa! < 6 || dis_press_kPa! > 40{
+                        Message += "\n血压的范围在6-40之间"
+                    }else if dis_press_kPa! > sys_press_kPa!{
+                        Message += "\n舒张压要小于收缩压"
+                    }else{
+                        sys_press_mmHg = PressureUnitChange.kPaTommHg(num: sys_press_kPa!)
+                        dis_press_mmHg = PressureUnitChange.kPaTommHg(num: dis_press_kPa!)
+                    }
+                }else{
+                    Message += "\n舒张压或舒张压不能只填写一个"
+                }
             }
         }
+        
+        // ************** 药物 ***************
         let medicine = getMedicineArray()
         var medicine_string:String = ""
         if medicine != []{
@@ -376,31 +385,41 @@ class InsertViewController: UIViewController {
                 }
                 j = j + 1
             }
-        }else{
-            print("如何等于空的时候，值为多少",medicine)
         }
         print(medicine_string)
         
         
-        
+        // **************** 运动类型 **************
         let sport = input.getSportType()
         print("获得运动类型:",sport)
-    
-        var sport_time:Int64?
-        if input.sport.timeOfDurationTextfield.text! != ""{
-            if Int(input.sport.timeOfDurationTextfield.text!)! > 5 && Int(input.sport.timeOfDurationTextfield.text!)! < 360{
-                sport_time = Int64(input.sport.timeOfDurationTextfield.text!)
-            }else{
-                print(Int(input.sport.timeOfDurationTextfield.text!)!)
-                alert.custom(self, "Attention", "有效的运动持续时间范围为5~360")
-                return
+        // **************** 运动时间 **************
+        let sport_time:Int64? = input.getSportTime()
+
+        // y*************** 运动强度 ****************
+        var sport_strength:Int64? = input.getSportStrength()
+        
+        // 有运动时间无运动类型报错
+        // 运动时间不在正常范围报错
+        if sport == "Nothing"{
+            sport_strength = nil
+            if sport_time != nil{
+                Message += "\n根据时间和强度选择运动类型"
+                
+            }
+        }else if let time = sport_time{
+            if time < 5 && time > 360{
+                print(time)
+                Message += "\n有效的运动持续时间范围为5~360"
             }
         }
-        print("获得运动持续时间:",sport_time ?? "no sport time")
         
-        let sport_strength = input.getSportStrength()
-//        print("获得运动强度转换后的值:",sport_strength)
+        print("获得运动持续时间:",sport_time ?? "no sport time")
 
+        // 如果警示信息不为空，说明需要警示
+        if Message != ""{
+            alert.custom(self, "Attention", Message)
+            return
+        }
         
         //第一步：先封装成一个对象
         var  insertData:glucoseDate = glucoseDate()
@@ -424,14 +443,16 @@ class InsertViewController: UIViewController {
 //        insertData.height = height
         insertData.weightKg = weight_kg
         insertData.weightLbs = weight_lbs
+        //insertData.systolicPressureMmhg = (sys_press_mmHg != nil) ? Int64(sys_press_mmHg!):nil
         insertData.systolicPressureMmhg = sys_press_mmHg
         insertData.systolicPressureKpa = sys_press_kPa
-        insertData.diastolicPressureMmhg = sys_press_mmHg
-        insertData.diastolicPressureKpa = sys_press_kPa
+        //insertData.diastolicPressureMmhg = (dis_press_mmHg != nil) ? Int64(dis_press_mmHg!):nil
+        insertData.diastolicPressureMmhg = dis_press_mmHg
+        insertData.diastolicPressureKpa = dis_press_kPa
         insertData.medicine = (medicine_string == "") ? nil:medicine_string
-        insertData.sportType = sport
+        insertData.sportType = (sport == "Nothing") ? nil:sport
         insertData.sportTime = sport_time
-        insertData.sportStrength = Int64(sport_strength)
+        insertData.sportStrength = sport_strength
         insertData.inputType = 1
         insertData.remark = input.getRemark()
         insertData.machineId = nil
@@ -506,7 +527,7 @@ class InsertViewController: UIViewController {
                                 print("更新成功")
                                 // 向数据库更新数据
                                 DBSQLiteManager.manager.updateGlucoseRecord(data: insertData)
-                                // 更新s所展示的数据
+                                // 更新所展示的数据
                                 initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())
                                 sortedTimeOfData()
                                 chartData()
@@ -515,6 +536,8 @@ class InsertViewController: UIViewController {
                             }else{
                                 print(responseModel.code)
                                 print("更新失败")
+                                let alert = CustomAlertController()
+                                alert.custom(self, "Attention", "更新失败，请重新登录")
                                 
                             }
                         } //end of letif
@@ -609,10 +632,110 @@ class InsertViewController: UIViewController {
     }
     
     
-    
-    func getAllInfo(){
+}
+
+
+
+extension InsertViewController{
+    // 将单元格的内容传入手动输入界面
+    func EditData(_ section:Int,_ row:Int){
+        let x = sortedData[section][row]
+        let y = sortedTime[section][row]
+        // 设置时间选择器的位置
+        
+        // 手动输入标志位设置
+        self.isInsert = false
+        // 血糖记录ID
+        self.recordId = x.bloodGlucoseRecordId!
+        // 时间
+        self.input.setDate(y.toFormat("yyyy-MM-dd"))
+        self.input.setTime(y.toFormat("HH:mm"))
+        // 血糖量
+        if let value = x.bloodGlucoseMmol{
+            if GetUnit.getBloodUnit() == "mmol/L"{
+                // 设置文本框文本
+                self.input.setGlucoseValue("\(value)")
+                // 设置滑块位置
+                //                self.input.glucose.XTSlider.setValue(Float(value), animated: false)
+                self.input.glucose.setValueAndThumbColor(value: Float(value))
+                //                self.input.glucose.value = Float(value)
+            }else{
+                // 设置文本框文本
+                self.input.setGlucoseValue(String(format: "%.0f", x.bloodGlucoseMg!))
+                // 设置滑块位置
+//                self.input.glucose.XTSlider.setValue(Float(x.bloodGlucoseMg!), animated: false)
+//                self.input.glucose.tfvalueChange()
+//                self.input.glucose.XTSlider.value = Float(x.bloodGlucoseMg!)
+//                self.input.setSlider(Float(x.bloodGlucoseMg!))
+                //                self.input.glucose.value = Float(x.bloodGlucoseMg!)
+//                self.input.glucose.setValueAndThumbColor(value: Float(value))
+            }
+            
+        }
+        
+        
+        // 检测时间段，非空
+        self.input.setEventValue(Int(x.detectionTime!))
+        // 进餐量，非空
+        self.input.setPorValue(Int(x.eatNum!))
+        // 胰岛素量
+        if let insNum = x.insulinNum{
+            self.input.setInsNumValue("\(insNum)")
+        }
+        
+        // 胰岛素类型
+        self.input.setInsValue(x.insulinType ?? "Nothing")
+        
+        // 体重
+        if let weight = x.weightKg{
+            if GetUnit.getWeightUnit() == "kg"{
+                self.input.setWeightValue("\(weight)")
+            }else{
+                self.input.setWeightValue(String(format: "%.0f", x.weightLbs!))
+            }
+        }
+//        else{
+//            self.input.setWeightValue("")
+//        }
+        
+        //        // 身高
+        //        if let height = x.height{
+        //            self.input.setHeightValue("\(height)")
+        //        }
+        
+        // 血压
+        if let sysValue = x.systolicPressureKpa{
+            if GetUnit.getPressureUnit() == "mmHg"{
+                self.input.setSysValue(String(format: "%.0f", x.systolicPressureMmhg!))
+                self.input.setDiaValue(String(format: "%.0f", x.diastolicPressureMmhg!))
+            }else{
+                self.input.setSysValue("\(sysValue)")
+                self.input.setDiaValue("\(x.diastolicPressureKpa!)")
+            }
+        }else{
+            self.input.setSysValue("")
+            self.input.setDiaValue("")
+        }
+        //******************************** 有bug，未设置被选中的项
+        // 药物
+        if let medicine = x.medicine{
+            let medicineArr = medicine.components(separatedBy: ",")
+            self.setMedicineArray(medicineArr as Array)
+        }
+        
+        // 运动
+        self.input.setSportType(x.sportType ?? "Nothing")
+        
+        // 运动时间
+        if let sportTime = x.sportTime{
+            self.input.setSportTime("\(sportTime)")
+        }else{
+            self.input.setSportTime("")
+        }
+        // 运动强度
+        self.input.setSportStrength(x.sportStrength ?? 1)
+        // 备注
+        self.input.setRemark(text: x.remark ?? "")
         
     }
-    
-    
 }

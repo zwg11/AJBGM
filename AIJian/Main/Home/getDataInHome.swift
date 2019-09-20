@@ -20,10 +20,15 @@ class getDataInHome{
         
         let str:String?
         // // 判断单位，根据相应单位取出最近一次的值
-        if GetUnit.getBloodUnit() == "mmol/L"{
-            str = (data.bloodGlucoseMmol != nil) ? String(data.bloodGlucoseMmol!):"-"
+        if let value = data.bloodGlucoseMmol{
+            if GetUnit.getBloodUnit() == "mmol/L"{
+                str = String(value)
+            }else{
+                str = String(format:"%.0f",data.bloodGlucoseMg!)
+            }
+
         }else{
-            str = (data.bloodGlucoseMg != nil) ? String(data.bloodGlucoseMg!):"-"
+            str = "-"
         }
         
         return str!
@@ -62,23 +67,31 @@ class getDataInHome{
                     avgValue += Double(i.bloodGlucoseMg!)
                     // 如果当前值比最大值大，则最大值为当前值
                     if Double(i.bloodGlucoseMg!) > highestValue{
-                        highestValue = Double(i.bloodGlucoseMg!)
+                        highestValue = i.bloodGlucoseMg!
                     }
                     // 如果当前值比最小值小，则最小值为当前值
                     if Double(i.bloodGlucoseMg!) < lowestValue{
-                        lowestValue = Double(i.bloodGlucoseMg!)
+                        lowestValue = i.bloodGlucoseMg!
                     }
                 }
             }
             avgValue = avgValue/Double(checkNum)
+            // 平均值为1位小数
             let x = String(format: "%.1f", avgValue)
             result.append(x)
             result.append(checkNum)
-            result.append(highestValue)
-            result.append(lowestValue)
+            // 最高值和最低值根据单位判断是否有小数
+            if GetUnit.getBloodUnit() == "mmol/L"{
+                result.append(highestValue)
+                result.append(lowestValue)
+            }else{
+                result.append(String(format: "%.0f", highestValue))
+                result.append(String(format: "%.0f", lowestValue))
+            }
+            
             return result
         }else{
-            
+            // 如果没数据，平均值、检测次数为0，最高值、最低值设为 --
             result.append(avgValue)
             result.append(checkNum)
             result.append("--")

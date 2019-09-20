@@ -13,17 +13,19 @@ extension UIButton{
     // 字体内容及其颜色 边框设置
     func NorStyle(title string:String){
         self.setTitle(string, for: .normal)
-        self.setTitleColor(UIColor.black, for: .normal)
-        self.layer.borderColor = UIColor.black.cgColor
+        self.setTitleColor(UIColor.white, for: .normal)
+        self.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        self.layer.borderColor = UIColor.lightGray.cgColor
         self.layer.borderWidth = 1
         self.layer.cornerRadius = 3
+        self.backgroundColor = SendButtonColor
     }
     
     // 用于手动输入页面，按钮被选中时的样式
     func setSelected(){
         self.setTitleColor(UIColor.white, for: .normal)
-        self.backgroundColor = UIColor.blue
-        self.layer.borderColor = UIColor.white.cgColor
+        self.backgroundColor = SendButtonColor
+        self.layer.borderColor = UIColor.lightGray.cgColor
         self.layer.borderWidth = 1
         
     }
@@ -31,7 +33,7 @@ extension UIButton{
     // 用于手动输入页面，按钮未被选中时的样式
     func setDeselected(){
         self.setTitleColor(UIColor.gray, for: .normal)
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = kRGBColor(17, 56, 86, 1)
         self.layer.borderWidth = 0
     }
     

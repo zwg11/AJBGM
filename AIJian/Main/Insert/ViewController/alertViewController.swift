@@ -25,7 +25,7 @@ class alertViewController: UIAlertController,UITableViewDelegate,UITableViewData
     var boolArray:Array<Bool> = []
     //弹出数据列表
     var alertData:[String] = []
-    // 该值记录被选中的单元格的个数
+    // 该值记录被选中的单元格的个数,使用@dynamic修饰使其能够被观察
     @objc dynamic var selectedNum = 0
     
     //单元格的个数

@@ -16,12 +16,12 @@ class tableViewCellCustomLabel: UILabel {
         
         let markLabelText = text
         self.textAlignment = .center
-        self.textColor = UIColor.black
+        self.textColor = UIColor.white
         self.font = UIFont.systemFont(ofSize: 16)
-        self.backgroundColor = UIColor.clear
+        self.backgroundColor = SendButtonColor
         self.numberOfLines = 0
-        self.layer.borderColor = UIColor.white.cgColor
-        self.layer.borderWidth = 1
+//        self.layer.borderColor = UIColor.white.cgColor
+//        self.layer.borderWidth = 1
 
         
         let markAttr = NSMutableAttributedString(string: markLabelText)

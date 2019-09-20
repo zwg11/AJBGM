@@ -36,6 +36,7 @@ public class DBSQLiteManager:NSObject{
     let eat_num                        = Expression<Int64?>("eat_num")//进餐量---(0-无，1-小，2-中，3-大)
     let insulin_type                   = Expression<String?>("insulin_type")//胰岛素类型
     let insulin_num                    = Expression<Double?>("insulin_num")//胰岛素用量，单位U
+    //let weight_kg                      = Expression<Double?>("insulin_num")
     let systolic_pressure_mmhg         = Expression<Double?>("systolic_pressure_mmhg")//收缩压(mmHg)
     let diastolic_pressure_mmhg        = Expression<Double?>("diastolic_pressure_mmhg")//舒张压(mmHg)
     let systolic_pressure_kpa          = Expression<Double?>("systolic_pressure_kpa")
@@ -104,6 +105,8 @@ public class DBSQLiteManager:NSObject{
             t.column(eat_num)
             t.column(insulin_type)
             t.column(insulin_num)
+            t.column(weight_kg)
+            t.column(weight_lbs)
             t.column(systolic_pressure_mmhg)
             t.column(diastolic_pressure_mmhg)
             t.column(systolic_pressure_kpa)
@@ -260,6 +263,8 @@ public class DBSQLiteManager:NSObject{
                 ,glucose_mg <- i.bloodGlucoseMg!
                 ,eat_type <- i.eatType
                 ,eat_num <- i.eatNum
+                ,weight_kg <- i.weightKg
+                ,weight_lbs <- i.weightLbs
                 ,insulin_type <- i.insulinType
                 ,insulin_num <- i.insulinNum
                 ,systolic_pressure_mmhg <- i.systolicPressureMmhg
@@ -315,6 +320,8 @@ public class DBSQLiteManager:NSObject{
                 ,glucose_mg <- data.bloodGlucoseMg!
                 ,eat_type <- data.eatType
                 ,eat_num <- data.eatNum
+                ,weight_kg <- data.weightKg
+                ,weight_lbs <- data.weightLbs
                 ,insulin_type <- data.insulinType
                 ,insulin_num <- data.insulinNum
                 ,systolic_pressure_mmhg <- data.systolicPressureMmhg
@@ -407,6 +414,8 @@ public class DBSQLiteManager:NSObject{
                 dataGlucose.bloodGlucoseMg        = record[glucose_mg]
                 dataGlucose.eatType               = record[eat_type]
                 dataGlucose.eatNum                = record[eat_num]
+                dataGlucose.weightKg              = record[weight_kg]
+                dataGlucose.weightLbs             = record[weight_lbs]
                 dataGlucose.insulinType           = record[insulin_type]
                 dataGlucose.insulinNum            = record[insulin_num]
                 dataGlucose.systolicPressureMmhg  = record[systolic_pressure_mmhg]

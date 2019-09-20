@@ -47,19 +47,19 @@ class DataViewController: UIViewController {
         return button
     }()
     
-    private lazy var pageViewManager:DNSPageViewManager = {
+    lazy var pageViewManager:DNSPageViewManager = {
         // MARK：- 创建DNSPageStyle,设置格式
         // 标题是否能滚动、点击标题是否会伸缩、标题背景、是否显示下划线
         // 标题字体颜色、字体选中颜色、下划线颜色、下划线高
         let style = DNSPageStyle()
         style.isTitleViewScrollEnabled = false
         style.isTitleScaleEnabled = false
-        style.titleViewBackgroundColor = barDefaultColor
+        style.titleViewBackgroundColor = ThemeColor
         style.isShowBottomLine = true
         style.titleFont = UIFont.systemFont(ofSize: 14)
         style.titleSelectedColor = UIColor.white
         style.titleColor = UIColor.white
-        style.bottomLineColor = UIColor.white
+        style.bottomLineColor = UIColor.green
         style.bottomLineHeight = 2
         
         // 标题内容
@@ -168,7 +168,7 @@ class DataViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         // 隐藏 tabbar
         self.tabBarController?.tabBar.isHidden = true
-        self.pageViewManager.titleView.currentIndex = 0
+//        self.pageViewManager.titleView.currentIndex = 0
         
         
         

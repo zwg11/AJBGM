@@ -14,6 +14,7 @@ class StaticView: UIView {
     private lazy var frequencyLabel:UILabel = {
        let label = UILabel()
         label.text = "Frequency"
+        label.textColor = UIColor.white
         label.font = UIFont.systemFont(ofSize: 15)
         return label
     }()
@@ -21,6 +22,7 @@ class StaticView: UIView {
     private lazy var AverageLabel:UILabel = {
         let label = UILabel()
         label.text = "Average"
+        label.textColor = UIColor.white
         label.font = UIFont.systemFont(ofSize: 15)
         return label
     }()
@@ -28,6 +30,7 @@ class StaticView: UIView {
     private lazy var MaxLabel:UILabel = {
         let label = UILabel()
         label.text = "Max"
+        label.textColor = UIColor.white
         label.font = UIFont.systemFont(ofSize: 15)
         return label
     }()
@@ -35,6 +38,7 @@ class StaticView: UIView {
     private lazy var MinLabel:UILabel = {
         let label = UILabel()
         label.text = "Min"
+        label.textColor = UIColor.white
         label.font = UIFont.systemFont(ofSize: 15)
         return label
     }()
@@ -72,7 +76,7 @@ class StaticView: UIView {
     
     func setupUI(){
         
-        self.backgroundColor = UIColor.gray
+        self.backgroundColor = UIColor.lightGray
         let labels = [freValueLabel,frequencyLabel,AvgValueLabel,AverageLabel,MinValueLabel,MinLabel,MaxValueLabel,MaxLabel]
         
         for i in labels{
@@ -145,8 +149,11 @@ class StaticView: UIView {
         // 初始化对应的label
         AvgValueLabel.text = "\(result[0]) "  + unit
         freValueLabel.text = "\(result[1])"
+        
         MaxValueLabel.text = "\(result[2]) " + unit
         MinValueLabel.text = "\(result[3]) " + unit
+        
+        
     }
     
 

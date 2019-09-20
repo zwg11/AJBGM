@@ -39,7 +39,7 @@ class InputView: UIView,UIScrollViewDelegate {
     private lazy var dateAndTime:dateAndTimeView = {
         let view = dateAndTimeView()
         view.setupUI()
-        view.backgroundColor = kRGBColor(255, 251, 186, 1)
+//        view.backgroundColor = kRGBColor(255, 251, 186, 1)
         view.dateButton.addTarget(self, action: #selector(chooseDate), for: .touchUpInside)
         view.timeButton.addTarget(self, action: #selector(chooseTime), for: .touchUpInside)
         return view
@@ -102,46 +102,44 @@ class InputView: UIView,UIScrollViewDelegate {
         button.frame = CGRect(x: 0, y: 0, width: AJScreenWidth, height: AJScreenHeight)
         return button
     }()
-    //第七部分：左侧按钮
-      lazy var leftButton:UIButton = {
-        let leftButton = UIButton.init(type: .system)
-        leftButton.backgroundColor = UIColor.gray
-        leftButton.setTitle("取消", for: .normal)
-        leftButton.setTitleColor(UIColor.white, for: .normal)
-        leftButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
-        leftButton.layer.cornerRadius = 5
-        leftButton.layer.masksToBounds = true
-        return leftButton
-    }()
-    //第七部分：右侧按钮
-     lazy var rightButton:UIButton = {
-        let rightButton = UIButton.init(type: .system)
-        rightButton.backgroundColor = UIColor.gray
-        rightButton.setTitle("保存", for: .normal)
-        rightButton.setTitleColor(UIColor.white, for: .normal)
-        rightButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
-        rightButton.layer.cornerRadius = 5
-        rightButton.layer.masksToBounds = true
-        return rightButton
-    }()
+//    //第七部分：左侧按钮
+//      lazy var leftButton:UIButton = {
+//        let leftButton = UIButton.init(type: .system)
+//        leftButton.backgroundColor = UIColor.gray
+//        leftButton.setTitle("取消", for: .normal)
+//        leftButton.setTitleColor(UIColor.white, for: .normal)
+//        leftButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+//        leftButton.layer.cornerRadius = 5
+//        leftButton.layer.masksToBounds = true
+//        return leftButton
+//    }()
+//    //第七部分：右侧按钮
+//     lazy var rightButton:UIButton = {
+//        let rightButton = UIButton.init(type: .system)
+//        rightButton.backgroundColor = UIColor.gray
+//        rightButton.setTitle("保存", for: .normal)
+//        rightButton.setTitleColor(UIColor.white, for: .normal)
+//        rightButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+//        rightButton.layer.cornerRadius = 5
+//        rightButton.layer.masksToBounds = true
+//        return rightButton
+//    }()
     
     
     
     //视图约束
     func setupUI() {
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = UIColor.clear
         
         //在这个地方对时间进行初始化
-        
-        
-        
+
         // 设置滚动视图属性
-        scrollView.contentSize = CGSize(width: AJScreenWidth, height: AJScreenWidth*3+200)
+        scrollView.contentSize = CGSize(width: AJScreenWidth, height: AJScreenWidth/6*17)
         scrollView.showsVerticalScrollIndicator = true
-        scrollView.backgroundColor = UIColor.white
+//        scrollView.backgroundColor = UIColor.white
         
         // 添加滚动视图
-        scrollView.backgroundColor = UIColor.red
+        scrollView.backgroundColor = UIColor.clear
         self.addSubview(scrollView)
         scrollView.snp.makeConstraints{(make) in
             make.edges.equalToSuperview()
@@ -163,7 +161,7 @@ class InputView: UIView,UIScrollViewDelegate {
         dateAndTime.snp.makeConstraints{(make) in
             make.left.right.equalTo(self)
             // 这里设置顶部位置置顶，与未设置时一样
-            make.height.equalTo(AJScreenWidth/8+AJScreenWidth/40)
+            make.height.equalTo(AJScreenWidth/5*2)
             // 设置初始始dateAndTime界面顶部在视图顶部
             make.top.equalToSuperview()
         }
@@ -174,7 +172,7 @@ class InputView: UIView,UIScrollViewDelegate {
             //make.left.right.equalToSuperview()
             make.left.right.equalTo(self)
             make.top.equalTo(dateAndTime.snp.bottom)
-            make.height.equalTo(AJScreenWidth/2)
+            make.height.equalTo(AJScreenWidth/5*2+AJScreenWidth/20)
         }
         
         // porAndIns 视图布局
@@ -183,7 +181,7 @@ class InputView: UIView,UIScrollViewDelegate {
             //make.left.right.equalToSuperview()
             make.left.right.equalTo(self)
             make.top.equalTo(glucose.snp.bottom)
-            make.height.equalTo(AJScreenWidth/2-AJScreenWidth/15+AJScreenWidth/40)
+            make.height.equalTo(AJScreenWidth/2-AJScreenWidth/15)
         }
         
         // bodyInfo 视图布局
@@ -192,7 +190,7 @@ class InputView: UIView,UIScrollViewDelegate {
             //make.left.right.equalToSuperview()
             make.left.right.equalTo(self)
             make.top.equalTo(porAndIns.snp.bottom)
-            make.height.equalTo(AJScreenWidth/5*3)
+            make.height.equalTo(AJScreenWidth/20*13)
         }
         
         // sport 视图布局
@@ -200,7 +198,7 @@ class InputView: UIView,UIScrollViewDelegate {
         sport.snp.makeConstraints{(make) in
             make.left.right.equalTo(self)
             make.top.equalTo(bodyInfo.snp.bottom)
-            make.height.equalTo(AJScreenWidth/2 + AJScreenWidth/5)
+            make.height.equalTo(AJScreenWidth/2 + AJScreenWidth/15*2 + AJScreenWidth/40)
         }
         
         // remark 视图布局
@@ -211,23 +209,23 @@ class InputView: UIView,UIScrollViewDelegate {
             make.height.equalTo(AJScreenWidth/4)
         }
         
-        //leftButton左侧按钮：取消
-        self.scrollView.addSubview(leftButton)
-        leftButton.snp.makeConstraints{ (make) in
-            make.left.equalTo(AJScreenWidth/2)
-            make.height.equalTo(AJScreenWidth/15*2)
-            make.width.equalTo(AJScreenWidth/2-4)
-            make.top.equalTo(remark.snp.bottom)
-        }
+//        //leftButton左侧按钮：取消
+//        self.scrollView.addSubview(leftButton)
+//        leftButton.snp.makeConstraints{ (make) in
+//            make.left.equalTo(AJScreenWidth/2)
+//            make.height.equalTo(AJScreenWidth/15*2)
+//            make.width.equalTo(AJScreenWidth/2-4)
+//            make.top.equalTo(remark.snp.bottom)
+//        }
    
-        //rightButton右侧按钮:保存
-        self.scrollView.addSubview(rightButton)
-        rightButton.snp.makeConstraints{ (make) in
-            make.right.equalTo(AJScreenWidth/2)
-            make.height.equalTo(AJScreenWidth/15*2)
-            make.width.equalTo(AJScreenWidth/2-4)
-            make.top.equalTo(remark.snp.bottom)
-        }
+//        //rightButton右侧按钮:保存
+//        self.scrollView.addSubview(rightButton)
+//        rightButton.snp.makeConstraints{ (make) in
+//            make.right.equalTo(AJScreenWidth/2)
+//            make.height.equalTo(AJScreenWidth/15*2)
+//            make.width.equalTo(AJScreenWidth/2-4)
+//            make.top.equalTo(remark.snp.bottom)
+//        }
         
         
         self.bringSubviewToFront(picker)
@@ -409,8 +407,15 @@ class InputView: UIView,UIScrollViewDelegate {
 //            porAndIns.portionButton.setTitle(picker.portionStr ?? "No Meal", for: .normal)
         //胰岛素
         case .insulin:
-            porAndIns.insulinButton.setTitle(picker.insulinStr ?? "Nothing", for: .normal)
-            
+            if let str = picker.insulinStr {
+                if str == "Edit Entry"{
+                    NotificationCenter.default.post(name: NSNotification.Name("chooseInsulin"), object: self, userInfo: nil)
+                    porAndIns.insulinButton.setTitle("Nothing", for: .normal)
+                }else{
+                    porAndIns.insulinButton.setTitle(str, for: .normal)
+                }
+                
+            }
             
         case .sport:
             sport.sportButton.setTitle(picker.sportStr ?? "Nothing", for: .normal)
@@ -424,8 +429,14 @@ class InputView: UIView,UIScrollViewDelegate {
         print("sure button clicked")
         
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 
     var offset:CGFloat?
+    var movement:CGFloat?
+    // 选择器消失时 滚动视图是否b偏移动画
     func animationPickerViewDismiss(){
         if let dy = offset{
             UIView.beginAnimations("animatePickerViewDismiss", context: nil)
@@ -437,9 +448,10 @@ class InputView: UIView,UIScrollViewDelegate {
         offset = nil
     }
     
-    // 选择器弹出时的滚动视图的动画
+    // 选择器弹出时的滚动视图的动画，防止选择器遮挡按钮
     func animatePickerViewAppear(button:UIButton)
     {
+        // 记录scrollf的偏移量
         offset = self.scrollView.contentOffset.y
         
         print(self.scrollView.contentOffset.y)
@@ -450,14 +462,14 @@ class InputView: UIView,UIScrollViewDelegate {
         //let movementDistance:CGFloat = -100
         let movementDuration: Double = 0.5
         
-        var movement:CGFloat = buttonY - pickerY
-        if movement < 0{
+        movement = buttonY - pickerY
+        if movement! < 0{
             movement = 0
         }
         UIView.beginAnimations("animatePickerViewAppear", context: nil)
         UIView.setAnimationBeginsFromCurrentState(true)
         UIView.setAnimationDuration(movementDuration)
-        self.scrollView.contentOffset = CGPoint(x: 0, y: offset! + movement)
+        self.scrollView.contentOffset = CGPoint(x: 0, y: offset! + movement!)
         UIView.commitAnimations()
     }
     
@@ -472,12 +484,12 @@ class InputView: UIView,UIScrollViewDelegate {
     
     /************************************************/
     //时间和日期的设置和获取方法
-    func getData()->String{
+    func getDate()->String{
         dateString = dateAndTime.dateButton.currentTitle
         return dateString!
     }
     
-    func setData(_ str:String){
+    func setDate(_ str:String){
         dateAndTime.dateButton.setTitle(str, for: .normal)
     }
     
@@ -500,7 +512,7 @@ class InputView: UIView,UIScrollViewDelegate {
     //设置血糖值
     func setGlucoseValue(_ num:String){
         glucose.XTTextfield.text! = num
-        glucose.XTSlider.value = Float(Double((Double(num))!))
+        glucose.XTSlider.value = Float(num)!
     }
     
     //获取事件
@@ -534,15 +546,9 @@ class InputView: UIView,UIScrollViewDelegate {
     }
     //获取胰岛素量
     func getInsNumValue()->Double?{
-        let alert = CustomAlertController()
         var a:Double?
         if porAndIns.insulinTextfield.text! != ""{
-            if FormatMethodUtil.validateInsulinNum(number: porAndIns.insulinTextfield.text!) == true{
-                a = Double(porAndIns.insulinTextfield.text!)!
-                return a!
-            }else{
-                alert.custom(UIViewController(), "Attention", "非法输入")
-            }
+            a = Double(porAndIns.insulinTextfield.text!)
         }
         return a
     }
@@ -550,10 +556,18 @@ class InputView: UIView,UIScrollViewDelegate {
     func setInsNumValue(_ str:String){
        porAndIns.insulinTextfield.text! = str
     }
+    
+    // 设置滑块的值
+    func setSlider(_ value:Float){
+        glucose.XTSlider.setValue(value, animated: true)
+    }
     /************************************************/
     //获取体重值
-    func getWeightValue()->String{
-        let str = bodyInfo.weightTextfield.text!
+    func getWeightValue()->Double?{
+        var str:Double?
+        if bodyInfo.weightTextfield.text! != ""{
+            str = Double(bodyInfo.weightTextfield.text!)
+        }
         return str
     }
     //设置体重值
@@ -583,8 +597,11 @@ class InputView: UIView,UIScrollViewDelegate {
     }
     
     //得到运动时间
-    func getSportTime()->String{
-        let a = sport.timeOfDurationTextfield.text!
+    func getSportTime()->Int64?{
+        var a:Int64?
+        if sport.timeOfDurationTextfield.text != ""{
+            a = Int64(sport.timeOfDurationTextfield.text!)
+        }
         return a
     }
     //设置运动时间
@@ -593,20 +610,23 @@ class InputView: UIView,UIScrollViewDelegate {
     }
 
     //得到运动强度
-    func getSportStrength()->Int{
+    func getSportStrength()->Int64{
         let a = sport.intensityLevel
-        return a
+        return Int64(a)
     }
     //设置运动强度
-    func setSportStrength(_ strength:Int){
-        sport.initIntensity(strength)
+    func setSportStrength(_ strength:Int64){
+        sport.initIntensity(Int(strength))
         
     }
     
     // 得到备注
-    func getRemark()->String{
-        let text = remark.remarkTextField.text ?? ""
-        return text
+    func getRemark()->String?{
+        if remark.remarkTextField.text != ""{
+            let text = remark.remarkTextField.text!
+            return text
+        }
+        return nil
     }
     // 设置备注
     func setRemark(text:String){
@@ -615,22 +635,33 @@ class InputView: UIView,UIScrollViewDelegate {
 
     /************************************************/
     //获取收缩压
-    func getSysValue()->String{
-        let str = bodyInfo.blood_sysPressureTextfield.text!
-        return str
+    func getSysValue()->Double?{
+        if bodyInfo.blood_sysPressureTextfield.text != ""{
+            
+            let str = Double(bodyInfo.blood_sysPressureTextfield.text!)
+            
+            return str
+        }else{
+            return nil
+        }
     }
     //设置收缩压
     func setSysValue(_ str:String){
-        bodyInfo.blood_sysPressureTextfield.text! = str
+        bodyInfo.blood_sysPressureTextfield.text = str
     }
     //获取舒张压
-    func getDiaValue()->String{
-        let str = bodyInfo.blood_diaPressureTextfield.text!
-        return str
+    func getDiaValue()->Double?{
+        if bodyInfo.blood_diaPressureTextfield.text != ""{
+            let str = Double(bodyInfo.blood_diaPressureTextfield.text!)
+            return str
+        }else{
+            return nil
+        }
+        
     }
     //设置舒张压
     func setDiaValue(_ str:String){
-        bodyInfo.blood_diaPressureTextfield.text! = str
+        bodyInfo.blood_diaPressureTextfield.text = str
     }
     /************************************************/
 }

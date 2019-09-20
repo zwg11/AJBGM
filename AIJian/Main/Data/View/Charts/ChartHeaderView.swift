@@ -15,7 +15,7 @@ class ChartHeaderView: UIView {
     private lazy var textLabel:UILabel = {
        let label = UILabel()
         label.text = "Trend"
-        label.textColor = UIColor.black
+        label.textColor = UIColor.white
         label.font = UIFont.systemFont(ofSize: 18)
         return label
     }()
@@ -29,7 +29,7 @@ class ChartHeaderView: UIView {
     
     func setUpUI(){
         
-        
+        self.backgroundColor = UIColor.clear
         self.addSubview(self.titleImageView)
         self.titleImageView.snp.makeConstraints{ (make) in
             make.left.equalToSuperview().offset(AJScreenWidth/15)

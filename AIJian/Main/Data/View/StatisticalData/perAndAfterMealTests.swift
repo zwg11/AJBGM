@@ -66,7 +66,7 @@ class perAndAfterMealTests: UIView {
     private lazy var checkViewTitle:UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.textColor = UIColor.black
+        label.textColor = UIColor.white
         label.font = UIFont.systemFont(ofSize: 18)
         return label
     }()
@@ -306,11 +306,11 @@ class perAndAfterMealTests: UIView {
         totalNum = sortedByDateOfData!.count
         if totalNum > 0{
             for i in sortedByDateOfData!{
-                switch i.detectionTime{
-                case 1,3,5,7:
+                switch i.detectionTime!{
+                case 0:
                     perMealNum += 1
                     per.append(i)
-                case 2,4,6,8:
+                case 1:
                     afterMealNum += 1
                     after.append(i)
                 default:

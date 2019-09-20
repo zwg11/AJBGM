@@ -33,7 +33,8 @@ class DataTableViewOfHeader: UIView {
         }
         remarkLabel.frame = CGRect(x: offsetX, y: 0, width: 200, height: 40)
         self.addSubview(remarkLabel)
-        self.backgroundColor = kRGBColor(247, 243, 180, 1)
+        self.backgroundColor = ThemeColor
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -48,10 +48,10 @@ func xAxisArrayToWeek(Days:Int)->[String]{
     //dates.sort()
     var xAxisStrings:[String] = []
     for i in dates{
-        xAxisStrings.append(i.weekdayName(.standaloneShort))
+        xAxisStrings.append("           " + i.weekdayName(.standaloneShort))
     }
     print(xAxisStrings)
-    xAxisStrings[0] = ""
+    //xAxisStrings[0] = ""
     xAxisStrings[xAxisStrings.count-1] = ""
     return xAxisStrings
 }
