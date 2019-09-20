@@ -9,11 +9,14 @@
 /* Begin PBXBuildFile section */
 		003263799B683595EE9B154587776A9E /* AJGuidePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D6B7CCDE92018CDCC88D28D843A752 /* AJGuidePageView.swift */; };
 		01AD16706B471DE7CFDCBBC976B8EF66 /* dateRangePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD4A500110CCA25E61A95066330D220 /* dateRangePickerView.swift */; };
+		09707B54A814D80AF262F18C171FC530 /* InsulinType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB8DBFCEA7297369A51108D4F1C5D91 /* InsulinType.swift */; };
 		0C071CF1378E0EEF78ED9B5D27C8C0BE /* defaultBloodSetting.plist in Resources */ = {isa = PBXBuildFile; fileRef = 367F547FD8A2D05AB23C071F7752C480 /* defaultBloodSetting.plist */; };
+		0C48522C9A98AE69C9E473FB8886F207 /* InsulinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE379B051D4A0168749A671811BD868 /* InsulinViewController.swift */; };
 		0E835E57A6F34BDC4B6AA25CB303D3B4 /* bodyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BAE5242D4EA9B456D06DAC9947B1AB /* bodyInfoView.swift */; };
 		0FCF3B6597088D36328606A7EE666F3D /* dataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271D9A9F1ADE04BDD9B630AC333B2CD8 /* dataTableViewCell.swift */; };
 		12FD0BE7E50C8B635C32E575FFC6214F /* glucoseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC343A4BFCBECD9056D60A82B6F7115 /* glucoseView.swift */; };
 		14A1F66FE36579BF1FEE9A0F20D616BE /* AJNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E052E7AE76BD935D91BC473CA6AE9623 /* AJNavigationController.swift */; };
+		152C4A08BC56AF93C71A63431BF14DC2 /* Insulin.plist in Resources */ = {isa = PBXBuildFile; fileRef = 60235DEE16226B1877D4F759DD359050 /* Insulin.plist */; };
 		15D6FA7AF2ACEF4E3D398687FDBA3FB5 /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934C03A16BAD1A90B8D792A740D0BE1B /* PageView.swift */; };
 		15E8CC2CDBADD659EF7EC522415C62F9 /* EatNumChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185DDEA41DA7C96CD6E76086B42F7C86 /* EatNumChange.swift */; };
 		18F0313CE9FBB4D24BE3EB41E867AE4B /* glucoseRecentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE9E229BA78C6BCCE60166625ACCCC4 /* glucoseRecentView.swift */; };
@@ -26,6 +29,7 @@
 		2C9DC80088BFE63075C792E21BA74909 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 120A6F84CA97F8EC5CA77C3F92CE89BB /* LaunchScreen.storyboard */; };
 		30E983804395F9F8A70B9E14F4E3D7DB /* getDataInHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C340848915D471758C27C46FC15E8A6 /* getDataInHome.swift */; };
 		3196F5B95AA6AA6CBF111CFD2DE7E61B /* pickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1FFFCEAEB20DEFEC8716743912DE93 /* pickerView.swift */; };
+		35F229CDB65C074B26E6675EAD66CE2B /* BasalInsulinTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F050A7AE8A1301E444704F3A331088 /* BasalInsulinTableView.swift */; };
 		36ED57EDEB1BEDFCEC1376EA7C0663EA /* Pods_AIJian.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF99105C98E070F5A2AB3295DDBB3B84 /* Pods_AIJian.framework */; };
 		3AA27EF7A0776B0646E3A87A334BEA4D /* GeneralStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C00E21044909597018A27EA6A8731C /* GeneralStatusView.swift */; };
 		3ED6816474BEC77E2364F3D9F389E2CD /* CustomActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77041D07788584DA608BC9657890705D /* CustomActivityIndicatorView.swift */; };
@@ -53,12 +57,6 @@
 		7E55D14C065E24471D59E71862D56472 /* UseDirViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67085F8C516527849C0A634158BE78B7 /* UseDirViewController.swift */; };
 		82229929AE907526C16AFB7C3B976565 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428DE12BF8AED7060D2DACBB1BDB9E15 /* AppDelegate.swift */; };
 		84847BC2FE082A7DD9416B04C6429EAB /* BHJPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE608F63498A45B84C3679D6251C8601 /* BHJPickerView.swift */; };
-		84FD2F5A233100410062154E /* Insulin.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84FD2F592331003F0062154E /* Insulin.plist */; };
-		84FD2F5C233108740062154E /* InsulinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FD2F5B233108740062154E /* InsulinViewController.swift */; };
-		84FD2F5F23310B1B0062154E /* BolusInsulinTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FD2F5E23310B1B0062154E /* BolusInsulinTableView.swift */; };
-		84FD2F6123310B3C0062154E /* BasalInsulinTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FD2F6023310B3C0062154E /* BasalInsulinTableView.swift */; };
-		84FD2F6323310B520062154E /* OtherInsulinTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FD2F6223310B510062154E /* OtherInsulinTableView.swift */; };
-		84FD2F6523310E720062154E /* InsulinType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FD2F6423310E720062154E /* InsulinType.swift */; };
 		85BF4AD1556507F03E9CF1AB13F34571 /* BloodSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCA193DA6A5E1E858111B284800163C /* BloodSetViewController.swift */; };
 		875E6FED57826107D84E47853B2A507F /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5C68EDC76F69EA0E7DCD122ED6AB4 /* UITextField+Extension.swift */; };
 		88B422202CF871BF6F10A6D4FD24F651 /* GetUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3389A85E5BFB5D3E18B8DAA0516CC7 /* GetUnit.swift */; };
@@ -78,6 +76,7 @@
 		A4ED7886092801F8747BE1A2182D7314 /* ChartHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9EECDFBBCC15B19BB9A7310C3C5FC1 /* ChartHeaderView.swift */; };
 		A51D1EDF287FD5220248DC6C355A5AC8 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F58ECE090CC8932E95E703B01B4E2B /* InputView.swift */; };
 		A51F9B8EA9488DBFC4F727ED5E91473F /* CurrentVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD500821F545519203F5A1882AD77ED1 /* CurrentVersion.swift */; };
+		A80635501A48A1CA762DE7BAA59B6CF6 /* BolusInsulinTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9898FA10A2CB87AAD7AD91B22FF72ED /* BolusInsulinTableView.swift */; };
 		A87003F858AAC758556FC11B84E22CC6 /* NSDate+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACDB27DDBFA6BA1FEA8A6864CE435C5 /* NSDate+Date.swift */; };
 		AB27A7600A1A69D96B3C0BDEEBA411E6 /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281577697E4B5C8A234B003E370ABACA /* AboutUsViewController.swift */; };
 		AE5F885CE9A2327A38A50458E467EBE8 /* AJMineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B122EE08303781538E0581FB9B0AF84 /* AJMineHeaderView.swift */; };
@@ -115,6 +114,7 @@
 		DE3CF4606A6A4080C7331A8EA9ABB889 /* GetSortedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59A10BC763D4D5E27D2541D481F5390 /* GetSortedData.swift */; };
 		DED73D531E1A93CEAA15FA41DA1EA16F /* inputChoose.plist in Resources */ = {isa = PBXBuildFile; fileRef = 327249D87EBD50F9CA3CF88F34F49D5F /* inputChoose.plist */; };
 		E74705A4B4520AF2BB983AE3A49DEDCB /* totalCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944C88A1CC67791001D6E2AB70AF8DE /* totalCheckView.swift */; };
+		E753DC7DBC086A2A30C6EC0830A63D95 /* OtherInsulinTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB32CBB039E1CB1B7CFC343ECDA5FC66 /* OtherInsulinTableView.swift */; };
 		E984F8552E1FF381F5828A63501263CC /* recentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF195A74D0097D3A2F613C3949D8455 /* recentTableViewCell.swift */; };
 		ECCDAB6AF9B53630AF5186D28430395B /* registerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA464EB54C14F9628836CB6E349E42D /* registerView.swift */; };
 		F0A6F0F1CF20A1EA46FA373138B695E8 /* customRangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE202E3593E8C04C492C3EE879A1902 /* customRangeView.swift */; };
@@ -175,6 +175,7 @@
 		5CDBFD961B14C40710FE24938097E7B6 /* UILabel+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		5DE202E3593E8C04C492C3EE879A1902 /* customRangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customRangeView.swift; sourceTree = "<group>"; };
 		5EAFAE8757FDB6305DED9249DB2CB82F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		60235DEE16226B1877D4F759DD359050 /* Insulin.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Insulin.plist; sourceTree = "<group>"; };
 		6466430F2C5AE99EEF606768B0B4A23D /* StaticView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticView.swift; sourceTree = "<group>"; };
 		64A06ADE609E5D44A46272347EF3A865 /* StatisticalDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticalDataViewController.swift; sourceTree = "<group>"; };
 		6614F4AA0A8E37F9E3E5385A5D65B09C /* tableViewCellCustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tableViewCellCustomLabel.swift; sourceTree = "<group>"; };
@@ -194,14 +195,9 @@
 		7C3389A85E5BFB5D3E18B8DAA0516CC7 /* GetUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUnit.swift; sourceTree = "<group>"; };
 		7C340848915D471758C27C46FC15E8A6 /* getDataInHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = getDataInHome.swift; path = AIJian/Main/Home/getDataInHome.swift; sourceTree = SOURCE_ROOT; };
 		802706582BF2DD3F2F165BE6CC4B129F /* UnitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitViewController.swift; sourceTree = "<group>"; };
-		84FD2F592331003F0062154E /* Insulin.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Insulin.plist; sourceTree = "<group>"; };
-		84FD2F5B233108740062154E /* InsulinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsulinViewController.swift; sourceTree = "<group>"; };
-		84FD2F5E23310B1B0062154E /* BolusInsulinTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BolusInsulinTableView.swift; sourceTree = "<group>"; };
-		84FD2F6023310B3C0062154E /* BasalInsulinTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasalInsulinTableView.swift; sourceTree = "<group>"; };
-		84FD2F6223310B510062154E /* OtherInsulinTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherInsulinTableView.swift; sourceTree = "<group>"; };
-		84FD2F6423310E720062154E /* InsulinType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsulinType.swift; sourceTree = "<group>"; };
 		88B84B902E4E28BB9EBAC8F34677E2D8 /* loginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginViewController.swift; sourceTree = "<group>"; };
 		8A18E98B74565B5E695548D96DE09E13 /* SuggestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionViewController.swift; sourceTree = "<group>"; };
+		8AB8DBFCEA7297369A51108D4F1C5D91 /* InsulinType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsulinType.swift; sourceTree = "<group>"; };
 		8AD251DA1D7683298B03830243680EC8 /* format_method.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = format_method.swift; sourceTree = "<group>"; };
 		8DF195A74D0097D3A2F613C3949D8455 /* recentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = recentTableViewCell.swift; path = AIJian/Main/Home/recentTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		8FB165FA9B5B4F5C13436FA707111C57 /* sugComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sugComponent.swift; sourceTree = "<group>"; };
@@ -222,6 +218,7 @@
 		A5A1585583F171AC210D37D0F2F28C6E /* User.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = User.plist; sourceTree = "<group>"; };
 		A753E7B0055447EE4F602E4DC552B128 /* AJMineTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AJMineTableView.swift; sourceTree = "<group>"; };
 		A8C3FB678C55445CDE289E6C4AF9E0F1 /* Eventhing_response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Eventhing_response.swift; sourceTree = "<group>"; };
+		A9898FA10A2CB87AAD7AD91B22FF72ED /* BolusInsulinTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BolusInsulinTableView.swift; sourceTree = "<group>"; };
 		A9B6DD9553609694BAC126BBFA65648A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AE9D2F5F3748AFDB28A21FD34F1F2A2C /* AJStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AJStartView.swift; sourceTree = "<group>"; };
 		AEB5C68EDC76F69EA0E7DCD122ED6AB4 /* UITextField+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
@@ -231,6 +228,7 @@
 		B67C5D050C5D9478AF306B5A049428F1 /* portionAndInsulinView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = portionAndInsulinView.swift; sourceTree = "<group>"; };
 		B7C52F310EC78F0CAFCE223C140C228D /* UnitConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConversion.swift; sourceTree = "<group>"; };
 		B9FC2F51C9CAE9D3C768C8D06AE069A2 /* const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = const.swift; sourceTree = "<group>"; };
+		BB32CBB039E1CB1B7CFC343ECDA5FC66 /* OtherInsulinTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherInsulinTableView.swift; sourceTree = "<group>"; };
 		BD0D1AC2632CAB8219D398832954F62F /* ChartDrawFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDrawFunc.swift; sourceTree = "<group>"; };
 		BD1FFFCEAEB20DEFEC8716743912DE93 /* pickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pickerView.swift; sourceTree = "<group>"; };
 		BD500821F545519203F5A1882AD77ED1 /* CurrentVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentVersion.swift; sourceTree = "<group>"; };
@@ -241,6 +239,7 @@
 		CE3143243F11C6CB31301BDE5B0B1EAC /* StatisticDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticDate.swift; sourceTree = "<group>"; };
 		D547385BBF4921804514C136B71543B8 /* remarkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = remarkView.swift; sourceTree = "<group>"; };
 		D5D1EDA5EE3FFF2A769760777FC8415E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D6F050A7AE8A1301E444704F3A331088 /* BasalInsulinTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasalInsulinTableView.swift; sourceTree = "<group>"; };
 		DCA464EB54C14F9628836CB6E349E42D /* registerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = registerView.swift; sourceTree = "<group>"; };
 		DE608F63498A45B84C3679D6251C8601 /* BHJPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BHJPickerView.swift; sourceTree = "<group>"; };
 		E052E7AE76BD935D91BC473CA6AE9623 /* AJNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AJNavigationController.swift; sourceTree = "<group>"; };
@@ -259,6 +258,7 @@
 		F7152151493753A2D1A697BD37767901 /* DataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewController.swift; sourceTree = "<group>"; };
 		F8A34F9A4CB476E221493BFF4FA2AA03 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		FC89C668BD48D245D25CED60FBDF41B4 /* Pods-AIJian.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AIJian.release.xcconfig"; path = "Target Support Files/Pods-AIJian/Pods-AIJian.release.xcconfig"; sourceTree = "<group>"; };
+		FCE379B051D4A0168749A671811BD868 /* InsulinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsulinViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -277,12 +277,12 @@
 			isa = PBXGroup;
 			children = (
 				961092F618DFD3A23C3E2C9E1F14FB00 /* GlobalValue.plist */,
+				60235DEE16226B1877D4F759DD359050 /* Insulin.plist */,
 				946C4B448C4368010D25171286A04DC5 /* UnitSetting.plist */,
 				A5A1585583F171AC210D37D0F2F28C6E /* User.plist */,
 				367F547FD8A2D05AB23C071F7752C480 /* defaultBloodSetting.plist */,
 				327249D87EBD50F9CA3CF88F34F49D5F /* inputChoose.plist */,
 				7BD87968C7A6DBA89B736444D0C1C80C /* userBloodSetting.plist */,
-				84FD2F592331003F0062154E /* Insulin.plist */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -487,13 +487,13 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		84FD2F5D23310AC90062154E /* TableViewForInsulin */ = {
+		BF80F129B376C63F914BDB119ECD0789 /* TableViewForInsulin */ = {
 			isa = PBXGroup;
 			children = (
-				84FD2F5E23310B1B0062154E /* BolusInsulinTableView.swift */,
-				84FD2F6023310B3C0062154E /* BasalInsulinTableView.swift */,
-				84FD2F6223310B510062154E /* OtherInsulinTableView.swift */,
-				84FD2F6423310E720062154E /* InsulinType.swift */,
+				D6F050A7AE8A1301E444704F3A331088 /* BasalInsulinTableView.swift */,
+				A9898FA10A2CB87AAD7AD91B22FF72ED /* BolusInsulinTableView.swift */,
+				8AB8DBFCEA7297369A51108D4F1C5D91 /* InsulinType.swift */,
+				BB32CBB039E1CB1B7CFC343ECDA5FC66 /* OtherInsulinTableView.swift */,
 			);
 			path = TableViewForInsulin;
 			sourceTree = "<group>";
@@ -585,8 +585,8 @@
 			children = (
 				F3EA8AF88908000078EAC3AC949A8176 /* BLEViewController.swift */,
 				13E708809ACCA305E2B4107ADF6D21D4 /* InsertViewController.swift */,
+				FCE379B051D4A0168749A671811BD868 /* InsulinViewController.swift */,
 				12334E6F67A1C77D5D81A3AA8A2BEB74 /* alertViewController.swift */,
-				84FD2F5B233108740062154E /* InsulinViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -669,6 +669,7 @@
 		E29E548AEAE843EFDF12DD2003871B64 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				BF80F129B376C63F914BDB119ECD0789 /* TableViewForInsulin */,
 				66F58ECE090CC8932E95E703B01B4E2B /* InputView.swift */,
 				7A16F36F9537243E6B7560D1B9FF77A0 /* allPickerView.swift */,
 				41BAE5242D4EA9B456D06DAC9947B1AB /* bodyInfoView.swift */,
@@ -677,7 +678,6 @@
 				B67C5D050C5D9478AF306B5A049428F1 /* portionAndInsulinView.swift */,
 				D547385BBF4921804514C136B71543B8 /* remarkView.swift */,
 				7913A53032178A4B8556F90346B73A35 /* sportView.swift */,
-				84FD2F5D23310AC90062154E /* TableViewForInsulin */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -813,11 +813,11 @@
 			files = (
 				404DF41E22F23B418B99982210F28297 /* Assets.xcassets in Resources */,
 				CE7A682B87979E6CD2FFAF3C097ED6F8 /* GlobalValue.plist in Resources */,
+				152C4A08BC56AF93C71A63431BF14DC2 /* Insulin.plist in Resources */,
 				2C9DC80088BFE63075C792E21BA74909 /* LaunchScreen.storyboard in Resources */,
 				4C433DFBF324335CF5426A76C3A8C0E6 /* Localization.strings in Resources */,
 				DAB75D62191E7B20DE8D9FC833830F2D /* Main.storyboard in Resources */,
 				71937B70E5629695BD05C1C077D5607B /* UnitSetting.plist in Resources */,
-				84FD2F5A233100410062154E /* Insulin.plist in Resources */,
 				CDAE1F2D93FE04AAC0DB578104CB6109 /* User.plist in Resources */,
 				0C071CF1378E0EEF78ED9B5D27C8C0BE /* defaultBloodSetting.plist in Resources */,
 				DED73D531E1A93CEAA15FA41DA1EA16F /* inputChoose.plist in Resources */,
@@ -885,12 +885,12 @@
 				82229929AE907526C16AFB7C3B976565 /* AppDelegate.swift in Sources */,
 				84847BC2FE082A7DD9416B04C6429EAB /* BHJPickerView.swift in Sources */,
 				BC83B1437A56BCF7C847128796026D49 /* BLEViewController.swift in Sources */,
-				84FD2F5F23310B1B0062154E /* BolusInsulinTableView.swift in Sources */,
+				35F229CDB65C074B26E6675EAD66CE2B /* BasalInsulinTableView.swift in Sources */,
 				85BF4AD1556507F03E9CF1AB13F34571 /* BloodSetViewController.swift in Sources */,
+				A80635501A48A1CA762DE7BAA59B6CF6 /* BolusInsulinTableView.swift in Sources */,
 				5152E1428C13A8DE4BF2E86A2D9C2248 /* BrithdayViewController.swift in Sources */,
 				DC527C2AA2A4BA97B440B8CC67D870EE /* ChartDrawFunc.swift in Sources */,
 				A4ED7886092801F8747BE1A2182D7314 /* ChartHeaderView.swift in Sources */,
-				84FD2F6323310B520062154E /* OtherInsulinTableView.swift in Sources */,
 				1DE16FE45BBA038D234EB138172EFDA9 /* ChartView.swift in Sources */,
 				4EA8F5F3B9FD7A60E6A46D35F6C6792C /* ChartViewController.swift in Sources */,
 				A51F9B8EA9488DBFC4F727ED5E91473F /* CurrentVersion.swift in Sources */,
@@ -913,11 +913,14 @@
 				BA52FED03B80B15A0F3460206CDC2279 /* InfoViewController.swift in Sources */,
 				A51D1EDF287FD5220248DC6C355A5AC8 /* InputView.swift in Sources */,
 				F2A43A73565BB1CF045F3019A8AA1498 /* InsertViewController.swift in Sources */,
+				09707B54A814D80AF262F18C171FC530 /* InsulinType.swift in Sources */,
+				0C48522C9A98AE69C9E473FB8886F207 /* InsulinViewController.swift in Sources */,
 				913C5A050E557527D087A3E79934646B /* IntensityChange.swift in Sources */,
 				7A18ABD895A54152058EAE905EF289FD /* LastResultTableViewCell.swift in Sources */,
 				A2362882D12624BFD10D37A285D02419 /* LocalizationTool.swift in Sources */,
 				F440EC390F52F7014B638916C024A81A /* MineViewController.swift in Sources */,
 				A87003F858AAC758556FC11B84E22CC6 /* NSDate+Date.swift in Sources */,
+				E753DC7DBC086A2A30C6EC0830A63D95 /* OtherInsulinTableView.swift in Sources */,
 				15D6FA7AF2ACEF4E3D398687FDBA3FB5 /* PageView.swift in Sources */,
 				55EBF230C8DD14A232D18B95A37D8202 /* PassChangeViewController.swift in Sources */,
 				B19FE207427413DEE020EE6B205B6B9D /* PlistSet.swift in Sources */,
@@ -929,7 +932,6 @@
 				A489FE1D1E209499E7F9EA11DD91D8C1 /* StatisticDate.swift in Sources */,
 				29C10571F503D7FCC9D1EFF3EEF54262 /* StatisticalDataViewController.swift in Sources */,
 				D04F636417EB92069574FA06715E5F33 /* SuggestionViewController.swift in Sources */,
-				84FD2F6123310B3C0062154E /* BasalInsulinTableView.swift in Sources */,
 				C8C584C14E41F381E1E0B5BA0C387AE8 /* UIAlertViewController_Extension.swift in Sources */,
 				9B3DAB77A3DC41F8FAC306F8E17CF1C1 /* UIButton+Extension.swift in Sources */,
 				56ACC92032D24C9E3DE0AB02415266D6 /* UIImageView+Extension.swift in Sources */,
@@ -938,7 +940,6 @@
 				F1647D90FE006C35DDD2C91362D4AE2F /* URL_Address.swift in Sources */,
 				B15AA473274039A45723EF4FC67E8107 /* UnitConversion.swift in Sources */,
 				3F209594276298C7CF2E79AB8D42762D /* UnitViewController.swift in Sources */,
-				84FD2F5C233108740062154E /* InsulinViewController.swift in Sources */,
 				CD1234E30F7C4689A1783E8E01C09116 /* UpdateManager.swift in Sources */,
 				7E55D14C065E24471D59E71862D56472 /* UseDirViewController.swift in Sources */,
 				79EF3049BA2F75158E6183282C4F9EA9 /* User.swift in Sources */,
@@ -949,7 +950,6 @@
 				4BE0A50E8FBE3EE70181B9DBA9FE2930 /* alertViewController.swift in Sources */,
 				3FF8ECC746A30B198DB68C15D5F5E15C /* allPickerView.swift in Sources */,
 				B72572AB691BA264ED8800ADFB4F6B02 /* averageView.swift in Sources */,
-				84FD2F6523310E720062154E /* InsulinType.swift in Sources */,
 				0E835E57A6F34BDC4B6AA25CB303D3B4 /* bodyInfoView.swift in Sources */,
 				6ECA98075DA8031CC3E4FCCF8A969285 /* const.swift in Sources */,
 				F0A6F0F1CF20A1EA46FA373138B695E8 /* customRangeView.swift in Sources */,
