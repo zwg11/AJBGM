@@ -20,6 +20,7 @@ class sugComponent: UIView {
     var textField:UITextField = {
         let textField = UITextField()
         textField.placeholder = "*************"
+        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
         return textField
     }()
     
@@ -35,7 +36,8 @@ class sugComponent: UIView {
         imageView.snp.makeConstraints{ (make) in
             make.width.equalTo(AJScreenHeight/15)
             make.height.equalTo(AJScreenHeight/15)
-            make.left.equalTo(AJScreenWidth/25)
+//            make.left.equalTo(AJScreenWidth/25)
+            make.left.equalToSuperview()
         }
         
         textField.snp.makeConstraints{ (make) in

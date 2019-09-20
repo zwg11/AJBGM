@@ -13,10 +13,11 @@ class QuitCellView:UITableViewCell{
     
      lazy var quitButton:UIButton = {
         let quitLogin = UIButton(type:.system)
-        quitLogin.backgroundColor = UIColor.red
+        quitLogin.backgroundColor = ButtonColor
+        quitLogin.tintColor = UIColor.white
+        quitLogin.setTitleColor(UIColor.white, for: .normal)
         quitLogin.setTitle("退出登录", for:.normal)
         quitLogin.titleLabel?.font = UIFont.systemFont(ofSize:18)
-        quitLogin.titleLabel?.textColor = UIColor.white
         return quitLogin
     }()
     
@@ -26,7 +27,7 @@ class QuitCellView:UITableViewCell{
     }
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.backgroundColor = UIColor.white
+//        self.backgroundColor = UIColor.white
         setupUI()
     }
     

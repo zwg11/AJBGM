@@ -33,6 +33,8 @@ let NaviTitleColor = UIColor.init(red: 173/255.0, green: 176/255.0, blue: 181/25
 //send code 按钮背景色
 let SendButtonColor = UIColor.init(red: 26/255.0, green: 90/255.0, blue: 145/255.0, alpha: 1)
 
+//我的页面姓名的字体颜色
+let MineNameTextColor = UIColor.init(red: 196/255.0, green: 197/255.0, blue: 198/255.0, alpha: 1)
 
 //白色
 let DominantColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 1)

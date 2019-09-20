@@ -27,6 +27,9 @@ class registerViewController: UIViewController,UITextFieldDelegate {
     //传给下一个页面的data,防止任何人都能重置用户信息
     var data:String?
     
+    var isAgree:Bool = false
+    
+    
     private lazy var register:registerView = {
         let view = registerView()
         view.setupUI()
@@ -51,6 +54,8 @@ class registerViewController: UIViewController,UITextFieldDelegate {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: NaviTitleColor]
         self.view.backgroundColor = ThemeColor
         self.title = "Sign Up"
+        register.NoResponseProtocolLogo.addTarget(self, action: #selector(ClickIcon), for: .touchUpInside)
+        register.NoResponseProtocolInfo.addTarget(self, action: #selector(ClickProtocol), for: .touchUpInside)
         self.view.addSubview(register)
         register.snp.makeConstraints{(make) in
             make.height.equalTo(AJScreenHeight)
@@ -58,6 +63,20 @@ class registerViewController: UIViewController,UITextFieldDelegate {
         }
         // Do any additional setup after loading the view.
     }
+    
+    @objc func ClickIcon(){
+        if isAgree == false{
+            register.NoResponseProtocolLogo.setImage(UIImage(named: "selected"), for: .normal)
+            isAgree = true
+        }else{
+            register.NoResponseProtocolLogo.setImage(UIImage(named: "unselected"), for: .normal)
+            isAgree = false
+        }
+    }
+    @objc func ClickProtocol(){
+        
+    }
+    
     
    //注册时，点击下一步
     @objc func nextAction(){
@@ -71,9 +90,11 @@ class registerViewController: UIViewController,UITextFieldDelegate {
         print(password!)
         print(passwordSec!)
         let alertController = CustomAlertController()
-        
-        if password == ""{
-            alertController.custom(self, "Attention", "新密码不能为空")
+        if email == ""{
+            alertController.custom(self, "Attention", "邮箱不能为空")
+            return
+        }else if password == ""{
+            alertController.custom(self, "Attention", "密码不能为空")
             return
         }else if passwordSec == "" {
             alertController.custom(self, "Attention", "确认密码不能为空")
@@ -81,12 +102,11 @@ class registerViewController: UIViewController,UITextFieldDelegate {
         }else if password != passwordSec{
             alertController.custom(self, "Attention", "两次密码不同")
             return
-        }else if email == ""{
-            alertController.custom(self, "Attention", "邮箱不能为空")
-            return
         }else if FormatMethodUtil.validatePasswd(passwd: password!) != true{
-            alertController.custom(self, "Attention", "密码强度不够")
+            alertController.custom(self, "Attention", "密码强度不足")
             return
+        }else if isAgree == false{
+            alertController.custom(self, "Attention", "请勾选同意协议")
         }else{
             let dictString:Dictionary = [ "email":String(email!),"verifyCode":String(email_code!),"password":String(password!)]
             //            let user = User.deserialize(from: jsonString)
@@ -179,14 +199,14 @@ class registerViewController: UIViewController,UITextFieldDelegate {
         }
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        UIView.animate(withDuration: 0.2, animations: {
-            self.register.frame.origin.y = -150
-        })
-        
-        return true
-    }
-    
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//        UIView.animate(withDuration: 0.2, animations: {
+//            self.register.frame.origin.y = -150
+//        })
+//
+//        return true
+//    }
+//
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // 收起键盘
 //        UIView.animate(withDuration: 0.2, animations: {

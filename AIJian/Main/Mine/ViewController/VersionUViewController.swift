@@ -16,27 +16,32 @@ import StoreKit
 class VersionUViewController: UIViewController {
         
         //列表数据
-        public lazy var versionDataArray: Array = ["当前版本","反馈","去评分","版本更新"]
+        public lazy var versionDataArray: Array = ["Current Version","Feedback","Score","Version Update"]
         
         override func viewDidLoad() {
             super.viewDidLoad()
             
-            self.title = "Version Update"
-            self.view.backgroundColor = UIColor.white
+            self.title = "Update"
+            self.view.backgroundColor = ThemeColor
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(title:"back", style:.plain, target: self, action: #selector(back))
             
             
-            
-            let tableview = UITableView.init(frame: CGRect(x: 0, y: navigationBarHeight, width: AJScreenWidth, height: AJScreenHeight/15*4))
-            
+//
+//            let tableview = UITableView.init(frame: CGRect(x: 0, y: navigationBarHeight, width: AJScreenWidth, height: AJScreenHeight/15*4))
+                let tableview = UITableView()
             //将CELL的标识，在此处进行设置
-            tableview.backgroundColor = UIColor.white
+            tableview.backgroundColor = ThemeColor
             tableview.isScrollEnabled = false
             tableview.register(UITableViewCell.self, forCellReuseIdentifier:"versioncell")
             tableview.delegate = self
             tableview.dataSource = self
             
             self.view.addSubview(tableview)
+            tableview.snp.remakeConstraints{ (make) in
+                make.height.equalTo(AJScreenHeight/15*4)
+                make.width.equalToSuperview()
+                make.top.equalTo(topLayoutGuide.snp.bottom)
+            }
         }
         @objc private func back(){
             self.navigationController?.popViewController(animated: true)
@@ -59,6 +64,8 @@ extension VersionUViewController:UITableViewDelegate,UITableViewDataSource{
             print("到达版本更新页", indexPath)
             //根据注册的cell类ID值获取到载体cell
             let cell = tableView.dequeueReusableCell(withIdentifier: "versioncell",for: indexPath)
+            cell.backgroundColor = ThemeColor
+            cell.textLabel?.textColor = TextColor
             cell.selectionStyle = .none
             cell.accessoryType = .disclosureIndicator
             cell.textLabel?.text = versionDataArray[(indexPath as NSIndexPath).row]

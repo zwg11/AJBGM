@@ -17,8 +17,8 @@ class CurrentVersion:UIViewController{
     override func viewDidLoad() {
         
         
-        self.title = "当前版本"
-        self.view.backgroundColor = UIColor.white
+        self.title = "Current Version"
+        self.view.backgroundColor = ThemeColor
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title:"back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back))
       
         
@@ -30,13 +30,13 @@ class CurrentVersion:UIViewController{
             make.left.equalToSuperview().offset(AJScreenWidth/5)
             make.right.equalToSuperview().offset(-AJScreenWidth/5)
             make.height.equalTo(AJScreenWidth*2/5)
-            make.top.equalTo(navigationBarHeight + AJScreenHeight / 7)
+            make.top.equalTo(topLayoutGuide.snp.bottom).offset(AJScreenHeight / 7)
         }
         
         
         //图标下面的一条线
         let line = UIView(frame: CGRect())
-        line.backgroundColor = UIColor.black
+        line.backgroundColor = TextColor
         self.view.addSubview(line)
         line.snp.makeConstraints{ (make) in
             make.height.equalTo(2)
@@ -48,6 +48,7 @@ class CurrentVersion:UIViewController{
         let information = UILabel(frame: CGRect())
         information.text = "On Call v1.0"
         information.textAlignment = .center
+        information.textColor = TextColor
         information.font = UIFont.systemFont(ofSize: 18)
         self.view.addSubview(information)
         information.snp.makeConstraints{ (make) in

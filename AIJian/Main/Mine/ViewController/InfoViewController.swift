@@ -17,7 +17,7 @@ class InfoViewController: UIViewController ,PickerDelegate{
     var num:Int = 0
 
     //列表数据
-    public lazy var infoArray: Array = ["姓    名","性    别","体    重","身    高","生    日","国    家","电    话"]
+    public lazy var infoArray: Array = ["Name","Gender","Weight","Height","Data of Birth","Country","Phone"]
     //图标数据
     public lazy var infoIconArray:Array = ["aboutUs","aboutUs","aboutUs","aboutUs","aboutUs","aboutUs","aboutUs"]
     public lazy var infoDataArray : [String] = ["","","","","","",""]
@@ -50,8 +50,11 @@ class InfoViewController: UIViewController ,PickerDelegate{
         //initInfoDataArray()
         //tableview.reloadData()
 
-        self.title = "Information"
-        self.view.backgroundColor = UIColor.white
+        self.title = "Personal Information"
+        self.navigationController?.navigationBar.barTintColor = ThemeColor
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: NaviTitleColor]
+        self.view.backgroundColor = ThemeColor
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title:"back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title:"Save", style: UIBarButtonItem.Style.plain, target: self, action: #selector(saveUserInfo))
         
@@ -64,7 +67,7 @@ class InfoViewController: UIViewController ,PickerDelegate{
         //update.reloadRows(at: [IndexPath(row: 1, section: 1)], with: .fade)
         self.view.addSubview(tableview)
         tableview.snp.makeConstraints{(make) in
-            make.top.equalTo(AJScreenHeight/10)
+            make.top.equalTo(topLayoutGuide.snp.bottom)
             make.left.right.equalToSuperview()
             make.height.equalTo(AJScreenHeight/15*7)
         }
@@ -182,12 +185,14 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
         print("row",indexPath.row)
         //根据注册的cell类ID值获取到载体cell
         var cell = tableView.dequeueReusableCell(withIdentifier: "infocell")
-        
+
         cell?.selectionStyle = .none
         cell = UITableViewCell(style: .value1, reuseIdentifier: "infocell")
         cell!.accessoryType = .disclosureIndicator
         cell?.imageView?.image = UIImage(named: infoIconArray[indexPath.row])
         cell?.textLabel?.text = infoArray[indexPath.row]
+        cell!.backgroundColor = ThemeColor
+        cell?.textLabel?.textColor = TextColor
 
         //let userInfo = DBSQLiteManager.manager.selectUserRecord(userId: UserInfo.getUserId())
         switch indexPath.row{
@@ -210,6 +215,9 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
         default:
             cell?.detailTextLabel?.text = infoDataArray[6]=="" ? "nothing":infoDataArray[6]
         }
+        
+        cell?.detailTextLabel?.textColor = UIColor.white
+        
         return cell!
     }
     

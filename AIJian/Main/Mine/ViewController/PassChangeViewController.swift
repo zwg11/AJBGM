@@ -37,7 +37,7 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
         lazy var oldPasswd_textF:UITextField = {
             let oldPasswd_textF = UITextField()
             oldPasswd_textF.font = UIFont.systemFont(ofSize: 16)
-            oldPasswd_textF.placeholder="请填写旧密码"
+            oldPasswd_textF.placeholder="Old Password"
 //            oldPasswd_textF.keyboardType = .default
             oldPasswd_textF.isSecureTextEntry = true
             oldPasswd_textF.allowsEditingTextAttributes = false
@@ -45,39 +45,42 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
             let imageView = UIImageView(image: UIImage(named: "email"))
             oldPasswd_textF.leftView = imageView
             oldPasswd_textF.leftViewMode = .always
+            oldPasswd_textF.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
             return oldPasswd_textF
         }()
     
         lazy var newPasswd_textF:UITextField = {
             let newPasswd_textF = UITextField()
             newPasswd_textF.font = UIFont.systemFont(ofSize: 16)
-            newPasswd_textF.placeholder="请填写新密码"
+            newPasswd_textF.placeholder="New Password"
             newPasswd_textF.allowsEditingTextAttributes = false
             newPasswd_textF.isSecureTextEntry = true
             newPasswd_textF.borderStyle = .none
             let imageView = UIImageView(image: UIImage(named: "email"))
             newPasswd_textF.leftView = imageView
             newPasswd_textF.leftViewMode = .always
+            newPasswd_textF.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
             return newPasswd_textF
         }()
     
         lazy var verfiedPasswd_textF:UITextField = {
             let verfiedPasswd_textF = UITextField()
             verfiedPasswd_textF.font = UIFont.systemFont(ofSize: 16)
-            verfiedPasswd_textF.placeholder="请再次确认新密码"
+            verfiedPasswd_textF.placeholder="Confirm the Password"
             verfiedPasswd_textF.allowsEditingTextAttributes = false
             verfiedPasswd_textF.isSecureTextEntry = true
             verfiedPasswd_textF.borderStyle = .none
             let imageView = UIImageView(image: UIImage(named: "email"))
             verfiedPasswd_textF.leftView = imageView
             verfiedPasswd_textF.leftViewMode = .always
+            verfiedPasswd_textF.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
             return verfiedPasswd_textF
         }()
     
         lazy var saveButton:UIButton = {
             let button = UIButton()
-            button.setTitle("save", for: .normal)
-            button.backgroundColor = UIColor.blue
+            button.setTitle("Save", for: .normal)
+            button.backgroundColor = ButtonColor
             button.setTitleColor(UIColor.white, for: .normal)
             button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
             return button
@@ -98,10 +101,9 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
     
         override func viewDidLoad() {
             super.viewDidLoad()
-            self.title = "pass"
-            self.view.backgroundColor = UIColor.white
+            self.title = "Change Password"
+            self.view.backgroundColor = ThemeColor
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(title:"back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back))
-//            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: UIBarButtonItem.Style.plain, target: self, action: #selector(save))
             if AJScreenHeight == 812{
                 print("相等")
             }else{
@@ -167,7 +169,7 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
             
             //第二条线
             let line_frame2 = UIView(frame: CGRect())
-            line_frame2.backgroundColor = UIColor.black
+            line_frame2.backgroundColor = LineColor
             self.view.addSubview(line_frame2)
             line_frame2.snp.makeConstraints{ (make) in
                 make.height.equalTo(0.5)
@@ -201,7 +203,7 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
             }
             //第三条线
             let line_frame3 = UIView(frame: CGRect())
-            line_frame3.backgroundColor = UIColor.black
+            line_frame3.backgroundColor = LineColor
             self.view.addSubview(line_frame3)
             line_frame3.snp.makeConstraints{ (make) in
                 make.height.equalTo(0.5)
@@ -237,7 +239,7 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
             }
             //第四条线
             let line_frame4 = UIView(frame: CGRect())
-            line_frame4.backgroundColor = UIColor.black
+            line_frame4.backgroundColor = LineColor
             self.view.addSubview(line_frame4)
             line_frame4.snp.makeConstraints{ (make) in
                 make.height.equalTo(0.5)

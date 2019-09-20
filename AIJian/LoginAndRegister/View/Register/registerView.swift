@@ -82,6 +82,21 @@ class registerView: UIView {
         textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
         return textField
     }()
+    //免责条例的Logo
+    lazy var NoResponseProtocolLogo:UIButton = {
+        let NoResponseProtocol = UIButton(frame: CGRect())
+        NoResponseProtocol.setImage(UIImage(named: "unselected"), for: .normal)
+        NoResponseProtocol.setTitleColor(TextColor, for: .normal)
+        return NoResponseProtocol
+    }()
+    //免责条例的用户信息
+    lazy var NoResponseProtocolInfo:UIButton = {
+        let NoResponseProtocol = UIButton(frame: CGRect())
+        NoResponseProtocol.setTitle("Agreed \"Registration Protocol and submit the information\" ", for: .normal)
+        NoResponseProtocol.setTitleColor(TextColor, for: .normal)
+        NoResponseProtocol.titleLabel?.font = UIFont.systemFont(ofSize: 10)
+        return NoResponseProtocol
+    }()
     
     // 下一步按钮
     lazy var nextButton:UIButton = {
@@ -215,6 +230,22 @@ class registerView: UIView {
             make.left.equalTo(AJScreenWidth/15)
             make.right.equalTo(-AJScreenWidth/15)
             make.top.equalTo(passwordSecTextField.snp.bottom).offset(1)
+        }
+        
+        self.addSubview(NoResponseProtocolLogo)
+        NoResponseProtocolLogo.snp.makeConstraints{ (make) in
+            make.height.equalTo(10)
+            make.width.equalTo(AJScreenWidth/20)
+            make.left.equalTo(AJScreenWidth/15)
+            make.top.equalTo(line_frame4.snp.bottom).offset(5)
+        }
+        self.addSubview(NoResponseProtocolInfo)
+        NoResponseProtocolInfo.snp.makeConstraints{ (make) in
+            make.height.equalTo(10)
+            make.width.equalTo(AJScreenWidth)
+            make.left.equalTo(NoResponseProtocolLogo.snp.right).offset(1)
+            make.right.equalTo(-AJScreenWidth/15)
+            make.top.equalTo(line_frame4.snp.bottom).offset(5)
         }
         
         // 下一步按钮
