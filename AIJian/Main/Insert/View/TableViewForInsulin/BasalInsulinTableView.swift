@@ -85,6 +85,7 @@ class BasalInsulinView: UIView, UITableViewDelegate, UITableViewDataSource{
     
     func settupUI(){
         let view = UITableView()
+        view.bounces = false
         self.addSubview(view)
         view.dataSource = self
         view.delegate = self

@@ -32,6 +32,7 @@ class LastResultTableViewCell: UITableViewCell {
         label.text = getDataInHome.getLastGlucoseValue()
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
+        label.adjustsFontSizeToFitWidth = true
         label.backgroundColor = UIColor.gray
         label.textColor = UIColor.white
         return label
@@ -44,6 +45,7 @@ class LastResultTableViewCell: UITableViewCell {
         label.textAlignment = .left
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
+        label.adjustsFontSizeToFitWidth = true
         label.backgroundColor = UIColor.gray
         label.textColor = UIColor.white
         return label
@@ -54,6 +56,7 @@ class LastResultTableViewCell: UITableViewCell {
         label.font = UIFont.systemFont(ofSize: 15)
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
+        label.adjustsFontSizeToFitWidth = true
         // 显示血糖正常范围
         let unit = GetUnit.getBloodUnit()
         let low = GetBloodLimit.getRandomDinnerLow()

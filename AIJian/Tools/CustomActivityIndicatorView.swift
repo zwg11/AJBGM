@@ -20,7 +20,7 @@ class CustomIndicatorView: UIView {
         let view = UIActivityIndicatorView(style: .whiteLarge)
         // 使得控件不转时隐藏
         view.hidesWhenStopped = true
-        view.color = UIColor.red
+        view.color = UIColor.white
         //view.backgroundColor = UIColor.yellow
         return view
     }()
@@ -37,7 +37,7 @@ class CustomIndicatorView: UIView {
         let label = UILabel()
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 15)
-        label.textColor = UIColor.black
+        label.textColor = UIColor.white
         return label
     }()
     // 设置label文本

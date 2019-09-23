@@ -57,6 +57,9 @@
 		7E55D14C065E24471D59E71862D56472 /* UseDirViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67085F8C516527849C0A634158BE78B7 /* UseDirViewController.swift */; };
 		82229929AE907526C16AFB7C3B976565 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428DE12BF8AED7060D2DACBB1BDB9E15 /* AppDelegate.swift */; };
 		84847BC2FE082A7DD9416B04C6429EAB /* BHJPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE608F63498A45B84C3679D6251C8601 /* BHJPickerView.swift */; };
+		84FD2F672334B1330062154E /* SetColorOfText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FD2F662334B1330062154E /* SetColorOfText.swift */; };
+		84FD2F692334CB1B0062154E /* SharedStaticView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FD2F682334CB1B0062154E /* SharedStaticView.swift */; };
+		84FD2F6B2334D1120062154E /* ProtocolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FD2F6A2334D1120062154E /* ProtocolView.swift */; };
 		85BF4AD1556507F03E9CF1AB13F34571 /* BloodSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCA193DA6A5E1E858111B284800163C /* BloodSetViewController.swift */; };
 		875E6FED57826107D84E47853B2A507F /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5C68EDC76F69EA0E7DCD122ED6AB4 /* UITextField+Extension.swift */; };
 		88B422202CF871BF6F10A6D4FD24F651 /* GetUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3389A85E5BFB5D3E18B8DAA0516CC7 /* GetUnit.swift */; };
@@ -193,6 +196,9 @@
 		7C3389A85E5BFB5D3E18B8DAA0516CC7 /* GetUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUnit.swift; sourceTree = "<group>"; };
 		7C340848915D471758C27C46FC15E8A6 /* getDataInHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = getDataInHome.swift; path = AIJian/Main/Home/getDataInHome.swift; sourceTree = SOURCE_ROOT; };
 		802706582BF2DD3F2F165BE6CC4B129F /* UnitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitViewController.swift; sourceTree = "<group>"; };
+		84FD2F662334B1330062154E /* SetColorOfText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetColorOfText.swift; sourceTree = "<group>"; };
+		84FD2F682334CB1B0062154E /* SharedStaticView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStaticView.swift; sourceTree = "<group>"; };
+		84FD2F6A2334D1120062154E /* ProtocolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolView.swift; sourceTree = "<group>"; };
 		88B84B902E4E28BB9EBAC8F34677E2D8 /* loginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginViewController.swift; sourceTree = "<group>"; };
 		8A18E98B74565B5E695548D96DE09E13 /* SuggestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionViewController.swift; sourceTree = "<group>"; };
 		8AB8DBFCEA7297369A51108D4F1C5D91 /* InsulinType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsulinType.swift; sourceTree = "<group>"; };
@@ -484,22 +490,12 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		BF80F129B376C63F914BDB119ECD0789 /* TableViewForInsulin */ = {
-			isa = PBXGroup;
-			children = (
-				D6F050A7AE8A1301E444704F3A331088 /* BasalInsulinTableView.swift */,
-				A9898FA10A2CB87AAD7AD91B22FF72ED /* BolusInsulinTableView.swift */,
-				8AB8DBFCEA7297369A51108D4F1C5D91 /* InsulinType.swift */,
-				BB32CBB039E1CB1B7CFC343ECDA5FC66 /* OtherInsulinTableView.swift */,
-			);
-			path = TableViewForInsulin;
-			sourceTree = "<group>";
-		};
 		8AAD81B15BC82054ED7CDA072058E5FC /* Register */ = {
 			isa = PBXGroup;
 			children = (
 				147304D84A9DE6863D9AB1D97597C6C9 /* InfoInputView.swift */,
 				DCA464EB54C14F9628836CB6E349E42D /* registerView.swift */,
+				84FD2F6A2334D1120062154E /* ProtocolView.swift */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -596,6 +592,17 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		BF80F129B376C63F914BDB119ECD0789 /* TableViewForInsulin */ = {
+			isa = PBXGroup;
+			children = (
+				A9898FA10A2CB87AAD7AD91B22FF72ED /* BolusInsulinTableView.swift */,
+				D6F050A7AE8A1301E444704F3A331088 /* BasalInsulinTableView.swift */,
+				BB32CBB039E1CB1B7CFC343ECDA5FC66 /* OtherInsulinTableView.swift */,
+				8AB8DBFCEA7297369A51108D4F1C5D91 /* InsulinType.swift */,
+			);
+			path = TableViewForInsulin;
+			sourceTree = "<group>";
+		};
 		C5E814D3921484087E76F8B2413E7574 /* Charts */ = {
 			isa = PBXGroup;
 			children = (
@@ -650,6 +657,7 @@
 				23C00E21044909597018A27EA6A8731C /* GeneralStatusView.swift */,
 				0557E67341EF86431E047CAF50A62A92 /* SharedView.swift */,
 				BD1FFFCEAEB20DEFEC8716743912DE93 /* pickerView.swift */,
+				84FD2F682334CB1B0062154E /* SharedStaticView.swift */,
 			);
 			path = share;
 			sourceTree = "<group>";
@@ -743,6 +751,7 @@
 				0D612F090DA61DB57678E74F261C68D6 /* UserInfo.swift */,
 				8AD251DA1D7683298B03830243680EC8 /* format_method.swift */,
 				E2F07FB865C1B45AC2F704BE6D7A4BF4 /* viewToImage.swift */,
+				84FD2F662334B1330062154E /* SetColorOfText.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -877,6 +886,7 @@
 				14A1F66FE36579BF1FEE9A0F20D616BE /* AJNavigationController.swift in Sources */,
 				D73159906BF596032A3B3FB75BFF3023 /* AJStartView.swift in Sources */,
 				F0CC7B621011F02A6C445F2D4CFD4002 /* AJTabbarController.swift in Sources */,
+				84FD2F692334CB1B0062154E /* SharedStaticView.swift in Sources */,
 				AB27A7600A1A69D96B3C0BDEEBA411E6 /* AboutUsViewController.swift in Sources */,
 				B1B7D2822DE19C1364753E125637AD19 /* AddressModel.swift in Sources */,
 				82229929AE907526C16AFB7C3B976565 /* AppDelegate.swift in Sources */,
@@ -928,6 +938,7 @@
 				F2C132B8DC75DCC95C950DC23D124584 /* StaticView.swift in Sources */,
 				A489FE1D1E209499E7F9EA11DD91D8C1 /* StatisticDate.swift in Sources */,
 				29C10571F503D7FCC9D1EFF3EEF54262 /* StatisticalDataViewController.swift in Sources */,
+				84FD2F6B2334D1120062154E /* ProtocolView.swift in Sources */,
 				D04F636417EB92069574FA06715E5F33 /* SuggestionViewController.swift in Sources */,
 				C8C584C14E41F381E1E0B5BA0C387AE8 /* UIAlertViewController_Extension.swift in Sources */,
 				9B3DAB77A3DC41F8FAC306F8E17CF1C1 /* UIButton+Extension.swift in Sources */,
@@ -953,6 +964,7 @@
 				0FCF3B6597088D36328606A7EE666F3D /* dataTableViewCell.swift in Sources */,
 				8C12DF1C8D3786CE5E341EA9333B9A3B /* dateAndTimeView.swift in Sources */,
 				01AD16706B471DE7CFDCBBC976B8EF66 /* dateRangePickerView.swift in Sources */,
+				84FD2F672334B1330062154E /* SetColorOfText.swift in Sources */,
 				45803CE73725E712D36BEA50254D994A /* emailCheckSecViewController.swift in Sources */,
 				957A7C093476F2DD3E1D27A459DA5B62 /* emailCheckSecondView.swift in Sources */,
 				D140B268899B7C34FE91E8B62F5A2755 /* emailCheckView.swift in Sources */,

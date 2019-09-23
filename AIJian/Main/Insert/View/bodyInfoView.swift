@@ -39,6 +39,7 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
         label.text = GetUnit.getWeightUnit()
         label.font = UIFont.systemFont(ofSize: 16)
         label.minimumScaleFactor = 0.5
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
 
@@ -123,6 +124,7 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
         label.text = GetUnit.getPressureUnit()
         label.font = UIFont.systemFont(ofSize: 16)
         label.minimumScaleFactor = 0.5
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     

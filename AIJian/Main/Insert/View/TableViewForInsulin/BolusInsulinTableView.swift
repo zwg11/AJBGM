@@ -93,6 +93,7 @@ class BolusInsulinView: UIView, UITableViewDelegate, UITableViewDataSource{
 
     func settupUI(){
         let view = UITableView()
+        view.bounces = false
         view.dataSource = self
         view.delegate = self
         

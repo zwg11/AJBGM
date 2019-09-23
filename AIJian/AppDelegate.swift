@@ -10,6 +10,7 @@ import UIKit
 import HandyJSON
 import Alamofire
 import Siren
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        // 设置文本框适应键盘
+        IQKeyboardManager.shared.enable = true
         // 先确认是否初始化plist文件，没有则初始化
         PlistSetting.initPlistFile()
         

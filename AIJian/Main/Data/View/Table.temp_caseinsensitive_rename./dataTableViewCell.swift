@@ -52,6 +52,7 @@ class dataTableViewCell: UITableViewCell {
         // 事件
         eventLabel.font = UIFont.systemFont(ofSize: 15)
         eventLabel.minimumScaleFactor = 0.3
+        eventLabel.adjustsFontSizeToFitWidth = true
         eventLabel.text = (sortedData[secion][row].detectionTime != nil) ? EvenChang.numToeven(Int(sortedData[secion][row].detectionTime!)):"-"
         // 进餐量
         appetiteLabel.text = (sortedData[secion][row].eatNum != nil) ? EatNumChange.numToeat(Int(sortedData[secion][row].eatNum!)):"-"
@@ -60,6 +61,7 @@ class dataTableViewCell: UITableViewCell {
         // 胰岛素类型和量
         isulinLabel.font = UIFont.systemFont(ofSize: 15)
         isulinLabel.minimumScaleFactor = 0.3
+        isulinLabel.adjustsFontSizeToFitWidth = true
         if sortedData[secion][row].insulinNum != nil{
             isulinLabel.text = String(sortedData[secion][row].insulinNum!) + "U\n" +  String(sortedData[secion][row].insulinType!)
             isulinLabel.font = UIFont.systemFont(ofSize: 10)
@@ -103,6 +105,7 @@ class dataTableViewCell: UITableViewCell {
         // 药物
         medicineLabel.font = UIFont.systemFont(ofSize: 15)
         medicineLabel.minimumScaleFactor = 0.3
+        medicineLabel.adjustsFontSizeToFitWidth = true
         medicineLabel.text = sortedData[secion][row].medicine ?? "-"
         
         // 先判断有没有运动量，若没有再判断有没有运动类型
@@ -138,6 +141,7 @@ class dataTableViewCell: UITableViewCell {
             offsetX += 80
             self.addSubview(i)
         }
+        SetColorOfLabelText.SetGlucoseTextColor(sortedData[secion][row], label: glucoseLabel)
         remarkLabel.frame.size.width = 200
     }
     

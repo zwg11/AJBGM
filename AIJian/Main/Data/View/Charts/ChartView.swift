@@ -168,11 +168,33 @@ class ChartView: UIView ,ChartViewDelegate{
         }
         print(yDataArray1)
         let set1 = LineChartDataSet.init(entries: yDataArray1, label: "")
-        
-        set1.colors = [UIColor.blue]
+        // 设置线 的颜色
+        set1.colors = [UIColor.black]
+        // 设置 点的样式
         set1.drawCirclesEnabled = true//绘制转折点
-        set1.circleColors = [UIColor.red]
-        set1.lineWidth = 1.0
+        // 不显示十字线
+        set1.highlightEnabled = false
+        // 绘制转折点内圆
+        set1.drawCircleHoleEnabled = false
+        // 转折点是否显示y轴的值
+        set1.drawValuesEnabled = false
+        // 转折点颜色
+        var colors:[UIColor] = []
+        // 根据entry的y坐标的大小不同设置不同的颜色
+        for i in 0..<set1.count{
+            print("要画的第\(i)个点。")
+            if set1[i].y > GetBloodLimit.getRandomDinnerTop(){
+                colors.append(UIColor.red)
+            }else if set1[i].y < GetBloodLimit.getRandomDinnerLow(){
+                colors.append(UIColor.orange)
+            }else{
+                colors.append(UIColor.green)
+            }
+        }
+        set1.circleColors = colors
+        // 转折点大小
+        set1.circleRadius = 6
+        set1.lineWidth = 3.0
         
         // 初始化折线图数据
         let data = LineChartData.init(dataSets: [set1])

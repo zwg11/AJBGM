@@ -29,7 +29,24 @@ class InsertViewController: UIViewController {
     var isInsert: Bool = true
     
     // 选择药物按钮弹出的alert
-    private var medicineChooseAlert = alertViewController()
+    private var medicineChooseAlert:alertViewController = {
+        // 读取配置文件
+        //        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
+        
+        let VC = alertViewController(title: "请选择", message: "", preferredStyle: .alert)
+        //        medicineChooseAlert.alertData = data["medicine"] as! [String]
+        //        viewController.setupUI()
+        
+        // 避免懒加载导致数据未初始化就被使用
+        VC.setupUI()
+        return VC
+    }()
+    
+//{
+//        var viewController = alertViewController()
+//
+//        return viewController
+//    }
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         // 设置当选中的表格个数改变时，使得对应的按钮显示已选择的表格数
@@ -71,16 +88,10 @@ class InsertViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = ThemeColor
         self.title = "Add Data"
-//        self.navigationController?.navigationBar.titleTextAttributes = []
-        // 读取配置文件
-        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
         
-        medicineChooseAlert = alertViewController(title: "请选择", message: "", preferredStyle: .alert)
-        medicineChooseAlert.alertData = data["medicine"] as! [String]
-        medicineChooseAlert.setupUI()
+
         // 添加监听器监听选中的表格的个数
         medicineChooseAlert.addObserver(self, forKeyPath: "selectedNum", options: [.new], context: nil)
-        
         
         // 添加导航栏左按钮
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
@@ -109,23 +120,20 @@ class InsertViewController: UIViewController {
         print("choose medicine button clicked,appear done.")
         // 读取配置文件
         let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
+        let arr = data["medicine"] as! NSArray
         // 由于 药物 一定是有可选项的，所以不需判断是否有可选项
         // 若需更新，重新加载数据和表格
     
-        medicineChooseAlert.alertData = data["medicine"] as! [String]
+//        medicineChooseAlert.alertData = data["medicine"] as! [String]
         // 设置框的高度，根据单元格数量和表格上下约束计算得出
         medicineChooseAlert.view.snp.updateConstraints{(make) in
-            make.height.equalTo(medicineChooseAlert.alertData.count*35+90)
+            make.height.equalTo(arr.count*35+90)
         }
         // 更新单元格
         medicineChooseAlert.tabelView.reloadData()
         // 显示 警示框
         self.present(medicineChooseAlert, animated: true, completion: nil)
-        
-        // 显示 警示框
-        self.present(medicineChooseAlert, animated: true, completion: nil)
-        
-        
+   
     }
     
     
@@ -133,7 +141,7 @@ class InsertViewController: UIViewController {
     // ********* 药物 编辑 按钮 *********
     @objc func edit(sender:UIButton?){
         
-        let alert = UIAlertController(title: "添加备注", message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: "添加药物", message: "", preferredStyle: .alert)
         alert.addTextField(configurationHandler: {(textField) in
             textField.placeholder = ""
             textField.keyboardType = .default
@@ -144,23 +152,25 @@ class InsertViewController: UIViewController {
         let actionSure = UIAlertAction(title: "确定", style: .destructive, handler: {(UIAlertAction)-> Void in
             // 读取配置文件
             let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: self.path)!
+            var arr = data["medicine"] as! [String]
             // 文本框为空，不做任何事
             if alert.textFields![0].text == "" {
                 return
+            }else{
+                arr.append(alert.textFields![0].text!)
             }
 
-                
-            // 使得另一个警示框的表格数据更新
-            self.medicineChooseAlert.alertData.append(alert.textFields![0].text!)
-                
+//            // 使得警示框的表格数据更新
+//            self.medicineChooseAlert.alertData.append(alert.textFields![0].text!)
+            
             // 改变对应的选择器的内容和沙盒中对应队列的内容
-            data["medicine"] = self.medicineChooseAlert.alertData
+            data["medicine"] = arr
             print(self.path)
             // 将改变后的结果写入沙盒
             data.write(toFile: self.path, atomically: true)
             print(data["medicine"] ?? "no medicine")
-            print(self.medicineChooseAlert.alertData)
-            // 将新添加的事件 添加到 表格状态数组中并值为 true
+//            print(self.medicineChooseAlert.alertData)
+//             将新添加的事件 添加到 表格状态数组中并值为 true
             self.medicineChooseAlert.boolarr.append(true)
             self.medicineChooseAlert.boolArray.append(true)
             self.medicineChooseAlert.selectedNum += 1
@@ -372,20 +382,35 @@ class InsertViewController: UIViewController {
         // ************** 药物 ***************
         let medicine = getMedicineArray()
         var medicine_string:String = ""
-        if medicine != []{
-//            print("药物",medicine)
-            var j:Int = 1
-            for i in medicine{
-                if j == 1 {
-                    medicine_string = i
-                }else if j <= medicine.count - 1{
-                    medicine_string = medicine_string + "," + i
-                }else{
-                    medicine_string = medicine_string  + i
+        // 如果有药物
+        if medicine.count > 0{
+            // 窑炉数为1
+            if medicine.count == 1{
+                medicine_string = medicine[0]
+            }// 药物数大于1
+            else{
+                
+                for i in 0..<medicine.count-1{
+                    medicine_string += medicine[i] + ","
                 }
-                j = j + 1
+                medicine_string += medicine.last!
             }
         }
+        
+//        if medicine != []{
+////            print("药物",medicine)
+//            var j:Int = 1
+//            for i in medicine{
+//                if j == 1 {
+//                    medicine_string = i
+//                }else if j <= medicine.count - 1{
+//                    medicine_string = medicine_string + "," + i
+//                }else{
+//                    medicine_string = medicine_string  + i
+//                }
+//                j = j + 1
+//            }
+//        }
         print(medicine_string)
         
         
@@ -581,14 +606,17 @@ class InsertViewController: UIViewController {
     }
  
     
-    func getMedicineArray()->Array<String>{
+    func getMedicineArray()->[String]{
         var arr:[String] = []
         var j:Int = 0
+        let path = PlistSetting.getFilePath(File: "inputChoose.plist")
+        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
+        let arr1 = data["medicine"] as! NSArray
         for i in medicineChooseAlert.boolarr{
             if i{
                 print("药物")
                 print(i)
-                arr.append(medicineChooseAlert.alertData[j])
+                arr.append(arr1[j] as! String)
             }
             j = j+1
         }
@@ -599,41 +627,47 @@ class InsertViewController: UIViewController {
         
         // 读取配置文件
         let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
+        var medicine = data["medicine"] as! [String]
         
-        let initLength:Int = medicineChooseAlert.alertData.count
         var arrtemp = arr
         let fromLength:Int = arr.count
-        //如果alertData的数据元素，与传入的数据元素相等的话。则将元素对应的boolarr设置成true
+        //如果配置文件中的数据元素，与传入的数据元素相等的话。则将元素对应的boolarr设置成true
         //a与b之间的交集
-        for i in 0..<initLength{
-            for j in 0..<fromLength{
-                if medicineChooseAlert.alertData[i] == arrtemp[j]{
-                    //除了原先有的不用append之外，其他的东西三个东西都需要设置
-                    medicineChooseAlert.boolarr[i] = true
-                    medicineChooseAlert.boolArray[i] = true
-                    medicineChooseAlert.selectedNum += 1
-                    arrtemp[j] = ""
-//                    arrtemp.remove(at: j)//如果相等,则将对应的数剔除
+        if fromLength > 0{
+            // 设置按钮标题
+            input.bodyInfo.medicineChooseButton.setTitle("\(fromLength)个选项已选择", for: .normal)
+            
+            for i in 0..<medicine.count{
+                
+                for j in 0..<fromLength{
+                    if medicine[i] == arrtemp[j]{
+                        //除了原先有的不用append之外，其他的东西三个东西都需要设置
+                        medicineChooseAlert.boolarr[i] = true
+                        medicineChooseAlert.boolArray[i] = true
+                        medicineChooseAlert.selectedNum += 1
+                        arrtemp[j] = ""
+//                        arrtemp.remove(at: j)//如果相等,则将对应的数剔除
+                    }
                 }
             }
         }
+        
         for j in 0..<fromLength{
             if(arrtemp[j] != ""){  //不为空，说明原先没有这种药，需要重新添加，重新选取
                 //先加载到内存数组中
-                medicineChooseAlert.alertData.append(arrtemp[j])
+                medicine.append(arrtemp[j])
                 medicineChooseAlert.boolArray.append(true)
                 medicineChooseAlert.boolarr.append(true)
                 medicineChooseAlert.selectedNum += 1
-                //后写入到文件中
-                data["medicine"] = medicineChooseAlert.alertData
-                data.write(toFile: path, atomically: true)
+                
             }
         }
+        
+        // 写入到文件中
+        data["medicine"] = medicine
+        data.write(toFile: path, atomically: true)
     }
-    
-    
 }
-
 
 
 extension InsertViewController{

@@ -32,19 +32,18 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
     }()
     
     override func viewWillAppear(_ animated: Bool) {
-        self.view.addSubview(general)
+        // h刷新数据
+        general.test()
     }
     // 将shareV视图生成为图片
     @objc func sendImage(){
         
         let name = shareV.nameTextField.text
-        //设置名字和生日
+        let phone = shareV.phoneTextField.text
+        //设置名字和电话
         general.nameLabel.text = name
-        //general.birthLabel.text = birth == "Please Select" ? "":birth
-        let dateFormat = DateFormatter()
-        dateFormat.dateFormat = "yyyy-MM-dd HH:mm"
-        // 时间范围
-        general.rangeLabel.text = dateFormat.string(from: startD!) + " - " + dateFormat.string(from: endD!)
+        general.phoneLabel.text = phone
+        
         // 将视图生成文件
         let image = viewToImage.getImageFromView(view: general)
         // 将图片放入相册
@@ -87,6 +86,8 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
         self.view.backgroundColor = ThemeColor
         self.view.clipsToBounds = true
         //general.setupUI()
+        
+        self.view.addSubview(general)
         
         let sharedScrollView = UIScrollView()
         // 设置内容高度为屏幕的3/2,显示滚动条，d能上下滚动，背景为白色

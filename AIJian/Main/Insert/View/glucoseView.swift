@@ -58,6 +58,7 @@ class glucoseView: UIView ,UITextFieldDelegate{
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = UIColor.white
         label.minimumScaleFactor = 0.5
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
@@ -365,11 +366,13 @@ class glucoseView: UIView ,UITextFieldDelegate{
     // ***********现在对于直接输入那么以下代码可使文本框遵循：***********
     // ***********对于单位--mg/dL 输入小于1000的整数***********
     // ***********对于单位--mmol/L 输入小于100、小数点后1位的数***********
-    let testString = ".0123456789"
+    
     // 如果返回true 则可以输入 ； 反之输入无效
     // string 指的是指定范围的替换字符串。在键入期间，此参数通常只包含键入的单个新字符
     //但如果用户粘贴文本，则它可能包含更多字符。当用户删除一个或多个字符时，替换字符串为空。
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let testString = ".0123456789"
         // textField:当前被操作的文本框
         // range:当前将要替换掉的文本范围
         // string:要替代文本框中一定范围文本的字符串

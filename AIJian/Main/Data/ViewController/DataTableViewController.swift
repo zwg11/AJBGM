@@ -124,6 +124,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
             label.textAlignment = .center
             label.font = UIFont.systemFont(ofSize: 15)
             label.minimumScaleFactor = 0.5
+            label.adjustsFontSizeToFitWidth = true
             view.addSubview(label)
             // 如果列表章节数大于0
             if section<sortedTime.count{

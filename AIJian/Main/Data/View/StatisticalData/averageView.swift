@@ -22,6 +22,7 @@ class averageView: UIView {
         label.text = "Average"
         label.font = UIFont.systemFont(ofSize: 18)
         label.minimumScaleFactor = 0.5
+        label.adjustsFontSizeToFitWidth = true
         label.textColor = UIColor.white
         label.textAlignment = .left
         return label
