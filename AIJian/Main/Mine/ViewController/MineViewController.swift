@@ -141,6 +141,8 @@ class MineViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
         let viewController = loginViewController()
         let nv = loginNavigationController(rootViewController: viewController)
+        // 设置弹出模式为占满屏幕
+        nv.modalPresentationStyle = .fullScreen
         self.present(nv, animated: true, completion: nil)
         
         // 将对应的用户的token设为空

@@ -45,7 +45,10 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
             let imageView = UIImageView(image: UIImage(named: "email"))
             oldPasswd_textF.leftView = imageView
             oldPasswd_textF.leftViewMode = .always
-            oldPasswd_textF.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
+            let str:NSMutableAttributedString = NSMutableAttributedString(string: "Old Password", attributes: [NSAttributedString.Key.foregroundColor:TextColor])
+            oldPasswd_textF.attributedPlaceholder = str
+            
+//            oldPasswd_textF.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
             return oldPasswd_textF
         }()
     
@@ -59,7 +62,9 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
             let imageView = UIImageView(image: UIImage(named: "email"))
             newPasswd_textF.leftView = imageView
             newPasswd_textF.leftViewMode = .always
-            newPasswd_textF.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
+            let str:NSMutableAttributedString = NSMutableAttributedString(string: "New Password", attributes: [NSAttributedString.Key.foregroundColor:TextColor])
+            newPasswd_textF.attributedPlaceholder = str
+//            newPasswd_textF.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
             return newPasswd_textF
         }()
     
@@ -73,7 +78,9 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
             let imageView = UIImageView(image: UIImage(named: "email"))
             verfiedPasswd_textF.leftView = imageView
             verfiedPasswd_textF.leftViewMode = .always
-            verfiedPasswd_textF.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
+            let str:NSMutableAttributedString = NSMutableAttributedString(string: "Confirm the Password", attributes: [NSAttributedString.Key.foregroundColor:TextColor])
+            verfiedPasswd_textF.attributedPlaceholder = str
+//            verfiedPasswd_textF.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
             return verfiedPasswd_textF
         }()
     

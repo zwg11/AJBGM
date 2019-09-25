@@ -28,4 +28,17 @@ extension UITextField{
         // 设置字体颜色
         self.textColor = UIColor.white
     }
+    
+    //初始化textField的placeholder大小及颜色和键盘类型
+    func initTextField(placeholder string:String,keyboardType type:UIKeyboardType){
+//        let textField = UITextField()
+        self.placeholder = string
+        self.textAlignment = .left
+        self.keyboardType = type
+
+        self.setValue(NSNumber(value: 10), forKey: "paddingLeft")
+        let str:NSMutableAttributedString = NSMutableAttributedString(string: string, attributes: [NSAttributedString.Key.foregroundColor:TextColor])
+        self.attributedPlaceholder = str
+//        return textField
+    }
 }

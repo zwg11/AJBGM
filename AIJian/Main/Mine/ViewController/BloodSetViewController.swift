@@ -513,7 +513,9 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             let g_String = floor(g_Double * 18.02)
             let h_String = floor(h_Double * 18.02)
             showPlaceholder(String(format:"%.0f",a_String),String(format:"%.0f",b_String),String(format:"%.0f",c_String),String(format:"%.0f",d_String),String(format:"%.0f",e_String),String(format:"%.0f",f_String),String(format:"%.0f",g_String),String(format:"%.0f",h_String))
-            emptyStomach_left.setValue(AnotherColor, forKeyPath: "_placeholderLabel.textColor")
+            let str:NSMutableAttributedString = NSMutableAttributedString(string: "", attributes: [NSAttributedString.Key.foregroundColor:AnotherColor])
+            emptyStomach_left.attributedPlaceholder = str
+//            emptyStomach_left.setValue(AnotherColor, forKeyPath: "_placeholderLabel.textColor")
         }
     }
     
@@ -1039,22 +1041,22 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
     }
     //函数功能：设置text的placeholder显示,函数参数可匿名
     func showPlaceholder(_ a:String,_ b:String,_ c:String,_ d:String,_ e:String,_ f:String,_ g:String,_ h:String){
-        emptyStomach_left.placeholder  = a
-        emptyStomach_left.setValue(AnotherColor, forKeyPath: "_placeholderLabel.textColor")
-        emptyStomach_right.placeholder = b
-        emptyStomach_right.setValue(AnotherColor, forKeyPath: "_placeholderLabel.textColor")
-        beforeDinner_left.placeholder  = c
-        beforeDinner_left.setValue(AnotherColor, forKeyPath: "_placeholderLabel.textColor")
-        beforeDinner_right.placeholder = d
-        beforeDinner_right.setValue(AnotherColor, forKeyPath: "_placeholderLabel.textColor")
-        afterDinner_left.placeholder   = e
-        afterDinner_left.setValue(AnotherColor, forKeyPath: "_placeholderLabel.textColor")
-        afterDinner_right.placeholder  = f
-        afterDinner_right.setValue(AnotherColor, forKeyPath: "_placeholderLabel.textColor")
-        randomDinner_left.placeholder  = g
-        randomDinner_left.setValue(AnotherColor, forKeyPath: "_placeholderLabel.textColor")
-        randomDinner_right.placeholder = h
-        randomDinner_right.setValue(AnotherColor, forKeyPath: "_placeholderLabel.textColor")
+//        emptyStomach_left.placeholder  = a
+//        emptyStomach_left.setValue(AnotherColor, forKeyPath: "_placeholderLabel.textColor")
+//        emptyStomach_right.placeholder = b
+//        emptyStomach_right.setValue(AnotherColor, forKeyPath: "_placeholderLabel.textColor")
+//        beforeDinner_left.placeholder  = c
+//        beforeDinner_left.setValue(AnotherColor, forKeyPath: "_placeholderLabel.textColor")
+//        beforeDinner_right.placeholder = d
+//        beforeDinner_right.setValue(AnotherColor, forKeyPath: "_placeholderLabel.textColor")
+//        afterDinner_left.placeholder   = e
+//        afterDinner_left.setValue(AnotherColor, forKeyPath: "_placeholderLabel.textColor")
+//        afterDinner_right.placeholder  = f
+//        afterDinner_right.setValue(AnotherColor, forKeyPath: "_placeholderLabel.textColor")
+//        randomDinner_left.placeholder  = g
+//        randomDinner_left.setValue(AnotherColor, forKeyPath: "_placeholderLabel.textColor")
+//        randomDinner_right.placeholder = h
+//        randomDinner_right.setValue(AnotherColor, forKeyPath: "_placeholderLabel.textColor")
     }
     
     // 详细用法请看 glucoseView.swift

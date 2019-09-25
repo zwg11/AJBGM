@@ -33,21 +33,25 @@ class registerView: UIView {
     
     // 输入邮箱文本框
     lazy var emailTextField:UITextField = {
-        let textField = initTextField(placeholder: " Email",keyboardType: .emailAddress)
+        let textField = UITextField()
+        textField.initTextField(placeholder: " Email",keyboardType: .emailAddress)
+//        let textField = initTextField(placeholder: " Email",keyboardType: .emailAddress)
         let imageView = UIImageView(image: UIImage(named: "email"))
         textField.leftView = imageView
         textField.leftViewMode = .always
-        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
+//        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
         return textField
     }()
     
     // 输入验证码文本框
     lazy var authCodeTextField:UITextField = {
-        let textField = initTextField(placeholder: " Code",keyboardType: .numberPad)
+        let textField = UITextField()
+        textField.initTextField(placeholder: " Code",keyboardType: .numberPad)
+//        let textField = initTextField(placeholder: " Code",keyboardType: .numberPad)
         let imageView = UIImageView(image: UIImage(named: "email"))
         textField.leftView = imageView
         textField.leftViewMode = .always
-        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
+//        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
         return textField
     }()
     
@@ -63,23 +67,27 @@ class registerView: UIView {
     
     // 输入密码文本框
     lazy var passwordTextField:UITextField = {
-        let textField = initTextField(placeholder: " Password",keyboardType: .default)
+        let textField = UITextField()
+        textField.initTextField(placeholder: " Password",keyboardType: .default)
+//        let textField = initTextField(placeholder: " Password",keyboardType: .default)
         textField.isSecureTextEntry = true
         let imageView = UIImageView(image: UIImage(named: "email"))
         textField.leftView = imageView
         textField.leftViewMode = .always
-        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
+//        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
         return textField
     }()
     
     // 输入确认密码文本框
     lazy var passwordSecTextField:UITextField = {
-        let textField = initTextField(placeholder: " Confirm the Password",keyboardType: .default)
+        let textField = UITextField()
+        textField.initTextField(placeholder: " Confirm the Password",keyboardType: .default)
+//        let textField = initTextField(placeholder: " Confirm the Password",keyboardType: .default)
         textField.isSecureTextEntry = true
         let imageView = UIImageView(image: UIImage(named: "email"))
         textField.leftView = imageView
         textField.leftViewMode = .always
-        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
+//        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
         return textField
     }()
     //免责条例的Logo
@@ -109,15 +117,15 @@ class registerView: UIView {
     }()
     
 
-    func initTextField(placeholder string:String,keyboardType type:UIKeyboardType) -> UITextField{
-        let textField = UITextField()
-        textField.placeholder = string
-        textField.textAlignment = .left
-        textField.keyboardType = type
-        textField.layer.borderColor = UIColor.gray.cgColor
-        textField.setValue(NSNumber(value: 10), forKey: "paddingLeft")
-        return textField
-    }
+//    func initTextField(placeholder string:String,keyboardType type:UIKeyboardType) -> UITextField{
+//        let textField = UITextField()
+//        textField.placeholder = string
+//        textField.textAlignment = .left
+//        textField.keyboardType = type
+//        textField.layer.borderColor = UIColor.gray.cgColor
+//        textField.setValue(NSNumber(value: 10), forKey: "paddingLeft")
+//        return textField
+//    }
     
     func setupUI(){
         self.backgroundColor = ThemeColor

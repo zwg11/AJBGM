@@ -19,8 +19,10 @@ class sugComponent: UIView {
     
     var textField:UITextField = {
         let textField = UITextField()
-        textField.placeholder = "*************"
-        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
+        let str:NSMutableAttributedString = NSMutableAttributedString(string: "*************", attributes: [NSAttributedString.Key.foregroundColor:TextColor])
+        textField.attributedPlaceholder = str
+//        textField.placeholder = "*************"
+//        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
         return textField
     }()
     

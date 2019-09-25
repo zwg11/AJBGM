@@ -272,7 +272,8 @@ extension loginViewController{
                         // 显示tabbar
                         let tabbar = AJTabbarController()
                         //                                tabbar.isLogin = true
-                        self.present(tabbar, animated: false, completion: nil)
+                        tabbar.modalPresentationStyle = .fullScreen
+                        self.present(tabbar, animated: true, completion: nil)
                         // 重新加载表格内容
                         //self.homeTableView.reloadData()
                     }

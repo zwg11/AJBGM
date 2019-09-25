@@ -21,11 +21,13 @@ class InfoInputView: UIView {
     
     // 输入用户名文本框
     lazy var userNameTextField:UITextField = {
-        let textField = initTextField(placeholder: " Name",keyboardType: .default)
+        let textField = UITextField()
+        textField.initTextField(placeholder: " Name",keyboardType: .default)
+//        let textField = initTextField(placeholder: " Name",keyboardType: .default)
         let imageView = UIImageView(image: UIImage(named: "email"))
         textField.leftView = imageView
         textField.leftViewMode = .always
-        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
+//        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
         return textField
     }()
     
@@ -119,7 +121,9 @@ class InfoInputView: UIView {
     
     // 输入国家文本框
     lazy var nationTextField:UITextField = {
-        let textField = initTextField(placeholder: " China",keyboardType: .default)
+        let textField = UITextField()
+        textField.initTextField(placeholder: " China",keyboardType: .default)
+//        let textField = initTextField(placeholder: " China",keyboardType: .default)
         let imageView = UIImageView(image: UIImage(named: "email"))
         textField.leftView = imageView
         textField.leftViewMode = .always
@@ -137,11 +141,13 @@ class InfoInputView: UIView {
 //
     // 输入电话文本框
     lazy var phoneTextField:UITextField = {
-        let textField = initTextField(placeholder: " Phone",keyboardType: .emailAddress)
+        let textField = UITextField()
+        textField.initTextField(placeholder: " Phone",keyboardType: .default)
+//        let textField = initTextField(placeholder: " Phone",keyboardType: .emailAddress)
         let imageView = UIImageView(image: UIImage(named: "email"))
         textField.leftView = imageView
         textField.leftViewMode = .always
-        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
+//        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
         return textField
     }()
     
@@ -183,17 +189,17 @@ class InfoInputView: UIView {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         return button
     }()
-    //初始化textField的模板
-    func initTextField(placeholder string:String,keyboardType type:UIKeyboardType) -> UITextField{
-        let textField = UITextField()
-        textField.placeholder = string
-        textField.textAlignment = .left
-        textField.keyboardType = type
-
-        textField.setValue(NSNumber(value: 10), forKey: "paddingLeft")
-        
-        return textField
-    }
+//    //初始化textField的模板
+//    func initTextField(placeholder string:String,keyboardType type:UIKeyboardType) -> UITextField{
+//        let textField = UITextField()
+//        textField.placeholder = string
+//        textField.textAlignment = .left
+//        textField.keyboardType = type
+//
+//        textField.setValue(NSNumber(value: 10), forKey: "paddingLeft")
+//
+//        return textField
+//    }
     
     func setupUI(){
         

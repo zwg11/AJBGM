@@ -14,23 +14,28 @@ class emailCheckSecondView: UIView {
 
     // 输入新密码文本框
     lazy var passwordTextField:UITextField = {
-        let textField = initTextField(placeholder: "New Password",keyboardType: .default)
+        
+        let textField = UITextField()
+        textField.initTextField(placeholder: "New Password",keyboardType: .default)
         textField.isSecureTextEntry = true
         let imageView = UIImageView(image: UIImage(named: "email"))
         textField.leftView = imageView
         textField.leftViewMode = .always
-        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
+//        let str:NSMutableAttributedString = NSMutableAttributedString(string: " New Password", attributes: [NSAttributedString.Key.foregroundColor:TextColor])
+//        textField.attributedPlaceholder = str
+//        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
         return textField
     }()
     
     // 输入确认新密码文本框
     lazy var passwordSecTextField:UITextField = {
-        let textField = initTextField(placeholder: "Confirm the Password",keyboardType: .default)
+        let textField = UITextField()
+        textField.initTextField(placeholder: "Confirm the Password",keyboardType: .default)
         textField.isSecureTextEntry = true
         let imageView = UIImageView(image: UIImage(named: "email"))
         textField.leftView = imageView
         textField.leftViewMode = .always
-        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
+//        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
         return textField
     }()
     
@@ -44,15 +49,17 @@ class emailCheckSecondView: UIView {
         return button
     }()
     
-    func initTextField(placeholder text:String,keyboardType type:UIKeyboardType) -> UITextField{
-        let textField = UITextField()
-        textField.placeholder = text
-        textField.textAlignment = .left
-        textField.keyboardType = type
-        textField.textColor = TextColor
-        textField.setValue(NSNumber(value: 10), forKey: "paddingLeft")
-        return textField
-    }
+//    func initTextField(placeholder text:String,keyboardType type:UIKeyboardType) -> UITextField{
+//        let textField = UITextField()
+//        textField.placeholder = text
+//        textField.textAlignment = .left
+//        textField.keyboardType = type
+//        textField.textColor = TextColor
+//        textField.setValue(NSNumber(value: 10), forKey: "paddingLeft")
+//        let str:NSMutableAttributedString = NSMutableAttributedString(string: text, attributes: [NSAttributedString.Key.foregroundColor:TextColor])
+//        textField.attributedPlaceholder = str
+//        return textField
+//    }
 
     func setupUI(){
         // 输入密码文本框布局
