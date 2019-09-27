@@ -21,17 +21,19 @@ public enum BHJPickerViewStyle {
     case blood    // 血糖单位
     case weight   // 体重单位
     case pressure // 血压单位
+    case country  //国家
 }
 
 /// PickerDelegate  设置代理方法，供Controller层使用
-protocol PickerDelegate {
+@objc protocol PickerDelegate {
     
 //    func selectedAddress(_ pickerView : BHJPickerView,_ procince : AddressModel,_ city : AddressModel,_ area : AddressModel)
-    func selectedDate(_ pickerView : BHJPickerView,_ dateStr : Date)
-    func selectedGender(_ pickerView : BHJPickerView,_ genderStr : String)
-    func selectedBlood(_ pickerView : BHJPickerView,_ bloodStr : String)
-    func selectedWeight(_ pickerView : BHJPickerView,_ weightStr : String)
-    func selectedPressure(_ pickerView : BHJPickerView,_ pressureStr : String)
+    @objc optional func selectedDate(_ pickerView : BHJPickerView,_ dateStr : Date)
+    @objc optional func selectedGender(_ pickerView : BHJPickerView,_ genderStr : String)
+    @objc optional func selectedBlood(_ pickerView : BHJPickerView,_ bloodStr : String)
+    @objc optional func selectedWeight(_ pickerView : BHJPickerView,_ weightStr : String)
+    @objc optional func selectedPressure(_ pickerView : BHJPickerView,_ pressureStr : String)
+    @objc optional func selectedCountry(_ pickerView : BHJPickerView,_ countryStr : String)
 }
 
 
@@ -49,7 +51,7 @@ class BHJPickerView: UIView , UIPickerViewDelegate, UIPickerViewDataSource{
     private var bloodPicker : UIPickerView = UIPickerView()
     private var weightPicker : UIPickerView = UIPickerView()
     private var pressurePicker : UIPickerView = UIPickerView()
-    
+    private var countryPicker : UIPickerView = UIPickerView()
     private var backgroundButton : UIButton = UIButton()
     //存储数据信息，用来统一存放数据
     private var dataArray : NSMutableArray = NSMutableArray()
@@ -69,6 +71,8 @@ class BHJPickerView: UIView , UIPickerViewDelegate, UIPickerViewDataSource{
     private var selectedWeight : String = String()
     //存储血压
     private var selectedPressure : String = String()
+    //存储国家
+    private var selectedCountry: String = String()
     var  List: Int?   //设置成List.   0: 地址  时间不设置标志位   1：性别  2：血糖 3：体重  4：血压
     
     
@@ -159,6 +163,13 @@ class BHJPickerView: UIView , UIPickerViewDelegate, UIPickerViewDataSource{
                 List = 3
                 //                isAddress = false
                 self.addSubview(pressurePicker)
+            case .country:  //国家
+                countryPicker = UIPickerView.init(frame: CGRect.init(x: 0, y: 44, width: AJScreenWidth, height: pickerH - 44))
+                countryPicker.delegate = self
+                countryPicker.dataSource = self
+                countryPicker.backgroundColor = UIColor.white
+                List = 4
+                self.addSubview(countryPicker)
         }
         
         if pickerStyle != BHJPickerViewStyle.date{
@@ -174,9 +185,12 @@ class BHJPickerView: UIView , UIPickerViewDelegate, UIPickerViewDataSource{
                 case 2:  //体重
                     dataArray = NSMutableArray.init(array: ["kg","lbs"])
                     self.pickerView(weightPicker, didSelectRow: 0, inComponent: 0)
-                default:  //血压
+                case 3:  //血压
                     dataArray = NSMutableArray.init(array: ["mmHg","kPa"])
                     self.pickerView(pressurePicker, didSelectRow: 0, inComponent: 0)
+                default:
+                    dataArray = NSMutableArray.init(array: self.getCountry())
+                    self.pickerView(countryPicker, didSelectRow: 0, inComponent: 0)
                 }
         }
     }
@@ -197,16 +211,18 @@ class BHJPickerView: UIView , UIPickerViewDelegate, UIPickerViewDataSource{
 //        if pickerStyle == .address {
 //            pickerDelegate?.selectedAddress(self, selectedProvince, selectedCity, selectedDistrict)
 //        }else
-            if pickerStyle == .date{
-            pickerDelegate?.selectedDate(self, datePicker.date)
+        if pickerStyle == .date{
+            pickerDelegate?.selectedDate!(self, datePicker.date)
         }else if pickerStyle == .gender{
-            pickerDelegate?.selectedGender(self, selectedGender)
+            pickerDelegate?.selectedGender!(self, selectedGender)
         }else if pickerStyle == .blood{
-            pickerDelegate?.selectedBlood(self, selectedBlood)
+            pickerDelegate?.selectedBlood!(self, selectedBlood)
         }else if pickerStyle == .weight{
-            pickerDelegate?.selectedWeight(self, selectedWeight)
+            pickerDelegate?.selectedWeight!(self, selectedWeight)
+        }else if pickerStyle == .pressure{
+            pickerDelegate?.selectedPressure!(self, selectedPressure)
         }else{
-            pickerDelegate?.selectedPressure(self, selectedPressure)
+            pickerDelegate?.selectedCountry!(self, selectedCountry)
         }
         self.pickerViewHidden()
     }
@@ -388,9 +404,17 @@ class BHJPickerView: UIView , UIPickerViewDelegate, UIPickerViewDataSource{
             selectedBlood = dataArray[row] as! String
         case 2:
             selectedWeight = dataArray[row] as! String
-        default:
+        case 3:
             selectedPressure = dataArray[row] as! String
+        default:
+            selectedCountry = dataArray[row] as! String
         }
+    }
+    
+    func getCountry()->Array<Any>{
+        let countryPath = Bundle.main.path(forResource: "CountryEn", ofType: "plist")
+        let country:Array = NSMutableArray.init(contentsOfFile: countryPath!)! as Array
+        return country
     }
 
 

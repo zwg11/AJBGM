@@ -58,6 +58,7 @@ class emailCheckView: UIView {
         textField.placeholder = text
         textField.textAlignment = .left
         textField.keyboardType = type
+        textField.textColor = TextColor
         textField.layer.borderColor = UIColor.gray.cgColor
         textField.setValue(NSNumber(value: 10), forKey: "paddingLeft")
         
