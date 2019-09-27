@@ -39,12 +39,7 @@ class registerView: UIView {
         let imageView = UIImageView(image: UIImage(named: "email"))
         textField.leftView = imageView
         textField.leftViewMode = .always
-<<<<<<< HEAD
-        textField.textColor = TextColor
-        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
-=======
-//        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
->>>>>>> 05dfb685ffd63c72a91e3f458ccbd3239c35249a
+
         return textField
     }()
     
@@ -56,12 +51,7 @@ class registerView: UIView {
         let imageView = UIImageView(image: UIImage(named: "email"))
         textField.leftView = imageView
         textField.leftViewMode = .always
-<<<<<<< HEAD
-        textField.textColor = TextColor
-        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
-=======
-//        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
->>>>>>> 05dfb685ffd63c72a91e3f458ccbd3239c35249a
+
         return textField
     }()
     
@@ -84,12 +74,7 @@ class registerView: UIView {
         let imageView = UIImageView(image: UIImage(named: "email"))
         textField.leftView = imageView
         textField.leftViewMode = .always
-<<<<<<< HEAD
-        textField.textColor = TextColor
-        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
-=======
-//        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
->>>>>>> 05dfb685ffd63c72a91e3f458ccbd3239c35249a
+
         return textField
     }()
     
@@ -102,12 +87,7 @@ class registerView: UIView {
         let imageView = UIImageView(image: UIImage(named: "email"))
         textField.leftView = imageView
         textField.leftViewMode = .always
-<<<<<<< HEAD
-        textField.textColor = TextColor
-        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
-=======
-//        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
->>>>>>> 05dfb685ffd63c72a91e3f458ccbd3239c35249a
+
         return textField
     }()
     //免责条例的Logo

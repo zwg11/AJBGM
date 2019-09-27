@@ -57,17 +57,6 @@ class emailCheckView: UIView {
     }()
 
 
-    func initTextField(placeholder text:String,keyboardType type:UIKeyboardType) -> UITextField{
-        let textField = UITextField()
-        textField.placeholder = text
-        textField.textAlignment = .left
-        textField.keyboardType = type
-        textField.textColor = TextColor
-        textField.layer.borderColor = UIColor.gray.cgColor
-        textField.setValue(NSNumber(value: 10), forKey: "paddingLeft")
-        
-        return textField
-    }
 
 //    func initTextField(placeholder text:String,keyboardType type:UIKeyboardType) -> UITextField{
 //        let textField = UITextField()
@@ -79,6 +68,7 @@ class emailCheckView: UIView {
 //
 //        return textField
 //    }
+
 
 
     func setupUI(){

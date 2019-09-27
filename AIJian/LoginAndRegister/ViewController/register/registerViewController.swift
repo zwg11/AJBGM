@@ -35,6 +35,7 @@ class registerViewController: UIViewController,UITextFieldDelegate {
         alert.addAction(cancelAction)
         return alert
     }()
+
     
     // 协议内容
     

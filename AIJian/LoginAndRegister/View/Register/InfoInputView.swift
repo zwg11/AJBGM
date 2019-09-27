@@ -146,7 +146,7 @@ class InfoInputView: UIView {
         textField.leftViewMode = .always
         textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
         return textField
-    };()
+    }()
     
 //    /*电话标签*/
 //    lazy var phone_label:UILabel = {
@@ -449,3 +449,4 @@ class InfoInputView: UIView {
         }
     }
 
+}
