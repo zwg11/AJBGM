@@ -48,12 +48,8 @@
 		55EBF230C8DD14A232D18B95A37D8202 /* PassChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9793C8E8D4581432CB83EE79CF209C56 /* PassChangeViewController.swift */; };
 		56ACC92032D24C9E3DE0AB02415266D6 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A34F9A4CB476E221493BFF4FA2AA03 /* UIImageView+Extension.swift */; };
 		6909EE6FFC2BE982D2396BEDD6D91E75 /* remarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D547385BBF4921804514C136B71543B8 /* remarkView.swift */; };
-
-
 		6A66C6C4FFB3E3C9BB5320EEB7E51473 /* PopTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB534F9B228926CFEFE19414443BC11 /* PopTextView.swift */; };
-
 		6E35FD60C98CE0106FAB496C7D9A6831 /* SharedStaticView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499D392FCC415844B1B79CE51C4D09C5 /* SharedStaticView.swift */; };
-
 		6ECA98075DA8031CC3E4FCCF8A969285 /* const.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FC2F51C9CAE9D3C768C8D06AE069A2 /* const.swift */; };
 		71937B70E5629695BD05C1C077D5607B /* UnitSetting.plist in Resources */ = {isa = PBXBuildFile; fileRef = 946C4B448C4368010D25171286A04DC5 /* UnitSetting.plist */; };
 		74BAA950DB2E4C75BE286CCA00B3A027 /* SharedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B95A250C5649E01E8B1CE6F8AD5E85 /* SharedViewController.swift */; };
@@ -241,12 +237,8 @@
 		B67C5D050C5D9478AF306B5A049428F1 /* portionAndInsulinView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = portionAndInsulinView.swift; sourceTree = "<group>"; };
 		B7C52F310EC78F0CAFCE223C140C228D /* UnitConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConversion.swift; sourceTree = "<group>"; };
 		B9FC2F51C9CAE9D3C768C8D06AE069A2 /* const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = const.swift; sourceTree = "<group>"; };
-
-		BBB534F9B228926CFEFE19414443BC11 /* PopTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopTextView.swift; sourceTree = "<group>"; };
-
 		BB32CBB039E1CB1B7CFC343ECDA5FC66 /* OtherInsulinTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherInsulinTableView.swift; sourceTree = "<group>"; };
-
-
+		BBB534F9B228926CFEFE19414443BC11 /* PopTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopTextView.swift; sourceTree = "<group>"; };
 		BD0D1AC2632CAB8219D398832954F62F /* ChartDrawFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDrawFunc.swift; sourceTree = "<group>"; };
 		BD1FFFCEAEB20DEFEC8716743912DE93 /* pickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pickerView.swift; sourceTree = "<group>"; };
 		BD500821F545519203F5A1882AD77ED1 /* CurrentVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentVersion.swift; sourceTree = "<group>"; };
@@ -514,7 +506,6 @@
 				147304D84A9DE6863D9AB1D97597C6C9 /* InfoInputView.swift */,
 				6469267F98B5A5BF4D42AFD9B360DF70 /* PopSmallChangeBigFatherView.swift */,
 				BBB534F9B228926CFEFE19414443BC11 /* PopTextView.swift */,
-
 				FCC3095E4A77F8F520BF6370290A26F4 /* ProtocolView.swift */,
 				DCA464EB54C14F9628836CB6E349E42D /* registerView.swift */,
 			);
