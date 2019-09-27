@@ -58,6 +58,7 @@
 		7CD890F46A335B97CB394B2E0F32CE7C /* WeightUnitChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9333124ACDB51FBDDC929EEAD032D6D3 /* WeightUnitChange.swift */; };
 		7E55D14C065E24471D59E71862D56472 /* UseDirViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67085F8C516527849C0A634158BE78B7 /* UseDirViewController.swift */; };
 		82229929AE907526C16AFB7C3B976565 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428DE12BF8AED7060D2DACBB1BDB9E15 /* AppDelegate.swift */; };
+		842ACD35233CDD7900CF38FD /* sliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842ACD34233CDD7900CF38FD /* sliderView.swift */; };
 		84847BC2FE082A7DD9416B04C6429EAB /* BHJPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE608F63498A45B84C3679D6251C8601 /* BHJPickerView.swift */; };
 		85BF4AD1556507F03E9CF1AB13F34571 /* BloodSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCA193DA6A5E1E858111B284800163C /* BloodSetViewController.swift */; };
 		875E6FED57826107D84E47853B2A507F /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5C68EDC76F69EA0E7DCD122ED6AB4 /* UITextField+Extension.swift */; };
@@ -198,6 +199,7 @@
 		7C3389A85E5BFB5D3E18B8DAA0516CC7 /* GetUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUnit.swift; sourceTree = "<group>"; };
 		7C340848915D471758C27C46FC15E8A6 /* getDataInHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = getDataInHome.swift; path = AIJian/Main/Home/getDataInHome.swift; sourceTree = SOURCE_ROOT; };
 		802706582BF2DD3F2F165BE6CC4B129F /* UnitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitViewController.swift; sourceTree = "<group>"; };
+		842ACD34233CDD7900CF38FD /* sliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sliderView.swift; sourceTree = "<group>"; };
 		88B84B902E4E28BB9EBAC8F34677E2D8 /* loginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginViewController.swift; sourceTree = "<group>"; };
 		8A18E98B74565B5E695548D96DE09E13 /* SuggestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionViewController.swift; sourceTree = "<group>"; };
 		8AB8DBFCEA7297369A51108D4F1C5D91 /* InsulinType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsulinType.swift; sourceTree = "<group>"; };
@@ -683,6 +685,7 @@
 				B67C5D050C5D9478AF306B5A049428F1 /* portionAndInsulinView.swift */,
 				D547385BBF4921804514C136B71543B8 /* remarkView.swift */,
 				7913A53032178A4B8556F90346B73A35 /* sportView.swift */,
+				842ACD34233CDD7900CF38FD /* sliderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -938,6 +941,7 @@
 				4103417E5D61D24965902570B01CC19F /* SharedView.swift in Sources */,
 				74BAA950DB2E4C75BE286CCA00B3A027 /* SharedViewController.swift in Sources */,
 				F2C132B8DC75DCC95C950DC23D124584 /* StaticView.swift in Sources */,
+				842ACD35233CDD7900CF38FD /* sliderView.swift in Sources */,
 				A489FE1D1E209499E7F9EA11DD91D8C1 /* StatisticDate.swift in Sources */,
 				29C10571F503D7FCC9D1EFF3EEF54262 /* StatisticalDataViewController.swift in Sources */,
 				D04F636417EB92069574FA06715E5F33 /* SuggestionViewController.swift in Sources */,

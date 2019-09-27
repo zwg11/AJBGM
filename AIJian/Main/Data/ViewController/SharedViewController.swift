@@ -15,7 +15,7 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
     var date:String?
     // 记录i姓名
     var name:String?
-    
+
     private lazy var shareV:SharedView = {
         let view = SharedView()
         view.setupUI()
@@ -43,7 +43,7 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
         //设置名字和电话
         general.nameLabel.text = name
         general.phoneLabel.text = phone
-        
+
         // 将视图生成文件
         let image = viewToImage.getImageFromView(view: general)
         // 将图片放入相册
@@ -85,8 +85,7 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
         super.viewDidLoad()
         self.view.backgroundColor = ThemeColor
         self.view.clipsToBounds = true
-        //general.setupUI()
-        
+
         self.view.addSubview(general)
         
         let sharedScrollView = UIScrollView()

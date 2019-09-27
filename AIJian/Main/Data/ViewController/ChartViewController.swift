@@ -103,17 +103,19 @@ class ChartViewController: UIViewController {
         lineChartView.addLimitLine(high, "\(high)", UIColor.red)
         // 设置x轴的最大坐标值
         lineChartView.lineChartView.xAxis.axisMaximum = Double(daysNum!)
-        // 如果有数据，就画图；否则不画图，图表显示“No Data”
-        if data1.count > 0{
-            // 根据所选中的时间范围器元素决定各界面的数据如何初始化
-            switch pickerSelectedRow{
-            case 1,2,3:
-                lineChartView.drawLineChart(xAxisArray: array as NSArray,xAxisData: data1)
+//        // 如果有数据，就画图；否则不画图，图表显示“No Data”
+//        if data1.count > 0{
+//            
+//        }
+        // 根据所选中的时间范围器元素决定各界面的数据如何初始化
+        switch pickerSelectedRow{
+        case 1,2,3:
+            lineChartView.drawLineChart(xAxisArray: array as NSArray,xAxisData: data1)
 
-            default:
-                lineChartView.drawLineChart(xAxisArray: xAxisArray(startDate: startD!, endDate: endD!) as NSArray,xAxisData: DateToData(startD!, endD!))
-            }
+        default:
+            lineChartView.drawLineChart(xAxisArray: xAxisArray(startDate: startD!, endDate: endD!) as NSArray,xAxisData: DateToData(startD!, endD!))
         }
+        
         
     }
 

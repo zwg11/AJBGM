@@ -14,7 +14,8 @@ let shift_path = Bundle.main.path(forResource: "GlobalValue", ofType: "plist")
 let shift_data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: shift_path!)!
 
 let SHIFT = shift_data["shift"]
-
+//用于滑块的图片
+var sliderImage = UIImage()
 
 let AJScreenWidth = UIScreen.main.bounds.width
 let AJScreenHeight = UIScreen.main.bounds.height

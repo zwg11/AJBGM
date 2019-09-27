@@ -17,7 +17,7 @@ class MineViewController: UIViewController {
     
     
     let _titleArr = ["User Info","Units Setup","Change Password","Targets Setting","Instructions","About Us","Update"]
-    let _imgArr   = ["aboutUs","aboutUs","aboutUs","aboutUs","aboutUs","aboutUs","aboutUs",]
+    let _imgArr   = ["user-info","Units-Setup","Change-Password","Targets-Setting","Instructions","About-Us","Update",]
     
 
     //点击跳转对应页面

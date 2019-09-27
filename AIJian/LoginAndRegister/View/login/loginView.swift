@@ -102,7 +102,7 @@ class loginView: UIView {
         // 艾康图标布局
         self.addSubview(AJImageView)
         AJImageView.snp.makeConstraints{(make) in
-            make.width.equalTo(AJScreenWidth/2)
+//            make.width.equalTo(AJScreenWidth/2)
             make.height.equalTo(AJScreenWidth/5)
             make.left.equalTo(AJScreenWidth/4)
             make.right.equalTo(-AJScreenWidth/4)
@@ -133,7 +133,7 @@ class loginView: UIView {
         self.addSubview(line_frame1)
         line_frame1.snp.makeConstraints{ (make) in
             make.height.equalTo(0.5)
-            make.width.equalTo(AJScreenWidth)
+//            make.width.equalTo(AJScreenWidth)
             make.left.equalTo(AJScreenWidth/15)
             make.right.equalTo(-AJScreenWidth/15)
             make.top.equalTo(userNameTextField.snp.bottom).offset(1)
@@ -153,7 +153,7 @@ class loginView: UIView {
         self.addSubview(line_frame2)
         line_frame2.snp.makeConstraints{ (make) in
             make.height.equalTo(0.5)
-            make.width.equalTo(AJScreenWidth)
+//            make.width.equalTo(AJScreenWidth)
             make.left.equalTo(AJScreenWidth/15)
             make.right.equalTo(-AJScreenWidth/15)
             make.top.equalTo(passwordTextField.snp.bottom).offset(1)
@@ -180,6 +180,7 @@ class loginView: UIView {
         self.addSubview(registerButton)
         registerButton.snp.makeConstraints{(make) in
             make.centerX.equalTo(passwordTextField.snp.centerX)
+            make.width.equalTo(AJScreenWidth/2)
             make.height.equalTo(AJScreenWidth/18)
             make.top.equalTo(loginwordButton.snp.bottom).offset(AJScreenWidth/30)
         }

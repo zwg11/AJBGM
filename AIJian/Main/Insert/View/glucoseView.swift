@@ -23,6 +23,8 @@ class glucoseView: UIView ,UITextFieldDelegate{
 //        imageView.image = UIImage(named: "iconxt")
 //        return imageView
 //    }()
+
+
     // 血糖label
     private lazy var XTLabel:UILabel = {
         let label = UILabel()
@@ -184,7 +186,10 @@ class glucoseView: UIView ,UITextFieldDelegate{
         }
     }
     
+    
     func setupUI(){
+        
+
         
         resetGlucoseUnit()
         initEvent(event: eventNum)
@@ -201,7 +206,17 @@ class glucoseView: UIView ,UITextFieldDelegate{
 //            make.left.top.equalToSuperview().offset(AJScreenWidth/20)
 //            make.height.width.equalTo(AJScreenWidth/15)
 //        }
+//        let sd = sliderView.init(frame: CGRect(x: 0, y: 10, width: AJScreenWidth*0.9, height: 5))
+//        //sd.frame = CGRect(x: 0, y: 10, width: AJScreenWidth*0.9, height: 5)
+//        sd.loadViews()
+//        self.addSubview(sd)
         
+
+//        let image = viewToImage.getImageFromView(view: sd)
+
+        // 将图片放入相册
+        UIImageWriteToSavedPhotosAlbum(sliderImage, self, #selector(savedPhotosAlbum(_:didFinishSavingWithError:contextInfo:)), nil)
+
         // 血糖label布局设置
         self.addSubview(XTLabel)
         XTLabel.snp.makeConstraints{(make) in
@@ -229,7 +244,10 @@ class glucoseView: UIView ,UITextFieldDelegate{
         }
         
         // 血糖值滑块布局
+//        let image1 = UIImage(named: "back-1")
         self.addSubview(XTSlider)
+        XTSlider.setMinimumTrackImage(sliderImage, for: .normal)
+        XTSlider.setMaximumTrackImage(sliderImage, for: .normal)
 //        initSliderColor()
 //        XTSlider.value = value
         XTSlider.snp.makeConstraints{(make) in
@@ -291,6 +309,22 @@ class glucoseView: UIView ,UITextFieldDelegate{
             make.left.equalTo(FastingButton.snp.right).offset(AJScreenWidth/30)
             make.width.equalTo(AJScreenWidth/5)
             make.top.bottom.equalTo(BeforeButton)
+        }
+    }
+    
+    //保存图片
+    @objc func savedPhotosAlbum(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: AnyObject) {
+        
+        if error != nil {
+//            let alert = CustomAlertController()
+//            alert.custom(self, "", "图片生成失败")
+            print("savw failed")
+            
+        } else {
+//            let alert = CustomAlertController()
+//            alert.custom(self, "", "图片生成成功")
+            print("savw success")
+            
         }
     }
     

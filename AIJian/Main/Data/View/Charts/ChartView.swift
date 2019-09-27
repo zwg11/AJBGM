@@ -21,7 +21,7 @@ class ChartView: UIView ,ChartViewDelegate{
         _lineChartView.doubleTapToZoomEnabled = false
         _lineChartView.chartDescription?.text = ""//设置为""隐藏描述文字
         
-        _lineChartView.noDataText = "暂无数据"
+        _lineChartView.noDataText = "No Data"
         _lineChartView.noDataTextColor = UIColor.white
         _lineChartView.noDataFont = UIFont.boldSystemFont(ofSize: 20)
         // 是否显示图表左下角的图例，变false使得其不显示
@@ -102,8 +102,12 @@ class ChartView: UIView ,ChartViewDelegate{
                 // 将数据添加到图表数据数组中
                 yDataArray1.append(entry)
             }
+        }else{
+            // 设折线图数据为空
+            lineChartView.data = nil
+            return
         }
-        print(yDataArray1)
+//        print(yDataArray1)
         let set1 = LineChartDataSet.init(entries: yDataArray1, label: "")
         // 设置线 的颜色
         set1.colors = [UIColor.green]
@@ -165,6 +169,9 @@ class ChartView: UIView ,ChartViewDelegate{
                 // 将数据添加到图表数据数组中
                 yDataArray1.append(entry)
             }
+        }else{
+            lineChartView.data = nil
+            return
         }
         print(yDataArray1)
         let set1 = LineChartDataSet.init(entries: yDataArray1, label: "")

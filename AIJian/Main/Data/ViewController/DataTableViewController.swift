@@ -304,8 +304,12 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
 
     
     
-    // 设置视图每次出现时滚动视图都回到顶部
+    // MARK: - viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
+        let sd = sliderView.init(frame: CGRect(x: 0, y: -100, width: AJScreenWidth*0.9, height: 5))
+         self.view.addSubview(sd)
+         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor:UIColor.white]
+         sliderImage = viewToImage.getImageFromView(view: sd)
         // 将滚动视图置于初始状态
         self.mainScrollView.contentOffset = CGPoint(x: 0, y: 0)
         self.scroll.contentOffset = CGPoint(x: 0, y: 0)
@@ -314,7 +318,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         initTable()
         initScroll()
     }
-    
+    // MARK: - initScroll
     // 初始化滚动视图、设置页面的所有滚动视图和表格的大小和坐标
     func initScroll(){
         // 计算表格所需高度
@@ -405,7 +409,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
 extension DataTableViewController{
     // 该函数向服务器请求删除y某一条数据并进行一定程度的数据处理
     // 包括对本地数据库的删除、全局变量的删除
-    // deleteData()
+    // MARK: - deleteData()
     func deleteData(section:Int,row:Int){
         
         let gluData = sortedData[section][row]

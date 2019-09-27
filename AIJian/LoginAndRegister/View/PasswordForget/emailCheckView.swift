@@ -31,7 +31,7 @@ class emailCheckView: UIView {
         let imageView = UIImageView(image: UIImage(named: "email"))
         textField.leftView = imageView
         textField.leftViewMode = .always
-        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
+//        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
         return textField
     }()
     

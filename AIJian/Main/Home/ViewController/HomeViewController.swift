@@ -133,6 +133,9 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.clipsToBounds = true
+
+        
         self.view.addSubview(homeTableView)
         homeTableView.snp.makeConstraints{(make) in
             make.left.right.equalToSuperview()
@@ -151,7 +154,7 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
         self.view.backgroundColor = ThemeColor
 
-        
+
         
         
         // Do any additional setup after loading the view.

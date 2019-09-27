@@ -258,7 +258,12 @@ class averageView: UIView {
             standardDaviation = sumStandardDaviation/Double(sumCheckNum)
             
             // 将计算结果赋值给对应的label
-            glucoseValue.text = String(format: "% .1f", avgGlucoseValue!)
+            if GetUnit.getBloodUnit() == "mg/dL"{
+                glucoseValue.text = String(format: "% .0f", avgGlucoseValue!)
+            }else{
+                glucoseValue.text = String(format: "% .1f", avgGlucoseValue!)
+            }
+            
             standardDeValue.text = String(format: "% .1f", standardDaviation!)
             testNum.text = String(format: "% .1f", avgCheckNum!)
  

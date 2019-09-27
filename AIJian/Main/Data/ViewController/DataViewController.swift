@@ -335,11 +335,12 @@ class DataViewController: UIViewController {
     func setDaysAndRange(){
         
         let today = DateInRegion().dateAt(.endOfDay).date
-        endD = today + 1.seconds
+        
         // 监听导航栏右按钮的文本，对于不同的文本生成对应的数据
         switch pickerSelectedRow{
             
         case 1:
+            endD = today + 1.seconds
             startD = endD! - 3.days
             daysNum = 3
             // 向数据库索取一定时间范围的数据，并将其按时间降序排序
@@ -349,12 +350,14 @@ class DataViewController: UIViewController {
             // 处理出为展示图表的数据
             chartData()
         case 2:
+            endD = today + 1.seconds
             startD = endD! - 7.days
             daysNum = 7
             initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())
             sortedTimeOfData()
             chartData()
         case 3:
+            endD = today + 1.seconds
             startD = endD! - 30.days
             daysNum = 30
             initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())

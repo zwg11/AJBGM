@@ -147,7 +147,7 @@ class loginViewController: UIViewController,UITextFieldDelegate {
                                 sqliteManager.addUserRecord(user1)
                                 // 登陆成功，请求数据
                                 self.indicator.setLabelText("登录成功，正在初始化数据")
-                                self.requestData(day: 30)
+                                self.requestData(day: 1000)
 
  
                             }else{
@@ -221,7 +221,7 @@ class loginViewController: UIViewController,UITextFieldDelegate {
 extension loginViewController{
     // 该函数向服务器请求数据并进行一定程度的数据处理
     // 包括对数据根据日期进行排序，之后分出日期和时间、分健康信息等
-    // requestData()
+    // MARK: - requestData()
     func requestData(day:Int){
         //********
         let day = day

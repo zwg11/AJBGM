@@ -24,7 +24,7 @@ class InsertViewController: UIViewController {
 //        view.rightButton.addTarget(self, action: #selector(save), for: .touchUpInside) //点击保存
         return view
     }()
-    
+    private lazy var sdView = sliderView.init(frame: CGRect(x: 0, y: 0, width: AJScreenWidth*0.9, height: 2))
     // 该页面是编辑还是输入
     var isInsert: Bool = true
     
@@ -90,6 +90,7 @@ class InsertViewController: UIViewController {
         self.title = "Add Data"
         
 
+        
         // 添加监听器监听选中的表格的个数
         medicineChooseAlert.addObserver(self, forKeyPath: "selectedNum", options: [.new], context: nil)
         
@@ -208,7 +209,8 @@ class InsertViewController: UIViewController {
     
     // 血糖记录ID，用于更新数据
     var recordId:String?
-    //********************* 点击保存 ********************
+    
+    //MARK: - 点击保存
     @objc func save(){
         let alert = CustomAlertController()
         // 记录需要警告的内容
@@ -465,13 +467,10 @@ class InsertViewController: UIViewController {
         insertData.eatNum = Int64(eat_num)
         insertData.insulinType = (insulin_type == "Nothing") ? nil:insulin_type
         insertData.insulinNum = insulin_num
-//        insertData.height = height
         insertData.weightKg = weight_kg
         insertData.weightLbs = weight_lbs
-        //insertData.systolicPressureMmhg = (sys_press_mmHg != nil) ? Int64(sys_press_mmHg!):nil
         insertData.systolicPressureMmhg = sys_press_mmHg
         insertData.systolicPressureKpa = sys_press_kPa
-        //insertData.diastolicPressureMmhg = (dis_press_mmHg != nil) ? Int64(dis_press_mmHg!):nil
         insertData.diastolicPressureMmhg = dis_press_mmHg
         insertData.diastolicPressureKpa = dis_press_kPa
         insertData.medicine = (medicine_string == "") ? nil:medicine_string
@@ -480,7 +479,6 @@ class InsertViewController: UIViewController {
         insertData.sportStrength = sport_strength
         insertData.inputType = 1
         insertData.remark = input.getRemark()
-        insertData.machineId = nil
      
         print("insertdata:\(insertData)")
         //第二步:再封装成一个数组
@@ -578,6 +576,11 @@ class InsertViewController: UIViewController {
     
     //视图将要出现的时候
     override func viewWillAppear(_ animated: Bool) {
+//        // 初始化
+//        sdView.loadViews()
+//        let image = viewToImage.getImageFromView(view: sdView)
+//        self.input.glucose.XTSlider.setMinimumTrackImage(image, for: .normal)
+//        self.input.glucose.XTSlider.setMaximumTrackImage(image, for: .normal)
         // 每次进入界面滚动视图都是在最顶部
         self.input.scrollView.contentOffset = CGPoint(x: 0, y: 0)
         
@@ -671,6 +674,7 @@ class InsertViewController: UIViewController {
 
 
 extension InsertViewController{
+    // MARK: - 当从表格视图转来时
     // 将单元格的内容传入手动输入界面
     func EditData(_ section:Int,_ row:Int){
         let x = sortedData[section][row]
