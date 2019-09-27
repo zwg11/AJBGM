@@ -16,7 +16,7 @@ class recentTrendView: UIView {
         let view = ChartView()
         view.setupUI()
         // 摄者y轴最大值
-        view.lineChartView.leftAxis.axisMaximum = GetBloodLimit.getRandomDinnerTop()*2
+//        view.lineChartView.leftAxis.axisMaximum = GetBloodLimit.getRandomDinnerTop()*2
         view.lineChartView.leftAxis.drawLabelsEnabled = false
         // 设置x轴坐标数
         view.lineChartView.xAxis.labelCount = 7
@@ -26,12 +26,14 @@ class recentTrendView: UIView {
         view.lineChartView.xAxis.labelFont = UIFont.systemFont(ofSize: 15)
         // 设置坐标label在顶部朝内
         view.lineChartView.xAxis.labelPosition = .topInside
+        // 不绘制y轴的网格
+        view.lineChartView.leftAxis.drawGridLinesEnabled = false
         
-        // 画限制线
-        let low = GetBloodLimit.getRandomDinnerLow()
-        let high = GetBloodLimit.getRandomDinnerTop()
-        view.addLimitLine(low, "\(low)", kRGBColor(249, 158, 25, 1))
-        view.addLimitLine(high, "\(high)", kRGBColor(55, 158, 247, 1))
+//        // 画限制线
+//        let low = GetBloodLimit.getRandomDinnerLow()
+//        let high = GetBloodLimit.getRandomDinnerTop()
+//        view.addLimitLine(low, "\(low)", kRGBColor(249, 158, 25, 1))
+//        view.addLimitLine(high, "\(high)", kRGBColor(55, 158, 247, 1))
         view.backgroundColor = UIColor.clear
  
         return view
@@ -45,6 +47,20 @@ class recentTrendView: UIView {
         self.recentTrendView.snp_makeConstraints{(make) in
             make.edges.equalToSuperview()
         }
+    }
+    func reloadChart(){
+        // 移除所有限制线
+        for i in recentTrendView.lineChartView.leftAxis.limitLines{
+            print(i)
+            recentTrendView.lineChartView.leftAxis.removeLimitLine(i)
+        }
+        // 设置y轴最大值
+        recentTrendView.lineChartView.leftAxis.axisMaximum = GetBloodLimit.getRandomDinnerTop()*2
+        // 画限制线
+        let low = GetBloodLimit.getRandomDinnerLow()
+        let high = GetBloodLimit.getRandomDinnerTop()
+        recentTrendView.addLimitLine(low, "\(low)", UIColor.orange)
+        recentTrendView.addLimitLine(high, "\(high)", UIColor.red)
     }
 
 }

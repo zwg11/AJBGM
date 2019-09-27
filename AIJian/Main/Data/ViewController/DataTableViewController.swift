@@ -30,8 +30,10 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
             if(cell == nil){
                 cell = UITableViewCell(style: .default, reuseIdentifier: id)
             }
-            
+            cell?.selectionStyle = .none
             cell?.textLabel?.text = sortedTime[indexPath.section][indexPath.row].toFormat("HH:mm")
+            cell?.textLabel?.textColor = UIColor.white
+            cell?.backgroundColor = UIColor.clear
             return cell!
         }
         var cell1 = tableView.dequeueReusableCell(withIdentifier: id1)
@@ -64,7 +66,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         refreshControl.attributedTitle = NSAttributedString(string: "松开后自动刷新")
         mainScrollView.addSubview(refreshControl)
 
-        mainScrollView.backgroundColor = kRGBColor(156, 181, 234, 1)
+        mainScrollView.backgroundColor = ThemeColor
         mainScrollView.alwaysBounceVertical = true
         self.view.addSubview(mainScrollView)
         mainScrollView.snp.makeConstraints{(make) in
@@ -77,6 +79,8 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         DATETableView.dataSource = self
         DATETableView.delegate = self
         DATETableView.isScrollEnabled = false
+        
+        DATETableView.backgroundColor = ThemeColor
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(test), name: NSNotification.Name(rawValue: "reloadTable"), object: nil)
@@ -115,13 +119,24 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
             let view = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 40))
             let label = UILabel(frame: CGRect(x: 0, y: 0, width: 80, height: 40))
 
-            label.backgroundColor = UIColor.blue
+            label.backgroundColor = SendButtonColor
             label.textColor = UIColor.white
             label.textAlignment = .center
+            label.font = UIFont.systemFont(ofSize: 15)
+            label.minimumScaleFactor = 0.5
+            label.adjustsFontSizeToFitWidth = true
             view.addSubview(label)
             // 如果列表章节数大于0
             if section<sortedTime.count{
-                label.text = sortedTime[section][0].toFormat("MM-dd")
+                // 判断日期是否为今天、明天
+                if sortedTime[section][0].compare(.isToday){
+                    label.text = "Today"
+                }else if sortedTime[section][0].compare(.isYesterday){
+                    label.text = "Yesterday"
+                }else{
+                    label.text = sortedTime[section][0].toFormat("MM-dd")
+                }
+                
             }
             return view
         }else{
@@ -138,7 +153,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return nil
     }
-    
+
     // 表格章节数依据数据里的日期，有几天有数据就是几个章节
     func numberOfSections(in tableView: UITableView) -> Int {
         if (sortedTime.count != 0) {
@@ -154,18 +169,20 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
             return 0
         }
     }
-    // 由于编辑需要向手动输入界面传值，在此声明
-    let insert = InsertViewController()
+    
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 设置点击单元格有选中z动画，手指松开时变为未选中
-        tableView.deselectRow(at: indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: false)
         let alert = UIAlertController(title: "您是想选择", message: "", preferredStyle: .alert)
         // 该动作编辑一条记录
         let editAction = UIAlertAction(title: "编辑", style: .default, handler: {(UIAlertAction)->Void in
 
+            let insert = InsertViewController()
+            
+            self.navigationController?.pushViewController(insert, animated: true)
             // 将当前单元格的内容传入手动输入界面
-            self.EditData(indexPath.section,indexPath.row)
-            self.navigationController?.pushViewController(self.insert, animated: true)
+            insert.EditData(indexPath.section,indexPath.row)
             
         })
         // 该动作删除一条记录，先删除服务器的，再删除本地数据库，最后删除全局变量的
@@ -182,85 +199,107 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         
     }
     
-    // 将当前单元格的内容传入手动输入界面
-    func EditData(_ section:Int,_ row:Int){
-        let x = sortedData[section][row]
-        let y = sortedTime[section][row]
-        // 设置时间选择器的位置
-        
-        // 手动输入标志位设置
-        insert.isInsert = false
-        // 血糖记录ID
-        insert.recordId = x.bloodGlucoseRecordId!
-        // 时间
-        insert.input.setData(y.toFormat("yyyy-MM-dd"))
-        insert.input.setTime(y.toFormat("HH:mm"))
-        // 血糖量
-        if let value = x.bloodGlucoseMmol{
-            if GetUnit.getBloodUnit() == "mmol/L"{
-                insert.input.setGlucoseValue("\(value)")
-                
-            }else{
-                insert.input.setGlucoseValue("\(x.bloodGlucoseMg!)")
-            }
-            // 设置滑块的位置
-            insert.input.glucose.XTSlider.setValue(Float(value), animated: false)
-        }
-
-        // 检测时间段
-        insert.input.setEventValue(Int(x.detectionTime!))
-        // 进餐量
-        insert.input.setPorValue(Int(x.eatNum!))
-        // 胰岛素量
-        if let insNum = x.insulinNum{
-            insert.input.setInsNumValue("\(insNum)")
-        }
-        // 胰岛素类型
-        insert.input.setInsValue(x.insulinType ?? "Nothing")
-        
-        // 体重
-        if let weight = x.weightKg{
-            if GetUnit.getWeightUnit() == "kg"{
-                insert.input.setWeightValue("\(weight)")
-            }else{
-                insert.input.setWeightValue("\(x.weightLbs!)")
-            }
-        }
-        
-//        // 身高
-//        if let height = x.height{
-//            insert.input.setHeightValue("\(height)")
+//    // 将当前单元格的内容传入手动输入界面
+//    func EditData(_ section:Int,_ row:Int){
+//        let x = sortedData[section][row]
+//        let y = sortedTime[section][row]
+//        // 设置时间选择器的位置
+//
+//        // 手动输入标志位设置
+//        insert.isInsert = false
+//        // 血糖记录ID
+//        insert.recordId = x.bloodGlucoseRecordId!
+//        // 时间
+//        insert.input.setDate(y.toFormat("yyyy-MM-dd"))
+//        insert.input.setTime(y.toFormat("HH:mm"))
+//        // 血糖量
+//        if let value = x.bloodGlucoseMmol{
+//            if GetUnit.getBloodUnit() == "mmol/L"{
+//                // 设置文本框文本
+//                insert.input.setGlucoseValue("\(value)")
+//                // 设置滑块位置
+////                insert.input.glucose.XTSlider.setValue(Float(value), animated: false)
+//                insert.input.glucose.setValueAndThumbColor(value: Float(value))
+////                insert.input.glucose.value = Float(value)
+//            }else{
+//                // 设置文本框文本
+//                insert.input.setGlucoseValue(String(format: "%.0f", x.bloodGlucoseMg!))
+//                // 设置滑块位置
+////                insert.input.glucose.XTSlider.setValue(Float(x.bloodGlucoseMg!), animated: false)
+//                insert.input.setSlider(Float(x.bloodGlucoseMg!))
+////                insert.input.glucose.value = Float(x.bloodGlucoseMg!)
+//                insert.input.glucose.setValueAndThumbColor(value: Float(value))
+//            }
+//
 //        }
-        
-        insert.input.setSportType(x.sportType ?? "Nothing")
-        // 血压
-        if let sysValue = x.systolicPressureKpa{
-            if GetUnit.getPressureUnit() == "mmHg"{
-                insert.input.setSysValue("\(x.systolicPressureMmhg!)")
-                insert.input.setDiaValue("\(x.diastolicPressureMmhg!)")
-            }else{
-                insert.input.setSysValue("\(sysValue)")
-                insert.input.setDiaValue("\(x.diastolicPressureKpa!)")
-            }
-        }
-        // 药物
-        if let medicine = x.medicine{
-            let medicineArr = medicine.components(separatedBy: ",")
-            insert.setMedicineArray(medicineArr as Array)
-        }
-        
-        // 运动
-        insert.input.setSportType(x.sportType ?? "Nothing")
-        
-        
-        // 运动时间
-        if let sportTime = x.sportTime{
-            insert.input.setSportTime("\(sportTime)")
-        }
-        // 运动强度
-        insert.input.setSportStrength(Int(x.sportStrength!))
-        
-    }
+//
+//
+//        // 检测时间段，非空
+//        insert.input.setEventValue(Int(x.detectionTime!))
+//        // 进餐量，非空
+//        insert.input.setPorValue(Int(x.eatNum!))
+//        // 胰岛素量
+//        if let insNum = x.insulinNum{
+//            insert.input.setInsNumValue("\(insNum)")
+//        }else{
+//            insert.input.setInsNumValue("")
+//        }
+//        // 胰岛素类型
+//        insert.input.setInsValue(x.insulinType ?? "Nothing")
+//
+//        // 体重
+//        if let weight = x.weightKg{
+//            if GetUnit.getWeightUnit() == "kg"{
+//                insert.input.setWeightValue("\(weight)")
+//            }else{
+//                insert.input.setWeightValue("\(x.weightLbs!)")
+//            }
+//        }else{
+//            insert.input.setWeightValue("")
+//        }
+//
+////        // 身高
+////        if let height = x.height{
+////            insert.input.setHeightValue("\(height)")
+////        }
+//
+//        // 血压
+//        if let sysValue = x.systolicPressureKpa{
+//            if GetUnit.getPressureUnit() == "mmHg"{
+//                insert.input.setSysValue("\(x.systolicPressureMmhg!)")
+//                insert.input.setDiaValue("\(x.diastolicPressureMmhg!)")
+//            }else{
+//                insert.input.setSysValue("\(sysValue)")
+//                insert.input.setDiaValue("\(x.diastolicPressureKpa!)")
+//            }
+//        }else{
+//            insert.input.setSysValue("")
+//            insert.input.setDiaValue("")
+//        }
+//        //******************************** 有bug，未设置被选中的项
+//        // 药物
+//        if let medicine = x.medicine{
+//            let medicineArr = medicine.components(separatedBy: ",")
+//            insert.setMedicineArray(medicineArr as Array)
+//        }
+//
+//
+//        // 运动
+//        insert.input.setSportType(x.sportType ?? "Nothing")
+//
+//
+//        // 运动时间
+//        if let sportTime = x.sportTime{
+//            insert.input.setSportTime("\(sportTime)")
+//        }else{
+//            insert.input.setSportTime("")
+//        }
+//        // 运动强度
+//        insert.input.setSportStrength(x.sportStrength ?? 1)
+//        // 备注
+//        insert.input.setRemark(text: x.remark ?? "")
+//
+//    }
     
 
     
@@ -337,6 +376,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
     private lazy var label:UILabel = {
         let label = UILabel()
         label.text = "No Data"
+        label.textColor = UIColor.white
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 20)
         //label.center = self.view.center

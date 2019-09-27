@@ -12,16 +12,16 @@ class sportView: UIView ,UITextFieldDelegate{
 
     var intensityLevel = 1
     //***************************运动*************************
-    // 运动图标
-    private lazy var sportImageView:UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "事件")
-        return imageView
-    }()
+//    // 运动图标
+//    private lazy var sportImageView:UIImageView = {
+//        let imageView = UIImageView()
+//        imageView.image = UIImage(named: "事件")
+//        return imageView
+//    }()
     // 运动label
     private lazy var sportLabel:UILabel = {
         let label = UILabel()
-        label.normalLabel(text: "运动")
+        label.normalLabel(text: "Exercise")
         return label
     }()
     
@@ -35,7 +35,7 @@ class sportView: UIView ,UITextFieldDelegate{
     // 持续时间label
     private lazy var timeOfDurationLabel:UILabel = {
         let label = UILabel()
-        label.normalLabel(text: "持续时间")
+        label.normalLabel(text: "Duration")
         return label
     }()
     // 持续时间输入文本框
@@ -52,7 +52,7 @@ class sportView: UIView ,UITextFieldDelegate{
     // 持续时间单位label
     private lazy var timeOfDurationUnitLabel:UILabel = {
         let label = UILabel()
-        label.normalLabel(text: "分钟")
+        label.normalLabel(text: "minutes")
         label.font = UIFont.systemFont(ofSize: 16)
         
         return label
@@ -62,7 +62,7 @@ class sportView: UIView ,UITextFieldDelegate{
     // 运动强度label
     private lazy var exerIntensityLabel:UILabel = {
         let label = UILabel()
-        label.normalLabel(text: "运动强度")
+        label.normalLabel(text: "Intensity")
         return label
     }()
     
@@ -110,9 +110,9 @@ class sportView: UIView ,UITextFieldDelegate{
     @objc func intensityChange(_ sender:UIButton){
         let buttons = [intensityHard,intensityMedium,intensityLight]
         for i in buttons{
-            i.setSelected()
+            i.setDeselected()
         }
-        sender.setDeselected()
+        sender.setSelected()
         intensityLevel = sender.tag
     }
     
@@ -129,30 +129,31 @@ class sportView: UIView ,UITextFieldDelegate{
     func setupUI(){
         initIntensity(intensityLevel)
         // 设置视图背景颜色和边框
-        self.layer.borderColor = UIColor.gray.cgColor
+        self.layer.borderColor = UIColor.darkGray.cgColor
         self.layer.borderWidth = 1
-        self.backgroundColor = kRGBColor(130, 154, 249, 1)
+//        self.backgroundColor = kRGBColor(130, 154, 249, 1)
+        self.backgroundColor = UIColor.clear
         
         //***********************运动********************
-        // 运动图标布局设置
-        self.addSubview(sportImageView)
-        sportImageView.snp.makeConstraints{(make) in
-            make.left.top.equalToSuperview().offset(AJScreenWidth/20)
-            make.height.width.equalTo(AJScreenWidth/15)
-        }
+//        // 运动图标布局设置
+//        self.addSubview(sportImageView)
+//        sportImageView.snp.makeConstraints{(make) in
+//            make.left.top.equalToSuperview().offset(AJScreenWidth/20)
+//            make.height.width.equalTo(AJScreenWidth/15)
+//        }
         
         // 运动label布局z设置
         self.addSubview(sportLabel)
         sportLabel.snp.makeConstraints{(make) in
-            make.left.equalTo(sportImageView.snp.right).offset(AJScreenWidth/40)
-            make.centerY.equalTo(sportImageView.snp.centerY)
-            make.height.equalTo(sportImageView.snp.height)
+            make.left.top.equalToSuperview().offset(AJScreenWidth/20)
+            make.height.equalTo(AJScreenWidth/15)
+            make.width.equalTo(AJScreenWidth/5)
         }
         
         // 运动选择按钮
         self.addSubview(sportButton)
         sportButton.snp.makeConstraints{(make) in
-            make.left.equalToSuperview().offset(AJScreenWidth/40)
+            make.left.equalTo(sportLabel)
             make.top.equalTo(sportLabel.snp.bottom).offset(AJScreenWidth/40)
             make.width.equalTo(AJScreenWidth/5*3)
             make.height.equalTo(AJScreenWidth/12)
@@ -163,7 +164,7 @@ class sportView: UIView ,UITextFieldDelegate{
         // 运动持续时间label布局设置
         self.addSubview(timeOfDurationLabel)
         timeOfDurationLabel.snp.makeConstraints{(make) in
-            make.right.equalTo(sportLabel.snp.right)
+            make.left.equalTo(sportLabel)
             make.top.equalTo(sportButton.snp.bottom).offset(AJScreenWidth/40)
             make.height.equalTo(AJScreenWidth/12)
         }
@@ -190,7 +191,7 @@ class sportView: UIView ,UITextFieldDelegate{
         // 运动强度label布局设置
         self.addSubview(exerIntensityLabel)
         exerIntensityLabel.snp.makeConstraints{(make) in
-            make.left.equalTo(timeOfDurationLabel)
+            make.left.equalTo(sportLabel)
             make.top.equalTo(timeOfDurationTextfield.snp.bottom).offset(AJScreenWidth/40)
             make.height.equalTo(AJScreenWidth/15)
         }
@@ -232,5 +233,29 @@ class sportView: UIView ,UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    // *************** 详细用法请看glucoseView中的注释 *****************
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let testString = "0123456789"
+        let char = NSCharacterSet.init(charactersIn: testString).inverted
+        
+        let inputString = string.components(separatedBy: char).joined(separator: "")
+        
+        if string == inputString{
+            let numFrontDot:Int = 3
+
+            let futureStr:NSMutableString = NSMutableString(string: textField.text!)
+            futureStr.insert(string, at: range.location)
+            
+            if futureStr.length >= numFrontDot{
+                return false
+            }
+            
+            return true
+            
+        }else{
+            return false
+        }
     }
 }

@@ -64,7 +64,7 @@ class ChartViewController: UIViewController {
             make.bottom.equalTo(staticV.snp.top)
         }
         
-        self.view.backgroundColor = UIColor.init(red: 255/255.0, green: 251/255.0, blue: 186/255.0, alpha: 1)
+        self.view.backgroundColor = ThemeColor
         // Do any additional setup after loading the view.
         // 监听所选时间范围的变化
         NotificationCenter.default.addObserver(self, selector: #selector(test), name: NSNotification.Name(rawValue: "reloadChart"), object: nil)
@@ -92,10 +92,15 @@ class ChartViewController: UIViewController {
         // 画限制线，标明低于和高于的界限
         // 该界限获取自动适应单位，所以不需判断单位
         print("lowLimit:\(GetBloodLimit.getRandomDinnerLow())")
+        // 移除所有限制线
+        for i in lineChartView.lineChartView.leftAxis.limitLines{
+            lineChartView.lineChartView.leftAxis.removeLimitLine(i)
+        }
+        
         let low = GetBloodLimit.getRandomDinnerLow()
         let high = GetBloodLimit.getRandomDinnerTop()
-        lineChartView.addLimitLine(low, "\(low)", UIColor.yellow)
-        lineChartView.addLimitLine(high, "\(high)", UIColor.blue)
+        lineChartView.addLimitLine(low, "\(low)", UIColor.orange)
+        lineChartView.addLimitLine(high, "\(high)", UIColor.red)
         // 设置x轴的最大坐标值
         lineChartView.lineChartView.xAxis.axisMaximum = Double(daysNum!)
         // 如果有数据，就画图；否则不画图，图表显示“No Data”

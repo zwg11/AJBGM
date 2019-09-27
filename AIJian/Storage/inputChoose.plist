@@ -12,13 +12,11 @@
 	<key>insulin</key>
 	<array>
 		<string>Nothing</string>
-		<string>胰岛素1通用追加</string>
-		<string>胰岛素2长秀霖</string>
-		<string>胰岛素3 20/80(预混)</string>
-		<string>编辑条目</string>
+		<string>Generic Bolus (Rapid-acting)</string>
+		<string>Generic Basal (Long-acting)</string>
+		<string>25/75 (Premixed)</string>
+		<string>Edit Entry</string>
 	</array>
-	<key>remark</key>
-	<array/>
 	<key>sport</key>
 	<array>
 		<string>Nothing</string>

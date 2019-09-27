@@ -22,7 +22,7 @@ class AJTabbarController: UITabBarController {
         nv1.navigationBar.isTranslucent = false
         // 设置导航栏标题
         Home.navigationItem.title = "Home"
-        Home.navigationController?.navigationBar.tintColor = barDefaultColor
+        //Home.navigationController?.navigationBar.tintColor = barDefaultColor
         //未选中状态的图标
         nv1.tabBarItem.image = UIImage(named: "zhuye.png")?.withRenderingMode(.alwaysOriginal)
         //选中状态的tab图标
@@ -33,6 +33,7 @@ class AJTabbarController: UITabBarController {
         
         
         let Data = DataViewController()
+        Data.pageViewManager.titleView.currentIndex = 0
         let nv2 = AJNavigationController(rootViewController: Data)
         nv2.navigationBar.barTintColor = ThemeColor
         nv2.navigationBar.isTranslucent = false
@@ -63,7 +64,8 @@ class AJTabbarController: UITabBarController {
         self.addChild(nv4)
         
         // 设置tabbar背景颜色
-        self.tabBar.backgroundColor = barDefaultColor
+        self.tabBar.barTintColor = ThemeColor
+        
     }
     
     func isLoadData(){

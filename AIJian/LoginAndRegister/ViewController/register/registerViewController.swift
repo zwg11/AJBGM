@@ -28,6 +28,15 @@ class registerViewController: UIViewController,UITextFieldDelegate {
     var data:String?
     
     var isAgree:Bool = false
+    // 协议警示框
+    private lazy var ProtocolAlert:UIAlertController = {
+        let alert = UIAlertController(title: "协议", message: "", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "cancel", style: .cancel, handler: nil)
+        alert.addAction(cancelAction)
+        return alert
+    }()
+    
+    // 协议内容
     
     var popTextView:PopTextView = PopTextView()
     private lazy var register:registerView = {
@@ -244,3 +253,7 @@ class registerViewController: UIViewController,UITextFieldDelegate {
     
 }
 
+
+extension registerViewController{
+    
+}

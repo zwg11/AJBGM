@@ -82,7 +82,7 @@ class UnitViewController: UIViewController {
     
     lazy var lb_Button:UIButton = {
         let lb_Button = UIButton(frame: CGRect())
-        lb_Button.setTitle("lb", for: .normal)
+        lb_Button.setTitle("lbs", for: .normal)
         lb_Button.contentHorizontalAlignment = .center
         lb_Button.setTitleColor(UIColor.white, for: .normal)
         lb_Button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
@@ -356,7 +356,7 @@ class UnitViewController: UIViewController {
         lb_Button.layer.borderColor = unselectedTextColor.cgColor
     }
     @objc private func ClickLbButton(){
-        currentWeightUnit = "lb"
+        currentWeightUnit = "lbs"
         lb_Button.backgroundColor = ButtonColor
         lb_Button.setTitleColor(UIColor.white, for: .normal)
         lb_Button.layer.borderWidth = 0.5

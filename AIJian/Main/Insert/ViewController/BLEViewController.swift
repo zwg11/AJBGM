@@ -40,6 +40,10 @@ class BLEViewController: UIViewController {
         let insert = InsertViewController()
         self.navigationController?.pushViewController(insert, animated: true)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor:UIColor.white]
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

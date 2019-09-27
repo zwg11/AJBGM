@@ -22,13 +22,15 @@ class ChartView: UIView ,ChartViewDelegate{
         _lineChartView.chartDescription?.text = ""//设置为""隐藏描述文字
         
         _lineChartView.noDataText = "暂无数据"
-        _lineChartView.noDataTextColor = UIColor.gray
+        _lineChartView.noDataTextColor = UIColor.white
         _lineChartView.noDataFont = UIFont.boldSystemFont(ofSize: 20)
         // 是否显示图表左下角的图例，变false使得其不显示
         _lineChartView.legend.enabled = false
         // 是否支持拖拽
         _lineChartView.scaleXEnabled = true
         _lineChartView.scaleYEnabled = false
+        
+        
         // x、y轴是否支持自动缩放
         //_lineChartView.autoScaleMinMaxEnabled = false
         //_lineChartView.xAxis.axisLineWidth = 720//x轴宽度
@@ -39,12 +41,14 @@ class ChartView: UIView ,ChartViewDelegate{
         leftAxis.labelCount = 6
         leftAxis.forceLabelsEnabled = false
         leftAxis.axisLineColor = UIColor.black
-        leftAxis.labelTextColor = UIColor.black
+        leftAxis.labelTextColor = UIColor.white
         leftAxis.labelFont = UIFont.systemFont(ofSize: 10)
         leftAxis.labelPosition = .outsideChart
+        
+        
         //网格
-        //leftAxis.gridColor = UIColor.init(red: 233/255.0, green: 233/255.0, blue: 233/255.0, alpha: 1.0)
-        //leftAxis.gridColor = UIColor.lightGray
+        leftAxis.gridColor = UIColor.init(red: 233/255.0, green: 233/255.0, blue: 233/255.0, alpha: 1.0)
+        leftAxis.gridColor = UIColor.lightGray
         leftAxis.gridAntialiasEnabled = false//抗锯齿
         if GetUnit.getBloodUnit() == "mg/dL"{
             
@@ -105,7 +109,8 @@ class ChartView: UIView ,ChartViewDelegate{
         set1.colors = [UIColor.green]
         // 设置 点的样式
         set1.drawCirclesEnabled = true//绘制转折点
-        
+        // 不显示十字线
+        set1.highlightEnabled = false
         // 绘制转折点内圆
         set1.drawCircleHoleEnabled = false
         // 转折点是否显示y轴的值
@@ -163,11 +168,33 @@ class ChartView: UIView ,ChartViewDelegate{
         }
         print(yDataArray1)
         let set1 = LineChartDataSet.init(entries: yDataArray1, label: "")
-        
-        set1.colors = [UIColor.blue]
+        // 设置线 的颜色
+        set1.colors = [UIColor.black]
+        // 设置 点的样式
         set1.drawCirclesEnabled = true//绘制转折点
-        set1.circleColors = [UIColor.red]
-        set1.lineWidth = 1.0
+        // 不显示十字线
+        set1.highlightEnabled = false
+        // 绘制转折点内圆
+        set1.drawCircleHoleEnabled = false
+        // 转折点是否显示y轴的值
+        set1.drawValuesEnabled = false
+        // 转折点颜色
+        var colors:[UIColor] = []
+        // 根据entry的y坐标的大小不同设置不同的颜色
+        for i in 0..<set1.count{
+            print("要画的第\(i)个点。")
+            if set1[i].y > GetBloodLimit.getRandomDinnerTop(){
+                colors.append(UIColor.red)
+            }else if set1[i].y < GetBloodLimit.getRandomDinnerLow(){
+                colors.append(UIColor.orange)
+            }else{
+                colors.append(UIColor.green)
+            }
+        }
+        set1.circleColors = colors
+        // 转折点大小
+        set1.circleRadius = 6
+        set1.lineWidth = 3.0
         
         // 初始化折线图数据
         let data = LineChartData.init(dataSets: [set1])
@@ -190,27 +217,29 @@ class ChartView: UIView ,ChartViewDelegate{
         lineChartView.leftAxis.addLimitLine(limitLine)
     }
     
-    //折线上的点选中回调
-    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry,highlight: Highlight) {
-        print("选中了一个数据")
-        //显示该点的MarkerView标签
-        self.showMarkerView(value: "\(entry.y)")
-    }
-
-
-    //显示MarkerView标签
-    func showMarkerView(value:String){
-        let marker = MarkerView(frame: CGRect(x: 20, y: 20, width: 80, height: 20))
-        marker.chartView = self.lineChartView
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
-        label.text = "血糖:" + value + GetUnit.getBloodUnit()
-        label.textColor = UIColor.white
-        label.font = UIFont.systemFont(ofSize: 12)
-        label.backgroundColor = UIColor.gray
-        label.textAlignment = .center
-        marker.addSubview(label)
-        self.lineChartView.marker = marker
-    }
+    
+    
+//    //折线上的点选中回调
+//    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry,highlight: Highlight) {
+//        print("选中了一个数据")
+//        //显示该点的MarkerView标签
+//        self.showMarkerView(value: "\(entry.y)")
+//    }
+//
+//
+//    //显示MarkerView标签
+//    func showMarkerView(value:String){
+//        let marker = MarkerView(frame: CGRect(x: 20, y: 20, width: 80, height: 20))
+//        marker.chartView = self.lineChartView
+//        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
+//        label.text = "血糖:" + value + GetUnit.getBloodUnit()
+//        label.textColor = UIColor.white
+//        label.font = UIFont.systemFont(ofSize: 12)
+//        label.backgroundColor = UIColor.gray
+//        label.textAlignment = .center
+//        marker.addSubview(label)
+//        self.lineChartView.marker = marker
+//    }
     
     func setupUI(){
         self.addSubview(lineChartView)

@@ -12,12 +12,11 @@ class alertViewController: UIAlertController,UITableViewDelegate,UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //self = UIAlertController.init(title: "提示\n\n\n\n", message: "", preferredStyle: .alert)
-        
-        //setupUI()
+
         // Do any additional setup after loading the view.
     }
+    
+    
     let tabelView = UITableView()
     //存放初始化数据状态，即表格弹出时的选中状态
     var boolarr:Array<Bool> = []
@@ -25,13 +24,16 @@ class alertViewController: UIAlertController,UITableViewDelegate,UITableViewData
     var boolArray:Array<Bool> = []
     //弹出数据列表
     var alertData:[String] = []
-    // 该值记录被选中的单元格的个数
+    // 该值记录被选中的单元格的个数,使用@dynamic修饰使其能够被观察
     @objc dynamic var selectedNum = 0
     
     //单元格的个数
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return alertData.count
+        // 读取配置文件中的药物种类
+        let path = PlistSetting.getFilePath(File: "inputChoose.plist")
+        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
+        let arr = data["medicine"] as! NSArray
+        return arr.count
     }
     //单元格的行高
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -40,24 +42,31 @@ class alertViewController: UIAlertController,UITableViewDelegate,UITableViewData
     
     // 设置单元格内容和图片
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "id")
         
+        // 读取配置文件中的药物种类
+        let path = PlistSetting.getFilePath(File: "inputChoose.plist")
+        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
+        let arr = data["medicine"] as! NSArray
+        
+        var cell = tableView.dequeueReusableCell(withIdentifier: "id")
+        cell?.selectionStyle = .none
         if(cell == nil){
             // 该单元格可根据单元格选中状态设置图片显示内容
             cell = UITableViewCell(style: .default, reuseIdentifier: "id")
+            cell?.selectionStyle = .none
         }
         
-        if alertData.count > 0{
-            cell?.textLabel?.text = alertData[indexPath.row]
-            // 读取数组设置 单元格 是否被选中  每次弹出的时候，都是去检测boolarr这个数组。
-            if boolarr[indexPath.row]{
-                
-                cell?.imageView?.image = UIImage(named: "selected")
-            }else{
-                
-                cell?.imageView?.image = UIImage(named: "unselected")
-            }
+        // 表格文本内容与配置文件一致
+        cell?.textLabel?.text = arr[indexPath.row] as? String
+        // 读取数组设置 单元格 是否被选中  每次弹出的时候，都是去检测boolarr这个数组。
+        if boolarr[indexPath.row]{
+            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+            cell?.imageView?.image = UIImage(named: "selected")
+        }else{
+            tableView.deselectRow(at: indexPath, animated: true)
+            cell?.imageView?.image = UIImage(named: "unselected")
         }
+        
       
         return cell!
     }
@@ -65,33 +74,51 @@ class alertViewController: UIAlertController,UITableViewDelegate,UITableViewData
     // 设置单元格被选中时动作
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         let cell = tableView.cellForRow(at: indexPath)
-        tableView.deselectRow(at: indexPath, animated: true)
-        // 转变当前表格的选中状态
+        cell?.imageView?.image = UIImage(named: "selected")
+        // 设置该行状态为选中
+        boolArray[indexPath.row] = true
         
-        boolArray[indexPath.row] = !boolArray[indexPath.row]
-        if boolArray[indexPath.row]{
-            selectedNum += 1
-            cell?.imageView?.image = UIImage(named: "selected")
-        }else{
-            
-            cell?.imageView?.image = UIImage(named: "unselected")
-            selectedNum -= 1
-        }
+        selectedNum += 1
+//        tableView.deselectRow(at: indexPath, animated: true)
+//        // 转变当前表格的选中状态
+//
+//        boolArray[indexPath.row] = !boolArray[indexPath.row]
+//        if boolArray[indexPath.row]{
+//            selectedNum += 1
+//            cell?.imageView?.image = UIImage(named: "selected")
+//        }else{
+//
+//            cell?.imageView?.image = UIImage(named: "unselected")
+//            selectedNum -= 1
+//        }
 
     }// 点击单元格函数结束
+    
+    // 取消选中某一行
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.imageView?.image = UIImage(named: "unselected")
+        
+        // 设置该行状态为未选中
+        boolArray[indexPath.row] = false
+
+        selectedNum -= 1
+    }
 
     func setupUI(){
         // 设置单元格允许多选
         tabelView.allowsMultipleSelection = true
-        // 初始化 存储表格状态的数组
-        if alertData.count>0{
-            print("定义中，内部数据的个数",alertData.count)
-            for i in 1...alertData.count{
-                print(i)
-                boolarr.append(false)
-            }
-        }
         
+        // 读取配置文件中的药物种类
+        let path = PlistSetting.getFilePath(File: "inputChoose.plist")
+        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
+        let arr = data["medicine"] as! NSArray
+        
+        // 初始化 存储表格状态的数组,保持数组大小与药物种类一致
+        for i in 0...arr.count-1{
+            print(i)
+            boolarr.append(false)
+        }
         boolArray = boolarr
         
         tabelView.delegate = self
@@ -121,7 +148,7 @@ class alertViewController: UIAlertController,UITableViewDelegate,UITableViewData
                 if i{
                     sum += 1
                 }
-                
+
             }
             self.selectedNum = sum
         })
@@ -132,8 +159,9 @@ class alertViewController: UIAlertController,UITableViewDelegate,UITableViewData
             self.boolarr = self.boolArray
             print("定义中，点击了确定之后的更新数据",self.boolArray)
             print("定义中，点击了确定之后的初始化数据",self.boolarr)
+
+//            self.tabelView.reloadData()
             
-            self.tabelView.reloadData()
         })
         
         self.addAction(cancelAction)

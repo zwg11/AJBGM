@@ -17,16 +17,16 @@ class glucoseView: UIView ,UITextFieldDelegate{
     // 设置事件值
     var eventNum:Int = 3
     //***********************血糖********************
-    // 血糖图标
-    private lazy var XTimageView:UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "iconxt")
-        return imageView
-    }()
+//    // 血糖图标
+//    private lazy var XTimageView:UIImageView = {
+//        let imageView = UIImageView()
+//        imageView.image = UIImage(named: "iconxt")
+//        return imageView
+//    }()
     // 血糖label
     private lazy var XTLabel:UILabel = {
         let label = UILabel()
-        label.normalLabel(text: "血糖")
+        label.normalLabel(text: "Blood Glucose")
         return label
     }()
     // 血糖值mmol/L小数输入文本框
@@ -56,30 +56,47 @@ class glucoseView: UIView ,UITextFieldDelegate{
         let label = UILabel()
         label.text = GetUnit.getBloodUnit()
         label.font = UIFont.systemFont(ofSize: 16)
-        
+        label.textColor = UIColor.white
+        label.minimumScaleFactor = 0.5
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
+    
     // 血糖滑块
-     lazy var XTSlider:UISlider = {
+    lazy var XTSlider:UISlider = {
         let slider = UISlider()
         slider.isContinuous = true
 //        slider.minimumTrackTintColor = UIColor.blue
 //        slider.maximumTrackTintColor = UIColor.white
-        slider.addTarget(self, action: #selector(valueChange), for: UIControl.Event.valueChanged)
+        slider.addTarget(self, action: #selector(valueChange(_:)), for: UIControl.Event.valueChanged)
         slider.thumbTintColor = UIColor.green
         return slider
     }()
     // 血糖滑块的动作
-    @objc func valueChange(){
+    @objc func valueChange(_ sender:UISlider){
         if GetUnit.getBloodUnit() == "mmol/L"{
             glucoseValueMM = Double(XTSlider.value)
             // 结果保留1位小数
             XTTextfield.text = String(format:"%.1f",glucoseValueMM)
+            
         }else{
             glucoseValueMG = Double(XTSlider.value)
             // 结果保留1位小数
-            XTTextfield.text = String(format:"%.1f",glucoseValueMG)
+            XTTextfield.text = String(format:"%.0f",glucoseValueMG)
+        }
+        //setValueAndThumbColor(value: sender.value)
+    }
+    
+    
+    func setValueAndThumbColor(value:Float){
+        XTSlider.setValue(value, animated: true)
+        if value <= Float(GetBloodLimit.getRandomDinnerLow()){
+            XTSlider.thumbTintColor = UIColor.red
+        }else if value >= Float(GetBloodLimit.getRandomDinnerTop()){
+            XTSlider.thumbTintColor = UIColor.yellow
+        }else{
+            XTSlider.thumbTintColor = UIColor.green
         }
     }
     //**********************************事件*************************
@@ -168,27 +185,29 @@ class glucoseView: UIView ,UITextFieldDelegate{
     }
     
     func setupUI(){
-        initEvent(event: eventNum)
         
+        resetGlucoseUnit()
+        initEvent(event: eventNum)
+//        setValueAndThumbColor(value: 0)
         // 设置视图背景颜色和边框
-        self.layer.borderColor = UIColor.gray.cgColor
+        self.layer.borderColor = UIColor.darkGray.cgColor
         self.layer.borderWidth = 1
-        self.backgroundColor = kRGBColor(130, 154, 249, 1)
+        self.backgroundColor = UIColor.clear
         
         //***********************血糖********************
-        // 血糖图标布局设置
-        self.addSubview(XTimageView)
-        XTimageView.snp.makeConstraints{(make) in
-            make.left.top.equalToSuperview().offset(AJScreenWidth/20)
-            make.height.width.equalTo(AJScreenWidth/15)
-        }
+//        // 血糖图标布局设置
+//        self.addSubview(XTimageView)
+//        XTimageView.snp.makeConstraints{(make) in
+//            make.left.top.equalToSuperview().offset(AJScreenWidth/20)
+//            make.height.width.equalTo(AJScreenWidth/15)
+//        }
         
-        // 血糖label布局z设置
+        // 血糖label布局设置
         self.addSubview(XTLabel)
         XTLabel.snp.makeConstraints{(make) in
-            make.left.equalTo(XTimageView.snp.right).offset(AJScreenWidth/40)
-            make.centerY.equalTo(XTimageView.snp.centerY)
-            make.height.equalTo(XTimageView.snp.height)
+            make.left.top.equalToSuperview().offset(AJScreenWidth/20)
+            make.width.equalTo(AJScreenWidth/4)
+            make.height.equalTo(AJScreenWidth/15)
         }
         
         // 血糖值输入框布局
@@ -211,7 +230,8 @@ class glucoseView: UIView ,UITextFieldDelegate{
         
         // 血糖值滑块布局
         self.addSubview(XTSlider)
-        initSliderColor()
+//        initSliderColor()
+//        XTSlider.value = value
         XTSlider.snp.makeConstraints{(make) in
             make.left.equalToSuperview().offset(AJScreenWidth/20)
             make.right.equalToSuperview().offset(-AJScreenWidth/20)
@@ -298,49 +318,150 @@ class glucoseView: UIView ,UITextFieldDelegate{
         }
     }
     
-    func initSliderColor(){
-        let first = UIColor.yellow
-        let second = UIColor.green
-        let third = UIColor.red
-        // 创建一个渐变层
-        let layer = CAGradientLayer()
-        // 设置frame
-        layer.frame = self.XTSlider.frame
-        // 设置渐变颜色
-        layer.colors = [first,second,third]
-        var location1 = 0.0
-        var location2 = 0.0
+//    func initSliderColor(){
+//        let first = UIColor.yellow
+//        let second = UIColor.green
+//        let third = UIColor.red
+//        // 创建一个渐变层
+//        let layer = CAGradientLayer()
+//        // 设置frame
+//        layer.frame = self.XTSlider.frame
+//        // 设置渐变颜色
+//        layer.colors = [first,second,third]
+//        var location1 = 0.0
+//        var location2 = 0.0
+//
+//        // 分段位置
+//        if GetUnit.getBloodUnit() == "mmol/L"{
+//            location1 = (GetBloodLimit.getRandomDinnerLow()-0.6)/16.6
+//            location2 = (GetBloodLimit.getRandomDinnerTop()-0.6)/16.6
+//        }else{
+//            location1 = (GetBloodLimit.getRandomDinnerLow()-10.0)/300.0
+//            location2 = (GetBloodLimit.getRandomDinnerTop()-10.0)/300.0
+//        }
+//
+//        // 设置渐变层起点和终点
+//        layer.startPoint = CGPoint(x: 0, y: 0.5)
+//        layer.endPoint = CGPoint(x: 1, y: 0.5)
+//        layer.locations = [location1,location2,1] as [NSNumber]
+////        let image = imageGradient(gradientColors: [first,second,third])
+////        XTSlider.setMinimumTrackImage(image, for: .normal)
+//    }
+    
+    
+//    func imageGradient(gradientColors:[UIColor], size:CGSize = CGSize(width: 10, height: 10) ) -> UIImage
+//    {
+//        UIGraphicsBeginImageContextWithOptions(size, true, 0)
+//        let context = UIGraphicsGetCurrentContext()!
+//        let colorSpace = CGColorSpaceCreateDeviceRGB()
+//        let colors = gradientColors.map {(color: UIColor) -> AnyObject! in return color.cgColor as AnyObject! } as NSArray
+//        let gradient = CGGradient(colorsSpace: colorSpace, colors: colors, locations: nil)
+//        // 第二个参数是起始位置，第三个参数是终止位置
+//        context.drawLinearGradient(gradient!, start: CGPoint(x: 0, y: 0), end: CGPoint(x: size.width, y: 0), options: CGGradientDrawingOptions(rawValue: 0))
+//        let image = UIImage.init(cgImage:(UIGraphicsGetImageFromCurrentImageContext()?.cgImage!)!)
+//        UIGraphicsEndImageContext()
+//        return image
+//    }
+    
+    // ***********现在对于直接输入那么以下代码可使文本框遵循：***********
+    // ***********对于单位--mg/dL 输入小于1000的整数***********
+    // ***********对于单位--mmol/L 输入小于100、小数点后1位的数***********
+    
+    // 如果返回true 则可以输入 ； 反之输入无效
+    // string 指的是指定范围的替换字符串。在键入期间，此参数通常只包含键入的单个新字符
+    //但如果用户粘贴文本，则它可能包含更多字符。当用户删除一个或多个字符时，替换字符串为空。
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        // 分段位置
-        if GetUnit.getBloodUnit() == "mmol/L"{
-            location1 = (GetBloodLimit.getRandomDinnerLow()-0.6)/16.6
-            location2 = (GetBloodLimit.getRandomDinnerTop()-0.6)/16.6
-        }else{
-            location1 = (GetBloodLimit.getRandomDinnerLow()-10.0)/300.0
-            location2 = (GetBloodLimit.getRandomDinnerTop()-10.0)/300.0
+        let testString = ".0123456789"
+        // textField:当前被操作的文本框
+        // range:当前将要替换掉的文本范围
+        // string:要替代文本框中一定范围文本的字符串
+        
+        // char 是字符序列，其包含 testString 以外的字符
+        // NSCharacterSet.init(charactersIn: ) 返回包含testString所有字符的字符序列
+        // .inverted 将其反转，即包含 testString 以外的字符
+        let char = NSCharacterSet.init(charactersIn: testString).inverted
+        // 将 string 按 包含 testString 以外的字符 进行分割 components(separatedBy: ) ，再连接joined(separator: “”)
+        let inputString = string.components(separatedBy: char).joined(separator: "")
+        
+        // 若此时字符串与原字符串一致，那么可以输入，否则不能输入
+        if string == inputString{
+            // 小数点前允许的最大位数
+            var numFrontDot:Int = 3
+            // 小数点及其之后允许的最大位数
+            var numAfterDot:Int = 0
+            // mg/dL 只允许输入3位整数
+            // mmol/L 小数点前2位，小数点后1位
+            if GetUnit.getBloodUnit() == "mmol/L"{
+                numFrontDot = 2
+                numAfterDot = 2
+            }
+            // textField中的文本为当前textField的文本，还未被替换
+            let futureStr:NSMutableString = NSMutableString(string: textField.text!)
+            futureStr.insert(string, at: range.location)
+            // 计数小数点之前的个数
+            var flag = 0
+            // 计数小数点之前的内个数
+            var flag1 = 0
+            // 计数小数点个数
+            var dotNum = 0
+            // 判断是否为小数点前
+            var isFrontDot = true
+            
+            if futureStr.length >= 1{
+                // 如果第一个就是小数点，不能输入
+                let char = Character(UnicodeScalar(futureStr.character(at:0))!)
+                if char == "."{
+                    return false
+                }
+                // 如果第一个为0，第二位不为小数点，不能输入
+                if futureStr.length >= 2{
+                    let char2 = Character(UnicodeScalar(futureStr.character(at:1))!)
+                    if char2 != "." && char == "0"{
+                        return false
+                    }
+                }
+            }
+            
+            if !futureStr.isEqual(to: ""){
+                for i in 0..<futureStr.length{
+                    // 获得指定位置的字符
+                    let char = Character(UnicodeScalar(futureStr.character(at:i))!)
+                    // 如果是小数点
+                    if char == "."{
+                        // 判断之前是否有小数点
+                        // 如果有，不能输入
+                        isFrontDot = false
+                        dotNum += 1
+                        if dotNum > 1{
+                            return false
+                        }
+                        
+                    }
+                    // 判断是否在小数点前，对相应变量进行操作
+                    // f如果相应变量超过一定值，不允许输入
+                    if isFrontDot{
+                        flag += 1
+                        if flag > numFrontDot{
+                            return false
+                        }
+                        
+                    }
+                    else{
+                        flag1 += 1
+                        if flag1 > numAfterDot{
+                            return false
+                        }
+                    }
+                    
+                }
+            }
+            return true
+            
+        }// 若此时字符串与原字符串不一致，不能输入
+        else{
+            return false
         }
-        
-        // 设置渐变层起点和终点
-        layer.startPoint = CGPoint(x: 0, y: 0.5)
-        layer.endPoint = CGPoint(x: 1, y: 0.5)
-        layer.locations = [location1,location2,1] as [NSNumber]
-        let image = imageGradient(gradientColors: [first,second,third])
-        XTSlider.setMinimumTrackImage(image, for: .normal)
-    }
-    
-    
-    func imageGradient(gradientColors:[UIColor], size:CGSize = CGSize(width: 10, height: 10) ) -> UIImage
-    {
-        UIGraphicsBeginImageContextWithOptions(size, true, 0)
-        let context = UIGraphicsGetCurrentContext()!
-        let colorSpace = CGColorSpaceCreateDeviceRGB()
-        let colors = gradientColors.map {(color: UIColor) -> AnyObject! in return color.cgColor as AnyObject! } as NSArray
-        let gradient = CGGradient(colorsSpace: colorSpace, colors: colors, locations: nil)
-        // 第二个参数是起始位置，第三个参数是终止位置
-        context.drawLinearGradient(gradient!, start: CGPoint(x: 0, y: 0), end: CGPoint(x: size.width, y: 0), options: CGGradientDrawingOptions(rawValue: 0))
-        let image = UIImage.init(cgImage:(UIGraphicsGetImageFromCurrentImageContext()?.cgImage!)!)
-        UIGraphicsEndImageContext()
-        return image
     }
     
 }

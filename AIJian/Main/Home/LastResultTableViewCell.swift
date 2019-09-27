@@ -27,9 +27,11 @@ class LastResultTableViewCell: UITableViewCell {
     private lazy var glucoseValueLabel:UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 60)
-        label.textAlignment = .center
+        label.textAlignment = .left
         // 标签显示数据库中日期最晚的血糖值
         label.text = getDataInHome.getLastGlucoseValue()
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
         label.adjustsFontSizeToFitWidth = true
         label.backgroundColor = UIColor.gray
         label.textColor = UIColor.white
@@ -40,8 +42,10 @@ class LastResultTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 25)
         label.text = GetUnit.getBloodUnit()
-        label.textAlignment = .center
-        label.sizeToFit()
+        label.textAlignment = .left
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
+        label.adjustsFontSizeToFitWidth = true
         label.backgroundColor = UIColor.gray
         label.textColor = UIColor.white
         return label
@@ -50,10 +54,20 @@ class LastResultTableViewCell: UITableViewCell {
     private lazy var rangeLabel:UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 15)
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
+        label.adjustsFontSizeToFitWidth = true
         // 显示血糖正常范围
-        label.text = "参考值 \(GetBloodLimit.getRandomDinnerLow())\(GetUnit.getBloodUnit())-\(GetBloodLimit.getRandomDinnerTop())\(GetUnit.getBloodUnit())"
-        label.textAlignment = .center
-        label.sizeToFit()
+        let unit = GetUnit.getBloodUnit()
+        let low = GetBloodLimit.getRandomDinnerLow()
+        let high = GetBloodLimit.getRandomDinnerTop()
+        if unit == "mg/dL"{
+            label.text = "参考值 \(Int(low))" + unit + "-" + "\(Int(high))" + unit
+        }else{
+            label.text = "参考值 \(low)" + unit + "-" + "\(high)" + unit
+        }
+        
+        label.textAlignment = .left
         label.backgroundColor = UIColor.gray
         label.textColor = UIColor.white
         return label
@@ -80,6 +94,7 @@ class LastResultTableViewCell: UITableViewCell {
         rangeLabel.snp.makeConstraints{(make) in
             make.left.equalToSuperview().offset(AJScreenWidth/10)
             make.bottom.equalToSuperview()
+            make.width.equalTo(AJScreenWidth/2)
             //make.top.equalTo(glucoseValueLabel.snp.bottom)
             make.height.equalTo(AJScreenWidth/15)
         }
@@ -103,7 +118,7 @@ class LastResultTableViewCell: UITableViewCell {
             make.left.equalTo(rangeLabel)
             make.top.equalToSuperview().offset(20)
             make.bottom.equalTo(rangeLabel.snp.top).offset(-20)
-            //make.height.width.equalTo(50)
+            make.width.equalTo(AJScreenWidth/5)
         }
         
         content.addSubview(gUnitLabel)
@@ -111,6 +126,7 @@ class LastResultTableViewCell: UITableViewCell {
             make.left.equalTo(glucoseValueLabel.snp.right).offset(10)
             make.bottom.equalTo(glucoseValueLabel)
             make.height.equalTo(40)
+            make.width.equalTo(AJScreenWidth/6)
         }
         
         

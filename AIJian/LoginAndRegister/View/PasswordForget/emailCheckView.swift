@@ -14,17 +14,20 @@ class emailCheckView: UIView {
     
     // 输入邮箱文本框
     lazy var emailTextField:UITextField = {
-        let textField = initTextField(placeholder: " Email",keyboardType: .emailAddress)
+        let textField = UITextField()
+        textField.initTextField(placeholder: " Email",keyboardType: .default)
         let imageView = UIImageView(image: UIImage(named: "email"))
         textField.leftView = imageView
         textField.leftViewMode = .always
-        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
+//        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
         return textField
     }()
     
     // 输入验证码文本框
     lazy var authCodeTextField:UITextField = {
-        let textField = initTextField(placeholder: " Code",keyboardType: .numberPad)
+        let textField = UITextField()
+        textField.initTextField(placeholder: " Code",keyboardType: .default)
+//        let textField = initTextField(placeholder: " Code",keyboardType: .numberPad)
         let imageView = UIImageView(image: UIImage(named: "email"))
         textField.leftView = imageView
         textField.leftViewMode = .always
@@ -53,6 +56,7 @@ class emailCheckView: UIView {
         return button
     }()
 
+
     func initTextField(placeholder text:String,keyboardType type:UIKeyboardType) -> UITextField{
         let textField = UITextField()
         textField.placeholder = text
@@ -64,6 +68,18 @@ class emailCheckView: UIView {
         
         return textField
     }
+
+//    func initTextField(placeholder text:String,keyboardType type:UIKeyboardType) -> UITextField{
+//        let textField = UITextField()
+//        textField.placeholder = text
+//        textField.textAlignment = .left
+//        textField.keyboardType = type
+//        textField.layer.borderColor = UIColor.gray.cgColor
+//        textField.setValue(NSNumber(value: 10), forKey: "paddingLeft")
+//
+//        return textField
+//    }
+
 
     func setupUI(){
         // 输入邮箱文本框布局

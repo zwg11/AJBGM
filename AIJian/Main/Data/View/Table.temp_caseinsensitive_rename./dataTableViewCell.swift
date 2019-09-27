@@ -29,20 +29,39 @@ class dataTableViewCell: UITableViewCell {
     }
     
     convenience init(style: UITableViewCell.CellStyle, reuseIdentifier: String?,secion:Int,row:Int){
+        print("sortedData：\(sortedData[secion][row])")
         self.init(style: style, reuseIdentifier: reuseIdentifier)
+        // 被选中的背景,设为无
+        self.selectionStyle = .none
+        // 设置单元格颜色
+        self.backgroundColor = ThemeColor
         // 血糖
-        if GetUnit.getBloodUnit() == "mmol/L"{
-            glucoseLabel.text = (sortedData[secion][row].bloodGlucoseMmol != nil) ? String(sortedData[secion][row].bloodGlucoseMmol!):"-"
-        }else{
-            glucoseLabel.text = (sortedData[secion][row].bloodGlucoseMg != nil) ? String(sortedData[secion][row].bloodGlucoseMg!):"-"
+        // 如果血糖不为空
+        if let gluBlood = sortedData[secion][row].bloodGlucoseMmol{
+            // 根据单位设置不同形式的值
+            if GetUnit.getBloodUnit() == "mmol/L"{
+                glucoseLabel.text =  "\(gluBlood)"
+            }else{
+                glucoseLabel.text = String(format:"%.0f",sortedData[secion][row].bloodGlucoseMg!)
+            }
+        }// 否则为 “-”
+        else{
+            glucoseLabel.text =  "-"
         }
+        
         // 事件
-        eventLabel.text = (sortedData[secion][row].eatType != nil) ? String(sortedData[secion][row].eatType!):"-"
+        eventLabel.font = UIFont.systemFont(ofSize: 15)
+        eventLabel.minimumScaleFactor = 0.3
+        eventLabel.adjustsFontSizeToFitWidth = true
+        eventLabel.text = (sortedData[secion][row].detectionTime != nil) ? EvenChang.numToeven(Int(sortedData[secion][row].detectionTime!)):"-"
         // 进餐量
-        appetiteLabel.text = (sortedData[secion][row].eatNum != nil) ? String(sortedData[secion][row].eatNum!):"-"
+        appetiteLabel.text = (sortedData[secion][row].eatNum != nil) ? EatNumChange.numToeat(Int(sortedData[secion][row].eatNum!)):"-"
         
         // 先判断有没有胰岛素量，若没有再判断有没有胰岛素类型
         // 胰岛素类型和量
+        isulinLabel.font = UIFont.systemFont(ofSize: 15)
+        isulinLabel.minimumScaleFactor = 0.3
+        isulinLabel.adjustsFontSizeToFitWidth = true
         if sortedData[secion][row].insulinNum != nil{
             isulinLabel.text = String(sortedData[secion][row].insulinNum!) + "U\n" +  String(sortedData[secion][row].insulinType!)
             isulinLabel.font = UIFont.systemFont(ofSize: 10)
@@ -55,20 +74,44 @@ class dataTableViewCell: UITableViewCell {
         // 身高
 //        heightLabel.text = (sortedData[secion][row].height != nil) ? String(sortedData[secion][row].height!):"-"
         // 体重
-        weightLabel.text = (sortedData[secion][row].weightKg != nil) ? String(sortedData[secion][row].weightKg!):"-"
-        // 血压
-        if GetUnit.getPressureUnit() == "mmHg"{
-            bloodPressureLabel.text = (sortedData[secion][row].systolicPressureMmhg != nil) ? String(sortedData[secion][row].systolicPressureMmhg!) + "/" + String(sortedData[secion][row].diastolicPressureMmhg!):"-"
-        }else{
-            bloodPressureLabel.text = (sortedData[secion][row].systolicPressureKpa != nil) ? String(sortedData[secion][row].systolicPressureKpa!) + "/" + String(sortedData[secion][row].diastolicPressureKpa!):"-"
+        // 如果体重不为空
+        if let weight = sortedData[secion][row].weightKg{
+            // 根据单位设置不同形式的值
+            if GetUnit.getWeightUnit() == "kg"{
+                weightLabel.text =  "\(weight)"
+            }else{
+                weightLabel.text =  String(format: "%.0f", sortedData[secion][row].weightLbs!)
+            }
+        }// 否则为 “-”
+        else{
+            weightLabel.text = "-"
         }
+        
+        
+        // 血压
+        // 如果血压不为空
+        if let pressure = sortedData[secion][row].systolicPressureMmhg{
+            // 根据单位设置不同形式的值
+            if GetUnit.getPressureUnit() == "mmHg"{
+                bloodPressureLabel.text =  String(format:"%.0f",pressure) + "/" + String(format:"%.0f",sortedData[secion][row].diastolicPressureMmhg ?? 0)
+            }else{
+                bloodPressureLabel.text =  String(sortedData[secion][row].systolicPressureKpa!) + "/" + String(sortedData[secion][row].diastolicPressureKpa!)
+            }
+        }// 否则为 “-”
+        else{
+            bloodPressureLabel.text = "-"
+        }
+        
         // 药物
+        medicineLabel.font = UIFont.systemFont(ofSize: 15)
+        medicineLabel.minimumScaleFactor = 0.3
+        medicineLabel.adjustsFontSizeToFitWidth = true
         medicineLabel.text = sortedData[secion][row].medicine ?? "-"
         
         // 先判断有没有运动量，若没有再判断有没有运动类型
         // 运动
         if sortedData[secion][row].sportTime != nil{
-            sportLabel.text = String(sortedData[secion][row].sportType!) + "\n" + String(sortedData[secion][row].sportTime!)
+            sportLabel.text = String(sortedData[secion][row].sportType!) + "\n" + String(sortedData[secion][row].sportTime!) + "min"
             sportLabel.font = UIFont.systemFont(ofSize: 10)
         }else if sortedData[secion][row].sportType != nil{
             sportLabel.text = String(sortedData[secion][row].sportType!)
@@ -77,6 +120,8 @@ class dataTableViewCell: UITableViewCell {
             sportLabel.text = "-"
         }
         
+        // 备注
+        remarkLabel.textAlignment = .center
         if let remarkText = sortedData[secion][row].remark{
             remarkLabel.text = remarkText
         }else{
@@ -92,10 +137,12 @@ class dataTableViewCell: UITableViewCell {
             i.frame = CGRect(x: offsetX, y: 0, width: 80, height: 40)
             i.textAlignment = .center
             i.numberOfLines = 0
-            
+            i.textColor = UIColor.white
             offsetX += 80
             self.addSubview(i)
         }
+        SetColorOfLabelText.SetGlucoseTextColor(sortedData[secion][row], label: glucoseLabel)
+        remarkLabel.frame.size.width = 200
     }
     
     required init?(coder aDecoder: NSCoder) {

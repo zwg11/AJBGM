@@ -124,9 +124,11 @@ class InfoViewController: UIViewController ,PickerDelegate{
                             print(responseModel.code!)
                             print("更新成功")
                             //print("responseModel.data：\(responseModel.data!)")
-                            self.navigationController?.popViewController(animated: true)
+//                            self.navigationController?.popViewController(animated: true)
                             // 向数据库插入数据
                             self.updateUserInfoInSqlite(updateUserInfo)
+                            let alert = CustomAlertController()
+                            alert.custom(self, "Attension", "更新用户信息成功")
                         }else{
                             let alert = CustomAlertController()
                             alert.custom(self, "Attension", "更新用户信息失败")

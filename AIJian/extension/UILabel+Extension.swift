@@ -13,12 +13,12 @@ extension UILabel{
     // 设置一般标签格式
     // 颜色为黑 字体大小为18 靠左 背景颜色为黄
     func normalLabel(text string:String){
-        self.textColor = UIColor.black
+        self.textColor = UIColor.white
         self.textAlignment = .left
-        self.font = UIFont.systemFont(ofSize: 18)
+        self.font = UIFont.systemFont(ofSize: 16)
         self.text = string
-        self.backgroundColor = UIColor.yellow
-        self.sizeToFit()
+        self.backgroundColor = UIColor.blue
+        self.adjustsFontSizeToFitWidth = true
         
     }
 }

@@ -8,20 +8,20 @@
 
 import UIKit
 
-class portionAndInsulinView: UIView {
+class portionAndInsulinView: UIView,UITextFieldDelegate {
 
     var PortionNum:Int = 2
     //**********************进餐量*********************
-    // 进餐量图标
-    private lazy var portionImageView:UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "事件")
-        return imageView
-    }()
+//    // 进餐量图标
+//    private lazy var portionImageView:UIImageView = {
+//        let imageView = UIImageView()
+//        imageView.image = UIImage(named: "事件")
+//        return imageView
+//    }()
     // 进餐量label
     private lazy var portionLabel:UILabel = {
         let label = UILabel()
-        label.normalLabel(text: "进餐量")
+        label.normalLabel(text: "Food")
         return label
     }()
     
@@ -93,28 +93,28 @@ class portionAndInsulinView: UIView {
         case 3:
             intensityChange(portionLittleButton)
         default:
-            intensityChange(portionLittleButton)
+            intensityChange(portionNormalButton)
         }
     }
     
     // **********************胰岛素***********************
-    // 胰岛素图标
-    private lazy var insulinImageView:UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "事件")
-        return imageView
-    }()
+//    // 胰岛素图标
+//    private lazy var insulinImageView:UIImageView = {
+//        let imageView = UIImageView()
+//        imageView.image = UIImage(named: "事件")
+//        return imageView
+//    }()
     // 胰岛素label
     private lazy var insulinLabel:UILabel = {
         let label = UILabel()
-        label.normalLabel(text: "胰岛素")
+        label.normalLabel(text: "Insulin")
         return label
     }()
     
     // 胰岛素选择按钮
     lazy var insulinButton:UIButton = {
         let button = UIButton()
-        button.NorStyle(title: "无")
+        button.NorStyle(title: "Nothing")
         return button
     }()
     
@@ -124,6 +124,7 @@ class portionAndInsulinView: UIView {
         textfield.norStyle(placeholder: "")
         textfield.keyboardType = UIKeyboardType.decimalPad
         textfield.textAlignment = .center
+        textfield.delegate = self
         //textfield.font = UIFont.systemFont(ofSize: 16)
         return textfield
     }()
@@ -143,24 +144,24 @@ class portionAndInsulinView: UIView {
     func setupUI(){
         initPortion(portion: PortionNum)
         // 设置视图背景颜色和边框
-        self.layer.borderColor = UIColor.blue.cgColor
+        self.layer.borderColor = UIColor.darkGray.cgColor
         self.layer.borderWidth = 1
-        self.backgroundColor = kRGBColor(130, 154, 249, 1)
-        
+//        self.backgroundColor = kRGBColor(130, 154, 249, 1)
+        self.backgroundColor = UIColor.clear
         // **********************进餐量***********************
         // 进餐量图标布局设置
-        self.addSubview(portionImageView)
-        portionImageView.snp.makeConstraints{(make) in
-            make.left.top.equalToSuperview().offset(AJScreenWidth/20)
-            make.height.width.equalTo(AJScreenWidth/15)
-        }
+//        self.addSubview(portionImageView)
+//        portionImageView.snp.makeConstraints{(make) in
+//            make.left.top.equalToSuperview().offset(AJScreenWidth/20)
+//            make.height.width.equalTo(AJScreenWidth/15)
+//        }
         
         // 进餐量label布局z设置
         self.addSubview(portionLabel)
         portionLabel.snp.makeConstraints{(make) in
-            make.left.equalTo(portionImageView.snp.right).offset(AJScreenWidth/40)
-            make.centerY.equalTo(portionImageView.snp.centerY)
-            make.height.equalTo(portionImageView.snp.height)
+            make.left.top.equalToSuperview().offset(AJScreenWidth/20)
+            make.height.equalTo(AJScreenWidth/15)
+            make.width.equalTo(AJScreenWidth/10)
         }
         
 //        // 进餐量选择按钮
@@ -178,7 +179,7 @@ class portionAndInsulinView: UIView {
         self.addSubview(portionLittleButton)
         
         portionNoButton.snp.makeConstraints{(make) in
-            make.left.equalTo(portionImageView)
+            make.left.equalTo(portionLabel)
             make.width.equalTo(AJScreenWidth/5)
             make.height.equalTo(AJScreenWidth/15)
             make.top.equalTo(portionLabel.snp.bottom).offset(AJScreenWidth/40)
@@ -203,32 +204,29 @@ class portionAndInsulinView: UIView {
         }
         
         // **********************胰岛素***********************
-        // 胰岛素图标布局
-        self.addSubview(insulinImageView)
-        insulinImageView.snp.makeConstraints{(make) in
-            make.left.right.height.equalTo(portionImageView)
-            make.top.equalTo(portionLittleButton.snp.bottom).offset(AJScreenWidth/40)
-        }
+//        // 胰岛素图标布局
+//        self.addSubview(insulinImageView)
+//        insulinImageView.snp.makeConstraints{(make) in
+//            make.left.right.height.equalTo(portionImageView)
+//            make.top.equalTo(portionLittleButton.snp.bottom).offset(AJScreenWidth/40)
+//        }
         
         // 胰岛素label布局
         self.addSubview(insulinLabel)
         insulinLabel.snp.makeConstraints{(make) in
-            make.left.equalTo(insulinImageView.snp.right).offset(AJScreenWidth/40)
-            make.height.equalTo(insulinImageView)
-            make.bottom.equalTo(insulinImageView)
+            make.left.equalToSuperview().offset(AJScreenWidth/20)
+            make.top.equalTo(portionNoButton.snp.bottom).offset(AJScreenWidth/40)
+            make.height.equalTo(AJScreenWidth/15)
+            make.width.equalTo(AJScreenWidth/8)
         }
         // 胰岛素选择按钮
         self.addSubview(insulinButton)
         insulinButton.snp.makeConstraints{(make) in
-            make.left.equalTo(insulinImageView)
-            make.top.equalTo(insulinImageView.snp.bottom).offset(AJScreenWidth/40)
+            make.left.equalTo(insulinLabel)
+            make.top.equalTo(insulinLabel.snp.bottom).offset(AJScreenWidth/40)
             make.width.equalTo(AJScreenWidth/5*3)
             make.height.equalTo(AJScreenWidth/12)
         }
-        
-        
-        
-        
         
         // 胰岛素值输入框布局
         self.addSubview(insulinTextfield)
@@ -243,8 +241,73 @@ class portionAndInsulinView: UIView {
         self.addSubview(insulinUnitLabel)
         insulinUnitLabel.snp.makeConstraints{(make) in
             make.left.equalTo(insulinTextfield.snp.right).offset(AJScreenWidth/40)
-            make.centerY.equalTo(insulinButton)
-            make.height.equalTo(insulinButton)
+            make.width.equalTo(AJScreenWidth/40)
+            make.top.bottom.equalTo(insulinButton)
+        }
+    }
+    
+
+    // 详细用法请看glucoseView中的注释
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let testString = ".0123456789"
+        let char = NSCharacterSet.init(charactersIn: testString).inverted
+
+        let inputString = string.components(separatedBy: char).joined(separator: "")
+
+        if string == inputString{
+            let numFrontDot:Int = 2
+            let numAfterDot:Int = 3
+
+            let futureStr:NSMutableString = NSMutableString(string: textField.text!)
+            futureStr.insert(string, at: range.location)
+            var flag = 0
+            var flag1 = 0
+            var dotNum = 0
+            var isFrontDot = true
+            
+            if futureStr.length >= 1{
+                // 如果第一个就是小数点，不能输入
+                let char = Character(UnicodeScalar(futureStr.character(at:0))!)
+                if char == "."{
+                    return false
+                }
+                // 如果第一个为0，第二位不为小数点，不能输入
+                if futureStr.length >= 2{
+                    let char2 = Character(UnicodeScalar(futureStr.character(at:1))!)
+                    if char2 != "." && char == "0"{
+                        return false
+                    }
+                }
+            }
+            
+            if !futureStr.isEqual(to: ""){
+                for i in 0..<futureStr.length{
+                    let char = Character(UnicodeScalar(futureStr.character(at:i))!)
+                    if char == "."{
+                        isFrontDot = false
+                        dotNum += 1
+                        if dotNum > 1{
+                            return false
+                        }
+                    }
+                    if isFrontDot{
+                        flag += 1
+                        if flag > numFrontDot{
+                            return false
+                        }
+                    }
+                    else{
+                        flag1 += 1
+                        if flag1 > numAfterDot{
+                            return false
+                        }
+                    }
+                }
+            }
+            return true
+            
+        }else{
+            return false
         }
     }
 }

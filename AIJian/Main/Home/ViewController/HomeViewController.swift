@@ -20,7 +20,7 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
         case 1:
-            return 150
+            return AJScreenWidth/3
         case 3,5:
             return AJScreenWidth/2
 //        case 5:
@@ -124,6 +124,7 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         homeTableView.reloadData()
         print("这个东西到底是什么东西",SHIFT!)
         // 图表重新画
+        recent7View.reloadChart()
         recent7View.recentTrendView.drawLineChart(xAxisArray: xAxisArrayToWeek(Days: 7) as NSArray,xAxisData: recentDaysData(Days: 7))
 
     }
@@ -155,8 +156,6 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
         // Do any additional setup after loading the view.
     }
-
-    
-    
+ 
 }
 
