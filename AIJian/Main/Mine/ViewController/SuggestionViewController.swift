@@ -11,16 +11,16 @@ import Alamofire
 import HandyJSON
 
 
-class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate {
+class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,PickerDelegate {
     
     var email:String?
     var phone:String?
-    var country:String?
+    var country:String = "China"
     let id = "reusedId"
     
     let emailCommponent = sugComponent()
     let telephoneCommponent = sugComponent()
-    let nationComponent = sugComponent()
+    let nationCp = nationComponent()
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -53,6 +53,7 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
         case 1:
             let cell = UITableViewCell(style: .default, reuseIdentifier: id)
             telephoneCommponent.textField.delegate = self
+            telephoneCommponent.textField.textColor = TextColor
             telephoneCommponent.setupUI(title: "Please Enter Your Phone Number")
             cell.contentView.addSubview(telephoneCommponent)
             cell.selectionStyle = .none
@@ -61,9 +62,11 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
             return cell
         case 2:
             let cell = UITableViewCell(style: .default, reuseIdentifier: id)
-            nationComponent.textField.delegate = self
-            nationComponent.setupUI(title: "请输入国家")
-            cell.contentView.addSubview(nationComponent)
+            nationCp.setupUI(title: "China")
+            nationCp.nationButton.addTarget(self, action:#selector(selectNation) , for: .touchUpInside)
+//            nationComponent.textField.delegate = self
+//            nationComponent.setupUI(title: "请输入国家")
+            cell.contentView.addSubview(nationCp)
             cell.selectionStyle = .none
             cell.textLabel?.textColor = TextColor
             cell.backgroundColor = ThemeColor
@@ -136,6 +139,17 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
         
     }
     
+    @objc func selectNation(){
+        print("选择国家")
+        let pickerView = BHJPickerView.init(self, .country)
+        pickerView.pickerViewShow()
+    }
+    func selectedCountry(_ pickerView: BHJPickerView, _ countryStr: String) {
+//        infoinputView.nationButton.setTitle(countryStr, for: .normal)
+        nationCp.nationButton.setTitle(countryStr, for:.normal)
+        country = countryStr
+    }
+    
     @objc private func back(){
         self.navigationController?.popViewController(animated: true)
     }
@@ -161,7 +175,7 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
 //        }
         
         //网络请求
-        let dictString:Dictionary = [ "email":String(emailCommponent.textField.text!),"phoneNumber":String(telephoneCommponent.textField.text!),"country":String(nationComponent.textField.text!),"feedback":String(content_field.text!),"token":UserInfo.getToken(),"userId":UserInfo.getUserId()] as [String : Any]
+        let dictString:Dictionary = [ "email":String(emailCommponent.textField.text!),"phoneNumber":String(telephoneCommponent.textField.text!),"country":String(country),"feedback":String(content_field.text!),"token":UserInfo.getToken(),"userId":UserInfo.getUserId()] as [String : Any]
         print(dictString)
         //  此处的参数需要传入一个字典类型
         Alamofire.request(FEEDBACK,method: .post,parameters: dictString).responseString{ (response) in
@@ -181,7 +195,7 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
                             self.content_field.text! = ""
                             self.emailCommponent.textField.text! = ""
                             self.telephoneCommponent.textField.text! = ""
-                            self.nationComponent.textField.text! = ""
+//                            self.nationComponent.textField.text! = ""
                             self.navigationController?.popViewController(animated: true)
                         }else{
                             alert.custom(self,"Attention", "反馈失败！")

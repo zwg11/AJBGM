@@ -8,7 +8,7 @@
 
 import UIKit
 
-class sugComponent: UIView {
+class nationComponent: UIView {
     
     
     lazy var imageView:UIImageView = {
@@ -17,32 +17,36 @@ class sugComponent: UIView {
         return image
     }()
     
-    var textField:UITextField = {
-        let textField = UITextField()
-        let str:NSMutableAttributedString = NSMutableAttributedString(string: "*************", attributes: [NSAttributedString.Key.foregroundColor:TextColor])
-        textField.attributedPlaceholder = str
+//    var textField:UITextField = {
+//        let textField = UITextField()
 //        textField.placeholder = "*************"
 //        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
-        return textField
+//        return textField
+//    }()
+    lazy var nationButton:UIButton = {
+        let button = UIButton()
+        button.setTitleColor(TextColor, for: .normal)
+        button.setTitle("China", for: .normal)
+        button.contentHorizontalAlignment = .left
+        return button
     }()
-    
     
     func  setupUI(title:String){
         self.frame = CGRect(x: 0, y: 0, width: AJScreenWidth, height: AJScreenHeight/15)
         print("调用了组件层")
-        textField.placeholder = title
+        nationButton.setTitle(title, for: .normal)
         
         self.addSubview(imageView)
-        self.addSubview(textField)
+        self.addSubview(nationButton)
         
         imageView.snp.makeConstraints{ (make) in
             make.width.equalTo(AJScreenHeight/15)
             make.height.equalTo(AJScreenHeight/15)
-//            make.left.equalTo(AJScreenWidth/25)
+            //            make.left.equalTo(AJScreenWidth/25)
             make.left.equalToSuperview()
         }
         
-        textField.snp.makeConstraints{ (make) in
+        nationButton.snp.makeConstraints{ (make) in
             make.width.equalTo(AJScreenWidth*4/5)
             make.height.equalTo(AJScreenHeight/15)
             make.left.equalTo(imageView.snp.right).offset(5)

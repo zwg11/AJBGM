@@ -56,6 +56,8 @@ class emailCheckView: UIView {
         return button
     }()
 
+
+
 //    func initTextField(placeholder text:String,keyboardType type:UIKeyboardType) -> UITextField{
 //        let textField = UITextField()
 //        textField.placeholder = text
@@ -66,6 +68,8 @@ class emailCheckView: UIView {
 //
 //        return textField
 //    }
+
+
 
     func setupUI(){
         // 输入邮箱文本框布局

@@ -11,7 +11,7 @@ import SnapKit
 import Alamofire
 import HandyJSON
 
-class infoInputViewController: UIViewController,UITextFieldDelegate {
+class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelegate {
 
     //邮箱，来自上一步传过来的
     var email:String?
@@ -46,11 +46,14 @@ class infoInputViewController: UIViewController,UITextFieldDelegate {
         view.userNameTextField.delegate = self  //用户名
 //        view.heightTextField.delegate = self    //身高
 //        view.weightTextField.delegate = self    //体重
-        view.nationTextField.delegate = self    //国家
+//        view.nationTextField.delegate = self    //国家
         view.phoneTextField.delegate = self     //电话
         initDelegate()
         view.gender_man_button.addTarget(self, action: #selector(genderMan), for: .touchUpInside)
         view.gender_woman_button.addTarget(self, action: #selector(genderWoman), for: .touchUpInside)
+        view.nationButton.addTarget(self, action: #selector(selectNation), for: .touchUpInside)
+//        view.nationButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: -10)
+        view.nationButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 0)
         view.dateButton.addTarget(self, action: #selector(chooseDate), for: .touchUpInside)
         view.finishButton.addTarget(self, action: #selector(finish), for: .touchUpInside)
         return view
@@ -223,7 +226,7 @@ class infoInputViewController: UIViewController,UITextFieldDelegate {
 //        }
        
         //国家
-        country = infoinputView.nationTextField.text!
+//        country = infoinputView.nationTextField.text!
         //电话
         phoneNumber = infoinputView.phoneTextField.text!
         //时间
@@ -307,5 +310,14 @@ class infoInputViewController: UIViewController,UITextFieldDelegate {
         // 收起键盘
         textField.resignFirstResponder()
         return true
+    }
+    @objc func selectNation(){
+        print("选择国家")
+        let pickerView = BHJPickerView.init(self, .country)
+        pickerView.pickerViewShow()
+    }
+    func selectedCountry(_ pickerView: BHJPickerView, _ countryStr: String) {
+          infoinputView.nationButton.setTitle(countryStr, for: .normal)
+          country = countryStr
     }
 }

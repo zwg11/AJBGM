@@ -120,6 +120,23 @@ class InfoInputView: UIView {
 //    }()
     
     // 输入国家文本框
+//    lazy var nationTextField:UITextField = {
+//        let textField = initTextField(placeholder: " China",keyboardType: .default)
+//        let imageView = UIImageView(image: UIImage(named: "email"))
+//        textField.leftView = imageView
+//        textField.leftViewMode = .always
+//        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
+//        return textField
+//    }()
+    lazy var nationButton:UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "email"), for: .normal)
+        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
+        button.setTitleColor(TextColor, for: .normal)
+        button.setTitle("China", for: .normal)
+        button.contentHorizontalAlignment = .left
+        return button
+    }()
     lazy var nationTextField:UITextField = {
         let textField = UITextField()
         textField.initTextField(placeholder: " China",keyboardType: .default)
@@ -350,8 +367,8 @@ class InfoInputView: UIView {
 //        }
 //
         // 输入国家文本框布局
-        self.addSubview(nationTextField)
-        nationTextField.snp.makeConstraints{(make) in
+        self.addSubview(nationButton)
+        nationButton.snp.makeConstraints{(make) in
             //            make.left.equalToSuperview().offset(AJScreenWidth/7)
             make.left.equalToSuperview().offset(AJScreenWidth/15)
             make.right.equalToSuperview().offset(-AJScreenWidth/15)
@@ -367,7 +384,7 @@ class InfoInputView: UIView {
             make.width.equalTo(AJScreenWidth)
             make.left.equalTo(AJScreenWidth/15)
             make.right.equalTo(-AJScreenWidth/15)
-            make.top.equalTo(nationTextField.snp.bottom).offset(1)
+            make.top.equalTo(nationButton.snp.bottom).offset(1)
         }
         
 //        //电话标签
@@ -387,7 +404,7 @@ class InfoInputView: UIView {
             make.left.equalToSuperview().offset(AJScreenWidth/15)
             make.right.equalToSuperview().offset(-AJScreenWidth/15)
             make.height.equalTo(AJScreenWidth/12)
-            make.top.equalTo(nationTextField.snp.bottom).offset(AJScreenWidth/11)
+            make.top.equalTo(nationButton.snp.bottom).offset(AJScreenWidth/11)
         }
         
         let line_frame4 = UIView(frame: CGRect())
@@ -431,5 +448,5 @@ class InfoInputView: UIView {
             make.top.equalToSuperview().offset(AJScreenHeight*12/15)
         }
     }
-    
+
 }

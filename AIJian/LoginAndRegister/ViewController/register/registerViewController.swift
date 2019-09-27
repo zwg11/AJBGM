@@ -35,10 +35,11 @@ class registerViewController: UIViewController,UITextFieldDelegate {
         alert.addAction(cancelAction)
         return alert
     }()
+
     
     // 协议内容
     
-    
+    var popTextView:PopTextView = PopTextView()
     private lazy var register:registerView = {
         let view = registerView()
         view.setupUI()
@@ -83,7 +84,11 @@ class registerViewController: UIViewController,UITextFieldDelegate {
         }
     }
     @objc func ClickProtocol(){
-        
+        self.popTextView.whiteViewEndFrame = CGRect.init(x: 20, y: 100, width: AJScreenWidth - AJScreenWidth/8, height: AJScreenHeight - 300)
+        self.popTextView.addAnimate()
+        //                    self.popTextView.textStr = "message"
+        self.popTextView.oneBtn.addTarget(self, action: #selector(self.oneBtn4Click), for: UIControl.Event.touchUpInside)
+        self.popTextView.bbtn.addTarget(self, action: #selector(self.oneBtn4Click), for: .touchUpInside)
     }
     
     
@@ -228,7 +233,13 @@ class registerViewController: UIViewController,UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
-    
+    @objc func oneBtn4Click(btn:UIButton){
+        //        self.dataMarr.replaceObject(at: 4, with: self.popTextView.textView.text)
+        self.popTextView.tapBtnAndcancelBtnClick()
+        self.popTextView.textView.text = ""
+        let indexPath: IndexPath = NSIndexPath.init(row: 4, section: 0) as IndexPath
+        //        tableView.reloadRows(at: [0,0], with: UITableView.RowAnimation.none)
+    }
 //    func textFieldDidBeginEditing(_ textField: UITextField) {
 //        UIView.animate(withDuration: 0.4, animations: {
 //            self.register.frame.origin.y = -150

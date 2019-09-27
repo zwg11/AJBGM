@@ -39,7 +39,7 @@ class registerView: UIView {
         let imageView = UIImageView(image: UIImage(named: "email"))
         textField.leftView = imageView
         textField.leftViewMode = .always
-//        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
+
         return textField
     }()
     
@@ -51,7 +51,7 @@ class registerView: UIView {
         let imageView = UIImageView(image: UIImage(named: "email"))
         textField.leftView = imageView
         textField.leftViewMode = .always
-//        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
+
         return textField
     }()
     
@@ -74,7 +74,7 @@ class registerView: UIView {
         let imageView = UIImageView(image: UIImage(named: "email"))
         textField.leftView = imageView
         textField.leftViewMode = .always
-//        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
+
         return textField
     }()
     
@@ -87,7 +87,7 @@ class registerView: UIView {
         let imageView = UIImageView(image: UIImage(named: "email"))
         textField.leftView = imageView
         textField.leftViewMode = .always
-//        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
+
         return textField
     }()
     //免责条例的Logo
@@ -242,14 +242,14 @@ class registerView: UIView {
         
         self.addSubview(NoResponseProtocolLogo)
         NoResponseProtocolLogo.snp.makeConstraints{ (make) in
-            make.height.equalTo(10)
-            make.width.equalTo(AJScreenWidth/20)
+            make.height.equalTo(20)
+            make.width.equalTo(AJScreenWidth/18)
             make.left.equalTo(AJScreenWidth/15)
             make.top.equalTo(line_frame4.snp.bottom).offset(5)
         }
         self.addSubview(NoResponseProtocolInfo)
         NoResponseProtocolInfo.snp.makeConstraints{ (make) in
-            make.height.equalTo(10)
+            make.height.equalTo(20)
             make.width.equalTo(AJScreenWidth)
             make.left.equalTo(NoResponseProtocolLogo.snp.right).offset(1)
             make.right.equalTo(-AJScreenWidth/15)

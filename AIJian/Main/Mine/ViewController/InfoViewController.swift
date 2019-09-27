@@ -248,7 +248,8 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
                 pickerView.pickerViewShow()
                 num = 4
             case 5:
-                inputNation()  //国家
+                let pickerView = BHJPickerView.init(self, .country)   //国家
+                pickerView.pickerViewShow()
                 num = 5
             case 6:
                 inputPhone()   //电话
@@ -370,32 +371,39 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
     }
     
     //改国家
-    func inputNation(){
-        let alertController = UIAlertController(title: "请输入国家",message: "",
-                                                preferredStyle: .alert)
-        alertController.addTextField {
-            (textField: UITextField!) -> Void in
-            textField.placeholder = "国家"
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let okAction = UIAlertAction(title: "Sure", style: .default, handler: {
-            action in
-            let UserName = alertController.textFields!.first!
-            if String(UserName.text!) == ""  {  //||  String(UserName.text!) == "0"
-                print("国家，什么事情，也不干")
-            }else{
-                self.infoDataArray[5] = UserName.text!
-                print("国家num是多少",self.num)
-                self.updateSth = true
-                self.tableview.reloadRows(at: [IndexPath(row:self.num,section:0)], with: .fade)
-                // print("用户名：\(String(describing: UserName.text)) ")
-            }
-            
-        })
-        alertController.addAction(cancelAction)
-        alertController.addAction(okAction)
-        self.present(alertController, animated: true, completion: nil)
+    func selectedCountry(_ pickerView: BHJPickerView, _ countryStr: String) {
+        let message = countryStr
+        self.infoDataArray[5] = message
+        self.tableview.reloadRows(at: [IndexPath(row:self.num,section:0)], with: .fade)
+        print(message)
+        self.updateSth = true
     }
+//    func inputNation(){
+//        let alertController = UIAlertController(title: "请输入国家",message: "",
+//                                                preferredStyle: .alert)
+//        alertController.addTextField {
+//            (textField: UITextField!) -> Void in
+//            textField.placeholder = "国家"
+//        }
+//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+//        let okAction = UIAlertAction(title: "Sure", style: .default, handler: {
+//            action in
+//            let UserName = alertController.textFields!.first!
+//            if String(UserName.text!) == ""  {  //||  String(UserName.text!) == "0"
+//                print("国家，什么事情，也不干")
+//            }else{
+//                self.infoDataArray[5] = UserName.text!
+//                print("国家num是多少",self.num)
+//                self.updateSth = true
+//                self.tableview.reloadRows(at: [IndexPath(row:self.num,section:0)], with: .fade)
+//                // print("用户名：\(String(describing: UserName.text)) ")
+//            }
+//
+//        })
+//        alertController.addAction(cancelAction)
+//        alertController.addAction(okAction)
+//        self.present(alertController, animated: true, completion: nil)
+//    }
     
     //改电话
     func inputPhone(){
@@ -425,20 +433,20 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
         self.present(alertController, animated: true, completion: nil)
     }
     
-    func selectedBlood(_ pickerView: BHJPickerView, _ bloodStr: String) {
-        
-    }
-    
-    func selectedWeight(_ pickerView: BHJPickerView, _ weightStr: String) {
-        
-    }
-    
-    func selectedPressure(_ pickerView: BHJPickerView, _ pressureStr: String) {
-        
-    }
-    func selectedAddress(_ pickerView: BHJPickerView, _ procince: AddressModel, _ city: AddressModel, _ area: AddressModel) {
-      //选择地址
-    }
+//    func selectedBlood(_ pickerView: BHJPickerView, _ bloodStr: String) {
+//
+//    }
+//
+//    func selectedWeight(_ pickerView: BHJPickerView, _ weightStr: String) {
+//
+//    }
+//
+//    func selectedPressure(_ pickerView: BHJPickerView, _ pressureStr: String) {
+//
+//    }
+//    func selectedAddress(_ pickerView: BHJPickerView, _ procince: AddressModel, _ city: AddressModel, _ area: AddressModel) {
+//      //选择地址
+//    }
     
   
 }
