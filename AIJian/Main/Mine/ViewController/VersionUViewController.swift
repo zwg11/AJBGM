@@ -101,11 +101,6 @@ extension VersionUViewController:UITableViewDelegate,UITableViewDataSource{
                     print("第五行")
                }
           }
-        //    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        //        let footview = UIView()
-        //        footview.backgroundColor = FooterViewColor
-        //        return footview
-        //    }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return AJScreenHeight/15
     }

@@ -4,7 +4,7 @@
 //
 //  Created by ADMIN on 2019/9/8.
 //  Copyright © 2019 xiaozuo. All rights reserved.
-//
+//  反馈中，用到的国家组件
 
 import UIKit
 
@@ -33,7 +33,6 @@ class nationComponent: UIView {
     
     func  setupUI(title:String){
         self.frame = CGRect(x: 0, y: 0, width: AJScreenWidth, height: AJScreenHeight/15)
-        print("调用了组件层")
         nationButton.setTitle(title, for: .normal)
         
         self.addSubview(imageView)

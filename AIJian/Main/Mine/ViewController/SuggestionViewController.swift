@@ -36,7 +36,7 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
     //放对应的内容
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        print("获得tableview的内容")
+      
         switch indexPath.row {
         case 0:
             let cell = UITableViewCell(style: .default, reuseIdentifier: id)
@@ -64,8 +64,6 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
             let cell = UITableViewCell(style: .default, reuseIdentifier: id)
             nationCp.setupUI(title: "China")
             nationCp.nationButton.addTarget(self, action:#selector(selectNation) , for: .touchUpInside)
-//            nationComponent.textField.delegate = self
-//            nationComponent.setupUI(title: "请输入国家")
             cell.contentView.addSubview(nationCp)
             cell.selectionStyle = .none
             cell.textLabel?.textColor = TextColor
@@ -87,7 +85,6 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
         self.title = "Suggestion"
         self.view.backgroundColor = ThemeColor
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title:"back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back))
-        print("到达意见反馈页。。。。。。。。。。。。")
         
         content_field.placeholder = "Please Enter Your Comments"
         content_field.backgroundColor = ThemeColor
@@ -104,9 +101,7 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
             make.right.equalTo(-AJScreenWidth/15)
             make.top.equalTo(topLayoutGuide.snp.bottom).offset(10)
         }
-        
-        
-//        sugTableView.frame = CGRect(x:0, y:navigationBarHeight+AJScreenHeight/5+5,width: AJScreenWidth,height: AJScreenHeight/5)
+
         sugTableView.delegate = self
         sugTableView.dataSource = self
         sugTableView.backgroundColor = ThemeColor
@@ -135,12 +130,9 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
             make.right.equalTo(-AJScreenWidth/15)
             make.top.equalTo(sugTableView.snp.bottom).offset(AJScreenHeight/7)
         }
-        
-        
     }
     
     @objc func selectNation(){
-        print("选择国家")
         let pickerView = BHJPickerView.init(self, .country)
         pickerView.pickerViewShow()
     }
@@ -158,21 +150,14 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
          let alert = CustomAlertController()
         
         if content_field.text! == ""{
-            print("内容不能为空！")
-            alert.custom(self, "Attention", "内容不能为空！")
+            alert.custom(self, "Attention", "Feedback Empty！")
             return
         }
         print(content_field.text!.count)
         if content_field.text!.count >= 300{
-            print("输入的字数不能超过300！")
-            alert.custom(self, "Attention", "输入的字数不能超过300！")
+            alert.custom(self, "Attention", "Words should be less than 300！")
             return
         }
-//        if emailCommponent.textField.text! == ""{
-//            print("为了方便我们联系您，邮箱不能为空！")
-//            alert.custom(self, "Attention", "内容不能为空！")
-//            return
-//        }
         
         //网络请求
         let dictString:Dictionary = [ "email":String(emailCommponent.textField.text!),"phoneNumber":String(telephoneCommponent.textField.text!),"country":String(country),"feedback":String(content_field.text!),"token":UserInfo.getToken(),"userId":UserInfo.getUserId()] as [String : Any]
@@ -190,21 +175,19 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
                         
                         /*  此处为跳转和控制逻辑*/
                         if(responseModel.code == 1 ){
-                            print("密码修改成功")
-                            alert.custom(self,"Attention", "反馈成功，感谢您的反馈！")
+                            alert.custom(self,"Attention", "Submitted.Thanks for your feedback！")
                             self.content_field.text! = ""
                             self.emailCommponent.textField.text! = ""
                             self.telephoneCommponent.textField.text! = ""
-//                            self.nationComponent.textField.text! = ""
                             self.navigationController?.popViewController(animated: true)
                         }else{
-                            alert.custom(self,"Attention", "反馈失败！")
+                            alert.custom(self,"Attention", "Sorry.Feedback Failure！")
                             self.navigationController?.popViewController(animated: true)
                         }
                     }
                 }
             }else{
-                alert.custom(self,"Attention", "网络异常")
+                alert.custom(self,"Attention", "Internet Error")
             }
     }
 }

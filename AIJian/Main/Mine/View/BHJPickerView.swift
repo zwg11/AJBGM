@@ -56,13 +56,6 @@ class BHJPickerView: UIView , UIPickerViewDelegate, UIPickerViewDataSource{
     //存储数据信息，用来统一存放数据
     private var dataArray : NSMutableArray = NSMutableArray()
     
-    //存储城市信息
-//    private var cityArray : NSMutableArray = NSMutableArray()
-//    //存储地区信息
-//    private var districtArray : NSMutableArray = NSMutableArray()
-//    private var selectedProvince : AddressModel = AddressModel()
-//    private var selectedCity : AddressModel = AddressModel()
-//    private var selectedDistrict : AddressModel = AddressModel()
     //存储性别
     private var selectedGender : String = String()
     //存储血糖
@@ -93,7 +86,7 @@ class BHJPickerView: UIView , UIPickerViewDelegate, UIPickerViewDataSource{
         let cancelButton = UIButton.init(type: UIButton.ButtonType.custom)
         cancelButton.frame = CGRect.init(x: 0, y: 0, width: 60, height: 44)
         cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-        cancelButton.setTitle("取 消", for: UIControl.State.normal)
+        cancelButton.setTitle("Cancel", for: UIControl.State.normal)
         cancelButton.setTitleColor(kRGBColor(18, 93, 255, 1), for: UIControl.State.normal)
         cancelButton.addTarget(self, action: #selector(cancelButtonClick), for: UIControl.Event.touchUpInside)
         self.addSubview(cancelButton)
@@ -102,7 +95,7 @@ class BHJPickerView: UIView , UIPickerViewDelegate, UIPickerViewDataSource{
         let doneButton = UIButton.init(type: UIButton.ButtonType.custom)
         doneButton.frame = CGRect.init(x: AJScreenWidth - 60, y: 0, width: 60, height: 44)
         doneButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-        doneButton.setTitle("确 定", for: UIControl.State.normal)
+        doneButton.setTitle("Ok", for: UIControl.State.normal)
         doneButton.setTitleColor(kRGBColor(18, 93, 255, 1), for: UIControl.State.normal)
         doneButton.addTarget(self, action: #selector(doneButtonClick), for: UIControl.Event.touchUpInside)
         self.addSubview(doneButton)
@@ -113,15 +106,6 @@ class BHJPickerView: UIView , UIPickerViewDelegate, UIPickerViewDataSource{
         backgroundButton.backgroundColor = kRGBColor(0, 0, 0, 0)
         backgroundButton.addTarget(self, action: #selector(cancelButtonClick), for: UIControl.Event.touchUpInside)
         switch style {
-//            case .address:
-//                addressPicker = UIPickerView.init(frame: CGRect.init(x: 0, y: 44, width: AJScreenWidth, height: pickerH - 44))
-//                addressPicker.delegate = self
-//                addressPicker.dataSource = self
-//                addressPicker.backgroundColor = UIColor.white
-////                isAddress = true
-//                List = 0
-//                self.addSubview(addressPicker)
-//
             case .date:
                 datePicker = UIDatePicker.init(frame: CGRect.init(x: 0, y: 44, width: AJScreenWidth, height: pickerH - 44))
                 datePicker.datePickerMode = UIDatePicker.Mode.date
@@ -177,7 +161,7 @@ class BHJPickerView: UIView , UIPickerViewDelegate, UIPickerViewDataSource{
 //                case 0:
 //                    self.getAddressData()
                 case 0:  //性别
-                    dataArray = NSMutableArray.init(array: ["男","女"])
+                    dataArray = NSMutableArray.init(array: ["Male","Female"])
                     self.pickerView(genderPicker, didSelectRow: 0, inComponent: 0)
                 case 1: //血糖
                     dataArray = NSMutableArray.init(array: ["mg/dL","mmol/L"])
@@ -234,29 +218,6 @@ class BHJPickerView: UIView , UIPickerViewDelegate, UIPickerViewDataSource{
         
     }
     
-    /// 读取省市区数据
-//    func getAddressData() {
-//
-//        dataArray.removeAllObjects()
-//        let path = Bundle.main.path(forResource:"city", ofType: "json")
-//        let url = URL(fileURLWithPath: path!)
-//        let addressData = NSData.init(contentsOf: url)
-//        let addressDic = try! JSONSerialization.jsonObject(with: addressData! as Data, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSArray
-//        let dic = addressDic.object(at: 0) as! NSDictionary
-//        let provinceArray = dic["childs"] as! NSArray
-//        for i in 0..<provinceArray.count {
-//            let provinceDic = provinceArray.object(at: i) as! NSDictionary
-//            let provinceM = AddressModel.init()
-//            provinceM.region_name = (provinceDic["region_name"] as? String)
-//            provinceM.region_id = (provinceDic["region_id"] as! String)
-//            provinceM.agency_id = (provinceDic["agency_id"] as? String)
-//            provinceM.parent_id = (provinceDic["parent_id"] as! String)
-//            provinceM.region_type = (provinceDic["region_type"] as! String)
-//            provinceM.childs = (provinceDic["childs"] as! [NSDictionary])
-//            self.dataArray.add(provinceM)
-//        }
-//        self.pickerView(addressPicker, didSelectRow: 0, inComponent: 0)
-//    }
     /// 展示pickerView
     public func pickerViewShow() {
         
@@ -304,17 +265,6 @@ class BHJPickerView: UIView , UIPickerViewDelegate, UIPickerViewDataSource{
     ///   - component: 列
     /// - Returns: 行
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        
-//        switch List {
-//            case 0:
-//                if component == 0{
-//                    return dataArray.count
-//                }else if component == 1{
-//                    return cityArray.count
-//                }else{
-//                    return districtArray.count
-//                }
-//            default:
                 return dataArray.count
 //        }
     }
@@ -328,22 +278,6 @@ class BHJPickerView: UIView , UIPickerViewDelegate, UIPickerViewDataSource{
     /// - Returns: title
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         var title = ""
-//        switch List {
-//        case 0:
-//            if component == 0{
-//                let provinceM = dataArray[row] as! AddressModel
-//                title = provinceM.region_name ?? "未知"
-//                return title
-//            }else if component == 1{
-//                let cityModel = cityArray[row] as! AddressModel
-//                title = cityModel.region_name ?? "未知"
-//                return title
-//            }else{
-//                let areaModel = districtArray[row] as! AddressModel
-//                title = areaModel.region_name ?? "未知"
-//                return title
-//            }
-//        default:
             title = dataArray[row] as! String
             return title
         
@@ -358,46 +292,6 @@ class BHJPickerView: UIView , UIPickerViewDelegate, UIPickerViewDataSource{
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         switch List{
-//        case 0:
-//            if component == 0 {
-//                let provinceM = dataArray[row] as! AddressModel
-//                let cityDicArray = provinceM.childs!
-//                cityArray.removeAllObjects()
-//                for j in 0..<cityDicArray.count {
-//                    let cityDic = cityDicArray[j]
-//                    let cityM = AddressModel.init()
-//                    cityM.region_name = (cityDic["region_name"] as? String)
-//                    cityM.region_id = (cityDic["region_id"] as! String)
-//                    cityM.agency_id = (cityDic["agency_id"] as? String)
-//                    cityM.parent_id = (cityDic["parent_id"] as! String)
-//                    cityM.region_type = (cityDic["region_type"] as! String)
-//                    cityM.childs = (cityDic["childs"] as! [NSDictionary])
-//                    cityArray.add(cityM)
-//                }
-//                // 默认选择当前省的第一个城市对应的区县
-//                self.pickerView(pickerView, didSelectRow: 0, inComponent: 1)
-//                selectedProvince = provinceM
-//            }else if component == 1 {
-//                let cityModel = cityArray[row] as! AddressModel
-//                let areaArray = cityModel.childs!
-//                districtArray.removeAllObjects()
-//                for j in 0..<areaArray.count {
-//                    let areaDic = areaArray[j]
-//                    let areaModel = AddressModel.init()
-//                    areaModel.region_name = (areaDic["region_name"] as? String)
-//                    areaModel.region_id = (areaDic["region_id"] as! String)
-//                    areaModel.agency_id = (areaDic["agency_id"] as? String)
-//                    areaModel.parent_id = (areaDic["parent_id"] as! String)
-//                    areaModel.region_type = (areaDic["region_type"] as! String)
-//                    districtArray.add(areaModel)
-//                }
-//                selectedCity = cityModel
-//                self.pickerView(pickerView, didSelectRow: 0, inComponent: 2)
-//            }else{
-//                let areaModel = districtArray[row] as! AddressModel
-//                selectedDistrict = areaModel
-//            }
-//            pickerView.reloadAllComponents()
         case 0:
             selectedGender = dataArray[row] as! String
         case 1:

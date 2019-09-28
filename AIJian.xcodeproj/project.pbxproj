@@ -86,7 +86,6 @@
 		AFB0A1406BF5F638E880614AD3D8E27A /* portionAndInsulinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67C5D050C5D9478AF306B5A049428F1 /* portionAndInsulinView.swift */; };
 		B15AA473274039A45723EF4FC67E8107 /* UnitConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C52F310EC78F0CAFCE223C140C228D /* UnitConversion.swift */; };
 		B19FE207427413DEE020EE6B205B6B9D /* PlistSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C52548A79BC012285A79353950AF46 /* PlistSet.swift */; };
-		B1B7D2822DE19C1364753E125637AD19 /* AddressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A6EB8D8F032AF1FFD6D1E5AC4852B8 /* AddressModel.swift */; };
 		B43A43DAFE36319300153E43EA4E4E05 /* sugComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB165FA9B5B4F5C13436FA707111C57 /* sugComponent.swift */; };
 		B72572AB691BA264ED8800ADFB4F6B02 /* averageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E6BF264A7759F39EE60E2FC55F2DB6 /* averageView.swift */; };
 		B83598611557B254549833AC919D9A79 /* userModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B094C4B18BB5F0C34595C39C01AC2B /* userModel.swift */; };
@@ -233,7 +232,6 @@
 		AF99105C98E070F5A2AB3295DDBB3B84 /* Pods_AIJian.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AIJian.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFAB4AF4474CEF20E35E879F280D6EE7 /* nationComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nationComponent.swift; sourceTree = "<group>"; };
 		B0B9B3028D87CFA7B2325B82FADAD9A7 /* DataTableViewOfHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTableViewOfHeader.swift; sourceTree = "<group>"; };
-		B1A6EB8D8F032AF1FFD6D1E5AC4852B8 /* AddressModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddressModel.swift; path = AIJian/Main/Mine/View/AddressModel.swift; sourceTree = SOURCE_ROOT; };
 		B67C5D050C5D9478AF306B5A049428F1 /* portionAndInsulinView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = portionAndInsulinView.swift; sourceTree = "<group>"; };
 		B7C52F310EC78F0CAFCE223C140C228D /* UnitConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConversion.swift; sourceTree = "<group>"; };
 		B9FC2F51C9CAE9D3C768C8D06AE069A2 /* const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = const.swift; sourceTree = "<group>"; };
@@ -374,7 +372,6 @@
 			children = (
 				3B122EE08303781538E0581FB9B0AF84 /* AJMineHeaderView.swift */,
 				A753E7B0055447EE4F602E4DC552B128 /* AJMineTableView.swift */,
-				B1A6EB8D8F032AF1FFD6D1E5AC4852B8 /* AddressModel.swift */,
 				DE608F63498A45B84C3679D6251C8601 /* BHJPickerView.swift */,
 				045FCCE2115285505EA4034A4B5AD8DF /* HZtextview.swift */,
 				3ACDB27DDBFA6BA1FEA8A6864CE435C5 /* NSDate+Date.swift */,
@@ -900,7 +897,6 @@
 				D73159906BF596032A3B3FB75BFF3023 /* AJStartView.swift in Sources */,
 				F0CC7B621011F02A6C445F2D4CFD4002 /* AJTabbarController.swift in Sources */,
 				AB27A7600A1A69D96B3C0BDEEBA411E6 /* AboutUsViewController.swift in Sources */,
-				B1B7D2822DE19C1364753E125637AD19 /* AddressModel.swift in Sources */,
 				82229929AE907526C16AFB7C3B976565 /* AppDelegate.swift in Sources */,
 				84847BC2FE082A7DD9416B04C6429EAB /* BHJPickerView.swift in Sources */,
 				BC83B1437A56BCF7C847128796026D49 /* BLEViewController.swift in Sources */,

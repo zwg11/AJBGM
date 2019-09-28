@@ -317,7 +317,7 @@ class UnitViewController: UIViewController {
         print("PressureUnit",data["PressureUnit"]!)
     }
     @objc private func ClickMmolButton(){
-        currentBloodUnit = "mmol/L"
+        currentGlucoseUnit = "mmol/L"
         mmol_Button.backgroundColor = ButtonColor
         mmol_Button.setTitleColor(UIColor.white, for: .normal)
         mmol_Button.layer.borderWidth = 0.5
@@ -330,7 +330,7 @@ class UnitViewController: UIViewController {
     }
     
     @objc private func ClickMgButton(){
-        currentBloodUnit = "mg/dL"
+        currentGlucoseUnit = "mg/dL"
         mg_Button.backgroundColor = ButtonColor
         mg_Button.setTitleColor(UIColor.white, for: .normal)
         mg_Button.layer.borderWidth = 0.5
@@ -380,6 +380,7 @@ class UnitViewController: UIViewController {
         KPa_Button.layer.borderWidth = 0.5
         KPa_Button.layer.borderColor = unselectedTextColor.cgColor
     }
+    
     @objc private func ClickKpaButton(){
         currentBloodUnit = "KPa"
         KPa_Button.backgroundColor = ButtonColor
@@ -406,7 +407,7 @@ class UnitViewController: UIViewController {
         //接着写入到文件中
         data.write(toFile: path, atomically: true)
         let alert = CustomAlertController()
-        alert.custom(self, "Attention", "保存成功！")
+        alert.custom(self, "Attention", "Save Success！")
         
     }
     

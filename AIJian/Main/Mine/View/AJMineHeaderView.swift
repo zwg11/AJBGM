@@ -23,7 +23,7 @@ class AJMineHeaderView:UITableViewCell{
     //点击登录,label无法直接添加addtarger
     lazy var textButton:UIButton = {
         let button = UIButton()
-        button.setTitle("Click Login", for: .init())
+        button.setTitle("", for: .init())
 //        button.backgroundColor = UIColor.init(red:18.0/255.0,green: 73/255.0,blue:212/255.0,alpha: 1)
         button.titleLabel?.font = UIFont.systemFont(ofSize:20)
         button.titleLabel?.textColor = MineNameTextColor

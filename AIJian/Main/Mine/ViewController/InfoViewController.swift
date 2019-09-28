@@ -29,9 +29,12 @@ class InfoViewController: UIViewController ,PickerDelegate{
     func initInfoDataArray(){
         let userInfo = DBSQLiteManager.manager.selectUserRecord(userId: UserInfo.getUserId())
         infoDataArray[0] = userInfo.user_name ?? ""
-        if (userInfo.height != nil){
-            infoDataArray[1] = (userInfo.height! == 0) ? "男":"女"
-        }
+        //0为女
+        infoDataArray[1] = (userInfo.gender! == 0) ? "Female":"Male"
+        
+//        if (userInfo.height != nil){
+//            infoDataArray[1] = (userInfo.height! == 0) ? "男":"女"
+//        }
         
         if GetUnit.getWeightUnit() == "kg"{
             infoDataArray[2] = (userInfo.weight_kg != nil) ? "\(userInfo.weight_kg!)":""
@@ -87,7 +90,7 @@ class InfoViewController: UIViewController ,PickerDelegate{
         var updateUserInfo = USER_UPDATE()
         updateUserInfo.email = UserInfo.getEmail()
         updateUserInfo.userName = (infoDataArray[0] == "") ? nil:infoDataArray[0]
-        updateUserInfo.gender = (infoDataArray[1] == "男") ? 0:1
+        updateUserInfo.gender = (infoDataArray[1] == "Male") ? 0:1
         if infoDataArray[2] != ""{
             if GetUnit.getWeightUnit() == "kg"{
                 updateUserInfo.weightKg = Double(infoDataArray[2])
@@ -107,7 +110,6 @@ class InfoViewController: UIViewController ,PickerDelegate{
         Alamofire.request(UPDATE_USERINFO,method: .post,parameters: dictString).responseString{ (response) in
             if response.result.isSuccess {
                 if let jsonString = response.result.value {
-                    print("进入验证过程")
                     print(jsonString)
                     // json转model
                     // 写法一：responseModel.deserialize(from: jsonString)
@@ -117,30 +119,23 @@ class InfoViewController: UIViewController ,PickerDelegate{
                      //                         */
                     if let responseModel = JSONDeserializer<USERINFO_UPDATE_RESPONSE>.deserializeFrom(json: jsonString) {
                         /// model转json 为了方便在控制台查看
-                        print("瞧瞧输出的是什么",responseModel.toJSONString(prettyPrint: true)!)
                         /*  此处为跳转和控制逻辑
                          */
                         if(responseModel.code! == 1 ){
-                            print(responseModel.code!)
-                            print("更新成功")
-                            //print("responseModel.data：\(responseModel.data!)")
-//                            self.navigationController?.popViewController(animated: true)
                             // 向数据库插入数据
                             self.updateUserInfoInSqlite(updateUserInfo)
                             let alert = CustomAlertController()
-                            alert.custom(self, "Attension", "更新用户信息成功")
+                            alert.custom(self, "Attension", "Update Successed")
                         }else{
                             let alert = CustomAlertController()
-                            alert.custom(self, "Attension", "更新用户信息失败")
+                            alert.custom(self, "Attension", "Update Failed")
                             print(responseModel.code!)
-                            print("更新失败")
-                            
                         }
                     } //end of letif
                 }
             }else{
                 let alert = CustomAlertController()
-                alert.custom(self, "Attension", "更新用户信息失败")
+                alert.custom(self, "Attension", "Update Successed")
             }
         }//end of request
     }
@@ -182,9 +177,6 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
     }
     //每一个cell，里面的内容
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("到达个人信息页", indexPath)
-        print("section",indexPath.section)
-        print("row",indexPath.row)
         //根据注册的cell类ID值获取到载体cell
         var cell = tableView.dequeueReusableCell(withIdentifier: "infocell")
 
@@ -256,8 +248,6 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
                 num = 6
             default:
                 inputUserName()
-                //let pickerView = BHJPickerView.init(self, .address)
-                //pickerView.pickerViewShow()
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
@@ -269,25 +259,22 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
     
     //输入用户名
     @objc func inputUserName(){
-        let alertController = UIAlertController(title: "请输入用户名",message: "",
+        let alertController = UIAlertController(title: "Please Enter Name",message: "",
                                                 preferredStyle: .alert)
         alertController.addTextField {
             (textField: UITextField!) -> Void in
-            textField.placeholder = "用户名"
+//            textField.placeholder = "用户名"
         }
-        let cancelAction = UIAlertAction(title: "cancel", style: .cancel, handler: nil)
-        let okAction = UIAlertAction(title: "好的", style: .default, handler: {
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: {
             action in
             let UserName = alertController.textFields!.first!
-            if String(UserName.text!) == ""  {  //||  String(UserName.text!) == "0"
-                print("用户名，什么事情，也不干")
+            if String(UserName.text!) == ""  {
+             
             }else{
                 self.infoDataArray[0] = UserName.text!
-                print("用户名num是多少",self.num)
-                
                 self.tableview.reloadRows(at: [IndexPath(row:self.num,section:0)], with: .fade)
                 self.updateSth = true
-                // print("用户名：\(String(describing: UserName.text)) ")
             }
            
         })
@@ -306,24 +293,21 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
     }
     //改体重
     func inputWeight(){
-        let alertController = UIAlertController(title: "请输入体重",message: "",
+        let alertController = UIAlertController(title: "Please Enter Weight",message: "",
                                                 preferredStyle: .alert)
         alertController.addTextField {
             (textField: UITextField!) -> Void in
-            textField.placeholder = "体重"
+//            textField.placeholder = "体重"
         }
-        let cancelAction = UIAlertAction(title: "cancel", style: .cancel, handler: nil)
-        let okAction = UIAlertAction(title: "Sure", style: .default, handler: {
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: {
             action in
             let UserName = alertController.textFields!.first!
-            if String(UserName.text!) == ""  {  //||  String(UserName.text!) == "0"
-                print("体重，什么事情，也不干")
+            if String(UserName.text!) == ""  {
             }else{
                 self.infoDataArray[2] = UserName.text!
-                print("体重num是多少",self.num)
                 self.updateSth = true
                 self.tableview.reloadRows(at: [IndexPath(row:self.num,section:0)], with: .fade)
-                // print("用户名：\(String(describing: UserName.text)) ")
             }
             
         })
@@ -334,21 +318,19 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
     
     //改身高
     func inputHeight(){
-        let alertController = UIAlertController(title: "请输入身高",message: "",
+        let alertController = UIAlertController(title: "Please Enter Height",message: "",
                                                 preferredStyle: .alert)
         alertController.addTextField {
             (textField: UITextField!) -> Void in
-            textField.placeholder = "身高"
+//            textField.placeholder = "身高"
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let okAction = UIAlertAction(title: "Sure", style: .default, handler: {
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: {
             action in
             let UserName = alertController.textFields!.first!
-            if String(UserName.text!) == ""  {  //||  String(UserName.text!) == "0"
-                print("身高，什么事情，也不干")
+            if String(UserName.text!) == ""  {
             }else{
                 self.infoDataArray[3] = UserName.text!
-                print("这个num是多少",self.num)
                 self.updateSth = true
                 self.tableview.reloadRows(at: [IndexPath(row:self.num,section:0)], with: .fade)
                 // print("用户名：\(String(describing: UserName.text)) ")
@@ -364,7 +346,6 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
     func selectedDate(_ pickerView: BHJPickerView, _ dateStr: Date) {
         let messge = Date().dateStringWithDate(dateStr)
         self.infoDataArray[4] = messge
-        print("点击生日num是多少",self.num)
         self.tableview.reloadRows(at: [IndexPath(row:self.num,section:0)], with: .fade)
         print(messge)
         self.updateSth = true
@@ -378,53 +359,24 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
         print(message)
         self.updateSth = true
     }
-//    func inputNation(){
-//        let alertController = UIAlertController(title: "请输入国家",message: "",
-//                                                preferredStyle: .alert)
-//        alertController.addTextField {
-//            (textField: UITextField!) -> Void in
-//            textField.placeholder = "国家"
-//        }
-//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-//        let okAction = UIAlertAction(title: "Sure", style: .default, handler: {
-//            action in
-//            let UserName = alertController.textFields!.first!
-//            if String(UserName.text!) == ""  {  //||  String(UserName.text!) == "0"
-//                print("国家，什么事情，也不干")
-//            }else{
-//                self.infoDataArray[5] = UserName.text!
-//                print("国家num是多少",self.num)
-//                self.updateSth = true
-//                self.tableview.reloadRows(at: [IndexPath(row:self.num,section:0)], with: .fade)
-//                // print("用户名：\(String(describing: UserName.text)) ")
-//            }
-//
-//        })
-//        alertController.addAction(cancelAction)
-//        alertController.addAction(okAction)
-//        self.present(alertController, animated: true, completion: nil)
-//    }
     
     //改电话
     func inputPhone(){
-        let alertController = UIAlertController(title: "请输入电话",message: "",
+        let alertController = UIAlertController(title: "Please Enter Phone",message: "",
                                                 preferredStyle: .alert)
         alertController.addTextField {
             (textField: UITextField!) -> Void in
-            textField.placeholder = "电话"
+//            textField.placeholder = "电话"
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let okAction = UIAlertAction(title: "Sure", style: .default, handler: {
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: {
             action in
             let UserName = alertController.textFields!.first!
-            if String(UserName.text!) == ""  {  //||  String(UserName.text!) == "0"
-                print("电话，什么事情，也不干")
+            if String(UserName.text!) == ""  {
             }else{
                 self.infoDataArray[6] = UserName.text!
-                print("电话num是多少",self.num)
                 self.updateSth = true
                 self.tableview.reloadRows(at: [IndexPath(row:self.num,section:0)], with: .fade)
-                // print("用户名：\(String(describing: UserName.text)) ")
             }
             
         })
@@ -433,20 +385,4 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
         self.present(alertController, animated: true, completion: nil)
     }
     
-//    func selectedBlood(_ pickerView: BHJPickerView, _ bloodStr: String) {
-//
-//    }
-//
-//    func selectedWeight(_ pickerView: BHJPickerView, _ weightStr: String) {
-//
-//    }
-//
-//    func selectedPressure(_ pickerView: BHJPickerView, _ pressureStr: String) {
-//
-//    }
-//    func selectedAddress(_ pickerView: BHJPickerView, _ procince: AddressModel, _ city: AddressModel, _ area: AddressModel) {
-//      //选择地址
-//    }
-    
-  
 }

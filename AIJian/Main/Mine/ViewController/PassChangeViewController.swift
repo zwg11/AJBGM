@@ -26,19 +26,11 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
             text_email.backgroundColor = UIColor.red
             return text_email
         }()
-//
-//        lazy var oldPasswd_label:UILabel = {
-//            let oldPasswd_label = UILabel(frame: CGRect())
-//            oldPasswd_label.text = "旧 密 码"
-//            oldPasswd_label.font = UIFont.systemFont(ofSize: 18)
-//            return oldPasswd_label
-//        }()
     
         lazy var oldPasswd_textF:UITextField = {
             let oldPasswd_textF = UITextField()
             oldPasswd_textF.font = UIFont.systemFont(ofSize: 16)
             oldPasswd_textF.placeholder="Old Password"
-//            oldPasswd_textF.keyboardType = .default
             oldPasswd_textF.isSecureTextEntry = true
             oldPasswd_textF.allowsEditingTextAttributes = false
             oldPasswd_textF.borderStyle = .none
@@ -47,8 +39,6 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
             oldPasswd_textF.leftViewMode = .always
             let str:NSMutableAttributedString = NSMutableAttributedString(string: "Old Password", attributes: [NSAttributedString.Key.foregroundColor:TextColor])
             oldPasswd_textF.attributedPlaceholder = str
-            
-//            oldPasswd_textF.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
             return oldPasswd_textF
         }()
     
@@ -64,7 +54,6 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
             newPasswd_textF.leftViewMode = .always
             let str:NSMutableAttributedString = NSMutableAttributedString(string: "New Password", attributes: [NSAttributedString.Key.foregroundColor:TextColor])
             newPasswd_textF.attributedPlaceholder = str
-//            newPasswd_textF.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
             return newPasswd_textF
         }()
     
@@ -80,7 +69,6 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
             verfiedPasswd_textF.leftViewMode = .always
             let str:NSMutableAttributedString = NSMutableAttributedString(string: "Confirm the Password", attributes: [NSAttributedString.Key.foregroundColor:TextColor])
             verfiedPasswd_textF.attributedPlaceholder = str
-//            verfiedPasswd_textF.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
             return verfiedPasswd_textF
         }()
     
@@ -111,58 +99,7 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
             self.title = "Change Password"
             self.view.backgroundColor = ThemeColor
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(title:"back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back))
-            if AJScreenHeight == 812{
-                print("相等")
-            }else{
-                print("不相等")
-            }
-            print("iphone x 的高度",AJScreenHeight)
-            
-            
-//            /*第一行开始*/
-//            let email_label = UILabel(frame: CGRect())
-//            email_label.text = ""
-//            email_label.font = UIFont.systemFont(ofSize: 18)
-//            self.view.addSubview(email_label)
-//            email_label.snp.makeConstraints{ (make) in
-//                make.height.equalTo(AJScreenHeight/15)
-//                make.width.equalTo(AJScreenWidth/5)
-//                make.left.equalTo(AJScreenWidth/15)
-//                make.top.equalTo(topLayoutGuide.snp.bottom)
-//            }
-//            print("距离上面的高度",navigationBarHeight)
-//
-//            //邮箱信息布局约束
-//            self.view.addSubview(text_email)
-//            text_email.snp.makeConstraints{ (make) in
-//                make.height.equalTo(AJScreenHeight/15)
-//                make.width.equalTo(AJScreenWidth/2)
-//                make.left.equalTo(email_label.snp.right).offset(AJScreenWidth/10)
-//                make.top.equalTo(topLayoutGuide.snp.bottom)
-//            }
-//
-//            //第一条线
-//            let line_frame1 = UIView(frame: CGRect())
-//            line_frame1.backgroundColor = UIColor.black
-//            self.view.addSubview(line_frame1)
-//            line_frame1.snp.makeConstraints{ (make) in
-//                make.height.equalTo(0.5)
-//                make.width.equalTo(AJScreenWidth)
-//                make.left.equalTo(AJScreenWidth/15)
-//                make.top.equalTo(text_email.snp.bottom).offset(1)
-////                make.top.equalTo(navigationBarHeight+AJScreenHeight/15+0.2)
-//            }
-            /*第一行结束*/
-//
-//            //第二行
-//            self.view.addSubview(oldPasswd_label)
-//            oldPasswd_label.snp.makeConstraints{ (make) in
-//                make.left.equalTo(AJScreenWidth/15)
-//                make.height.equalTo(AJScreenHeight/15)
-//                make.width.equalTo(AJScreenWidth/5)
-//                make.top.equalTo(line_frame1.snp.bottom).offset(1)
-//            }
-            
+        
             //旧密码内容
             oldPasswd_textF.delegate = self
             self.view.addSubview(oldPasswd_textF)
@@ -185,18 +122,6 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
                 make.right.equalTo(-AJScreenWidth/15)
                 make.top.equalTo(oldPasswd_textF.snp.bottom).offset(1)
             }
-//            //第三行
-//            let newPasswd_label = UILabel(frame: CGRect())
-//            newPasswd_label.text = "新 密 码"
-//            newPasswd_label.font = UIFont.systemFont(ofSize: 18)
-//            //        newPasswd_label.backgroundColor = UIColor.red
-//            self.view.addSubview(newPasswd_label)
-//            newPasswd_label.snp.makeConstraints{ (make) in
-//                make.left.equalTo(AJScreenWidth/15)
-//                make.height.equalTo(AJScreenHeight/15)
-//                make.width.equalTo(AJScreenWidth/5)
-//                make.top.equalTo(line_frame2.snp.bottom).offset(1)
-//            }
             
             //新密码内容
             newPasswd_textF.delegate = self
@@ -219,20 +144,7 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
                 make.right.equalTo(-AJScreenWidth/15)
                 make.top.equalTo(newPasswd_textF.snp.bottom).offset(1)
             }
-            
-            ////        //第四行
-//            //        let verfiedPasswd_label = UILabel(frame: CGRect())
-//            let verfiedPasswd_label = UILabel(frame: CGRect())
-//            verfiedPasswd_label.text = "确认密码"
-//            verfiedPasswd_label.font = UIFont.systemFont(ofSize: 18)
-//            //        verfiedPasswd_label.backgroundColor = UIColor.red
-//            self.view.addSubview(verfiedPasswd_label)
-//            verfiedPasswd_label.snp.makeConstraints{ (make) in
-//                make.left.equalTo(AJScreenWidth/15)
-//                make.height.equalTo(AJScreenHeight/15)
-//                make.width.equalTo(AJScreenWidth/5)
-//                make.top.equalTo(line_frame3.snp.bottom).offset(1)
-//            }
+
             
             //确认密码
             verfiedPasswd_textF.delegate = self
@@ -283,19 +195,19 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
             
             
             if oldP == ""{
-                alert.custom(self, "Attention", "旧密码不能为空")
+                alert.custom(self, "Attention", "Original Password Empty")
                 return
             }else if newP == ""{
-                alert.custom(self, "Attention", "新密码不能为空")
+                alert.custom(self, "Attention", "New Password Empty")
                 return
             }else if verfiedP == ""{
-                alert.custom(self, "Attention", "确认密码不能为空")
+                alert.custom(self, "Attention", "Confirm Password Empty")
                 return
             }else if FormatMethodUtil.validatePasswd(passwd: verfiedP!) != true{
-                alert.custom(self, "Attention", "新密码强度不够")
+                alert.custom(self, "Attention", "New Password Strength Weak")
                 return
             }else if newP != verfiedP{
-                alert.custom(self, "Attention", "新密码和旧密码不同")
+                alert.custom(self, "Attention", "Passwords Not Match")
                 return
             }else{
                 let dictString:Dictionary = [ "oldPassword":String(oldP!),"newPassword":String(newP!),"email":String(email),"token":String(token),"userId":UserInfo.getUserId()] as [String : Any]
@@ -313,14 +225,13 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
                                 
                                 /*  此处为跳转和控制逻辑*/
                                 if(responseModel.code == 1 ){
-                                    print("密码修改成功")
-                                    alert.custom_cengji(self,"Attention", "密码修改成功")
+                                    alert.custom_cengji(self,"Attention", "Password Reset Success")
                                     self.oldPasswd_textF.text! = ""
                                     self.newPasswd_textF.text! = ""
                                     self.verfiedPasswd_textF.text! = ""
                                 
                                 }else{
-                                    alert.custom_cengji(self,"Attention", "密码修改失败")
+                                    alert.custom_cengji(self,"Attention", "Password Reset Failure")
                                     self.oldPasswd_textF.text! = ""
                                     self.newPasswd_textF.text! = ""
                                     self.verfiedPasswd_textF.text! = ""
@@ -330,7 +241,7 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
                             }
                         }
                     }else{
-                        alert.custom(self,"Attention", "网络异常")
+                        alert.custom(self,"Attention", "Internet Error")
                     }
                 }
             }   

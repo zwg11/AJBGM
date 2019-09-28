@@ -14,18 +14,13 @@ import SnapKit
 class MineViewController: UIViewController {
     
     //列表数据
-    
-    
     let _titleArr = ["User Info","Units Setup","Change Password","Targets Setting","Instructions","About Us","Update"]
     let _imgArr   = ["aboutUs","aboutUs","aboutUs","aboutUs","aboutUs","aboutUs","aboutUs",]
-    
-
     //点击跳转对应页面
     public lazy var clickArray: [UIViewController] = {
         return [InfoViewController(),UnitViewController(),PassChangeViewController(),BloodSetViewController(), UseDirViewController(),AboutUsViewController(),VersionUViewController()
         ]
     }()
-
     
     override func viewWillAppear(_ animated: Bool) {
         // 检查数据库是否有相关用户的信息
@@ -43,41 +38,12 @@ class MineViewController: UIViewController {
         self.view.backgroundColor = ThemeColor
         //将所有按钮添加到scrollview中，还需要修改相对布局
 
-//
-//        let headview = AJMineHeaderView(frame: CGRect(x: 0, y: 0, width: AJScreenWidth, height: AJScreenHeight/5))
-////        headview.setUpUI()
-////        headview.textLabel
-//        headview.textButton.addTarget(self, action: #selector(MineLogin), for: .touchUpInside)
-//
-//        print(headview)
-        
-//        let tableview = AJMineTableView(frame: CGRect(x: 0, y:  AJScreenHeight/5, width: AJScreenWidth, height: AJScreenHeight/3*2))
         let tableview = UITableView(frame: CGRect(x: 0, y:  0, width: AJScreenWidth, height: AJScreenHeight*7/10+AJScreenHeight/5+50))
         //将CELL的标识，在此处进行设置
         tableview.register(UITableViewCell.self, forCellReuseIdentifier:"cell")
         tableview.delegate = self
         tableview.dataSource = self
         tableview.backgroundColor = ThemeColor
-//        tableview.tintColor = ThemeColor
-//        self.view.addSubview(tableview)
-    
-    
-      
-        
-//        let scrollView = UIScrollView(frame: CGRect(x: 0, y: navigationBarHeight, width: AJScreenWidth, height: AJScreenHeight-64))
-//        scrollView.contentSize = CGSize(width: AJScreenWidth, height: AJScreenHeight*7/10+AJScreenHeight/5)
-//
-//        scrollView.showsVerticalScrollIndicator = true
-////        scrollView.addSubview(headview)
-//        scrollView.addSubview(tableview)
-//        scrollView.addSubview(quitButton)
-//        quitButton.snp.makeConstraints{ (make) in
-//            make.top.equalTo(AJScreenHeight-AJScreenHeight/9)
-//            make.centerX.equalToSuperview()
-//            make.height.equalTo(AJScreenHeight/15)
-//            make.width.equalTo(AJScreenWidth)
-//        }
-        
         self.view.addSubview(tableview)
         
     }
@@ -87,8 +53,6 @@ class MineViewController: UIViewController {
         Alamofire.request(USER_INFO_REQUEST,method: .post,parameters: dictString).responseString{ (response) in
             if response.result.isSuccess {
                 if let jsonString = response.result.value {
-                    print("进入验证过程")
-                    print(jsonString)
                     // json转model
                     // 写法一：responseModel.deserialize(from: jsonString)
                     // 写法二：用JSONDeserializer<T>
@@ -97,27 +61,20 @@ class MineViewController: UIViewController {
                      //                         */
                     if let responseModel = JSONDeserializer<USERINFO_REQUEST>.deserializeFrom(json: jsonString) {
                         /// model转json 为了方便在控制台查看
-                        print("瞧瞧输出的是什么",responseModel.toJSONString(prettyPrint: true)!)
                         /*  此处为跳转和控制逻辑
                          */
                         if(responseModel.code! == 1 ){
-                            print(responseModel.code!)
-                            print("插入成功")
-                            print("responseModel.data：\(responseModel.data!)")
                             // 向数据库插入数据
                             DBSQLiteManager.manager.updateUserInfo(responseModel.data!)
                         }else{
                             let alert = CustomAlertController()
-                            alert.custom(self, "Attension", "获取用户信息失败")
-                            print(responseModel.code)
-                            print("插入失败")
-                            
+                            alert.custom(self, "Attension", "Unable to get the information")
                         }
                     } //end of letif
                 }
             }else{
                 let alert = CustomAlertController()
-                alert.custom(self, "Attension", "获取用户信息失败")
+                alert.custom(self, "Attension", "Unable to get the information")
             }
         }//end of request
     } //end of requestUserInfo
@@ -135,7 +92,6 @@ class MineViewController: UIViewController {
      每个present,都需要对应一个dismiss.
      */
     @objc public func loginOff(){
-        print("退出成功")
         //用do...catch语句来做。。。无论怎么样，都进行dismiss。如果出错了，就直接present
         // 回到登录界面
         self.dismiss(animated: true, completion: nil)
@@ -166,8 +122,6 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
     }
     //每一个cell，里面的内容
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("这是什么东东", indexPath)
-        print(indexPath.row)
         let cellid = "another"
         let cellquit = "quitbutton"
         //indexPath为一个数组
@@ -272,16 +226,7 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
         }else{
             self.navigationController?.pushViewController(clickArray[col-1], animated: true)
         }
-        
-//        if indexPath.section == 0 {
-//            self.navigationController?.pushViewController(clickArray[col], animated: true)
-//            print(clickArray[col])
-//            print(col)
-//        }else{
-//            self.navigationController?.pushViewController(clickArray[col+row+3], animated: true)
-//            print(clickArray[col+row+3])
-//            print(col+row+3)
-//        }
+
     }
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footview = UIView()
