@@ -8,8 +8,10 @@
 
 import UIKit
 
+
 class BLEViewController: UIViewController {
     
+//    let sd = sliderView.init(frame: CGRect(x: 0, y: 100, width: AJScreenWidth*0.9, height: 5))
     // 设置导航栏左按钮样式
     private lazy var leftButton:UIButton = {
         let button = UIButton.init(type: .custom)
@@ -29,7 +31,7 @@ class BLEViewController: UIViewController {
     private lazy var rightButton:UIButton = {
         let button = UIButton.init(type: .custom)
         button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-        button.setImage(UIImage(named: "shuru"), for: .normal)
+        button.setImage(UIImage(named: "edit"), for: .normal)
         //button.setTitleColor(UIColor.blue, for: .normal)
         button.addTarget(self, action: #selector(rightButtonClick), for: .touchUpInside)
         return button
@@ -38,21 +40,26 @@ class BLEViewController: UIViewController {
     @objc func rightButtonClick(){
         // 设置去手动输入界面
         let insert = InsertViewController()
+
         self.navigationController?.pushViewController(insert, animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        let sd = sliderView.init(frame: CGRect(x: 0, y: -100, width: AJScreenWidth*0.9, height: 2))
+        self.view.addSubview(sd)
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor:UIColor.white]
+        sliderImage = viewToImage.getImageFromView(view: sd)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+//        self.view.addSubview(sd)
         // 添加导航栏左按钮
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
         // 添加导航栏右按钮
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
         // Do any additional setup after loading the view.
+//        sliderImage = viewToImage.getImageFromView(view: sd)
     }
     
 

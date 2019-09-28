@@ -229,9 +229,13 @@ class DataViewController: UIViewController {
             rangePickerButton.setTitle(dateRangePicker.selectedContent, for: .normal)
             // 设置开始时间和结束时间
             // 开始时间
-            startD = customRange.startDatePicker.date.dateAt(.startOfDay)
+            let SD = dateManage(date: customRange.startDatePicker.date)
+            startD = SD.dateAt(.startOfDay)
+            print("startD:\(startD)")
             // 结束时间
-            endD = customRange.endDatePicker.date.dateAt(.endOfDay)
+            let ED = customRange.endDatePicker.date
+            endD = ED.dateAt(.endOfDay)
+            print("endD:\(endD)")
             // 设定被选中的标志位
             pickerSelectedRow = 4
             
@@ -243,6 +247,14 @@ class DataViewController: UIViewController {
         
         
         
+    }
+    
+    func dateManage(date:Date) -> Date{
+        let dateformat = DateFormatter()
+        dateformat.dateFormat = "yyyy-MM-dd"
+        let res = dateformat.string(from: date)
+        let x = res.toDate()?.date
+        return x!
     }
     // ************ 选择器的出现和消失 ****************
     // 点击取消按钮，时间选择器界面移到屏幕外，视觉效果为消失
@@ -335,11 +347,12 @@ class DataViewController: UIViewController {
     func setDaysAndRange(){
         
         let today = DateInRegion().dateAt(.endOfDay).date
-        endD = today + 1.seconds
+        
         // 监听导航栏右按钮的文本，对于不同的文本生成对应的数据
         switch pickerSelectedRow{
             
         case 1:
+            endD = today + 1.seconds
             startD = endD! - 3.days
             daysNum = 3
             // 向数据库索取一定时间范围的数据，并将其按时间降序排序
@@ -349,12 +362,14 @@ class DataViewController: UIViewController {
             // 处理出为展示图表的数据
             chartData()
         case 2:
+            endD = today + 1.seconds
             startD = endD! - 7.days
             daysNum = 7
             initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())
             sortedTimeOfData()
             chartData()
         case 3:
+            endD = today + 1.seconds
             startD = endD! - 30.days
             daysNum = 30
             initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())

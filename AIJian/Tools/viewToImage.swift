@@ -19,15 +19,4 @@ class viewToImage{
         return image!
     }
     
-    //保存图片
-    @objc class func savedPhotosAlbum(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: AnyObject) {
-        
-        if error != nil {
-            print("savw failed")
-            
-        } else {
-            print("savw success")
-            
-        }
-    }
 }

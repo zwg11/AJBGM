@@ -15,6 +15,7 @@ class customRangeView: UIView {
         let datePicker = UIDatePicker()
         datePicker.datePickerMode = .date
         datePicker.maximumDate = Date()
+        datePicker.backgroundColor = UIColor.white
         datePicker.layer.borderColor = UIColor.gray.cgColor
         datePicker.layer.borderWidth = 1
         datePicker.locale = Locale(identifier: Locale.current.identifier)
@@ -27,6 +28,7 @@ class customRangeView: UIView {
         let datePicker = UIDatePicker()
         datePicker.datePickerMode = .date
         datePicker.maximumDate = Date()
+        datePicker.backgroundColor = UIColor.white
         datePicker.layer.borderColor = UIColor.gray.cgColor
         datePicker.layer.borderWidth = 1
         // 获取本地时间，使得datePicker 日期与本地一致
@@ -64,6 +66,7 @@ class customRangeView: UIView {
      // 该视图包含2个时间选择器，2个label，一个按钮
     lazy var contentView:UIView = {
         let view = UIView()
+        view.backgroundColor = UIColor.white
         return view
     }()
     

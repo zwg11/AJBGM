@@ -102,7 +102,8 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     private lazy var recent7View:recentTrendView = {
         let view = recentTrendView()
-        
+        // 分割线颜色设为白色
+        homeTableView.separatorColor = UIColor.white
         view.setupUI()
         view.backgroundColor = UIColor.clear
         return view
@@ -133,6 +134,9 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.clipsToBounds = true
+
+        
         self.view.addSubview(homeTableView)
         homeTableView.snp.makeConstraints{(make) in
             make.left.right.equalToSuperview()
@@ -151,7 +155,7 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
         self.view.backgroundColor = ThemeColor
 
-        
+
         
         
         // Do any additional setup after loading the view.

@@ -124,30 +124,30 @@ class StatisticalDataViewController: UIViewController,UIScrollViewDelegate {
     func initContent(){
 
         
-        let today = DateInRegion().dateAt(.endOfDay).date
-        let end = today + 1.seconds
-        // 监听导航栏右按钮的文本，对于不同的文本生成对应的数据
-        switch pickerSelectedRow{
-            
-        case 1:
-            let start = end - 3.days
-            initDataSortedByDate(startDate: start, endDate: end, userId: UserInfo.getUserId())
-            //sortedTimeOfData()
-
-        case 2:
-            let start = end - 7.days
-            initDataSortedByDate(startDate: start, endDate: end, userId: UserInfo.getUserId())
-            //sortedTimeOfData()
-
-        case 3:
-            let start = end - 30.days
-            initDataSortedByDate(startDate: start, endDate: end, userId: UserInfo.getUserId())
-            //sortedTimeOfData()
-
-        default:
-            print("zidingyi ")
-            
-        }
+//        let today = DateInRegion().dateAt(.endOfDay).date
+//        let end = today + 1.seconds
+//        // 监听导航栏右按钮的文本，对于不同的文本生成对应的数据
+//        switch pickerSelectedRow{
+//            
+//        case 1:
+//            let start = end - 3.days
+//            initDataSortedByDate(startDate: start, endDate: end, userId: UserInfo.getUserId())
+//            //sortedTimeOfData()
+//
+//        case 2:
+//            let start = end - 7.days
+//            initDataSortedByDate(startDate: start, endDate: end, userId: UserInfo.getUserId())
+//            //sortedTimeOfData()
+//
+//        case 3:
+//            let start = end - 30.days
+//            initDataSortedByDate(startDate: start, endDate: end, userId: UserInfo.getUserId())
+//            //sortedTimeOfData()
+//
+//        default:
+//            print("zidingyi ")
+//            
+//        }
         
         // 平均视图初始化
         averageview.labelUpdate()

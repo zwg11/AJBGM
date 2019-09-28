@@ -23,6 +23,8 @@ class glucoseView: UIView ,UITextFieldDelegate{
 //        imageView.image = UIImage(named: "iconxt")
 //        return imageView
 //    }()
+
+
     // 血糖label
     private lazy var XTLabel:UILabel = {
         let label = UILabel()
@@ -184,7 +186,10 @@ class glucoseView: UIView ,UITextFieldDelegate{
         }
     }
     
+    
     func setupUI(){
+        
+
         
         resetGlucoseUnit()
         initEvent(event: eventNum)
@@ -201,7 +206,14 @@ class glucoseView: UIView ,UITextFieldDelegate{
 //            make.left.top.equalToSuperview().offset(AJScreenWidth/20)
 //            make.height.width.equalTo(AJScreenWidth/15)
 //        }
+//        let sd = sliderView.init(frame: CGRect(x: 0, y: 10, width: AJScreenWidth*0.9, height: 5))
+//        //sd.frame = CGRect(x: 0, y: 10, width: AJScreenWidth*0.9, height: 5)
+//        sd.loadViews()
+//        self.addSubview(sd)
         
+
+//        let image = viewToImage.getImageFromView(view: sd)
+
         // 血糖label布局设置
         self.addSubview(XTLabel)
         XTLabel.snp.makeConstraints{(make) in
@@ -229,7 +241,10 @@ class glucoseView: UIView ,UITextFieldDelegate{
         }
         
         // 血糖值滑块布局
+//        let image1 = UIImage(named: "back-1")
         self.addSubview(XTSlider)
+        XTSlider.setMinimumTrackImage(sliderImage, for: .normal)
+        XTSlider.setMaximumTrackImage(sliderImage, for: .normal)
 //        initSliderColor()
 //        XTSlider.value = value
         XTSlider.snp.makeConstraints{(make) in
@@ -293,6 +308,7 @@ class glucoseView: UIView ,UITextFieldDelegate{
             make.top.bottom.equalTo(BeforeButton)
         }
     }
+    
     
     // 设置键盘按 return 键弹回
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

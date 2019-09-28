@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "邮箱.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "Email.png",
       "scale" : "2x"
     },
     {

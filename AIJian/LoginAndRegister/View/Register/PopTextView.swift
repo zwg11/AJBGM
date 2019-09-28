@@ -79,8 +79,8 @@ class PopTextView: PopSmallChangeBigFatherView {
 }
 extension PopTextView:UITextViewDelegate{
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.endEditing(true);
-        textView.resignFirstResponder;
+        self.endEditing(true)
+        textView.resignFirstResponder()
     }
     func textViewDidChange(_ textView: UITextView) {
         if textView.text == ""{
