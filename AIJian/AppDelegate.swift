@@ -65,6 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         }
                     }
                 }else{  //没网的时候
+                    print("网络链接失败")
                     self.window?.rootViewController = tabBarController  //没网的时候也跳到选择界面
                     //具体的提示，homeViewController   自己会做
                 }

@@ -229,9 +229,13 @@ class DataViewController: UIViewController {
             rangePickerButton.setTitle(dateRangePicker.selectedContent, for: .normal)
             // 设置开始时间和结束时间
             // 开始时间
-            startD = customRange.startDatePicker.date.dateAt(.startOfDay)
+            let SD = dateManage(date: customRange.startDatePicker.date)
+            startD = SD.dateAt(.startOfDay)
+            print("startD:\(startD)")
             // 结束时间
-            endD = customRange.endDatePicker.date.dateAt(.endOfDay)
+            let ED = customRange.endDatePicker.date
+            endD = ED.dateAt(.endOfDay)
+            print("endD:\(endD)")
             // 设定被选中的标志位
             pickerSelectedRow = 4
             
@@ -243,6 +247,14 @@ class DataViewController: UIViewController {
         
         
         
+    }
+    
+    func dateManage(date:Date) -> Date{
+        let dateformat = DateFormatter()
+        dateformat.dateFormat = "yyyy-MM-dd"
+        let res = dateformat.string(from: date)
+        let x = res.toDate()?.date
+        return x!
     }
     // ************ 选择器的出现和消失 ****************
     // 点击取消按钮，时间选择器界面移到屏幕外，视觉效果为消失

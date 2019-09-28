@@ -214,9 +214,6 @@ class glucoseView: UIView ,UITextFieldDelegate{
 
 //        let image = viewToImage.getImageFromView(view: sd)
 
-        // 将图片放入相册
-        UIImageWriteToSavedPhotosAlbum(sliderImage, self, #selector(savedPhotosAlbum(_:didFinishSavingWithError:contextInfo:)), nil)
-
         // 血糖label布局设置
         self.addSubview(XTLabel)
         XTLabel.snp.makeConstraints{(make) in
@@ -312,21 +309,6 @@ class glucoseView: UIView ,UITextFieldDelegate{
         }
     }
     
-    //保存图片
-    @objc func savedPhotosAlbum(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: AnyObject) {
-        
-        if error != nil {
-//            let alert = CustomAlertController()
-//            alert.custom(self, "", "图片生成失败")
-            print("savw failed")
-            
-        } else {
-//            let alert = CustomAlertController()
-//            alert.custom(self, "", "图片生成成功")
-            print("savw success")
-            
-        }
-    }
     
     // 设置键盘按 return 键弹回
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

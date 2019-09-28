@@ -61,6 +61,9 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
+        // 分割线颜色
+        DATATableView.separatorColor = UIColor.white
+        DATETableView.separatorColor = UIColor.white
         // 刷新控件设置
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         refreshControl.attributedTitle = NSAttributedString(string: "松开后自动刷新")

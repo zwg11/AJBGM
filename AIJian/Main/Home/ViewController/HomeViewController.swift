@@ -102,7 +102,8 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     private lazy var recent7View:recentTrendView = {
         let view = recentTrendView()
-        
+        // 分割线颜色设为白色
+        homeTableView.separatorColor = UIColor.white
         view.setupUI()
         view.backgroundColor = UIColor.clear
         return view

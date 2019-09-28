@@ -53,6 +53,9 @@ class MineViewController: UIViewController {
         
 //        let tableview = AJMineTableView(frame: CGRect(x: 0, y:  AJScreenHeight/5, width: AJScreenWidth, height: AJScreenHeight/3*2))
         let tableview = UITableView(frame: CGRect(x: 0, y:  0, width: AJScreenWidth, height: AJScreenHeight*7/10+AJScreenHeight/5+50))
+        //分割线
+//        tableview.separatorStyle = .singleLine
+        tableview.separatorColor = UIColor.white
         //将CELL的标识，在此处进行设置
         tableview.register(UITableViewCell.self, forCellReuseIdentifier:"cell")
         tableview.delegate = self
