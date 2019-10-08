@@ -79,8 +79,8 @@ class DataViewController: UIViewController {
         let button = UIButton()
         button.addTarget(self, action: #selector(chooseDate), for: .touchUpInside)
 
-        button.setTitle("最近7天", for: .normal)
-        button.frame.size = CGSize(width: AJScreenWidth/5, height: 44)
+        button.setTitle("Last7days", for: .normal)
+        button.frame.size = CGSize(width: AJScreenWidth/4, height: 44)
         return button
     }()
     
@@ -270,21 +270,21 @@ class DataViewController: UIViewController {
         backButton.removeFromSuperview()
         UIView.animate(withDuration: 0.5, animations: dismiss)
         // 如果选择了自定义，那么弹出2个时间选择器供用户选择时间范围
-        if dateRangePicker.selectedContent == "自定义"{
+        if dateRangePicker.selectedContent == "Custom"{
             self.view.addSubview(customRange)
         }// 否则更新按钮标题
         else{
             // 更新按钮标题
-            rangePickerButton.setTitle(dateRangePicker.selectedContent ?? "最近7天", for: .normal)
+            rangePickerButton.setTitle(dateRangePicker.selectedContent ?? "Last 7 days", for: .normal)
             
             // 监听导航栏右按钮的文本，对于不同的文本设定不同的标志位
             switch dateRangePicker.selectedContent{
                 
-            case "最近3天":
+            case "Last 3 days":
                 pickerSelectedRow = 1
-            case "最近7天":
+            case "Last 7 days":
                 pickerSelectedRow = 2
-            case "最近30天":
+            case "Last 30 days":
                 pickerSelectedRow = 3
             default:
                 print("error.No selelcted row in picker.")

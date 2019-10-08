@@ -49,8 +49,8 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             let data = x.selectLastGlucoseRecord(UserInfo.getUserId())
 
             // 显示时间
-            if let date = data.createTime{
-                cell.detailTextLabel?.text = date
+            if let time = data.createTime{
+                cell.detailTextLabel?.text = time.toDate()?.date.toFormat("yyyy-MM-dd HH:mm")
             }
             
             return cell
@@ -98,6 +98,21 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         }
         
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 1{
+            
+            let x = DBSQLiteManager.shareManager()
+            // 在数据库取出最近一次的血糖记录
+            let data = x.selectLastGlucoseRecord(UserInfo.getUserId())
+            // 初始化insert界面
+            let insert = InsertViewController()
+            insert.EditData(date: data)
+            self.navigationController?.pushViewController(insert, animated: true)
+        }
+    }
+    
+    
 
     
     private lazy var recent7View:recentTrendView = {
@@ -127,6 +142,10 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         recent7View.reloadChart()
         recent7View.recentTrendView.drawLineChart(xAxisArray: xAxisArrayToWeek(Days: 7) as NSArray,xAxisData: recentDaysData(Days: 7))
 
+        // 设置滑块的图片样式
+        let sd = sliderView.init(frame: CGRect(x: 0, y: -100, width: AJScreenWidth*0.9, height: 5))
+        self.view.addSubview(sd)
+        sliderImage = viewToImage.getImageFromView(view: sd)
     }
     
     var homeTableView:UITableView = UITableView()

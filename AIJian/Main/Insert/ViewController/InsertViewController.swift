@@ -628,7 +628,7 @@ class InsertViewController: UIViewController {
 //        self.input.glucose.XTSlider.setMaximumTrackImage(image, for: .normal)
         // 每次进入界面滚动视图都是在最顶部
         self.input.scrollView.contentOffset = CGPoint(x: 0, y: 0)
-        
+        // 隐藏tabbar
         self.tabBarController?.tabBar.isHidden = true
         //重新判断加载视图
         //input.reloadInputViews()
@@ -649,6 +649,7 @@ class InsertViewController: UIViewController {
     }
     //视图将要消失的时候
     override func viewWillDisappear(_ animated: Bool) {
+        // tabbar不隐藏
         self.tabBarController?.tabBar.isHidden = false
         self.input.removeFromSuperview()
     }
@@ -721,9 +722,9 @@ class InsertViewController: UIViewController {
 extension InsertViewController{
     // MARK: - 当从表格视图转来时
     // 将单元格的内容传入手动输入界面
-    func EditData(_ section:Int,_ row:Int){
-        let x = sortedData[section][row]
-        let y = sortedTime[section][row]
+    func EditData(date:glucoseDate){
+        let x = date
+//        let y = sortedTime[section][row]
         // 设置时间选择器的位置
         
         // 手动输入标志位设置
@@ -731,8 +732,8 @@ extension InsertViewController{
         // 血糖记录ID
         self.recordId = x.bloodGlucoseRecordId!
         // 时间
-        self.input.setDate(y.toFormat("yyyy-MM-dd"))
-        self.input.setTime(y.toFormat("HH:mm"))
+        self.input.setDate((x.createTime?.toDate()?.date.toFormat("yyyy-MM-dd"))!)
+        self.input.setTime((x.createTime?.toDate()?.date.toFormat("HH:mm"))!)
         // 血糖量
         if let value = x.bloodGlucoseMmol{
             if GetUnit.getBloodUnit() == "mmol/L"{
@@ -754,6 +755,11 @@ extension InsertViewController{
 //                self.input.glucose.setValueAndThumbColor(value: Float(value))
             }
             
+        }
+        // 当数据未从血糖仪传来的数据，血糖文本框不可编辑
+        if x.inputType == 0{
+
+            self.input.glucose.XTTextfield.isUserInteractionEnabled = false
         }
         
         

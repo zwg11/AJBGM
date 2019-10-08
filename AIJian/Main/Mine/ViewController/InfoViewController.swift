@@ -30,7 +30,12 @@ class InfoViewController: UIViewController ,PickerDelegate{
         let userInfo = DBSQLiteManager.manager.selectUserRecord(userId: UserInfo.getUserId())
         infoDataArray[0] = userInfo.user_name ?? ""
         //0为女
-        infoDataArray[1] = (userInfo.gender! == 0) ? "Female":"Male"
+        if let gender = userInfo.gender{
+            infoDataArray[1] = (gender == 0) ? "Female":"Male"
+        }else{
+            infoDataArray[1] = "Female"
+        }
+        
         
 //        if (userInfo.height != nil){
 //            infoDataArray[1] = (userInfo.height! == 0) ? "男":"女"

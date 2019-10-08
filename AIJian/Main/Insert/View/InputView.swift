@@ -331,9 +331,10 @@ class InputView: UIView,UIScrollViewDelegate {
             
         case .date:
             picker.bringSubviewToFront(picker.datePicker)
+            picker.datePicker.date = (dateAndTime.dateButton.currentTitle?.toDate()!.date)!
         case .time:
             picker.bringSubviewToFront(picker.timePicker)
-            
+            picker.timePicker.date = (dateAndTime.timeButton.currentTitle?.toDate()!.date)!
 //        case .occurTime:
 //            picker.bringSubviewToFront(picker.eventPicker)
 //

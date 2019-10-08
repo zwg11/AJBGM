@@ -188,24 +188,25 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 设置点击单元格有选中z动画，手指松开时变为未选中
         tableView.deselectRow(at: indexPath, animated: false)
-        let alert = UIAlertController(title: "您是想选择", message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Choose To", message: "", preferredStyle: .alert)
         // 该动作编辑一条记录
-        let editAction = UIAlertAction(title: "编辑", style: .default, handler: {(UIAlertAction)->Void in
+        let editAction = UIAlertAction(title: "Edit", style: .default, handler: {(UIAlertAction)->Void in
 
             let insert = InsertViewController()
             
             self.navigationController?.pushViewController(insert, animated: true)
             // 将当前单元格的内容传入手动输入界面
-            insert.EditData(indexPath.section,indexPath.row)
+            let date = sortedData[indexPath.section][indexPath.row]
+            insert.EditData(date: date)
             
         })
         // 该动作删除一条记录，先删除服务器的，再删除本地数据库，最后删除全局变量的
-        let deleteAction = UIAlertAction(title: "删除", style: .destructive, handler: {(UIAlertAction)->Void in
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: {(UIAlertAction)->Void in
             // 进行删除操作
             self.deleteData(section: indexPath.section, row: indexPath.row)
             
         })
-        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alert.addAction(editAction)
         alert.addAction(deleteAction)
         alert.addAction(cancelAction)
@@ -320,10 +321,9 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
     
     // MARK: - viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
-        let sd = sliderView.init(frame: CGRect(x: 0, y: -100, width: AJScreenWidth*0.9, height: 5))
-         self.view.addSubview(sd)
-         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor:UIColor.white]
-         sliderImage = viewToImage.getImageFromView(view: sd)
+        
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor:UIColor.white]
+         
         // 将滚动视图置于初始状态
         self.mainScrollView.contentOffset = CGPoint(x: 0, y: 0)
         self.scroll.contentOffset = CGPoint(x: 0, y: 0)
@@ -451,7 +451,7 @@ extension DataTableViewController{
                         // 如果 返回信息说明 请删除失败，则弹出警示框报错
                         if deleteResponse.code != 1{
                             let alert = CustomAlertController()
-                            alert.custom(self, "警告", "删除失败，请稍后重试")
+                            alert.custom(self, "aAttension", "Delete failed, please try again later.")
                             // 删除失败函数直接退出
                             return
                         }else{
@@ -461,7 +461,7 @@ extension DataTableViewController{
                             if dbSql.deleteGlucoseRecord(gluData.bloodGlucoseRecordId!){
                                 // 弹出警示框，提示用户
                                 let alert = CustomAlertController()
-                                alert.custom(self, "", "删除成功")
+                                alert.custom(self, "", "Delete success")
                                 // 初始化展示数据
                                 initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())
                                 // 表格数据初始化
@@ -483,7 +483,7 @@ extension DataTableViewController{
             else{
                 // 弹出警示框，提示用户
                 let alert = CustomAlertController()
-                alert.custom(self, "错误", "网络异常，请重新操作")
+                alert.custom(self, "Error", "Network exception, please re-operate")
                 return
             }// 如果请求未得到回复
         }

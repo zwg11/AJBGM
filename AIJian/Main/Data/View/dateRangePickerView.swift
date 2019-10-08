@@ -21,12 +21,12 @@ class dateRangePickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         return rangeDate[row]
     }
 
-    private let rangeDate:[String] = ["最近3天","最近7天","最近30天","自定义"]
+    private let rangeDate:[String] = ["Last 3 days","Last 7 days","Last 30 days","Custom"]
     // 确定按钮和取消按钮
     // 确定按钮
     lazy var sureButton:UIButton = {
         let button = UIButton()
-        button.setTitle("确定", for: .normal)
+        button.setTitle("Sure", for: .normal)
         button.setTitleColor(UIColor.red, for: .normal)
         button.contentHorizontalAlignment = .right
         // 设置内边界，使得按钮的字体不那么靠右
@@ -36,7 +36,7 @@ class dateRangePickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
     // 取消按钮
     lazy var cancelButton:UIButton = {
         let button = UIButton()
-        button.setTitle("取消", for: .normal)
+        button.setTitle("Cancel", for: .normal)
         button.setTitleColor(UIColor.red, for: .normal)
         button.contentHorizontalAlignment = .left
         button.contentEdgeInsets = UIEdgeInsets(top: 0, left: UIScreen.main.bounds.width/20, bottom: 0, right: 0)

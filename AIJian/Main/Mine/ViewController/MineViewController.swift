@@ -13,6 +13,12 @@ import SnapKit
 
 class MineViewController: UIViewController {
     
+    // 设置数据请求超时时间
+    let AlamofireManager:Alamofire.SessionManager = {
+        let conf = URLSessionConfiguration.default
+        conf.timeoutIntervalForRequest = 10
+        return Alamofire.SessionManager(configuration: conf)
+    }()
     //列表数据
     let _titleArr = ["User Info","Units Setup","Change Password","Targets Setting","Instructions","About Us","Update"]
 
@@ -57,7 +63,8 @@ class MineViewController: UIViewController {
     
     func requestUserInfo(){
         let dictString = ["userId":UserInfo.getUserId(),"token":UserInfo.getToken()] as [String : Any]
-        Alamofire.request(USER_INFO_REQUEST,method: .post,parameters: dictString).responseString{ (response) in
+        // 数据请求超时时间为10s
+        AlamofireManager.request(USER_INFO_REQUEST,method: .post,parameters: dictString).responseString{ (response) in
             if response.result.isSuccess {
                 if let jsonString = response.result.value {
                     // json转model

@@ -17,9 +17,9 @@ class LastResultTableViewCell: UITableViewCell {
     
     private lazy var content: UIView = {
         let view = UIView()
-        view.layer.borderColor = UIColor.gray.cgColor
-        view.layer.borderWidth = 2
-        view.layer.cornerRadius = 5
+//        view.layer.borderColor = UIColor.gray.cgColor
+//        view.layer.borderWidth = 2
+//        view.layer.cornerRadius = 5
         return view
         
     }()
@@ -34,6 +34,7 @@ class LastResultTableViewCell: UITableViewCell {
         label.minimumScaleFactor = 0.5
         label.adjustsFontSizeToFitWidth = true
         label.textColor = UIColor.white
+        label.backgroundColor = UIColor.yellow
         return label
     }()
     
@@ -46,12 +47,13 @@ class LastResultTableViewCell: UITableViewCell {
         label.minimumScaleFactor = 0.5
         label.adjustsFontSizeToFitWidth = true
         label.textColor = UIColor.white
+        label.backgroundColor = UIColor.yellow
         return label
     }()
     
     private lazy var rangeLabel:UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15)
+        label.font = UIFont.systemFont(ofSize: 18)
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
         label.adjustsFontSizeToFitWidth = true
@@ -66,7 +68,7 @@ class LastResultTableViewCell: UITableViewCell {
         }
         
         label.textAlignment = .left
-        label.textColor = UIColor.white
+        label.textColor = UIColor.gray
         return label
     }()
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -91,7 +93,7 @@ class LastResultTableViewCell: UITableViewCell {
         rangeLabel.snp.makeConstraints{(make) in
             make.left.equalToSuperview().offset(AJScreenWidth/10)
             make.bottom.equalToSuperview()
-            make.width.equalTo(AJScreenWidth/2)
+            make.width.equalTo(AJScreenWidth/3*2)
             //make.top.equalTo(glucoseValueLabel.snp.bottom)
             make.height.equalTo(AJScreenWidth/15)
         }
@@ -99,23 +101,11 @@ class LastResultTableViewCell: UITableViewCell {
         content.addSubview(glucoseValueLabel)
 
         
-//        // 在数据库取出最近一次的血糖记录
-//        let x = DBSQLiteManager.shareManager()
-//        let data = x.selectLastGlucoseRecord(UserInfo.getUserId())
-//        // // 判断单位，根据相应单位取出最近一次的值
-//        if GetUnit.getBloodUnit() == "mmol/L"{
-//            glucoseValueLabel.text = (data.bloodGlucoseMmol != nil) ? String(data.bloodGlucoseMmol!):"-"
-//        }else{
-//            glucoseValueLabel.text = (data.bloodGlucoseMg != nil) ? String(data.bloodGlucoseMg!):"-"
-//        }
-        
-        
-        
         glucoseValueLabel.snp.makeConstraints{(make) in
             make.left.equalTo(rangeLabel)
-            make.top.equalToSuperview().offset(20)
-            make.bottom.equalTo(rangeLabel.snp.top).offset(-20)
-            make.width.equalTo(AJScreenWidth/5)
+            make.top.equalToSuperview().offset(10)
+            make.bottom.equalTo(rangeLabel.snp.top).offset(-10)
+            make.width.equalTo(AJScreenWidth/4)
         }
         
         content.addSubview(gUnitLabel)

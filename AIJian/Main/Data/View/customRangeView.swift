@@ -57,7 +57,7 @@ class customRangeView: UIView {
     
     lazy var endbutton:UIButton = {
         let button = UIButton()
-        button.setTitle("设置日期范围", for: .normal)
+        button.setTitle("Setting Date Range", for: .normal)
         button.backgroundColor = UIColor.white
         button.setTitleColor(UIColor.blue, for: .normal)
         return button

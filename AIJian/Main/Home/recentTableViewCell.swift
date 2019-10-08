@@ -40,20 +40,21 @@ class recentTableViewCell: UITableViewCell {
     }()
     private lazy var checkNum:glucoseRecentView = {
         let view = glucoseRecentView()
-        view.setupUI(title: "Times", value: "\(result[1])", unit: "次")
+        view.setupUI(title: "Times", value: "\(result[1])", unit: "Times")
         return view
     }()
     
     private lazy var highest:glucoseRecentView = {
         let view = glucoseRecentView()
         view.setupUI(title: "Max", value: "\(result[2])", unit: GetUnit.getBloodUnit())
-        view.ValueLabel.textColor = UIColor.orange
+        view.ValueLabel.textColor = UIColor.red
         
         return view
     }()
     private lazy var lowest:glucoseRecentView = {
         let view = glucoseRecentView()
         view.setupUI(title: "Min", value: "\(result[3])", unit: GetUnit.getBloodUnit())
+        view.ValueLabel.textColor = UIColor.orange
         return view
     }()
     

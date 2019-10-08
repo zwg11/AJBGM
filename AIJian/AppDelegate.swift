@@ -19,6 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var isFirstStart:Bool?
 
+    let AlamofireManager:Alamofire.SessionManager = {
+        let conf = URLSessionConfiguration.default
+        conf.timeoutIntervalForRequest = 10
+        return Alamofire.SessionManager(configuration: conf)
+    }()
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
@@ -46,7 +51,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("token不为空")
             //此处分为两种情况：一种是判断token过没过期。第二种是没有网络怎么办
             let dictString:Dictionary = [ "userId":UserInfo.getUserId() ,"token":UserInfo.getToken()] as [String : Any]
-            Alamofire.request(CHECK_TOKEN,method: .post,parameters: dictString).responseString{ (response) in
+            AlamofireManager.request(CHECK_TOKEN,method: .post,parameters: dictString).responseString{ (response) in
+//                var remainingCount = 10
+//                // 在global线程里创建一个时间源
+//                let codeTimer = DispatchSource.makeTimerSource(queue:DispatchQueue.global())
+//                // 设定这个时间源是每秒循环一次，立即开始
+//                codeTimer.schedule(deadline: .now(), repeating: .seconds(1))
+//                // 设定时间源的触发事件
+//                codeTimer.setEventHandler(handler: {
+//                    // 每秒计时一次
+//                    remainingCount -= 1
+//                    // 请求时间超时，取消时间源，转到home界面
+//                    if remainingCount <= 0 {
+//                        codeTimer.cancel()
+//                        // 返回主线程，使页面转到home界面
+//                        DispatchQueue.main.async {
+//                            self.window?.rootViewController = tabBarController
+//                            let alert = CustomAlertController()
+//                            alert.custom(tabBarController, "attension", "no network")
+//                        }
+//                    }
+//
+//                })
+//                // 启动时间源
+//                codeTimer.resume()
+                
                 if response.result.isSuccess {
                     if let jsonString = response.result.value {
                         if let responseModel = JSONDeserializer<responseModel>.deserializeFrom(json: jsonString) {
