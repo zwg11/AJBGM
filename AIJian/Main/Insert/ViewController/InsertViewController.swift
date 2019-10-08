@@ -83,7 +83,7 @@ class InsertViewController: UIViewController {
     //private let path = Bundle.main.path(forResource: "inputChoose", ofType: "plist")
     private let path = PlistSetting.getFilePath(File: "inputChoose.plist")
    // let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path!)!
-    
+    // MARK: - viewDidLoad()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = ThemeColor
@@ -104,6 +104,7 @@ class InsertViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(test), name: NSNotification.Name(rawValue: "chooseInsulin"), object: nil)
         // 设置监听器，监听是否要重新加载胰岛素选择器条目
         NotificationCenter.default.addObserver(self, selector: #selector(reloadPicker), name: NSNotification.Name(rawValue: "reload"), object: nil)
+
     }
     
     @objc func test(){
@@ -197,9 +198,8 @@ class InsertViewController: UIViewController {
     }
     
     @objc func leftButtonClick(){
-        // 设置返回首页
+        // 设置返回原页面
         self.navigationController?.popViewController(animated: true)
-        //self.dismiss(animated: true, completion: nil)
     }
     
     @objc func cancel(){
@@ -212,6 +212,15 @@ class InsertViewController: UIViewController {
     
     //MARK: - 点击保存
     @objc func save(){
+        // 风火轮启动
+        let indicator = CustomIndicatorView()
+        indicator.setupUI("")
+        self.view.addSubview(indicator)
+        indicator.snp.makeConstraints{(make) in
+            make.edges.equalToSuperview()
+        }
+        indicator.startIndicator()
+        
         let alert = CustomAlertController()
         // 记录需要警告的内容
         var Message:String = ""
@@ -444,6 +453,9 @@ class InsertViewController: UIViewController {
 
         // 如果警示信息不为空，说明需要警示
         if Message != ""{
+            // 风火轮停止，并移除
+            indicator.stopIndicator()
+            indicator.removeFromSuperview()
             alert.custom(self, "Attention", Message)
             return
         }
@@ -511,14 +523,30 @@ class InsertViewController: UIViewController {
                             if(responseModel.code == 1 ){
                                 print(responseModel.code)
                                 print("插入成功")
+                                
                                 // 向数据库插入数据
                                 DBSQLiteManager.manager.addGlucoseRecords(add: tempArray)
+                                // 风火轮启动
+                                indicator.stopIndicator()
+                                indicator.removeFromSuperview()
+//                                alert.custom(self, "", "Insert Success.")
+//                                let x = UIAlertController(title: "", message: "Insert Success.", preferredStyle: .alert)
+//
+//                                self.present(x, animated: true, completion: nil)
+//                                sleep(2)
+//                                x.dismiss(animated: true, completion: nil)
                                 // 跳转到原来的界面
-                                self.navigationController?.popViewController(animated: true)
+                                self.navigationController?.popToRootViewController(animated: true)
+                                // 发送通知，提示插入成功
+                                NotificationCenter.default.post(name: NSNotification.Name("InsertData"), object: self, userInfo: nil)
                                 
                             }else{
                                 print(responseModel.code)
                                 print("插入失败")
+                                // 风火轮停止
+                                indicator.stopIndicator()
+                                indicator.removeFromSuperview()
+                                alert.custom(self, "", "Insert Failed.")
                                 
                             }
                         } //end of letif
@@ -554,11 +582,28 @@ class InsertViewController: UIViewController {
                                 initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())
                                 sortedTimeOfData()
                                 chartData()
+                                // 风火轮停止
+                                indicator.stopIndicator()
+                                indicator.removeFromSuperview()
+                                
+//                                let x = UIAlertController(title: "", message: "Update Success.", preferredStyle: .alert)
+//                                self.present(x, animated: true, completion: nil)
+//                                sleep(2)
+//                                x.dismiss(animated: true, completion: nil)
                                 // 跳转到原来的界面
+
+//                                self.presentedViewController!.present(x, animated: true, completion: nil)
                                 self.navigationController?.popViewController(animated: true)
+                                NotificationCenter.default.post(name: NSNotification.Name("Update success"), object: self, userInfo: nil)
+//                                sleep(2)
+//                                x.dismiss(animated: true, completion: nil)
                             }else{
                                 print(responseModel.code)
                                 print("更新失败")
+                                // 风火轮停止
+                                indicator.stopIndicator()
+                                indicator.removeFromSuperview()
+                                // 弹窗提示
                                 let alert = CustomAlertController()
                                 alert.custom(self, "Attention", "更新失败，请重新登录")
                                 

@@ -60,8 +60,19 @@ class BLEViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
         // Do any additional setup after loading the view.
 //        sliderImage = viewToImage.getImageFromView(view: sd)
+        // 设置监听器，监听是否弹出插入成功r弹窗
+        NotificationCenter.default.addObserver(self, selector: #selector(InsertSuccess), name: NSNotification.Name(rawValue: "InsertData"), object: nil)
+        
     }
     
+    @objc func InsertSuccess(){
+        let x = UIAlertController(title: "", message: "Insert Success.", preferredStyle: .alert)
+        self.present(x, animated: true, completion: {()->Void in
+            sleep(1)
+            x.dismiss(animated: true, completion: nil)
+        })
+
+    }
 
     /*
     // MARK: - Navigation

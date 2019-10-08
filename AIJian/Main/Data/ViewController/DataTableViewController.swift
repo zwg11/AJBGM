@@ -87,6 +87,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(test), name: NSNotification.Name(rawValue: "reloadTable"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(UpdateSuccess), name: NSNotification.Name(rawValue: "Update success"), object: nil)
         
     }
     
@@ -107,6 +108,16 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         initTable()
         initScroll()
     }
+    
+    @objc func UpdateSuccess(){
+        let x = UIAlertController(title: "", message: "Update Success.", preferredStyle: .alert)
+        self.present(x, animated: true, completion: {()->Void in
+            sleep(1)
+            x.dismiss(animated: true, completion: nil)
+        })
+
+    }
+    
     
     // MARK: - 设置导航栏头部尾部高度，注意heightFor和viewFor函数都实现才能调节高度
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

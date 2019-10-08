@@ -76,7 +76,7 @@ class StaticView: UIView {
     
     func setupUI(){
         
-        self.backgroundColor = UIColor.lightGray
+        self.backgroundColor = kRGBColor(24, 45, 65, 1)
         let labels = [freValueLabel,frequencyLabel,AvgValueLabel,AverageLabel,MinValueLabel,MinLabel,MaxValueLabel,MaxLabel]
         
         for i in labels{

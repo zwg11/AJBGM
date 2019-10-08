@@ -37,7 +37,13 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
     }
     // 将shareV视图生成为图片
     @objc func sendImage(){
-        
+//        let indicator = CustomIndicatorView()
+//        indicator.setupUI("正在生成图片...")
+//        self.view.addSubview(indicator)
+//        indicator.snp.makeConstraints{(make) in
+//            make.edges.equalToSuperview()
+//        }
+//        indicator.startIndicator()
         let name = shareV.nameTextField.text
         let phone = shareV.phoneTextField.text
         //设置名字和电话
@@ -47,11 +53,13 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
         // 将视图生成文件
         let image = viewToImage.getImageFromView(view: general)
         // 将图片放入相册
-        UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.savedPhotosAlbum(_:didFinishSavingWithError:contextInfo:)), nil)
+//        UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.savedPhotosAlbum(_:didFinishSavingWithError:contextInfo:)), nil)
         // 要分享的内容封装成数组
         let activityItems = [image]
         // 创建
         let toVC = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+//        indicator.stopIndicator()
+//        indicator.removeFromSuperview()
         self.present(toVC, animated: true, completion: nil)
     }
     
@@ -59,13 +67,17 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
     @objc func savedPhotosAlbum(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: AnyObject) {
         
         if error != nil {
-            let alert = CustomAlertController()
-            alert.custom(self, "", "图片生成失败")
+            let alert = UIAlertController(title: "", message: "图片生成失败", preferredStyle: .alert)
+            self.present(alert, animated: true, completion: nil)
+            sleep(1)
+            alert.dismiss(animated: true, completion: nil)
             print("savw failed")
             
         } else {
-            let alert = CustomAlertController()
-            alert.custom(self, "", "图片生成成功")
+            let alert = UIAlertController(title: "", message: "图片生成成功", preferredStyle: .alert)
+            self.present(alert, animated: true, completion: nil)
+            sleep(1)
+            alert.dismiss(animated: true, completion: nil)
             print("savw success")
             
         }
