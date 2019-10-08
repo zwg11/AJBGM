@@ -247,7 +247,7 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
                             }else{
                                 print(responseModel.code)
                                 self.navigationController?.popToRootViewController(animated: true)
-                                alertController.custom(self,"Attention", "ign Up Failure！")
+                                alertController.custom(self,"Attention", "Sign Up Failure！")
                                 
                             }
                         } //end of letif

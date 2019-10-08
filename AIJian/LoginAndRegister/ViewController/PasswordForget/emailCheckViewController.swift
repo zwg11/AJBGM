@@ -65,7 +65,7 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
         //获得email和验证码
         //邮箱不能为空
         if email == ""{
-            alertController.custom(self, "Attention", "邮箱不能为空")
+            alertController.custom(self, "Attention", "Email Empty")
         }else{
             let dictString:Dictionary = [ "email":String(email!),"verifyCode":String(email_code!)]
             print(dictString)
@@ -95,7 +95,7 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
 //                                secViewController.email = self.email
 //                                secViewController.verifyString = "gy riut u"
 //                                self.navigationController?.pushViewController(secViewController, animated: true)
-                                alertController.custom(self,"Attention", "邮箱或密码不正确")
+                                alertController.custom(self,"Attention", "Incorrect Email or Password")
                                 return
                             }
                         } //end of letif
@@ -116,7 +116,7 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
          需要判断邮箱不为空才能获取验证码
          */
         if email == ""{
-            alertController.custom(self, "Attention", "邮箱不能为空")
+            alertController.custom(self, "Attention", "Email Empty")
         }else{
             print("如果不为空的话",email!)
             let  dictString:Dictionary = [ "email":String(email!)]
@@ -133,13 +133,13 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
                                 //返回1，让其倒计时
                                 self.emailCheck.getAuthCodeButton.countDown(count: 10)
                             }else{
-                                alertController.custom(self,"Attention", "邮箱或密码不正确")
+                                alertController.custom(self,"Attention", "Incorrect Email or Password")
                             }
                             print("注册时，获取验证码阶段")
                         }
                     }//end of response.result.value
                 }else{
-                    alertController.custom(self, "Attention", "网络请求失败")
+                    alertController.custom(self, "Attention", "Internet Error")
                 }//end of response.result.isSuccess
             }//end of request
            

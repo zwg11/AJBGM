@@ -68,7 +68,7 @@ class registerView: UIView {
     // 输入密码文本框
     lazy var passwordTextField:UITextField = {
         let textField = UITextField()
-        textField.initTextField(placeholder: " Password",keyboardType: .default)
+        textField.initTextField(placeholder: " Set a Password",keyboardType: .default)
 //        let textField = initTextField(placeholder: " Password",keyboardType: .default)
         textField.isSecureTextEntry = true
         let imageView = UIImageView(image: UIImage(named: "mima"))
@@ -100,7 +100,7 @@ class registerView: UIView {
     //免责条例的用户信息
     lazy var NoResponseProtocolInfo:UIButton = {
         let NoResponseProtocol = UIButton(frame: CGRect())
-        NoResponseProtocol.setTitle("Agreed \"Registration Protocol and submit the information\" ", for: .normal)
+        NoResponseProtocol.setTitle("Agreed \"Registration Protocol and submit the Information\" ", for: .normal)
         NoResponseProtocol.setTitleColor(TextColor, for: .normal)
         NoResponseProtocol.titleLabel?.font = UIFont.systemFont(ofSize: 10)
         return NoResponseProtocol
