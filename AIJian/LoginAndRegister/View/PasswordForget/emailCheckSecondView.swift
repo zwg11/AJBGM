@@ -18,7 +18,7 @@ class emailCheckSecondView: UIView {
         let textField = UITextField()
         textField.initTextField(placeholder: "New Password",keyboardType: .default)
         textField.isSecureTextEntry = true
-        let imageView = UIImageView(image: UIImage(named: "email"))
+        let imageView = UIImageView(image: UIImage(named: "mima"))
         textField.leftView = imageView
         textField.leftViewMode = .always
 //        let str:NSMutableAttributedString = NSMutableAttributedString(string: " New Password", attributes: [NSAttributedString.Key.foregroundColor:TextColor])
@@ -32,7 +32,7 @@ class emailCheckSecondView: UIView {
         let textField = UITextField()
         textField.initTextField(placeholder: "Confirm the Password",keyboardType: .default)
         textField.isSecureTextEntry = true
-        let imageView = UIImageView(image: UIImage(named: "email"))
+        let imageView = UIImageView(image: UIImage(named: "mima"))
         textField.leftView = imageView
         textField.leftViewMode = .always
 //        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")

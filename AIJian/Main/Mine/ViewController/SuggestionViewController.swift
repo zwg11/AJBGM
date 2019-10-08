@@ -40,6 +40,7 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
         switch indexPath.row {
         case 0:
             let cell = UITableViewCell(style: .default, reuseIdentifier: id)
+            emailCommponent.imageView.image = UIImage(named: "email")
             emailCommponent.textField.delegate = self
             emailCommponent.textField.isEnabled = false
             emailCommponent.setupUI(title: "")
@@ -52,8 +53,9 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
             return cell
         case 1:
             let cell = UITableViewCell(style: .default, reuseIdentifier: id)
+            telephoneCommponent.imageView.image = UIImage(named: "Phone")
             telephoneCommponent.textField.delegate = self
-            telephoneCommponent.textField.textColor = TextColor
+//            telephoneCommponent.textField.textColor = TextColor
             telephoneCommponent.setupUI(title: "Please Enter Your Phone Number")
             cell.contentView.addSubview(telephoneCommponent)
             cell.selectionStyle = .none
@@ -62,6 +64,7 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
             return cell
         case 2:
             let cell = UITableViewCell(style: .default, reuseIdentifier: id)
+            nationCp.imageView.image = UIImage(named: "Country")
             nationCp.setupUI(title: "China")
             nationCp.nationButton.addTarget(self, action:#selector(selectNation) , for: .touchUpInside)
             cell.contentView.addSubview(nationCp)

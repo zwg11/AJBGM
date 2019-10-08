@@ -71,7 +71,7 @@ class registerView: UIView {
         textField.initTextField(placeholder: " Password",keyboardType: .default)
 //        let textField = initTextField(placeholder: " Password",keyboardType: .default)
         textField.isSecureTextEntry = true
-        let imageView = UIImageView(image: UIImage(named: "email"))
+        let imageView = UIImageView(image: UIImage(named: "mima"))
         textField.leftView = imageView
         textField.leftViewMode = .always
 
@@ -84,7 +84,7 @@ class registerView: UIView {
         textField.initTextField(placeholder: " Confirm the Password",keyboardType: .default)
 //        let textField = initTextField(placeholder: " Confirm the Password",keyboardType: .default)
         textField.isSecureTextEntry = true
-        let imageView = UIImageView(image: UIImage(named: "email"))
+        let imageView = UIImageView(image: UIImage(named: "mima"))
         textField.leftView = imageView
         textField.leftViewMode = .always
 

@@ -35,25 +35,25 @@ class recentTableViewCell: UITableViewCell {
     
     private lazy var average:glucoseRecentView = {
         let view = glucoseRecentView()
-        view.setupUI(title: "平均值", value: "\(result[0])", unit: GetUnit.getBloodUnit())
+        view.setupUI(title: "Average", value: "\(result[0])", unit: GetUnit.getBloodUnit())
         return view
     }()
     private lazy var checkNum:glucoseRecentView = {
         let view = glucoseRecentView()
-        view.setupUI(title: "检测次数", value: "\(result[1])", unit: "次")
+        view.setupUI(title: "Times", value: "\(result[1])", unit: "次")
         return view
     }()
     
     private lazy var highest:glucoseRecentView = {
         let view = glucoseRecentView()
-        view.setupUI(title: "最高值", value: "\(result[2])", unit: GetUnit.getBloodUnit())
+        view.setupUI(title: "Max", value: "\(result[2])", unit: GetUnit.getBloodUnit())
         view.ValueLabel.textColor = UIColor.orange
         
         return view
     }()
     private lazy var lowest:glucoseRecentView = {
         let view = glucoseRecentView()
-        view.setupUI(title: "最低值", value: "\(result[3])", unit: GetUnit.getBloodUnit())
+        view.setupUI(title: "Min", value: "\(result[3])", unit: GetUnit.getBloodUnit())
         return view
     }()
     

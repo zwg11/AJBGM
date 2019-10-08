@@ -30,8 +30,8 @@ class registerViewController: UIViewController,UITextFieldDelegate {
     var isAgree:Bool = false
     // 协议警示框
     private lazy var ProtocolAlert:UIAlertController = {
-        let alert = UIAlertController(title: "协议", message: "", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "cancel", style: .cancel, handler: nil)
+        let alert = UIAlertController(title: "Protocol", message: "", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alert.addAction(cancelAction)
         return alert
     }()
@@ -105,22 +105,22 @@ class registerViewController: UIViewController,UITextFieldDelegate {
         print(passwordSec!)
         let alertController = CustomAlertController()
         if email == ""{
-            alertController.custom(self, "Attention", "邮箱不能为空")
+            alertController.custom(self, "Attention", "Email Empty")
             return
         }else if password == ""{
-            alertController.custom(self, "Attention", "密码不能为空")
+            alertController.custom(self, "Attention", "Password Empty")
             return
         }else if passwordSec == "" {
-            alertController.custom(self, "Attention", "确认密码不能为空")
+            alertController.custom(self, "Attention", "Confirm Password Empty")
             return
         }else if password != passwordSec{
-            alertController.custom(self, "Attention", "两次密码不同")
+            alertController.custom(self, "Attention", "Passwords Not Match")
             return
         }else if FormatMethodUtil.validatePasswd(passwd: password!) != true{
-            alertController.custom(self, "Attention", "密码强度不足")
+            alertController.custom(self, "Attention", "Confirm Password Weak")
             return
         }else if isAgree == false{
-            alertController.custom(self, "Attention", "请勾选同意协议")
+            alertController.custom(self, "Attention", "Please Agree the Protocol")
         }else{
             let dictString:Dictionary = [ "email":String(email!),"verifyCode":String(email_code!),"password":String(password!)]
             //            let user = User.deserialize(from: jsonString)
@@ -152,14 +152,14 @@ class registerViewController: UIViewController,UITextFieldDelegate {
 //                                infoInput_next.email = self.email
 //                                infoInput_next.verifyString = "edbdkeisoaoen45673"
 //                                self.navigationController?.pushViewController(infoInput_next, animated: true)
-                                alertController.custom(self,"Attention", "验证码错误")
+                                alertController.custom(self,"Attention", "Code Error")
                                 return 
                             }
                             
                         } //得到响应
                     }
                 }else{
-                    alertController.custom(self,"Attention", "网络错误")
+                    alertController.custom(self,"Attention", "Internet Error")
                     return
                 }
             }
@@ -178,10 +178,8 @@ class registerViewController: UIViewController,UITextFieldDelegate {
         let alertController = CustomAlertController()
         email = register.emailTextField.text!
         if email == ""{
-            alertController.custom(self, "Attention", "邮箱不能为空")
+            alertController.custom(self, "Attention", "Email Empty")
         }else if FormatMethodUtil.validateEmail(email: email!) == true{
-            print("获取验证码阶段")
-            print("如果不为空的话",email!)
             let  dictString:Dictionary = [ "email":String(email!)]
             print(dictString)
             Alamofire.request(get_Code,method: .post,parameters: dictString).responseString{ (response) in
@@ -196,19 +194,17 @@ class registerViewController: UIViewController,UITextFieldDelegate {
                                 //返回1，让其倒计时
                                 self.register.getAuthCodeButton.countDown(count: 10)
                             }else{
-                                alertController.custom(self,"Attention", "邮箱或密码不正确")
+                                alertController.custom(self,"Attention", "Email or Password Error")
                             }
-                        print("注册时，获取验证码阶段")
                     }
                   }//end of response.result.value
                 }else{
-                    alertController.custom(self, "Attention", "网络请求失败")
+                    alertController.custom(self, "Attention", "Internet Error")
                 }//end of response.result.isSuccess
             }//end of request
             
         }else{
-            alertController.custom(self,"Attention", "邮箱格式错误")
-            print("邮箱格式错误")
+            alertController.custom(self,"Attention", "Incorrect Email Format")
             return
         }
     }

@@ -19,7 +19,7 @@ class InfoViewController: UIViewController ,PickerDelegate{
     //列表数据
     public lazy var infoArray: Array = ["Name","Gender","Weight","Height","Data of Birth","Country","Phone"]
     //图标数据
-    public lazy var infoIconArray:Array = ["aboutUs","aboutUs","aboutUs","aboutUs","aboutUs","aboutUs","aboutUs"]
+    public lazy var infoIconArray:Array = ["Name","Gender","Weight","Height","Data-of-Birth","Country","Phone"]
     public lazy var infoDataArray : [String] = ["","","","","","",""]
 
     let tableview = UITableView()
@@ -61,7 +61,7 @@ class InfoViewController: UIViewController ,PickerDelegate{
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title:"back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title:"Save", style: UIBarButtonItem.Style.plain, target: self, action: #selector(saveUserInfo))
         
-       //tableview.register(UITableViewCell.self, forCellReuseIdentifier:"infocell")
+       tableview.register(UITableViewCell.self, forCellReuseIdentifier:"infocell")
         tableview.delegate = self
         tableview.dataSource = self
         tableview.isScrollEnabled = false
@@ -179,37 +179,41 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //根据注册的cell类ID值获取到载体cell
         var cell = tableView.dequeueReusableCell(withIdentifier: "infocell")
-
-        cell?.selectionStyle = .none
         cell = UITableViewCell(style: .value1, reuseIdentifier: "infocell")
+        cell?.selectionStyle = .none
         cell!.accessoryType = .disclosureIndicator
-        cell?.imageView?.image = UIImage(named: infoIconArray[indexPath.row])
-        cell?.textLabel?.text = infoArray[indexPath.row]
         cell!.backgroundColor = ThemeColor
         cell?.textLabel?.textColor = TextColor
-
-        //let userInfo = DBSQLiteManager.manager.selectUserRecord(userId: UserInfo.getUserId())
         switch indexPath.row{
-        case 0:
-            cell?.detailTextLabel?.text = infoDataArray[0]=="" ? "nothing":infoDataArray[0]
-        case 1:
-            cell?.detailTextLabel?.text = infoDataArray[1]=="" ? "nothing":infoDataArray[1]
-            
-           
-        case 2:
-            cell?.detailTextLabel?.text = (infoDataArray[2]=="" ? "nothing":(infoDataArray[2]) + GetUnit.getWeightUnit())
-
-            
-        case 3:
-            cell?.detailTextLabel?.text = infoDataArray[3]=="" ? "nothing":(infoDataArray[3] + "cm")
-        case 4:
-            cell?.detailTextLabel?.text = infoDataArray[4]=="" ? "nothing":infoDataArray[4]
-        case 5:
-            cell?.detailTextLabel?.text = infoDataArray[5]=="" ? "nothing":infoDataArray[5]
-        default:
-            cell?.detailTextLabel?.text = infoDataArray[6]=="" ? "nothing":infoDataArray[6]
-        }
-        
+            case 0:
+                cell?.imageView?.image = UIImage(named: infoIconArray[0])
+                cell?.detailTextLabel?.text = infoDataArray[0]=="" ? "nothing":infoDataArray[0]
+                cell?.textLabel?.text = infoArray[indexPath.row]
+            case 1:
+                cell?.imageView?.image = UIImage(named: infoIconArray[1])
+                cell?.detailTextLabel?.text = infoDataArray[1]=="" ? "nothing":infoDataArray[1]
+                cell?.textLabel?.text = infoArray[indexPath.row]
+            case 2:
+                cell?.imageView?.image = UIImage(named: infoIconArray[2])
+                cell?.detailTextLabel?.text = (infoDataArray[2]=="" ? "nothing":(infoDataArray[2]) + GetUnit.getWeightUnit())
+                cell?.textLabel?.text = infoArray[indexPath.row]
+            case 3:
+                cell?.imageView?.image = UIImage(named: infoIconArray[3])
+                cell?.detailTextLabel?.text = infoDataArray[3]=="" ? "nothing":(infoDataArray[3] + "cm")
+                cell?.textLabel?.text = infoArray[indexPath.row]
+            case 4:
+                cell?.imageView?.image = UIImage(named: infoIconArray[4])
+                cell?.detailTextLabel?.text = infoDataArray[4]=="" ? "nothing":infoDataArray[4]
+                cell?.textLabel?.text = infoArray[indexPath.row]
+            case 5:
+                cell?.imageView?.image = UIImage(named: infoIconArray[5])
+                cell?.detailTextLabel?.text = infoDataArray[5]=="" ? "nothing":infoDataArray[5]
+                cell?.textLabel?.text = infoArray[indexPath.row]
+            default:
+                cell?.imageView?.image = UIImage(named: infoIconArray[6])
+                cell?.detailTextLabel?.text = infoDataArray[6]=="" ? "nothing":infoDataArray[6]
+                cell?.textLabel?.text = infoArray[indexPath.row]
+            }
         cell?.detailTextLabel?.textColor = UIColor.white
         
         return cell!
