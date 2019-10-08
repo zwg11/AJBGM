@@ -127,7 +127,7 @@ class ChartView: UIView ,ChartViewDelegate{
             if set1[i].y > GetBloodLimit.getRandomDinnerTop(){
                 colors.append(UIColor.red)
             }else if set1[i].y < GetBloodLimit.getRandomDinnerLow(){
-                colors.append(UIColor.yellow)
+                colors.append(UIColor.orange)
             }else{
                 colors.append(UIColor.green)
             }
@@ -169,9 +169,6 @@ class ChartView: UIView ,ChartViewDelegate{
                 // 将数据添加到图表数据数组中
                 yDataArray1.append(entry)
             }
-        }else{
-            lineChartView.data = nil
-            return
         }
         print(yDataArray1)
         let set1 = LineChartDataSet.init(entries: yDataArray1, label: "")

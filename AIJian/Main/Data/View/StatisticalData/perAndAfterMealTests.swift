@@ -82,17 +82,17 @@ class perAndAfterMealTests: UIView {
     
     //***********低于正常值*************
     private lazy var lower:UILabel = {
-        let label = initLabel(setTextColor: yellowColor, setText: "Low")
+        let label = initLabel(setTextColor: UIColor.orange, setText: "Low")
         return label
     }()
     
     private lazy var lowerValue:UILabel = {
-        let label = initLabel(setTextColor: yellowColor, setText: "0")
+        let label = initLabel(setTextColor: UIColor.orange, setText: "0")
         return label
     }()
     
     private lazy var lowerPercent:UILabel = {
-        let label = initLabel(setTextColor: yellowColor, setText: "0%")
+        let label = initLabel(setTextColor: UIColor.orange, setText: "0%")
         return label
     }()
     
