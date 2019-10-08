@@ -109,7 +109,7 @@ class BHJPickerView: UIView , UIPickerViewDelegate, UIPickerViewDataSource{
             case .date:
                 datePicker = UIDatePicker.init(frame: CGRect.init(x: 0, y: 44, width: AJScreenWidth, height: pickerH - 44))
                 datePicker.datePickerMode = UIDatePicker.Mode.date
-                datePicker.locale = Locale.init(identifier: "zh_CN")
+                datePicker.locale = Locale.init(identifier: "en_US")
                 datePicker.backgroundColor = UIColor.white
                 datePicker.addTarget(self, action: #selector(BHJPickerView.dateSelected(_:)), for: UIControl.Event.valueChanged)
                 datePicker.setDate(Date(), animated: true)

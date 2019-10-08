@@ -13,7 +13,7 @@ class AJMineHeaderView:UITableViewCell{
     //头像
      lazy var titleImage:UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named:"defaultUserImage")
+        imageView.image = UIImage(named:"headImage")
         imageView.layer.cornerRadius = (AJScreenWidth*0.3)/2   //将圆角设置成半径
         imageView.layer.masksToBounds = true
         imageView.backgroundColor = UIColor.green
