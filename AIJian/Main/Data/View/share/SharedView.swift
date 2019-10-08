@@ -75,6 +75,7 @@ class SharedView: UIView ,UITextFieldDelegate{
         textField.textAlignment = .left
         textField.keyboardType = .default
         textField.layer.borderColor = UIColor.gray.cgColor
+        textField.textColor = TextColor
         textField.layer.borderWidth = 1
         textField.borderStyle = .line
         textField.delegate = self
@@ -95,6 +96,7 @@ class SharedView: UIView ,UITextFieldDelegate{
         let textField = UITextField()
         textField.textAlignment = .left
         textField.keyboardType = .default
+        textField.textColor = TextColor
         textField.layer.borderColor = UIColor.gray.cgColor
         textField.layer.borderWidth = 1
         textField.borderStyle = .line

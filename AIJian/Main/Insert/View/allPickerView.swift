@@ -159,7 +159,7 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         let timePicker = UIDatePicker()
         
         timePicker.calendar = Calendar.current
-        timePicker.locale = Locale(identifier: "en_GB")
+        timePicker.locale = Locale(identifier: "en_US")
         timePicker.timeZone = .current
         timePicker.datePickerMode = .time
         timePicker.backgroundColor = UIColor.white

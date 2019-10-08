@@ -8,7 +8,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "EEC936C8-0FEC-40E9-BB90-38D85FA034D5"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AIJian/AppDelegate.swift"
@@ -21,36 +21,34 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "EEC936C8-0FEC-40E9-BB90-38D85FA034D5 - 432bd01ce76048fe"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "AIJian.AppDelegate.application(_: __C.UIApplication, didFinishLaunchingWithOptions: Swift.Optional&lt;Swift.Dictionary&lt;__C.UIApplicationLaunchOptionsKey, Any&gt;&gt;) -&gt; Swift.Bool"
                   moduleName = "AIJian"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ADMIN/Desktop/ios%E9%A1%B9%E7%9B%AE%E8%AF%95%E9%AA%8C/AIJian/AIJian/AppDelegate.swift"
-                  timestampString = "0"
+                  urlString = "file:///Users/ADMIN/Desktop/swift1/AIJian/AppDelegate.swift"
+                  timestampString = "592225499.466759"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "49"
                   endingLineNumber = "49"
-                  offsetFromSymbolStart = "1754">
+                  offsetFromSymbolStart = "1860">
                </Location>
                <Location
-                  uuid = "EEC936C8-0FEC-40E9-BB90-38D85FA034D5 - ad30ca400a4ddc86"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #1 (Alamofire.DataResponse&lt;Swift.String&gt;) -&gt; () in AIJian.AppDelegate.application(_: __C.UIApplication, didFinishLaunchingWithOptions: Swift.Optional&lt;Swift.Dictionary&lt;__C.UIApplicationLaunchOptionsKey, Any&gt;&gt;) -&gt; Swift.Bool"
                   moduleName = "AIJian"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ADMIN/Desktop/ios%E9%A1%B9%E7%9B%AE%E8%AF%95%E9%AA%8C/AIJian/AIJian/AppDelegate.swift"
-                  timestampString = "0"
+                  urlString = "file:///Users/ADMIN/Desktop/swift1/AIJian/AppDelegate.swift"
+                  timestampString = "592225499.468554"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "50"
                   endingLineNumber = "50"
-                  offsetFromSymbolStart = "274">
+                  offsetFromSymbolStart = "228">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -59,7 +57,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "BBFED4E0-453F-4FC0-8011-D40E39B723E0"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AIJian/AppDelegate.swift"
@@ -76,7 +74,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "5C10EEA8-5A70-45F3-B2E3-2F9EE3301443"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AIJian/AppDelegate.swift"
@@ -582,36 +580,34 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "9B6CA4E6-7D73-4DD2-AF5C-3EE812E4D95C - 47baa6232b580feb"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "AIJian.DataTableViewController.UpdateSuccess() -&gt; ()"
                   moduleName = "AIJian"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ADMIN/Desktop/ios%E9%A1%B9%E7%9B%AE%E8%AF%95%E9%AA%8C/AIJian/AIJian/Main/Data/ViewController/DataTableViewController.swift"
-                  timestampString = "0"
+                  urlString = "file:///Users/ADMIN/Desktop/swift1/AIJian/Main/Data/ViewController/DataTableViewController.swift"
+                  timestampString = "592225499.8717951"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "114"
                   endingLineNumber = "114"
-                  offsetFromSymbolStart = "156">
+                  offsetFromSymbolStart = "188">
                </Location>
                <Location
-                  uuid = "9B6CA4E6-7D73-4DD2-AF5C-3EE812E4D95C - 92c003807e25fcff"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #1 () -&gt; () in AIJian.DataTableViewController.UpdateSuccess() -&gt; ()"
                   moduleName = "AIJian"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ADMIN/Desktop/ios%E9%A1%B9%E7%9B%AE%E8%AF%95%E9%AA%8C/AIJian/AIJian/Main/Data/ViewController/DataTableViewController.swift"
-                  timestampString = "0"
+                  urlString = "file:///Users/ADMIN/Desktop/swift1/AIJian/Main/Data/ViewController/DataTableViewController.swift"
+                  timestampString = "592225499.873455"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "115"
                   endingLineNumber = "115"
-                  offsetFromSymbolStart = "29">
+                  offsetFromSymbolStart = "48">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -716,40 +712,6 @@
             endingLineNumber = "43"
             landmarkName = "sendImage()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "1E2D4115-504D-4DD5-97A6-19821EA07304 - fc79d701ba57fe30"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "AIJian.SharedViewController.sendImage() -&gt; ()"
-                  moduleName = "AIJian"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ADMIN/Desktop/ios%E9%A1%B9%E7%9B%AE%E8%AF%95%E9%AA%8C/AIJian/AIJian/Main/Data/ViewController/SharedViewController.swift"
-                  timestampString = "0"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "43"
-                  endingLineNumber = "43"
-                  offsetFromSymbolStart = "520">
-               </Location>
-               <Location
-                  uuid = "1E2D4115-504D-4DD5-97A6-19821EA07304 - 489190cc85a63310"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (SnapKit.ConstraintMaker) -&gt; () in AIJian.SharedViewController.sendImage() -&gt; ()"
-                  moduleName = "AIJian"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ADMIN/Desktop/ios%E9%A1%B9%E7%9B%AE%E8%AF%95%E9%AA%8C/AIJian/AIJian/Main/Data/ViewController/SharedViewController.swift"
-                  timestampString = "0"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "44"
-                  endingLineNumber = "44"
-                  offsetFromSymbolStart = "22">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
