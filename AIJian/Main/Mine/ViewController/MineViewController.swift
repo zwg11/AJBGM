@@ -18,6 +18,7 @@ class MineViewController: UIViewController {
 
     let _imgArr   = ["user-info","Units-Setup","Change-Password","Targets-Setting","Instructions","About-Us","Update",]
 
+    let tableview = UITableView(frame: CGRect(x: 0, y:  0, width: AJScreenWidth, height: AJScreenHeight*7/10+AJScreenHeight/5+50))
     //点击跳转对应页面
     public lazy var clickArray: [UIViewController] = {
         return [InfoViewController(),UnitViewController(),PassChangeViewController(),BloodSetViewController(), UseDirViewController(),AboutUsViewController(),VersionUViewController()
@@ -33,14 +34,16 @@ class MineViewController: UIViewController {
         if userInfo.user_name == nil{
             requestUserInfo()
         }
+        
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        self.tableview.reloadRows(at: [IndexPath(row:0,section:0)], with: .fade)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = ThemeColor
         //将所有按钮添加到scrollview中，还需要修改相对布局
 
-        let tableview = UITableView(frame: CGRect(x: 0, y:  0, width: AJScreenWidth, height: AJScreenHeight*7/10+AJScreenHeight/5+50))
         //分割线
 //        tableview.separatorStyle = .singleLine
         tableview.separatorColor = UIColor.white
@@ -50,7 +53,6 @@ class MineViewController: UIViewController {
         tableview.dataSource = self
         tableview.backgroundColor = ThemeColor
         self.view.addSubview(tableview)
-        
     }
     
     func requestUserInfo(){
@@ -71,6 +73,7 @@ class MineViewController: UIViewController {
                         if(responseModel.code! == 1 ){
                             // 向数据库插入数据
                             DBSQLiteManager.manager.updateUserInfo(responseModel.data!)
+                            self.tableview.reloadRows(at: [IndexPath(row:0,section:0)], with: .fade)
                         }else{
                             let alert = CustomAlertController()
                             alert.custom(self, "Attension", "Unable to get the information")

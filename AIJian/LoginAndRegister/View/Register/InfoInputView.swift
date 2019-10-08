@@ -24,7 +24,7 @@ class InfoInputView: UIView {
         let textField = UITextField()
         textField.initTextField(placeholder: " Name",keyboardType: .default)
 //        let textField = initTextField(placeholder: " Name",keyboardType: .default)
-        let imageView = UIImageView(image: UIImage(named: "email"))
+        let imageView = UIImageView(image: UIImage(named: "Name"))
         textField.leftView = imageView
         textField.leftViewMode = .always
 //        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
@@ -34,7 +34,7 @@ class InfoInputView: UIView {
     /*性别标签*/
     lazy var gender_label:UIButton = {
         let gender_man_label = UIButton(frame: CGRect())
-        gender_man_label.setImage(UIImage(named: "email"), for: .normal)
+        gender_man_label.setImage(UIImage(named: "Gender"), for: .normal)
         gender_man_label.setTitle(" Gender", for: .normal)
         gender_man_label.contentHorizontalAlignment = .left
         gender_man_label.setTitleColor(TextColor, for: .normal)
@@ -141,7 +141,7 @@ class InfoInputView: UIView {
         let textField = UITextField()
         textField.initTextField(placeholder: " China",keyboardType: .default)
 //        let textField = initTextField(placeholder: " China",keyboardType: .default)
-        let imageView = UIImageView(image: UIImage(named: "email"))
+        let imageView = UIImageView(image: UIImage(named: "Country"))
         textField.leftView = imageView
         textField.leftViewMode = .always
 //        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
@@ -161,7 +161,7 @@ class InfoInputView: UIView {
         let textField = UITextField()
         textField.initTextField(placeholder: " Phone",keyboardType: .default)
 //        let textField = initTextField(placeholder: " Phone",keyboardType: .emailAddress)
-        let imageView = UIImageView(image: UIImage(named: "email"))
+        let imageView = UIImageView(image: UIImage(named: "Phone"))
         textField.leftView = imageView
         textField.leftViewMode = .always
 //        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
@@ -171,7 +171,7 @@ class InfoInputView: UIView {
     /*出生日期标签*/
     lazy var brithday_label:UIButton = {
         let gender_woman_button = UIButton(frame: CGRect())
-        gender_woman_button.setImage(UIImage(named: "email"), for: .normal)
+        gender_woman_button.setImage(UIImage(named: "Date-of-Birth"), for: .normal)
         gender_woman_button.setTitle(" Data of Birth", for: .normal)
         gender_woman_button.contentHorizontalAlignment = .left
         gender_woman_button.setTitleColor(TextColor, for: .normal)

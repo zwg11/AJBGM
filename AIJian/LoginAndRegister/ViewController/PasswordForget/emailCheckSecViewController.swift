@@ -69,13 +69,13 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
 //        print(password)
 //        print(passwordSec)
         if password == ""{
-             alertController.custom(self, "Attention", "新密码不能为空")
+             alertController.custom(self, "Attention", "New Password Empty")
             return
         }else if passwordSec == "" {
-             alertController.custom(self, "Attention", "确认密码不能为空")
+             alertController.custom(self, "Attention", "Confirm Password Empty")
             return
         }else if password != passwordSec{
-             alertController.custom(self, "Attention", "两次密码不同")
+             alertController.custom(self, "Attention", "Passwords Not Match")
             return
         }else{//经过前端验证之后，需要进行后端验证
             print(email!)
@@ -100,7 +100,7 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
                             if(responseModel.code == 1 ){
                                 print("重置成功")
                                 print("跳转到修改密码那一页")
-                                alertController.custom(self,"Attention", "密码重置成功")
+                                alertController.custom(self,"Attention", "Password Reset Success")
                                 self.navigationController?.popToRootViewController(animated: true)
                             }else{
                                 //先转，后弹

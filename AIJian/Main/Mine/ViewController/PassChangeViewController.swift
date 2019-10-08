@@ -34,7 +34,7 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
             oldPasswd_textF.isSecureTextEntry = true
             oldPasswd_textF.allowsEditingTextAttributes = false
             oldPasswd_textF.borderStyle = .none
-            let imageView = UIImageView(image: UIImage(named: "email"))
+            let imageView = UIImageView(image: UIImage(named: "mima"))
             oldPasswd_textF.leftView = imageView
             oldPasswd_textF.leftViewMode = .always
             let str:NSMutableAttributedString = NSMutableAttributedString(string: "Old Password", attributes: [NSAttributedString.Key.foregroundColor:TextColor])
@@ -49,7 +49,7 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
             newPasswd_textF.allowsEditingTextAttributes = false
             newPasswd_textF.isSecureTextEntry = true
             newPasswd_textF.borderStyle = .none
-            let imageView = UIImageView(image: UIImage(named: "email"))
+            let imageView = UIImageView(image: UIImage(named: "mima"))
             newPasswd_textF.leftView = imageView
             newPasswd_textF.leftViewMode = .always
             let str:NSMutableAttributedString = NSMutableAttributedString(string: "New Password", attributes: [NSAttributedString.Key.foregroundColor:TextColor])
@@ -64,7 +64,7 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
             verfiedPasswd_textF.allowsEditingTextAttributes = false
             verfiedPasswd_textF.isSecureTextEntry = true
             verfiedPasswd_textF.borderStyle = .none
-            let imageView = UIImageView(image: UIImage(named: "email"))
+            let imageView = UIImageView(image: UIImage(named: "mima"))
             verfiedPasswd_textF.leftView = imageView
             verfiedPasswd_textF.leftViewMode = .always
             let str:NSMutableAttributedString = NSMutableAttributedString(string: "Confirm the Password", attributes: [NSAttributedString.Key.foregroundColor:TextColor])

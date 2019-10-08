@@ -13,14 +13,13 @@ class sugComponent: UIView {
     
     lazy var imageView:UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "aboutUs")
+        image.image = UIImage(named: "Email")
         return image
     }()
     
     var textField:UITextField = {
         let textField = UITextField()
-        let str:NSMutableAttributedString = NSMutableAttributedString(string: "*************", attributes: [NSAttributedString.Key.foregroundColor:TextColor])
-        textField.attributedPlaceholder = str
+        
 //        textField.placeholder = "*************"
 //        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
         return textField
@@ -30,7 +29,9 @@ class sugComponent: UIView {
     func  setupUI(title:String){
         self.frame = CGRect(x: 0, y: 0, width: AJScreenWidth, height: AJScreenHeight/15)
         print("调用了组件层")
-        textField.placeholder = title
+        let str:NSMutableAttributedString = NSMutableAttributedString(string: title, attributes: [NSAttributedString.Key.foregroundColor:TextColor])
+        textField.attributedPlaceholder = str
+//        textField.placeholder = title
         
         self.addSubview(imageView)
         self.addSubview(textField)

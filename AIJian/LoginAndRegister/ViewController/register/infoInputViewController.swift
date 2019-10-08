@@ -131,15 +131,12 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
     
     //选择出生日期
     @objc func chooseDate(){
-        print("点击了出生日期按钮")
         UIView.animate(withDuration: 0.5, animations: appear)
     }
     func appear(){
         
         // 重新布置约束
         // 时间选择器界面移到屏幕内底部，视觉效果为出现
-        //shareV.pickDateView.frame.origin = CGPoint(x: 0, y: self.frame.size.height/3*2)
-        print("func appear done.")
         // 删除顶部约束
         self.topConstraint?.uninstall()
         picker.snp_makeConstraints{(make) in
@@ -159,7 +156,6 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
         // 重新布置约束
         // 时间选择器界面移到屏幕外，视觉效果为消失
         //shareV.pickDateView.frame.origin = CGPoint(x: 0, y: shareV.snp.bottom)
-        print("func dismiss done.")
         // 删除顶部约束
         self.bottomConstraint?.uninstall()
         picker.snp_makeConstraints{(make) in
@@ -180,13 +176,6 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
     // 点击取消按钮，时间选择器界面移到屏幕外，视觉效果为消失
     @objc func pickViewDismiss(){
         UIView.animate(withDuration: 0.5, animations: dismiss)
-        
-        //        self.pickDateView.snp.makeConstraints{(make) in
-        //            make.top.equalTo(self.snp.bottom)
-        //
-        //        }
-        print("cancel button clicked")
-        
     }
     // 点击确定按钮，时间选择器界面移到屏幕外，视觉效果为消失，按钮文本显示日期
     @objc func pickViewSelected(){
@@ -197,12 +186,8 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
         // 绑定一个时间选择器，并按格式返回时间
         brithday = dateFormatter.string(from: picker.datePicker.date)
         infoinputView.dateButton.setTitle(brithday, for: .normal)
-        print("选择时间日期:",brithday!)
-//        shareV.birthdayButton.setTitle(date, for: .normal)
         
         UIView.animate(withDuration: 0.5, animations: dismiss)
-        
-        print("sure button clicked")
         
     }
     
@@ -210,44 +195,17 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
     
     //完成的点击方法
     @objc func finish(){
-        print("点击了完成方法")
         let alertController = CustomAlertController()
-        //用户名
-       userName = infoinputView.userNameTextField.text!
-        //性别
-//        gender = infoinputView.
-//        //身高
-//        if infoinputView.heightTextField.text! != ""{
-//             height = Double(infoinputView.heightTextField.text!)!
-//        }
-//        //体重
-//        if infoinputView.weightTextField.text! != ""{
-//             weightKg = Double(infoinputView.weightTextField.text!)!
-//        }
-       
-        //国家
-//        country = infoinputView.nationTextField.text!
-        //电话
-        phoneNumber = infoinputView.phoneTextField.text!
-        //时间
-//        brithday =
+        
         if userName == ""{
-            alertController.custom(self, "Attention", "用户名不能为空")
+            alertController.custom(self, "Attention", "Name Empty")
             return
         }else if country == ""{
-             alertController.custom(self, "Attention", "国家不能为空")
+             alertController.custom(self, "Attention", "Country Empty")
             return
         }else{  //经过验证之后的请求
             //设置了国家和用户名不能为空
-            print(userName!)
-//            print(height!)
-//            print(weightKg!)
-            print(country!)
-            print(phoneNumber!)
-//            email = "3333@qq.com"
-//            verifyString = "aekcnsoirebgregnkdnwin"
-            print("从前一个页面传过来的email",email!)
-            print("从前一个页面传过来的data",verifyString!)
+
             var userData:USER = USER()
             userData.email = String(email!)
             userData.user_name = String(userName!)
@@ -271,10 +229,6 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
             Alamofire.request(FillUserInfo,method: .post,parameters: dictString).responseString{ (response) in
                 if response.result.isSuccess {
                     if let jsonString = response.result.value {
-                        print("进入验证过程")
-                        print(jsonString)
-                        
-                        
                         // json转model
                         // 写法一：responseModel.deserialize(from: jsonString)
                         // 写法二：用JSONDeserializer<T>
@@ -283,18 +237,17 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
 //                         */
                         if let responseModel = JSONDeserializer<responseModel>.deserializeFrom(json: jsonString) {
                             /// model转json 为了方便在控制台查看
-                            print("瞧瞧输出的是什么",responseModel.toJSONString(prettyPrint: true)!)
                             /*  此处为跳转和控制逻辑
                              */
                             if(responseModel.code == 1 ){
                                 print(responseModel.code)
                                  self.navigationController?.popToRootViewController(animated: true)
-                                alertController.custom(self,"Attention", "恭喜您，注册成功！")
+                                alertController.custom(self,"Attention", "Sign Up Success！")
                                
                             }else{
                                 print(responseModel.code)
                                 self.navigationController?.popToRootViewController(animated: true)
-                                alertController.custom(self,"Attention", "恭喜您，注册成功！")
+                                alertController.custom(self,"Attention", "Sign Up Failure！")
                                 
                             }
                         } //end of letif
@@ -312,7 +265,6 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
         return true
     }
     @objc func selectNation(){
-        print("选择国家")
         let pickerView = BHJPickerView.init(self, .country)
         pickerView.pickerViewShow()
     }

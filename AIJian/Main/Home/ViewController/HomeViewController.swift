@@ -41,7 +41,7 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             
             let cell = UITableViewCell(style: .value1, reuseIdentifier: id)
             cell.selectionStyle = .none
-            cell.textLabel?.text = "最近一次"
+            cell.textLabel?.text = "Latest BG"
             cell.backgroundColor = UIColor.clear
             cell.textLabel?.textColor = UIColor.white
             // 在数据库取出最近一次的血糖记录
@@ -67,7 +67,7 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             
             let cell = UITableViewCell(style: .default, reuseIdentifier: id)
             cell.selectionStyle = .none
-            cell.textLabel?.text = "最近7天"
+            cell.textLabel?.text = "Last 7 days"
             cell.textLabel?.textColor = UIColor.white
             cell.backgroundColor = UIColor.clear
             return cell
@@ -81,7 +81,7 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             
             let cell = UITableViewCell(style: .default, reuseIdentifier: id)
             cell.selectionStyle = .none
-            cell.textLabel?.text = "血糖趋势"
+            cell.textLabel?.text = "Trend"
             cell.textLabel?.textColor = UIColor.white
             cell.backgroundColor = UIColor.clear
             return cell
@@ -123,7 +123,6 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
 //        user1.email = "zzmmshang@qq.com"
 //        sqliteManager.addUserRecord(user1)
         homeTableView.reloadData()
-        print("这个东西到底是什么东西",SHIFT!)
         // 图表重新画
         recent7View.reloadChart()
         recent7View.recentTrendView.drawLineChart(xAxisArray: xAxisArrayToWeek(Days: 7) as NSArray,xAxisData: recentDaysData(Days: 7))

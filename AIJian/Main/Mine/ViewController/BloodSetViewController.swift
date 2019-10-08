@@ -43,7 +43,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
     
     let UIPAGEColor = UIColor.init(red: 128/255.0, green: 136/255.0, blue: 146/255.0, alpha: 1)
     let UITITLEColor = UIColor.init(red: 136/255.0, green: 172/255.0, blue: 207/255.0, alpha: 1)
-    let AnotherColor = UIColor.init(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 1)
+    let AnotherColor = UIColor.init(red: 136/255.0, green: 136/255.0, blue: 136/255.0, alpha: 1)
     //空腹相关的全局变量
     lazy var emptyStomach_left:UITextField = {
         let emptyStomach_left = UITextField()
@@ -52,6 +52,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
         emptyStomach_left.keyboardType = UIKeyboardType.decimalPad
         emptyStomach_left.borderStyle = .line
         emptyStomach_left.textAlignment = .center
+        emptyStomach_left.textColor = TextColor
         emptyStomach_left.layer.borderColor = UIColor.white.cgColor
         emptyStomach_left.layer.borderWidth = 1
         return emptyStomach_left
@@ -64,6 +65,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
         emptyStomach_right.keyboardType = UIKeyboardType.decimalPad
         emptyStomach_right.borderStyle = .line
         emptyStomach_right.textAlignment = .center
+        emptyStomach_right.textColor = TextColor
         emptyStomach_right.layer.borderColor = UIColor.white.cgColor
         emptyStomach_right.layer.borderWidth = 1
         return emptyStomach_right
@@ -84,6 +86,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
         beforeDinner_left.keyboardType = UIKeyboardType.decimalPad
         beforeDinner_left.borderStyle = .line
         beforeDinner_left.textAlignment = .center
+        beforeDinner_left.textColor = TextColor
         beforeDinner_left.layer.borderColor = UIColor.white.cgColor
         beforeDinner_left.layer.borderWidth = 1
         return beforeDinner_left
@@ -96,6 +99,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
         beforeDinner_right.keyboardType = UIKeyboardType.decimalPad
         beforeDinner_right.borderStyle = .line
         beforeDinner_right.textAlignment = .center
+        beforeDinner_right.textColor = TextColor
         beforeDinner_right.layer.borderColor = UIColor.white.cgColor
         beforeDinner_right.layer.borderWidth = 1
         return beforeDinner_right
@@ -116,6 +120,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
         afterDinner_left.keyboardType = UIKeyboardType.decimalPad
         afterDinner_left.borderStyle = .line
         afterDinner_left.textAlignment = .center
+        afterDinner_left.textColor = TextColor
         afterDinner_left.layer.borderColor = UIColor.white.cgColor
         afterDinner_left.layer.borderWidth = 1
         return afterDinner_left
@@ -128,6 +133,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
         afterDinner_right.keyboardType = UIKeyboardType.decimalPad
         afterDinner_right.borderStyle = .line
         afterDinner_right.textAlignment = .center
+        afterDinner_right.textColor = TextColor
         afterDinner_right.layer.borderColor = UIColor.white.cgColor
         afterDinner_right.layer.borderWidth = 1
         return afterDinner_right
@@ -148,6 +154,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
         randomDinner_left.keyboardType = UIKeyboardType.decimalPad
         randomDinner_left.borderStyle = .line
         randomDinner_left.textAlignment = .center
+        randomDinner_left.textColor = TextColor
         randomDinner_left.layer.borderColor = UIColor.white.cgColor
         randomDinner_left.layer.borderWidth = 1
         return randomDinner_left
@@ -159,6 +166,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
         randomDinner_right.keyboardType = UIKeyboardType.decimalPad
         randomDinner_right.borderStyle = .line
         randomDinner_right.textAlignment = .center
+        randomDinner_right.textColor = TextColor
         randomDinner_right.layer.borderColor = UIColor.white.cgColor
         randomDinner_right.layer.borderWidth = 1
         return randomDinner_right
@@ -513,8 +521,8 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             let g_String = floor(g_Double * 18.02)
             let h_String = floor(h_Double * 18.02)
             showPlaceholder(String(format:"%.0f",a_String),String(format:"%.0f",b_String),String(format:"%.0f",c_String),String(format:"%.0f",d_String),String(format:"%.0f",e_String),String(format:"%.0f",f_String),String(format:"%.0f",g_String),String(format:"%.0f",h_String))
-            let str:NSMutableAttributedString = NSMutableAttributedString(string: "", attributes: [NSAttributedString.Key.foregroundColor:AnotherColor])
-            emptyStomach_left.attributedPlaceholder = str
+//            let str:NSMutableAttributedString = NSMutableAttributedString(string: "", attributes: [NSAttributedString.Key.foregroundColor:AnotherColor])
+//            emptyStomach_left.attributedPlaceholder = str
 //            emptyStomach_left.setValue(AnotherColor, forKeyPath: "_placeholderLabel.textColor")
         }
     }
@@ -1041,22 +1049,22 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
     }
     //函数功能：设置text的placeholder显示,函数参数可匿名
     func showPlaceholder(_ a:String,_ b:String,_ c:String,_ d:String,_ e:String,_ f:String,_ g:String,_ h:String){
-//        emptyStomach_left.placeholder  = a
-//        emptyStomach_left.setValue(AnotherColor, forKeyPath: "_placeholderLabel.textColor")
-//        emptyStomach_right.placeholder = b
-//        emptyStomach_right.setValue(AnotherColor, forKeyPath: "_placeholderLabel.textColor")
-//        beforeDinner_left.placeholder  = c
-//        beforeDinner_left.setValue(AnotherColor, forKeyPath: "_placeholderLabel.textColor")
-//        beforeDinner_right.placeholder = d
-//        beforeDinner_right.setValue(AnotherColor, forKeyPath: "_placeholderLabel.textColor")
-//        afterDinner_left.placeholder   = e
-//        afterDinner_left.setValue(AnotherColor, forKeyPath: "_placeholderLabel.textColor")
-//        afterDinner_right.placeholder  = f
-//        afterDinner_right.setValue(AnotherColor, forKeyPath: "_placeholderLabel.textColor")
-//        randomDinner_left.placeholder  = g
-//        randomDinner_left.setValue(AnotherColor, forKeyPath: "_placeholderLabel.textColor")
-//        randomDinner_right.placeholder = h
-//        randomDinner_right.setValue(AnotherColor, forKeyPath: "_placeholderLabel.textColor")
+        let a1:NSMutableAttributedString = NSMutableAttributedString(string: a, attributes: [NSAttributedString.Key.foregroundColor:TextColor])
+        emptyStomach_left.attributedPlaceholder  = a1
+        let b1:NSMutableAttributedString = NSMutableAttributedString(string: b, attributes: [NSAttributedString.Key.foregroundColor:TextColor])
+        emptyStomach_right.attributedPlaceholder  = b1
+        let c1:NSMutableAttributedString = NSMutableAttributedString(string: c, attributes: [NSAttributedString.Key.foregroundColor:TextColor])
+        beforeDinner_left.attributedPlaceholder  = c1
+        let d1:NSMutableAttributedString = NSMutableAttributedString(string: d, attributes: [NSAttributedString.Key.foregroundColor:TextColor])
+        beforeDinner_right.attributedPlaceholder  = d1
+        let e1:NSMutableAttributedString = NSMutableAttributedString(string: e, attributes: [NSAttributedString.Key.foregroundColor:TextColor])
+        afterDinner_left.attributedPlaceholder  = e1
+        let f1:NSMutableAttributedString = NSMutableAttributedString(string: f, attributes: [NSAttributedString.Key.foregroundColor:TextColor])
+        afterDinner_right.attributedPlaceholder  = f1
+        let g1:NSMutableAttributedString = NSMutableAttributedString(string: g, attributes: [NSAttributedString.Key.foregroundColor:TextColor])
+        randomDinner_left.attributedPlaceholder  = g1
+        let h1:NSMutableAttributedString = NSMutableAttributedString(string: h, attributes: [NSAttributedString.Key.foregroundColor:TextColor])
+        randomDinner_right.attributedPlaceholder  = h1
     }
     
     // 详细用法请看 glucoseView.swift

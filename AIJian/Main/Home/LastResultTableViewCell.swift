@@ -33,7 +33,6 @@ class LastResultTableViewCell: UITableViewCell {
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
         label.adjustsFontSizeToFitWidth = true
-        label.backgroundColor = UIColor.gray
         label.textColor = UIColor.white
         return label
     }()
@@ -46,7 +45,6 @@ class LastResultTableViewCell: UITableViewCell {
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
         label.adjustsFontSizeToFitWidth = true
-        label.backgroundColor = UIColor.gray
         label.textColor = UIColor.white
         return label
     }()
@@ -62,13 +60,12 @@ class LastResultTableViewCell: UITableViewCell {
         let low = GetBloodLimit.getRandomDinnerLow()
         let high = GetBloodLimit.getRandomDinnerTop()
         if unit == "mg/dL"{
-            label.text = "参考值 \(Int(low))" + unit + "-" + "\(Int(high))" + unit
+            label.text = "Reference value \(Int(low))" + unit + "-" + "\(Int(high))" + unit
         }else{
-            label.text = "参考值 \(low)" + unit + "-" + "\(high)" + unit
+            label.text = "Reference value \(low)" + unit + "-" + "\(high)" + unit
         }
         
         label.textAlignment = .left
-        label.backgroundColor = UIColor.gray
         label.textColor = UIColor.white
         return label
     }()

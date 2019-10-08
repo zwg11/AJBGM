@@ -28,7 +28,7 @@ class emailCheckView: UIView {
         let textField = UITextField()
         textField.initTextField(placeholder: " Code",keyboardType: .default)
 //        let textField = initTextField(placeholder: " Code",keyboardType: .numberPad)
-        let imageView = UIImageView(image: UIImage(named: "email"))
+        let imageView = UIImageView(image: UIImage(named: "mima"))
         textField.leftView = imageView
         textField.leftViewMode = .always
 //        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")

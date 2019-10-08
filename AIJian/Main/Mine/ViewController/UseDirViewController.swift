@@ -21,7 +21,7 @@ class UseDirViewController: UIViewController {
         self.view.backgroundColor = ThemeColor
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title:"back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back))
         
-        let imageNameArray: [String] = ["yindao01", "yindao02","yindao03"]
+        let imageNameArray: [String] = ["LaunchImage", "LaunchImage-1"]
         let guideView = PageView.init(imageNameArray: imageNameArray)
         self.view.addSubview(guideView)
         guideView.snp.remakeConstraints{ (make) in

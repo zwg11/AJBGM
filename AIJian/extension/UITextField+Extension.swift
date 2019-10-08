@@ -35,7 +35,7 @@ extension UITextField{
         self.placeholder = string
         self.textAlignment = .left
         self.keyboardType = type
-
+        self.textColor = TextColor
         self.setValue(NSNumber(value: 10), forKey: "paddingLeft")
         let str:NSMutableAttributedString = NSMutableAttributedString(string: string, attributes: [NSAttributedString.Key.foregroundColor:TextColor])
         self.attributedPlaceholder = str

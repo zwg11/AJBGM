@@ -70,21 +70,17 @@ class loginViewController: UIViewController,UITextFieldDelegate {
         let alertController = CustomAlertController()
         email = loginview.userNameTextField.text!
         password = loginview.passwordTextField.text!
-        print("邮箱为",email!)
-        print("密码为",password!)
         if email == ""{
-            alertController.custom(self,"Attention", "邮箱不能为空")
-            print("邮箱不能为空")
+            alertController.custom(self,"Attention", "Email Empty")
             return
         }else if password == ""{
-            alertController.custom(self,"Attention", "密码不能为空")
-            print("密码不能为空")
+            alertController.custom(self,"Attention", "Password Empty")
             return
         }else if FormatMethodUtil.validateEmail(email: email!) == true{
             // ****** 弹出加载风火轮 ******
             
             // 初始化UI
-            indicator.setupUI("正在登录")
+            indicator.setupUI("Logining in...")
             // 设置风火轮视图在父视图中心
             // 开始转
             indicator.startIndicator()
@@ -146,7 +142,7 @@ class loginViewController: UIViewController,UITextFieldDelegate {
                                 user1.email = UserInfo.getEmail()
                                 sqliteManager.addUserRecord(user1)
                                 // 登陆成功，请求数据
-                                self.indicator.setLabelText("登录成功，正在初始化数据")
+                                self.indicator.setLabelText("Login in Success，Initializing Data..")
                                 self.requestData(day: 1000)
 
  
@@ -157,7 +153,7 @@ class loginViewController: UIViewController,UITextFieldDelegate {
                                 self.indicator.stopIndicator()
                                 self.indicator.removeFromSuperview()
                                 
-                                alertController.custom(self,"Attention", "邮箱或密码不正确")
+                                alertController.custom(self,"Attention", "Incorrect Email or Password")
                             }
                         }
                     }
@@ -166,14 +162,14 @@ class loginViewController: UIViewController,UITextFieldDelegate {
                     self.indicator.stopIndicator()
                     self.indicator.removeFromSuperview()
                     
-                    alertController.custom(self,"Attention", "网络连接失败，请稍后重试！")
+                    alertController.custom(self,"Attention", "Internet Error！")
                 }
             }
             print("邮箱格式正确,登录成功")
             
             return
         }else{
-            alertController.custom(self,"Attention", "邮箱格式错误")
+            alertController.custom(self,"Attention", "Incorrect Email Format")
             print("邮箱格式错误")
             return
         }
@@ -251,7 +247,7 @@ extension loginViewController{
                             self.indicator.removeFromSuperview()
                             
                             let alert = CustomAlertController()
-                            alert.custom(self, "警告", "\(recordInDaysResponse.msg!)")
+                            alert.custom(self, "Attention", "\(recordInDaysResponse.msg!)")
                             return
                         }
                         
@@ -284,7 +280,7 @@ extension loginViewController{
                 self.indicator.removeFromSuperview()
                 
                 let alert = CustomAlertController()
-                alert.custom(self, "警告", "网络异常，请稍后重试")
+                alert.custom(self, "Attention", "Internet Error")
                 print("没网了")
             }
             
