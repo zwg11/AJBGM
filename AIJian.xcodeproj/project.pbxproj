@@ -30,9 +30,11 @@
 		30E983804395F9F8A70B9E14F4E3D7DB /* getDataInHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C340848915D471758C27C46FC15E8A6 /* getDataInHome.swift */; };
 		3196F5B95AA6AA6CBF111CFD2DE7E61B /* pickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1FFFCEAEB20DEFEC8716743912DE93 /* pickerView.swift */; };
 		35F229CDB65C074B26E6675EAD66CE2B /* BasalInsulinTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F050A7AE8A1301E444704F3A331088 /* BasalInsulinTableView.swift */; };
+		36BBFB3CF4326849B8182D7E23D1D1C8 /* CRC16.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87C7D3F47A2F01DF9F52E6E047E342A /* CRC16.swift */; };
 		36ED57EDEB1BEDFCEC1376EA7C0663EA /* Pods_AIJian.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF99105C98E070F5A2AB3295DDBB3B84 /* Pods_AIJian.framework */; };
 		3A882D841BCD9D047B77B5EE61C0F09E /* SetColorOfText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4F369C05939A511383BE4E6F782638 /* SetColorOfText.swift */; };
 		3AA27EF7A0776B0646E3A87A334BEA4D /* GeneralStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C00E21044909597018A27EA6A8731C /* GeneralStatusView.swift */; };
+		3ADD7EA7FBEA2802825A5D0C6978A31A /* gluViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764C38A18B23A2FFB100BF679825865 /* gluViewController.swift */; };
 		3ED6816474BEC77E2364F3D9F389E2CD /* CustomActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77041D07788584DA608BC9657890705D /* CustomActivityIndicatorView.swift */; };
 		3F209594276298C7CF2E79AB8D42762D /* UnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802706582BF2DD3F2F165BE6CC4B129F /* UnitViewController.swift */; };
 		3FF8ECC746A30B198DB68C15D5F5E15C /* allPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A16F36F9537243E6B7560D1B9FF77A0 /* allPickerView.swift */; };
@@ -52,6 +54,7 @@
 		6E35FD60C98CE0106FAB496C7D9A6831 /* SharedStaticView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499D392FCC415844B1B79CE51C4D09C5 /* SharedStaticView.swift */; };
 		6ECA98075DA8031CC3E4FCCF8A969285 /* const.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FC2F51C9CAE9D3C768C8D06AE069A2 /* const.swift */; };
 		71937B70E5629695BD05C1C077D5607B /* UnitSetting.plist in Resources */ = {isa = PBXBuildFile; fileRef = 946C4B448C4368010D25171286A04DC5 /* UnitSetting.plist */; };
+		743A3F6B430D84EA70AEC37B7E7C611D /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EC5BD8176D116187C1289A2D7921FC /* String+extension.swift */; };
 		74BAA950DB2E4C75BE286CCA00B3A027 /* SharedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B95A250C5649E01E8B1CE6F8AD5E85 /* SharedViewController.swift */; };
 		78ACFA86EAB2AD613A75EC3FA86CC0D5 /* emailCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5DB8024A9CEB37E93599A5AA8FB6AB /* emailCheckViewController.swift */; };
 		79EF3049BA2F75158E6183282C4F9EA9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3100BA3D03C73A4C3825AD32D66C7DEF /* User.swift */; };
@@ -59,11 +62,6 @@
 		7CD890F46A335B97CB394B2E0F32CE7C /* WeightUnitChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9333124ACDB51FBDDC929EEAD032D6D3 /* WeightUnitChange.swift */; };
 		7E55D14C065E24471D59E71862D56472 /* UseDirViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67085F8C516527849C0A634158BE78B7 /* UseDirViewController.swift */; };
 		82229929AE907526C16AFB7C3B976565 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428DE12BF8AED7060D2DACBB1BDB9E15 /* AppDelegate.swift */; };
-		842ACD37234D71AE00CF38FD /* LoadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842ACD36234D71AE00CF38FD /* LoadView.swift */; };
-		842ACD39234D71BD00CF38FD /* BLEViewController 2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842ACD38234D71BD00CF38FD /* BLEViewController 2.swift */; };
-		842ACD3B234D71C700CF38FD /* gluViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842ACD3A234D71C700CF38FD /* gluViewController.swift */; };
-		842ACD3D234D724B00CF38FD /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842ACD3C234D724B00CF38FD /* String+extension.swift */; };
-		842ACD3F234D72D300CF38FD /* CRC16.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842ACD3E234D72D300CF38FD /* CRC16.swift */; };
 		84847BC2FE082A7DD9416B04C6429EAB /* BHJPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE608F63498A45B84C3679D6251C8601 /* BHJPickerView.swift */; };
 		85BF4AD1556507F03E9CF1AB13F34571 /* BloodSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCA193DA6A5E1E858111B284800163C /* BloodSetViewController.swift */; };
 		875E6FED57826107D84E47853B2A507F /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5C68EDC76F69EA0E7DCD122ED6AB4 /* UITextField+Extension.swift */; };
@@ -75,6 +73,7 @@
 		8FA5DCA84D635AA4D80C1A78D6EF2D17 /* DataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B20E6C74C7069BCCED010C7F429CCBA /* DataTableViewController.swift */; };
 		913C5A050E557527D087A3E79934646B /* IntensityChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8E8D0A6CA3F03313B4B856827E97DD /* IntensityChange.swift */; };
 		936A597C2AC4773B5A725A4B47936B31 /* viewToImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F07FB865C1B45AC2F704BE6D7A4BF4 /* viewToImage.swift */; };
+		93E546E5E1118F5FA76871EC98702104 /* LoadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2F4241A59E2EB545EC4954C1FD38B9 /* LoadView.swift */; };
 		957A7C093476F2DD3E1D27A459DA5B62 /* emailCheckSecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F6BFF01153E17E98228FE2B6DE05A3 /* emailCheckSecondView.swift */; };
 		9A52EC121DB581CF229AB2E3F50BBAE6 /* Eventhing_response.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C3FB678C55445CDE289E6C4AF9E0F1 /* Eventhing_response.swift */; };
 		9B3DAB77A3DC41F8FAC306F8E17CF1C1 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA336323AF93C849D90681604D2147DF /* UIButton+Extension.swift */; };
@@ -126,6 +125,7 @@
 		E479C902F6DEDF27CD6A2A4C47BC21D5 /* CountryEn.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1B29EA5E3861CBD4A8333DE8EB3A45A /* CountryEn.plist */; };
 		E74705A4B4520AF2BB983AE3A49DEDCB /* totalCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6944C88A1CC67791001D6E2AB70AF8DE /* totalCheckView.swift */; };
 		E753DC7DBC086A2A30C6EC0830A63D95 /* OtherInsulinTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB32CBB039E1CB1B7CFC343ECDA5FC66 /* OtherInsulinTableView.swift */; };
+		E85A9418E967599370BB20317758AB88 /* BLEViewController 2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32EB0E8DBAE9B6ABD130E92D422FA94 /* BLEViewController 2.swift */; };
 		E984F8552E1FF381F5828A63501263CC /* recentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF195A74D0097D3A2F613C3949D8455 /* recentTableViewCell.swift */; };
 		ECCDAB6AF9B53630AF5186D28430395B /* registerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA464EB54C14F9628836CB6E349E42D /* registerView.swift */; };
 		F0A6F0F1CF20A1EA46FA373138B695E8 /* customRangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE202E3593E8C04C492C3EE879A1902 /* customRangeView.swift */; };
@@ -172,6 +172,7 @@
 		31B95A250C5649E01E8B1CE6F8AD5E85 /* SharedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedViewController.swift; sourceTree = "<group>"; };
 		327249D87EBD50F9CA3CF88F34F49D5F /* inputChoose.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = inputChoose.plist; sourceTree = "<group>"; };
 		367F547FD8A2D05AB23C071F7752C480 /* defaultBloodSetting.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaultBloodSetting.plist; sourceTree = "<group>"; };
+		3764C38A18B23A2FFB100BF679825865 /* gluViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = gluViewController.swift; sourceTree = "<group>"; };
 		3ACDB27DDBFA6BA1FEA8A6864CE435C5 /* NSDate+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSDate+Date.swift"; sourceTree = "<group>"; };
 		3B122EE08303781538E0581FB9B0AF84 /* AJMineHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AJMineHeaderView.swift; sourceTree = "<group>"; };
 		3B4F369C05939A511383BE4E6F782638 /* SetColorOfText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetColorOfText.swift; sourceTree = "<group>"; };
@@ -180,6 +181,7 @@
 		428DE12BF8AED7060D2DACBB1BDB9E15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		44ECE95E879F310D822741002FFB8089 /* UpdateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateManager.swift; sourceTree = "<group>"; };
 		47DC8F6CE4A54E2D70DC37A7931E98A7 /* emailCheckSecViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emailCheckSecViewController.swift; sourceTree = "<group>"; };
+		47EC5BD8176D116187C1289A2D7921FC /* String+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
 		499D392FCC415844B1B79CE51C4D09C5 /* SharedStaticView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStaticView.swift; sourceTree = "<group>"; };
 		4A9EECDFBBCC15B19BB9A7310C3C5FC1 /* ChartHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartHeaderView.swift; sourceTree = "<group>"; };
 		509CA4053D288A4E56C778E86FBE7CFD /* Pods-AIJian.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AIJian.debug.xcconfig"; path = "Target Support Files/Pods-AIJian/Pods-AIJian.debug.xcconfig"; sourceTree = "<group>"; };
@@ -209,11 +211,6 @@
 		7C3389A85E5BFB5D3E18B8DAA0516CC7 /* GetUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUnit.swift; sourceTree = "<group>"; };
 		7C340848915D471758C27C46FC15E8A6 /* getDataInHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = getDataInHome.swift; path = AIJian/Main/Home/getDataInHome.swift; sourceTree = SOURCE_ROOT; };
 		802706582BF2DD3F2F165BE6CC4B129F /* UnitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitViewController.swift; sourceTree = "<group>"; };
-		842ACD36234D71AE00CF38FD /* LoadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadView.swift; sourceTree = "<group>"; };
-		842ACD38234D71BD00CF38FD /* BLEViewController 2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BLEViewController 2.swift"; sourceTree = "<group>"; };
-		842ACD3A234D71C700CF38FD /* gluViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = gluViewController.swift; sourceTree = "<group>"; };
-		842ACD3C234D724B00CF38FD /* String+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
-		842ACD3E234D72D300CF38FD /* CRC16.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CRC16.swift; sourceTree = "<group>"; };
 		88B84B902E4E28BB9EBAC8F34677E2D8 /* loginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginViewController.swift; sourceTree = "<group>"; };
 		8A18E98B74565B5E695548D96DE09E13 /* SuggestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionViewController.swift; sourceTree = "<group>"; };
 		8AB8DBFCEA7297369A51108D4F1C5D91 /* InsulinType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsulinType.swift; sourceTree = "<group>"; };
@@ -232,7 +229,9 @@
 		9CC343A4BFCBECD9056D60A82B6F7115 /* glucoseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = glucoseView.swift; sourceTree = "<group>"; };
 		9CCA193DA6A5E1E858111B284800163C /* BloodSetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BloodSetViewController.swift; sourceTree = "<group>"; };
 		9D6CD8071B1953BFC8FC49D0C07E5B17 /* QuitCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuitCellView.swift; sourceTree = "<group>"; };
+		9E2F4241A59E2EB545EC4954C1FD38B9 /* LoadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadView.swift; sourceTree = "<group>"; };
 		A0CD12C84AD248DAFB41C4466E30E5F0 /* loginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loginView.swift; sourceTree = "<group>"; };
+		A32EB0E8DBAE9B6ABD130E92D422FA94 /* BLEViewController 2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BLEViewController 2.swift"; sourceTree = "<group>"; };
 		A50E32E0C4224AB84E6F8B2316008860 /* DBSQLiteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBSQLiteManager.swift; sourceTree = "<group>"; };
 		A5A1585583F171AC210D37D0F2F28C6E /* User.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = User.plist; sourceTree = "<group>"; };
 		A753E7B0055447EE4F602E4DC552B128 /* AJMineTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AJMineTableView.swift; sourceTree = "<group>"; };
@@ -277,6 +276,7 @@
 		F3EA8AF88908000078EAC3AC949A8176 /* BLEViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEViewController.swift; sourceTree = "<group>"; };
 		F42164E20D884983B9B2042EA7CE3CFA /* AIJian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AIJian.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7152151493753A2D1A697BD37767901 /* DataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewController.swift; sourceTree = "<group>"; };
+		F87C7D3F47A2F01DF9F52E6E047E342A /* CRC16.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CRC16.swift; sourceTree = "<group>"; };
 		F8A34F9A4CB476E221493BFF4FA2AA03 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		FC89C668BD48D245D25CED60FBDF41B4 /* Pods-AIJian.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AIJian.release.xcconfig"; path = "Target Support Files/Pods-AIJian/Pods-AIJian.release.xcconfig"; sourceTree = "<group>"; };
 		FCC3095E4A77F8F520BF6370290A26F4 /* ProtocolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolView.swift; sourceTree = "<group>"; };
@@ -449,7 +449,7 @@
 		720A6E8A39160E995E393EF618DDAA6D /* Insert */ = {
 			isa = PBXGroup;
 			children = (
-				842ACD3E234D72D300CF38FD /* CRC16.swift */,
+				F87C7D3F47A2F01DF9F52E6E047E342A /* CRC16.swift */,
 				185DDEA41DA7C96CD6E76086B42F7C86 /* EatNumChange.swift */,
 				E3B0669AC5418D0BA85C5EB3AE10DDD7 /* EvenChange.swift */,
 				0A8E8D0A6CA3F03313B4B856827E97DD /* IntensityChange.swift */,
@@ -460,7 +460,7 @@
 		740973640689B3902B55C2DE31E7B66A /* extension */ = {
 			isa = PBXGroup;
 			children = (
-				842ACD3C234D724B00CF38FD /* String+extension.swift */,
+				47EC5BD8176D116187C1289A2D7921FC /* String+extension.swift */,
 				F0BB31FFA0EA717578FBF645BF4D701F /* UIAlertViewController_Extension.swift */,
 				EA336323AF93C849D90681604D2147DF /* UIButton+Extension.swift */,
 				F8A34F9A4CB476E221493BFF4FA2AA03 /* UIImageView+Extension.swift */,
@@ -599,12 +599,12 @@
 		A812E9EFA8B37373CD2D05DBB08FDB65 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				842ACD3A234D71C700CF38FD /* gluViewController.swift */,
-				842ACD38234D71BD00CF38FD /* BLEViewController 2.swift */,
+				A32EB0E8DBAE9B6ABD130E92D422FA94 /* BLEViewController 2.swift */,
 				F3EA8AF88908000078EAC3AC949A8176 /* BLEViewController.swift */,
 				13E708809ACCA305E2B4107ADF6D21D4 /* InsertViewController.swift */,
 				FCE379B051D4A0168749A671811BD868 /* InsulinViewController.swift */,
 				12334E6F67A1C77D5D81A3AA8A2BEB74 /* alertViewController.swift */,
+				3764C38A18B23A2FFB100BF679825865 /* gluViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -699,9 +699,9 @@
 		E29E548AEAE843EFDF12DD2003871B64 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				842ACD36234D71AE00CF38FD /* LoadView.swift */,
 				BF80F129B376C63F914BDB119ECD0789 /* TableViewForInsulin */,
 				66F58ECE090CC8932E95E703B01B4E2B /* InputView.swift */,
+				9E2F4241A59E2EB545EC4954C1FD38B9 /* LoadView.swift */,
 				7A16F36F9537243E6B7560D1B9FF77A0 /* allPickerView.swift */,
 				41BAE5242D4EA9B456D06DAC9947B1AB /* bodyInfoView.swift */,
 				760452171F68DFBAE73622584ED2C38F /* dateAndTimeView.swift */,
@@ -913,16 +913,17 @@
 				53ECBF9769DA897ED2EE5CB10BE88D1E /* AJMineTableView.swift in Sources */,
 				14A1F66FE36579BF1FEE9A0F20D616BE /* AJNavigationController.swift in Sources */,
 				D73159906BF596032A3B3FB75BFF3023 /* AJStartView.swift in Sources */,
-				842ACD3D234D724B00CF38FD /* String+extension.swift in Sources */,
 				F0CC7B621011F02A6C445F2D4CFD4002 /* AJTabbarController.swift in Sources */,
 				AB27A7600A1A69D96B3C0BDEEBA411E6 /* AboutUsViewController.swift in Sources */,
 				82229929AE907526C16AFB7C3B976565 /* AppDelegate.swift in Sources */,
 				84847BC2FE082A7DD9416B04C6429EAB /* BHJPickerView.swift in Sources */,
+				E85A9418E967599370BB20317758AB88 /* BLEViewController 2.swift in Sources */,
 				BC83B1437A56BCF7C847128796026D49 /* BLEViewController.swift in Sources */,
 				35F229CDB65C074B26E6675EAD66CE2B /* BasalInsulinTableView.swift in Sources */,
 				85BF4AD1556507F03E9CF1AB13F34571 /* BloodSetViewController.swift in Sources */,
 				A80635501A48A1CA762DE7BAA59B6CF6 /* BolusInsulinTableView.swift in Sources */,
 				5152E1428C13A8DE4BF2E86A2D9C2248 /* BrithdayViewController.swift in Sources */,
+				36BBFB3CF4326849B8182D7E23D1D1C8 /* CRC16.swift in Sources */,
 				DC527C2AA2A4BA97B440B8CC67D870EE /* ChartDrawFunc.swift in Sources */,
 				A4ED7886092801F8747BE1A2182D7314 /* ChartHeaderView.swift in Sources */,
 				1DE16FE45BBA038D234EB138172EFDA9 /* ChartView.swift in Sources */,
@@ -944,7 +945,6 @@
 				DAD1F3B648F0B2AE0DD72681269865A8 /* HZtextview.swift in Sources */,
 				C701921CAA5E7D6176A633628D36FCD2 /* HomeViewController.swift in Sources */,
 				D4FE5D1D7D0DE3136E04639AC72B702D /* InfoInputView.swift in Sources */,
-				842ACD3B234D71C700CF38FD /* gluViewController.swift in Sources */,
 				BA52FED03B80B15A0F3460206CDC2279 /* InfoViewController.swift in Sources */,
 				A51D1EDF287FD5220248DC6C355A5AC8 /* InputView.swift in Sources */,
 				F2A43A73565BB1CF045F3019A8AA1498 /* InsertViewController.swift in Sources */,
@@ -952,7 +952,7 @@
 				0C48522C9A98AE69C9E473FB8886F207 /* InsulinViewController.swift in Sources */,
 				913C5A050E557527D087A3E79934646B /* IntensityChange.swift in Sources */,
 				7A18ABD895A54152058EAE905EF289FD /* LastResultTableViewCell.swift in Sources */,
-				842ACD39234D71BD00CF38FD /* BLEViewController 2.swift in Sources */,
+				93E546E5E1118F5FA76871EC98702104 /* LoadView.swift in Sources */,
 				A2362882D12624BFD10D37A285D02419 /* LocalizationTool.swift in Sources */,
 				F440EC390F52F7014B638916C024A81A /* MineViewController.swift in Sources */,
 				A87003F858AAC758556FC11B84E22CC6 /* NSDate+Date.swift in Sources */,
@@ -967,13 +967,12 @@
 				C88FB686223BB5A94898D1B74AAF1FF6 /* QuitCellView.swift in Sources */,
 				3A882D841BCD9D047B77B5EE61C0F09E /* SetColorOfText.swift in Sources */,
 				6E35FD60C98CE0106FAB496C7D9A6831 /* SharedStaticView.swift in Sources */,
-				842ACD37234D71AE00CF38FD /* LoadView.swift in Sources */,
 				4103417E5D61D24965902570B01CC19F /* SharedView.swift in Sources */,
-				842ACD3F234D72D300CF38FD /* CRC16.swift in Sources */,
 				74BAA950DB2E4C75BE286CCA00B3A027 /* SharedViewController.swift in Sources */,
 				F2C132B8DC75DCC95C950DC23D124584 /* StaticView.swift in Sources */,
 				A489FE1D1E209499E7F9EA11DD91D8C1 /* StatisticDate.swift in Sources */,
 				29C10571F503D7FCC9D1EFF3EEF54262 /* StatisticalDataViewController.swift in Sources */,
+				743A3F6B430D84EA70AEC37B7E7C611D /* String+extension.swift in Sources */,
 				D04F636417EB92069574FA06715E5F33 /* SuggestionViewController.swift in Sources */,
 				C8C584C14E41F381E1E0B5BA0C387AE8 /* UIAlertViewController_Extension.swift in Sources */,
 				9B3DAB77A3DC41F8FAC306F8E17CF1C1 /* UIButton+Extension.swift in Sources */,
@@ -1005,6 +1004,7 @@
 				78ACFA86EAB2AD613A75EC3FA86CC0D5 /* emailCheckViewController.swift in Sources */,
 				2B176AC33E91C2CFDB77A8DC10A64B36 /* format_method.swift in Sources */,
 				30E983804395F9F8A70B9E14F4E3D7DB /* getDataInHome.swift in Sources */,
+				3ADD7EA7FBEA2802825A5D0C6978A31A /* gluViewController.swift in Sources */,
 				18F0313CE9FBB4D24BE3EB41E867AE4B /* glucoseRecentView.swift in Sources */,
 				12FD0BE7E50C8B635C32E575FFC6214F /* glucoseView.swift in Sources */,
 				C8F5100D99CC101199D1703D63BC02A4 /* infoInputViewController.swift in Sources */,
