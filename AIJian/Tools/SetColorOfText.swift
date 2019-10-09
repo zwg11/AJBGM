@@ -14,18 +14,24 @@ class SetColorOfLabelText{
     // 根据血糖值判断其属于哪个血糖范围
     // 不同血糖范围设置不同的字体颜色
     static func SetGlucoseTextColor(_ data:glucoseDate,label:UILabel){
+        var bgvalue:Double?
+        if GetUnit.getBloodUnit() == "mg/dL"{
+            bgvalue = data.bloodGlucoseMg
+        }else{
+            bgvalue = data.bloodGlucoseMmol
+        }
         // 如果有血糖值
-        if let value = data.bloodGlucoseMg{
+        if let value = bgvalue{
             // 根据检测时间判断
             switch data.detectionTime!{
                 // a餐前
             case 0:
-                // 如果小于正常范围，设为红色
+                // 如果小于正常范围，设为橘色
                 if value < GetBloodLimit.getBeforeDinnerLow(){
-                    label.textColor = UIColor.red
-                }// 如果大于正常范围，设为y橘色
-                else if value >= GetBloodLimit.getBeforeDinnerTop(){
                     label.textColor = UIColor.orange
+                }// 如果大于正常范围，设为红色
+                else if value >= GetBloodLimit.getBeforeDinnerTop(){
+                    label.textColor = UIColor.red
                 }// 如果在正常范围，设为绿色
                 else{
                     label.textColor = UIColor.green

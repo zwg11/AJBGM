@@ -26,7 +26,7 @@ class BLEViewController: UIViewController {
         // 设置返回首页
         self.tabBarController?.selectedIndex = 0
     }
-    
+
     // 设置导航栏右按钮样式
     private lazy var rightButton:UIButton = {
         let button = UIButton.init(type: .custom)
@@ -43,7 +43,7 @@ class BLEViewController: UIViewController {
 
         self.navigationController?.pushViewController(insert, animated: true)
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         let sd = sliderView.init(frame: CGRect(x: 0, y: -100, width: AJScreenWidth*0.9, height: 2))
         self.view.addSubview(sd)
@@ -62,9 +62,9 @@ class BLEViewController: UIViewController {
 //        sliderImage = viewToImage.getImageFromView(view: sd)
         // 设置监听器，监听是否弹出插入成功r弹窗
         NotificationCenter.default.addObserver(self, selector: #selector(InsertSuccess), name: NSNotification.Name(rawValue: "InsertData"), object: nil)
-        
+
     }
-    
+
     @objc func InsertSuccess(){
         let x = UIAlertController(title: "", message: "Insert Success.", preferredStyle: .alert)
         self.present(x, animated: true, completion: {()->Void in

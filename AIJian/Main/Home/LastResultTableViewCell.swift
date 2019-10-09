@@ -34,7 +34,7 @@ class LastResultTableViewCell: UITableViewCell {
         label.minimumScaleFactor = 0.5
         label.adjustsFontSizeToFitWidth = true
         label.textColor = UIColor.white
-        label.backgroundColor = UIColor.yellow
+//        label.backgroundColor = UIColor.yellow
         return label
     }()
     
@@ -47,7 +47,7 @@ class LastResultTableViewCell: UITableViewCell {
         label.minimumScaleFactor = 0.5
         label.adjustsFontSizeToFitWidth = true
         label.textColor = UIColor.white
-        label.backgroundColor = UIColor.yellow
+//        label.backgroundColor = UIColor.yellow
         return label
     }()
     
