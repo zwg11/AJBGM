@@ -82,12 +82,12 @@ class BHJPickerView: UIView , UIPickerViewDelegate, UIPickerViewDataSource{
         view.backgroundColor = kRGBColor(230, 230, 230, 1)
         self.addSubview(view)
         
-        // 取消按钮
+        // 取消按钮  字体需要黑色
         let cancelButton = UIButton.init(type: UIButton.ButtonType.custom)
         cancelButton.frame = CGRect.init(x: 0, y: 0, width: 60, height: 44)
         cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         cancelButton.setTitle("Cancel", for: UIControl.State.normal)
-        cancelButton.setTitleColor(kRGBColor(18, 93, 255, 1), for: UIControl.State.normal)
+        cancelButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
         cancelButton.addTarget(self, action: #selector(cancelButtonClick), for: UIControl.Event.touchUpInside)
         self.addSubview(cancelButton)
         
@@ -95,8 +95,8 @@ class BHJPickerView: UIView , UIPickerViewDelegate, UIPickerViewDataSource{
         let doneButton = UIButton.init(type: UIButton.ButtonType.custom)
         doneButton.frame = CGRect.init(x: AJScreenWidth - 60, y: 0, width: 60, height: 44)
         doneButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-        doneButton.setTitle("Ok", for: UIControl.State.normal)
-        doneButton.setTitleColor(kRGBColor(18, 93, 255, 1), for: UIControl.State.normal)
+        doneButton.setTitle("Sure", for: UIControl.State.normal)
+        doneButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
         doneButton.addTarget(self, action: #selector(doneButtonClick), for: UIControl.Event.touchUpInside)
         self.addSubview(doneButton)
         

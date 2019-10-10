@@ -47,7 +47,7 @@ class glucoseRecentView: UIView {
         TitleLabel.snp.makeConstraints{(make) in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview().offset(AJScreenWidth/30)
-            make.height.equalTo(AJScreenWidth/20)
+            make.height.equalTo(AJScreenWidth/20+3)
             make.width.equalTo(AJScreenWidth/4)
         }
         ValueLabel.sizeToFit()

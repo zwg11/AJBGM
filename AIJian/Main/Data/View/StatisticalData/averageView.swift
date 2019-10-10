@@ -38,7 +38,7 @@ class averageView: UIView {
     // 血糖label
     private lazy var glucoseLabel:UILabel = {
         let label = UILabel()
-        label.text = "blood sugar"
+        label.text = "Blood Glucose"
         label.textColor = UIColor.white
         label.font = UIFont.systemFont(ofSize: 16)
         label.textAlignment = .left
@@ -48,7 +48,7 @@ class averageView: UIView {
    // 标准差label
     private lazy var sDLabel:UILabel = {
         let label = UILabel()
-        label.text = "standard deviation"
+        label.text = "Standard Deviation"
         label.textColor = UIColor.white
         label.font = UIFont.systemFont(ofSize: 16)
         label.textAlignment = .left
@@ -58,7 +58,7 @@ class averageView: UIView {
     // 每天检测次数label
     private lazy var checkNumLabel:UILabel = {
         let label = UILabel()
-        label.text = "tests number per day"
+        label.text = "Frequency/Day"
         label.textColor = UIColor.white
         label.font = UIFont.systemFont(ofSize: 16)
         label.textAlignment = .left

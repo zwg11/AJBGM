@@ -100,7 +100,7 @@ class registerView: UIView {
     //免责条例的用户信息
     lazy var NoResponseProtocolInfo:UIButton = {
         let NoResponseProtocol = UIButton(frame: CGRect())
-        NoResponseProtocol.setTitle("Agreed \"Registration Protocol and submit the Information\" ", for: .normal)
+        NoResponseProtocol.setTitle("Agreed \"Registration Protocol and Submit the Information\" ", for: .normal)
         NoResponseProtocol.setTitleColor(TextColor, for: .normal)
         NoResponseProtocol.titleLabel?.font = UIFont.systemFont(ofSize: 10)
         return NoResponseProtocol

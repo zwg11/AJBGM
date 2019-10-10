@@ -33,21 +33,24 @@ class UpdateManager:NSObject{
         //appstore上的版本号大于本地版本号 - 说明有更新
         //直接通过字符串来比较，避免无法转为float类型的尴尬
         if appStoreVersion > localVersion && !res {
-            let alertC = UIAlertController.init(title: "版本更新了", message: "是否前往更新", preferredStyle: .alert)
-            let yesAction = UIAlertAction.init(title: "去更新", style: .default, handler: { (handler) in
+            let alertC = UIAlertController.init(title: "Version Update", message: "", preferredStyle: .alert)
+            let yesAction = UIAlertAction.init(title: "Update", style: .default, handler: { (handler) in
                 self.updateApp(appId:appId)
             })
-            let noAction = UIAlertAction.init(title: "下次再说", style: .cancel, handler: nil)
-            let cancelAction = UIAlertAction.init(title: "不再提示", style: .default, handler: { (handler) in
+            let noAction = UIAlertAction.init(title: "Later", style: .default, handler: nil)
+            let cancelAction = UIAlertAction.init(title: "Dismiss", style: .default, handler: { (handler) in
                 self.noAlertAgain()
             })
+            yesAction.setValue(UIColor.black, forKey: "_titleTextColor")
+            noAction.setValue(UIColor.black, forKey: "_titleTextColor")
+            cancelAction.setValue(UIColor.black, forKey: "_titleTextColor")
             alertC.addAction(yesAction)
             alertC.addAction(noAction)
             alertC.addAction(cancelAction)
             UIApplication.shared.keyWindow?.rootViewController?.present(alertC, animated: true, completion: nil)
         }else{
-            let alertC = UIAlertController.init(title: "已经是最新版本了", message: "", preferredStyle: .alert)
-            let noAction = UIAlertAction.init(title: "确定", style: .cancel, handler: nil)
+            let alertC = UIAlertController.init(title: "Latest Version", message: "", preferredStyle: .alert)
+            let noAction = UIAlertAction.init(title: "Sure", style: .cancel, handler: nil)
             alertC.addAction(noAction)
             
             UIApplication.shared.keyWindow?.rootViewController?.present(alertC, animated: true, completion: nil)

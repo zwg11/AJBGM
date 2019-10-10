@@ -451,7 +451,7 @@ extension DataTableViewController{
                         // 如果 返回信息说明 请删除失败，则弹出警示框报错
                         if deleteResponse.code != 1{
                             let alert = CustomAlertController()
-                            alert.custom(self, "aAttension", "Delete failed, please try again later.")
+                            alert.custom(self, "Attention", "Delete failed, please try again later.")
                             // 删除失败函数直接退出
                             return
                         }else{
@@ -461,7 +461,7 @@ extension DataTableViewController{
                             if dbSql.deleteGlucoseRecord(gluData.bloodGlucoseRecordId!){
                                 // 弹出警示框，提示用户
                                 let alert = CustomAlertController()
-                                alert.custom(self, "", "Delete success")
+                                alert.custom(self, "", "Deleted Successfully")
                                 // 初始化展示数据
                                 initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())
                                 // 表格数据初始化
@@ -483,7 +483,7 @@ extension DataTableViewController{
             else{
                 // 弹出警示框，提示用户
                 let alert = CustomAlertController()
-                alert.custom(self, "Error", "Network exception, please re-operate")
+                alert.custom(self, "Error", "Network exception, Please re-operate")
                 return
             }// 如果请求未得到回复
         }
