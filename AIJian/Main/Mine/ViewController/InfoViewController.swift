@@ -52,6 +52,13 @@ class InfoViewController: UIViewController ,PickerDelegate{
         infoDataArray[6] = userInfo.phone_number ?? ""
         
     }
+    lazy var rightButton:UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(saveUserInfo), for: .touchUpInside)
+        button.setTitle("Save", for: .normal)
+        button.tintColor = ThemeColor
+        return button
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +71,7 @@ class InfoViewController: UIViewController ,PickerDelegate{
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: NaviTitleColor]
         self.view.backgroundColor = ThemeColor
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title:"back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title:"Save", style: UIBarButtonItem.Style.plain, target: self, action: #selector(saveUserInfo))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
         
        tableview.register(UITableViewCell.self, forCellReuseIdentifier:"infocell")
         tableview.delegate = self
@@ -192,31 +199,31 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
         switch indexPath.row{
             case 0:
                 cell?.imageView?.image = UIImage(named: infoIconArray[0])
-                cell?.detailTextLabel?.text = infoDataArray[0]=="" ? "nothing":infoDataArray[0]
+                cell?.detailTextLabel?.text = infoDataArray[0]=="" ? "-":infoDataArray[0]
                 cell?.textLabel?.text = infoArray[indexPath.row]
             case 1:
                 cell?.imageView?.image = UIImage(named: infoIconArray[1])
-                cell?.detailTextLabel?.text = infoDataArray[1]=="" ? "nothing":infoDataArray[1]
+                cell?.detailTextLabel?.text = infoDataArray[1]=="" ? "-":infoDataArray[1]
                 cell?.textLabel?.text = infoArray[indexPath.row]
             case 2:
                 cell?.imageView?.image = UIImage(named: infoIconArray[2])
-                cell?.detailTextLabel?.text = (infoDataArray[2]=="" ? "nothing":(infoDataArray[2]) + GetUnit.getWeightUnit())
+                cell?.detailTextLabel?.text = (infoDataArray[2]=="" ? "-":(infoDataArray[2]) + GetUnit.getWeightUnit())
                 cell?.textLabel?.text = infoArray[indexPath.row]
             case 3:
                 cell?.imageView?.image = UIImage(named: infoIconArray[3])
-                cell?.detailTextLabel?.text = infoDataArray[3]=="" ? "nothing":(infoDataArray[3] + "cm")
+                cell?.detailTextLabel?.text = infoDataArray[3]=="" ? "-":(infoDataArray[3] + "cm")
                 cell?.textLabel?.text = infoArray[indexPath.row]
             case 4:
                 cell?.imageView?.image = UIImage(named: infoIconArray[4])
-                cell?.detailTextLabel?.text = infoDataArray[4]=="" ? "nothing":infoDataArray[4]
+                cell?.detailTextLabel?.text = infoDataArray[4]=="" ? "-":infoDataArray[4]
                 cell?.textLabel?.text = infoArray[indexPath.row]
             case 5:
                 cell?.imageView?.image = UIImage(named: infoIconArray[5])
-                cell?.detailTextLabel?.text = infoDataArray[5]=="" ? "nothing":infoDataArray[5]
+                cell?.detailTextLabel?.text = infoDataArray[5]=="" ? "-":infoDataArray[5]
                 cell?.textLabel?.text = infoArray[indexPath.row]
             default:
                 cell?.imageView?.image = UIImage(named: infoIconArray[6])
-                cell?.detailTextLabel?.text = infoDataArray[6]=="" ? "nothing":infoDataArray[6]
+                cell?.detailTextLabel?.text = infoDataArray[6]=="" ? "-":infoDataArray[6]
                 cell?.textLabel?.text = infoArray[indexPath.row]
             }
         cell?.detailTextLabel?.textColor = UIColor.white
@@ -274,8 +281,8 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
             (textField: UITextField!) -> Void in
 //            textField.placeholder = "用户名"
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let okAction = UIAlertAction(title: "Ok", style: .default, handler: {
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        let okAction = UIAlertAction(title: "Sure", style: .default, handler: {
             action in
             let UserName = alertController.textFields!.first!
             if String(UserName.text!) == ""  {
@@ -287,6 +294,8 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
             }
            
         })
+        okAction.setValue(UIColor.black, forKey: "_titleTextColor")
+        cancelAction.setValue(UIColor.black, forKey: "_titleTextColor")
         alertController.addAction(cancelAction)
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)
@@ -308,8 +317,8 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
             (textField: UITextField!) -> Void in
 //            textField.placeholder = "体重"
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let okAction = UIAlertAction(title: "Ok", style: .default, handler: {
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        let okAction = UIAlertAction(title: "Sure", style: .default, handler: {
             action in
             let UserName = alertController.textFields!.first!
             if String(UserName.text!) == ""  {
@@ -320,6 +329,8 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
             }
             
         })
+        okAction.setValue(UIColor.black, forKey: "_titleTextColor")
+        cancelAction.setValue(UIColor.black, forKey: "_titleTextColor")
         alertController.addAction(cancelAction)
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)
@@ -333,8 +344,8 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
             (textField: UITextField!) -> Void in
 //            textField.placeholder = "身高"
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let okAction = UIAlertAction(title: "Ok", style: .default, handler: {
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        let okAction = UIAlertAction(title: "Sure", style: .default, handler: {
             action in
             let UserName = alertController.textFields!.first!
             if String(UserName.text!) == ""  {
@@ -346,6 +357,8 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
             }
             
         })
+        okAction.setValue(UIColor.black, forKey: "_titleTextColor")
+        cancelAction.setValue(UIColor.black, forKey: "_titleTextColor")
         alertController.addAction(cancelAction)
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)
@@ -377,8 +390,8 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
             (textField: UITextField!) -> Void in
 //            textField.placeholder = "电话"
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let okAction = UIAlertAction(title: "Ok", style: .default, handler: {
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        let okAction = UIAlertAction(title: "Sure", style: .default, handler: {
             action in
             let UserName = alertController.textFields!.first!
             if String(UserName.text!) == ""  {
@@ -389,6 +402,8 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
             }
             
         })
+        okAction.setValue(UIColor.black, forKey: "_titleTextColor")
+        cancelAction.setValue(UIColor.black, forKey: "_titleTextColor")
         alertController.addAction(cancelAction)
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)

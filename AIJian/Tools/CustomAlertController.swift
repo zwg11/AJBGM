@@ -16,9 +16,11 @@ public class CustomAlertController {
     func custom(_ viewController:UIViewController,_ title: String,_ message: String){
         let alertController = UIAlertController(title: title,
                                                 message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: {
+        
+        let okAction = UIAlertAction(title: "Sure", style: .default, handler: {
             action in
         })
+        okAction.setValue(UIColor.black, forKey: "_titleTextColor")
         //只加入确定按钮
         alertController.addAction(okAction)
         viewController.present(alertController, animated: true, completion: nil)
@@ -27,10 +29,11 @@ public class CustomAlertController {
     func custom_cengji(_ viewController:UIViewController,_ title: String,_ message: String){
         let alertController = UIAlertController(title: title,
                                                 message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: {
+        let okAction = UIAlertAction(title: "Sure", style: .default, handler: {
             action in
             viewController.navigationController?.popViewController(animated: true)
         })
+        okAction.setValue(UIColor.black, forKey: "_titleTextColor")
         //只加入确定按钮
         alertController.addAction(okAction)
         viewController.present(alertController, animated: true, completion: nil)

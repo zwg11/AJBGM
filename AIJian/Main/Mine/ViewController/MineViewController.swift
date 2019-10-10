@@ -43,7 +43,7 @@ class MineViewController: UIViewController {
         
     }
     override func viewDidAppear(_ animated: Bool) {
-        self.tableview.reloadRows(at: [IndexPath(row:0,section:0)], with: .fade)
+        self.tableview.reloadRows(at: [IndexPath(row:0,section:0)], with: .none)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,7 +80,7 @@ class MineViewController: UIViewController {
                         if(responseModel.code! == 1 ){
                             // 向数据库插入数据
                             DBSQLiteManager.manager.updateUserInfo(responseModel.data!)
-                            self.tableview.reloadRows(at: [IndexPath(row:0,section:0)], with: .fade)
+                            self.tableview.reloadRows(at: [IndexPath(row:0,section:0)], with: .none)
                         }else{
                             let alert = CustomAlertController()
                             alert.custom(self, "Attension", "Unable to get the information")
@@ -150,6 +150,7 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
                 cell.textButton.setTitle(userInfo.user_name, for: .normal)
                 cell.selectionStyle = .none
                 cell.backgroundColor = ThemeColor
+            
                 return cell
             case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)

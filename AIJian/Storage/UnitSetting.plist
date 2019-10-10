@@ -5,8 +5,8 @@
 	<key>PressureUnit</key>
 	<string>mmHg</string>
 	<key>WeightUnit</key>
-	<string>kg</string>
+	<string>Kg</string>
 	<key>BloodUnit</key>
-	<string>mg/dL</string>
+	<string>mmol/L</string>
 </dict>
 </plist>

@@ -79,7 +79,7 @@ class DataViewController: UIViewController {
         let button = UIButton()
         button.addTarget(self, action: #selector(chooseDate), for: .touchUpInside)
 
-        button.setTitle("Last7days", for: .normal)
+        button.setTitle("Last 7 days", for: .normal)
         button.frame.size = CGSize(width: AJScreenWidth/4, height: 44)
         return button
     }()
@@ -221,7 +221,7 @@ class DataViewController: UIViewController {
         
         if customRange.startDatePicker.date >= customRange.endDatePicker.date{
             let alert = CustomAlertController()
-            alert.custom(self, "注意", "开始日期必须早于结束日期")
+            alert.custom(self, "Attention", "Start Date Needs to Come Before End Date")
         }else{
             // 选择日期范围视图移除
             customRange.removeFromSuperview()

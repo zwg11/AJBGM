@@ -4,10 +4,6 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
-	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>APP need to use BLE to connect bloodglucose machine</string>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>APP need to use BLE to connect bloodglucose machine</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -29,6 +25,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>APP need to use BLE to connect bloodglucose machine</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>APP need to use BLE to connect bloodglucose machine</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>APP要存储图片到你的相册</string>
 	<key>NSPhotoLibraryUsageDescription</key>

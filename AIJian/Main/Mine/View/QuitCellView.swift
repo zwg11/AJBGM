@@ -16,7 +16,7 @@ class QuitCellView:UITableViewCell{
         quitLogin.backgroundColor = ButtonColor
         quitLogin.tintColor = UIColor.white
         quitLogin.setTitleColor(UIColor.white, for: .normal)
-        quitLogin.setTitle("Sign out", for:.normal)
+        quitLogin.setTitle("Sign Out", for:.normal)
         quitLogin.titleLabel?.font = UIFont.systemFont(ofSize:18)
         return quitLogin
     }()

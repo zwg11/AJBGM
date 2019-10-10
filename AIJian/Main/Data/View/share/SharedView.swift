@@ -23,13 +23,13 @@ class SharedView: UIView ,UITextFieldDelegate{
         label.numberOfLines = 0
         return label
     }()
-    // 按钮，用来发d送报告
+    // 按钮，用来发送报告
     lazy var sendButton:UIButton = {
         let button = UIButton(type: .custom)
         button.setTitle("Send", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-        button.backgroundColor = UIColor.gray
+        button.backgroundColor = ButtonColor
         
         //button.addTarget(self, action: #selector(sendCheck), for: .touchUpInside)
         return button

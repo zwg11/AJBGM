@@ -63,6 +63,8 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
     private lazy var picker : pickerView = {
         let view = pickerView()
         view.setupUI()
+        view.cancelButton.setTitleColor(UIColor.black, for: .normal)
+        view.sureButton.setTitleColor(UIColor.black, for: .normal)
         view.sureButton.addTarget(self, action: #selector(pickViewSelected), for: .touchUpInside)
         view.cancelButton.addTarget(self, action: #selector(pickViewDismiss), for: .touchUpInside)
         return view

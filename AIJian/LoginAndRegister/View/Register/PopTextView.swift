@@ -36,10 +36,10 @@ class PopTextView: PopSmallChangeBigFatherView {
     //放一个输入框
     func addWhiteVieSubView1(){
         let titleLabel:UILabel = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: self.WhiteView.frame.width, height: titleHeight))
-        titleLabel.text = "免费声明"
+        titleLabel.text = "Disclaimer"
         titleLabel.textAlignment = NSTextAlignment.center
         titleLabel.font = UIFont.systemFont(ofSize: 25, weight: UIFont.Weight.bold)
-        titleLabel.textColor = UIColor.red
+        titleLabel.textColor = UIColor.black
         self.WhiteView.addSubview(titleLabel)
         textView = UITextView.init(frame: CGRect.init(x: AJScreenWidth/8, y: titleHeight, width: self.WhiteView.frame.width - AJScreenWidth/4, height: self.WhiteView.frame.height - titleHeight - AJScreenHeight/15))
         textView.layer.masksToBounds = true
@@ -56,9 +56,9 @@ class PopTextView: PopSmallChangeBigFatherView {
         oneBtn.frame = CGRect()
         oneBtn.layer.masksToBounds = true
         oneBtn.layer.cornerRadius = 5
-        oneBtn.setTitle("确定", for: UIControl.State.normal)
+        oneBtn.setTitle("Sure", for: UIControl.State.normal)
         oneBtn.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-        oneBtn.setTitleColor(UIColor.red, for: UIControl.State.normal)
+        oneBtn.setTitleColor(UIColor.black, for: UIControl.State.normal)
         self.WhiteView.addSubview(oneBtn)
         oneBtn.snp.makeConstraints{ (make) in
             make.left.equalToSuperview()

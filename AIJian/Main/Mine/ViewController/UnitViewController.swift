@@ -123,6 +123,14 @@ class UnitViewController: UIViewController {
         return KPa_Button
     }()
     
+    lazy var rightButton:UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(save), for: .touchUpInside)
+        button.setTitle("Save", for: .normal)
+        button.tintColor = ThemeColor
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Units Setup"
@@ -130,7 +138,7 @@ class UnitViewController: UIViewController {
         self.view.backgroundColor = ThemeColor
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title:"back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back))
 
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: UIBarButtonItem.Style.plain, target: self, action: #selector(save))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
 //        tableview.register(UITableViewCell.self, forCellReuseIdentifier:"infocell")
 //        tableview.delegate = self
 //        tableview.dataSource = self
@@ -211,7 +219,7 @@ class UnitViewController: UIViewController {
         text_BloodPress.snp.makeConstraints{  (make) in
             make.left.equalTo(AJScreenWidth/15)
             make.height.equalTo(AJScreenHeight/15)
-            make.width.equalTo(AJScreenWidth/4)
+            make.width.equalTo(AJScreenWidth/3)
             make.top.equalTo(line_frame2.snp.bottom).offset(AJScreenWidth/20)
         }
         
@@ -235,6 +243,7 @@ class UnitViewController: UIViewController {
         
         
     }
+   
     
     //每一次视图出现，就加载
     override func viewWillAppear(_ animated: Bool) {
@@ -249,6 +258,9 @@ class UnitViewController: UIViewController {
         currentGlucoseUnit = unitDataArray[0]
         currentWeightUnit = unitDataArray[1]
         currentBloodUnit = unitDataArray[2]
+        print("BloodUnit",data["BloodUnit"]!)
+        print("WeightUnit",data["WeightUnit"]!)
+        print("PressureUnit",data["PressureUnit"]!)
         if unitDataArray[0] == "mmol/L"{
             mmol_Button.backgroundColor = ButtonColor
             mmol_Button.setTitleColor(UIColor.white, for: .normal)
@@ -270,6 +282,12 @@ class UnitViewController: UIViewController {
             mmol_Button.layer.borderWidth = 0.5
             mmol_Button.layer.borderColor = unselectedTextColor.cgColor
         }
+        if unitDataArray[1] == "Kg"{
+            print("等于Kg")
+        }else{
+            print("不等于Kg")
+        }
+        
         if unitDataArray[1] == "Kg"{
             kg_Button.backgroundColor = ButtonColor
             kg_Button.setTitleColor(UIColor.white, for: .normal)

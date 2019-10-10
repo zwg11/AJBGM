@@ -67,14 +67,14 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
     @objc func savedPhotosAlbum(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: AnyObject) {
         
         if error != nil {
-            let alert = UIAlertController(title: "", message: "图片生成失败", preferredStyle: .alert)
+            let alert = UIAlertController(title: "", message: "Generate Order Failed", preferredStyle: .alert)
             self.present(alert, animated: true, completion: nil)
             sleep(1)
             alert.dismiss(animated: true, completion: nil)
             print("savw failed")
             
         } else {
-            let alert = UIAlertController(title: "", message: "图片生成成功", preferredStyle: .alert)
+            let alert = UIAlertController(title: "", message: "Generate Order Successfully", preferredStyle: .alert)
             self.present(alert, animated: true, completion: nil)
             sleep(1)
             alert.dismiss(animated: true, completion: nil)

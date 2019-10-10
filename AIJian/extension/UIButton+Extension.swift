@@ -48,10 +48,10 @@ extension UIButton{
         
         var remainingCount: Int = count {
             willSet {
-                setTitle("重新发送(\(newValue))", for: .normal)
+                setTitle("Resend(\(newValue))", for: .normal)
                 
                 if newValue <= 0 {
-                    setTitle("重新发送", for: .normal)
+                    setTitle("Resend", for: .normal)
                 }
             }
         }

@@ -130,7 +130,7 @@ class InfoInputView: UIView {
 //    }()
     lazy var nationButton:UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "email"), for: .normal)
+        button.setImage(UIImage(named: "Country"), for: .normal)
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
         button.setTitleColor(TextColor, for: .normal)
         button.setTitle("China", for: .normal)
@@ -187,7 +187,7 @@ class InfoInputView: UIView {
         let now = Date()
         // 创建一个时间格式器
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy/MM/dd"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         button.NorStyle(title: "\(dateFormatter.string(from: now))")
         button.setTitleColor(UIColor.white, for: .normal)
         button.layer.borderWidth = 0.5
@@ -258,7 +258,7 @@ class InfoInputView: UIView {
             make.left.equalToSuperview().offset(AJScreenWidth/15)
             // make.right.equalToSuperview().offset(-AJScreenWidth/7)
             make.height.equalTo(AJScreenWidth/12)
-            make.width.equalTo(AJScreenWidth/4)
+            make.width.equalTo(AJScreenWidth/3)
 //            make.top.equalToSuperview().offset(44)
             make.top.equalTo(userNameTextField.snp.bottom).offset(AJScreenWidth/11)
         }
@@ -267,7 +267,7 @@ class InfoInputView: UIView {
         self.addSubview(gender_man_button)
         gender_man_button.snp.makeConstraints{ (make) in
             make.top.equalTo(userNameTextField.snp.bottom).offset(AJScreenWidth/11)
-            make.left.equalTo(gender_label.snp.right).offset(AJScreenWidth/10)
+            make.left.equalTo(gender_label.snp.right).offset(AJScreenWidth/15)
             make.width.equalTo(AJScreenWidth/5)
             make.height.equalTo(AJScreenWidth/12)
         }
@@ -276,7 +276,7 @@ class InfoInputView: UIView {
         self.addSubview(gender_woman_button)
         gender_woman_button.snp.makeConstraints{ (make) in
             make.top.equalTo(userNameTextField.snp.bottom).offset(AJScreenWidth/11)
-            make.left.equalTo(gender_man_button.snp.right).offset(AJScreenWidth/11)
+            make.left.equalTo(gender_man_button.snp.right).offset(AJScreenWidth/15)
             make.width.equalTo(AJScreenWidth/4)
             make.height.equalTo(AJScreenWidth/12)
         }
@@ -423,7 +423,7 @@ class InfoInputView: UIView {
         brithday_label.snp.makeConstraints{(make) in
             make.left.equalToSuperview().offset(AJScreenWidth/15)
             make.height.equalTo(AJScreenWidth/12)
-            make.width.equalTo(AJScreenWidth/3)
+            make.width.equalTo(AJScreenWidth/2)
             make.top.equalTo(phoneTextField.snp.bottom).offset(AJScreenWidth/11)
         }
         
@@ -433,7 +433,7 @@ class InfoInputView: UIView {
         dateButton.snp.makeConstraints{(make) in
             make.right.equalToSuperview().offset(-AJScreenWidth/15)
             make.height.equalTo(AJScreenWidth/12)
-            make.width.equalTo(AJScreenWidth/2)
+            make.width.equalTo(AJScreenWidth*2/5)
             make.top.equalTo(phoneTextField.snp.bottom).offset(AJScreenWidth/11)
         }
         
