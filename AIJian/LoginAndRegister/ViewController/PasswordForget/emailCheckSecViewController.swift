@@ -65,9 +65,6 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
         let alertController = CustomAlertController()
         password = emailCheckSec.passwordTextField.text!
         passwordSec = emailCheckSec.passwordSecTextField.text!
-//        let email:String = "1115824104@qq.com"
-//        print(password)
-//        print(passwordSec)
         if password == ""{
              alertController.custom(self, "Attention", "New Password Empty")
             return
@@ -100,13 +97,12 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
                             if(responseModel.code == 1 ){
                                 print("重置成功")
                                 print("跳转到修改密码那一页")
-                                alertController.custom(self,"Attention", "Password Reset Success")
+                                alertController.custom_cengji(self,"Attention", "Password Reset Success")
                                 self.navigationController?.popToRootViewController(animated: true)
                             }else{
                                 //先转，后弹
+                                 alertController.custom_cengji(self,"Attention", "Password Reset Failed")
                                 self.navigationController?.popToRootViewController(animated: true)
-                                
-                                
                             }
                         } //end of letif
                     }

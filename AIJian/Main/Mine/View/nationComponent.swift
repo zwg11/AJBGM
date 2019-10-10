@@ -39,15 +39,16 @@ class nationComponent: UIView {
         self.addSubview(nationButton)
         
         imageView.snp.makeConstraints{ (make) in
-            make.width.equalTo(AJScreenHeight/15)
-            make.height.equalTo(AJScreenHeight/15)
-            //            make.left.equalTo(AJScreenWidth/25)
+           make.top.equalTo(AJScreenHeight/90)
+            make.width.equalTo(AJScreenWidth/12)
+            make.height.equalTo(AJScreenWidth/12)
             make.left.equalToSuperview()
         }
         
         nationButton.snp.makeConstraints{ (make) in
+            make.top.equalTo(AJScreenHeight/90)
             make.width.equalTo(AJScreenWidth*4/5)
-            make.height.equalTo(AJScreenHeight/15)
+            make.height.equalTo(AJScreenWidth/12)
             make.left.equalTo(imageView.snp.right).offset(5)
         }
         

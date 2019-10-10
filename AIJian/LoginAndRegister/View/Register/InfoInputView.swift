@@ -159,7 +159,7 @@ class InfoInputView: UIView {
     // 输入电话文本框
     lazy var phoneTextField:UITextField = {
         let textField = UITextField()
-        textField.initTextField(placeholder: " Phone",keyboardType: .default)
+        textField.initTextField(placeholder: " Phone",keyboardType: .numberPad)
 //        let textField = initTextField(placeholder: " Phone",keyboardType: .emailAddress)
         let imageView = UIImageView(image: UIImage(named: "Phone"))
         textField.leftView = imageView

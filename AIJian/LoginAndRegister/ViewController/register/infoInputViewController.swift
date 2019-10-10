@@ -16,7 +16,7 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
     //邮箱，来自上一步传过来的
     var email:String?
     //用户名
-    var userName:String? = ""
+    var userName:String?
     //标志位,用来设置性别的
     var flag:Bool = true
     //性别  男为1   女为0
@@ -44,15 +44,12 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
         // 以下代理本想单独拿出来写进函数中，但是不知为什么老是内存溢出
         //所有的textField的代理方法
         view.userNameTextField.delegate = self  //用户名
-//        view.heightTextField.delegate = self    //身高
-//        view.weightTextField.delegate = self    //体重
-//        view.nationTextField.delegate = self    //国家
+
         view.phoneTextField.delegate = self     //电话
         initDelegate()
         view.gender_man_button.addTarget(self, action: #selector(genderMan), for: .touchUpInside)
         view.gender_woman_button.addTarget(self, action: #selector(genderWoman), for: .touchUpInside)
         view.nationButton.addTarget(self, action: #selector(selectNation), for: .touchUpInside)
-//        view.nationButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: -10)
         view.nationButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 0)
         view.dateButton.addTarget(self, action: #selector(chooseDate), for: .touchUpInside)
         view.finishButton.addTarget(self, action: #selector(finish), for: .touchUpInside)
@@ -199,6 +196,9 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
     @objc func finish(){
         let alertController = CustomAlertController()
         
+        userName = infoinputView.userNameTextField.text!
+        phoneNumber = infoinputView.phoneTextField.text!
+        
         if userName == ""{
             alertController.custom(self, "Attention", "Name Empty")
             return
@@ -243,14 +243,14 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
                              */
                             if(responseModel.code == 1 ){
                                 print(responseModel.code)
-                                 self.navigationController?.popToRootViewController(animated: true)
-                                alertController.custom(self,"Attention", "Sign Up Success！")
+                                alertController.custom_cengji(self,"Attention", "Sign Up Success！")
+                                self.navigationController?.popToRootViewController(animated: true)
+                      
                                
                             }else{
                                 print(responseModel.code)
+                                alertController.custom_cengji(self,"Attention", "Sign Up Failure！")
                                 self.navigationController?.popToRootViewController(animated: true)
-                                alertController.custom(self,"Attention", "Sign Up Failure！")
-                                
                             }
                         } //end of letif
                     }

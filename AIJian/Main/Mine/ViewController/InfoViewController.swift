@@ -84,7 +84,7 @@ class InfoViewController: UIViewController ,PickerDelegate{
         tableview.snp.makeConstraints{(make) in
             make.top.equalTo(topLayoutGuide.snp.bottom)
             make.left.right.equalToSuperview()
-            make.height.equalTo(AJScreenHeight/15*7)
+            make.height.equalTo(AJScreenHeight/16*7)
         }
     }
     @objc private func back(){
@@ -270,7 +270,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return AJScreenHeight/15
+        return AJScreenHeight/16
     }
     
     //输入用户名
