@@ -798,7 +798,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         emptyStomach_left.layer.borderColor = UIColor.red.cgColor
                         emptyStomach_left.layer.borderWidth = 1
-                        alert.custom(self, "Attention", "空腹血糖下限范围为60到140")
+//                        alert.custom(self, "Attention", "空腹血糖下限范围为60到140")
                     }
 //                }else{
 //                    alert.custom(self, "Attention", "非法输入")
@@ -843,7 +843,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         beforeDinner_left.layer.borderColor = UIColor.red.cgColor
                         beforeDinner_left.layer.borderWidth = 1
-                        alert.custom(self, "Attention", "餐前血糖下限范围为60--140")
+//                        alert.custom(self, "Attention", "餐前血糖下限范围为60--140")
                     }
 //                }else{
 //                    alert.custom(self, "Attention", "非法输入")
@@ -867,7 +867,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         beforeDinner_right.layer.borderColor = UIColor.red.cgColor
                         beforeDinner_right.layer.borderWidth = 1
-                        alert.custom(self, "Attention", "餐前血糖上限限范围为90--300")
+//                        alert.custom(self, "Attention", "餐前血糖上限限范围为90--300")
                     }
 //                }else{
 //                    alert.custom(self, "Attention", "非法输入")
@@ -892,7 +892,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         afterDinner_left.layer.borderColor = UIColor.red.cgColor
                         afterDinner_left.layer.borderWidth = 1
-                        alert.custom(self, "Attention", "餐后血糖下限范围为90-300")
+//                        alert.custom(self, "Attention", "餐后血糖下限范围为90-300")
                     }
 //                }else{
 //                    alert.custom(self, "Attention", "非法输入")
@@ -916,7 +916,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         afterDinner_right.layer.borderColor = UIColor.red.cgColor
                         afterDinner_right.layer.borderWidth = 1
-                        alert.custom(self, "Attention", "餐后血糖上限限范围为90-300")
+//                        alert.custom(self, "Attention", "餐后血糖上限限范围为90-300")
                     }
 //                }else{
 //                    alert.custom(self, "Attention", "非法输入")
@@ -940,7 +940,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         randomDinner_left.layer.borderColor = UIColor.red.cgColor
                         randomDinner_left.layer.borderWidth = 1
-                        alert.custom(self, "Attention", "随机血糖下限范围为60-140")
+//                        alert.custom(self, "Attention", "随机血糖下限范围为60-140")
                     }
 //                }else{
 //                    alert.custom(self, "Attention", "非法输入")
@@ -965,7 +965,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         randomDinner_right.layer.borderColor = UIColor.red.cgColor
                         randomDinner_right.layer.borderWidth = 1
-                        alert.custom(self, "Attention", "随机血糖上限限范围为90--300")
+//                        alert.custom(self, "Attention", "随机血糖上限限范围为90--300")
                     }
 //                }else{
 //                    alert.custom(self, "Attention", "非法输入")
@@ -1010,6 +1010,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
     
     
     @objc private func recover(){
+        setBoundWhite()
         //这个是加载缺省的上下限设置文件信息
         let path_default = Bundle.main.path(forResource: "defaultBloodSetting", ofType: "plist")
         let data_default:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path_default!)!

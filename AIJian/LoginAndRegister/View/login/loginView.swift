@@ -37,7 +37,6 @@ class loginView: UIView {
     lazy var userNameTextField:UITextField = {
         let textField = initTextField(imageName: "email", placeholder: "Email Address")
         textField.keyboardType = UIKeyboardType.emailAddress
-//        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
         return textField
     }()
     // 输入密码文本框
@@ -45,7 +44,14 @@ class loginView: UIView {
         let textField = initTextField(imageName: "mima", placeholder: "Password")
         textField.keyboardType = .default
         textField.isSecureTextEntry = true
-//        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
+        if #available(iOS 11.0, *) {
+            textField.textContentType = UITextContentType.password;
+        }
+        if #available(iOS 12.0, *) {
+            textField.textContentType = UITextContentType.newPassword;
+        } else {
+            // Fallback on earlier versions
+        }
         return textField
     }()
 

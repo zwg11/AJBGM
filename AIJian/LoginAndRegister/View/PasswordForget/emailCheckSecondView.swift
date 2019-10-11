@@ -18,12 +18,17 @@ class emailCheckSecondView: UIView {
         let textField = UITextField()
         textField.initTextField(placeholder: "New Password",keyboardType: .default)
         textField.isSecureTextEntry = true
+        if #available(iOS 11.0, *) {
+            textField.textContentType = UITextContentType.password;
+        }
+        if #available(iOS 12.0, *) {
+            textField.textContentType = UITextContentType.newPassword;
+        } else {
+            // Fallback on earlier versions
+        }
         let imageView = UIImageView(image: UIImage(named: "mima"))
         textField.leftView = imageView
         textField.leftViewMode = .always
-//        let str:NSMutableAttributedString = NSMutableAttributedString(string: " New Password", attributes: [NSAttributedString.Key.foregroundColor:TextColor])
-//        textField.attributedPlaceholder = str
-//        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
         return textField
     }()
     
@@ -32,6 +37,14 @@ class emailCheckSecondView: UIView {
         let textField = UITextField()
         textField.initTextField(placeholder: "Confirm the Password",keyboardType: .default)
         textField.isSecureTextEntry = true
+        if #available(iOS 11.0, *) {
+            textField.textContentType = UITextContentType.password;
+        }
+        if #available(iOS 12.0, *) {
+            textField.textContentType = UITextContentType.newPassword;
+        } else {
+            // Fallback on earlier versions
+        }
         let imageView = UIImageView(image: UIImage(named: "mima"))
         textField.leftView = imageView
         textField.leftViewMode = .always

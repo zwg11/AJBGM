@@ -243,14 +243,12 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
                              */
                             if(responseModel.code == 1 ){
                                 print(responseModel.code)
-                                alertController.custom_cengji(self,"Attention", "Sign Up Success！")
                                 self.navigationController?.popToRootViewController(animated: true)
-                      
-                               
+                                alertController.custom_cengji(self,"Attention", "Sign Up Success！")
                             }else{
                                 print(responseModel.code)
-                                alertController.custom_cengji(self,"Attention", "Sign Up Failure！")
                                 self.navigationController?.popToRootViewController(animated: true)
+                                alertController.custom_cengji(self,"Attention", "Sign Up Failure！")
                             }
                         } //end of letif
                     }

@@ -15,7 +15,7 @@ class emailCheckView: UIView {
     // 输入邮箱文本框
     lazy var emailTextField:UITextField = {
         let textField = UITextField()
-        textField.initTextField(placeholder: " Email",keyboardType: .default)
+        textField.initTextField(placeholder: " Email",keyboardType: .emailAddress)
         let imageView = UIImageView(image: UIImage(named: "email"))
         textField.leftView = imageView
         textField.leftViewMode = .always

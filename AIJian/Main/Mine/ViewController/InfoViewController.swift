@@ -279,6 +279,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
                                                 preferredStyle: .alert)
         alertController.addTextField {
             (textField: UITextField!) -> Void in
+            
 //            textField.placeholder = "用户名"
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
@@ -315,6 +316,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
                                                 preferredStyle: .alert)
         alertController.addTextField {
             (textField: UITextField!) -> Void in
+            textField.keyboardType = .decimalPad
 //            textField.placeholder = "体重"
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
@@ -342,6 +344,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
                                                 preferredStyle: .alert)
         alertController.addTextField {
             (textField: UITextField!) -> Void in
+            textField.keyboardType = .decimalPad
 //            textField.placeholder = "身高"
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
@@ -388,6 +391,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
                                                 preferredStyle: .alert)
         alertController.addTextField {
             (textField: UITextField!) -> Void in
+            textField.keyboardType = .decimalPad
 //            textField.placeholder = "电话"
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)

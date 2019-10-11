@@ -97,12 +97,12 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
                             if(responseModel.code == 1 ){
                                 print("重置成功")
                                 print("跳转到修改密码那一页")
-                                alertController.custom_cengji(self,"Attention", "Password Reset Success")
                                 self.navigationController?.popToRootViewController(animated: true)
+                                 alertController.custom_cengji(self,"Attention", "Password Reset Success")
                             }else{
                                 //先转，后弹
-                                 alertController.custom_cengji(self,"Attention", "Password Reset Failed")
                                 self.navigationController?.popToRootViewController(animated: true)
+                                alertController.custom_cengji(self,"Attention", "Password Reset Failed")
                             }
                         } //end of letif
                     }
