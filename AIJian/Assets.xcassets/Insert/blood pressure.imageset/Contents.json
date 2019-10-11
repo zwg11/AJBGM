@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "pressure.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "血压.png",
       "scale" : "2x"
     },
     {

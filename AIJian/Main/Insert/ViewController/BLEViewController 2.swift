@@ -53,18 +53,22 @@
 //        var cell = tableView.dequeueReusableCell(withIdentifier: "id")
 //        
 //        if cell == nil{
-//            cell = UITableViewCell(style: .value2, reuseIdentifier: "id")
+//            cell = UITableViewCell(style: .default, reuseIdentifier: "id")
 //        }
-//        let uuid = deviceDic[indexPath.row].description
+////        let uuid = deviceDic[indexPath.row].description
 //        //cell?.textLabel?.text = deviceName[indexPath.row]
 //        cell?.selectionStyle = .none
 //        cell?.textLabel?.text = deviceName[indexPath.row]
 //        cell?.textLabel?.textColor = UIColor.white
-//        cell?.detailTextLabel?.text = uuid
-//        cell?.detailTextLabel?.textColor = UIColor.lightGray
+////        cell?.detailTextLabel?.text = uuid
+////        cell?.detailTextLabel?.textColor = UIColor.lightGray
 //        cell?.accessoryType = .disclosureIndicator
 //        cell?.backgroundColor = ThemeColor
 //        return cell!
+//    }
+//    // 设置表格头部背景颜色
+//    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+//        view.tintColor = SendButtonColor
 //    }
 //    // 表格头部信息
 //    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -544,7 +548,7 @@
 //    private var button:UIButton = {
 //        let button = UIButton()
 //        //button.tintColor = UIColor.white
-//        button.backgroundColor = UIColor.blue
+//        button.backgroundColor = SendButtonColor
 //        // button.titleLabel?.text = "扫描设备"
 //        button.setTitleColor(UIColor.white, for: .normal)
 //        button.setTitle("Scan Devices", for: .normal)

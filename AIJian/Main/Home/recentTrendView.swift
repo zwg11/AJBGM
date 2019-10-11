@@ -45,7 +45,10 @@ class recentTrendView: UIView {
         // 画图
         self.recentTrendView.drawLineChart(xAxisArray: xAxisArrayToWeek(Days: 7) as NSArray,xAxisData: recentDaysData(Days: 7))
         self.recentTrendView.snp_makeConstraints{(make) in
-            make.edges.equalToSuperview()
+            make.left.top.equalToSuperview()
+            
+            make.width.equalTo(AJScreenWidth)
+            make.height.equalTo(AJScreenWidth/2)
         }
     }
     func reloadChart(){

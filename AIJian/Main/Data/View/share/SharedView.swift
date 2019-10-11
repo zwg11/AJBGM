@@ -29,7 +29,7 @@ class SharedView: UIView ,UITextFieldDelegate{
         button.setTitle("Send", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-        button.backgroundColor = ButtonColor
+        button.backgroundColor = SendButtonColor
         
         //button.addTarget(self, action: #selector(sendCheck), for: .touchUpInside)
         return button

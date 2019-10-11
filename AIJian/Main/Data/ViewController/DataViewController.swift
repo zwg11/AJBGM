@@ -99,10 +99,14 @@ class DataViewController: UIViewController {
     
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        // 设置页面支持横屏
+//        appDelegate.blockRotation = true
         self.view.backgroundColor = UIColor.white
-        
+        // 超过页面范围的子页面不显示
+        self.view.clipsToBounds = true
         // 设置pickerView初始位置
         dateRangePicker.rangePicker.selectRow(1, inComponent: 0, animated: false)
         
@@ -164,13 +168,25 @@ class DataViewController: UIViewController {
         self.view.backgroundColor = UIColor.white   
     }
     
+
+//    override var shouldAutorotate: Bool{
+//            return true
+//    }
+//
+//    override var supportedInterfaceOrientations: UIInterfaceOrientationMask{
+//        return .allButUpsideDown
+//    }
+    
     // 页面出现，tabbar隐藏
     override func viewWillAppear(_ animated: Bool) {
         // 隐藏 tabbar
         self.tabBarController?.tabBar.isHidden = true
 //        self.pageViewManager.titleView.currentIndex = 0
-        
-        
+        // 设置页面支持横屏
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.blockRotation = true
+//        let value = UIInterfaceOrientation.portrait.rawValue
+//        UIDevice.current.setValue(value, forKey: "orientation")
         
         // 添加导航栏左按钮
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
@@ -180,13 +196,27 @@ class DataViewController: UIViewController {
         // 识别 导航栏右按钮标题，做出相应值的设置
         setDaysAndRange()
         
+        
     }
 
     // 页面消失，tabbar隐藏
     override func viewWillDisappear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
+        // 设置页面不支持横屏
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.blockRotation = false
+        let value = UIInterfaceOrientation.portrait.rawValue
+        UIDevice.current.setValue(value, forKey: "orientation")
+        
+
     }
     @objc func leftButtonClick(){
+        let orientation = UIDevice.current.orientation
+        if orientation != .portrait{
+            let value = UIInterfaceOrientation.portrait.rawValue
+            UIDevice.current.setValue(value, forKey: "orientation")
+        }
+
         // 设置返回首页
         self.tabBarController?.selectedIndex = 0
     }
@@ -231,11 +261,11 @@ class DataViewController: UIViewController {
             // 开始时间
             let SD = dateManage(date: customRange.startDatePicker.date)
             startD = SD.dateAt(.startOfDay)
-            print("startD:\(startD)")
+//            print("startD:\(startD)")
             // 结束时间
             let ED = customRange.endDatePicker.date
             endD = ED.dateAt(.endOfDay)
-            print("endD:\(endD)")
+//            print("endD:\(endD)")
             // 设定被选中的标志位
             pickerSelectedRow = 4
             
@@ -272,6 +302,15 @@ class DataViewController: UIViewController {
         // 如果选择了自定义，那么弹出2个时间选择器供用户选择时间范围
         if dateRangePicker.selectedContent == "Custom"{
             self.view.addSubview(customRange)
+            customRange.snp.makeConstraints{(make)  in
+                make.left.right.top.equalToSuperview()
+                if #available(iOS 11.0, *) {
+                    make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+                } else {
+                    // Fallback on earlier versions
+                    make.bottom.equalTo(bottomLayoutGuide.snp.top)
+                }
+            }
         }// 否则更新按钮标题
         else{
             // 更新按钮标题
@@ -410,3 +449,16 @@ class DataViewController: UIViewController {
     
 }
 
+extension DataViewController{
+//    override var shouldAutorotate: Bool {
+//        return true
+//    }
+//    
+//    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+//        return .allButUpsideDown
+//    }
+//    
+//    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+//        return .portrait
+//    }
+}

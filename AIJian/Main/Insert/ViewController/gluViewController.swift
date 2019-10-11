@@ -68,7 +68,10 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         cell?.backgroundColor = ThemeColor
         return cell!
     }
-    
+    // 设置表格头部背景颜色
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        view.tintColor = SendButtonColor
+    }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Blood Glucose Record"
     }
@@ -182,15 +185,20 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
                             arr[self.meterID] = self.lastRecord
                             data["meterID"] = arr
                             data.write(toFile: "User.plist", atomically: true)
-                            // 插入成功
-                            let alert = CustomAlertController()
-                            alert.custom(self, "", "插入成功")
+//                            // 插入成功
+//                            let alert = CustomAlertController()
+//                            alert.custom(self, "", "插入成功")
                             // 跳转到原来的界面
-//                            self.navigationController?.popViewController(animated: true)
+                            self.navigationController?.popToRootViewController(animated: false)
+                            // 发送通知，提示插入成功
+                            NotificationCenter.default.post(name: NSNotification.Name("InsertData"), object: self, userInfo: nil)
                             
                         }else{
                             print(responseModel.code)
                             print("插入失败")
+                            // 插入成功
+                            let alert = CustomAlertController()
+                            alert.custom(self, "", "Insert Failed,Please Try Again Later.")
                             
                         }
                     } //end of letif

@@ -36,6 +36,14 @@ class InsulinViewController: UIViewController ,UITableViewDelegate,UITableViewDa
         return cell
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     private lazy var Bolus:BolusInsulinView = {
         let view = BolusInsulinView()
         view.settupUI()

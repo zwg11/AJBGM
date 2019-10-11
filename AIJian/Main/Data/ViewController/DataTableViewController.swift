@@ -364,7 +364,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         
         
         // 设置数据滚动视图内容的大小，该滚动视图只允许横向滚动
-        scroll.contentSize = CGSize(width: 640+200, height: scHeight)
+        scroll.contentSize = CGSize(width: 720+200, height: scHeight)
         scroll.showsHorizontalScrollIndicator = true
         scroll.indicatorStyle = .black
         scroll.bounces = false
@@ -384,7 +384,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         
         // create a tableView
         // **********其宽度要根据计算得出，高度也是根据数据量计算得出************
-        DATATableView = UITableView(frame: CGRect(x: 0, y: 0, width: 640 + 200, height: scHeight), style: .grouped)
+        DATATableView = UITableView(frame: CGRect(x: 0, y: 0, width: 720 + 200, height: scHeight), style: .grouped)
         DATATableView.dataSource = self
         DATATableView.delegate = self
         DATATableView.isScrollEnabled = false

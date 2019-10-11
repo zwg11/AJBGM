@@ -2,12 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "iconxt.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "bloodGlu.png",
+      "filename" : "xuetang.png",
       "scale" : "2x"
     },
     {

@@ -262,3 +262,18 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
     }
    
 }
+
+
+extension MineViewController{
+    override var shouldAutorotate: Bool {
+        return true
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
+    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+        return .portrait
+    }
+}

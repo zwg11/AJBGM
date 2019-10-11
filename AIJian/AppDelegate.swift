@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var isFirstStart:Bool?
 
+    var blockRotation = false
     let AlamofireManager:Alamofire.SessionManager = {
         let conf = URLSessionConfiguration.default
         conf.timeoutIntervalForRequest = 10
@@ -140,6 +141,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
       
     }
+    
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        if blockRotation{
+            return .allButUpsideDown
+        }else{
+            return .portrait
+        }
+        
+        
+    }
+    
+    
+    
 
     
 }
