@@ -55,6 +55,9 @@ class dataTableViewCell: UITableViewCell {
         eventLabel.adjustsFontSizeToFitWidth = true
         eventLabel.text = (sortedData[secion][row].detectionTime != nil) ? EvenChang.numToeven(Int(sortedData[secion][row].detectionTime!)):"-"
         // 进餐量
+        appetiteLabel.font = UIFont.systemFont(ofSize: 15)
+        appetiteLabel.minimumScaleFactor = 0.3
+        appetiteLabel.adjustsFontSizeToFitWidth = true
         appetiteLabel.text = (sortedData[secion][row].eatNum != nil) ? EatNumChange.numToeat(Int(sortedData[secion][row].eatNum!)):"-"
         
         // 先判断有没有胰岛素量，若没有再判断有没有胰岛素类型
@@ -134,11 +137,11 @@ class dataTableViewCell: UITableViewCell {
         var offsetX:CGFloat = 0
         for i in labels{
             //i.font = UIFont.systemFont(ofSize: 12)
-            i.frame = CGRect(x: offsetX, y: 0, width: 80, height: 40)
+            i.frame = CGRect(x: offsetX, y: 0, width: 90, height: 40)
             i.textAlignment = .center
             i.numberOfLines = 0
             i.textColor = UIColor.white
-            offsetX += 80
+            offsetX += 90
             self.addSubview(i)
         }
         SetColorOfLabelText.SetGlucoseTextColor(sortedData[secion][row], label: glucoseLabel)

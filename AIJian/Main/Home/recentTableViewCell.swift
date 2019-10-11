@@ -87,50 +87,50 @@ class recentTableViewCell: UITableViewCell {
         
         average.snp.makeConstraints{(make) in
             make.left.equalToSuperview()
-            make.right.equalTo(self.snp.centerX)
+            make.width.equalTo(AJScreenWidth/2)
             make.top.equalToSuperview()
-            make.height.equalToSuperview().dividedBy(2)
+            make.height.equalTo(AJScreenWidth/4)
         }
         
         checkNum.snp.makeConstraints{(make) in
-            make.right.equalToSuperview()
-            make.left.equalTo(self.snp.centerX)
+            make.left.equalTo(average.snp.right)
+            make.width.equalTo(average)
             make.top.equalToSuperview()
-            make.height.equalToSuperview().dividedBy(2)
+            make.height.equalTo(AJScreenWidth/4)
         }
         
         highest.snp.makeConstraints{(make) in
             make.left.equalToSuperview()
-            make.right.equalTo(self.snp.centerX)
+            make.width.equalTo(average)
             make.bottom.equalToSuperview()
-            make.height.equalToSuperview().dividedBy(2)
+            make.height.equalTo(AJScreenWidth/4)
         }
         
         lowest.snp.makeConstraints{(make) in
-            make.right.equalToSuperview()
-            make.left.equalTo(self.snp.centerX)
+            make.left.equalTo(average.snp.right)
+            make.width.equalTo(average)
             make.bottom.equalToSuperview()
-            make.height.equalToSuperview().dividedBy(2)
+            make.height.equalTo(AJScreenWidth/4)
         }
         
         horizonLine.snp.makeConstraints{(make) in
-            make.left.equalToSuperview().offset(AJScreenWidth/20)
-            make.right.equalToSuperview().offset(-AJScreenWidth/20)
-            make.centerY.equalToSuperview()
+            make.bottom.equalTo(average)
+            make.left.equalTo(average).offset(AJScreenWidth/20)
+            make.right.equalTo(checkNum).offset(-AJScreenWidth/20)
             make.height.equalTo(1)
         }
         
         verLine1.snp.makeConstraints{(make) in
-            make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(10)
-            make.bottom.equalTo(self.snp.centerY).offset(-10)
+            make.top.equalTo(average).offset(10)
+            make.bottom.equalTo(average).offset(-10)
+            make.left.equalTo(average.snp.right)
             make.width.equalTo(1)
         }
         
         verLine2.snp.makeConstraints{(make) in
-            make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-10)
-            make.top.equalTo(self.snp.centerY).offset(10)
+            make.top.equalTo(highest).offset(10)
+            make.bottom.equalTo(highest).offset(-10)
+            make.left.equalTo(highest.snp.right)
             make.width.equalTo(1)
         }
         

@@ -125,18 +125,6 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }()
     
     override func viewWillAppear(_ animated: Bool) {
-        
-
-//        // 初始化用户信息
-//        getUserInfo()
-//        // 向数据库插入用户信息
-//        let sqliteManager = DBSQLiteManager()
-//        sqliteManager.createTable()
-//        var user1 = USER()
-//        user1.user_id = userId!
-//        user1.token = token
-//        user1.email = "zzmmshang@qq.com"
-//        sqliteManager.addUserRecord(user1)
         homeTableView.reloadData()
         // 图表重新画
         recent7View.reloadChart()
@@ -146,6 +134,31 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         let sd = sliderView.init(frame: CGRect(x: 0, y: -100, width: AJScreenWidth*0.9, height: 5))
         self.view.addSubview(sd)
         sliderImage = viewToImage.getImageFromView(view: sd)
+        // 隐藏tabbar
+        self.tabBarController?.tabBar.isHidden = false
+        
+        
+        let value = UIInterfaceOrientation.portrait.rawValue
+        UIDevice.current.setValue(value, forKey: "orientation")
+
+        //重新判断加载视图
+        //input.reloadInputViews()
+//        self.view.addSubview(homeTableView)
+//        homeTableView.snp.makeConstraints{(make) in
+//            make.left.right.equalToSuperview()
+//            if #available(iOS 11.0, *) {
+//                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+//                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+//            } else {
+//                // Fallback on earlier versions
+//                make.top.equalTo(topLayoutGuide.snp.bottom)
+//                make.bottom.equalTo(bottomLayoutGuide.snp.top)
+//            }
+//        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+//        homeTableView.removeFromSuperview()
     }
     
     var homeTableView:UITableView = UITableView()
@@ -165,6 +178,7 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                 make.bottom.equalTo(bottomLayoutGuide.snp.top)
                 // Fallback on earlier versions
             }
+
         }
         homeTableView.delegate = self
         homeTableView.dataSource = self
@@ -172,12 +186,34 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         homeTableView.isScrollEnabled = true
         
         self.view.backgroundColor = ThemeColor
+        // 设置监听器，监听是否弹出插入成功r弹窗
+            NotificationCenter.default.addObserver(self, selector: #selector(InsertSuccess), name: NSNotification.Name(rawValue: "InsertData"), object: nil)
 
+    }
 
+    @objc func InsertSuccess(){
+        let x = UIAlertController(title: "", message: "Insert Success.", preferredStyle: .alert)
+        self.present(x, animated: true, completion: {()->Void in
+            sleep(1)
+            x.dismiss(animated: true, completion: nil)
+        })
         
-        
-        // Do any additional setup after loading the view.
     }
  
 }
 
+
+extension HomeViewController{
+    override var shouldAutorotate: Bool {
+        return true
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
+    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+        return .portrait
+    }
+  
+}

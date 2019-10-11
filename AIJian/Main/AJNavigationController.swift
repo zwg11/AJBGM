@@ -39,4 +39,18 @@ extension AJNavigationController
         }
         super.pushViewController(viewController, animated: animated)
     }
+    
+    
+    
+   override var shouldAutorotate: Bool {
+        return self.topViewController?.shouldAutorotate ?? false
+    }
+
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return self.topViewController?.supportedInterfaceOrientations ?? .portrait
+    }
+
+    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+        return self.topViewController?.preferredInterfaceOrientationForPresentation ?? .portrait
+    }
 }

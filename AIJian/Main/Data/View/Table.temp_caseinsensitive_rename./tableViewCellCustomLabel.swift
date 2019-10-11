@@ -31,7 +31,7 @@ class tableViewCellCustomLabel: UILabel {
         // 添加图片
         let markattach = NSTextAttachment()
         markattach.image = UIImage(named: image)
-        markattach.bounds = CGRect(x: 0, y: -2, width: 20, height: 20)
+        markattach.bounds = CGRect(x: 0, y: -10, width: 30, height: 30)
         
         let markAttackStr = NSAttributedString(attachment: markattach)
         // 放置 markAttackStr 的位置

@@ -33,7 +33,7 @@ class InsertViewController: UIViewController {
         // 读取配置文件
         //        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
         
-        let VC = alertViewController(title: "请选择", message: "", preferredStyle: .alert)
+        let VC = alertViewController(title: "Please Choose", message: "", preferredStyle: .alert)
         //        medicineChooseAlert.alertData = data["medicine"] as! [String]
         //        viewController.setupUI()
         
@@ -52,7 +52,7 @@ class InsertViewController: UIViewController {
         // 设置当选中的表格个数改变时，使得对应的按钮显示已选择的表格数
         //药物数已被设置为可观察
         if medicineChooseAlert.selectedNum>0{
-            input.bodyInfo.medicineChooseButton.setTitle("\(medicineChooseAlert.selectedNum)个选项已选择", for: .normal)
+            input.bodyInfo.medicineChooseButton.setTitle("\(medicineChooseAlert.selectedNum) Item selected", for: .normal)
         }else{
             input.bodyInfo.medicineChooseButton.setTitle("Nothing", for: .normal)
         }
@@ -536,7 +536,8 @@ class InsertViewController: UIViewController {
 //                                sleep(2)
 //                                x.dismiss(animated: true, completion: nil)
                                 // 跳转到原来的界面
-                                self.navigationController?.popToRootViewController(animated: true)
+                                self.navigationController?.popToRootViewController(animated: false)
+//                                self.tabBarController?.selectedIndex = 0
                                 // 发送通知，提示插入成功
                                 NotificationCenter.default.post(name: NSNotification.Name("InsertData"), object: self, userInfo: nil)
                                 
@@ -605,7 +606,7 @@ class InsertViewController: UIViewController {
                                 indicator.removeFromSuperview()
                                 // 弹窗提示
                                 let alert = CustomAlertController()
-                                alert.custom(self, "Attention", "更新失败，请重新登录")
+                                alert.custom(self, "Attention", "Update Failed,Please Sign up Again")
                                 
                             }
                         } //end of letif
@@ -621,11 +622,6 @@ class InsertViewController: UIViewController {
     
     //视图将要出现的时候
     override func viewWillAppear(_ animated: Bool) {
-//        // 初始化
-//        sdView.loadViews()
-//        let image = viewToImage.getImageFromView(view: sdView)
-//        self.input.glucose.XTSlider.setMinimumTrackImage(image, for: .normal)
-//        self.input.glucose.XTSlider.setMaximumTrackImage(image, for: .normal)
         // 每次进入界面滚动视图都是在最顶部
         self.input.scrollView.contentOffset = CGPoint(x: 0, y: 0)
         // 隐藏tabbar
@@ -646,6 +642,9 @@ class InsertViewController: UIViewController {
         }
         //重新设置单位
        input.resetUnit()
+        
+        let value = UIInterfaceOrientation.portrait.rawValue
+        UIDevice.current.setValue(value, forKey: "orientation")
     }
     //视图将要消失的时候
     override func viewWillDisappear(_ animated: Bool) {
@@ -760,6 +759,7 @@ extension InsertViewController{
         if x.inputType == 0{
 
             self.input.glucose.XTTextfield.isUserInteractionEnabled = false
+            self.input.glucose.XTSlider.isUserInteractionEnabled = false
         }
         
         
@@ -827,4 +827,19 @@ extension InsertViewController{
         self.input.setRemark(text: x.remark ?? "")
         
     }
+    
+//    override var shouldAutorotate: Bool {
+//        return false
+//    }
+//    
+//    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+//        return .portrait
+//    }
+//    
+//    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+//        return .portrait
+//    }
+
 }
+
+

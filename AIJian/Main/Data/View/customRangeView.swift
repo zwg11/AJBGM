@@ -39,18 +39,18 @@ class customRangeView: UIView {
     
     lazy var startLabel:UILabel = {
         let label = UILabel()
-        label.text = "input end date"
+        label.text = "Start Date"
         label.textAlignment = .center
-        label.textColor = UIColor.blue
+        label.textColor = UIColor.black
         label.font = UIFont.systemFont(ofSize: 16)
         return label
     }()
     
     lazy var endLabel:UILabel = {
         let label = UILabel()
-        label.text = "input start date"
+        label.text = "End Date"
         label.textAlignment = .center
-        label.textColor = UIColor.blue
+        label.textColor = UIColor.black
         label.font = UIFont.systemFont(ofSize: 16)
         return label
     }()
@@ -59,7 +59,8 @@ class customRangeView: UIView {
         let button = UIButton()
         button.setTitle("Setting Date Range", for: .normal)
         button.backgroundColor = UIColor.white
-        button.setTitleColor(UIColor.blue, for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+
         return button
     }()
     
@@ -77,7 +78,6 @@ class customRangeView: UIView {
         let button = UIButton.init(type: .system)
         button.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.2)
         button.addTarget(self, action: #selector(dismissCustom), for: .touchUpInside)
-        button.frame = CGRect(x: 0, y: 0, width: AJScreenWidth, height: AJScreenHeight)
         return button
     }()
     // 实现点击背景 该视图 消失的效果
@@ -89,34 +89,37 @@ class customRangeView: UIView {
     
     func setupUI(){
         self.addSubview(backButton)
-        self.frame = CGRect(x: 0, y: 0, width: AJScreenWidth, height: AJScreenHeight)
+        backButton.snp.makeConstraints{(make) in
+            make.edges.equalToSuperview()
+        }
+//        self.frame = CGRect(x: 0, y: 0, width: AJScreenWidth, height: AJScreenHeight)
         self.backgroundColor = kRGBColor(0, 0, 0, 0.2)
         
         contentView.addSubview(startLabel)
         startLabel.snp.makeConstraints{(make) in
             make.left.right.top.equalToSuperview()
-            make.height.equalTo(20)
+            make.height.equalTo(25)
         }
         
         contentView.addSubview(startDatePicker)
         startDatePicker.snp.makeConstraints{(make) in
             make.left.right.equalToSuperview()
             make.top.equalTo(startLabel.snp.bottom)
-            make.height.equalTo(150)
+            make.height.equalTo(110)
         }
         
         contentView.addSubview(endLabel)
         endLabel.snp.makeConstraints{(make) in
             make.left.right.equalToSuperview()
             make.top.equalTo(startDatePicker.snp.bottom)
-            make.height.equalTo(20)
+            make.height.equalTo(25)
         }
         
         contentView.addSubview(endDatePicker)
         endDatePicker.snp.makeConstraints{(make) in
             make.left.right.equalToSuperview()
             make.top.equalTo(endLabel.snp.bottom)
-            make.height.equalTo(150)
+            make.height.equalTo(110)
         }
         
         contentView.addSubview(endbutton)
@@ -124,16 +127,16 @@ class customRangeView: UIView {
             make.left.equalToSuperview().offset(10)
             make.right.equalToSuperview().offset(-10)
             make.top.equalTo(endDatePicker.snp.bottom).offset(10)
-            make.height.equalTo(20)
+            make.height.equalTo(30)
         }
         
         //contentView.backgroundColor = UIColor.yellow
         self.addSubview(contentView)
         contentView.snp.makeConstraints{(make) in
-            make.left.equalToSuperview().offset(AJScreenWidth/5)
-            make.right.equalToSuperview().offset(-AJScreenWidth/5)
-            make.center.equalToSuperview()
-            make.height.equalTo(400)
+            make.left.right.bottom.equalToSuperview()
+
+//            make.center.equalToSuperview()
+            make.height.equalTo(300)
         }
         
         

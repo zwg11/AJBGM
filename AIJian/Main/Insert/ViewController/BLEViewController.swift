@@ -42,6 +42,7 @@ class BLEViewController: UIViewController {
         let insert = InsertViewController()
 
         self.navigationController?.pushViewController(insert, animated: true)
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -49,6 +50,13 @@ class BLEViewController: UIViewController {
         self.view.addSubview(sd)
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor:UIColor.white]
         sliderImage = viewToImage.getImageFromView(view: sd)
+        // 隐藏tabbar
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        // 隐藏tabbar
+        self.tabBarController?.tabBar.isHidden = false
     }
 
     override func viewDidLoad() {
@@ -60,7 +68,7 @@ class BLEViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
         // Do any additional setup after loading the view.
 //        sliderImage = viewToImage.getImageFromView(view: sd)
-        // 设置监听器，监听是否弹出插入成功r弹窗
+//         设置监听器，监听是否弹出插入成功弹窗
         NotificationCenter.default.addObserver(self, selector: #selector(InsertSuccess), name: NSNotification.Name(rawValue: "InsertData"), object: nil)
 
     }
@@ -71,6 +79,7 @@ class BLEViewController: UIViewController {
             sleep(1)
             x.dismiss(animated: true, completion: nil)
         })
+        self.tabBarController?.selectedIndex = 0
 
     }
 
@@ -84,4 +93,18 @@ class BLEViewController: UIViewController {
     }
     */
 
+}
+
+extension BLEViewController{
+    override var shouldAutorotate: Bool {
+        return false
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
+    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+        return .portrait
+    }
 }
