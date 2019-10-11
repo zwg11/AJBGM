@@ -55,7 +55,7 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
             let cell = UITableViewCell(style: .default, reuseIdentifier: id)
             telephoneCommponent.imageView.image = UIImage(named: "Phone")
             telephoneCommponent.textField.delegate = self
-//            telephoneCommponent.textField.textColor = TextColor
+            telephoneCommponent.textField.textColor = TextColor
             telephoneCommponent.setupUI(title: "Please Enter Your Phone Number")
             cell.contentView.addSubview(telephoneCommponent)
             cell.selectionStyle = .none
@@ -156,6 +156,12 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
             alert.custom(self, "Attention", "Feedback Empty！")
             return
         }
+        
+        if  telephoneCommponent.textField.text! == ""{
+            alert.custom(self, "Attention", "Phone Empty！")
+            return
+        }
+        
         print(content_field.text!.count)
         if content_field.text!.count >= 300{
             alert.custom(self, "Attention", "Words should be less than 300！")
@@ -178,13 +184,12 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
                         
                         /*  此处为跳转和控制逻辑*/
                         if(responseModel.code == 1 ){
-                            alert.custom(self,"Attention", "Submitted.Thanks for your feedback！")
+                            alert.custom_cengji(self,"Attention", "Submitted.Thanks for your feedback！")
                             self.content_field.text! = ""
-                            self.emailCommponent.textField.text! = ""
+                            self.emailCommponent.textField.text! = UserInfo.getEmail()
                             self.telephoneCommponent.textField.text! = ""
-                            self.navigationController?.popViewController(animated: true)
                         }else{
-                            alert.custom(self,"Attention", "Sorry.Feedback Failure！")
+                            alert.custom_cengji(self,"Attention", "Sorry.Feedback Failure！")
                             self.navigationController?.popViewController(animated: true)
                         }
                     }

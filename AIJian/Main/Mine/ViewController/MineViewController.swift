@@ -43,7 +43,7 @@ class MineViewController: UIViewController {
         
     }
     override func viewDidAppear(_ animated: Bool) {
-        self.tableview.reloadRows(at: [IndexPath(row:0,section:0)], with: .none)
+//        self.tableview.reloadRows(at: [IndexPath(row:0,section:0)], with: .none)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -224,6 +224,7 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
                 cell.selectionStyle = .none
+                cell.imageView?.bounds = CGRect(x: 0,y: 0,width: AJScreenHeight/25,height: AJScreenWidth/25)
                 cell.imageView?.image = UIImage(named: _imgArr[3])
                 cell.textLabel?.text = _titleArr[3]
                 cell.accessoryType = .disclosureIndicator
@@ -260,4 +261,19 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
         }
     }
    
+}
+
+
+extension MineViewController{
+    override var shouldAutorotate: Bool {
+        return true
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
+    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+        return .portrait
+    }
 }

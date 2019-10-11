@@ -33,7 +33,9 @@ class InsertViewController: UIViewController {
         // 读取配置文件
         //        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
         
-        let VC = alertViewController(title: "Please Choose", message: "", preferredStyle: .alert)
+
+        let VC = alertViewController(title: "Please Select", message: "", preferredStyle: .alert)
+
         //        medicineChooseAlert.alertData = data["medicine"] as! [String]
         //        viewController.setupUI()
         
@@ -143,15 +145,15 @@ class InsertViewController: UIViewController {
     // ********* 药物 编辑 按钮 *********
     @objc func edit(sender:UIButton?){
         
-        let alert = UIAlertController(title: "添加药物", message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Add Medication", message: "", preferredStyle: .alert)
         alert.addTextField(configurationHandler: {(textField) in
             textField.placeholder = ""
             textField.keyboardType = .default
         })
         // 添加取消按钮
-        let actionCancel = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        let actionCancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         // 添加保存按钮，将文本框中数据保存到沙盒中
-        let actionSure = UIAlertAction(title: "确定", style: .destructive, handler: {(UIAlertAction)-> Void in
+        let actionSure = UIAlertAction(title: "Sure", style: .destructive, handler: {(UIAlertAction)-> Void in
             // 读取配置文件
             let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: self.path)!
             var arr = data["medicine"] as! [String]
@@ -246,12 +248,12 @@ class InsertViewController: UIViewController {
                     print("血糖mg值",bloodGlucoseValueMg as Any)
                     print("血糖mmol值",bloodGlucoseValueMmol as Any)
                 }else{
-                    Message += "\n血糖的范围为10~600"
+                    Message += "\nBG is not within the valid range.The valid range is:10~600"
 //                    alert.custom(self, "Attention", "血糖的范围为10~600")
                 }
             }
             else{
-                Message += "\n血糖不能为空"
+                Message += "\nBG Empty"
 //                alert.custom(self, "Attention", "血糖不能为空")
 //                return
             }
@@ -264,12 +266,12 @@ class InsertViewController: UIViewController {
                     print("血糖mg值",bloodGlucoseValueMg as Any)
                     print("血糖mmol值",bloodGlucoseValueMmol as Any)
                 }else{
-                    Message += "\n血糖的范围为0.6~33.3"
+                    Message += "\nBG is not within the valid range.The valid range is:0.6~33.3"
 //                    alert.custom(self, "Attention", "血糖的范围为0.6~33.3")
                 }
             
             }else{
-                Message += "\n血糖不能为空"
+                Message += "\nBG Empty"
 //                alert.custom(self, "Attention", "血糖不能为空")
 //                return
             }
@@ -289,9 +291,9 @@ class InsertViewController: UIViewController {
         let insulin_num:Double? = input.getInsNumValue()
         if insulin_num != nil{
             if insulin_type == "Nothing"{
-                Message += "\n胰岛素类型未选择"
+                Message += "\nInsulin Dose requires that a type be specified"
             }else if insulin_num! > 100.0{
-                Message += "\n输入胰岛素的值不能超过100"
+                Message += "\nInsulin Number is not within the valid range.The valid range is:100"
             }
         }
         print("胰岛素的量",insulin_num ?? "no")
@@ -305,7 +307,7 @@ class InsertViewController: UIViewController {
             weight_kg = input.getWeightValue()
             if weight_kg != nil{
                 if weight_kg! >= 454.0{
-                    Message += "\n体重有效的范围为0~454"
+                    Message += "\nWeight is not within the valid range.The valid range is:0~454"
                 }else{
                     weight_lbs = WeightUnitChange.KgToLbs(num: weight_kg!)
                 }
@@ -357,15 +359,15 @@ class InsertViewController: UIViewController {
                 if sys_press_mmHg != nil && dis_press_mmHg != nil{
                     if sys_press_mmHg! < 45 || sys_press_mmHg! > 300
                         || dis_press_mmHg! < 45 || dis_press_mmHg! > 300{
-                        Message += "\n血压的范围在45~300之间"
+                        Message += "\nBlood Pressure is not within the valid range.The valid range is:45~300"
                     }else if dis_press_mmHg! >= sys_press_mmHg!{
-                        Message += "\n舒张压要大于收缩压"
+                        Message += "\nThe Sysolic Blood Pressure value must be greater than the Diastolic value"
                     }else{
                         sys_press_kPa = PressureUnitChange.mmHgTokPa(num: sys_press_mmHg!)
                         dis_press_kPa = PressureUnitChange.mmHgTokPa(num: dis_press_mmHg!)
                     }
                 }else{
-                    Message += "\n舒张压或舒张压不能只填写一个"
+                    Message += "\nBlood Pressure requires both a Systolic and Diastolic reading"
                 }
             }
             
@@ -377,15 +379,15 @@ class InsertViewController: UIViewController {
                 if sys_press_kPa != nil && dis_press_kPa != nil{
                     if sys_press_kPa! < 6 || sys_press_kPa! > 40
                         || dis_press_kPa! < 6 || dis_press_kPa! > 40{
-                        Message += "\n血压的范围在6-40之间"
+                        Message += "\nBlood Pressure is not within the valid range.The valid range is:6-40"
                     }else if dis_press_kPa! > sys_press_kPa!{
-                        Message += "\n舒张压要小于收缩压"
+                        Message += "\nThe Sysolic Blood Pressure value must be greater than the Diastolic value"
                     }else{
                         sys_press_mmHg = PressureUnitChange.kPaTommHg(num: sys_press_kPa!)
                         dis_press_mmHg = PressureUnitChange.kPaTommHg(num: dis_press_kPa!)
                     }
                 }else{
-                    Message += "\n舒张压或舒张压不能只填写一个"
+                    Message += "\nBlood Pressure requires both a Systolic and Diastolic reading"
                 }
             }
         }
@@ -439,13 +441,13 @@ class InsertViewController: UIViewController {
         if sport == "Nothing"{
             sport_strength = nil
             if sport_time != nil{
-                Message += "\n根据时间和强度选择运动类型"
+                Message += "\nExercise type required with duration/intensity"
                 
             }
         }else if let time = sport_time{
             if time < 5 && time > 360{
                 print(time)
-                Message += "\n有效的运动持续时间范围为5~360"
+                Message += "\nExercise Duration is not within the valid range.The valid range is:5~360"
             }
         }
         
@@ -606,7 +608,9 @@ class InsertViewController: UIViewController {
                                 indicator.removeFromSuperview()
                                 // 弹窗提示
                                 let alert = CustomAlertController()
-                                alert.custom(self, "Attention", "Update Failed,Please Sign up Again")
+
+                                alert.custom(self, "Attention", "Update Failure,Please login again!")
+
                                 
                             }
                         } //end of letif
@@ -683,7 +687,7 @@ class InsertViewController: UIViewController {
         //a与b之间的交集
         if fromLength > 0{
             // 设置按钮标题
-            input.bodyInfo.medicineChooseButton.setTitle("\(fromLength)个选项已选择", for: .normal)
+            input.bodyInfo.medicineChooseButton.setTitle("\(fromLength)Selected", for: .normal)
             
             for i in 0..<medicine.count{
                 

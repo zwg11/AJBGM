@@ -71,6 +71,14 @@ class registerView: UIView {
         textField.initTextField(placeholder: " Set a Password",keyboardType: .default)
 //        let textField = initTextField(placeholder: " Password",keyboardType: .default)
         textField.isSecureTextEntry = true
+        if #available(iOS 11.0, *) {
+            textField.textContentType = UITextContentType.password;
+        }
+        if #available(iOS 12.0, *) {
+            textField.textContentType = UITextContentType.newPassword;
+        } else {
+            // Fallback on earlier versions
+        }
         let imageView = UIImageView(image: UIImage(named: "mima"))
         textField.leftView = imageView
         textField.leftViewMode = .always
@@ -84,6 +92,14 @@ class registerView: UIView {
         textField.initTextField(placeholder: " Confirm the Password",keyboardType: .default)
 //        let textField = initTextField(placeholder: " Confirm the Password",keyboardType: .default)
         textField.isSecureTextEntry = true
+        if #available(iOS 11.0, *) {
+            textField.textContentType = UITextContentType.password;
+        }
+        if #available(iOS 12.0, *) {
+            textField.textContentType = UITextContentType.newPassword;
+        } else {
+            // Fallback on earlier versions
+        }
         let imageView = UIImageView(image: UIImage(named: "mima"))
         textField.leftView = imageView
         textField.leftViewMode = .always

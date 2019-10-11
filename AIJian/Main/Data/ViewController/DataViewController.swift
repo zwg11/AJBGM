@@ -97,7 +97,7 @@ class DataViewController: UIViewController {
     var topConstraint:Constraint?
     var bottomConstraint:Constraint?
     
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
     
     
     override func viewDidLoad() {
@@ -182,8 +182,9 @@ class DataViewController: UIViewController {
         // 隐藏 tabbar
         self.tabBarController?.tabBar.isHidden = true
 //        self.pageViewManager.titleView.currentIndex = 0
-//        // 设置页面支持横屏
-//        appDelegate.blockRotation = true
+        // 设置页面支持横屏
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.blockRotation = true
 //        let value = UIInterfaceOrientation.portrait.rawValue
 //        UIDevice.current.setValue(value, forKey: "orientation")
         
@@ -202,9 +203,10 @@ class DataViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
         // 设置页面不支持横屏
-//        appDelegate.blockRotation = false
-//        let value = UIInterfaceOrientation.portrait.rawValue
-//        UIDevice.current.setValue(value, forKey: "orientation")
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.blockRotation = false
+        let value = UIInterfaceOrientation.portrait.rawValue
+        UIDevice.current.setValue(value, forKey: "orientation")
         
 
     }
@@ -448,15 +450,15 @@ class DataViewController: UIViewController {
 }
 
 extension DataViewController{
-    override var shouldAutorotate: Bool {
-        return true
-    }
-    
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .allButUpsideDown
-    }
-    
-    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
-        return .portrait
-    }
+//    override var shouldAutorotate: Bool {
+//        return true
+//    }
+//    
+//    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+//        return .allButUpsideDown
+//    }
+//    
+//    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+//        return .portrait
+//    }
 }

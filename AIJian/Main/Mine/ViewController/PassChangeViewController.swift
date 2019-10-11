@@ -33,6 +33,7 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
             oldPasswd_textF.placeholder="Old Password"
             oldPasswd_textF.isSecureTextEntry = true
             oldPasswd_textF.allowsEditingTextAttributes = false
+            oldPasswd_textF.textColor = TextColor
             oldPasswd_textF.borderStyle = .none
             let imageView = UIImageView(image: UIImage(named: "mima"))
             oldPasswd_textF.leftView = imageView
@@ -49,6 +50,7 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
             newPasswd_textF.allowsEditingTextAttributes = false
             newPasswd_textF.isSecureTextEntry = true
             newPasswd_textF.borderStyle = .none
+            newPasswd_textF.textColor = TextColor
             let imageView = UIImageView(image: UIImage(named: "mima"))
             newPasswd_textF.leftView = imageView
             newPasswd_textF.leftViewMode = .always
@@ -64,6 +66,7 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
             verfiedPasswd_textF.allowsEditingTextAttributes = false
             verfiedPasswd_textF.isSecureTextEntry = true
             verfiedPasswd_textF.borderStyle = .none
+            verfiedPasswd_textF.textColor = TextColor
             let imageView = UIImageView(image: UIImage(named: "mima"))
             verfiedPasswd_textF.leftView = imageView
             verfiedPasswd_textF.leftViewMode = .always
@@ -229,13 +232,13 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
                                     self.oldPasswd_textF.text! = ""
                                     self.newPasswd_textF.text! = ""
                                     self.verfiedPasswd_textF.text! = ""
-                                
+                                    self.navigationController?.popToRootViewController(animated: true)
                                 }else{
                                     alert.custom_cengji(self,"Attention", "Password Reset Failure")
                                     self.oldPasswd_textF.text! = ""
                                     self.newPasswd_textF.text! = ""
                                     self.verfiedPasswd_textF.text! = ""
-                           
+                                    self.navigationController?.popToRootViewController(animated: true)
                                 }
                                 
                             }

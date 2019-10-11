@@ -204,16 +204,18 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
 
 
 extension HomeViewController{
-    override var shouldAutorotate: Bool {
-        return true
-    }
-    
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
-    }
-    
-    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
-        return .portrait
-    }
+//    override var shouldAutorotate: Bool {
+//        return false
+//    }
+//    
+//    
+//    
+//    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+//        return .portrait
+//    }
+//    
+//    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+//        return .portrait
+//    }
   
 }

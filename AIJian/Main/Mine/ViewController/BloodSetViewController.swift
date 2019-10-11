@@ -527,8 +527,9 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
         }
     }
     
-    
+    //返回的时候，将框框再重新设回白色
     @objc private func back(){
+        setBoundWhite()
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -581,21 +582,23 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             print("空腹下限值",a)
             if self.emptyStomach_left.text! != ""{
                 //判断是否为非法输入
-                if FormatMethodUtil.validateBloodNumber(number: self.emptyStomach_left.text!) == true{
+//                if FormatMethodUtil.validateBloodNumber(number: self.emptyStomach_left.text!) == true{
                     a = Double(self.emptyStomach_left.text!)!
                     if a <= 7.8 && a >= 3.3{
                         print("用户的输入",a)
                         emptyStomach_left_number = a as NSNumber
                         save_data.setObject(emptyStomach_left_number as Any, forKey: "emptyStomachLowLimit" as NSCopying)
                         save_data.write(toFile: save_path, atomically: true)
-                        alert.custom(self, "Attention", "保存成功")
+//                        alert.custom(self, "Attention", "保存成功")
                         print(type(of: self.emptyStomach_left_number))
                     }else{
-                        alert.custom(self, "Attention", "空腹血糖下限范围为3.3~7.8")
+                        emptyStomach_left.layer.borderColor = UIColor.red.cgColor
+                        emptyStomach_left.layer.borderWidth = 1
+//                        alert.custom(self, "Attention", "空腹血糖下限范围为3.3~7.8")
                     }
-                }else{
-                    alert.custom(self, "Attention", "非法输入")
-                }
+//                }else{
+//                    alert.custom(self, "Attention", "非法输入")
+//                }
             }else{
                 print("空腹下限啥事也没干")
             }
@@ -603,17 +606,19 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             var b:Double = Double(((save_data["emptyStomachHighLimit"]  as? NSNumber)?.stringValue)!)!
             print("空腹上限值",b)
             if self.emptyStomach_right.text! != ""{
-                if FormatMethodUtil.validateBloodNumber(number: self.emptyStomach_right.text!) == true{
+//                if FormatMethodUtil.validateBloodNumber(number: self.emptyStomach_right.text!) == true{
                     b = Double(self.emptyStomach_right.text!)!
                     if b <= 16.6 && b >= 5.0 && b > a{  //注：上限的值必须大于下限
                         emptyStomach_right_number = b as NSNumber
                         save_data.setObject(emptyStomach_right_number as Any, forKey: "emptyStomachHighLimit" as NSCopying)
                     }else{
-                        alert.custom(self, "Attention", "空腹血糖上限限范围为5.0~16.6")
+                        emptyStomach_right.layer.borderColor = UIColor.red.cgColor
+                        emptyStomach_right.layer.borderWidth = 1
+//                        alert.custom(self, "Attention", "空腹血糖上限限范围为5.0~16.6")
                     }
-                }else{
-                    alert.custom(self, "Attention", "非法输入")
-                }
+//                }else{
+//                    alert.custom(self, "Attention", "非法输入")
+//                }
             }else{
                 print("空腹上限啥事也没干")
             }
@@ -622,7 +627,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             print("餐前下限值",c)
             if self.beforeDinner_left.text! != ""{
                 //判断是否为非法输入
-                if FormatMethodUtil.validateBloodNumber(number: self.beforeDinner_left.text!) == true{
+//                if FormatMethodUtil.validateBloodNumber(number: self.beforeDinner_left.text!) == true{
                     c = Double(self.beforeDinner_left.text!)!
                     if c <= 7.8 && c >= 3.3{
                         print("用户的输入",c)
@@ -630,11 +635,13 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                         save_data.setObject(beforeDinner_left_number as Any, forKey: "beforeDinnerLowLimit" as NSCopying)
                         print(type(of: beforeDinner_left_number))
                     }else{
-                        alert.custom(self, "Attention", "餐前血糖下限范围为3.3~7.8")
+                        beforeDinner_left.layer.borderColor = UIColor.red.cgColor
+                        beforeDinner_left.layer.borderWidth = 1
+//                        alert.custom(self, "Attention", "餐前血糖下限范围为3.3~7.8")
                     }
-                }else{
-                    alert.custom(self, "Attention", "非法输入")
-                }
+//                }else{
+//                    alert.custom(self, "Attention", "非法输入")
+//                }
             }else{
                 print("餐前下限啥事也没干")
             }
@@ -643,7 +650,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             print("餐前上限值",d)
             if self.beforeDinner_right.text! != ""{
                 //判断是否为非法输入
-                if FormatMethodUtil.validateBloodNumber(number: self.beforeDinner_right.text!) == true{
+//                if FormatMethodUtil.validateBloodNumber(number: self.beforeDinner_right.text!) == true{
                     d = Double(self.beforeDinner_right.text!)!
                     if d <= 16.6 && d >= 5.0 && d > c{
                         print("用户的输入",d)
@@ -651,11 +658,13 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                         save_data.setObject(beforeDinner_right_number as Any, forKey: "beforeDinnerHighLimit" as NSCopying)
                         print(type(of: beforeDinner_right_number))
                     }else{
-                        alert.custom(self, "Attention", "餐前血糖上限限范围为5.0~16.6")
+                        beforeDinner_right.layer.borderColor = UIColor.red.cgColor
+                        beforeDinner_right.layer.borderWidth = 1
+//                        alert.custom(self, "Attention", "餐前血糖上限限范围为5.0~16.6")
                     }
-                }else{
-                    alert.custom(self, "Attention", "非法输入")
-                }
+//                }else{
+//                    alert.custom(self, "Attention", "非法输入")
+//                }
             }else{
                 print("餐前上限啥事也没干")
             }
@@ -665,7 +674,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             print("餐后下限值",e)
             if self.afterDinner_left.text! != ""{
                 //判断是否为非法输入
-                if FormatMethodUtil.validateBloodNumber(number: self.afterDinner_left.text!) == true{
+//                if FormatMethodUtil.validateBloodNumber(number: self.afterDinner_left.text!) == true{
                     e = Double(self.afterDinner_left.text!)!
                     if e <= 7.8 && e >= 3.3{
                         print("用户的输入",e)
@@ -673,11 +682,13 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                         save_data.setObject(afterDinner_left_number as Any, forKey: "afterDinnerLowLimit" as NSCopying)
                         print(type(of: afterDinner_left_number))
                     }else{
-                        alert.custom(self, "Attention", "餐后血糖下限范围为3.3~7.8")
+                        afterDinner_left.layer.borderColor = UIColor.red.cgColor
+                        afterDinner_left.layer.borderWidth = 1
+//                        alert.custom(self, "Attention", "餐后血糖下限范围为3.3~7.8")
                     }
-                }else{
-                    alert.custom(self, "Attention", "非法输入")
-                }
+//                }else{
+//                    alert.custom(self, "Attention", "非法输入")
+//                }
             }else{
                 print("餐后下限啥事也没干")
             }
@@ -686,7 +697,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             print("餐后上限值",f)
             if self.afterDinner_right.text! != ""{
                 //判断是否为非法输入
-                if FormatMethodUtil.validateBloodNumber(number: self.afterDinner_right.text!) == true{
+//                if FormatMethodUtil.validateBloodNumber(number: self.afterDinner_right.text!) == true{
                     f = Double(self.afterDinner_right.text!)!
                     if f <= 16.6 && f >= 5.0 && f > e{
                         print("用户的输入",f)
@@ -694,11 +705,13 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                         save_data.setObject(afterDinner_right_number as Any, forKey: "afterDinnerHighLimit" as NSCopying)
                         print(type(of: afterDinner_right_number))
                     }else{
-                        alert.custom(self, "Attention", "餐后血糖上限限范围为5.0~16.6")
+                        afterDinner_right.layer.borderColor = UIColor.red.cgColor
+                        afterDinner_right.layer.borderWidth = 1
+//                        alert.custom(self, "Attention", "餐后血糖上限限范围为5.0~16.6")
                     }
-                }else{
-                    alert.custom(self, "Attention", "非法输入")
-                }
+//                }else{
+//                    alert.custom(self, "Attention", "非法输入")
+//                }
             }else{
                 print("餐后上限啥事也没干")
             }
@@ -707,7 +720,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             print("随机下限值",g)
             if self.randomDinner_left.text! != ""{
                 //判断是否为非法输入
-                if FormatMethodUtil.validateBloodNumber(number: self.randomDinner_left.text!) == true{
+//                if FormatMethodUtil.validateBloodNumber(number: self.randomDinner_left.text!) == true{
                     g = Double(self.randomDinner_left.text!)!
                     if g <= 7.8 && g >= 3.3{
                         print("用户的输入",g)
@@ -715,11 +728,13 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                         save_data.setObject(randomDinner_left_number as Any, forKey: "randomDinnerLowLimit" as NSCopying)
                         print(type(of: randomDinner_left_number))
                     }else{
-                        alert.custom(self, "Attention", "随机血糖下限范围为3.3~7.8")
+                        randomDinner_left.layer.borderColor = UIColor.red.cgColor
+                        randomDinner_left.layer.borderWidth = 1
+//                        alert.custom(self, "Attention", "随机血糖下限范围为3.3~7.8")
                     }
-                }else{
-                    alert.custom(self, "Attention", "非法输入")
-                }
+//                }else{
+//                    alert.custom(self, "Attention", "非法输入")
+//                }
             }else{
                 print("随机下限啥事也没干")
             }
@@ -729,7 +744,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             print("随机上限值",h)
             if self.randomDinner_right.text! != ""{
                 //判断是否为非法输入
-                if FormatMethodUtil.validateBloodNumber(number: self.randomDinner_right.text!) == true{
+//                if FormatMethodUtil.validateBloodNumber(number: self.randomDinner_right.text!) == true{
                     h = Double(self.randomDinner_right.text!)!
                     if h <= 16.6 && h >= 5.0 && h > g{
                         print("用户的输入",h)
@@ -737,11 +752,13 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                         save_data.setObject(randomDinner_right_number as Any, forKey: "randomDinnerHighLimit" as NSCopying)
                         print(type(of: randomDinner_right_number))
                     }else{
-                        alert.custom(self, "Attention", "随机血糖上限限范围为5.0~16.6")
+                        randomDinner_right.layer.borderColor = UIColor.red.cgColor
+                        randomDinner_right.layer.borderWidth = 1
+//                        alert.custom(self, "Attention", "随机血糖上限限范围为5.0~16.6")
                     }
-                }else{
-                    alert.custom(self, "Attention", "非法输入")
-                }
+//                }else{
+//                    alert.custom(self, "Attention", "非法输入")
+//                }
             }else{
                 print("随机上限啥事也没干")
             }
@@ -767,7 +784,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             print("mg空腹下限值",a)
             if self.emptyStomach_left.text! != ""{
                 //判断是否为非法输入
-                if FormatMethodUtil.validateMgdlBloodNumber(number: self.emptyStomach_left.text!) == true{
+//                if FormatMethodUtil.validateMgdlBloodNumber(number: self.emptyStomach_left.text!) == true{
                     a = Double(self.emptyStomach_left.text!)!
                     if a <= 140 && a >= 60{
                         print("用户的输入",a)
@@ -776,14 +793,16 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                         emptyStomach_left_number = a as NSNumber
                         save_data.setObject(emptyStomach_left_number as Any, forKey: "emptyStomachLowLimit" as NSCopying)
                         save_data.write(toFile: save_path, atomically: true)
-                        alert.custom(self, "Attention", "保存成功")
-                        print(type(of: self.emptyStomach_left_number))
+//                        alert.custom(self, "Attention", "保存成功")
+//                        print(type(of: self.emptyStomach_left_number))
                     }else{
-                        alert.custom(self, "Attention", "空腹血糖下限范围为60到140")
+                        emptyStomach_left.layer.borderColor = UIColor.red.cgColor
+                        emptyStomach_left.layer.borderWidth = 1
+//                        alert.custom(self, "Attention", "空腹血糖下限范围为60到140")
                     }
-                }else{
-                    alert.custom(self, "Attention", "非法输入")
-                }
+//                }else{
+//                    alert.custom(self, "Attention", "非法输入")
+//                }
             }else{
                 print("空腹下限啥事也没干")
             }
@@ -791,18 +810,20 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             var b:Double = Double(((save_data["emptyStomachHighLimit"]  as? NSNumber)?.stringValue)!)!
             print("mg空腹上限值",b)
             if self.emptyStomach_right.text! != ""{
-                if FormatMethodUtil.validateMgdlBloodNumber(number: self.emptyStomach_right.text!) == true{
+//                if FormatMethodUtil.validateMgdlBloodNumber(number: self.emptyStomach_right.text!) == true{
                     b = Double(self.emptyStomach_right.text!)!
                     if b <= 300 && b >= 90 && b > a{  //注：上限的值必须大于下限
                         b = UnitConversion.mgTomm(num: b)
                         emptyStomach_right_number = b as NSNumber
                         save_data.setObject(emptyStomach_right_number as Any, forKey: "emptyStomachHighLimit" as NSCopying)
                     }else{
+                        emptyStomach_right.layer.borderColor = UIColor.red.cgColor
+                        emptyStomach_right.layer.borderWidth = 1
                         alert.custom(self, "Attention", "空腹血糖上限限范围为90--300")
                     }
-                }else{
-                    alert.custom(self, "Attention", "非法输入")
-                }
+//                }else{
+//                    alert.custom(self, "Attention", "非法输入")
+//                }
             }else{
                 print("mg空腹上限啥事也没干")
             }
@@ -811,7 +832,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             print("餐前下限值",c)
             if self.beforeDinner_left.text! != ""{
                 //判断是否为非法输入
-                if FormatMethodUtil.validateMgdlBloodNumber(number: self.beforeDinner_left.text!) == true{
+//                if FormatMethodUtil.validateMgdlBloodNumber(number: self.beforeDinner_left.text!) == true{
                     c = Double(self.beforeDinner_left.text!)!
                     if c <= 140 && c >= 60{
                         print("用户的输入",c)
@@ -820,11 +841,13 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                         save_data.setObject(beforeDinner_left_number as Any, forKey: "beforeDinnerLowLimit" as NSCopying)
                         print(type(of: beforeDinner_left_number))
                     }else{
-                        alert.custom(self, "Attention", "餐前血糖下限范围为60--140")
+                        beforeDinner_left.layer.borderColor = UIColor.red.cgColor
+                        beforeDinner_left.layer.borderWidth = 1
+//                        alert.custom(self, "Attention", "餐前血糖下限范围为60--140")
                     }
-                }else{
-                    alert.custom(self, "Attention", "非法输入")
-                }
+//                }else{
+//                    alert.custom(self, "Attention", "非法输入")
+//                }
             }else{
                 print("餐前下限啥事也没干")
             }
@@ -833,7 +856,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             print("餐前上限值",d)
             if self.beforeDinner_right.text! != ""{
                 //判断是否为非法输入
-                if FormatMethodUtil.validateMgdlBloodNumber(number: self.beforeDinner_right.text!) == true{
+//                if FormatMethodUtil.validateMgdlBloodNumber(number: self.beforeDinner_right.text!) == true{
                     d = Double(self.beforeDinner_right.text!)!
                     if d <= 300 && d >= 90 && d > c{
                         print("用户的输入",d)
@@ -842,11 +865,13 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                         save_data.setObject(beforeDinner_right_number as Any, forKey: "beforeDinnerHighLimit" as NSCopying)
                         print(type(of: beforeDinner_right_number))
                     }else{
-                        alert.custom(self, "Attention", "餐前血糖上限限范围为90--300")
+                        beforeDinner_right.layer.borderColor = UIColor.red.cgColor
+                        beforeDinner_right.layer.borderWidth = 1
+//                        alert.custom(self, "Attention", "餐前血糖上限限范围为90--300")
                     }
-                }else{
-                    alert.custom(self, "Attention", "非法输入")
-                }
+//                }else{
+//                    alert.custom(self, "Attention", "非法输入")
+//                }
             }else{
                 print("餐前上限啥事也没干")
             }
@@ -856,7 +881,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             print("餐后下限值",e)
             if self.afterDinner_left.text! != ""{
                 //判断是否为非法输入
-                if FormatMethodUtil.validateMgdlBloodNumber(number: self.afterDinner_left.text!) == true{
+//                if FormatMethodUtil.validateMgdlBloodNumber(number: self.afterDinner_left.text!) == true{
                     e = Double(self.afterDinner_left.text!)!
                     if e <= 140 && e >= 60{
                         print("用户的输入",e)
@@ -865,11 +890,13 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                         save_data.setObject(afterDinner_left_number as Any, forKey: "afterDinnerLowLimit" as NSCopying)
                         print(type(of: afterDinner_left_number))
                     }else{
-                        alert.custom(self, "Attention", "餐后血糖下限范围为90-300")
+                        afterDinner_left.layer.borderColor = UIColor.red.cgColor
+                        afterDinner_left.layer.borderWidth = 1
+//                        alert.custom(self, "Attention", "餐后血糖下限范围为90-300")
                     }
-                }else{
-                    alert.custom(self, "Attention", "非法输入")
-                }
+//                }else{
+//                    alert.custom(self, "Attention", "非法输入")
+//                }
             }else{
                 print("餐后下限啥事也没干")
             }
@@ -878,7 +905,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             print("餐后上限值",f)
             if self.afterDinner_right.text! != ""{
                 //判断是否为非法输入
-                if FormatMethodUtil.validateMgdlBloodNumber(number: self.afterDinner_right.text!) == true{
+//                if FormatMethodUtil.validateMgdlBloodNumber(number: self.afterDinner_right.text!) == true{
                     f = Double(self.afterDinner_right.text!)!
                     if f <= 300 && f >= 90 && f > e{
                         print("用户的输入",f)
@@ -887,11 +914,13 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                         save_data.setObject(afterDinner_right_number as Any, forKey: "afterDinnerHighLimit" as NSCopying)
                         print(type(of: afterDinner_right_number))
                     }else{
-                        alert.custom(self, "Attention", "餐后血糖上限限范围为90-300")
+                        afterDinner_right.layer.borderColor = UIColor.red.cgColor
+                        afterDinner_right.layer.borderWidth = 1
+//                        alert.custom(self, "Attention", "餐后血糖上限限范围为90-300")
                     }
-                }else{
-                    alert.custom(self, "Attention", "非法输入")
-                }
+//                }else{
+//                    alert.custom(self, "Attention", "非法输入")
+//                }
             }else{
                 print("餐后上限啥事也没干")
             }
@@ -900,7 +929,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             print("随机下限值",g)
             if self.randomDinner_left.text! != ""{
                 //判断是否为非法输入
-                if FormatMethodUtil.validateMgdlBloodNumber(number: self.randomDinner_left.text!) == true{
+//                if FormatMethodUtil.validateMgdlBloodNumber(number: self.randomDinner_left.text!) == true{
                     g = Double(self.randomDinner_left.text!)!
                     if g <= 140 && g >= 60{
                         print("用户的输入",g)
@@ -909,11 +938,13 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                         save_data.setObject(randomDinner_left_number as Any, forKey: "randomDinnerLowLimit" as NSCopying)
                         print(type(of: randomDinner_left_number))
                     }else{
-                        alert.custom(self, "Attention", "随机血糖下限范围为60-140")
+                        randomDinner_left.layer.borderColor = UIColor.red.cgColor
+                        randomDinner_left.layer.borderWidth = 1
+//                        alert.custom(self, "Attention", "随机血糖下限范围为60-140")
                     }
-                }else{
-                    alert.custom(self, "Attention", "非法输入")
-                }
+//                }else{
+//                    alert.custom(self, "Attention", "非法输入")
+//                }
             }else{
                 print("随机下限啥事也没干")
             }
@@ -923,7 +954,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             print("随机上限值",h)
             if self.randomDinner_right.text! != ""{
                 //判断是否为非法输入
-                if FormatMethodUtil.validateMgdlBloodNumber(number: self.randomDinner_right.text!) == true{
+//                if FormatMethodUtil.validateMgdlBloodNumber(number: self.randomDinner_right.text!) == true{
                     h = Double(self.randomDinner_right.text!)!
                     if h <= 300 && h >= 90 && h > g{
                         print("用户的输入",h)
@@ -932,11 +963,13 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                         save_data.setObject(randomDinner_right_number as Any, forKey: "randomDinnerHighLimit" as NSCopying)
                         print(type(of: randomDinner_right_number))
                     }else{
-                        alert.custom(self, "Attention", "随机血糖上限限范围为5.0~16.6")
+                        randomDinner_right.layer.borderColor = UIColor.red.cgColor
+                        randomDinner_right.layer.borderWidth = 1
+//                        alert.custom(self, "Attention", "随机血糖上限限范围为90--300")
                     }
-                }else{
-                    alert.custom(self, "Attention", "非法输入")
-                }
+//                }else{
+//                    alert.custom(self, "Attention", "非法输入")
+//                }
             }else{
                 print("随机上限啥事也没干")
             }
@@ -977,6 +1010,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
     
     
     @objc private func recover(){
+        setBoundWhite()
         //这个是加载缺省的上下限设置文件信息
         let path_default = Bundle.main.path(forResource: "defaultBloodSetting", ofType: "plist")
         let data_default:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path_default!)!
@@ -1066,8 +1100,13 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
         let h1:NSMutableAttributedString = NSMutableAttributedString(string: h, attributes: [NSAttributedString.Key.foregroundColor:TextColor])
         randomDinner_right.attributedPlaceholder  = h1
     }
+    //当text开始被编辑时，就直接将颜色改回来
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        setBoundWhite()
+        return true
+    }
     
-    // 详细用法请看 glucoseView.swift
+    // 详细用法请看 glucoseView.swift   已经限制输入框非法输入
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         let testString = ".0123456789"
@@ -1076,8 +1115,12 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
         let inputString = string.components(separatedBy: char).joined(separator: "")
 
         if string == inputString{
+            //  mg/dl   60--140   90--300
+        
             var numFrontDot:Int = 3
             var numAfterDot:Int = 0
+            
+            // mmol/L   3.0-5.8  5.0--16.6  算上小数点
             if GetUnit.getBloodUnit() == "mmol/L"{
                 numFrontDot = 2
                 numAfterDot = 2
@@ -1135,5 +1178,33 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             return false
         }
     }
+    
+    func setBoundWhite(){
+        emptyStomach_left.layer.borderColor = UIColor.white.cgColor
+        emptyStomach_left.layer.borderWidth = 1
+        
+        emptyStomach_right.layer.borderColor = UIColor.white.cgColor
+        emptyStomach_right.layer.borderWidth = 1
+        
+        beforeDinner_left.layer.borderColor = UIColor.white.cgColor
+        beforeDinner_left.layer.borderWidth = 1
+        
+        beforeDinner_right.layer.borderColor = UIColor.white.cgColor
+        beforeDinner_right.layer.borderWidth = 1
+        
+        afterDinner_left.layer.borderColor = UIColor.white.cgColor
+        afterDinner_left.layer.borderWidth = 1
+        
+        afterDinner_right.layer.borderColor = UIColor.white.cgColor
+        afterDinner_right.layer.borderWidth = 1
+        
+        randomDinner_left.layer.borderColor = UIColor.white.cgColor
+        randomDinner_left.layer.borderWidth = 1
+        
+        randomDinner_right.layer.borderColor = UIColor.white.cgColor
+        randomDinner_right.layer.borderWidth = 1
+    }
+    
+    
     
 }

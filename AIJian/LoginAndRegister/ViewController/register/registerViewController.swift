@@ -101,7 +101,8 @@ class registerViewController: UIViewController,UITextFieldDelegate {
         passwordSec = register.passwordSecTextField.text!
         email_code = register.authCodeTextField.text!
         email = register.emailTextField.text!
-        print(password!)
+        print(email_code!)
+        print(email!)
         print(passwordSec!)
         let alertController = CustomAlertController()
         if email == ""{
@@ -114,7 +115,7 @@ class registerViewController: UIViewController,UITextFieldDelegate {
             alertController.custom(self, "Attention", "Confirm Password Empty")
             return
         }else if password != passwordSec{
-            alertController.custom(self, "Attention", "Passwords Not Match")
+            alertController.custom(self, "Attention", "Password Not Match")
             return
         }else if FormatMethodUtil.validatePasswd(passwd: password!) != true{
             alertController.custom(self, "Attention", "Confirm Password Weak")
@@ -145,7 +146,7 @@ class registerViewController: UIViewController,UITextFieldDelegate {
                             /*  此处为跳转和控制逻辑
                              */
                             if(responseModel.code == 1 ){
-                                infoInput_next.email = self.email  //将数据传入下一个页面
+                               infoInput_next.email = self.email  //将数据传入下一个页面
                                infoInput_next.verifyString = responseModel.data
                                self.navigationController?.pushViewController(infoInput_next, animated: true)  //然后跳转
                             }else{

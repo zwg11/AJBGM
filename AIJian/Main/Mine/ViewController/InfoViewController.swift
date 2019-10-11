@@ -84,7 +84,7 @@ class InfoViewController: UIViewController ,PickerDelegate{
         tableview.snp.makeConstraints{(make) in
             make.top.equalTo(topLayoutGuide.snp.bottom)
             make.left.right.equalToSuperview()
-            make.height.equalTo(AJScreenHeight/15*7)
+            make.height.equalTo(AJScreenHeight/16*7)
         }
     }
     @objc private func back(){
@@ -270,7 +270,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return AJScreenHeight/15
+        return AJScreenHeight/16
     }
     
     //输入用户名
@@ -279,6 +279,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
                                                 preferredStyle: .alert)
         alertController.addTextField {
             (textField: UITextField!) -> Void in
+            
 //            textField.placeholder = "用户名"
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
@@ -315,6 +316,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
                                                 preferredStyle: .alert)
         alertController.addTextField {
             (textField: UITextField!) -> Void in
+            textField.keyboardType = .decimalPad
 //            textField.placeholder = "体重"
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
@@ -342,6 +344,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
                                                 preferredStyle: .alert)
         alertController.addTextField {
             (textField: UITextField!) -> Void in
+            textField.keyboardType = .decimalPad
 //            textField.placeholder = "身高"
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
@@ -388,6 +391,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
                                                 preferredStyle: .alert)
         alertController.addTextField {
             (textField: UITextField!) -> Void in
+            textField.keyboardType = .decimalPad
 //            textField.placeholder = "电话"
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)

@@ -43,14 +43,14 @@ extension AJNavigationController
     
     
    override var shouldAutorotate: Bool {
-        return self.topViewController?.shouldAutorotate ?? false
+        return self.visibleViewController?.shouldAutorotate ?? false
     }
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return self.topViewController?.supportedInterfaceOrientations ?? .portrait
+        return self.visibleViewController?.supportedInterfaceOrientations ?? .portrait
     }
 
     override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
-        return self.topViewController?.preferredInterfaceOrientationForPresentation ?? .portrait
+        return self.visibleViewController?.preferredInterfaceOrientationForPresentation ?? .portrait
     }
 }
