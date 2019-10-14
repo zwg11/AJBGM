@@ -629,6 +629,12 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         self.view.addSubview(button)
         button.snp.makeConstraints{(make) in
             make.left.right.bottom.equalToSuperview()
+//            if #available(iOS 11.0, *) {
+//                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+//            } else {
+//                // Fallback on earlier versions
+//                make.bottom.equalTo(bottomLayoutGuide.snp.top)
+//            }
             make.height.equalTo(44)
         }
         // 设置表格布局，设置其代理和数据来源，将其加入视图
@@ -664,6 +670,15 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         //        print(meterIDs!.value(forKey: "&M103D003E5F3 12496") as! String)
         //         //查看是否有某个 key 值
         //        print(meterIDs!["&M103D003E5F3 12496"] != nil)
+    // 设置监听器，监听是否弹出插入成功r弹窗
+            NotificationCenter.default.addObserver(self, selector: #selector(InsertSuccess), name: NSNotification.Name(rawValue: "InsertData"), object: nil)
+
+    }
+
+    @objc func InsertSuccess(){
+        // 跳转到home界面
+        self.tabBarController?.selectedIndex = 0
+        
     }
     
     

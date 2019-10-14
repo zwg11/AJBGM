@@ -160,7 +160,7 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         
         timePicker.calendar = Calendar.current
         timePicker.locale = Locale(identifier: "en_US")
-        timePicker.timeZone = .current
+//        timePicker.timeZone = .current
         timePicker.datePickerMode = .time
         timePicker.backgroundColor = UIColor.white
         timePicker.layer.borderColor = UIColor.gray.cgColor

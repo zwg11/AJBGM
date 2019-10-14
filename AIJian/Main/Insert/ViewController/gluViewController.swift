@@ -188,8 +188,19 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
 //                            // 插入成功
 //                            let alert = CustomAlertController()
 //                            alert.custom(self, "", "插入成功")
+                            let x = UIAlertController(title: "", message: "Insert Success.", preferredStyle: .alert)
+                            self.present(x, animated: true, completion: {()->Void in
+                                sleep(1)
+                                x.dismiss(animated: true, completion: {
+                                    // 跳转到原来的界面
+                                    
+                                    self.navigationController?.popToRootViewController(animated: false)
+                                })
+                            })
                             // 跳转到原来的界面
                             self.navigationController?.popToRootViewController(animated: false)
+                            // 设置返回首页
+//                            self.tabBarController?.selectedIndex = 0
                             // 发送通知，提示插入成功
                             NotificationCenter.default.post(name: NSNotification.Name("InsertData"), object: self, userInfo: nil)
                             
