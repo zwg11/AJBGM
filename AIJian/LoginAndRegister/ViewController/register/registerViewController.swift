@@ -120,6 +120,8 @@ class registerViewController: UIViewController,UITextFieldDelegate {
         }else if FormatMethodUtil.validatePasswd(passwd: password!) != true{
             alertController.custom(self, "Attention", "Confirm Password Weak")
             return
+        }else if passwordSec!.count >= 254 {
+            return
         }else if isAgree == false{
             alertController.custom(self, "Attention", "Please Agree the Protocol")
         }else{
