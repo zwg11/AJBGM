@@ -287,7 +287,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
             let UserName = alertController.textFields!.first!
             if String(UserName.text!) == ""  {
              
-            }else if String(UserName.text!).count >= 255 {
+            }else if String(UserName.text!).count >= 254 {
             
             }else{
                 self.infoDataArray[0] = UserName.text!

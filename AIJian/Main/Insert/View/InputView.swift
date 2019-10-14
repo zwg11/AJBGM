@@ -336,11 +336,13 @@ class InputView: UIView,UIScrollViewDelegate {
             picker.datePicker.date = (dateAndTime.dateButton.currentTitle?.toDate()!.date)!
         case .time:
             picker.bringSubviewToFront(picker.timePicker)
+
             let dateformat = DateFormatter()
             dateformat.timeZone = NSTimeZone.system
             dateformat.dateFormat = "HH:mm"
             let time = dateformat.date(from: dateAndTime.timeButton.currentTitle!)
             picker.timePicker.date = time!
+
 //        case .occurTime:
 //            picker.bringSubviewToFront(picker.eventPicker)
 //

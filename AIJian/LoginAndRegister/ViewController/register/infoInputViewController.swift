@@ -26,7 +26,7 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
     //体重
     var weightKg:Double? 
     //国家
-    var country:String? = ""
+    var country:String? = "China"
     //电话
     var phoneNumber:String? = ""
     //时间
@@ -201,6 +201,10 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
         
         if userName == ""{
             alertController.custom(self, "Attention", "Name Empty")
+            return
+        }else if userName!.count >= 254 {
+            return
+        }else if phoneNumber!.count >= 254 {
             return
         }else if country == ""{
              alertController.custom(self, "Attention", "Country Empty")

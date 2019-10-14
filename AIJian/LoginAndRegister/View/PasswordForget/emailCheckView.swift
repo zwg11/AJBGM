@@ -26,7 +26,7 @@ class emailCheckView: UIView {
     // 输入验证码文本框
     lazy var authCodeTextField:UITextField = {
         let textField = UITextField()
-        textField.initTextField(placeholder: " Code",keyboardType: .default)
+        textField.initTextField(placeholder: " Code",keyboardType: .numberPad)
 //        let textField = initTextField(placeholder: " Code",keyboardType: .numberPad)
         let imageView = UIImageView(image: UIImage(named: "mima"))
         textField.leftView = imageView
