@@ -15,8 +15,7 @@ class recentTrendView: UIView {
     lazy var recentTrendView:ChartView = {
         let view = ChartView()
         view.setupUI()
-        // 摄者y轴最大值
-//        view.lineChartView.leftAxis.axisMaximum = GetBloodLimit.getRandomDinnerTop()*2
+
         view.lineChartView.leftAxis.drawLabelsEnabled = false
         // 设置x轴坐标数
         view.lineChartView.xAxis.labelCount = 7
@@ -58,7 +57,12 @@ class recentTrendView: UIView {
             recentTrendView.lineChartView.leftAxis.removeLimitLine(i)
         }
         // 设置y轴最大值
-        recentTrendView.lineChartView.leftAxis.axisMaximum = GetBloodLimit.getRandomDinnerTop()*2
+        if GetUnit.getBloodUnit() == "mmol/L"{
+            recentTrendView.lineChartView.leftAxis.axisMaximum = 16.6
+        }else{
+            recentTrendView.lineChartView.leftAxis.axisMaximum = 300
+        }
+        
         // 画限制线
         let low = GetBloodLimit.getRandomDinnerLow()
         let high = GetBloodLimit.getRandomDinnerTop()

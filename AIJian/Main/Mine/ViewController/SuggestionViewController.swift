@@ -56,6 +56,7 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
             telephoneCommponent.imageView.image = UIImage(named: "Phone")
             telephoneCommponent.textField.delegate = self
             telephoneCommponent.textField.textColor = TextColor
+            telephoneCommponent.textField.keyboardType = .numberPad
             telephoneCommponent.setupUI(title: "Please Enter Your Phone Number")
             cell.contentView.addSubview(telephoneCommponent)
             cell.selectionStyle = .none
@@ -161,7 +162,10 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
             alert.custom(self, "Attention", "Phone Empty！")
             return
         }
-        
+        if  telephoneCommponent.textField.text!.count == 255{
+            alert.custom(self, "Attention", "Phone Error！")
+            return
+        }
         print(content_field.text!.count)
         if content_field.text!.count >= 300{
             alert.custom(self, "Attention", "Words should be less than 300！")

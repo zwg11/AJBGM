@@ -126,7 +126,7 @@ class customRangeView: UIView {
         endbutton.snp.makeConstraints{(make) in
             make.left.equalToSuperview().offset(10)
             make.right.equalToSuperview().offset(-10)
-            make.top.equalTo(endDatePicker.snp.bottom).offset(10)
+            make.top.equalTo(endDatePicker.snp.bottom)
             make.height.equalTo(30)
         }
         

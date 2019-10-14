@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import HandyJSON
 
-class InfoViewController: UIViewController ,PickerDelegate{
+class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
    
     
     
@@ -280,7 +280,6 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
         alertController.addTextField {
             (textField: UITextField!) -> Void in
             
-//            textField.placeholder = "用户名"
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
         let okAction = UIAlertAction(title: "Sure", style: .default, handler: {
@@ -288,6 +287,8 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
             let UserName = alertController.textFields!.first!
             if String(UserName.text!) == ""  {
              
+            }else if String(UserName.text!).count >= 255 {
+            
             }else{
                 self.infoDataArray[0] = UserName.text!
                 self.tableview.reloadRows(at: [IndexPath(row:self.num,section:0)], with: .fade)
@@ -317,7 +318,11 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
         alertController.addTextField {
             (textField: UITextField!) -> Void in
             textField.keyboardType = .decimalPad
+            textField.delegate = self
+            textField.tag = 1
 //            textField.placeholder = "体重"
+           
+ 
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
         let okAction = UIAlertAction(title: "Sure", style: .default, handler: {
@@ -345,7 +350,8 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
         alertController.addTextField {
             (textField: UITextField!) -> Void in
             textField.keyboardType = .decimalPad
-//            textField.placeholder = "身高"
+            textField.delegate = self
+            textField.tag = 0
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
         let okAction = UIAlertAction(title: "Sure", style: .default, handler: {
@@ -391,7 +397,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
                                                 preferredStyle: .alert)
         alertController.addTextField {
             (textField: UITextField!) -> Void in
-            textField.keyboardType = .decimalPad
+            textField.keyboardType = .numberPad
 //            textField.placeholder = "电话"
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
@@ -399,6 +405,9 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
             action in
             let UserName = alertController.textFields!.first!
             if String(UserName.text!) == ""  {
+            
+            }else if String(UserName.text!).count >= 255 {
+                    
             }else{
                 self.infoDataArray[6] = UserName.text!
                 self.updateSth = true
@@ -413,4 +422,81 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
         self.present(alertController, animated: true, completion: nil)
     }
     
+}
+
+
+extension InfoViewController{
+    // *************** 详细用法请看glucoseView中的注释 *****************
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let testString = ".0123456789"
+        let char = NSCharacterSet.init(charactersIn: testString).inverted
+        
+        let inputString = string.components(separatedBy: char).joined(separator: "")
+        
+        if string == inputString{
+            var numFrontDot:Int = 2
+            var numAfterDot:Int = 2
+            if textField.tag == 1{  //体重
+                if GetUnit.getWeightUnit() == "Kg"{
+                    numFrontDot = 3
+                    numAfterDot = 2
+                }else{
+                    numFrontDot = 3
+                    numAfterDot = 0
+                }
+            }else{   //身高
+                numFrontDot = 3
+                numAfterDot = 2
+            }
+
+            let futureStr:NSMutableString = NSMutableString(string: textField.text!)
+            futureStr.insert(string, at: range.location)
+            var flag = 0
+            var flag1 = 0
+            var dotNum = 0
+            var isFrontDot = true
+            
+            if futureStr.length >= 1{
+                let char = Character(UnicodeScalar(futureStr.character(at:0))!)
+                if char == "."{
+                    return false
+                }
+                if futureStr.length >= 2{
+                    let char2 = Character(UnicodeScalar(futureStr.character(at:1))!)
+                    if char2 != "." && char == "0"{
+                        return false
+                    }
+                }
+            }
+            
+            if !futureStr.isEqual(to: ""){
+                for i in 0..<futureStr.length{
+                    let char = Character(UnicodeScalar(futureStr.character(at:i))!)
+                    if char == "."{
+                        isFrontDot = false
+                        dotNum += 1
+                        if dotNum > 1{
+                            return false
+                        }
+                    }
+                    if isFrontDot{
+                        flag += 1
+                        if flag > numFrontDot{
+                            return false
+                        }
+                    }
+                    else{
+                        flag1 += 1
+                        if flag1 > numAfterDot{
+                            return false
+                        }
+                    }
+                }
+            }
+            return true
+            
+        }else{
+            return false
+        }
+    }
 }

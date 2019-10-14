@@ -11,11 +11,13 @@ import SnapKit
 
 class SharedViewController: UIViewController,UITextFieldDelegate {
 
+    
     // 记录日期
     var date:String?
-    // 记录i姓名
+    // 记录姓名
     var name:String?
-
+    // 记录电话
+    var phone:String?
     private lazy var shareV:SharedView = {
         let view = SharedView()
         view.setupUI()
@@ -32,7 +34,10 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
     }()
     
     override func viewWillAppear(_ animated: Bool) {
-        // h刷新数据
+        // 刷新数据
+        let userInfo = DBSQLiteManager.manager.selectUserRecord(userId: UserInfo.getUserId())
+        shareV.nameTextField.text = userInfo.user_name
+        shareV.phoneTextField.text = userInfo.phone_number
         general.test()
     }
     // 将shareV视图生成为图片
@@ -44,8 +49,15 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
 //            make.edges.equalToSuperview()
 //        }
 //        indicator.startIndicator()
+        let alert = CustomAlertController()
         let name = shareV.nameTextField.text
         let phone = shareV.phoneTextField.text
+        if name == ""{
+            alert.custom(self,"Attention", "Name Empty")
+        }
+        if phone == ""{
+            alert.custom(self,"Attention", "Phone Empty")
+        }
         //设置名字和电话
         general.nameLabel.text = name
         general.phoneLabel.text = phone

@@ -78,8 +78,11 @@ class ChartViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         print("chartViewController appear.")
         
-        lineChartView.lineChartView.leftAxis.axisMaximum = GetBloodLimit.getRandomDinnerTop() * 2
-        
+        if GetUnit.getBloodUnit() == "mmol/L"{
+            lineChartView.lineChartView.leftAxis.axisMaximum = 16.6
+        }else{
+            lineChartView.lineChartView.leftAxis.axisMaximum = 300
+        }
         initChart()
         staticV.initLabelText()
     }

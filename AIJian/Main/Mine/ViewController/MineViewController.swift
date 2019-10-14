@@ -40,11 +40,16 @@ class MineViewController: UIViewController {
         if userInfo.user_name == nil{
             requestUserInfo()
         }
-        
+        self.tableview.reloadRows(at: [IndexPath(row:0,section:0)], with: .none)
     }
-    override func viewDidAppear(_ animated: Bool) {
+//    //设定已经消失的时候，reload一次tableview
+//    override func viewDidDisappear(_ animated: Bool) {
 //        self.tableview.reloadRows(at: [IndexPath(row:0,section:0)], with: .none)
-    }
+//    }
+//    
+//    override func viewDidAppear(_ animated: Bool) {
+////        self.tableview.reloadRows(at: [IndexPath(row:0,section:0)], with: .none)
+//    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = ThemeColor

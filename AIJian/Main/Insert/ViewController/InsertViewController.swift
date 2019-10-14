@@ -248,12 +248,12 @@ class InsertViewController: UIViewController {
                     print("血糖mg值",bloodGlucoseValueMg as Any)
                     print("血糖mmol值",bloodGlucoseValueMmol as Any)
                 }else{
-                    Message += "\nBG is not within the valid range.The valid range is:10~600"
+                    Message += "\nGlucose Range:10~600"
 //                    alert.custom(self, "Attention", "血糖的范围为10~600")
                 }
             }
             else{
-                Message += "\nBG Empty"
+                Message += "\nEmpty Glucose Data"
 //                alert.custom(self, "Attention", "血糖不能为空")
 //                return
             }
@@ -266,12 +266,12 @@ class InsertViewController: UIViewController {
                     print("血糖mg值",bloodGlucoseValueMg as Any)
                     print("血糖mmol值",bloodGlucoseValueMmol as Any)
                 }else{
-                    Message += "\nBG is not within the valid range.The valid range is:0.6~33.3"
+                    Message += "\nGlucose Range:0.6~33.3"
 //                    alert.custom(self, "Attention", "血糖的范围为0.6~33.3")
                 }
             
             }else{
-                Message += "\nBG Empty"
+                Message += "\nEmpty Glucose Data"
 //                alert.custom(self, "Attention", "血糖不能为空")
 //                return
             }
@@ -291,9 +291,9 @@ class InsertViewController: UIViewController {
         let insulin_num:Double? = input.getInsNumValue()
         if insulin_num != nil{
             if insulin_type == "Nothing"{
-                Message += "\nInsulin Dose requires that a type be specified"
+                Message += "\nEmpty Insulin Type"
             }else if insulin_num! > 100.0{
-                Message += "\nInsulin Number is not within the valid range.The valid range is:100"
+                Message += "\nInsulin Range:100"
             }
         }
         print("胰岛素的量",insulin_num ?? "no")
@@ -302,12 +302,12 @@ class InsertViewController: UIViewController {
         // ******************** 体重 ********************
         var weight_kg:Double?
         var weight_lbs:Double?
-        if GetUnit.getWeightUnit() == "kg"{
+        if GetUnit.getWeightUnit() == "Kg"{
             // 体重不为空
             weight_kg = input.getWeightValue()
             if weight_kg != nil{
                 if weight_kg! >= 454.0{
-                    Message += "\nWeight is not within the valid range.The valid range is:0~454"
+                    Message += "\nWeight Range:0~454"
                 }else{
                     weight_lbs = WeightUnitChange.KgToLbs(num: weight_kg!)
                 }
@@ -359,15 +359,15 @@ class InsertViewController: UIViewController {
                 if sys_press_mmHg != nil && dis_press_mmHg != nil{
                     if sys_press_mmHg! < 45 || sys_press_mmHg! > 300
                         || dis_press_mmHg! < 45 || dis_press_mmHg! > 300{
-                        Message += "\nBlood Pressure is not within the valid range.The valid range is:45~300"
-                    }else if dis_press_mmHg! >= sys_press_mmHg!{
-                        Message += "\nThe Sysolic Blood Pressure value must be greater than the Diastolic value"
+                        Message += "\nBlood Pressure Range is:45~300"
+                    }else if dis_press_mmHg! >= sys_press_mmHg!{  //收缩压必须大于舒张压
+                        Message += "\nDBP Should be Greater than SBP "
                     }else{
                         sys_press_kPa = PressureUnitChange.mmHgTokPa(num: sys_press_mmHg!)
                         dis_press_kPa = PressureUnitChange.mmHgTokPa(num: dis_press_mmHg!)
                     }
                 }else{
-                    Message += "\nBlood Pressure requires both a Systolic and Diastolic reading"
+                    Message += "\nDBP or SBP Empty"
                 }
             }
             
@@ -379,15 +379,15 @@ class InsertViewController: UIViewController {
                 if sys_press_kPa != nil && dis_press_kPa != nil{
                     if sys_press_kPa! < 6 || sys_press_kPa! > 40
                         || dis_press_kPa! < 6 || dis_press_kPa! > 40{
-                        Message += "\nBlood Pressure is not within the valid range.The valid range is:6-40"
+                        Message += "\nBlood Pressure range:6-40"
                     }else if dis_press_kPa! > sys_press_kPa!{
-                        Message += "\nThe Sysolic Blood Pressure value must be greater than the Diastolic value"
+                        Message += "\nDBP Should be Greater than SBP"
                     }else{
                         sys_press_mmHg = PressureUnitChange.kPaTommHg(num: sys_press_kPa!)
                         dis_press_mmHg = PressureUnitChange.kPaTommHg(num: dis_press_kPa!)
                     }
                 }else{
-                    Message += "\nBlood Pressure requires both a Systolic and Diastolic reading"
+                    Message += "\nDBP or SBP Empty"
                 }
             }
         }
@@ -441,13 +441,13 @@ class InsertViewController: UIViewController {
         if sport == "Nothing"{
             sport_strength = nil
             if sport_time != nil{
-                Message += "\nExercise type required with duration/intensity"
+                Message += "\nSelect Exercise Based on Time and Strength"
                 
             }
         }else if let time = sport_time{
             if time < 5 && time > 360{
                 print(time)
-                Message += "\nExercise Duration is not within the valid range.The valid range is:5~360"
+                Message += "\n Effective Duration of Exercise:5~360"
             }
         }
         
@@ -541,7 +541,7 @@ class InsertViewController: UIViewController {
                                 self.navigationController?.popToRootViewController(animated: false)
 //                                self.tabBarController?.selectedIndex = 0
                                 // 发送通知，提示插入成功
-                                NotificationCenter.default.post(name: NSNotification.Name("InsertData"), object: self, userInfo: nil)
+                                NotificationCenter.default.post(name: NSNotification.Name("Data Input Failure"), object: self, userInfo: nil)
                                 
                             }else{
                                 print(responseModel.code)
@@ -549,7 +549,7 @@ class InsertViewController: UIViewController {
                                 // 风火轮停止
                                 indicator.stopIndicator()
                                 indicator.removeFromSuperview()
-                                alert.custom(self, "", "Insert Failed.")
+                                alert.custom(self, "", "Data Update Failure.")
                                 
                             }
                         } //end of letif
@@ -597,7 +597,7 @@ class InsertViewController: UIViewController {
 
 //                                self.presentedViewController!.present(x, animated: true, completion: nil)
                                 self.navigationController?.popViewController(animated: true)
-                                NotificationCenter.default.post(name: NSNotification.Name("Update success"), object: self, userInfo: nil)
+                                NotificationCenter.default.post(name: NSNotification.Name("Data Update success"), object: self, userInfo: nil)
 //                                sleep(2)
 //                                x.dismiss(animated: true, completion: nil)
                             }else{
@@ -609,7 +609,7 @@ class InsertViewController: UIViewController {
                                 // 弹窗提示
                                 let alert = CustomAlertController()
 
-                                alert.custom(self, "Attention", "Update Failure,Please login again!")
+                                alert.custom(self, "Attention", "Data Update Failure")
 
                                 
                             }

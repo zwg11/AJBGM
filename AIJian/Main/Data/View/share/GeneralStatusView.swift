@@ -112,8 +112,12 @@ class GeneralStatusView: UIView {
     
     func initChart(){
     
-        
-        chart.lineChartView.leftAxis.axisMaximum = GetBloodLimit.getRandomDinnerTop() * 2
+        if GetUnit.getBloodUnit() == "mmol/L"{
+            chart.lineChartView.leftAxis.axisMaximum = 16.6
+        }else{
+            chart.lineChartView.leftAxis.axisMaximum = 300
+        }
+
         // 初始化 图标所需要的数据
         let array = xAxisArray(Days: daysNum!)
         let data1 = recentDaysData(Days: daysNum!)

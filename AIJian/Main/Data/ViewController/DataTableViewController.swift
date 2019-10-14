@@ -207,6 +207,9 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
             
         })
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        editAction.setValue(UIColor.black, forKey: "_titleTextColor")
+        deleteAction.setValue(UIColor.black, forKey: "_titleTextColor")
+        cancelAction.setValue(UIColor.black, forKey: "_titleTextColor")
         alert.addAction(editAction)
         alert.addAction(deleteAction)
         alert.addAction(cancelAction)
