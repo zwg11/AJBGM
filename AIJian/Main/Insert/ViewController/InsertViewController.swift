@@ -531,17 +531,23 @@ class InsertViewController: UIViewController {
                                 // 风火轮启动
                                 indicator.stopIndicator()
                                 indicator.removeFromSuperview()
-//                                alert.custom(self, "", "Insert Success.")
-//                                let x = UIAlertController(title: "", message: "Insert Success.", preferredStyle: .alert)
-//
-//                                self.present(x, animated: true, completion: nil)
-//                                sleep(2)
-//                                x.dismiss(animated: true, completion: nil)
+
+                                let x = UIAlertController(title: "", message: "Insert Success.", preferredStyle: .alert)
+                                self.present(x, animated: true, completion: {()->Void in
+                                    sleep(1)
+                                    x.dismiss(animated: true, completion: {
+                                        // 跳转到原来的界面
+                                        self.navigationController?.popToRootViewController(animated: false)
+                                        // 发送通知，提示插入成功
+                                        NotificationCenter.default.post(name: NSNotification.Name("InsertData"), object: self, userInfo: nil)
+                                    })
+                                })
+
                                 // 跳转到原来的界面
-                                self.navigationController?.popToRootViewController(animated: false)
+//                                self.navigationController?.popViewController(animated: false)
+                                // 跳转到home界面
 //                                self.tabBarController?.selectedIndex = 0
-                                // 发送通知，提示插入成功
-                                NotificationCenter.default.post(name: NSNotification.Name("Data Input Failure"), object: self, userInfo: nil)
+
                                 
                             }else{
                                 print(responseModel.code)
@@ -597,6 +603,8 @@ class InsertViewController: UIViewController {
 
 //                                self.presentedViewController!.present(x, animated: true, completion: nil)
                                 self.navigationController?.popViewController(animated: true)
+                                // 设置返回首页
+//                                self.tabBarController?.selectedIndex = 0
                                 NotificationCenter.default.post(name: NSNotification.Name("Data Update success"), object: self, userInfo: nil)
 //                                sleep(2)
 //                                x.dismiss(animated: true, completion: nil)
