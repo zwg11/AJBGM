@@ -26,6 +26,8 @@
 
 import UIKit
 import CoreBluetooth
+import Alamofire
+import HandyJSON
 
 // 需要用的服务的 CBUUID
 let glucoseDevServiceCBUUID = CBUUID(string: "C14D2C0A-401F-B7A9-841F-E2E93B80F631")
@@ -711,3 +713,4 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
     
     
 }
+

@@ -245,14 +245,20 @@ class DataViewController: UIViewController {
         
         print("select CustomRange")
         
+        let customSD = customRange.startDatePicker.date
+        let customED = customRange.endDatePicker.date
         
         print("开始时间：\(customRange.startDatePicker.date)")
         print("结束时间：\(customRange.endDatePicker.date)")
-        
-        if customRange.startDatePicker.date >= customRange.endDatePicker.date{
+        let components = NSCalendar.current.dateComponents([.day], from: customSD, to: customED)
+        if customRange.startDatePicker.date > customRange.endDatePicker.date{
             let alert = CustomAlertController()
             alert.custom(self, "Attention", "Start Date Needs to Come Before End Date")
-        }else{
+        }else if components.day! > 31{
+            let alert = CustomAlertController()
+            alert.custom(self, "Attention", "The Time Span Shall Not Greater Than 31 Days")
+        }
+        else{
             // 选择日期范围视图移除
             customRange.removeFromSuperview()
             // 更新按钮标题
@@ -415,7 +421,7 @@ class DataViewController: UIViewController {
             sortedTimeOfData()
             chartData()
         default:
-            let components = Calendar.current.dateComponents([.day], from: startD!, to: endD!)
+            let components = Calendar.current.dateComponents([.day], from: startD!, to: endD!+1.seconds)
             daysNum = components.day
             print("daysNum:\(String(describing: daysNum))")
             initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())

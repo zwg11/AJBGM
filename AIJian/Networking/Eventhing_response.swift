@@ -143,3 +143,17 @@ struct USERINFO_UPDATE_RESPONSE: HandyJSON {
     var data:Any?
     
 }
+
+// 个人用户信息
+struct METERINFO_GET_RESPONSE: HandyJSON {
+    var code:Int64?
+    var msg:String?
+    var data:[RECENT_REC]?
+    
+}
+
+struct RECENT_REC:HandyJSON{
+    var meterId:String?
+    var recentRecord:String?
+    
+}

@@ -250,6 +250,16 @@ extension loginViewController{
                             alert.custom(self, "Attention", "\(recordInDaysResponse.msg!)")
                             return
                         }
+                        // 如果请求meter信息失败，不进行数据库操作
+                        if !self.GetMeterInfo(){
+                            // 将风火轮移除，并停止转动
+                            self.indicator.stopIndicator()
+                            self.indicator.removeFromSuperview()
+                            
+                            let alert = CustomAlertController()
+                            alert.custom(self, "Attention", "\(recordInDaysResponse.msg!)")
+                            return
+                        }
                         
                         // ******** 将得到的所有数据都添加到数据库 ***********
                         let sqliteManager = DBSQLiteManager()
@@ -289,5 +299,70 @@ extension loginViewController{
         //**********
     }
     // requestData() end
+    
+    
+    // MARK: - GetMeterInfo()
+    // 获取该用户所使用过的血糖仪的记录
+    func GetMeterInfo()->Bool{
+        //手动输入数据，请求部分
+        var isSuccess = true
+        let dictString = [ "userId":UserInfo.getUserId() as Any,"token":UserInfo.getToken()] as [String : Any]
+        // 向服务器申请插入数据请求
+        Alamofire.request(METERID_GET,method: .post,parameters: dictString).responseString{ (response) in
+            if response.result.isSuccess {
+                if let jsonString = response.result.value {
+                    print("进入验证过程")
+                    print(jsonString)
+                    // json转model
+                    // 写法一：responseModel.deserialize(from: jsonString)
+                    // 写法二：用JSONDeserializer<T>
+                    /*
+                     利用JSONDeserializer封装成一个对象。然后再解析这个对象，此处返回的不同，需要封装成responseAModel的响应体
+                     //                         */
+                    if let responseModel = JSONDeserializer<METERINFO_GET_RESPONSE>.deserializeFrom(json: jsonString) {
+                        /// model转json 为了方便在控制台查看
+                        print("瞧瞧输出的是什么",responseModel.toJSONString(prettyPrint: true)!)
+                        /*  此处为跳转和控制逻辑
+                         */
+                        if(responseModel.code == 1 ){
+                            print(responseModel.code as Any)
+                            print("插入成功")
+                            
+                            // 向配置文件存储最新记录
+                            // 读取配置文件，获取meterID的内容
+                            let path = PlistSetting.getFilePath(File: "User.plist")
+                            let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
+                            let arr = data["meterID"] as! NSMutableDictionary
+                            // 更新配置文件内容
+                            if let Info = responseModel.data{
+                                for i in Info{
+                                    arr[i.meterId as Any] = i.recentRecord
+                                }
+                            }
+                            
+                            data["meterID"] = arr
+                            data.write(toFile: "User.plist", atomically: true)
+                            isSuccess = true
+                            
+                        }else{
+                            print(responseModel.code as Any)
+                            print("插入失败")
+                            isSuccess = false
+                        }
+                    } //end of letif
+                    else{
+                        isSuccess = false
+                    }
+                }else{
+                    isSuccess = false
+                }
+            }// 请求失败
+            else{
+                isSuccess = false
+            }
+        }//end of request
+        return isSuccess
+    }
+    
 
 }

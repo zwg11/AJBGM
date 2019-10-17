@@ -59,3 +59,8 @@ let FEEDBACK = BASE_URL + "app/user/feedback"
 // 更新用户信息
 let UPDATE_USERINFO = BASE_URL + "app/user/infoUpdate"
 
+// 保存meterID
+let METERID_SAVE = BASE_URL + "app/bloodGlucoseRecord/saveMeter"
+
+// 得到meterID信息
+let METERID_GET = BASE_URL + "app/bloodGlucoseRecord/judgeMeter"

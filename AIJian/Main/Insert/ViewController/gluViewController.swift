@@ -176,34 +176,27 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
                             print("插入成功")
                             // 向数据库插入数据
                             DBSQLiteManager.manager.addGlucoseRecords(add: datas)
-                            // 向配置文件存储最新记录
-                            // 读取配置文件，获取meterID的内容
-                            let path = PlistSetting.getFilePath(File: "User.plist")
-                            let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
-                            let arr = data["meterID"] as! NSMutableDictionary
-                            // 更新配置文件内容
-                            arr[self.meterID] = self.lastRecord
-                            data["meterID"] = arr
-                            data.write(toFile: "User.plist", atomically: true)
-//                            // 插入成功
-//                            let alert = CustomAlertController()
-//                            alert.custom(self, "", "插入成功")
-                            let x = UIAlertController(title: "", message: "Insert Success.", preferredStyle: .alert)
-                            self.present(x, animated: true, completion: {()->Void in
-                                sleep(1)
-                                x.dismiss(animated: true, completion: {
-                                    // 跳转到原来的界面
-                                    
-                                    self.navigationController?.popToRootViewController(animated: false)
+                            if self.UpdateMeterInfo(){
+                                let x = UIAlertController(title: "", message: "Insert Success.", preferredStyle: .alert)
+                                self.present(x, animated: true, completion: {()->Void in
+                                    sleep(1)
+                                    x.dismiss(animated: true, completion: {
+                                        // 跳转到原来的界面
+                                        
+                                        self.navigationController?.popToRootViewController(animated: false)
+                                    })
                                 })
-                            })
-                            // 跳转到原来的界面
-                            self.navigationController?.popToRootViewController(animated: false)
-                            // 设置返回首页
-//                            self.tabBarController?.selectedIndex = 0
-                            // 发送通知，提示插入成功
-                            NotificationCenter.default.post(name: NSNotification.Name("InsertData"), object: self, userInfo: nil)
-                            
+                                // 跳转到原来的界面
+                                self.navigationController?.popToRootViewController(animated: false)
+                                // 发送通知，提示插入成功
+                                NotificationCenter.default.post(name: NSNotification.Name("InsertData"), object: self, userInfo: nil)
+                            }else{
+                                print(responseModel.code)
+                                print("插入失败")
+                                // 插入成功
+                                let alert = CustomAlertController()
+                                alert.custom(self, "", "Insert Failed,Please Try Again Later.")
+                            }
                         }else{
                             print(responseModel.code)
                             print("插入失败")
@@ -214,8 +207,15 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
                         }
                     } //end of letif
                 }
+            }else{
+                print("插入失败")
+                // 插入成功
+                let alert = CustomAlertController()
+                alert.custom(self, "", "Insert Failed,Please Try Again Later.")
             }
         }//end of request
+        
+        
         
     }
     
@@ -248,4 +248,62 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         
     }
     
+}
+
+
+extension gluViewController{
+    func UpdateMeterInfo()->Bool{
+        //手动输入数据，请求部分
+        var isSuccess = true
+        let dictString = [ "userId":UserInfo.getUserId() as Any,"token":UserInfo.getToken(),"meterId":meterID,"recentRecord":lastRecord] as [String : Any]
+                // 向服务器申请插入数据请求
+                Alamofire.request(METERID_SAVE,method: .post,parameters: dictString).responseString{ (response) in
+                    if response.result.isSuccess {
+                        if let jsonString = response.result.value {
+                            print("进入验证过程")
+                            print(jsonString)
+                            // json转model
+                            // 写法一：responseModel.deserialize(from: jsonString)
+                            // 写法二：用JSONDeserializer<T>
+                            /*
+                             利用JSONDeserializer封装成一个对象。然后再解析这个对象，此处返回的不同，需要封装成responseAModel的响应体
+                             //                         */
+                            if let responseModel = JSONDeserializer<responseModel>.deserializeFrom(json: jsonString) {
+                                /// model转json 为了方便在控制台查看
+                                print("瞧瞧输出的是什么",responseModel.toJSONString(prettyPrint: true)!)
+                                /*  此处为跳转和控制逻辑
+                                 */
+                                if(responseModel.code == 1 ){
+                                    print(responseModel.code)
+                                    print("插入成功")
+
+                                    // 向配置文件存储最新记录
+                                    // 读取配置文件，获取meterID的内容
+                                    let path = PlistSetting.getFilePath(File: "User.plist")
+                                    let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
+                                    let arr = data["meterID"] as! NSMutableDictionary
+                                    // 更新配置文件内容
+                                    arr[self.meterID] = self.lastRecord
+                                    data["meterID"] = arr
+                                    data.write(toFile: "User.plist", atomically: true)
+                                    isSuccess = true
+                                }else{
+                                    print(responseModel.code)
+                                    print("插入失败")
+                                    isSuccess = false
+                                }
+                            } //end of letif
+                            else{
+                                isSuccess = false
+                            }
+                        }else{
+                            isSuccess = false
+                        }
+                    }// 请求失败
+                    else{
+                        isSuccess = false
+                    }
+                }//end of request
+        return isSuccess
+    }
 }
