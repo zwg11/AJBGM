@@ -66,10 +66,11 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
         //tableview.reloadData()
 
         self.title = "Personal Information"
-        self.navigationController?.navigationBar.barTintColor = ThemeColor
+//        self.navigationController?.navigationBar.barTintColor = ThemeColor
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: NaviTitleColor]
         self.view.backgroundColor = ThemeColor
+        self.view.backgroundColor = UIColor.clear
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title:"back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
         
@@ -77,7 +78,7 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
         tableview.delegate = self
         tableview.dataSource = self
         tableview.isScrollEnabled = false
-      
+        tableview.backgroundColor = UIColor.clear
         
         //update.reloadRows(at: [IndexPath(row: 1, section: 1)], with: .fade)
         self.view.addSubview(tableview)
@@ -196,6 +197,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
         cell!.accessoryType = .disclosureIndicator
         cell!.backgroundColor = ThemeColor
         cell?.textLabel?.textColor = TextColor
+        cell!.backgroundColor = UIColor.clear
         switch indexPath.row{
             case 0:
                 cell?.imageView?.image = UIImage(named: infoIconArray[0])

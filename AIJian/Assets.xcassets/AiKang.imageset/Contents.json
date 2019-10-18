@@ -6,11 +6,12 @@
     },
     {
       "idiom" : "universal",
+      "filename" : "oncall.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "艾康图标.jpg",
+      "filename" : "oncall-1.png",
       "scale" : "3x"
     }
   ],

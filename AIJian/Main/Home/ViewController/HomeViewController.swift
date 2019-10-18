@@ -165,7 +165,7 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.clipsToBounds = true
+//        self.view.clipsToBounds = true
 
         
         self.view.addSubview(homeTableView)
@@ -184,8 +184,8 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         homeTableView.dataSource = self
         homeTableView.backgroundColor = UIColor.clear
         homeTableView.isScrollEnabled = true
-        
-        self.view.backgroundColor = ThemeColor
+        self.view.backgroundColor = UIColor.clear
+//        self.view.backgroundColor = UIColor.init(patternImage: UIImage(named: "bg")!)
         // 设置监听器，监听是否弹出插入成功r弹窗
 //        NotificationCenter.default.addObserver(self, selector: #selector(InsertSuccess), name: NSNotification.Name(rawValue: "InsertData"), object: nil)
 

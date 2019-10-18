@@ -53,7 +53,8 @@ class MineViewController: UIViewController {
 //    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = ThemeColor
+//        self.view.backgroundColor = ThemeColor
+        self.view.backgroundColor = UIColor.clear
         //将所有按钮添加到scrollview中，还需要修改相对布局
 
         //分割线
@@ -63,7 +64,8 @@ class MineViewController: UIViewController {
         tableview.register(UITableViewCell.self, forCellReuseIdentifier:"cell")
         tableview.delegate = self
         tableview.dataSource = self
-        tableview.backgroundColor = ThemeColor
+//        tableview.backgroundColor = ThemeColor
+        tableview.backgroundColor = UIColor.clear
         self.view.addSubview(tableview)
     }
     
@@ -156,7 +158,7 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
                 cell.textButton.setTitle(userInfo.user_name, for: .normal)
                 cell.selectionStyle = .none
                 cell.backgroundColor = ThemeColor
-            
+                cell.backgroundColor = UIColor.clear
                 return cell
             case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
@@ -166,6 +168,7 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
                 cell.accessoryType = .disclosureIndicator
                 cell.textLabel?.textColor = TextColor
                 cell.backgroundColor = ThemeColor
+                cell.backgroundColor = UIColor.clear
                 return cell
             case 2:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
@@ -175,6 +178,7 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
                 cell.accessoryType = .disclosureIndicator
                 cell.textLabel?.textColor = TextColor
                  cell.backgroundColor = ThemeColor
+                cell.backgroundColor = UIColor.clear
                 return cell
             case 3:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
@@ -184,6 +188,7 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
                 cell.accessoryType = .disclosureIndicator
                 cell.textLabel?.textColor = TextColor
                  cell.backgroundColor = ThemeColor
+                cell.backgroundColor = UIColor.clear
                 return cell
             case 4:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
@@ -193,6 +198,7 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
                 cell.accessoryType = .disclosureIndicator
                 cell.textLabel?.textColor = TextColor
                  cell.backgroundColor = ThemeColor
+                cell.backgroundColor = UIColor.clear
                 return cell
             case 5:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
@@ -202,6 +208,7 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
                 cell.accessoryType = .disclosureIndicator
                 cell.textLabel?.textColor = TextColor
                  cell.backgroundColor = ThemeColor
+                cell.backgroundColor = UIColor.clear
                 return cell
             case 6:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
@@ -211,6 +218,7 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
                 cell.accessoryType = .disclosureIndicator
                 cell.textLabel?.textColor = TextColor
                  cell.backgroundColor = ThemeColor
+                cell.backgroundColor = UIColor.clear
                 return cell
             case 7:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
@@ -220,12 +228,14 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
                 cell.accessoryType = .disclosureIndicator
                 cell.textLabel?.textColor = TextColor
                  cell.backgroundColor = ThemeColor
+                cell.backgroundColor = UIColor.clear
                 return cell
             case 8:
                 let cell = QuitCellView(style: .value1, reuseIdentifier: cellquit)
                 cell.selectionStyle = .none
                 cell.quitButton.addTarget(self, action: #selector(loginOff), for: .touchUpInside)
                  cell.backgroundColor = ThemeColor
+                cell.backgroundColor = UIColor.clear
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
@@ -234,6 +244,7 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
                 cell.imageView?.image = UIImage(named: _imgArr[3])
                 cell.textLabel?.text = _titleArr[3]
                 cell.accessoryType = .disclosureIndicator
+                cell.backgroundColor = UIColor.clear
                 return cell
             
         }

@@ -54,7 +54,8 @@ class DataViewController: UIViewController {
         let style = DNSPageStyle()
         style.isTitleViewScrollEnabled = false
         style.isTitleScaleEnabled = false
-        style.titleViewBackgroundColor = ThemeColor
+//        style.titleViewBackgroundColor = ThemeColor
+        style.titleViewBackgroundColor = UIColor.init(patternImage: UIImage(named: "bg")!)
         style.isShowBottomLine = true
         style.titleFont = UIFont.systemFont(ofSize: 14)
         style.titleSelectedColor = UIColor.white

@@ -48,7 +48,7 @@ class registerView: UIView {
         let textField = UITextField()
         textField.initTextField(placeholder: " Code",keyboardType: .numberPad)
 //        let textField = initTextField(placeholder: " Code",keyboardType: .numberPad)
-        let imageView = UIImageView(image: UIImage(named: "email"))
+        let imageView = UIImageView(image: UIImage(named: "验证码"))
         textField.leftView = imageView
         textField.leftViewMode = .always
 

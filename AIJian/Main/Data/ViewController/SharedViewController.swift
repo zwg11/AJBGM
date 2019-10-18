@@ -107,7 +107,8 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = ThemeColor
+        self.view.backgroundColor = UIColor.init(patternImage: UIImage(named: "bg")!)
+//        self.view.backgroundColor = ThemeColor
         self.view.clipsToBounds = true
 
         self.view.addSubview(general)

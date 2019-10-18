@@ -34,7 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PlistSetting.initPlistFile()
         
         let tabBarController = AJTabbarController()
-        tabBarController.tabBar.barTintColor = ThemeColor
+//        tabBarController.tabBar.barTintColor = ThemeColor
+//        tabBarController.tabBar.barTintColor = UIColor.clear
         /*
          此处需要判断是否为第一次登陆？
          如果是，则跳到登陆界面。
