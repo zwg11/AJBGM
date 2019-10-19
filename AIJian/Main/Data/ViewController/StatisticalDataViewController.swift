@@ -46,8 +46,9 @@ class StatisticalDataViewController: UIViewController,UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = ThemeColor
+//        self.view.backgroundColor = ThemeColor
 
+        self.view.backgroundColor = UIColor.clear
         // scrollView的高度是这样得到的：
         // 屏幕高度 - 状态栏高度 - 导航栏高度 - 标题高度
         // 导航栏 和 标题栏 高度都为 44
@@ -75,7 +76,7 @@ class StatisticalDataViewController: UIViewController,UIScrollViewDelegate {
             make.left.equalTo(self.view.snp.left)
             make.right.equalTo(self.view.snp.right)
             make.top.equalToSuperview()
-            make.height.equalTo(190)
+            make.height.equalTo(170)
         }
         
         // 总体检测结果窗口初始化

@@ -88,7 +88,8 @@ class InsertViewController: UIViewController {
     // MARK: - viewDidLoad()
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = ThemeColor
+//        self.view.backgroundColor = ThemeColor
+        self.view.backgroundColor = UIColor.clear
         self.title = "Add Data"
         
 

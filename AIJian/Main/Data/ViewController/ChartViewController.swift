@@ -35,6 +35,7 @@ class ChartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+
         self.view.addSubview(headerView)
         
         self.headerView.snp.makeConstraints{(make) in
@@ -64,7 +65,8 @@ class ChartViewController: UIViewController {
             make.bottom.equalTo(staticV.snp.top)
         }
         
-        self.view.backgroundColor = ThemeColor
+//        self.view.backgroundColor = ThemeColor
+        self.view.backgroundColor = UIColor.clear
         // Do any additional setup after loading the view.
         // 监听所选时间范围的变化
         NotificationCenter.default.addObserver(self, selector: #selector(test), name: NSNotification.Name(rawValue: "reloadChart"), object: nil)

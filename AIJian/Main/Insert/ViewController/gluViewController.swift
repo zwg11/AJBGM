@@ -65,7 +65,8 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         cell?.selectionStyle = .none
         cell?.detailTextLabel?.text = mark + "   " + BLEglucoseDate[indexPath.row]
         cell?.detailTextLabel?.textColor = UIColor.white
-        cell?.backgroundColor = ThemeColor
+//        cell?.backgroundColor = ThemeColor
+        cell?.backgroundColor = UIColor.clear
         return cell!
     }
     // 设置表格头部背景颜色
@@ -230,10 +231,11 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         tableView.delegate = self
         tableView.dataSource = self
         tableView.frame = CGRect(x: 0, y: 64, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height-200)
-        tableView.backgroundColor = ThemeColor
+//        tableView.backgroundColor = ThemeColor
+        tableView.backgroundColor = UIColor.clear
         button.frame = CGRect(x: 0, y: UIScreen.main.bounds.maxY-44, width: UIScreen.main.bounds.width, height: 44)
         // Do any additional setup after loading the view.
-        self.view.backgroundColor = UIColor.yellow
+        self.view.backgroundColor = UIColor.clear
         self.view.addSubview(tableView)
         self.view.addSubview(button)
         tableView.snp.makeConstraints{(make) in

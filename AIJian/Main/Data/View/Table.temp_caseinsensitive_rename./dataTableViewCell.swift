@@ -34,7 +34,8 @@ class dataTableViewCell: UITableViewCell {
         // 被选中的背景,设为无
         self.selectionStyle = .none
         // 设置单元格颜色
-        self.backgroundColor = ThemeColor
+        self.backgroundColor = UIColor.clear
+//        self.backgroundColor = ThemeColor
         // 血糖
         // 如果血糖不为空
         if let gluBlood = sortedData[secion][row].bloodGlucoseMmol{

@@ -55,7 +55,7 @@ class DataViewController: UIViewController {
         style.isTitleViewScrollEnabled = false
         style.isTitleScaleEnabled = false
 //        style.titleViewBackgroundColor = ThemeColor
-        style.titleViewBackgroundColor = UIColor.init(patternImage: UIImage(named: "bg")!)
+        style.titleViewBackgroundColor = UIColor.clear
         style.isShowBottomLine = true
         style.titleFont = UIFont.systemFont(ofSize: 14)
         style.titleSelectedColor = UIColor.white
@@ -105,7 +105,7 @@ class DataViewController: UIViewController {
         super.viewDidLoad()
         // 设置页面支持横屏
 //        appDelegate.blockRotation = true
-        self.view.backgroundColor = UIColor.white
+        self.view.backgroundColor = UIColor.clear
         // 超过页面范围的子页面不显示
         self.view.clipsToBounds = true
         // 设置pickerView初始位置
@@ -131,6 +131,9 @@ class DataViewController: UIViewController {
         
         // 添加内容视图
         let contentview = pageViewManager.contentView
+//        contentview.backgroundColor = UIColor.clear
+//        contentview.tintColor = UIColor.clear
+        contentview.collectionView.backgroundColor = UIColor.clear
         view.addSubview(contentview)
         // 注：想要横竖屏时内容区域自适应屏幕，需对内容区域进行左右约束对齐父视图
         // 设置约束左右与屏幕对齐，顶部对齐标题视图，底部与屏幕底部对齐
@@ -166,7 +169,7 @@ class DataViewController: UIViewController {
             }
         }
 
-        self.view.backgroundColor = UIColor.white   
+//        self.view.backgroundColor = UIColor.white
     }
     
 
