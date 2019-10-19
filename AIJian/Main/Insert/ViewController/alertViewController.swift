@@ -163,7 +163,8 @@ class alertViewController: UIAlertController,UITableViewDelegate,UITableViewData
 //            self.tabelView.reloadData()
             
         })
-        
+        cancelAction.setValue(UIColor.black, forKey: "_titleTextColor")
+        okAction.setValue(UIColor.black, forKey: "_titleTextColor")
         self.addAction(cancelAction)
         self.addAction(okAction)
     }
