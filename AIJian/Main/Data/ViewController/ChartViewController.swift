@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChartViewController: UIViewController {
+class ChartViewController: UIViewController{
     
     private lazy var headerView:ChartHeaderView = {
         let view = ChartHeaderView()
@@ -21,6 +21,7 @@ class ChartViewController: UIViewController {
         let view = ChartView()
         view.setupUI()
 
+//        view.lineChartView.delegate = self
         view.lineChartView.xAxis.labelCount = 4
         return view
     }()

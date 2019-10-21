@@ -108,6 +108,7 @@ class glucoseView: UIView ,UITextFieldDelegate{
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.setDeselected()
         button.tag = 0
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 5, right: 0)
         button.addTarget(self, action: #selector(SelectEvent(_:)), for: .touchUpInside)
         return button
     }()
@@ -119,6 +120,7 @@ class glucoseView: UIView ,UITextFieldDelegate{
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.setDeselected()
         button.tag = 1
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 5, right: 0)
         button.addTarget(self, action: #selector(SelectEvent(_:)), for: .touchUpInside)
         return button
     }()
