@@ -79,9 +79,9 @@ class DataViewController: UIViewController {
     lazy var rangePickerButton:UIButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(chooseDate), for: .touchUpInside)
-
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.setTitle("Last 7 days", for: .normal)
-        button.frame.size = CGSize(width: AJScreenWidth/4, height: 44)
+        button.frame.size = CGSize(width: AJScreenWidth/3, height: 44)
         return button
     }()
     

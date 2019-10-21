@@ -223,27 +223,27 @@ class ChartView: UIView ,ChartViewDelegate{
     
     
     
-//    //折线上的点选中回调
-//    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry,highlight: Highlight) {
-//        print("选中了一个数据")
-//        //显示该点的MarkerView标签
-//        self.showMarkerView(value: "\(entry.y)")
-//    }
-//
-//
-//    //显示MarkerView标签
-//    func showMarkerView(value:String){
-//        let marker = MarkerView(frame: CGRect(x: 20, y: 20, width: 80, height: 20))
-//        marker.chartView = self.lineChartView
-//        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
-//        label.text = "血糖:" + value + GetUnit.getBloodUnit()
-//        label.textColor = UIColor.white
-//        label.font = UIFont.systemFont(ofSize: 12)
-//        label.backgroundColor = UIColor.gray
-//        label.textAlignment = .center
-//        marker.addSubview(label)
-//        self.lineChartView.marker = marker
-//    }
+    //折线上的点选中回调
+    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry,highlight: Highlight) {
+        print("选中了一个数据")
+        //显示该点的MarkerView标签
+        self.showMarkerView(value: "\(entry.y)")
+    }
+
+
+    //显示MarkerView标签
+    func showMarkerView(value:String){
+        let marker = MarkerView(frame: CGRect(x: 20, y: 20, width: 80, height: 20))
+        marker.chartView = self.lineChartView
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
+        label.text = value + GetUnit.getBloodUnit()
+        label.textColor = UIColor.white
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.backgroundColor = UIColor.gray
+        label.textAlignment = .center
+        marker.addSubview(label)
+        self.lineChartView.marker = marker
+    }
     
     func setupUI(){
         self.addSubview(lineChartView)
