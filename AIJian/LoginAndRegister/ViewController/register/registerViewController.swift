@@ -55,14 +55,27 @@ class registerViewController: UIViewController,UITextFieldDelegate {
         view.getAuthCodeButton.addTarget(self, action: #selector(getAuthCode), for: .touchUpInside)
         return view
     }()
-    
+    // 设置导航栏左按钮样式
+    private lazy var leftButton:UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        button.setImage(UIImage(named: "back"), for: .normal)
+        //button.setTitleColor(UIColor.blue, for: .normal)
+        button.addTarget(self, action: #selector(leftButtonClick), for: .touchUpInside)
+        return button
+    }()
+    @objc private func leftButtonClick(){
+        self.navigationController?.popViewController(animated: false)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
-        self.navigationController?.navigationBar.barTintColor = ThemeColor
+//        self.navigationController?.navigationBar.barTintColor = ThemeColor
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: NaviTitleColor]
-        self.view.backgroundColor = ThemeColor
+         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
+//        self.view.backgroundColor = ThemeColor
+        self.view.backgroundColor = UIColor.clear
         self.title = "Sign Up"
         register.NoResponseProtocolLogo.addTarget(self, action: #selector(ClickIcon), for: .touchUpInside)
         register.NoResponseProtocolInfo.addTarget(self, action: #selector(ClickProtocol), for: .touchUpInside)
@@ -73,6 +86,7 @@ class registerViewController: UIViewController,UITextFieldDelegate {
         }
         // Do any additional setup after loading the view.
     }
+   
     
     @objc func ClickIcon(){
         if isAgree == false{
@@ -114,6 +128,8 @@ class registerViewController: UIViewController,UITextFieldDelegate {
         }else if passwordSec == "" {
             alertController.custom(self, "Attention", "Confirm Password Empty")
             return
+        }else if password!.count > 30{  //控制密码长度
+            return 
         }else if password != passwordSec{
             alertController.custom(self, "Attention", "Password Not Match")
             return
@@ -150,7 +166,7 @@ class registerViewController: UIViewController,UITextFieldDelegate {
                             if(responseModel.code == 1 ){
                                infoInput_next.email = self.email  //将数据传入下一个页面
                                infoInput_next.verifyString = responseModel.data
-                               self.navigationController?.pushViewController(infoInput_next, animated: true)  //然后跳转
+                               self.navigationController?.pushViewController(infoInput_next, animated: false)  //然后跳转
                             }else{
 //                                infoInput_next.email = self.email
 //                                infoInput_next.verifyString = "edbdkeisoaoen45673"

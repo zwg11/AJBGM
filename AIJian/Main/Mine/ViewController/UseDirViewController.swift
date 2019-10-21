@@ -13,13 +13,22 @@ import MediaPlayer
 
 class UseDirViewController: UIViewController {
 
-    
+    // 设置导航栏左按钮样式
+    private lazy var leftButton:UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        button.setImage(UIImage(named: "back"), for: .normal)
+        //button.setTitleColor(UIColor.blue, for: .normal)
+        button.addTarget(self, action: #selector(leftButtonClick), for: .touchUpInside)
+        return button
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title="Instruction"
         
-        self.view.backgroundColor = ThemeColor
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title:"back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back))
+//        self.view.backgroundColor = ThemeColor
+        self.view.backgroundColor = UIColor.clear
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
         
         let imageArray1: [String] = ["yindao01","yindao02"]
         let guideView = PageView.init(imageNameArray: imageArray1)
@@ -32,8 +41,8 @@ class UseDirViewController: UIViewController {
         
     }
     
-    @objc private func back(){
-        self.navigationController?.popViewController(animated: true)
+    @objc private func leftButtonClick(){
+        self.navigationController?.popViewController(animated: false)
     }
     
     

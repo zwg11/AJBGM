@@ -13,6 +13,9 @@ import SnapKit
 
 class MineViewController: UIViewController {
     
+    //请求出现转的效果，增加用户体验
+    private lazy var indicator = CustomIndicatorView()
+    
     // 设置数据请求超时时间
     let AlamofireManager:Alamofire.SessionManager = {
         let conf = URLSessionConfiguration.default
@@ -53,7 +56,8 @@ class MineViewController: UIViewController {
 //    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = ThemeColor
+//        self.view.backgroundColor = ThemeColor
+        self.view.backgroundColor = UIColor.clear
         //将所有按钮添加到scrollview中，还需要修改相对布局
 
         //分割线
@@ -63,11 +67,25 @@ class MineViewController: UIViewController {
         tableview.register(UITableViewCell.self, forCellReuseIdentifier:"cell")
         tableview.delegate = self
         tableview.dataSource = self
-        tableview.backgroundColor = ThemeColor
+//        tableview.backgroundColor = ThemeColor
+        tableview.backgroundColor = UIColor.clear
         self.view.addSubview(tableview)
     }
     
     func requestUserInfo(){
+        
+        // ****** 弹出加载风火轮 ******
+        
+        // 初始化UI
+        indicator.setupUI("Logining in...")
+        // 设置风火轮视图在父视图中心
+        // 开始转
+        indicator.startIndicator()
+        self.view.addSubview(indicator)
+        indicator.snp.makeConstraints{(make) in
+            make.edges.equalToSuperview()
+        }
+        
         let dictString = ["userId":UserInfo.getUserId(),"token":UserInfo.getToken()] as [String : Any]
         // 数据请求超时时间为10s
         AlamofireManager.request(USER_INFO_REQUEST,method: .post,parameters: dictString).responseString{ (response) in
@@ -85,15 +103,24 @@ class MineViewController: UIViewController {
                          */
                         if(responseModel.code! == 1 ){
                             // 向数据库插入数据
-                            DBSQLiteManager.manager.updateUserInfo(responseModel.data!)
+                            // 将风火轮移除，并停止转动
+                            self.indicator.stopIndicator()
+                            self.indicator.removeFromSuperview()
+                        DBSQLiteManager.manager.updateUserInfo(responseModel.data!)
                             self.tableview.reloadRows(at: [IndexPath(row:0,section:0)], with: .none)
                         }else{
+                            // 将风火轮移除，并停止转动
+                            self.indicator.stopIndicator()
+                            self.indicator.removeFromSuperview()
                             let alert = CustomAlertController()
                             alert.custom(self, "Attension", "Unable to get the information")
                         }
                     } //end of letif
                 }
             }else{
+                // 将风火轮移除，并停止转动
+                self.indicator.stopIndicator()
+                self.indicator.removeFromSuperview()
                 let alert = CustomAlertController()
                 alert.custom(self, "Attension", "Unable to get the information")
             }
@@ -156,7 +183,7 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
                 cell.textButton.setTitle(userInfo.user_name, for: .normal)
                 cell.selectionStyle = .none
                 cell.backgroundColor = ThemeColor
-            
+                cell.backgroundColor = UIColor.clear
                 return cell
             case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
@@ -166,6 +193,7 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
                 cell.accessoryType = .disclosureIndicator
                 cell.textLabel?.textColor = TextColor
                 cell.backgroundColor = ThemeColor
+                cell.backgroundColor = UIColor.clear
                 return cell
             case 2:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
@@ -175,6 +203,7 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
                 cell.accessoryType = .disclosureIndicator
                 cell.textLabel?.textColor = TextColor
                  cell.backgroundColor = ThemeColor
+                cell.backgroundColor = UIColor.clear
                 return cell
             case 3:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
@@ -184,6 +213,7 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
                 cell.accessoryType = .disclosureIndicator
                 cell.textLabel?.textColor = TextColor
                  cell.backgroundColor = ThemeColor
+                cell.backgroundColor = UIColor.clear
                 return cell
             case 4:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
@@ -193,6 +223,7 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
                 cell.accessoryType = .disclosureIndicator
                 cell.textLabel?.textColor = TextColor
                  cell.backgroundColor = ThemeColor
+                cell.backgroundColor = UIColor.clear
                 return cell
             case 5:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
@@ -202,6 +233,7 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
                 cell.accessoryType = .disclosureIndicator
                 cell.textLabel?.textColor = TextColor
                  cell.backgroundColor = ThemeColor
+                cell.backgroundColor = UIColor.clear
                 return cell
             case 6:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
@@ -211,6 +243,7 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
                 cell.accessoryType = .disclosureIndicator
                 cell.textLabel?.textColor = TextColor
                  cell.backgroundColor = ThemeColor
+                cell.backgroundColor = UIColor.clear
                 return cell
             case 7:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
@@ -220,12 +253,14 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
                 cell.accessoryType = .disclosureIndicator
                 cell.textLabel?.textColor = TextColor
                  cell.backgroundColor = ThemeColor
+                cell.backgroundColor = UIColor.clear
                 return cell
             case 8:
                 let cell = QuitCellView(style: .value1, reuseIdentifier: cellquit)
                 cell.selectionStyle = .none
                 cell.quitButton.addTarget(self, action: #selector(loginOff), for: .touchUpInside)
                  cell.backgroundColor = ThemeColor
+                cell.backgroundColor = UIColor.clear
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
@@ -234,6 +269,7 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
                 cell.imageView?.image = UIImage(named: _imgArr[3])
                 cell.textLabel?.text = _titleArr[3]
                 cell.accessoryType = .disclosureIndicator
+                cell.backgroundColor = UIColor.clear
                 return cell
             
         }
@@ -247,7 +283,7 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
         }else if col == 8{
             
         }else{
-            self.navigationController?.pushViewController(clickArray[col-1], animated: true)
+            self.navigationController?.pushViewController(clickArray[col-1], animated: false)
         }
 
     }

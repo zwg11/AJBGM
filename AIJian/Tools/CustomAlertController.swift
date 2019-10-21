@@ -31,7 +31,7 @@ public class CustomAlertController {
                                                 message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Sure", style: .default, handler: {
             action in
-            viewController.navigationController?.popViewController(animated: true)
+            viewController.navigationController?.popViewController(animated: false)
         })
         okAction.setValue(UIColor.black, forKey: "_titleTextColor")
         //只加入确定按钮

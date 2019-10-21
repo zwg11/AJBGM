@@ -40,6 +40,7 @@ class loginViewController: UIViewController,UITextFieldDelegate {
         self.navigationController?.isNavigationBarHidden = true
         self.navigationController?.navigationBar.backgroundColor = ThemeColor
 //        self.title = "登  录"
+        self.view.backgroundColor = UIColor.clear
         self.view.addSubview(loginview)
         loginview.snp.makeConstraints{(make) in
             make.height.equalTo(AJScreenHeight)
@@ -179,13 +180,13 @@ class loginViewController: UIViewController,UITextFieldDelegate {
         print("forgetPassword clicked.")
         
         //测试过程中，修改密码时，先跳到第二页
-        self.navigationController?.pushViewController(emailCheckViewController(), animated: true)
+        self.navigationController?.pushViewController(emailCheckViewController(), animated: false)
     }
     
     //跳转到注册界面
     @objc func register(){
         print("register clicked.")
-        self.navigationController?.pushViewController(registerViewController(), animated: true)
+        self.navigationController?.pushViewController(registerViewController(), animated: false)
     }
 
     //此处只做收回键盘的动作

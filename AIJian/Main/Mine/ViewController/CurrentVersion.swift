@@ -11,15 +11,23 @@ import SnapKit
 
 class CurrentVersion:UIViewController{
     
-    
-    
-   
+    // 设置导航栏左按钮样式
+    private lazy var leftButton:UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        button.setImage(UIImage(named: "back"), for: .normal)
+        //button.setTitleColor(UIColor.blue, for: .normal)
+        button.addTarget(self, action: #selector(leftButtonClick), for: .touchUpInside)
+        return button
+    }()
+  
     override func viewDidLoad() {
         
         
         self.title = "Current Version"
-        self.view.backgroundColor = ThemeColor
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title:"back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back))
+//        self.view.backgroundColor = ThemeColor
+        self.view.backgroundColor = UIColor.clear
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
       
         
         //图标
@@ -59,11 +67,9 @@ class CurrentVersion:UIViewController{
         }
         
     }
-    @objc private func back(){
+    @objc private func leftButtonClick(){
         //按返回的时候，需要将数据进行更新
-        
-        
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popViewController(animated: false)
     }
     
     

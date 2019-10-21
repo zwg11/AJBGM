@@ -9,16 +9,27 @@
 import UIKit
 
 class AboutUsViewController: UIViewController {
-
+    // 设置导航栏左按钮样式
+    private lazy var leftButton:UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        button.setImage(UIImage(named: "back"), for: .normal)
+        //button.setTitleColor(UIColor.blue, for: .normal)
+        button.addTarget(self, action: #selector(leftButtonClick), for: .touchUpInside)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "AboutUs"
-        self.view.backgroundColor = ThemeColor
-         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title:"back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back))
+//        self.view.backgroundColor = ThemeColor
+        self.view.backgroundColor = UIColor.clear
+         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
         
 //        let textView = UITextView(frame: CGRect(x: 0, y: navigationBarHeight, width: AJScreenWidth, height: AJScreenHeight))
         let textView = UITextView()
-        textView.backgroundColor = ThemeColor
+//        textView.backgroundColor = ThemeColor
+        textView.backgroundColor = UIColor.clear
         textView.font = UIFont.boldSystemFont(ofSize: 16)
         textView.textColor = TextColor
         textView.isEditable = false
@@ -33,8 +44,8 @@ class AboutUsViewController: UIViewController {
         
     }
     
-    @objc private func back(){
-        self.navigationController?.popViewController(animated: true)
+    @objc private func leftButtonClick(){
+        self.navigationController?.popViewController(animated: false)
     }
 
     /*

@@ -75,6 +75,16 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
             return verfiedPasswd_textF
         }()
     
+    // 设置导航栏左按钮样式
+    private lazy var leftButton:UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        button.setImage(UIImage(named: "back"), for: .normal)
+        //button.setTitleColor(UIColor.blue, for: .normal)
+        button.addTarget(self, action: #selector(leftButtonClick), for: .touchUpInside)
+        return button
+    }()
+    
         lazy var saveButton:UIButton = {
             let button = UIButton()
             button.setTitle("Save", for: .normal)
@@ -100,8 +110,9 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
         override func viewDidLoad() {
             super.viewDidLoad()
             self.title = "Change Password"
-            self.view.backgroundColor = ThemeColor
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title:"back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back))
+//            self.view.backgroundColor = ThemeColor
+            self.view.backgroundColor = UIColor.clear
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
         
             //旧密码内容
             oldPasswd_textF.delegate = self
@@ -185,8 +196,8 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
         }
         
         
-        @objc private func back(){
-            self.navigationController?.popViewController(animated: true)
+        @objc private func leftButtonClick(){
+            self.navigationController?.popViewController(animated: false)
         }
         @objc private func save(){
             let alert = CustomAlertController()
@@ -206,6 +217,8 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
             }else if verfiedP == ""{
                 alert.custom(self, "Attention", "Confirm Password Empty")
                 return
+            }else if verfiedP!.count >= 30 {
+                //不能让密码大于30个字符
             }else if FormatMethodUtil.validatePasswd(passwd: verfiedP!) != true{
                 alert.custom(self, "Attention", "New Password Strength Weak")
                 return
@@ -232,13 +245,13 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
                                     self.oldPasswd_textF.text! = ""
                                     self.newPasswd_textF.text! = ""
                                     self.verfiedPasswd_textF.text! = ""
-                                    self.navigationController?.popToRootViewController(animated: true)
+                                    self.navigationController?.popToRootViewController(animated: false)
                                 }else{
                                     alert.custom_cengji(self,"Attention", "Password Reset Failure")
                                     self.oldPasswd_textF.text! = ""
                                     self.newPasswd_textF.text! = ""
                                     self.verfiedPasswd_textF.text! = ""
-                                    self.navigationController?.popToRootViewController(animated: true)
+                                    self.navigationController?.popToRootViewController(animated: false)
                                 }
                                 
                             }

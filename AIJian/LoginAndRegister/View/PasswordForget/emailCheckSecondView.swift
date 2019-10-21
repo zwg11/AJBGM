@@ -76,7 +76,7 @@ class emailCheckSecondView: UIView {
 
     func setupUI(){
         // 输入密码文本框布局
-        self.backgroundColor = ThemeColor
+//        self.backgroundColor = ThemeColor
         
         self.addSubview(passwordTextField)
         passwordTextField.snp.makeConstraints{(make) in

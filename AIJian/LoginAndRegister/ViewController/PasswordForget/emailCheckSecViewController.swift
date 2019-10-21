@@ -33,6 +33,20 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
         view.setupUI()
         return view
     }()
+    
+    // 设置导航栏左按钮样式
+    private lazy var leftButton:UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        button.setImage(UIImage(named: "back"), for: .normal)
+        //button.setTitleColor(UIColor.blue, for: .normal)
+        button.addTarget(self, action: #selector(leftButtonClick), for: .touchUpInside)
+        return button
+    }()
+    @objc private func leftButtonClick(){
+        self.navigationController?.popViewController(animated: false)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 //        let x = emailCheckViewController()
@@ -42,8 +56,10 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
         
         print("上一页传过来的verifyString",verifyString)
         self.navigationController?.isNavigationBarHidden = false
-        self.navigationController?.navigationBar.backgroundColor = NavBarColor
+//        self.navigationController?.navigationBar.backgroundColor = NavBarColor
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: NaviTitleColor]
+         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
+         self.view.backgroundColor = UIColor.clear
         self.title = "Change Password"
 //        self.navigationController?.navigationBar.tintColor = TextColor
         self.view.addSubview(emailCheckSec)
@@ -71,6 +87,8 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
         }else if passwordSec == "" {
              alertController.custom(self, "Attention", "Confirm Password Empty")
             return
+        }else if password!.count >= 30{
+            return
         }else if password != passwordSec{
              alertController.custom(self, "Attention", "Passwords Not Match")
             return
@@ -97,11 +115,11 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
                             if(responseModel.code == 1 ){
                                 print("重置成功")
                                 print("跳转到修改密码那一页")
-                                self.navigationController?.popToRootViewController(animated: true)
+                                self.navigationController?.popToRootViewController(animated: false)
                                  alertController.custom_cengji(self,"Attention", "Password Reset Success")
                             }else{
                                 //先转，后弹
-                                self.navigationController?.popToRootViewController(animated: true)
+                                self.navigationController?.popToRootViewController(animated: false)
                                 alertController.custom_cengji(self,"Attention", "Password Reset Failed")
                             }
                         } //end of letif

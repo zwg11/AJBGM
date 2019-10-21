@@ -31,15 +31,29 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
         view.setupUI()
         return view
     }()
+    // 设置导航栏左按钮样式
+    private lazy var leftButton:UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        button.setImage(UIImage(named: "back"), for: .normal)
+        //button.setTitleColor(UIColor.blue, for: .normal)
+        button.addTarget(self, action: #selector(leftButtonClick), for: .touchUpInside)
+        return button
+    }()
+    @objc private func leftButtonClick(){
+        self.navigationController?.popViewController(animated: false)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.navigationController?.isNavigationBarHidden = false
-        self.navigationController?.navigationBar.barTintColor = ThemeColor
+//        self.navigationController?.navigationBar.barTintColor = ThemeColor
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: NaviTitleColor]
-        self.view.backgroundColor = ThemeColor
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
+//        self.view.backgroundColor = ThemeColor
+        self.view.backgroundColor = UIColor.clear
         self.title = "Email Verification"
         print("到达邮箱验证界面")
         self.view.addSubview(emailCheck)
@@ -90,7 +104,7 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
                                 print("跳转到修改密码那一页")
                                 secViewController.email = self.email
                                 secViewController.verifyString = responseModel.data
-                                self.navigationController?.pushViewController(secViewController, animated: true)
+                                self.navigationController?.pushViewController(secViewController, animated: false)
                             }else{
 //                                secViewController.email = self.email
 //                                secViewController.verifyString = "gy riut u"

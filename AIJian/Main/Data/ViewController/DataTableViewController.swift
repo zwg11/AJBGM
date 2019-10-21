@@ -38,6 +38,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         }
         var cell1 = tableView.dequeueReusableCell(withIdentifier: id1)
         cell1?.selectionStyle = .none
+        cell1?.backgroundColor = UIColor.clear
         if(cell1 == nil){
             cell1 = dataTableViewCell(style: .default, reuseIdentifier: id1,secion: indexPath.section,row: indexPath.row)
         }
@@ -69,7 +70,8 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         refreshControl.attributedTitle = NSAttributedString(string: "松开后自动刷新")
         mainScrollView.addSubview(refreshControl)
 
-        mainScrollView.backgroundColor = ThemeColor
+//        mainScrollView.backgroundColor = ThemeColor
+        mainScrollView.backgroundColor = UIColor.clear
         mainScrollView.alwaysBounceVertical = true
         self.view.addSubview(mainScrollView)
         mainScrollView.snp.makeConstraints{(make) in
@@ -83,7 +85,8 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         DATETableView.delegate = self
         DATETableView.isScrollEnabled = false
         
-        DATETableView.backgroundColor = ThemeColor
+//        DATETableView.backgroundColor = ThemeColor
+        DATETableView.backgroundColor = UIColor.clear
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(test), name: NSNotification.Name(rawValue: "reloadTable"), object: nil)
@@ -194,7 +197,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
 
             let insert = InsertViewController()
             
-            self.navigationController?.pushViewController(insert, animated: true)
+            self.navigationController?.pushViewController(insert, animated: false)
             // 将当前单元格的内容传入手动输入界面
             let date = sortedData[indexPath.section][indexPath.row]
             insert.EditData(date: date)
@@ -375,6 +378,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         scroll.alwaysBounceHorizontal = false
         
         mainScrollView.addSubview(scroll)
+        scroll.backgroundColor = UIColor.clear
         scroll.snp.remakeConstraints{(make) in
             make.top.equalToSuperview()
             // 一直不理解为什么约束有时设为与滚动视图对齐就会不显示
@@ -391,6 +395,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         DATATableView.dataSource = self
         DATATableView.delegate = self
         DATATableView.isScrollEnabled = false
+        DATATableView.backgroundColor = UIColor.clear
         scroll.addSubview(DATATableView)
     }
     // 没有数据时在视图中心显示该标签

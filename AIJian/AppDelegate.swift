@@ -34,20 +34,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PlistSetting.initPlistFile()
         
         let tabBarController = AJTabbarController()
-        tabBarController.tabBar.barTintColor = ThemeColor
+//        tabBarController.tabBar.barTintColor = ThemeColor
+//        tabBarController.tabBar.barTintColor = UIColor.clear
         /*
          此处需要判断是否为第一次登陆？
          如果是，则跳到登陆界面。
          如果否，则跳到首页界面。
          */     
         let viewController = loginViewController()
-        let nv = loginNavigationController(rootViewController: viewController)  //登陆界面
+        let loginNv = loginNavigationController(rootViewController: viewController)  //登陆界面
         
         //判断文件中的token是否为空。  如果为空时，则为第一次登陆。
         //如果不为空时，则需要再次判断
         if UserInfo.getToken() == ""{  //跳转到登陆界面
             print("token为空")
-            window?.rootViewController = nv
+            window?.rootViewController = loginNv
         }else{
             print("token不为空")
             //此处分为两种情况：一种是判断token过没过期。第二种是没有网络怎么办
@@ -90,7 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 print("你的token过期了")
 //                                UserInfo.setToken("")
                                 // 跳转到登录界面
-                                self.window?.rootViewController = nv
+                                self.window?.rootViewController = loginNv
                             }
                         }
                     }

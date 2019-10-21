@@ -65,7 +65,8 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
 //        cell?.detailTextLabel?.text = uuid
 //        cell?.detailTextLabel?.textColor = UIColor.lightGray
         cell?.accessoryType = .disclosureIndicator
-        cell?.backgroundColor = ThemeColor
+//        cell?.backgroundColor = ThemeColor
+        cell?.backgroundColor = UIColor.clear
         return cell!
     }
     // 设置表格头部背景颜色
@@ -641,7 +642,8 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         }
         // 设置表格布局，设置其代理和数据来源，将其加入视图
         tableView.frame = CGRect(x: 0, y: 64, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height-108)
-        tableView.backgroundColor = ThemeColor
+//        tableView.backgroundColor = ThemeColor
+        tableView.backgroundColor = UIColor.clear
         tableView.delegate = self
         tableView.dataSource = self
         self.view.addSubview(tableView)

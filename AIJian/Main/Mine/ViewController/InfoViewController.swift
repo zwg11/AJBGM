@@ -52,6 +52,17 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
         infoDataArray[6] = userInfo.phone_number ?? ""
         
     }
+    
+    // 设置导航栏左按钮样式
+    private lazy var leftButton:UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        button.setImage(UIImage(named: "back"), for: .normal)
+        //button.setTitleColor(UIColor.blue, for: .normal)
+        button.addTarget(self, action: #selector(leftButtonClick), for: .touchUpInside)
+        return button
+    }()
+    
     lazy var rightButton:UIButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(saveUserInfo), for: .touchUpInside)
@@ -66,18 +77,19 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
         //tableview.reloadData()
 
         self.title = "Personal Information"
-        self.navigationController?.navigationBar.barTintColor = ThemeColor
+//        self.navigationController?.navigationBar.barTintColor = ThemeColor
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: NaviTitleColor]
         self.view.backgroundColor = ThemeColor
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title:"back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back))
+        self.view.backgroundColor = UIColor.clear
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
         
        tableview.register(UITableViewCell.self, forCellReuseIdentifier:"infocell")
         tableview.delegate = self
         tableview.dataSource = self
         tableview.isScrollEnabled = false
-      
+        tableview.backgroundColor = UIColor.clear
         
         //update.reloadRows(at: [IndexPath(row: 1, section: 1)], with: .fade)
         self.view.addSubview(tableview)
@@ -87,15 +99,15 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
             make.height.equalTo(AJScreenHeight/16*7)
         }
     }
-    @objc private func back(){
+    @objc private func leftButtonClick(){
         //按返回的时候，需要将数据进行更新
-       self.navigationController?.popViewController(animated: true)
+       self.navigationController?.popViewController(animated: false)
     }
     
     @objc func saveUserInfo(){
 
         if !updateSth{
-            self.navigationController?.popViewController(animated: true)
+            self.navigationController?.popViewController(animated: false)
             return
         }
         // 如果有需要更新的内容
@@ -196,6 +208,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
         cell!.accessoryType = .disclosureIndicator
         cell!.backgroundColor = ThemeColor
         cell?.textLabel?.textColor = TextColor
+        cell!.backgroundColor = UIColor.clear
         switch indexPath.row{
             case 0:
                 cell?.imageView?.image = UIImage(named: infoIconArray[0])
@@ -266,7 +279,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
                 inputUserName()
         }
         
-        tableView.deselectRow(at: indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: false)
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -285,12 +298,13 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
         let okAction = UIAlertAction(title: "Sure", style: .default, handler: {
             action in
             let UserName = alertController.textFields!.first!
-            if String(UserName.text!) == ""  {
+            if String(UserName.text!).removeHeadAndTailSpacePro == ""  {
              
-            }else if String(UserName.text!).count >= 254 {
+                
+            }else if String(UserName.text!).count >= 50 {//不能让用户名大于50个字符
             
             }else{
-                self.infoDataArray[0] = UserName.text!
+                self.infoDataArray[0] = UserName.text!.removeHeadAndTailSpacePro
                 self.tableview.reloadRows(at: [IndexPath(row:self.num,section:0)], with: .fade)
                 self.updateSth = true
             }

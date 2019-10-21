@@ -230,7 +230,7 @@ class InfoInputView: UIView {
 //            make.top.equalToSuperview().offset(AJScreenHeight/15)
 //        }
         
-        self.backgroundColor = ThemeColor
+//        self.backgroundColor = ThemeColor
         // 输入用户名文本框布局
         self.addSubview(userNameTextField)
         userNameTextField.snp.makeConstraints{(make) in

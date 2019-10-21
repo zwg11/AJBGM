@@ -201,17 +201,26 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
         recoverBlood.layer.borderColor = UIColor.init(red: 28/255.0, green: 97/255.0, blue: 157/255.0, alpha: 1).cgColor
         return recoverBlood
     }()
-    /*****************************************************************************************************/
+   
+    // 设置导航栏左按钮样式
+    private lazy var leftButton:UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        button.setImage(UIImage(named: "back"), for: .normal)
+        //button.setTitleColor(UIColor.blue, for: .normal)
+        button.addTarget(self, action: #selector(leftButtonClick), for: .touchUpInside)
+        return button
+    }() /*****************************************************************************************************/
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // 设置点击屏幕键盘弹回
         hideKeyboardWhenTappedAround()
-        
+        self.view.backgroundColor = UIColor.clear
         self.title = "Targets Setting"
         // Do any additional setup after loading the view.
-        self.view.backgroundColor = ThemeColor
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title:"back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back))
+//        self.view.backgroundColor = ThemeColor
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
         
         let information = UILabel(frame: CGRect())
         information.text = "BG Targets"
@@ -528,9 +537,9 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
     }
     
     //返回的时候，将框框再重新设回白色
-    @objc private func back(){
+    @objc private func leftButtonClick(){
         setBoundWhite()
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popViewController(animated: false)
     }
     
     func hideKeyboardWhenTappedAround(){

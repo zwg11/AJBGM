@@ -16,8 +16,8 @@ class loginView: UIView {
     private lazy var AJImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "version")
-        imageView.layer.borderWidth = 1
-        imageView.layer.borderColor = borderColor.cgColor
+//        imageView.layer.borderWidth = 1
+//        imageView.layer.borderColor = borderColor.cgColor
         return imageView
     }()
     
@@ -104,14 +104,14 @@ class loginView: UIView {
     }
     
     func setupUI(){
-        self.backgroundColor = ThemeColor
+//        self.backgroundColor = ThemeColor
         // 艾康图标布局
         self.addSubview(AJImageView)
         AJImageView.snp.makeConstraints{(make) in
 //            make.width.equalTo(AJScreenWidth/2)
             make.height.equalTo(AJScreenWidth/5)
-            make.left.equalTo(AJScreenWidth/4)
-            make.right.equalTo(-AJScreenWidth/4)
+            make.left.equalTo(AJScreenWidth/5)
+            make.right.equalTo(-AJScreenWidth/5)
             make.top.equalTo(navigationBarHeight)
         }
         

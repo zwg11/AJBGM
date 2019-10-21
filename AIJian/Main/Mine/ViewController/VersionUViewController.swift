@@ -14,7 +14,17 @@ import StoreKit
 
 
 class VersionUViewController: UIViewController {
-        
+    
+    // 设置导航栏左按钮样式
+    private lazy var leftButton:UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        button.setImage(UIImage(named: "back"), for: .normal)
+        //button.setTitleColor(UIColor.blue, for: .normal)
+        button.addTarget(self, action: #selector(leftButtonClick), for: .touchUpInside)
+        return button
+    }()
+    
         //列表数据
         public lazy var versionDataArray: Array = ["Current Version","Feedback","Score","Version Update"]
         
@@ -22,8 +32,9 @@ class VersionUViewController: UIViewController {
             super.viewDidLoad()
             
             self.title = "Update"
-            self.view.backgroundColor = ThemeColor
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title:"back", style:.plain, target: self, action: #selector(back))
+//            self.view.backgroundColor = ThemeColor
+            self.view.backgroundColor = UIColor.clear
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
             
             
 //
@@ -35,7 +46,7 @@ class VersionUViewController: UIViewController {
             tableview.register(UITableViewCell.self, forCellReuseIdentifier:"versioncell")
             tableview.delegate = self
             tableview.dataSource = self
-            
+            tableview.backgroundColor = UIColor.clear
             self.view.addSubview(tableview)
             tableview.snp.remakeConstraints{ (make) in
                 make.height.equalTo(AJScreenHeight/15*4)
@@ -43,8 +54,8 @@ class VersionUViewController: UIViewController {
                 make.top.equalTo(topLayoutGuide.snp.bottom)
             }
         }
-        @objc private func back(){
-            self.navigationController?.popViewController(animated: true)
+        @objc private func leftButtonClick(){
+            self.navigationController?.popViewController(animated: false)
         }
     
     }
@@ -64,7 +75,8 @@ extension VersionUViewController:UITableViewDelegate,UITableViewDataSource{
             print("到达版本更新页", indexPath)
             //根据注册的cell类ID值获取到载体cell
             let cell = tableView.dequeueReusableCell(withIdentifier: "versioncell",for: indexPath)
-            cell.backgroundColor = ThemeColor
+//            cell.backgroundColor = ThemeColor
+            cell.backgroundColor = UIColor.clear
             cell.textLabel?.textColor = TextColor
             cell.selectionStyle = .none
             cell.accessoryType = .disclosureIndicator
@@ -85,10 +97,10 @@ extension VersionUViewController:UITableViewDelegate,UITableViewDataSource{
                     //取出本地版本
                     let localVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
                     print(localVersion)
-                    self.navigationController?.pushViewController(CurrentVersion(), animated: true)
+                    self.navigationController?.pushViewController(CurrentVersion(), animated: false)
                     print("第一行")
                 case 1:  //跳转到反馈页面
-                    self.navigationController?.pushViewController(SuggestionViewController(), animated: true)
+                    self.navigationController?.pushViewController(SuggestionViewController(), animated: false)
                 case 2:  //跳转到去评分界面
                     if #available(iOS 10.3, *) {
                         SKStoreReviewController.requestReview()

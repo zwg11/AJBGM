@@ -15,9 +15,10 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
     
     var email:String?
     var phone:String?
-    var country:String = "China"
     let id = "reusedId"
     
+    let userInfo = DBSQLiteManager.manager.selectUserRecord(userId: UserInfo.getUserId())
+    var country:String?
     let emailCommponent = sugComponent()
     let telephoneCommponent = sugComponent()
     let nationCp = nationComponent()
@@ -48,30 +49,39 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
             emailCommponent.textField.textColor = TextColor
             cell.contentView.addSubview(emailCommponent)
             cell.textLabel?.textColor = TextColor
-            cell.backgroundColor = ThemeColor
+//            cell.backgroundColor = ThemeColor
+            cell.backgroundColor = UIColor.clear
             cell.selectionStyle = .none
             return cell
         case 1:
             let cell = UITableViewCell(style: .default, reuseIdentifier: id)
             telephoneCommponent.imageView.image = UIImage(named: "Phone")
             telephoneCommponent.textField.delegate = self
+            telephoneCommponent.textField.isEnabled = false
+            telephoneCommponent.setupUI(title: "")
             telephoneCommponent.textField.textColor = TextColor
-            telephoneCommponent.textField.keyboardType = .numberPad
-            telephoneCommponent.setupUI(title: "Please Enter Your Phone Number")
+            if (userInfo.phone_number != nil){ //不等于空
+                telephoneCommponent.textField.text = userInfo.phone_number
+            }else{
+                telephoneCommponent.textField.text = "--"
+            }
+            telephoneCommponent.textField.textColor = TextColor
             cell.contentView.addSubview(telephoneCommponent)
             cell.selectionStyle = .none
             cell.textLabel?.textColor = TextColor
-            cell.backgroundColor = ThemeColor
+//            cell.backgroundColor = ThemeColor
+            cell.backgroundColor = UIColor.clear
             return cell
         case 2:
             let cell = UITableViewCell(style: .default, reuseIdentifier: id)
             nationCp.imageView.image = UIImage(named: "Country")
-            nationCp.setupUI(title: "China")
-            nationCp.nationButton.addTarget(self, action:#selector(selectNation) , for: .touchUpInside)
+            nationCp.setupUI(title: userInfo.country ?? "--")
+//            nationCp.nationButton.addTarget(self, action:#selector(selectNation) , for: .touchUpInside)
             cell.contentView.addSubview(nationCp)
             cell.selectionStyle = .none
             cell.textLabel?.textColor = TextColor
-            cell.backgroundColor = ThemeColor
+//            cell.backgroundColor = ThemeColor
+            cell.backgroundColor = UIColor.clear
             return cell
         default:
             let cell = UITableViewCell(style: .default, reuseIdentifier: id)
@@ -82,16 +92,26 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
     
     let sugTableView:UITableView = UITableView()
     let content_field = HZTextView()
-    
+    // 设置导航栏左按钮样式
+    private lazy var leftButton:UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        button.setImage(UIImage(named: "back"), for: .normal)
+        //button.setTitleColor(UIColor.blue, for: .normal)
+        button.addTarget(self, action: #selector(leftButtonClick), for: .touchUpInside)
+        return button
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.title = "Suggestion"
-        self.view.backgroundColor = ThemeColor
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title:"back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back))
+//        self.view.backgroundColor = ThemeColor
+        self.view.backgroundColor = UIColor.clear
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
         
         content_field.placeholder = "Please Enter Your Comments"
-        content_field.backgroundColor = ThemeColor
+//        content_field.backgroundColor = ThemeColor
+        content_field.backgroundColor = UIColor.clear
         content_field.font = UIFont.boldSystemFont(ofSize: 16)
         content_field.textColor = TextColor
         content_field.isEditable = true
@@ -108,7 +128,8 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
 
         sugTableView.delegate = self
         sugTableView.dataSource = self
-        sugTableView.backgroundColor = ThemeColor
+//        sugTableView.backgroundColor = ThemeColor
+        sugTableView.backgroundColor = UIColor.clear
         sugTableView.isScrollEnabled = false
         self.view.addSubview(sugTableView)
         sugTableView.snp.makeConstraints{  (make) in
@@ -146,26 +167,26 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
         country = countryStr
     }
     
-    @objc private func back(){
-        self.navigationController?.popViewController(animated: true)
+    @objc private func leftButtonClick(){
+        self.navigationController?.popViewController(animated: false)
     }
     @objc private func save(){
         print(content_field.text!)
          let alert = CustomAlertController()
         
-        if content_field.text! == ""{
+        if content_field.text!.removeHeadAndTailSpacePro == ""{
             alert.custom(self, "Attention", "Feedback Empty！")
             return
         }
         
-        if  telephoneCommponent.textField.text! == ""{
-            alert.custom(self, "Attention", "Phone Empty！")
-            return
-        }
-        if  telephoneCommponent.textField.text!.count == 255{
-            alert.custom(self, "Attention", "Phone Error！")
-            return
-        }
+//        if  telephoneCommponent.textField.text! == ""{
+//            alert.custom(self, "Attention", "Phone Empty！")
+//            return
+//        }
+//        if  telephoneCommponent.textField.text!.count == 255{
+//            alert.custom(self, "Attention", "Phone Error！")
+//            return
+//        }
         print(content_field.text!.count)
         if content_field.text!.count >= 300{
             alert.custom(self, "Attention", "Words should be less than 300！")
@@ -173,7 +194,7 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
         }
         
         //网络请求
-        let dictString:Dictionary = [ "email":String(emailCommponent.textField.text!),"phoneNumber":String(telephoneCommponent.textField.text!),"country":String(country),"feedback":String(content_field.text!),"token":UserInfo.getToken(),"userId":UserInfo.getUserId()] as [String : Any]
+        let dictString:Dictionary = [ "email":String(emailCommponent.textField.text!),"phoneNumber":String(telephoneCommponent.textField.text!),"country":String(country ?? "--"),"feedback":String(content_field.text!.removeHeadAndTailSpacePro),"token":UserInfo.getToken(),"userId":UserInfo.getUserId()] as [String : Any]
         print(dictString)
         //  此处的参数需要传入一个字典类型
         Alamofire.request(FEEDBACK,method: .post,parameters: dictString).responseString{ (response) in
@@ -194,7 +215,7 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
                             self.telephoneCommponent.textField.text! = ""
                         }else{
                             alert.custom_cengji(self,"Attention", "Sorry.Feedback Failure！")
-                            self.navigationController?.popViewController(animated: true)
+                            self.navigationController?.popViewController(animated: false)
                         }
                     }
                 }

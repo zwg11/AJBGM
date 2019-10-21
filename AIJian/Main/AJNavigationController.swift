@@ -20,12 +20,16 @@ class AJNavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavBarAppearence()
+        //navigationController
+        self.view.backgroundColor = UIColor.init(patternImage: UIImage(named: "bg")!)
+        
     }
 
     func setNavBarAppearence()
     {
         // 设置 导航栏颜色 和 标题字体颜色
-        self.navigationBar.barTintColor = barDefaultColor
+//        self.navigationBar.barTintColor = UIColor.clear
+        self.navigationBar.barTintColor = UIColor.init(patternImage: UIImage(named: "bg")!)
         let navigationTitleAttribute: NSDictionary = NSDictionary(object: UIColor.white, forKey: NSAttributedString.Key.foregroundColor as NSCopying)
         self.navigationBar.titleTextAttributes = navigationTitleAttribute as? [NSAttributedString.Key : Any]    
     

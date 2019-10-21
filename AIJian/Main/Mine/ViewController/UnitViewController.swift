@@ -123,6 +123,16 @@ class UnitViewController: UIViewController {
         return KPa_Button
     }()
     
+    // 设置导航栏左按钮样式
+    private lazy var leftButton:UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        button.setImage(UIImage(named: "back"), for: .normal)
+        //button.setTitleColor(UIColor.blue, for: .normal)
+        button.addTarget(self, action: #selector(leftButtonClick), for: .touchUpInside)
+        return button
+    }()
+    
     lazy var rightButton:UIButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(save), for: .touchUpInside)
@@ -135,8 +145,9 @@ class UnitViewController: UIViewController {
         super.viewDidLoad()
         self.title = "Units Setup"
         
-        self.view.backgroundColor = ThemeColor
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title:"back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back))
+//        self.view.backgroundColor = ThemeColor
+        self.view.backgroundColor = UIColor.clear
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
 //        tableview.register(UITableViewCell.self, forCellReuseIdentifier:"infocell")
@@ -263,6 +274,7 @@ class UnitViewController: UIViewController {
         print("PressureUnit",data["PressureUnit"]!)
         if unitDataArray[0] == "mmol/L"{
             mmol_Button.backgroundColor = ButtonColor
+            
             mmol_Button.setTitleColor(UIColor.white, for: .normal)
             mmol_Button.layer.borderWidth = 0.5
             mmol_Button.layer.borderColor = UIColor.white.cgColor
@@ -412,8 +424,8 @@ class UnitViewController: UIViewController {
         mmhg_Button.layer.borderColor = unselectedTextColor.cgColor
     }
     
-    @objc private func back(){
-        self.navigationController?.popViewController(animated: true)
+    @objc private func leftButtonClick(){
+        self.navigationController?.popViewController(animated: false)
     }
     @objc private func save(){
         let path = PlistSetting.getFilePath(File: "UnitSetting.plist")

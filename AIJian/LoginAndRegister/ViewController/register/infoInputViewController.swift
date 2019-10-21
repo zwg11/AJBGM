@@ -68,7 +68,18 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
     }()
     var topConstraint:Constraint?
     var bottomConstraint:Constraint?
-    
+    // 设置导航栏左按钮样式
+    private lazy var leftButton:UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        button.setImage(UIImage(named: "back"), for: .normal)
+        //button.setTitleColor(UIColor.blue, for: .normal)
+        button.addTarget(self, action: #selector(leftButtonClick), for: .touchUpInside)
+        return button
+    }()
+    @objc private func leftButtonClick(){
+        self.navigationController?.popViewController(animated: false)
+    }
     
     override func viewDidLoad() {
         
@@ -80,6 +91,8 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
         self.navigationController?.navigationBar.barTintColor = ThemeColor
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: NaviTitleColor]
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
+        self.view.backgroundColor = UIColor.clear
         self.view.addSubview(infoinputView)
         infoinputView.snp.makeConstraints{(make) in
             make.height.equalTo(AJScreenHeight)
@@ -202,7 +215,7 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
         if userName == ""{
             alertController.custom(self, "Attention", "Name Empty")
             return
-        }else if userName!.count >= 254 {
+        }else if userName!.count >= 254 {   //设置用户名长度和电话长度
             return
         }else if phoneNumber!.count >= 254 {
             return
@@ -247,11 +260,11 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
                              */
                             if(responseModel.code == 1 ){
                                 print(responseModel.code)
-                                self.navigationController?.popToRootViewController(animated: true)
+                                self.navigationController?.popToRootViewController(animated: false)
                                 alertController.custom_cengji(self,"Attention", "Sign Up Success！")
                             }else{
                                 print(responseModel.code)
-                                self.navigationController?.popToRootViewController(animated: true)
+                                self.navigationController?.popToRootViewController(animated: false)
                                 alertController.custom_cengji(self,"Attention", "Sign Up Failure！")
                             }
                         } //end of letif

@@ -88,7 +88,8 @@ class InsertViewController: UIViewController {
     // MARK: - viewDidLoad()
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = ThemeColor
+//        self.view.backgroundColor = ThemeColor
+        self.view.backgroundColor = UIColor.clear
         self.title = "Add Data"
         
 
@@ -158,10 +159,12 @@ class InsertViewController: UIViewController {
             let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: self.path)!
             var arr = data["medicine"] as! [String]
             // 文本框为空，不做任何事
-            if alert.textFields![0].text == "" {
+            if alert.textFields![0].text?.removeHeadAndTailSpacePro == "" {
+                return
+            }else if alert.textFields![0].text!.removeHeadAndTailSpacePro.count >= 100 { //单个不能超过100个字符
                 return
             }else{
-                arr.append(alert.textFields![0].text!)
+                arr.append(alert.textFields![0].text!.removeHeadAndTailSpacePro)
             }
 
 //            // 使得警示框的表格数据更新
@@ -411,6 +414,10 @@ class InsertViewController: UIViewController {
                 medicine_string += medicine.last!
             }
         }
+        //所有选择的药物长度不能超过254
+        if medicine.count >= 254{
+            return
+        }
         
 //        if medicine != []{
 ////            print("药物",medicine)
@@ -464,6 +471,11 @@ class InsertViewController: UIViewController {
             return
         }
         
+        //备注信息 不能超过100个字符
+        if input.remark.remarkTextField.text!.removeHeadAndTailSpacePro.count >= 254{
+            return
+        }
+        
         //第一步：先封装成一个对象
         var  insertData:glucoseDate = glucoseDate()
         insertData.userId = UserInfo.getUserId()
@@ -494,7 +506,7 @@ class InsertViewController: UIViewController {
         insertData.sportTime = sport_time
         insertData.sportStrength = sport_strength
         insertData.inputType = 1
-        insertData.remark = input.getRemark()
+        insertData.remark = input.getRemark()?.removeHeadAndTailSpacePro
      
         print("insertdata:\(insertData)")
         //第二步:再封装成一个数组

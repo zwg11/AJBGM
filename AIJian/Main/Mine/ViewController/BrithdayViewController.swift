@@ -26,7 +26,7 @@ class BrithdayViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        super.viewDidLoad()
+     
         let sharedScrollView = UIScrollView()
         // 设置内容高度为屏幕的3/2,显示滚动条，d能上下滚动，背景为白色
         sharedScrollView.contentSize = CGSize(width: AJScreenWidth, height: AJScreenWidth*3/2)
