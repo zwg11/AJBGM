@@ -663,7 +663,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
     @objc func rightButtonClick(){
         // 设置去手动输入界面
         let insert = InsertViewController()
-        self.navigationController?.pushViewController(insert, animated: true)
+        self.navigationController?.pushViewController(insert, animated: false)
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -35,9 +35,9 @@ class CurrentVersion:UIViewController{
         glucoseImage.image = UIImage(named:"version")
         self.view.addSubview(glucoseImage)
         glucoseImage.snp.makeConstraints{ (make) in
-            make.left.equalToSuperview().offset(AJScreenWidth/5)
-            make.right.equalToSuperview().offset(-AJScreenWidth/5)
-            make.height.equalTo(AJScreenWidth*2/5)
+            make.left.equalTo(AJScreenWidth/5)
+            make.right.equalTo(-AJScreenWidth/5)
+            make.height.equalTo(AJScreenWidth/5)
             make.top.equalTo(topLayoutGuide.snp.bottom).offset(AJScreenHeight / 7)
         }
         

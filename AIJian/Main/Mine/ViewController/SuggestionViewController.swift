@@ -131,6 +131,7 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
 //        sugTableView.backgroundColor = ThemeColor
         sugTableView.backgroundColor = UIColor.clear
         sugTableView.isScrollEnabled = false
+        sugTableView.separatorColor = UIColor.white
         self.view.addSubview(sugTableView)
         sugTableView.snp.makeConstraints{  (make) in
             make.top.equalTo(content_field.snp.bottom).offset(5)

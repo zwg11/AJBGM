@@ -41,12 +41,13 @@ class VersionUViewController: UIViewController {
 //            let tableview = UITableView.init(frame: CGRect(x: 0, y: navigationBarHeight, width: AJScreenWidth, height: AJScreenHeight/15*4))
                 let tableview = UITableView()
             //将CELL的标识，在此处进行设置
-            tableview.backgroundColor = ThemeColor
+//            tableview.backgroundColor = ThemeColor
             tableview.isScrollEnabled = false
             tableview.register(UITableViewCell.self, forCellReuseIdentifier:"versioncell")
             tableview.delegate = self
             tableview.dataSource = self
             tableview.backgroundColor = UIColor.clear
+            tableview.separatorColor = UIColor.white
             self.view.addSubview(tableview)
             tableview.snp.remakeConstraints{ (make) in
                 make.height.equalTo(AJScreenHeight/15*4)
