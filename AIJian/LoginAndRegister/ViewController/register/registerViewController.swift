@@ -211,7 +211,7 @@ class registerViewController: UIViewController,UITextFieldDelegate {
                              */
                             if(responseModel.code == 1 ){
                                 //返回1，让其倒计时
-                                self.register.getAuthCodeButton.countDown(count: 60)
+                                self.register.getAuthCodeButton.countDown(count: 90)
                             }else{
                                 alertController.custom(self,"Attention", "Email or Password Error")
                             }

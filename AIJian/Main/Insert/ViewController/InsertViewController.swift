@@ -111,7 +111,7 @@ class InsertViewController: UIViewController {
     }
     
     @objc func test(){
-        self.navigationController?.pushViewController(InsulinViewController(), animated: true)
+        self.navigationController?.pushViewController(InsulinViewController(), animated: false)
     }
     
     @objc func reloadPicker(){
@@ -206,7 +206,7 @@ class InsertViewController: UIViewController {
     
     @objc func leftButtonClick(){
         // 设置返回原页面
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popViewController(animated: false)
     }
     
     @objc func cancel(){
