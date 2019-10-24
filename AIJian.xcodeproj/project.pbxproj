@@ -62,6 +62,7 @@
 		7CD890F46A335B97CB394B2E0F32CE7C /* WeightUnitChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9333124ACDB51FBDDC929EEAD032D6D3 /* WeightUnitChange.swift */; };
 		7E55D14C065E24471D59E71862D56472 /* UseDirViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67085F8C516527849C0A634158BE78B7 /* UseDirViewController.swift */; };
 		82229929AE907526C16AFB7C3B976565 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428DE12BF8AED7060D2DACBB1BDB9E15 /* AppDelegate.swift */; };
+		842ACD41235EBB7B00CF38FD /* TimerForLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842ACD40235EBB7B00CF38FD /* TimerForLoad.swift */; };
 		84847BC2FE082A7DD9416B04C6429EAB /* BHJPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE608F63498A45B84C3679D6251C8601 /* BHJPickerView.swift */; };
 		85BF4AD1556507F03E9CF1AB13F34571 /* BloodSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCA193DA6A5E1E858111B284800163C /* BloodSetViewController.swift */; };
 		875E6FED57826107D84E47853B2A507F /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5C68EDC76F69EA0E7DCD122ED6AB4 /* UITextField+Extension.swift */; };
@@ -211,6 +212,7 @@
 		7C3389A85E5BFB5D3E18B8DAA0516CC7 /* GetUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUnit.swift; sourceTree = "<group>"; };
 		7C340848915D471758C27C46FC15E8A6 /* getDataInHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = getDataInHome.swift; path = AIJian/Main/Home/getDataInHome.swift; sourceTree = SOURCE_ROOT; };
 		802706582BF2DD3F2F165BE6CC4B129F /* UnitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitViewController.swift; sourceTree = "<group>"; };
+		842ACD40235EBB7B00CF38FD /* TimerForLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerForLoad.swift; sourceTree = "<group>"; };
 		88B84B902E4E28BB9EBAC8F34677E2D8 /* loginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginViewController.swift; sourceTree = "<group>"; };
 		8A18E98B74565B5E695548D96DE09E13 /* SuggestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionViewController.swift; sourceTree = "<group>"; };
 		8AB8DBFCEA7297369A51108D4F1C5D91 /* InsulinType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsulinType.swift; sourceTree = "<group>"; };
@@ -779,6 +781,7 @@
 				0D612F090DA61DB57678E74F261C68D6 /* UserInfo.swift */,
 				8AD251DA1D7683298B03830243680EC8 /* format_method.swift */,
 				E2F07FB865C1B45AC2F704BE6D7A4BF4 /* viewToImage.swift */,
+				842ACD40235EBB7B00CF38FD /* TimerForLoad.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -908,6 +911,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				842ACD41235EBB7B00CF38FD /* TimerForLoad.swift in Sources */,
 				003263799B683595EE9B154587776A9E /* AJGuidePageView.swift in Sources */,
 				AE5F885CE9A2327A38A50458E467EBE8 /* AJMineHeaderView.swift in Sources */,
 				53ECBF9769DA897ED2EE5CB10BE88D1E /* AJMineTableView.swift in Sources */,
@@ -1187,14 +1191,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F785YF5T8Q;
+				DEVELOPMENT_TEAM = U556FBGR65;
 				INFOPLIST_FILE = AIJian/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zhuozuozhang;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Zwg.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1208,14 +1212,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F785YF5T8Q;
+				DEVELOPMENT_TEAM = U556FBGR65;
 				INFOPLIST_FILE = AIJian/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zhuozuozhang;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Zwg.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;

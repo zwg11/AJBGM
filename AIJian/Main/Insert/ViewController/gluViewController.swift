@@ -23,6 +23,20 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     var meterID:String = ""
     // 最新记录
     var lastRecord = ""
+    
+    // 设置导航栏左按钮x样式
+    private lazy var leftButton:UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        button.setImage(UIImage(named: "back"), for: .normal)
+        button.addTarget(self, action: #selector(leftButtonClick), for: .touchUpInside)
+        return button
+    }()
+    // 返回上一个页面
+    @objc func leftButtonClick(){
+
+         self.navigationController?.popViewController(animated: true)
+     }
     // 使得列表行数与数据数量一致
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return BLEglucoseDate.count
@@ -116,10 +130,11 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     // 该按钮实现App对血糖的记录
     private var button:UIButton = {
         let button = UIButton()
-        button.tintColor = UIColor.white
-        button.backgroundColor = UIColor.blue
+//        button.tintColor = UIColor.white
+//        button.backgroundColor = UIColor.blue
         button.setTitle("Record Result", for: .normal)
-        button.setTitleColor(UIColor.white, for: .normal)
+//        button.setTitleColor(UIColor.white, for: .normal)
+        button.setSelected()
         button.addTarget(self, action: #selector(BLEDataSave), for: .touchUpInside)
         return button
     }()
@@ -201,7 +216,7 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
                         }else{
                             print(responseModel.code)
                             print("插入失败")
-                            // 插入成功
+                            // 插入失败
                             let alert = CustomAlertController()
                             alert.custom(self, "", "Insert Failed,Please Try Again Later.")
                             
@@ -227,6 +242,8 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // 添加导航栏左按钮
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -254,9 +271,11 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
 
 
 extension gluViewController{
+    // 更新用户血糖仪使用信息
     func UpdateMeterInfo()->Bool{
         //手动输入数据，请求部分
         var isSuccess = true
+        print("当前血糖仪为\(meterID),其最后插入的记录为\(lastRecord)")
         let dictString = [ "userId":UserInfo.getUserId() as Any,"token":UserInfo.getToken(),"meterId":meterID,"recentRecord":lastRecord] as [String : Any]
                 // 向服务器申请插入数据请求
                 Alamofire.request(METERID_SAVE,method: .post,parameters: dictString).responseString{ (response) in
@@ -276,22 +295,24 @@ extension gluViewController{
                                 /*  此处为跳转和控制逻辑
                                  */
                                 if(responseModel.code == 1 ){
-                                    print(responseModel.code)
-                                    print("插入成功")
+                                    
 
                                     // 向配置文件存储最新记录
                                     // 读取配置文件，获取meterID的内容
+//                                    UserInfo.setMeterID(self.meterID, self.lastRecord)
                                     let path = PlistSetting.getFilePath(File: "User.plist")
                                     let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
                                     let arr = data["meterID"] as! NSMutableDictionary
                                     // 更新配置文件内容
                                     arr[self.meterID] = self.lastRecord
                                     data["meterID"] = arr
-                                    data.write(toFile: "User.plist", atomically: true)
+                                    data.write(toFile: path, atomically: true)
+                                    print(data)
+                                    print("meterID更新成功")
                                     isSuccess = true
                                 }else{
                                     print(responseModel.code)
-                                    print("插入失败")
+                                    print("meterID插更新失败")
                                     isSuccess = false
                                 }
                             } //end of letif
@@ -305,6 +326,7 @@ extension gluViewController{
                     else{
                         isSuccess = false
                     }
+//                    return isSuccess
                 }//end of request
         return isSuccess
     }

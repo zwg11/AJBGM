@@ -31,6 +31,7 @@ class CustomIndicatorView: UIView {
     // 风火轮控件停止旋转
     func stopIndicator(){
         Indicator.stopAnimating()
+        self.removeFromSuperview()
     }
     // 文字说明label
     private lazy var label:UILabel = {
@@ -50,7 +51,7 @@ class CustomIndicatorView: UIView {
         // 设置背景为浅灰色
         self.backgroundColor = UIColor.lightGray
         // 设置透明度为0.8
-        self.alpha = 0.8
+        self.alpha = 0.5
         label.text = text
         self.addSubview(label)
         self.addSubview(Indicator)

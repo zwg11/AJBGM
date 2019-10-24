@@ -766,7 +766,7 @@ extension InsertViewController{
                 self.input.setGlucoseValue("\(value)")
                 // 设置滑块位置
                 //                self.input.glucose.XTSlider.setValue(Float(value), animated: false)
-                self.input.glucose.setValueAndThumbColor(value: Float(value))
+//                self.input.glucose.setValueAndThumbColor(value: Float(value))
                 //                self.input.glucose.value = Float(value)
             }else{
                 // 设置文本框文本
@@ -867,5 +867,6 @@ extension InsertViewController{
 //    }
 
 }
+
 
 

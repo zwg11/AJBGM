@@ -43,7 +43,11 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
     var BLEglucoseValue:[Int] = []
     // 存储读取的数据中的血糖标志位
     var BLEglucoseMark:[Int] = []
-    
+    // 计时器
+    var second = 10
+    var second1 = 10
+    var timer : Timer?
+    var timer1 : Timer?
     // MARK: - 表格初始化
     // 表格行数设置
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -88,8 +92,11 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         self.centralManager?.connect(peripherals[indexPath.row], options: nil)
         //显示 ”加载“ 视图,加载图片旋转，且显示状态文字标签
         loadV.startIndicator()
-        self.view.addSubview(loadV)
-        loadV.setLabelText("正在连接设备")
+        // 使得风火轮视图全屏显示
+        UIApplication.shared.keyWindow?.addSubview(loadV)
+//        self.view.addSubview(loadV)
+        loadV.setLabelText("Connecting Device..")
+        startTimer()
     }
     
     private var meterType:Int = 0
@@ -121,9 +128,9 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
     // 中心设备管理对象
     private var centralManager:CBCentralManager?
     // 要连接的外设
-    private var myperipheral:CBPeripheral?
+//    private var myperipheral:CBPeripheral?
     // 要交互的外设属性
-    private var characteristic:CBCharacteristic?
+//    private var characteristic:CBCharacteristic?
     
     // 以int型存储要传过来的血糖数据以便使用CRC验证码验证
     private var dataSting:[Int] = []
@@ -152,7 +159,8 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
             // 若蓝牙打开了，搜索设备
             print("powered on..")
             self.centralManager?.scanForPeripherals(withServices: [glucoseDevServiceCBUUID])
-            
+            // 进行计时
+            startScanTimer()
             break
         default:
             print("unknown state error..")
@@ -184,12 +192,16 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
     }
     //  MARK: - 连接设备后
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+        if time != nil{
+            timer!.invalidate() //销毁timer
+            timer = nil
+        }
         print("connnected success!!")
         // 停止扫描
         central.stopScan()
         // 设置外设代理，并记录连接的外设对象
         peripheral.delegate = self
-        self.myperipheral = peripheral
+//        self.myperipheral = peripheral
         peripheral.discoverServices([glucoseDevServiceCBUUID])
         //peripheral.discoverServices("需要用的服务UUID")
         
@@ -197,11 +209,25 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
     // 连接设备失败时回调的方法
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         print("连接失败")
+//        loadV.stopIndicator()
+//        let x = UIAlertController(title: "", message: "Connect Failed", preferredStyle: .alert)
+//        self.present(x, animated: true, completion: {()->Void in
+//            sleep(1)
+//            x.dismiss(animated: true, completion: {
+//            })
+//        })
     }
     
     // 断开连接时回调的方法
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         print("断开连接")
+        loadV.stopIndicator()
+        let x = UIAlertController(title: "", message: "Disconnect Occured", preferredStyle: .alert)
+        self.present(x, animated: true, completion: {()->Void in
+            sleep(1)
+            x.dismiss(animated: true, completion: {
+            })
+        })
     }
     
     //  MARK: - 发现设备的服务后的回调方法
@@ -284,7 +310,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         }// for end
         if !isSetNotify || !isWrite{
             loadV.stopIndicator()
-            loadV.removeFromSuperview()
+//            loadV.removeFromSuperview()
             print("连接失败")
         }
     }
@@ -323,13 +349,15 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                     if replyDateStr != "&M0 41870"{
                         // 设置meterID值
                         self.meterID = replyDateStr
+                        print("当前设备的meterID为：\(replyDateStr)")
                         print("收到meterID,查看是否之前与之通信过")
                         
                         // 由于本次测试的仪器的 2个特征值都相同，所以要向有 write 属性的特征值发送数据
                         // 如果存储 meterID 的数组包含 蓝牙发送过来的meterID
                         if self.meterIDs![replyDateStr] != nil{
                             // 改变显示在屏幕的提示标签文本
-                            self.loadV.setLabelText("发现之前的通讯记录，传输记录")
+//                            self.loadV.setLabelText("发现之前的通讯记录，传输记录")
+                            self.loadV.setLabelText("Discover Past Communication Records,Transferring Records")
                             print("通信过，发送App记录的最晚通讯记录，包括时间、血糖值、标记位")
                             // 获取上一次传输的最新记录
                             let str = self.meterIDs![replyDateStr] as! String
@@ -337,14 +365,17 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                             let array:Array<String> = str.components(separatedBy: " ")
                             // 抽出时间，并将其转为d一定格式的字符串
                             let date = "&D" + array[0][2,11] + " "
+//                            let date = "&D" + "0521191438" + " "
                             let SendData = date + crc.string2CRC(string: date)
+                            print("CRC验证码为：\(SendData)")
                             // 发送时间
                             peripheral.writeValue(SendData.data(using: .utf8)!, for: self.writeCharacteristic!, type: .withoutResponse)
                         }
                             // 如果之前未与该蓝牙通信过，则让其发送所有蓝牙数据
                         else{
                             // 改变显示在屏幕的提示标签文本
-                            self.loadV.setLabelText("未发现之前的通讯记录，让血糖仪发送所有数据")
+//                            self.loadV.setLabelText("未发现之前的通讯记录，让血糖仪发送所有数据")
+                            self.loadV.setLabelText("It's a New Device,Accept All Data in Device.")
                             peripheral.writeValue("&N1 13183".data(using: .utf8)!, for: self.writeCharacteristic!, type: .withoutResponse)
                             //self.meterIDs![replyDateStr] = ""
                         }
@@ -373,7 +404,17 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                     // 收到对时间的确认，发送血糖值
                     if replyDateStr == "&D1 12639"{
                         print("发送血糖值")
-                        peripheral.writeValue("&R120 14852".data(using: .utf8)!, for: self.writeCharacteristic!, type: .withoutResponse)
+                        // 获取上一次传输的最新记录
+                        let str = self.meterIDs![self.meterID] as! String
+                        // 按空格分开
+                        let array:Array<String> = str.components(separatedBy: " ")
+                        // 抽出血糖值，并将其转为一定格式的字符串
+                        let date = "&R" + array[1] + " "
+//                        let date = "&R158 "
+                        // 字符串 + CRC
+                        let SendData = date + crc.string2CRC(string: date)
+                        print("CRC验证码为：\(SendData)")
+                        peripheral.writeValue(SendData.data(using: .utf8)!, for: self.writeCharacteristic!, type: .withoutResponse)
                     }else{
                         //                            self.sthWrong = true
                         wrongInfo = "Incorrect Receiving of Blood Glucose Meter Information"
@@ -383,7 +424,18 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                     // 收到对血糖值的确认，发送标志位
                     if replyDateStr == "&R1 62910"{
                         print("发送标志位")
-                        peripheral.writeValue("&K0 41582".data(using: .utf8)!, for: self.writeCharacteristic!, type: .withoutResponse)
+                        // 获取上一次传输的最新记录
+                        let str = self.meterIDs![self.meterID] as! String
+                        // 按空格分开
+                        let array:Array<String> = str.components(separatedBy: " ")
+                        // 抽出标志位，并将其转为一定格式的字符串
+                        let date = "&K" + array[2] + " "
+//                        let date = "&K0 "
+                        print(array[2])
+                        // 字符串 + CRC
+                        let SendData = date + crc.string2CRC(string: date)
+                        print("CRC验证码为：\(SendData)")
+                        peripheral.writeValue(SendData.data(using: .utf8)!, for: self.writeCharacteristic!, type: .withoutResponse)
                     }else{
                         //                            self.sthWrong = true
                         wrongInfo = "Incorrect Receiving of Blood Glucose Meter Information"
@@ -393,7 +445,9 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                     // 收到对标志位的确认，告诉仪器发送数据
                     if replyDateStr == "&K1 12911"{
                         print("告诉仪器发送数据")
-                        peripheral.writeValue("&N1 13183".data(using: .utf8)!, for: self.writeCharacteristic!, type: .withoutResponse)
+                        let SendData = "&N0 " + crc.string2CRC(string: "&N0 ")
+                        print("CRC验证码为：\(SendData)")
+                        peripheral.writeValue(SendData.data(using: .utf8)!, for: self.writeCharacteristic!, type: .withoutResponse)
                     }else{
                         //                            self.sthWrong = true
                         wrongInfo = "Incorrect Receiving of Blood Glucose Meter Information"
@@ -409,6 +463,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                         if self.isFirstRecord{
                             
                             self.lastRecord = replyDateStr
+                            self.isFirstRecord = false
                         }
                         
                         self.dataOrder += 1
@@ -478,7 +533,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                             else{
                                 print("CRC:\(String(replyDateStr[2,replyDateStr.count-1])) 验证正确。跳转页面显示血糖数据")
                                 // 将加载视图移除界面，并使其图片动画停止
-                                self.loadV.removeFromSuperview()
+//                                self.loadV.removeFromSuperview()
                                 self.loadV.stopIndicator()
                                 // 转到展示数据的页面
                                 let gluVC = gluViewController()
@@ -498,7 +553,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                                 // 改变显示在屏幕的提示标签文本
                                 self.loadV.setLabelText("No Data In Machine")
                                 // 将加载视图移除界面，并使其图片动画停止
-                                self.loadV.removeFromSuperview()
+//                                self.loadV.removeFromSuperview()
                                 self.loadV.stopIndicator()
                                 wrongInfo = "No Data In Machine"
                                 //                                    self.sthWrong = true
@@ -524,7 +579,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                 // 若传输数据过程中有任何异常或无数据传输，执行
                 if let x = wrongInfo{
                     // 将加载视图移除界面，并使其图片动画停止
-                    self.loadV.removeFromSuperview()
+//                    self.loadV.removeFromSuperview()
                     self.loadV.stopIndicator()
                     // 弹出警示框，说明相关错误信息
                     let alert = CustomAlertController()
@@ -551,9 +606,10 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
     private var button:UIButton = {
         let button = UIButton()
         //button.tintColor = UIColor.white
-        button.backgroundColor = SendButtonColor
+//        button.backgroundColor = SendButtonColor
         // button.titleLabel?.text = "扫描设备"
-        button.setTitleColor(UIColor.white, for: .normal)
+//        button.setTitleColor(UIColor.white, for: .normal)
+        button.setSelected()
         button.setTitle("Scan Devices", for: .normal)
         button.addTarget(self, action: #selector(scanDev), for: .touchUpInside)
         return button
@@ -566,6 +622,8 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         print("点击 扫描设备 按钮")
         self.centralManager?.scanForPeripherals(withServices: [glucoseDevServiceCBUUID])
         tableView.reloadData()
+        // 对c扫描时间进行计时
+        startScanTimer()
     }
     
     // 加载视图
@@ -611,6 +669,8 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor:UIColor.white]
+        // 初始化数据
+        initAllDate()
     }
     
 //    // 页面消失，tabbar隐藏
@@ -713,6 +773,135 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         
     }
     
+    func initAllDate(){
+        // 首先确定命令字符串
+        let crc = CRC16()
+        let meterStr = "&T"+String(meterType)+" "
+        let order = meterStr + crc.string2CRC(string: meterStr)
+        
+        // 将字符串转为Data，发送蓝牙命令必须为Data型
+        byteDate = order.data(using: .utf8)
+        
+        // 读取配置文件，获取meterID的内容
+        let path = PlistSetting.getFilePath(File: "User.plist")
+        let data1:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
+        
+        // 设置为字典型
+        meterIDs = data1["meterID"] as? NSMutableDictionary
+        print("存储的meterID有:\(String(describing: meterIDs))")
+        // 初始化数据
+        
+        meterType = 0
+        //        byteDate = nil
+        //        // 记录扫描到的设备的UUID
+        //        deviceDic = []
+        //        // 记录扫描到的设备名称
+        //        deviceName = []
+        //        // 记录扫描到的设备
+        //        peripherals = []
+        // 记录返回的仪器ID
+        //        meterID = ""
+        // 最新血糖记录
+        lastRecord = ""
+        // 所要返回的数据量
+        dataCount = 0
+        // 第几个数据
+        dataOrder = 0
+        
+        // 记录有 .read 和 .notify 的 特征值
+        readCharacteristic = nil
+        // 记录有 .write 特征值
+        writeCharacteristic = nil
+        // 是否为第一个血糖数据
+        isFirstRecord = true
+        // 要连接的外设
+        //        myperipheral = nil
+        // 要交互的外设属性
+        //        characteristic = nil
+        
+        // 以int型存储要传过来的血糖数据以便使用CRC验证码验证
+        dataSting = []
+    }
     
+    
+}
+
+extension BLEViewController{
+
+
+    // MARK: - 为连接设备进行计时
+    // 1.开始计时
+    func startTimer() {
+
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updataSecond), userInfo: nil, repeats: true)
+        //调用fire()会立即启动计时器
+        timer!.fire()
+     }
+
+     // 2.定时操作
+     @objc func updataSecond() {
+         if second>1 {
+            //.........
+            second -= 1
+         }else {
+            stopTimer()
+         }
+     }
+
+    // 3.停止计时
+    func stopTimer() {
+        if timer != nil {
+            timer!.invalidate() //销毁timer
+            timer = nil
+            loadV.stopIndicator()
+            let x = UIAlertController(title: "", message: "connect failed", preferredStyle: .alert)
+            self.present(x, animated: true, completion: {()->Void in
+                sleep(1)
+                x.dismiss(animated: true, completion: {
+                })
+            })
+            
+         }
+        // 不要忘了设置second以便下次使用
+        second = 10
+     }
+    
+    // MARK: - 为扫描设备进行计时
+    // 1.开始计时
+    func startScanTimer() {
+
+        timer1 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updataScanSecond), userInfo: nil, repeats: true)
+        //调用fire()会立即启动计时器
+        timer1!.fire()
+        self.button.setDeselected()
+        self.button.isEnabled = false
+        self.button.setTitle("Scanning Devices..", for: .normal)
+     }
+
+     // 2.定时操作
+     @objc func updataScanSecond() {
+         if second1>1 {
+            //.........
+            second1 -= 1
+         }else {
+            stopScanTimer()
+         }
+     }
+    
+    // 3.停止计时
+    func stopScanTimer() {
+        if timer1 != nil {
+            timer1!.invalidate() //销毁timer
+            timer1 = nil
+            self.centralManager?.stopScan()
+//            self.loadV.stopIndicator()
+//            self.loadV.removeFromSuperview()
+            self.button.setSelected()
+            self.button.isEnabled = true
+            self.button.setTitle("Scan Devices", for: .normal)
+            // 不要忘了设置second以便下次使用
+            second1 = 10
+         }
+     }
 }
 
