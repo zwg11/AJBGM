@@ -155,6 +155,12 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
 //                make.bottom.equalTo(bottomLayoutGuide.snp.top)
 //            }
 //        }
+        // 读取配置文件，获取meterID的内容
+        let path = PlistSetting.getFilePath(File: "User.plist")
+        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
+        print("配置文件内容\(data)")
+        let arr = data["meterID"] as! NSMutableDictionary
+        print("配置文件中的meterID内容：\(arr)")
     }
     
     override func viewWillDisappear(_ animated: Bool) {

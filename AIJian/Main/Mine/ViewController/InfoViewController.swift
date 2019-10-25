@@ -419,13 +419,13 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
         let okAction = UIAlertAction(title: "Sure", style: .default, handler: {
             action in
-            let UserName = alertController.textFields!.first!
-            if String(UserName.text!) == ""  {
+            let PhoneNum = alertController.textFields!.first!
+            if String(PhoneNum.text!).removeHeadAndTailSpacePro == ""  {
             
-            }else if String(UserName.text!).count >= 255 {
+            }else if String(PhoneNum.text!).count >= 255 {
                     
             }else{
-                self.infoDataArray[6] = UserName.text!
+                self.infoDataArray[6] = PhoneNum.text!.removeHeadAndTailSpacePro
                 self.updateSth = true
                 self.tableview.reloadRows(at: [IndexPath(row:self.num,section:0)], with: .fade)
             }

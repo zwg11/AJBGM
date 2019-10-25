@@ -54,13 +54,21 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
         let phone = shareV.phoneTextField.text
         if name == ""{
             alert.custom(self,"Attention", "Name Empty")
+            return
         }
         if phone == ""{
             alert.custom(self,"Attention", "Phone Empty")
+            return
+        }
+        if name?.count >= 50{
+            return
+        }
+        if phone?.count >= 30{
+            return
         }
         //设置名字和电话
-        general.nameLabel.text = name
-        general.phoneLabel.text = phone
+        general.nameLabel.text = name?.removeHeadAndTailSpacePro
+        general.phoneLabel.text = phone?.removeHeadAndTailSpacePro
 
         // 将视图生成文件
         let image = viewToImage.getImageFromView(view: general)

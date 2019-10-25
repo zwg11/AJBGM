@@ -161,7 +161,7 @@ class InsertViewController: UIViewController {
             // 文本框为空，不做任何事
             if alert.textFields![0].text?.removeHeadAndTailSpacePro == "" {
                 return
-            }else if alert.textFields![0].text!.removeHeadAndTailSpacePro.count >= 100 { //单个不能超过100个字符
+            }else if alert.textFields![0].text!.removeHeadAndTailSpacePro.count >= 50 { //单个不能超过100个字符
                 return
             }else{
                 arr.append(alert.textFields![0].text!.removeHeadAndTailSpacePro)
@@ -766,7 +766,7 @@ extension InsertViewController{
                 self.input.setGlucoseValue("\(value)")
                 // 设置滑块位置
                 //                self.input.glucose.XTSlider.setValue(Float(value), animated: false)
-                self.input.glucose.setValueAndThumbColor(value: Float(value))
+//                self.input.glucose.setValueAndThumbColor(value: Float(value))
                 //                self.input.glucose.value = Float(value)
             }else{
                 // 设置文本框文本
@@ -867,5 +867,6 @@ extension InsertViewController{
 //    }
 
 }
+
 
 

@@ -124,7 +124,7 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
     @objc func getAuthCode(){
         print("点击获取验证码")
         let alertController = CustomAlertController()
-        email = emailCheck.emailTextField.text!
+        email = emailCheck.emailTextField.text!.removeHeadAndTailSpacePro
         print(email!)
         /*
          需要判断邮箱不为空才能获取验证码

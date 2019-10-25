@@ -31,6 +31,10 @@ class dataTableViewCell: UITableViewCell {
     convenience init(style: UITableViewCell.CellStyle, reuseIdentifier: String?,secion:Int,row:Int){
         print("sortedData：\(sortedData[secion][row])")
         self.init(style: style, reuseIdentifier: reuseIdentifier)
+        // 清空该cell的内容
+//        while self.contentView.subviews.last != nil{
+//            self.contentView.subviews.last?.removeFromSuperview()
+//        }
         // 被选中的背景,设为无
         self.selectionStyle = .none
         // 设置单元格颜色
@@ -117,7 +121,8 @@ class dataTableViewCell: UITableViewCell {
         if sortedData[secion][row].sportTime != nil{
             sportLabel.text = String(sortedData[secion][row].sportType!) + "\n" + String(sortedData[secion][row].sportTime!) + "min"
             sportLabel.font = UIFont.systemFont(ofSize: 10)
-        }else if sortedData[secion][row].sportType != nil{
+        }else if sortedData[secion][row].sportType != nil && sortedData[secion][row].sportType != "Nothing"{
+
             sportLabel.text = String(sortedData[secion][row].sportType!)
         }
         else{
@@ -143,7 +148,7 @@ class dataTableViewCell: UITableViewCell {
             i.numberOfLines = 0
             i.textColor = UIColor.white
             offsetX += 90
-            self.addSubview(i)
+            self.contentView.addSubview(i)
         }
         SetColorOfLabelText.SetGlucoseTextColor(sortedData[secion][row], label: glucoseLabel)
         remarkLabel.frame.size.width = 200

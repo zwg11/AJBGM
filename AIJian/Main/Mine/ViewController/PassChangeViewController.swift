@@ -219,6 +219,7 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
                 return
             }else if verfiedP!.count >= 30 {
                 //不能让密码大于30个字符
+                return 
             }else if FormatMethodUtil.validatePasswd(passwd: verfiedP!) != true{
                 alert.custom(self, "Attention", "New Password Strength Weak")
                 return

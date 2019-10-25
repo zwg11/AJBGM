@@ -41,6 +41,7 @@
 		404DF41E22F23B418B99982210F28297 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9B6DD9553609694BAC126BBFA65648A /* Assets.xcassets */; };
 		4103417E5D61D24965902570B01CC19F /* SharedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0557E67341EF86431E047CAF50A62A92 /* SharedView.swift */; };
 		45803CE73725E712D36BEA50254D994A /* emailCheckSecViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DC8F6CE4A54E2D70DC37A7931E98A7 /* emailCheckSecViewController.swift */; };
+		45EF33331045E85A1E58AC44AA1029E4 /* TimerForLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1F834BC1616B709547362ED7AE6678 /* TimerForLoad.swift */; };
 		4BE0A50E8FBE3EE70181B9DBA9FE2930 /* alertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12334E6F67A1C77D5D81A3AA8A2BEB74 /* alertViewController.swift */; };
 		4C433DFBF324335CF5426A76C3A8C0E6 /* Localization.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0112232D48380E271D8987FB869BBE8 /* Localization.strings */; };
 		4EA8F5F3B9FD7A60E6A46D35F6C6792C /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE1DA0B6A37D1A87017D70069003005 /* ChartViewController.swift */; };
@@ -210,6 +211,7 @@
 		7BD87968C7A6DBA89B736444D0C1C80C /* userBloodSetting.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = userBloodSetting.plist; sourceTree = "<group>"; };
 		7C3389A85E5BFB5D3E18B8DAA0516CC7 /* GetUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUnit.swift; sourceTree = "<group>"; };
 		7C340848915D471758C27C46FC15E8A6 /* getDataInHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = getDataInHome.swift; path = AIJian/Main/Home/getDataInHome.swift; sourceTree = SOURCE_ROOT; };
+		7E1F834BC1616B709547362ED7AE6678 /* TimerForLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerForLoad.swift; sourceTree = "<group>"; };
 		802706582BF2DD3F2F165BE6CC4B129F /* UnitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitViewController.swift; sourceTree = "<group>"; };
 		88B84B902E4E28BB9EBAC8F34677E2D8 /* loginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginViewController.swift; sourceTree = "<group>"; };
 		8A18E98B74565B5E695548D96DE09E13 /* SuggestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionViewController.swift; sourceTree = "<group>"; };
@@ -775,6 +777,7 @@
 				E59A10BC763D4D5E27D2541D481F5390 /* GetSortedData.swift */,
 				72C52548A79BC012285A79353950AF46 /* PlistSet.swift */,
 				3B4F369C05939A511383BE4E6F782638 /* SetColorOfText.swift */,
+				7E1F834BC1616B709547362ED7AE6678 /* TimerForLoad.swift */,
 				44ECE95E879F310D822741002FFB8089 /* UpdateManager.swift */,
 				0D612F090DA61DB57678E74F261C68D6 /* UserInfo.swift */,
 				8AD251DA1D7683298B03830243680EC8 /* format_method.swift */,
@@ -974,6 +977,7 @@
 				29C10571F503D7FCC9D1EFF3EEF54262 /* StatisticalDataViewController.swift in Sources */,
 				743A3F6B430D84EA70AEC37B7E7C611D /* String+extension.swift in Sources */,
 				D04F636417EB92069574FA06715E5F33 /* SuggestionViewController.swift in Sources */,
+				45EF33331045E85A1E58AC44AA1029E4 /* TimerForLoad.swift in Sources */,
 				C8C584C14E41F381E1E0B5BA0C387AE8 /* UIAlertViewController_Extension.swift in Sources */,
 				9B3DAB77A3DC41F8FAC306F8E17CF1C1 /* UIButton+Extension.swift in Sources */,
 				56ACC92032D24C9E3DE0AB02415266D6 /* UIImageView+Extension.swift in Sources */,

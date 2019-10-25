@@ -35,15 +35,19 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
             cell?.textLabel?.textColor = UIColor.white
             cell?.backgroundColor = UIColor.clear
             return cell!
+        }else{
+            var cell1 = tableView.cellForRow(at: indexPath)
+
+            if(cell1 == nil){
+                cell1 = dataTableViewCell(style: .default, reuseIdentifier: id1,secion: indexPath.section,row: indexPath.row)
+//                cell1 = UITableViewCell(style: .default, reuseIdentifier: id1)
+            }else{
+                while cell1?.contentView.subviews.last != nil{
+                    cell1?.contentView.subviews.last?.removeFromSuperview()
+                }
+            }
+            return cell1!
         }
-        var cell1 = tableView.dequeueReusableCell(withIdentifier: id1)
-        cell1?.selectionStyle = .none
-        cell1?.backgroundColor = UIColor.clear
-        if(cell1 == nil){
-            cell1 = dataTableViewCell(style: .default, reuseIdentifier: id1,secion: indexPath.section,row: indexPath.row)
-        }
-        
-        return cell1!
     }
 
 
@@ -87,9 +91,22 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         
 //        DATETableView.backgroundColor = ThemeColor
         DATETableView.backgroundColor = UIColor.clear
+        // 内含滚动视图设置
+        scroll.showsHorizontalScrollIndicator = true
+        scroll.indicatorStyle = .black
+        scroll.bounces = false
         
+        scroll.alwaysBounceHorizontal = false
         
-        NotificationCenter.default.addObserver(self, selector: #selector(test), name: NSNotification.Name(rawValue: "reloadTable"), object: nil)
+//        mainScrollView.addSubview(scroll)
+        // 数据表格设置
+//        DATATableView.dataSource = self
+//        DATATableView.delegate = self
+//        DATATableView.isScrollEnabled = false
+//        DATATableView.backgroundColor = UIColor.clear
+//        scroll.addSubview(DATATableView)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTable), name: NSNotification.Name(rawValue: "reloadTable"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(UpdateSuccess), name: NSNotification.Name(rawValue: "Update success"), object: nil)
         
     }
@@ -102,7 +119,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         refreshControl.endRefreshing()
     }
     
-    @objc func test(){
+    @objc func reloadTable(){
         // 将滚动视图置于初始状态
         self.mainScrollView.contentOffset = CGPoint(x: 0, y: 0)
         self.scroll.contentOffset = CGPoint(x: 0, y: 0)
@@ -110,6 +127,8 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         // 可以刷新了
         initTable()
         initScroll()
+        
+        
     }
     
     @objc func UpdateSuccess(){
@@ -124,14 +143,17 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
     
     // MARK: - 设置导航栏头部尾部高度，注意heightFor和viewFor函数都实现才能调节高度
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
         return 40
     }
     // 设置单元格高度
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
         return 44
     }
     // 设置表格头部视图
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+
         if tableView == DATETableView{
             let view = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 40))
             let label = UILabel(frame: CGRect(x: 0, y: 0, width: 80, height: 40))
@@ -156,12 +178,41 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
                 
             }
             return view
-        }else{
+        }
+        if tableView == DATATableView{
             // 设置头部视图
-            let view = DataTableViewOfHeader.init()
+            let view = UIView(frame: CGRect(x: 0, y: 0, width: 920, height: 40))
+
+            let glucoseButton = UIButton(type: .custom)
+            glucoseButton.setImage(UIImage(named: "iconxt"), for: .normal)
+            glucoseButton.setTitle("\(GetUnit.getBloodUnit())", for: .normal)
+            let glucoseLabel = tableViewCellCustomLabel.init(text: "\(GetUnit.getBloodUnit())",image: "iconxt")
+            let eventLabel = tableViewCellCustomLabel.init(text: "",image: "dec_time")
+            let appetiteLabel = tableViewCellCustomLabel.init(text: "",image: "appetite")
+            let insulinLabel = tableViewCellCustomLabel.init(text: "U",image: "insulin")
+            let weightLabel = tableViewCellCustomLabel.init(text: "\(GetUnit.getWeightUnit())",image: "weight")
+            //        let heightLabel = tableViewCellCustomLabel.init(text: " cm",image: "体重")
+            let bloodPressureLabel = tableViewCellCustomLabel.init(text: "\(GetUnit.getPressureUnit())",image: "blood pressure")
+            let medicineLabel = tableViewCellCustomLabel.init(text: "",image: "medicine")
+            let sportLabel = tableViewCellCustomLabel.init(text: "",image: "yundong")
+            let remarkLabel = tableViewCellCustomLabel.init(text: "",image: "remark")
+            let labels:[tableViewCellCustomLabel] = [glucoseLabel,eventLabel,appetiteLabel,insulinLabel,weightLabel,bloodPressureLabel,medicineLabel,sportLabel]
+            var offsetX:CGFloat = 0
+            //remarkLabel.frame = CGRect(x: offsetX, y: 0, width: 200, height: 40)
+            for i in labels{
+                i.frame = CGRect(x: offsetX, y: 0, width: 90, height: 40)
+
+                offsetX += 90
+                view.addSubview(i)
+            }
+
+            remarkLabel.frame = CGRect(x: offsetX, y: 0, width: 200, height: 40)
+            view.addSubview(remarkLabel)
+            view.backgroundColor = ThemeColor
+
             return view
         }
-        
+        return nil
     }
     // 不显示尾部视图
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -219,112 +270,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         self.present(alert, animated: true, completion: nil)
         
     }
-    
-//    // 将当前单元格的内容传入手动输入界面
-//    func EditData(_ section:Int,_ row:Int){
-//        let x = sortedData[section][row]
-//        let y = sortedTime[section][row]
-//        // 设置时间选择器的位置
-//
-//        // 手动输入标志位设置
-//        insert.isInsert = false
-//        // 血糖记录ID
-//        insert.recordId = x.bloodGlucoseRecordId!
-//        // 时间
-//        insert.input.setDate(y.toFormat("yyyy-MM-dd"))
-//        insert.input.setTime(y.toFormat("HH:mm"))
-//        // 血糖量
-//        if let value = x.bloodGlucoseMmol{
-//            if GetUnit.getBloodUnit() == "mmol/L"{
-//                // 设置文本框文本
-//                insert.input.setGlucoseValue("\(value)")
-//                // 设置滑块位置
-////                insert.input.glucose.XTSlider.setValue(Float(value), animated: false)
-//                insert.input.glucose.setValueAndThumbColor(value: Float(value))
-////                insert.input.glucose.value = Float(value)
-//            }else{
-//                // 设置文本框文本
-//                insert.input.setGlucoseValue(String(format: "%.0f", x.bloodGlucoseMg!))
-//                // 设置滑块位置
-////                insert.input.glucose.XTSlider.setValue(Float(x.bloodGlucoseMg!), animated: false)
-//                insert.input.setSlider(Float(x.bloodGlucoseMg!))
-////                insert.input.glucose.value = Float(x.bloodGlucoseMg!)
-//                insert.input.glucose.setValueAndThumbColor(value: Float(value))
-//            }
-//
-//        }
-//
-//
-//        // 检测时间段，非空
-//        insert.input.setEventValue(Int(x.detectionTime!))
-//        // 进餐量，非空
-//        insert.input.setPorValue(Int(x.eatNum!))
-//        // 胰岛素量
-//        if let insNum = x.insulinNum{
-//            insert.input.setInsNumValue("\(insNum)")
-//        }else{
-//            insert.input.setInsNumValue("")
-//        }
-//        // 胰岛素类型
-//        insert.input.setInsValue(x.insulinType ?? "Nothing")
-//
-//        // 体重
-//        if let weight = x.weightKg{
-//            if GetUnit.getWeightUnit() == "kg"{
-//                insert.input.setWeightValue("\(weight)")
-//            }else{
-//                insert.input.setWeightValue("\(x.weightLbs!)")
-//            }
-//        }else{
-//            insert.input.setWeightValue("")
-//        }
-//
-////        // 身高
-////        if let height = x.height{
-////            insert.input.setHeightValue("\(height)")
-////        }
-//
-//        // 血压
-//        if let sysValue = x.systolicPressureKpa{
-//            if GetUnit.getPressureUnit() == "mmHg"{
-//                insert.input.setSysValue("\(x.systolicPressureMmhg!)")
-//                insert.input.setDiaValue("\(x.diastolicPressureMmhg!)")
-//            }else{
-//                insert.input.setSysValue("\(sysValue)")
-//                insert.input.setDiaValue("\(x.diastolicPressureKpa!)")
-//            }
-//        }else{
-//            insert.input.setSysValue("")
-//            insert.input.setDiaValue("")
-//        }
-//        //******************************** 有bug，未设置被选中的项
-//        // 药物
-//        if let medicine = x.medicine{
-//            let medicineArr = medicine.components(separatedBy: ",")
-//            insert.setMedicineArray(medicineArr as Array)
-//        }
-//
-//
-//        // 运动
-//        insert.input.setSportType(x.sportType ?? "Nothing")
-//
-//
-//        // 运动时间
-//        if let sportTime = x.sportTime{
-//            insert.input.setSportTime("\(sportTime)")
-//        }else{
-//            insert.input.setSportTime("")
-//        }
-//        // 运动强度
-//        insert.input.setSportStrength(x.sportStrength ?? 1)
-//        // 备注
-//        insert.input.setRemark(text: x.remark ?? "")
-//
-//    }
-    
-
-    
-    
+  
     // MARK: - viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
         
@@ -337,6 +283,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         // 可以刷新了
         initTable()
         initScroll()
+        
     }
     // MARK: - initScroll
     // 初始化滚动视图、设置页面的所有滚动视图和表格的大小和坐标
@@ -371,12 +318,12 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         
         // 设置数据滚动视图内容的大小，该滚动视图只允许横向滚动
         scroll.contentSize = CGSize(width: 720+200, height: scHeight)
-        scroll.showsHorizontalScrollIndicator = true
-        scroll.indicatorStyle = .black
-        scroll.bounces = false
-        
-        scroll.alwaysBounceHorizontal = false
-        
+//        scroll.showsHorizontalScrollIndicator = true
+//        scroll.indicatorStyle = .black
+//        scroll.bounces = false
+//
+//        scroll.alwaysBounceHorizontal = false
+//
         mainScrollView.addSubview(scroll)
         scroll.backgroundColor = UIColor.clear
         scroll.snp.remakeConstraints{(make) in
@@ -391,11 +338,15 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         
         // create a tableView
         // **********其宽度要根据计算得出，高度也是根据数据量计算得出************
-        DATATableView = UITableView(frame: CGRect(x: 0, y: 0, width: 720 + 200, height: scHeight), style: .grouped)
+        DATATableView.frame = CGRect(x: 0, y: 0, width: 720 + 200, height: scHeight)
         DATATableView.dataSource = self
         DATATableView.delegate = self
         DATATableView.isScrollEnabled = false
         DATATableView.backgroundColor = UIColor.clear
+        // 清除滚动视图中的内容
+        while scroll.subviews.last != nil{
+            scroll.subviews.last?.removeFromSuperview()
+        }
         scroll.addSubview(DATATableView)
     }
     // 没有数据时在视图中心显示该标签
@@ -417,8 +368,19 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
             make.centerY.equalToSuperview()
         }
         // 重新加载表格内容
+//        DATATableView.tableHeaderView = nil
+//        DATATableView.tableHeaderView = DataTableViewOfHeader.init()
         DATATableView.reloadData()
+        // 刷新之前清除单元格所有内容
+//        for i in DATETableView.visibleCells{
+//            while i.contentView.subviews.last != nil{
+//                i.contentView.subviews.last?.removeFromSuperview()
+//            }
+//        }
         DATETableView.reloadData()
+
+//        DATATableView.layoutIfNeeded()
+//        DATETableView.layoutIfNeeded()
         // o有数据时移除该标签
         if sortedTime.count > 0{
             label.removeFromSuperview()
@@ -479,6 +441,8 @@ extension DataTableViewController{
                                 // 重新布局表格视图
                                 self.initTable()
                                 self.initScroll()
+                                
+                                
                             }
                         }
                         

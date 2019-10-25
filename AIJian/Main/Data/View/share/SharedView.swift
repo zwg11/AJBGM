@@ -95,7 +95,7 @@ class SharedView: UIView ,UITextFieldDelegate{
     lazy var phoneTextField:UITextField = {
         let textField = UITextField()
         textField.textAlignment = .left
-        textField.keyboardType = .default
+        textField.keyboardType = .numberPad
         textField.textColor = TextColor
         textField.layer.borderColor = UIColor.gray.cgColor
         textField.layer.borderWidth = 1

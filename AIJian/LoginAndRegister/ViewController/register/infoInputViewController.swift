@@ -209,8 +209,8 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
     @objc func finish(){
         let alertController = CustomAlertController()
         
-        userName = infoinputView.userNameTextField.text!
-        phoneNumber = infoinputView.phoneTextField.text!
+        userName = infoinputView.userNameTextField.text!.removeHeadAndTailSpacePro
+        phoneNumber = infoinputView.phoneTextField.text!.removeHeadAndTailSpacePro
         
         if userName == ""{
             alertController.custom(self, "Attention", "Name Empty")

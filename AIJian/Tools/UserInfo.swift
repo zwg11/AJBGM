@@ -39,6 +39,15 @@ class UserInfo{
         return email
     }
     
+    // 从plist 文件中提取 meterID
+    static func getMeterID() -> Dictionary<String, String>{
+        //let path = Bundle.main.path(forResource: "User", ofType: "plist")
+        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
+        var meterID:Dictionary<String, String>
+        meterID = data["meterID"] as! Dictionary
+        return meterID
+    }
+    
     // 设置plist 文件中的 userId
     static func setUserId(_ id:Int64){
         //let path = Bundle.main.path(forResource: "User", ofType: "plist")
@@ -61,6 +70,17 @@ class UserInfo{
         //let path = Bundle.main.path(forResource: "User", ofType: "plist")
         let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
         data["email"] = email
+        data.write(toFile: path, atomically: true)
+    }
+    
+    // 设置plist 文件中的 meterID
+    static func setMeterID(_ meterID:String,_ record:String){
+        //let path = Bundle.main.path(forResource: "User", ofType: "plist")
+        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
+        let arr = data["meterID"] as! NSMutableDictionary
+        // 更新配置文件内容
+        arr[meterID] = record
+        data["meterID"] = arr
         data.write(toFile: path, atomically: true)
     }
 }
