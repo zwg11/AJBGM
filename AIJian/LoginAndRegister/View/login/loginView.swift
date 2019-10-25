@@ -57,7 +57,7 @@ class loginView: UIView {
 
     // 忘记密码按钮
     lazy var forgetPasswordButton:UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setTitle("Forgot password", for: .normal)
         button.backgroundColor = UIColor.clear
         button.setTitleColor(TextColor, for: .normal)
@@ -68,7 +68,7 @@ class loginView: UIView {
     
     // 登录按钮
     lazy var loginwordButton:UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setTitle("Sign In", for: .normal)
         button.backgroundColor = ButtonColor
         button.tintColor = UIColor.white
@@ -81,7 +81,7 @@ class loginView: UIView {
     
     // 注册按钮
     lazy var registerButton:UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setTitle("New here?Sign up", for: .normal)
         button.backgroundColor = UIColor.clear
         button.setTitleColor(TextColor, for: .normal)

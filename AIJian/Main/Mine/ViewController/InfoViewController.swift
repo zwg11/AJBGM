@@ -55,7 +55,7 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
     
     // 设置导航栏左按钮样式
     private lazy var leftButton:UIButton = {
-        let button = UIButton.init(type: .custom)
+        let button = UIButton.init(type: .system)
         button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         button.setImage(UIImage(named: "back"), for: .normal)
         //button.setTitleColor(UIColor.blue, for: .normal)
@@ -64,7 +64,7 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
     }()
     
     lazy var rightButton:UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.addTarget(self, action: #selector(saveUserInfo), for: .touchUpInside)
         button.setTitle("Save", for: .normal)
         button.tintColor = ThemeColor
