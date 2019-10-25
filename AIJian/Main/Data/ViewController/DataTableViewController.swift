@@ -242,6 +242,13 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 设置点击单元格有选中z动画，手指松开时变为未选中
         tableView.deselectRow(at: indexPath, animated: false)
+        // 点击删除时弹出的警示框
+        let alert1 = UIAlertController(title: "Are You Sure To Delete", message: "", preferredStyle: .alert)
+        // 该动作删除一条记录
+        let sureAction = UIAlertAction(title: "Sure", style: .default, handler: {(UIAlertAction)->Void in
+            self.deleteData(section: indexPath.section, row: indexPath.row)
+        })
+    
         let alert = UIAlertController(title: "Choose To", message: "", preferredStyle: .alert)
         // 该动作编辑一条记录
         let editAction = UIAlertAction(title: "Edit", style: .default, handler: {(UIAlertAction)->Void in
@@ -252,22 +259,25 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
             // 将当前单元格的内容传入手动输入界面
             let date = sortedData[indexPath.section][indexPath.row]
             insert.EditData(date: date)
-            
+   
         })
         // 该动作删除一条记录，先删除服务器的，再删除本地数据库，最后删除全局变量的
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: {(UIAlertAction)->Void in
-            // 进行删除操作
-            self.deleteData(section: indexPath.section, row: indexPath.row)
-            
+            self.present(alert1, animated: true, completion: nil)
         })
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         editAction.setValue(UIColor.black, forKey: "_titleTextColor")
         deleteAction.setValue(UIColor.black, forKey: "_titleTextColor")
         cancelAction.setValue(UIColor.black, forKey: "_titleTextColor")
+        sureAction.setValue(UIColor.black, forKey: "_titleTextColor")
+        alert1.addAction(cancelAction)
+        alert1.addAction(sureAction)
         alert.addAction(editAction)
         alert.addAction(deleteAction)
         alert.addAction(cancelAction)
         self.present(alert, animated: true, completion: nil)
+        
+        
         
     }
   
@@ -275,7 +285,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
     override func viewWillAppear(_ animated: Bool) {
         
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor:UIColor.white]
-         
+        print("DateTableView appear.")
         // 将滚动视图置于初始状态
         self.mainScrollView.contentOffset = CGPoint(x: 0, y: 0)
         self.scroll.contentOffset = CGPoint(x: 0, y: 0)

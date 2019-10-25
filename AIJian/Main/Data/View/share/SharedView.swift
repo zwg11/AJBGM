@@ -25,7 +25,7 @@ class SharedView: UIView ,UITextFieldDelegate{
     }()
     // 按钮，用来发送报告
     lazy var sendButton:UIButton = {
-        let button = UIButton(type: .custom)
+        let button = UIButton(type: .system)
         button.setTitle("Send", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18)

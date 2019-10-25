@@ -31,7 +31,7 @@ class DataViewController: UIViewController {
         let button = UIButton.init(type: .system)
         button.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.2)
         button.addTarget(self, action: #selector(pickViewDismiss), for: .touchUpInside)
-        button.frame = CGRect(x: 0, y: 0, width: AJScreenWidth, height: AJScreenHeight)
+//        button.frame = CGRect(x: 0, y: 0, width: AJScreenWidth, height: AJScreenHeight)
         return button
     }()
     
@@ -77,10 +77,12 @@ class DataViewController: UIViewController {
     
     // 导航栏有按钮，用于弹出时间范围选择器
     lazy var rangePickerButton:UIButton = {
-        let button = UIButton()
+        let button = UIButton(type:.system)
         button.addTarget(self, action: #selector(chooseDate), for: .touchUpInside)
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.setTitle("Last 7 days", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         button.frame.size = CGSize(width: AJScreenWidth/3, height: 44)
         return button
     }()
@@ -157,12 +159,12 @@ class DataViewController: UIViewController {
 
         }
         
-        self.view.addSubview(dateRangePicker)
+        self.navigationController!.view.addSubview(dateRangePicker)
         dateRangePicker.snp.makeConstraints{(make) in
             make.left.right.equalToSuperview()
             make.height.equalTo(UIScreen.main.bounds.height/4)
             if #available(iOS 11.0, *) {
-                self.topConstraint = make.top.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(40).constraint
+                self.topConstraint = make.top.equalTo(self.navigationController!.view.safeAreaLayoutGuide.snp.bottom).offset(40).constraint
             } else {
                 // Fallback on earlier versions
                 self.topConstraint = make.top.equalTo(bottomLayoutGuide.snp.bottom).offset(40).constraint
@@ -231,9 +233,13 @@ class DataViewController: UIViewController {
         print("choose range date button clicked,appear done.")
 
         // 添加背景按钮
-        self.view.addSubview(backButton)
-        self.view.bringSubviewToFront(dateRangePicker)
+        self.navigationController!.view.addSubview(backButton)
+        backButton.snp.makeConstraints{(make) in
+            make.edges.equalToSuperview()
+        }
+        self.navigationController!.view.bringSubviewToFront(dateRangePicker)
         UIView.animate(withDuration: 0.5, animations: appear)
+        
     }
     
     // 该视图用来设置自定义选择日期范围的视图
@@ -359,14 +365,14 @@ class DataViewController: UIViewController {
             
             // 添加底部约束
             if #available(iOS 11.0, *) {
-                self.topConstraint = make.top.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(40).constraint
+                self.topConstraint = make.top.equalTo(self.navigationController!.view.safeAreaLayoutGuide.snp.bottom).offset(40).constraint
             } else {
                 // Fallback on earlier versions
                 self.topConstraint = make.top.equalTo(bottomLayoutGuide.snp.bottom).offset(40).constraint
             }
         }
         // 告诉当前控制器的View要更新约束了，动态更新约束，没有这句的话更新约束就没有动画效果
-        self.view.layoutIfNeeded()
+        self.navigationController!.view.layoutIfNeeded()
     }// 选择器消失
     
     
@@ -382,13 +388,13 @@ class DataViewController: UIViewController {
             
             // 添加底部约束
             if #available(iOS 11.0, *) {
-                self.bottomConstraint = make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).constraint
+                self.bottomConstraint = make.bottom.equalTo(self.navigationController!.view.safeAreaLayoutGuide.snp.bottom).constraint
             } else {
                 // Fallback on earlier versions
                 self.bottomConstraint = make.bottom.equalTo(bottomLayoutGuide.snp.top).constraint
             }
         }
-        self.view.layoutIfNeeded()
+        self.navigationController!.view.layoutIfNeeded()
     }//选择器显示
     
     

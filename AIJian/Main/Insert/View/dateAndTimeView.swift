@@ -25,7 +25,7 @@ class dateAndTimeView: UIView {
     }()
     // 选择日期按钮
     lazy var dateButton:UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         // 获取当前时间
         let now = Date()
         // 创建一个时间格式器
@@ -36,7 +36,7 @@ class dateAndTimeView: UIView {
     }()
     // 选择时间按钮
     lazy var timeButton:UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         // 获取当前时间
         let now = Date()
         // 创建一个时间格式器

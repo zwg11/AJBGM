@@ -144,14 +144,14 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
     
     // 药物选择按钮
     lazy var medicineChooseButton:UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.NorStyle(title: "Nothing")
         return button
     }()
     
     // 药物编辑按钮
     lazy var medicineEditButton:UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.NorStyle(title: "Edit")
         return button
     }()

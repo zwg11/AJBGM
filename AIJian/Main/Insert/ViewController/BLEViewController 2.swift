@@ -93,7 +93,8 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         //显示 ”加载“ 视图,加载图片旋转，且显示状态文字标签
         loadV.startIndicator()
         // 使得风火轮视图全屏显示
-        UIApplication.shared.keyWindow?.addSubview(loadV)
+//        UIApplication.shared.keyWindow?.addSubview(loadV)
+        self.navigationController?.view.addSubview(loadV)
 //        self.view.addSubview(loadV)
         loadV.setLabelText("Connecting Device..")
         startTimer()
@@ -604,7 +605,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
     var meterIDs:NSMutableDictionary?
     // 点击该按钮扫描设备
     private var button:UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         //button.tintColor = UIColor.white
 //        button.backgroundColor = SendButtonColor
         // button.titleLabel?.text = "扫描设备"
@@ -663,6 +664,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
     @objc func rightButtonClick(){
         // 设置去手动输入界面
         let insert = InsertViewController()
+        insert.title = "Add Data"
         self.navigationController?.pushViewController(insert, animated: false)
     }
     

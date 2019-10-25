@@ -255,7 +255,7 @@ class averageView: UIView {
                 }
             }
             
-            standardDaviation = sumStandardDaviation/Double(sumCheckNum)
+            standardDaviation = sqrt(sumStandardDaviation/Double(sumCheckNum))
             
             // 将计算结果赋值给对应的label
             if GetUnit.getBloodUnit() == "mg/dL"{

@@ -24,6 +24,12 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     // 最新记录
     var lastRecord = ""
     
+    let AlamofireManager:Alamofire.SessionManager = {
+        let conf = URLSessionConfiguration.default
+        conf.timeoutIntervalForRequest = 10
+        return Alamofire.SessionManager(configuration: conf)
+    }()
+    
     // 设置导航栏左按钮x样式
     private lazy var leftButton:UIButton = {
         let button = UIButton.init(type: .custom)
@@ -35,7 +41,16 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     // 返回上一个页面
     @objc func leftButtonClick(){
 
-         self.navigationController?.popViewController(animated: true)
+        // 点击删除时弹出的警示框
+        let alert = UIAlertController(title: "Back Without Save Data?", message: "", preferredStyle: .alert)
+        // 该动作删除一条记录
+        let sureAction = UIAlertAction(title: "Sure", style: .default, handler: {(UIAlertAction)->Void in
+            self.navigationController?.popViewController(animated: true)
+        })
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(cancelAction)
+        alert.addAction(sureAction)
+        self.present(alert, animated: true, completion: nil)
      }
     // 使得列表行数与数据数量一致
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -129,7 +144,7 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     var tableView = UITableView()
     // 该按钮实现App对血糖的记录
     private var button:UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
 //        button.tintColor = UIColor.white
 //        button.backgroundColor = UIColor.blue
         button.setTitle("Record Result", for: .normal)
@@ -171,7 +186,7 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         //手动输入数据，请求部分
         let dictString = [ "token":UserInfo.getToken(),"userId":UserInfo.getUserId() as Any,"userBloodGlucoseRecords":GlucoseJsonData] as [String : Any]
         // 向服务器申请插入数据请求
-        Alamofire.request(INSERT_RECORD,method: .post,parameters: dictString).responseString{ (response) in
+        AlamofireManager.request(INSERT_RECORD,method: .post,parameters: dictString).responseString{ (response) in
             if response.result.isSuccess {
                 if let jsonString = response.result.value {
                     print("进入验证过程")
@@ -200,12 +215,12 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
                                         // 跳转到原来的界面
                                         
                                         self.navigationController?.popToRootViewController(animated: false)
+                                        // 发送通知，提示插入成功
+                                        NotificationCenter.default.post(name: NSNotification.Name("InsertData"), object: self, userInfo: nil)
                                     })
                                 })
-                                // 跳转到原来的界面
-                                self.navigationController?.popToRootViewController(animated: false)
-                                // 发送通知，提示插入成功
-                                NotificationCenter.default.post(name: NSNotification.Name("InsertData"), object: self, userInfo: nil)
+
+                                
                             }else{
                                 print(responseModel.code)
                                 print("插入失败")

@@ -86,7 +86,7 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
     }()
     
         lazy var saveButton:UIButton = {
-            let button = UIButton()
+            let button = UIButton(type: .system)
             button.setTitle("Save", for: .normal)
             button.backgroundColor = ButtonColor
             button.setTitleColor(UIColor.white, for: .normal)

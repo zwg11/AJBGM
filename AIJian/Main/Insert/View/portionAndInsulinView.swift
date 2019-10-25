@@ -113,7 +113,7 @@ class portionAndInsulinView: UIView,UITextFieldDelegate {
     
     // 胰岛素选择按钮
     lazy var insulinButton:UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.NorStyle(title: "Nothing")
         return button
     }()

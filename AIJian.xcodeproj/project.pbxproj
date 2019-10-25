@@ -74,7 +74,6 @@
 		8FA5DCA84D635AA4D80C1A78D6EF2D17 /* DataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B20E6C74C7069BCCED010C7F429CCBA /* DataTableViewController.swift */; };
 		913C5A050E557527D087A3E79934646B /* IntensityChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8E8D0A6CA3F03313B4B856827E97DD /* IntensityChange.swift */; };
 		936A597C2AC4773B5A725A4B47936B31 /* viewToImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F07FB865C1B45AC2F704BE6D7A4BF4 /* viewToImage.swift */; };
-		93E546E5E1118F5FA76871EC98702104 /* LoadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2F4241A59E2EB545EC4954C1FD38B9 /* LoadView.swift */; };
 		957A7C093476F2DD3E1D27A459DA5B62 /* emailCheckSecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F6BFF01153E17E98228FE2B6DE05A3 /* emailCheckSecondView.swift */; };
 		9A52EC121DB581CF229AB2E3F50BBAE6 /* Eventhing_response.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C3FB678C55445CDE289E6C4AF9E0F1 /* Eventhing_response.swift */; };
 		9B3DAB77A3DC41F8FAC306F8E17CF1C1 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA336323AF93C849D90681604D2147DF /* UIButton+Extension.swift */; };
@@ -231,7 +230,6 @@
 		9CC343A4BFCBECD9056D60A82B6F7115 /* glucoseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = glucoseView.swift; sourceTree = "<group>"; };
 		9CCA193DA6A5E1E858111B284800163C /* BloodSetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BloodSetViewController.swift; sourceTree = "<group>"; };
 		9D6CD8071B1953BFC8FC49D0C07E5B17 /* QuitCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuitCellView.swift; sourceTree = "<group>"; };
-		9E2F4241A59E2EB545EC4954C1FD38B9 /* LoadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadView.swift; sourceTree = "<group>"; };
 		A0CD12C84AD248DAFB41C4466E30E5F0 /* loginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loginView.swift; sourceTree = "<group>"; };
 		A32EB0E8DBAE9B6ABD130E92D422FA94 /* BLEViewController 2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BLEViewController 2.swift"; sourceTree = "<group>"; };
 		A50E32E0C4224AB84E6F8B2316008860 /* DBSQLiteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBSQLiteManager.swift; sourceTree = "<group>"; };
@@ -703,7 +701,6 @@
 			children = (
 				BF80F129B376C63F914BDB119ECD0789 /* TableViewForInsulin */,
 				66F58ECE090CC8932E95E703B01B4E2B /* InputView.swift */,
-				9E2F4241A59E2EB545EC4954C1FD38B9 /* LoadView.swift */,
 				7A16F36F9537243E6B7560D1B9FF77A0 /* allPickerView.swift */,
 				41BAE5242D4EA9B456D06DAC9947B1AB /* bodyInfoView.swift */,
 				760452171F68DFBAE73622584ED2C38F /* dateAndTimeView.swift */,
@@ -955,7 +952,6 @@
 				0C48522C9A98AE69C9E473FB8886F207 /* InsulinViewController.swift in Sources */,
 				913C5A050E557527D087A3E79934646B /* IntensityChange.swift in Sources */,
 				7A18ABD895A54152058EAE905EF289FD /* LastResultTableViewCell.swift in Sources */,
-				93E546E5E1118F5FA76871EC98702104 /* LoadView.swift in Sources */,
 				A2362882D12624BFD10D37A285D02419 /* LocalizationTool.swift in Sources */,
 				F440EC390F52F7014B638916C024A81A /* MineViewController.swift in Sources */,
 				A87003F858AAC758556FC11B84E22CC6 /* NSDate+Date.swift in Sources */,

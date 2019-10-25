@@ -23,8 +23,6 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             return AJScreenWidth/3
         case 3,5:
             return AJScreenWidth/2
-//        case 5:
-//            return 150
         default:
             return AJScreenWidth/10
         }
@@ -32,13 +30,8 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let id = "reusedId"
-        //let id1 = "reuse"
-        //var cell = tableView.dequeueReusableCell(withIdentifier: id)
-        
         switch indexPath.row {
         case 0:
-            
-            
             let cell = UITableViewCell(style: .value1, reuseIdentifier: id)
             cell.selectionStyle = .none
             cell.textLabel?.text = "Latest BG"
@@ -191,37 +184,6 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         homeTableView.backgroundColor = UIColor.clear
         homeTableView.isScrollEnabled = true
         self.view.backgroundColor = UIColor.clear
-//        self.view.backgroundColor = UIColor.init(patternImage: UIImage(named: "bg")!)
-        // 设置监听器，监听是否弹出插入成功r弹窗
-//        NotificationCenter.default.addObserver(self, selector: #selector(InsertSuccess), name: NSNotification.Name(rawValue: "InsertData"), object: nil)
-
     }
-
-    @objc func InsertSuccess(){
-//        let x = UIAlertController(title: "", message: "Insert Success.", preferredStyle: .alert)
-//        self.present(x, animated: true, completion: {()->Void in
-//            sleep(1)
-//            x.dismiss(animated: true, completion: nil)
-//        })
-        
-    }
- 
 }
 
-
-extension HomeViewController{
-//    override var shouldAutorotate: Bool {
-//        return false
-//    }
-//    
-//    
-//    
-//    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-//        return .portrait
-//    }
-//    
-//    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
-//        return .portrait
-//    }
-  
-}

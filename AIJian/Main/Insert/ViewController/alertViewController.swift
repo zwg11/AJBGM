@@ -124,7 +124,8 @@ class alertViewController: UIAlertController,UITableViewDelegate,UITableViewData
         tabelView.delegate = self
         tabelView.dataSource = self
         // 设置tabelview不可滚动
-        tabelView.isScrollEnabled = false
+        tabelView.isScrollEnabled = true
+        tabelView.bounces = false
         tabelView.layer.borderColor = UIColor.lightGray.cgColor
         tabelView.layer.borderWidth = 1
         self.view.addSubview(tabelView)
@@ -136,7 +137,7 @@ class alertViewController: UIAlertController,UITableViewDelegate,UITableViewData
         
         let cancelAction = UIAlertAction(title: "cancel", style: .default, handler: {
             action in
-            print("cancel")
+            print("Cancel")
             //如果取消的话，需要将原先保留下来的状态数组boolarr。替换成用户选择了的数组
             self.boolArray = self.boolarr
             print("定义中，点击了取消之后的更新数据",self.boolArray)
@@ -152,7 +153,7 @@ class alertViewController: UIAlertController,UITableViewDelegate,UITableViewData
             }
             self.selectedNum = sum
         })
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: {
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: {
             action in
             print("确定")
             //如果取消的话，需要将用户选择了的数组。替换成原先保留下来的状态数组boolarr

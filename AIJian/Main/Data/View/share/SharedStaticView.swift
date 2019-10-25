@@ -209,9 +209,9 @@ class SharedStaticView: UIView {
             }
         }
         
-        PerMealStatic.initContent(perMealData)
-        AfterMealStatic.initContent(AfterMealData)
-        ToltalStatic.initContent(TotalData)
+        PerMealStatic.initContent(perMealData,time: 1)
+        AfterMealStatic.initContent(AfterMealData,time: 2)
+        ToltalStatic.initContent(TotalData,time: 3)
     }
 
 }
@@ -320,7 +320,7 @@ class MealStatic: UIView {
     }// func setupUI() end
     
     // label 内容设置
-    func initContent(_ datas:[glucoseDate]){
+    func initContent(_ datas:[glucoseDate],time:Int){
         TestNumLabel.text = "\(datas.count)"
         
         if datas.count <= 0{
@@ -370,21 +370,50 @@ class MealStatic: UIView {
             }
             
             SD = SD/Double(datas.count)
+            SD = sqrt(SD)
             SDLabel.text = String(format: "%.1f", SD)
             
             // 不同血糖值范围检测次数及其百分比
             // 检测次数
-            for i in datas{
-                if Double(i.bloodGlucoseMg!) < GetBloodLimit.getBeforeDinnerLow(){
-                    
-                    belowNum += 1
-                }else if Double(i.bloodGlucoseMg!) < GetBloodLimit.getBeforeDinnerTop(){
-                    
-                    withinNum += 1
-                }else{
-                    aboveNum += 1
+            // time: 1,表示餐前；2，表示餐后；3，表示任意
+            if time == 1{
+                for i in datas{
+                    if Double(i.bloodGlucoseMg!) < GetBloodLimit.getBeforeDinnerLow(){
+                        
+                        belowNum += 1
+                    }else if Double(i.bloodGlucoseMg!) < GetBloodLimit.getBeforeDinnerTop(){
+                        
+                        withinNum += 1
+                    }else{
+                        aboveNum += 1
+                    }
+                }
+            }else if time == 2{
+                for i in datas{
+                    if Double(i.bloodGlucoseMg!) < GetBloodLimit.getAfterDinnerLow(){
+                        
+                        belowNum += 1
+                    }else if Double(i.bloodGlucoseMg!) < GetBloodLimit.getAfterDinnerTop(){
+                        
+                        withinNum += 1
+                    }else{
+                        aboveNum += 1
+                    }
+                }
+            }else {
+                for i in datas{
+                    if Double(i.bloodGlucoseMg!) < GetBloodLimit.getRandomDinnerLow(){
+                        
+                        belowNum += 1
+                    }else if Double(i.bloodGlucoseMg!) < GetBloodLimit.getRandomDinnerTop(){
+                        
+                        withinNum += 1
+                    }else{
+                        aboveNum += 1
+                    }
                 }
             }
+            
             // 显示百分比和次数，格式 0%(0)
             let x:Int = 100*aboveNum/datas.count
             let y:Int = 100*withinNum/datas.count

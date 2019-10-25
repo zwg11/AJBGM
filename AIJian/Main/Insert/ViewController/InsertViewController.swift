@@ -12,6 +12,12 @@ import HandyJSON
 
 class InsertViewController: UIViewController {
 
+    let AlamofireManager:Alamofire.SessionManager = {
+        let conf = URLSessionConfiguration.default
+        conf.timeoutIntervalForRequest = 10
+        return Alamofire.SessionManager(configuration: conf)
+    }()
+    
     lazy var input:InputView = {
         let view = InputView()
         view.setupUI()
@@ -73,10 +79,11 @@ class InsertViewController: UIViewController {
     
     // 设置导航栏右按钮样式
     private lazy var rightButton:UIButton = {
-        let button = UIButton.init(type: .custom)
+        let button = UIButton.init(type: .system)
         button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         button.setTitle("Save", for: .normal)
-        //button.setTitleColor(UIColor.blue, for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         button.addTarget(self, action: #selector(save), for: .touchUpInside)
         return button
     }()
@@ -90,7 +97,7 @@ class InsertViewController: UIViewController {
         super.viewDidLoad()
 //        self.view.backgroundColor = ThemeColor
         self.view.backgroundColor = UIColor.clear
-        self.title = "Add Data"
+//        self.title = "Add Data"
         
 
         
@@ -132,7 +139,12 @@ class InsertViewController: UIViewController {
 //        medicineChooseAlert.alertData = data["medicine"] as! [String]
         // 设置框的高度，根据单元格数量和表格上下约束计算得出
         medicineChooseAlert.view.snp.updateConstraints{(make) in
-            make.height.equalTo(arr.count*35+90)
+            if arr.count>8{
+                make.height.equalTo(8*35+90)
+            }else{
+                make.height.equalTo(arr.count*35+90)
+            }
+            
         }
         // 更新单元格
         medicineChooseAlert.tabelView.reloadData()
@@ -220,12 +232,12 @@ class InsertViewController: UIViewController {
     //MARK: - 点击保存
     @objc func save(){
         // 风火轮启动
-        let indicator = CustomIndicatorView()
+        let indicator = CustomIndicatorView.init(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: AJScreenHeight))
         indicator.setupUI("")
-        self.view.addSubview(indicator)
-        indicator.snp.makeConstraints{(make) in
-            make.edges.equalToSuperview()
-        }
+//        UIApplication.shared.keyWindow?.addSubview(indicator)
+        self.navigationController?.view.addSubview(indicator)
+//        self.view.addSubview(indicator)
+
         indicator.startIndicator()
         
         let alert = CustomAlertController()
@@ -520,7 +532,7 @@ class InsertViewController: UIViewController {
         // 插入和修改的网络请求是不一样的
         if isInsert{
             // 向服务器申请插入数据请求
-            Alamofire.request(INSERT_RECORD,method: .post,parameters: dictString).responseString{ (response) in
+            AlamofireManager.request(INSERT_RECORD,method: .post,parameters: dictString).responseString{ (response) in
                 if response.result.isSuccess {
                     if let jsonString = response.result.value {
                         print("进入验证过程")
@@ -569,18 +581,25 @@ class InsertViewController: UIViewController {
                                 // 风火轮停止
                                 indicator.stopIndicator()
                                 indicator.removeFromSuperview()
-                                alert.custom(self, "", "Data Update Failure.")
+                                alert.custom(self, "", "Data Insertdate Failure.")
                                 
                             }
                         } //end of letif
                     }
+                }else{
+                print("插入失败")
+                // 风火轮停止
+                indicator.stopIndicator()
+                indicator.removeFromSuperview()
+                    alert.custom(self, "Error", "Network Exception,Please Try Again Later.")
+                    
                 }
             }//end of request
         }else{
             let dic = ["userId":UserInfo.getUserId(),"token":UserInfo.getToken(),"userBloodGlucoseRecord":insertData.toJSONString()!] as [String : Any]
             print("dic:\(dic)")
             // 向服务器申请更新数据请求
-            Alamofire.request(UPDATE_RECORD,method: .post,parameters: dic as Parameters).responseString{ (response) in
+            AlamofireManager.request(UPDATE_RECORD,method: .post,parameters: dic as Parameters).responseString{ (response) in
                 if response.result.isSuccess {
                     if let jsonString = response.result.value {
                         print("进入验证过程")
@@ -608,20 +627,18 @@ class InsertViewController: UIViewController {
                                 // 风火轮停止
                                 indicator.stopIndicator()
                                 indicator.removeFromSuperview()
-                                
-//                                let x = UIAlertController(title: "", message: "Update Success.", preferredStyle: .alert)
-//                                self.present(x, animated: true, completion: nil)
-//                                sleep(2)
-//                                x.dismiss(animated: true, completion: nil)
-                                // 跳转到原来的界面
+                                // 提示更新成功
+                                let x = UIAlertController(title: "", message: "Update Success.", preferredStyle: .alert)
+                                self.present(x, animated: true, completion: {()->Void in
+                                    sleep(1)
+                                    x.dismiss(animated: true, completion: {
+                                        // 跳转到原来的界面
+                                        self.navigationController?.popViewController(animated: true)
+                                    })
+                                })
 
-//                                self.presentedViewController!.present(x, animated: true, completion: nil)
-                                self.navigationController?.popViewController(animated: true)
-                                // 设置返回首页
-//                                self.tabBarController?.selectedIndex = 0
                                 NotificationCenter.default.post(name: NSNotification.Name("Data Update success"), object: self, userInfo: nil)
-//                                sleep(2)
-//                                x.dismiss(animated: true, completion: nil)
+
                             }else{
                                 print(responseModel.code)
                                 print("更新失败")
@@ -637,6 +654,13 @@ class InsertViewController: UIViewController {
                             }
                         } //end of letif
                     }
+                }else{
+                print("更新失败")
+                // 风火轮停止
+                indicator.stopIndicator()
+                indicator.removeFromSuperview()
+                    alert.custom(self, "Error", "Network Exception,Please Try Again Later.")
+                    
                 }
             }//end of request
         }
@@ -750,7 +774,8 @@ extension InsertViewController{
     func EditData(date:glucoseDate){
         let x = date
 //        let y = sortedTime[section][row]
-        // 设置时间选择器的位置
+        // 设置当前标题
+        self.title = "Update Data"
         
         // 手动输入标志位设置
         self.isInsert = false
