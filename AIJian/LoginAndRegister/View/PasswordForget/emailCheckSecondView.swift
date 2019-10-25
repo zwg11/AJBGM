@@ -54,7 +54,7 @@ class emailCheckSecondView: UIView {
     
     // 确认修改按钮
     lazy var changeSureButton:UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setTitle("OK", for: .normal)
         button.backgroundColor = ButtonColor
         button.setTitleColor(UIColor.white, for: .normal)

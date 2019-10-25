@@ -57,7 +57,7 @@ class registerView: UIView {
     
     // 获取验证码按钮
     lazy var getAuthCodeButton:UIButton = {
-        let button = UIButton(type: .custom)
+        let button = UIButton(type: .system)
         button.setTitle(" Send Code", for: .normal)
         button.backgroundColor = SendButtonColor
         button.setTitleColor(UIColor.white, for: .normal)
@@ -124,7 +124,7 @@ class registerView: UIView {
     
     // 下一步按钮
     lazy var nextButton:UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setTitle("Next", for: .normal)
         button.backgroundColor = ButtonColor
         button.setTitleColor(UIColor.white, for: .normal)

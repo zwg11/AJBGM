@@ -629,7 +629,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
     
     // 加载视图
     private lazy var loadV:CustomIndicatorView = {
-        let view = CustomIndicatorView.init(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+        let view = CustomIndicatorView.init(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: AJScreenHeight))
         view.setupUI("")
         //view.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.1)
         return view

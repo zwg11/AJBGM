@@ -69,7 +69,7 @@ class loginViewController: UIViewController,UITextFieldDelegate {
 //        self.present(AJTabbarController(), animated: false, completion: nil)
         //在此处获取邮箱和密码最为恰当
         let alertController = CustomAlertController()
-        email = loginview.userNameTextField.text!
+        email = loginview.userNameTextField.text!.removeHeadAndTailSpacePro
         password = loginview.passwordTextField.text!
         if email == ""{
             alertController.custom(self,"Attention", "Email Empty")

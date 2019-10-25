@@ -173,7 +173,7 @@ class InsertViewController: UIViewController {
             // 文本框为空，不做任何事
             if alert.textFields![0].text?.removeHeadAndTailSpacePro == "" {
                 return
-            }else if alert.textFields![0].text!.removeHeadAndTailSpacePro.count >= 100 { //单个不能超过100个字符
+            }else if alert.textFields![0].text!.removeHeadAndTailSpacePro.count >= 50 { //单个不能超过100个字符
                 return
             }else{
                 arr.append(alert.textFields![0].text!.removeHeadAndTailSpacePro)

@@ -33,7 +33,7 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
     }()
     // 设置导航栏左按钮样式
     private lazy var leftButton:UIButton = {
-        let button = UIButton.init(type: .custom)
+        let button = UIButton.init(type: .system)
         button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         button.setImage(UIImage(named: "back"), for: .normal)
         //button.setTitleColor(UIColor.blue, for: .normal)
@@ -124,7 +124,7 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
     @objc func getAuthCode(){
         print("点击获取验证码")
         let alertController = CustomAlertController()
-        email = emailCheck.emailTextField.text!
+        email = emailCheck.emailTextField.text!.removeHeadAndTailSpacePro
         print(email!)
         /*
          需要判断邮箱不为空才能获取验证码

@@ -129,7 +129,7 @@ class InfoInputView: UIView {
 //        return textField
 //    }()
     lazy var nationButton:UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setImage(UIImage(named: "Country"), for: .normal)
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
         button.setTitleColor(TextColor, for: .normal)
@@ -182,7 +182,7 @@ class InfoInputView: UIView {
     
     // 选择出生日期按钮
     lazy var dateButton:UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         // 获取当前时间
         let now = Date()
         // 创建一个时间格式器
@@ -199,7 +199,7 @@ class InfoInputView: UIView {
     
     // 完成按钮
     lazy var finishButton:UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setTitle("Sign Up", for: .normal)
         button.backgroundColor = ButtonColor
         button.setTitleColor(UIColor.white, for: .normal)

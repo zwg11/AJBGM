@@ -12,7 +12,7 @@ class QuitCellView:UITableViewCell{
     
     
      lazy var quitButton:UIButton = {
-        let quitLogin = UIButton(type:.system)
+        let quitLogin = UIButton(type: .system)
         quitLogin.backgroundColor = ButtonColor
         quitLogin.tintColor = UIColor.white
         quitLogin.setTitleColor(UIColor.white, for: .normal)

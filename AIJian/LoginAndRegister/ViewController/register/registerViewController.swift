@@ -111,7 +111,7 @@ class registerViewController: UIViewController,UITextFieldDelegate {
         let infoInput_next: infoInputViewController = infoInputViewController()
         print(infoInput_next)
 //        let infoInput_next = infoInputViewController.self
-        password = register.passwordTextField.text!
+        password = register.passwordTextField.text!.removeHeadAndTailSpacePro
         passwordSec = register.passwordSecTextField.text!
         email_code = register.authCodeTextField.text!
         email = register.emailTextField.text!

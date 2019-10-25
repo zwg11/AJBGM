@@ -55,7 +55,7 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
     
     // 设置导航栏左按钮样式
     private lazy var leftButton:UIButton = {
-        let button = UIButton.init(type: .custom)
+        let button = UIButton.init(type: .system)
         button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         button.setImage(UIImage(named: "back"), for: .normal)
         //button.setTitleColor(UIColor.blue, for: .normal)
@@ -64,7 +64,7 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
     }()
     
     lazy var rightButton:UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.addTarget(self, action: #selector(saveUserInfo), for: .touchUpInside)
         button.setTitle("Save", for: .normal)
         button.tintColor = ThemeColor
@@ -419,13 +419,13 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
         let okAction = UIAlertAction(title: "Sure", style: .default, handler: {
             action in
-            let UserName = alertController.textFields!.first!
-            if String(UserName.text!) == ""  {
+            let PhoneNum = alertController.textFields!.first!
+            if String(PhoneNum.text!).removeHeadAndTailSpacePro == ""  {
             
-            }else if String(UserName.text!).count >= 255 {
+            }else if String(PhoneNum.text!).count >= 255 {
                     
             }else{
-                self.infoDataArray[6] = UserName.text!
+                self.infoDataArray[6] = PhoneNum.text!.removeHeadAndTailSpacePro
                 self.updateSth = true
                 self.tableview.reloadRows(at: [IndexPath(row:self.num,section:0)], with: .fade)
             }
