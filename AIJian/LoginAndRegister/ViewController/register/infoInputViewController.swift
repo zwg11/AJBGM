@@ -88,7 +88,7 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
 //        self.view.backgroundColor = UIColor.white
         self.navigationController?.isNavigationBarHidden = false
 //        self.navigationController?.navigationBar.backgroundColor = ThemeColor
-        self.navigationController?.navigationBar.barTintColor = ThemeColor
+//        self.navigationController?.navigationBar.barTintColor = ThemeColor
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: NaviTitleColor]
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)

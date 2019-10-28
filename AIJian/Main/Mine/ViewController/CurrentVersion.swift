@@ -13,7 +13,7 @@ class CurrentVersion:UIViewController{
     
     // 设置导航栏左按钮样式
     private lazy var leftButton:UIButton = {
-        let button = UIButton.init(type: .system)
+        let button = UIButton.init(type: .custom)
         button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         button.setImage(UIImage(named: "back"), for: .normal)
         //button.setTitleColor(UIColor.blue, for: .normal)
@@ -36,8 +36,8 @@ class CurrentVersion:UIViewController{
         self.view.addSubview(glucoseImage)
         glucoseImage.snp.makeConstraints{ (make) in
             make.left.equalTo(AJScreenWidth/5)
-            make.right.equalTo(-AJScreenWidth/5)
-            make.height.equalTo(AJScreenWidth/5)
+            make.right.equalTo(-AJScreenWidth/7)
+            make.height.equalTo(AJScreenWidth/7)
             make.top.equalTo(topLayoutGuide.snp.bottom).offset(AJScreenHeight / 7)
         }
         

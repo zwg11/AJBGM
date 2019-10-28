@@ -150,8 +150,8 @@ class registerView: UIView {
         AJImageView.snp.makeConstraints{(make) in
 //            make.width.equalTo(AJScreenWidth/2)
             make.height.equalTo(AJScreenWidth/5)
-            make.left.equalTo(AJScreenWidth/5)
-            make.right.equalTo(-AJScreenWidth/5)
+            make.left.equalTo(AJScreenWidth/7)
+            make.right.equalTo(-AJScreenWidth/7)
             make.top.equalTo(AJScreenWidth/8)
         }
         
