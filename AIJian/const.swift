@@ -57,7 +57,6 @@ let navigationBarHeight : CGFloat = isIphoneX ? 88 : 64
 let tabBarHeight : CGFloat = isIphoneX ? 49 + 34 : 49
 
 
-let ABOUTUS_STRING = "艾康生物科技有限公司"
 
 var weightUnit : String = "kg"
 var heightUnit : String = "cm"
