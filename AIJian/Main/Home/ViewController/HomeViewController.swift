@@ -98,10 +98,17 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             let x = DBSQLiteManager.shareManager()
             // 在数据库取出最近一次的血糖记录
             let data = x.selectLastGlucoseRecord(UserInfo.getUserId())
-            // 初始化insert界面
-            let insert = InsertViewController()
-            insert.EditData(date: data)
-            self.navigationController?.pushViewController(insert, animated: false)
+            // 如果data不为空
+            if let lastData = data{
+                // 初始化insert界面
+                let insert = InsertViewController()
+                insert.EditData(date: data)
+                self.navigationController?.pushViewController(insert, animated: false)
+            }else{
+                let alert = CustomAlertController()
+                alert.custom(self, "Attension", "No Data.")
+            }
+            
         }
     }
     
