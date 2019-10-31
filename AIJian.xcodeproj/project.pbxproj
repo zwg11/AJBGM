@@ -212,7 +212,6 @@
 		7C340848915D471758C27C46FC15E8A6 /* getDataInHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = getDataInHome.swift; path = AIJian/Main/Home/getDataInHome.swift; sourceTree = SOURCE_ROOT; };
 		7E1F834BC1616B709547362ED7AE6678 /* TimerForLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerForLoad.swift; sourceTree = "<group>"; };
 		802706582BF2DD3F2F165BE6CC4B129F /* UnitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitViewController.swift; sourceTree = "<group>"; };
-		844B3F33236837C20025DD67 /* AIJian.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AIJian.entitlements; sourceTree = "<group>"; };
 		88B84B902E4E28BB9EBAC8F34677E2D8 /* loginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginViewController.swift; sourceTree = "<group>"; };
 		8A18E98B74565B5E695548D96DE09E13 /* SuggestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionViewController.swift; sourceTree = "<group>"; };
 		8AB8DBFCEA7297369A51108D4F1C5D91 /* InsulinType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsulinType.swift; sourceTree = "<group>"; };
@@ -239,6 +238,7 @@
 		A8C3FB678C55445CDE289E6C4AF9E0F1 /* Eventhing_response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Eventhing_response.swift; sourceTree = "<group>"; };
 		A9898FA10A2CB87AAD7AD91B22FF72ED /* BolusInsulinTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BolusInsulinTableView.swift; sourceTree = "<group>"; };
 		A9B6DD9553609694BAC126BBFA65648A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		ACC506478CB78866C8C8E9B479A8C649 /* AIJian.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AIJian.entitlements; sourceTree = "<group>"; };
 		AE9D2F5F3748AFDB28A21FD34F1F2A2C /* AJStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AJStartView.swift; sourceTree = "<group>"; };
 		AEB5C68EDC76F69EA0E7DCD122ED6AB4 /* UITextField+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		AF99105C98E070F5A2AB3295DDBB3B84 /* Pods_AIJian.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AIJian.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -314,7 +314,6 @@
 		206ED36DDB2B08FEBFF69272A4801034 /* AIJian */ = {
 			isa = PBXGroup;
 			children = (
-				844B3F33236837C20025DD67 /* AIJian.entitlements */,
 				5DB6D41E1DBD4DEE62BD6AEFE4B29F64 /* Localization */,
 				A0041A48F7A8684991B518C9F2827DCB /* LoginAndRegister */,
 				6B4C41AA49F4BA8383C452B7BC7DE4A4 /* Main */,
@@ -322,6 +321,7 @@
 				03703B9D5A4517C1D27073C4C4F20A55 /* Storage */,
 				F9662D194C68061F859B49F34545F0DF /* Tools */,
 				740973640689B3902B55C2DE31E7B66A /* extension */,
+				ACC506478CB78866C8C8E9B479A8C649 /* AIJian.entitlements */,
 				428DE12BF8AED7060D2DACBB1BDB9E15 /* AppDelegate.swift */,
 				A9B6DD9553609694BAC126BBFA65648A /* Assets.xcassets */,
 				5EAFAE8757FDB6305DED9249DB2CB82F /* Info.plist */,
