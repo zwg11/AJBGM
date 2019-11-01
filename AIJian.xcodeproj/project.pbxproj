@@ -238,6 +238,7 @@
 		A8C3FB678C55445CDE289E6C4AF9E0F1 /* Eventhing_response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Eventhing_response.swift; sourceTree = "<group>"; };
 		A9898FA10A2CB87AAD7AD91B22FF72ED /* BolusInsulinTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BolusInsulinTableView.swift; sourceTree = "<group>"; };
 		A9B6DD9553609694BAC126BBFA65648A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		ACC506478CB78866C8C8E9B479A8C649 /* AIJian.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AIJian.entitlements; sourceTree = "<group>"; };
 		AE9D2F5F3748AFDB28A21FD34F1F2A2C /* AJStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AJStartView.swift; sourceTree = "<group>"; };
 		AEB5C68EDC76F69EA0E7DCD122ED6AB4 /* UITextField+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		AF99105C98E070F5A2AB3295DDBB3B84 /* Pods_AIJian.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AIJian.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -320,6 +321,7 @@
 				03703B9D5A4517C1D27073C4C4F20A55 /* Storage */,
 				F9662D194C68061F859B49F34545F0DF /* Tools */,
 				740973640689B3902B55C2DE31E7B66A /* extension */,
+				ACC506478CB78866C8C8E9B479A8C649 /* AIJian.entitlements */,
 				428DE12BF8AED7060D2DACBB1BDB9E15 /* AppDelegate.swift */,
 				A9B6DD9553609694BAC126BBFA65648A /* Assets.xcassets */,
 				5EAFAE8757FDB6305DED9249DB2CB82F /* Info.plist */,
@@ -817,6 +819,11 @@
 				TargetAttributes = {
 					2EB99137C04148D2934AF4128A650BDB = {
 						CreatedOnToolsVersion = 10.2.1;
+						SystemCapabilities = {
+							com.apple.NetworkExtensions.iOS = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -1186,15 +1193,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = U556FBGR65;
+				DEVELOPMENT_TEAM = 9QH38524SB;
 				INFOPLIST_FILE = AIJian/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zhuozuozhan.ai;
+				PRODUCT_BUNDLE_IDENTIFIER = com.acon.glucose;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1207,15 +1215,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = U556FBGR65;
+				DEVELOPMENT_TEAM = 9QH38524SB;
+
 				INFOPLIST_FILE = AIJian/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zhuozuozhan.ai;
+				PRODUCT_BUNDLE_IDENTIFIER = com.acon.glucose;
+
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;

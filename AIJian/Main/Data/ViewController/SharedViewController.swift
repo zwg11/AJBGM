@@ -11,7 +11,12 @@ import SnapKit
 
 class SharedViewController: UIViewController,UITextFieldDelegate {
 
-    
+    // 加载视图
+    private lazy var indicator:CustomIndicatorView = {
+        let view = CustomIndicatorView.init(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: AJScreenHeight))
+        view.setupUI("")
+        return view
+    }()
     // 记录日期
     var date:String?
     // 记录姓名
@@ -42,28 +47,37 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
     }
     // 将shareV视图生成为图片
     @objc func sendImage(){
-//        let indicator = CustomIndicatorView()
-//        indicator.setupUI("正在生成图片...")
-//        self.view.addSubview(indicator)
-//        indicator.snp.makeConstraints{(make) in
-//            make.edges.equalToSuperview()
-//        }
+        // 添加风火轮
+        
+//        indicator.setLabelText("Image Being Generated...")
+//        self.navigationController?.view.addSubview(indicator)
 //        indicator.startIndicator()
         let alert = CustomAlertController()
+        
+        if sortedByDateOfData == nil || sortedByDateOfData?.count == 0{
+            alert.custom(self,"Attention", "No Data")
+            return
+        }
+        
         let name = shareV.nameTextField.text
         let phone = shareV.phoneTextField.text
         if name == ""{
+            
+//            indicator.stopIndicator()
             alert.custom(self,"Attention", "Name Empty")
             return
         }
         if phone == ""{
+//            indicator.stopIndicator()
             alert.custom(self,"Attention", "Phone Empty")
             return
         }
         if name!.count >= 50{
+//            indicator.stopIndicator()
             return
         }
         if phone!.count >= 30{
+//            indicator.stopIndicator()
             return
         }
         //设置名字和电话
@@ -78,8 +92,8 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
         let activityItems = [image]
         // 创建
         let toVC = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+        // 删除风火轮
 //        indicator.stopIndicator()
-//        indicator.removeFromSuperview()
         self.present(toVC, animated: true, completion: nil)
     }
     

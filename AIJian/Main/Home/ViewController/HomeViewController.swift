@@ -42,7 +42,7 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             let data = x.selectLastGlucoseRecord(UserInfo.getUserId())
 
             // 显示时间
-            if let time = data.createTime{
+            if let time = data?.createTime{
                 cell.detailTextLabel?.text = time.toDate()?.date.toFormat("yyyy-MM-dd HH:mm")
             }
             
@@ -93,20 +93,22 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        
         if indexPath.row == 1{
             
             let x = DBSQLiteManager.shareManager()
             // 在数据库取出最近一次的血糖记录
             let data = x.selectLastGlucoseRecord(UserInfo.getUserId())
             // 如果data不为空
-            if let lastData = data{
+            if data != nil{
                 // 初始化insert界面
                 let insert = InsertViewController()
-                insert.EditData(date: data)
+                insert.EditData(date: data!)
                 self.navigationController?.pushViewController(insert, animated: false)
             }else{
-                let alert = CustomAlertController()
-                alert.custom(self, "Attension", "No Data.")
+//                let alert = CustomAlertController()
+//                alert.custom(self, "Attension", "No Data.")
             }
             
         }

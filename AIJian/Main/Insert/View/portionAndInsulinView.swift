@@ -33,40 +33,29 @@ class portionAndInsulinView: UIView,UITextFieldDelegate {
 //    }()
     private lazy var portionNoButton:UIButton = {
         let button = UIButton()
-        button.setTitle("No Meal", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-        button.setDeselected()
-        button.tag = 0
+        button.setNormalStyle("No Meal", 0)
         button.addTarget(self, action: #selector(intensityChange(_:)), for: .touchUpInside)
         return button
     }()
     
     private lazy var portionMuchButton:UIButton = {
         let button = UIButton()
-        button.setTitle("Too Much", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-        button.setDeselected()
-        button.tag = 1
+        button.setNormalStyle("Too Much", 1)
+
         button.addTarget(self, action: #selector(intensityChange(_:)), for: .touchUpInside)
         return button
     }()
     
     private lazy var portionNormalButton:UIButton = {
         let button = UIButton()
-        button.setTitle("Normal", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-        button.setDeselected()
-        button.tag = 2
+        button.setNormalStyle("Normal", 2)
         button.addTarget(self, action: #selector(intensityChange(_:)), for: .touchUpInside)
         return button
     }()
     
     private lazy var portionLittleButton:UIButton = {
         let button = UIButton()
-        button.setTitle("Little", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-        button.setDeselected()
-        button.tag = 3
+        button.setNormalStyle("Little", 3)
         button.addTarget(self, action: #selector(intensityChange(_:)), for: .touchUpInside)
         return button
     }()

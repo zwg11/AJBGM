@@ -21,6 +21,16 @@ extension UIButton{
         self.backgroundColor = SendButtonColor
     }
     
+    // 设置按钮的统一风格
+    func setNormalStyle(_ title:String,_ tag:Int){
+        self.setTitle(title, for: .normal)
+        self.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        self.titleLabel?.adjustsFontSizeToFitWidth = true
+        self.titleEdgeInsets = UIEdgeInsets(top: 2, left: 0, bottom: 3, right: 0)
+        self.setDeselected()
+        self.tag = tag
+    }
+    
     // 用于手动输入页面，按钮被选中时的样式
     func setSelected(){
         self.setTitleColor(UIColor.white, for: .normal)

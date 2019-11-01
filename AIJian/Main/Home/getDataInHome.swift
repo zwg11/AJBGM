@@ -20,11 +20,11 @@ class getDataInHome{
         
         let str:String?
         // // 判断单位，根据相应单位取出最近一次的值
-        if let value = data.bloodGlucoseMmol{
+        if let value = data?.bloodGlucoseMmol{
             if GetUnit.getBloodUnit() == "mmol/L"{
                 str = String(value)
             }else{
-                str = String(format:"%.0f",data.bloodGlucoseMg!)
+                str = String(format:"%.0f",(data?.bloodGlucoseMg)!)
             }
 
         }else{

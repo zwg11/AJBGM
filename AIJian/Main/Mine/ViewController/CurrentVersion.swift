@@ -37,7 +37,7 @@ class CurrentVersion:UIViewController{
         glucoseImage.snp.makeConstraints{ (make) in
             make.left.equalTo(AJScreenWidth/5)
             make.right.equalTo(-AJScreenWidth/7)
-            make.height.equalTo(AJScreenWidth/7)
+            make.height.equalTo(AJScreenWidth/7 )
             make.top.equalTo(topLayoutGuide.snp.bottom).offset(AJScreenHeight / 7)
         }
         
