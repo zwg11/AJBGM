@@ -40,9 +40,7 @@ class QuitCellView:UITableViewCell{
         self.quitButton.snp.makeConstraints{ (make) in
             make.left.equalTo(AJScreenWidth/15)
             make.right.equalTo(-AJScreenWidth/15)
-            
             make.height.equalTo(AJScreenHeight/15)
-            make.width.equalTo(AJScreenHeight/15)
             make.top.equalTo(10)
         }
     }

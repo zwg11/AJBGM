@@ -18,6 +18,7 @@ class AboutUsViewController: UIViewController {
         button.addTarget(self, action: #selector(leftButtonClick), for: .touchUpInside)
         return button
     }()
+    var scrollView:UIScrollView = UIScrollView()
     let textView = UITextView()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,25 +37,31 @@ class AboutUsViewController: UIViewController {
         """
 //        textView.backgroundColor = ThemeColor
         textView.backgroundColor = UIColor.clear
-//        textView.font = UIFont.boldSystemFont(ofSize: 16)
+        textView.font = UIFont.boldSystemFont(ofSize: 16)
         textView.textColor = TextColor
         textView.isEditable = false
         textView.textAlignment = .left
-//        let paraph = NSMutableParagraphStyle()
-//        paraph.lineSpacing = 10//行间距
-//        paraph.paragraphSpacing = 20//段间距
-//        paraph.firstLineHeadIndent = 40//首行缩进
-//        attributedString.addAttribute(NSParagraphStyleAttributeName, value: paraph, range: range0)
-//        textView.attributedText = NSAttributedString(string: ABOUTUS_STRING, attributes: attributes)
-//        
-//        
-        self.view.addSubview(textView)
+        
+        textView.text = ABOUTUS_STRING
+        
+        scrollView.contentSize = CGSize(width: AJScreenWidth, height: AJScreenHeight+1)
+        scrollView.showsVerticalScrollIndicator = true
+        
+        // 添加滚动视图
+        scrollView.backgroundColor = UIColor.clear
+        self.view.addSubview(scrollView)
+        scrollView.snp.makeConstraints{(make) in
+            make.edges.equalToSuperview()
+        }
+      
+        self.scrollView.addSubview(textView)
         textView.snp.remakeConstraints{ (make) in
             make.width.equalToSuperview()
             make.height.equalToSuperview()
             make.top.equalTo(topLayoutGuide.snp.bottom)
         }
         
+       
     }
     
     @objc private func leftButtonClick(){

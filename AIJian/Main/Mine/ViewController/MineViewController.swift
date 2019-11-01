@@ -14,8 +14,12 @@ import SnapKit
 class MineViewController: UIViewController {
     
     //请求出现转的效果，增加用户体验
-    private lazy var indicator = CustomIndicatorView()
-    
+    private lazy var indicator:CustomIndicatorView = {
+        let view = CustomIndicatorView.init(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: AJScreenHeight))
+        view.setupUI("")
+        //view.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.1)
+        return view
+    }()
     // 设置数据请求超时时间
     let AlamofireManager:Alamofire.SessionManager = {
         let conf = URLSessionConfiguration.default
@@ -27,7 +31,7 @@ class MineViewController: UIViewController {
 
     let _imgArr   = ["user-info","Units-Setup","Change-Password","Targets-Setting","Instructions","About-Us","Update",]
 
-    let tableview = UITableView(frame: CGRect(x: 0, y:  0, width: AJScreenWidth, height: AJScreenHeight*7/10+AJScreenHeight/5+50))
+    let tableview = UITableView(frame: CGRect(x: 0, y:  0, width: AJScreenWidth, height: AJScreenHeight*7/12+AJScreenHeight/15+55+AJScreenWidth*0.35))
     //点击跳转对应页面
     public lazy var clickArray: [UIViewController] = {
         return [InfoViewController(),UnitViewController(),PassChangeViewController(),BloodSetViewController(), UseDirViewController(),AboutUsViewController(),VersionUViewController()
@@ -44,37 +48,35 @@ class MineViewController: UIViewController {
 //        self.tableview.reloadRows(at: [IndexPath(row:0,section:0)], with: .none)
 //    }
 //    
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         // ****** 弹出加载风火轮 ******
         
         // 初始化UI
-        indicator.setupUI("Logining in...")
+//        indicator.setupUI("Logining in...")
         // 设置风火轮视图在父视图中心
-        // 开始转
-        indicator.startIndicator()
-        self.view.addSubview(indicator)
-        indicator.snp.makeConstraints{(make) in
-            make.edges.equalToSuperview()
-        }
         // 检查数据库是否有相关用户的信息
-        let userInfo = DBSQLiteManager.manager.selectUserRecord(userId: UserInfo.getUserId())
         
-        // 如果得到的实体是空的，说明没有相关信息
-        // 那么就需向服务器请求数据
-        if userInfo.user_name == nil{
-            requestUserInfo()
-        }
-        // 将风火轮移除，并停止转动
-        self.indicator.stopIndicator()
-        self.indicator.removeFromSuperview()
-        self.tableview.reloadRows(at: [IndexPath(row:0,section:0)], with: .none)
+//        indicator.snp.makeConstraints{(make) in
+//            make.edges.equalToSuperview()
+//        }
+        
+       
     }
     override func viewDidLoad() {
         super.viewDidLoad()
 //        self.view.backgroundColor = ThemeColor
         self.view.backgroundColor = UIColor.clear
         //将所有按钮添加到scrollview中，还需要修改相对布局
-
+        let userInfo = DBSQLiteManager.manager.selectUserRecord(userId: UserInfo.getUserId())
+        indicator.startIndicator()
+        self.view.addSubview(indicator)
+        self.view.bringSubviewToFront(indicator)
+        // 如果得到的实体是空的，说明没有相关信息
+        // 那么就需向服务器请求数据
+        if userInfo.user_name == nil{
+            requestUserInfo()
+        }
+       
         //分割线
 //        tableview.separatorStyle = .singleLine
         tableview.separatorColor = UIColor.white
@@ -86,13 +88,19 @@ class MineViewController: UIViewController {
 //        tableview.backgroundColor = ThemeColor
         tableview.backgroundColor = UIColor.clear
         self.view.addSubview(tableview)
-        
+        // 将风火轮移除，并停止转动
+        self.indicator.stopIndicator()
+        self.indicator.removeFromSuperview()
+        self.tableview.reloadRows(at: [IndexPath(row:0,section:0)], with: .none)
         
     }
     
     func requestUserInfo(){
         
-      
+        // 开始转
+        indicator.startIndicator()
+        self.view.addSubview(indicator)
+        self.view.bringSubviewToFront(indicator)
         
         let dictString = ["userId":UserInfo.getUserId(),"token":UserInfo.getToken()] as [String : Any]
         // 数据请求超时时间为10s
@@ -131,6 +139,12 @@ class MineViewController: UIViewController {
                 alert.custom(self, "Attension", "Unable to get the information")
             }
         }//end of request
+        
+        // 将风火轮移除，并停止转动
+        self.indicator.stopIndicator()
+        self.indicator.removeFromSuperview()
+        self.tableview.reloadRows(at: [IndexPath(row:0,section:0)], with: .none)
+        
     } //end of requestUserInfo
 
     //点击登录，不允许跳转
@@ -303,7 +317,7 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
             case 0:
                 return AJScreenWidth*0.35 + 35
             case 8:
-                return AJScreenHeight/15+20
+                return AJScreenHeight/15 + 20
             default:
                 return AJScreenHeight/12
         }
