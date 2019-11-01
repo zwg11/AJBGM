@@ -74,33 +74,22 @@ class sportView: UIView ,UITextFieldDelegate{
 //    }()
     private lazy var intensityLight:UIButton = {
         let button = UIButton()
-        button.setTitle("Light", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-
-        button.tag = 0
-        button.setDeselected()
+        button.setNormalStyle("Light", 0)
         button.addTarget(self, action: #selector(intensityChange(_:)), for: .touchUpInside)
         return button
     }()
     
     private lazy var intensityMedium:UIButton = {
         let button = UIButton()
-        button.setTitle("Medium", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-
-        button.tag = 1
-        button.setDeselected()
+        button.setNormalStyle("Medium", 1)
         button.addTarget(self, action: #selector(intensityChange(_:)), for: .touchUpInside)
         return button
     }()
     
     private lazy var intensityHard:UIButton = {
         let button = UIButton()
-        button.setTitle("Hard", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        button.setNormalStyle("Hard", 2)
 
-        button.tag = 2
-        button.setDeselected()
         button.addTarget(self, action: #selector(intensityChange(_:)), for: .touchUpInside)
         return button
     }()

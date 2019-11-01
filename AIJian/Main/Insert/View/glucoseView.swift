@@ -104,65 +104,32 @@ class glucoseView: UIView ,UITextFieldDelegate{
     //**********************************事件*************************
     private lazy var BeforeButton:UIButton = {
         let button = UIButton()
-        button.setTitle("Before Meal", for: .normal)
-        button.titleLabel?.adjustsFontSizeToFitWidth = true
-        button.setDeselected()
-        button.tag = 0
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 5, right: 0)
+        button.setNormalStyle("Before Meal", 0)
         button.addTarget(self, action: #selector(SelectEvent(_:)), for: .touchUpInside)
         return button
     }()
     
     private lazy var AfterButton:UIButton = {
         let button = UIButton()
-        
-        button.setTitle("After Meal", for: .normal)
-        button.titleLabel?.adjustsFontSizeToFitWidth = true
-        button.setDeselected()
-        button.tag = 1
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 5, right: 0)
+        button.setNormalStyle("After Meal", 1)
         button.addTarget(self, action: #selector(SelectEvent(_:)), for: .touchUpInside)
         return button
     }()
     
     private lazy var FastingButton:UIButton = {
         let button = UIButton()
-        button.setTitle("Fasting", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-        button.setDeselected()
-        button.tag = 2
+        button.setNormalStyle("Fasting", 2)
         button.addTarget(self, action: #selector(SelectEvent(_:)), for: .touchUpInside)
         return button
     }()
     
     private lazy var RandomButton:UIButton = {
         let button = UIButton()
-        button.setTitle("Random", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-        button.setDeselected()
-        button.tag = 3
+        button.setNormalStyle("Random", 3)
         button.addTarget(self, action: #selector(SelectEvent(_:)), for: .touchUpInside)
         return button
     }()
-//    // 事件图标
-//    private lazy var eventImageView:UIImageView = {
-//        let imageView = UIImageView()
-//        imageView.image = UIImage(named: "事件")
-//        return imageView
-//    }()
-//    // 事件label
-//    private lazy var eventLabel:UILabel = {
-//        let label = UILabel()
-//        label.normalLabel(text: "事件")
-//        return label
-//    }()
-
-//    // 事件选择按钮
-//    lazy var eventButton:UIButton = {
-//        let button = UIButton()
-//        button.NorStyle(title: "无")
-//        return button
-//    }()
+    
     
     @objc func SelectEvent(_ sender:UIButton){
 
