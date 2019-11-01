@@ -45,6 +45,7 @@
 		4BE0A50E8FBE3EE70181B9DBA9FE2930 /* alertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12334E6F67A1C77D5D81A3AA8A2BEB74 /* alertViewController.swift */; };
 		4C433DFBF324335CF5426A76C3A8C0E6 /* Localization.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0112232D48380E271D8987FB869BBE8 /* Localization.strings */; };
 		4EA8F5F3B9FD7A60E6A46D35F6C6792C /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE1DA0B6A37D1A87017D70069003005 /* ChartViewController.swift */; };
+		501B511574435B4F38335F27D19CB781 /* protocolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CBBA20E99A5A8B3CA9B0B2BAF4201B /* protocolViewController.swift */; };
 		5152E1428C13A8DE4BF2E86A2D9C2248 /* BrithdayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069125044C84D4B9A10D2EFF9A2057BB /* BrithdayViewController.swift */; };
 		53ECBF9769DA897ED2EE5CB10BE88D1E /* AJMineTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A753E7B0055447EE4F602E4DC552B128 /* AJMineTableView.swift */; };
 		558080D97A62B5A3560E31B66D54F008 /* loginNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EF30771C7DE6130CC2BFE03540285D /* loginNavigationController.swift */; };
@@ -63,7 +64,6 @@
 		7CD890F46A335B97CB394B2E0F32CE7C /* WeightUnitChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9333124ACDB51FBDDC929EEAD032D6D3 /* WeightUnitChange.swift */; };
 		7E55D14C065E24471D59E71862D56472 /* UseDirViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67085F8C516527849C0A634158BE78B7 /* UseDirViewController.swift */; };
 		82229929AE907526C16AFB7C3B976565 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428DE12BF8AED7060D2DACBB1BDB9E15 /* AppDelegate.swift */; };
-		844B3F39236BF1960025DD67 /* protocolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B3F38236BF1960025DD67 /* protocolViewController.swift */; };
 		84847BC2FE082A7DD9416B04C6429EAB /* BHJPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE608F63498A45B84C3679D6251C8601 /* BHJPickerView.swift */; };
 		85BF4AD1556507F03E9CF1AB13F34571 /* BloodSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCA193DA6A5E1E858111B284800163C /* BloodSetViewController.swift */; };
 		875E6FED57826107D84E47853B2A507F /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5C68EDC76F69EA0E7DCD122ED6AB4 /* UITextField+Extension.swift */; };
@@ -213,8 +213,8 @@
 		7C340848915D471758C27C46FC15E8A6 /* getDataInHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = getDataInHome.swift; path = AIJian/Main/Home/getDataInHome.swift; sourceTree = SOURCE_ROOT; };
 		7E1F834BC1616B709547362ED7AE6678 /* TimerForLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerForLoad.swift; sourceTree = "<group>"; };
 		802706582BF2DD3F2F165BE6CC4B129F /* UnitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitViewController.swift; sourceTree = "<group>"; };
-		844B3F38236BF1960025DD67 /* protocolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = protocolViewController.swift; sourceTree = "<group>"; };
 		88B84B902E4E28BB9EBAC8F34677E2D8 /* loginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginViewController.swift; sourceTree = "<group>"; };
+		89CBBA20E99A5A8B3CA9B0B2BAF4201B /* protocolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = protocolViewController.swift; sourceTree = "<group>"; };
 		8A18E98B74565B5E695548D96DE09E13 /* SuggestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionViewController.swift; sourceTree = "<group>"; };
 		8AB8DBFCEA7297369A51108D4F1C5D91 /* InsulinType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsulinType.swift; sourceTree = "<group>"; };
 		8AD251DA1D7683298B03830243680EC8 /* format_method.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = format_method.swift; sourceTree = "<group>"; };
@@ -531,8 +531,8 @@
 			isa = PBXGroup;
 			children = (
 				27281F49EAF3824C93F33643E3F92985 /* infoInputViewController.swift */,
+				89CBBA20E99A5A8B3CA9B0B2BAF4201B /* protocolViewController.swift */,
 				8FE3B6FB424C620A1C8224C3669D485D /* registerViewController.swift */,
-				844B3F38236BF1960025DD67 /* protocolViewController.swift */,
 			);
 			path = register;
 			sourceTree = "<group>";
@@ -994,7 +994,6 @@
 				3F209594276298C7CF2E79AB8D42762D /* UnitViewController.swift in Sources */,
 				CD1234E30F7C4689A1783E8E01C09116 /* UpdateManager.swift in Sources */,
 				7E55D14C065E24471D59E71862D56472 /* UseDirViewController.swift in Sources */,
-				844B3F39236BF1960025DD67 /* protocolViewController.swift in Sources */,
 				79EF3049BA2F75158E6183282C4F9EA9 /* User.swift in Sources */,
 				FC5423243A15C385AA367ABAB67D6C09 /* UserInfo.swift in Sources */,
 				F2E3E078A8AFB14D3459CFD205D09431 /* VersionUViewController.swift in Sources */,
@@ -1026,6 +1025,7 @@
 				C45133C15650E0A758BE9274BD83AC47 /* perAndAfterMealTests.swift in Sources */,
 				3196F5B95AA6AA6CBF111CFD2DE7E61B /* pickerView.swift in Sources */,
 				AFB0A1406BF5F638E880614AD3D8E27A /* portionAndInsulinView.swift in Sources */,
+				501B511574435B4F38335F27D19CB781 /* protocolViewController.swift in Sources */,
 				E984F8552E1FF381F5828A63501263CC /* recentTableViewCell.swift in Sources */,
 				BC289F6EACFB2BCADEB1685DE0F10A6D /* recentTrendView.swift in Sources */,
 				ECCDAB6AF9B53630AF5186D28430395B /* registerView.swift in Sources */,
