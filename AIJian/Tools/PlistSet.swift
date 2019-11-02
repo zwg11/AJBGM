@@ -17,7 +17,7 @@ class PlistSetting{
     // 初始化plist文件，
     // 当Document目录文件夹中无对应plist文件
     // 从源文件夹中复制文件到Document目录文件夹中
-    class func initPlistFile(){
+    class func initPlistFile()->Bool{
         let fileManager = FileManager.default
         
         // 获取文件夹路径
@@ -127,7 +127,7 @@ class PlistSetting{
             }
             
         }
-        
+        return true
         
     }
     

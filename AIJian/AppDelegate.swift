@@ -31,7 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 设置文本框适应键盘
         IQKeyboardManager.shared.enable = true
         // 先确认是否初始化plist文件，没有则初始化
-        PlistSetting.initPlistFile()
+        let isPlistInit = PlistSetting.initPlistFile()
+//        PlistSetting.initPlistFile()
         
         let tabBarController = AJTabbarController()
 //        tabBarController.tabBar.barTintColor = ThemeColor
@@ -46,62 +47,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //判断文件中的token是否为空。  如果为空时，则为第一次登陆。
         //如果不为空时，则需要再次判断
-        if UserInfo.getToken() == ""{  //跳转到登陆界面
-            print("token为空")
-            window?.rootViewController = loginNv
-        }else{
-            print("token不为空")
-            //此处分为两种情况：一种是判断token过没过期。第二种是没有网络怎么办
-            let dictString:Dictionary = [ "userId":UserInfo.getUserId() ,"token":UserInfo.getToken()] as [String : Any]
-            AlamofireManager.request(CHECK_TOKEN,method: .post,parameters: dictString).responseString{ (response) in
-//                var remainingCount = 10
-//                // 在global线程里创建一个时间源
-//                let codeTimer = DispatchSource.makeTimerSource(queue:DispatchQueue.global())
-//                // 设定这个时间源是每秒循环一次，立即开始
-//                codeTimer.schedule(deadline: .now(), repeating: .seconds(1))
-//                // 设定时间源的触发事件
-//                codeTimer.setEventHandler(handler: {
-//                    // 每秒计时一次
-//                    remainingCount -= 1
-//                    // 请求时间超时，取消时间源，转到home界面
-//                    if remainingCount <= 0 {
-//                        codeTimer.cancel()
-//                        // 返回主线程，使页面转到home界面
-//                        DispatchQueue.main.async {
-//                            self.window?.rootViewController = tabBarController
-//                            let alert = CustomAlertController()
-//                            alert.custom(tabBarController, "attension", "no network")
-//                        }
-//                    }
-//
-//                })
-//                // 启动时间源
-//                codeTimer.resume()
+        if isPlistInit{
+            if UserInfo.getToken() == ""{  //跳转到登陆界面
+                print("token为空:\(UserInfo.getToken())")
+                window?.rootViewController = loginNv
+            }else{
                 
-                if response.result.isSuccess {
-                    if let jsonString = response.result.value {
-                        if let responseModel = JSONDeserializer<responseModel>.deserializeFrom(json: jsonString) {
-                            print(responseModel.toJSONString(prettyPrint: true)!)
-                            if(responseModel.code == 1 ){  //token没过期
-                                //没过期，允许使用，跳转到tabBar这个地方
-                                print("你的token还能用")
-                                self.window?.rootViewController = tabBarController
-                            }else{  //token过期了,不让用
-                                //过期了，需要清空app文件中的token
-                                print("你的token过期了")
-//                                UserInfo.setToken("")
-                                // 跳转到登录界面
-                                self.window?.rootViewController = loginNv
+                print("token不为空:\(UserInfo.getToken())")
+                //此处分为两种情况：一种是判断token过没过期。第二种是没有网络怎么办
+                let dictString:Dictionary = [ "userId":UserInfo.getUserId() ,"token":UserInfo.getToken()] as [String : Any]
+                AlamofireManager.request(CHECK_TOKEN,method: .post,parameters: dictString).responseString{ (response) in
+                    if response.result.isSuccess {
+                        if let jsonString = response.result.value {
+                            if let responseModel = JSONDeserializer<responseModel>.deserializeFrom(json: jsonString) {
+                                print(responseModel.toJSONString(prettyPrint: true)!)
+                                if(responseModel.code == 1 ){  //token没过期
+                                    //没过期，允许使用，跳转到tabBar这个地方
+                                    print("你的token还能用")
+                                    self.window?.rootViewController = tabBarController
+                                }else{  //token过期了,不让用
+                                    //过期了，需要清空app文件中的token
+                                    print("你的token过期了")
+                                    //                                UserInfo.setToken("")
+                                    // 跳转到登录界面
+                                    self.window?.rootViewController = loginNv
+                                }
                             }
                         }
+                    }else{  //没网的时候
+                        print("网络链接失败")
+                        self.window?.rootViewController = tabBarController  //没网的时候也跳到选择界面
+                        //具体的提示，homeViewController   自己会做
                     }
-                }else{  //没网的时候
-                    print("网络链接失败")
-                    self.window?.rootViewController = tabBarController  //没网的时候也跳到选择界面
-                    //具体的提示，homeViewController   自己会做
                 }
             }
         }
+        
         
         window?.makeKeyAndVisible()
         Siren.shared.wail()
