@@ -7,6 +7,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+<<<<<<< HEAD
             uuid = "E0CCC70C-C299-4F2F-A1DD-AA3BCCA244E0"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -17,12 +18,25 @@
             startingLineNumber = "34"
             endingLineNumber = "34"
             landmarkName = "application(_:didFinishLaunchingWithOptions:)"
+=======
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AIJian/Main/Mine/ViewController/MineViewController.swift"
+            timestampString = "594268811.209579"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "viewWillAppear(_:)"
+>>>>>>> 7884567227db1b215631f82a8d0bf645f3d2bf3b
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+<<<<<<< HEAD
             uuid = "6DC5A1E5-C868-4781-B945-DD574E1CA89A"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -34,11 +48,57 @@
             endingLineNumber = "52"
             landmarkName = "initPlistFile()"
             landmarkType = "7">
+=======
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AIJian/Main/Mine/ViewController/MineViewController.swift"
+            timestampString = "594268811.209725"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "viewWillAppear(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (SnapKit.ConstraintMaker) -&gt; () in AIJian.MineViewController.viewWillAppear(Swift.Bool) -&gt; ()"
+                  moduleName = "AIJian"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ADMIN/Desktop/swift1/AIJian/Main/Mine/ViewController/MineViewController.swift"
+                  timestampString = "594221974.11744"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57"
+                  offsetFromSymbolStart = "10">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "function signature specialization &lt;Arg[0] = Dead&gt; of AIJian.MineViewController.viewWillAppear(Swift.Bool) -&gt; ()"
+                  moduleName = "AIJian"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ADMIN/Desktop/swift1/AIJian/Main/Mine/ViewController/MineViewController.swift"
+                  timestampString = "594221974.119261"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "56"
+                  endingLineNumber = "56"
+                  offsetFromSymbolStart = "458">
+               </Location>
+            </Locations>
+>>>>>>> 7884567227db1b215631f82a8d0bf645f3d2bf3b
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+<<<<<<< HEAD
             uuid = "F7B06EBC-5444-4FDF-BB6F-82BC4360B890"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -49,12 +109,25 @@
             startingLineNumber = "69"
             endingLineNumber = "69"
             landmarkName = "initPlistFile()"
+=======
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AIJian/Main/Mine/ViewController/MineViewController.swift"
+            timestampString = "594268811.2098171"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "viewWillAppear(_:)"
+>>>>>>> 7884567227db1b215631f82a8d0bf645f3d2bf3b
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+<<<<<<< HEAD
             uuid = "A42E2854-FB0C-4549-BADD-3653685F85CE"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -65,12 +138,25 @@
             startingLineNumber = "84"
             endingLineNumber = "84"
             landmarkName = "initPlistFile()"
+=======
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AIJian/Main/Mine/ViewController/MineViewController.swift"
+            timestampString = "594268811.2099071"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "viewDidLoad()"
+>>>>>>> 7884567227db1b215631f82a8d0bf645f3d2bf3b
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+<<<<<<< HEAD
             uuid = "EA8C68F4-FEDB-43D4-995A-C57DF66E4615"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -81,12 +167,25 @@
             startingLineNumber = "37"
             endingLineNumber = "37"
             landmarkName = "application(_:didFinishLaunchingWithOptions:)"
+=======
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AIJian/Main/Mine/ViewController/MineViewController.swift"
+            timestampString = "594268811.2100101"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "viewDidLoad()"
+>>>>>>> 7884567227db1b215631f82a8d0bf645f3d2bf3b
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+<<<<<<< HEAD
             uuid = "7C5B461C-F4C0-4F01-A986-CD9C7F5F0A9F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -97,12 +196,25 @@
             startingLineNumber = "45"
             endingLineNumber = "45"
             landmarkName = "application(_:didFinishLaunchingWithOptions:)"
+=======
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AIJian/Main/Data/ViewController/SharedViewController.swift"
+            timestampString = "594286850.558298"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "viewWillAppear(_:)"
+>>>>>>> 7884567227db1b215631f82a8d0bf645f3d2bf3b
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+<<<<<<< HEAD
             uuid = "35739FA6-6BAD-4308-8F58-CEE296D4E01D"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -113,6 +225,34 @@
             startingLineNumber = "46"
             endingLineNumber = "46"
             landmarkName = "application(_:didFinishLaunchingWithOptions:)"
+=======
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AIJian/Main/Data/ViewController/SharedViewController.swift"
+            timestampString = "594286850.682079"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "viewWillAppear(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AIJian/Main/Data/ViewController/SharedViewController.swift"
+            timestampString = "594286850.682382"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "sendImage()"
+>>>>>>> 7884567227db1b215631f82a8d0bf645f3d2bf3b
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

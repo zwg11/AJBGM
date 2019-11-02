@@ -47,11 +47,7 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
     }
     // 将shareV视图生成为图片
     @objc func sendImage(){
-        // 添加风火轮
-        
-//        indicator.setLabelText("Image Being Generated...")
-//        self.navigationController?.view.addSubview(indicator)
-//        indicator.startIndicator()
+
         let alert = CustomAlertController()
         
         if sortedByDateOfData == nil || sortedByDateOfData?.count == 0{
@@ -62,22 +58,20 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
         let name = shareV.nameTextField.text
         let phone = shareV.phoneTextField.text
         if name == ""{
-            
-//            indicator.stopIndicator()
             alert.custom(self,"Attention", "Name Empty")
             return
         }
         if phone == ""{
-//            indicator.stopIndicator()
             alert.custom(self,"Attention", "Phone Empty")
             return
         }
         if name!.count >= 50{
-//            indicator.stopIndicator()
             return
         }
         if phone!.count >= 30{
-//            indicator.stopIndicator()
+            return
+        }
+        if phone!.count >= 30{
             return
         }
         //设置名字和电话
@@ -92,8 +86,6 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
         let activityItems = [image]
         // 创建
         let toVC = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
-        // 删除风火轮
-//        indicator.stopIndicator()
         self.present(toVC, animated: true, completion: nil)
     }
     

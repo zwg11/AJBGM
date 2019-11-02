@@ -27,6 +27,7 @@ class CustomIndicatorView: UIView {
     // 风火轮控件开始旋转
     func startIndicator(){
         Indicator.startAnimating()
+        
     }
     // 风火轮控件停止旋转
     func stopIndicator(){
