@@ -31,7 +31,6 @@
 		3196F5B95AA6AA6CBF111CFD2DE7E61B /* pickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1FFFCEAEB20DEFEC8716743912DE93 /* pickerView.swift */; };
 		35F229CDB65C074B26E6675EAD66CE2B /* BasalInsulinTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F050A7AE8A1301E444704F3A331088 /* BasalInsulinTableView.swift */; };
 		36BBFB3CF4326849B8182D7E23D1D1C8 /* CRC16.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87C7D3F47A2F01DF9F52E6E047E342A /* CRC16.swift */; };
-		36ED57EDEB1BEDFCEC1376EA7C0663EA /* Pods_AIJian.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF99105C98E070F5A2AB3295DDBB3B84 /* Pods_AIJian.framework */; };
 		3A882D841BCD9D047B77B5EE61C0F09E /* SetColorOfText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4F369C05939A511383BE4E6F782638 /* SetColorOfText.swift */; };
 		3AA27EF7A0776B0646E3A87A334BEA4D /* GeneralStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C00E21044909597018A27EA6A8731C /* GeneralStatusView.swift */; };
 		3ADD7EA7FBEA2802825A5D0C6978A31A /* gluViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764C38A18B23A2FFB100BF679825865 /* gluViewController.swift */; };
@@ -106,6 +105,7 @@
 		C88FB686223BB5A94898D1B74AAF1FF6 /* QuitCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6CD8071B1953BFC8FC49D0C07E5B17 /* QuitCellView.swift */; };
 		C8C584C14E41F381E1E0B5BA0C387AE8 /* UIAlertViewController_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BB31FFA0EA717578FBF645BF4D701F /* UIAlertViewController_Extension.swift */; };
 		C8F5100D99CC101199D1703D63BC02A4 /* infoInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27281F49EAF3824C93F33643E3F92985 /* infoInputViewController.swift */; };
+		CA28F55D9E0B3B1020CAF181 /* Pods_On_Call.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1775BDC7D706A1511310297A /* Pods_On_Call.framework */; };
 		CD009E706F285C614991B94F619B5BC3 /* nationComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAB4AF4474CEF20E35E879F280D6EE7 /* nationComponent.swift */; };
 		CD1234E30F7C4689A1783E8E01C09116 /* UpdateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ECE95E879F310D822741002FFB8089 /* UpdateManager.swift */; };
 		CDAE1F2D93FE04AAC0DB578104CB6109 /* User.plist in Resources */ = {isa = PBXBuildFile; fileRef = A5A1585583F171AC210D37D0F2F28C6E /* User.plist */; };
@@ -158,7 +158,9 @@
 		12334E6F67A1C77D5D81A3AA8A2BEB74 /* alertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alertViewController.swift; sourceTree = "<group>"; };
 		13E708809ACCA305E2B4107ADF6D21D4 /* InsertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertViewController.swift; sourceTree = "<group>"; };
 		147304D84A9DE6863D9AB1D97597C6C9 /* InfoInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoInputView.swift; sourceTree = "<group>"; };
+		1775BDC7D706A1511310297A /* Pods_On_Call.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_On_Call.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		185DDEA41DA7C96CD6E76086B42F7C86 /* EatNumChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EatNumChange.swift; sourceTree = "<group>"; };
+		191DB7CB7341E4FF91B2196C /* Pods-On_Call.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-On_Call.debug.xcconfig"; path = "Target Support Files/Pods-On_Call/Pods-On_Call.debug.xcconfig"; sourceTree = "<group>"; };
 		1DE1DA0B6A37D1A87017D70069003005 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		22B094C4B18BB5F0C34595C39C01AC2B /* userModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userModel.swift; sourceTree = "<group>"; };
 		23C00E21044909597018A27EA6A8731C /* GeneralStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralStatusView.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 		47EC5BD8176D116187C1289A2D7921FC /* String+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
 		499D392FCC415844B1B79CE51C4D09C5 /* SharedStaticView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStaticView.swift; sourceTree = "<group>"; };
 		4A9EECDFBBCC15B19BB9A7310C3C5FC1 /* ChartHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartHeaderView.swift; sourceTree = "<group>"; };
+		506CB3382B337BC12C8E6AB1 /* Pods-On_Call.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-On_Call.release.xcconfig"; path = "Target Support Files/Pods-On_Call/Pods-On_Call.release.xcconfig"; sourceTree = "<group>"; };
 		509CA4053D288A4E56C778E86FBE7CFD /* Pods-AIJian.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AIJian.debug.xcconfig"; path = "Target Support Files/Pods-AIJian/Pods-AIJian.debug.xcconfig"; sourceTree = "<group>"; };
 		531A0A352EC54333AE6CC2C50FF28F11 /* MineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineViewController.swift; sourceTree = "<group>"; };
 		5B6A065DC6BD73C9F1E61047A599D813 /* sliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sliderView.swift; sourceTree = "<group>"; };
@@ -243,7 +246,6 @@
 		ACC506478CB78866C8C8E9B479A8C649 /* AIJian.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AIJian.entitlements; sourceTree = "<group>"; };
 		AE9D2F5F3748AFDB28A21FD34F1F2A2C /* AJStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AJStartView.swift; sourceTree = "<group>"; };
 		AEB5C68EDC76F69EA0E7DCD122ED6AB4 /* UITextField+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
-		AF99105C98E070F5A2AB3295DDBB3B84 /* Pods_AIJian.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AIJian.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFAB4AF4474CEF20E35E879F280D6EE7 /* nationComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nationComponent.swift; sourceTree = "<group>"; };
 		B0B9B3028D87CFA7B2325B82FADAD9A7 /* DataTableViewOfHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTableViewOfHeader.swift; sourceTree = "<group>"; };
 		B67C5D050C5D9478AF306B5A049428F1 /* portionAndInsulinView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = portionAndInsulinView.swift; sourceTree = "<group>"; };
@@ -277,7 +279,7 @@
 		F0BB31FFA0EA717578FBF645BF4D701F /* UIAlertViewController_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertViewController_Extension.swift; sourceTree = "<group>"; };
 		F3E6BF264A7759F39EE60E2FC55F2DB6 /* averageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = averageView.swift; sourceTree = "<group>"; };
 		F3EA8AF88908000078EAC3AC949A8176 /* BLEViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEViewController.swift; sourceTree = "<group>"; };
-		F42164E20D884983B9B2042EA7CE3CFA /* AIJian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AIJian.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F42164E20D884983B9B2042EA7CE3CFA /* OnCall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnCall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7152151493753A2D1A697BD37767901 /* DataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewController.swift; sourceTree = "<group>"; };
 		F87C7D3F47A2F01DF9F52E6E047E342A /* CRC16.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CRC16.swift; sourceTree = "<group>"; };
 		F8A34F9A4CB476E221493BFF4FA2AA03 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
@@ -291,7 +293,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				36ED57EDEB1BEDFCEC1376EA7C0663EA /* Pods_AIJian.framework in Frameworks */,
+				CA28F55D9E0B3B1020CAF181 /* Pods_On_Call.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,7 +369,7 @@
 		39BC8768ADA5C752F83B10EDC1950A8C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				AF99105C98E070F5A2AB3295DDBB3B84 /* Pods_AIJian.framework */,
+				1775BDC7D706A1511310297A /* Pods_On_Call.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -540,7 +542,7 @@
 		9981F23105401ED460A32BF2E0D28AA2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F42164E20D884983B9B2042EA7CE3CFA /* AIJian.app */,
+				F42164E20D884983B9B2042EA7CE3CFA /* OnCall.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -697,6 +699,8 @@
 			children = (
 				509CA4053D288A4E56C778E86FBE7CFD /* Pods-AIJian.debug.xcconfig */,
 				FC89C668BD48D245D25CED60FBDF41B4 /* Pods-AIJian.release.xcconfig */,
+				191DB7CB7341E4FF91B2196C /* Pods-On_Call.debug.xcconfig */,
+				506CB3382B337BC12C8E6AB1 /* Pods-On_Call.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -791,9 +795,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2EB99137C04148D2934AF4128A650BDB /* AIJian */ = {
+		2EB99137C04148D2934AF4128A650BDB /* On_Call */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7D569BA149F82F2A1A46B23DE683CB4C /* Build configuration list for PBXNativeTarget "AIJian" */;
+			buildConfigurationList = 7D569BA149F82F2A1A46B23DE683CB4C /* Build configuration list for PBXNativeTarget "On_Call" */;
 			buildPhases = (
 				1D557BEC0EACDFBA3504F1D69991A97B /* [CP] Check Pods Manifest.lock */,
 				D1F8D45C123950B1BB12DFA12E44E757 /* Sources */,
@@ -805,9 +809,9 @@
 			);
 			dependencies = (
 			);
-			name = AIJian;
+			name = On_Call;
 			productName = AIJian;
-			productReference = F42164E20D884983B9B2042EA7CE3CFA /* AIJian.app */;
+			productReference = F42164E20D884983B9B2042EA7CE3CFA /* OnCall.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -830,7 +834,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 86D6B13253A86DFBD22C12FF92260C0C /* Build configuration list for PBXProject "AIJian" */;
+			buildConfigurationList = 86D6B13253A86DFBD22C12FF92260C0C /* Build configuration list for PBXProject "On_Call" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -844,7 +848,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2EB99137C04148D2934AF4128A650BDB /* AIJian */,
+				2EB99137C04148D2934AF4128A650BDB /* On_Call */,
 			);
 		};
 /* End PBXProject section */
@@ -887,7 +891,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-AIJian-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-On_Call-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -900,15 +904,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AIJian/Pods-AIJian-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-On_Call/Pods-On_Call-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AIJian/Pods-AIJian-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-On_Call/Pods-On_Call-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AIJian/Pods-AIJian-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-On_Call/Pods-On_Call-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1193,7 +1197,7 @@
 		};
 		7F53F875D0C90FC8294F7BB5937DF57B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FC89C668BD48D245D25CED60FBDF41B4 /* Pods-AIJian.release.xcconfig */;
+			baseConfigurationReference = 506CB3382B337BC12C8E6AB1 /* Pods-On_Call.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1207,7 +1211,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.acon.glu;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = OnCall;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1216,25 +1220,21 @@
 		};
 		FC7EEDAF3423F2134060A328CAEDA7F6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 509CA4053D288A4E56C778E86FBE7CFD /* Pods-AIJian.debug.xcconfig */;
+			baseConfigurationReference = 191DB7CB7341E4FF91B2196C /* Pods-On_Call.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-
 				DEVELOPMENT_TEAM = U556FBGR65;
-
 				INFOPLIST_FILE = AIJian/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-
 				PRODUCT_BUNDLE_IDENTIFIER = com.acon.glucose;
-
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = OnCall;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1243,7 +1243,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7D569BA149F82F2A1A46B23DE683CB4C /* Build configuration list for PBXNativeTarget "AIJian" */ = {
+		7D569BA149F82F2A1A46B23DE683CB4C /* Build configuration list for PBXNativeTarget "On_Call" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FC7EEDAF3423F2134060A328CAEDA7F6 /* Debug */,
@@ -1252,7 +1252,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		86D6B13253A86DFBD22C12FF92260C0C /* Build configuration list for PBXProject "AIJian" */ = {
+		86D6B13253A86DFBD22C12FF92260C0C /* Build configuration list for PBXProject "On_Call" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				56C5B17709763117926E373D69702137 /* Debug */,
