@@ -199,9 +199,14 @@ class registerViewController: UIViewController,UITextFieldDelegate {
     @objc func getAuthCode(){
         let alertController = CustomAlertController()
         email = register.emailTextField.text!
+        
         if email == ""{
             alertController.custom(self, "Attention", "Email Empty")
-        }else if FormatMethodUtil.validateEmail(email: email!) == true{
+            return
+        }
+        if FormatMethodUtil.validateEmail(email: email!) == true{
+            //只要邮箱正确，就给发送邮件
+            self.register.getAuthCodeButton.countDown(count: 90)
             let  dictString:Dictionary = [ "email":String(email!)]
             print(dictString)
             Alamofire.request(get_Code,method: .post,parameters: dictString).responseString{ (response) in
@@ -214,7 +219,6 @@ class registerViewController: UIViewController,UITextFieldDelegate {
                              */
                             if(responseModel.code == 1 ){
                                 //返回1，让其倒计时
-                                self.register.getAuthCodeButton.countDown(count: 90)
                             }else{
                                 alertController.custom(self,"Attention", "Email or Password Error")
                             }

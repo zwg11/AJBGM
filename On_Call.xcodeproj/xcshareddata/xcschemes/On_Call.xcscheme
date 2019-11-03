@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2EB99137C04148D2934AF4128A650BDB"
-               BuildableName = "On_Call.app"
+               BuildableName = "OnCall.app"
                BlueprintName = "On_Call"
                ReferencedContainer = "container:On_Call.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2EB99137C04148D2934AF4128A650BDB"
-            BuildableName = "On_Call.app"
+            BuildableName = "OnCall.app"
             BlueprintName = "On_Call"
             ReferencedContainer = "container:On_Call.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2EB99137C04148D2934AF4128A650BDB"
-            BuildableName = "On_Call.app"
+            BuildableName = "OnCall.app"
             BlueprintName = "On_Call"
             ReferencedContainer = "container:On_Call.xcodeproj">
          </BuildableReference>
