@@ -148,10 +148,9 @@ class registerView: UIView {
         // 艾康图标布局
         self.addSubview(AJImageView)
         AJImageView.snp.makeConstraints{(make) in
-//            make.width.equalTo(AJScreenWidth/2)
-            make.height.equalTo(AJScreenWidth/5)
-            make.left.equalTo(AJScreenWidth/7)
+            make.left.equalTo(AJScreenWidth/5)
             make.right.equalTo(-AJScreenWidth/7)
+            make.height.equalTo(AJScreenWidth/7)
             make.top.equalTo(AJScreenWidth/8)
         }
         
@@ -179,7 +178,7 @@ class registerView: UIView {
         self.addSubview(line_frame1)
         line_frame1.snp.makeConstraints{ (make) in
             make.height.equalTo(0.5)
-            make.width.equalTo(AJScreenWidth)
+//            make.width.equalTo(AJScreenWidth)
             make.left.equalTo(AJScreenWidth/15)
             make.right.equalTo(-AJScreenWidth/15)
             make.top.equalTo(emailTextField.snp.bottom).offset(1)
@@ -229,7 +228,7 @@ class registerView: UIView {
         self.addSubview(line_frame3)
         line_frame3.snp.makeConstraints{ (make) in
             make.height.equalTo(0.5)
-            make.width.equalTo(AJScreenWidth)
+//            make.width.equalTo(AJScreenWidth)
             make.left.equalTo(AJScreenWidth/15)
             make.right.equalTo(-AJScreenWidth/15)
             make.top.equalTo(passwordTextField.snp.bottom).offset(1)
@@ -250,7 +249,7 @@ class registerView: UIView {
         self.addSubview(line_frame4)
         line_frame4.snp.makeConstraints{ (make) in
             make.height.equalTo(0.5)
-            make.width.equalTo(AJScreenWidth)
+//            make.width.equalTo(AJScreenWidth)
             make.left.equalTo(AJScreenWidth/15)
             make.right.equalTo(-AJScreenWidth/15)
             make.top.equalTo(passwordSecTextField.snp.bottom).offset(1)

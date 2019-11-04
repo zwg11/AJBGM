@@ -33,6 +33,9 @@ class loginViewController: UIViewController,UITextFieldDelegate {
         view.registerButton.addTarget(self, action: #selector(register), for: .touchUpInside)
         return view
     }()
+  
+ 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //navigation顶部的title
@@ -50,6 +53,11 @@ class loginViewController: UIViewController,UITextFieldDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        if UserInfo.getEmail() != ""{
+            loginview.userNameTextField.text! = UserInfo.getEmail()
+        }else{
+            
+        }
         self.navigationController?.isNavigationBarHidden = true
     }
     

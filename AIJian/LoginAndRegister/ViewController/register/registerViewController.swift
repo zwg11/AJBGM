@@ -137,7 +137,7 @@ class registerViewController: UIViewController,UITextFieldDelegate {
             alertController.custom(self, "Attention", "Password Not Match")
             return
         }else if FormatMethodUtil.validatePasswd(passwd: password!) != true{
-            alertController.custom(self, "Attention", "Confirm Password Weak")
+            alertController.custom(self, "Attention", "Password (at least 8 characters)")
             return
         }else if passwordSec!.count >= 254 {
             return
