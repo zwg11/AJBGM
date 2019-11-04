@@ -17,14 +17,7 @@ class glucoseView: UIView ,UITextFieldDelegate{
     // 设置事件值
     var eventNum:Int = 3
     //***********************血糖********************
-//    // 血糖图标
-//    private lazy var XTimageView:UIImageView = {
-//        let imageView = UIImageView()
-//        imageView.image = UIImage(named: "iconxt")
-//        return imageView
-//    }()
-
-
+    
     // 血糖label
     private lazy var XTLabel:UILabel = {
         let label = UILabel()
@@ -169,20 +162,6 @@ class glucoseView: UIView ,UITextFieldDelegate{
         self.backgroundColor = UIColor.clear
         
         //***********************血糖********************
-//        // 血糖图标布局设置
-//        self.addSubview(XTimageView)
-//        XTimageView.snp.makeConstraints{(make) in
-//            make.left.top.equalToSuperview().offset(AJScreenWidth/20)
-//            make.height.width.equalTo(AJScreenWidth/15)
-//        }
-//        let sd = sliderView.init(frame: CGRect(x: 0, y: 10, width: AJScreenWidth*0.9, height: 5))
-//        //sd.frame = CGRect(x: 0, y: 10, width: AJScreenWidth*0.9, height: 5)
-//        sd.loadViews()
-//        self.addSubview(sd)
-        
-
-//        let image = viewToImage.getImageFromView(view: sd)
-
         // 血糖label布局设置
         self.addSubview(XTLabel)
         XTLabel.snp.makeConstraints{(make) in
@@ -212,40 +191,29 @@ class glucoseView: UIView ,UITextFieldDelegate{
         // 血糖值滑块布局
 //        let image1 = UIImage(named: "back-1")
         self.addSubview(XTSlider)
-        XTSlider.setMinimumTrackImage(sliderImage, for: .normal)
-        XTSlider.setMaximumTrackImage(sliderImage, for: .normal)
-//        initSliderColor()
-//        XTSlider.value = value
+//        sliderImage.size = CGSize(width: AJScreenWidth*0.9, height: 5)
+//        let miniImage = OriginImage(image: sliderImage, scaleToSize: CGSize(width: AJScreenWidth*0.9-15, height: 5))
+//        XTSlider.setMinimumTrackImage(miniImage, for: .normal)
+//        XTSlider.setMaximumTrackImage(sliderImage, for: .normal)
+        // 设置track透明，使其下面的sliderImageView能够显示出来
+        XTSlider.minimumTrackTintColor = UIColor.clear
+        XTSlider.maximumTrackTintColor = UIColor.clear
         XTSlider.snp.makeConstraints{(make) in
             make.left.equalToSuperview().offset(AJScreenWidth/20)
             make.right.equalToSuperview().offset(-AJScreenWidth/20)
             make.top.equalTo(XTTextfield.snp.bottom).offset(AJScreenWidth/40)
             make.height.equalTo(AJScreenWidth/15)
         }
-        
-//        //***********************事件********************
-//        // 事件图标布局
-//        self.addSubview(eventImageView)
-//        eventImageView.snp.makeConstraints{(make) in
-//            make.left.right.height.equalTo(XTimageView)
-//            make.top.equalTo(XTSlider.snp.bottom).offset(AJScreenWidth/40)
-//        }
-//
-//        // 事件label布局
-//        self.addSubview(eventLabel)
-//        eventLabel.snp.makeConstraints{(make) in
-//            make.left.height.equalTo(XTLabel)
-//            make.bottom.equalTo(eventImageView)
-//        }
-//
-//        // 事件按钮布局
-//        self.addSubview(eventButton)
-//        eventButton.snp.makeConstraints{(make) in
-//            make.centerX.equalToSuperview()
-//            make.top.equalTo(eventLabel.snp.bottom).offset(AJScreenWidth/40)
-//            make.width.equalTo(AJScreenWidth/5*3)
-//            make.height.equalTo(AJScreenWidth/12)
-//        }
+        // 将其显示在血糖滑块的track位置
+        let sliderImageView = UIImageView(image: sliderImage)
+        self.addSubview(sliderImageView)
+        sliderImageView.snp.makeConstraints{(make) in
+            make.left.right.centerY.equalTo(XTSlider)
+            make.height.equalTo(3)
+        }
+        // 将其放在最后一层，使得滑块覆盖它
+        self.sendSubviewToBack(sliderImageView)
+
         // 事件按钮布局，总共4个
         self.addSubview(BeforeButton)
         self.addSubview(AfterButton)
@@ -278,6 +246,13 @@ class glucoseView: UIView ,UITextFieldDelegate{
         }
     }
     
+    func OriginImage(image:UIImage,scaleToSize size:CGSize)->UIImage{
+        UIGraphicsBeginImageContext(size);
+        image.draw(in: CGRect(x: 0,y: 0, width: size.width, height: size.height))
+        let scaleImage=UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        return scaleImage!
+    }
     
     // 设置键盘按 return 键弹回
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -303,50 +278,7 @@ class glucoseView: UIView ,UITextFieldDelegate{
         }
     }
     
-//    func initSliderColor(){
-//        let first = UIColor.yellow
-//        let second = UIColor.green
-//        let third = UIColor.red
-//        // 创建一个渐变层
-//        let layer = CAGradientLayer()
-//        // 设置frame
-//        layer.frame = self.XTSlider.frame
-//        // 设置渐变颜色
-//        layer.colors = [first,second,third]
-//        var location1 = 0.0
-//        var location2 = 0.0
-//
-//        // 分段位置
-//        if GetUnit.getBloodUnit() == "mmol/L"{
-//            location1 = (GetBloodLimit.getRandomDinnerLow()-0.6)/16.6
-//            location2 = (GetBloodLimit.getRandomDinnerTop()-0.6)/16.6
-//        }else{
-//            location1 = (GetBloodLimit.getRandomDinnerLow()-10.0)/300.0
-//            location2 = (GetBloodLimit.getRandomDinnerTop()-10.0)/300.0
-//        }
-//
-//        // 设置渐变层起点和终点
-//        layer.startPoint = CGPoint(x: 0, y: 0.5)
-//        layer.endPoint = CGPoint(x: 1, y: 0.5)
-//        layer.locations = [location1,location2,1] as [NSNumber]
-////        let image = imageGradient(gradientColors: [first,second,third])
-////        XTSlider.setMinimumTrackImage(image, for: .normal)
-//    }
-    
-    
-//    func imageGradient(gradientColors:[UIColor], size:CGSize = CGSize(width: 10, height: 10) ) -> UIImage
-//    {
-//        UIGraphicsBeginImageContextWithOptions(size, true, 0)
-//        let context = UIGraphicsGetCurrentContext()!
-//        let colorSpace = CGColorSpaceCreateDeviceRGB()
-//        let colors = gradientColors.map {(color: UIColor) -> AnyObject! in return color.cgColor as AnyObject! } as NSArray
-//        let gradient = CGGradient(colorsSpace: colorSpace, colors: colors, locations: nil)
-//        // 第二个参数是起始位置，第三个参数是终止位置
-//        context.drawLinearGradient(gradient!, start: CGPoint(x: 0, y: 0), end: CGPoint(x: size.width, y: 0), options: CGGradientDrawingOptions(rawValue: 0))
-//        let image = UIImage.init(cgImage:(UIGraphicsGetImageFromCurrentImageContext()?.cgImage!)!)
-//        UIGraphicsEndImageContext()
-//        return image
-//    }
+
     
     // ***********现在对于直接输入那么以下代码可使文本框遵循：***********
     // ***********对于单位--mg/dL 输入小于1000的整数***********

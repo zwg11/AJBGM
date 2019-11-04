@@ -120,7 +120,7 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     private lazy var recent7View:recentTrendView = {
         let view = recentTrendView()
         // 分割线颜色设为白色
-        homeTableView.separatorColor = UIColor.white
+        homeTableView.separatorColor = UIColor.lightGray
         view.setupUI()
         view.backgroundColor = UIColor.clear
         return view
@@ -143,20 +143,6 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         let value = UIInterfaceOrientation.portrait.rawValue
         UIDevice.current.setValue(value, forKey: "orientation")
 
-        //重新判断加载视图
-        //input.reloadInputViews()
-//        self.view.addSubview(homeTableView)
-//        homeTableView.snp.makeConstraints{(make) in
-//            make.left.right.equalToSuperview()
-//            if #available(iOS 11.0, *) {
-//                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
-//                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
-//            } else {
-//                // Fallback on earlier versions
-//                make.top.equalTo(topLayoutGuide.snp.bottom)
-//                make.bottom.equalTo(bottomLayoutGuide.snp.top)
-//            }
-//        }
         // 读取配置文件，获取meterID的内容
         let path = PlistSetting.getFilePath(File: "User.plist")
         let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!

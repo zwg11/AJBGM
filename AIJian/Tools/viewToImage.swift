@@ -15,7 +15,9 @@ class viewToImage{
         UIGraphicsBeginImageContext(view.bounds.size)
         view.layer.render(in: UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
+
         UIGraphicsEndImageContext()
+
         return image!
     }
     

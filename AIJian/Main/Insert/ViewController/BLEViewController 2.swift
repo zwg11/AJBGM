@@ -75,7 +75,11 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
     }
     // 设置表格头部背景颜色
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        view.tintColor = SendButtonColor
+        guard let header = view as? UITableViewHeaderFooterView else {return}
+        header.textLabel?.textColor = UIColor.white
+        view.tintColor = UIColor.clear
+        view.layer.borderColor = UIColor.white.cgColor
+        
     }
     // 表格头部信息
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -609,8 +613,10 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         //button.tintColor = UIColor.white
 //        button.backgroundColor = SendButtonColor
         // button.titleLabel?.text = "扫描设备"
-//        button.setTitleColor(UIColor.white, for: .normal)
-        button.setSelected()
+        button.setTitleColor(UIColor.white, for: .normal)
+//        button.setSelected()
+        button.backgroundColor = ThemeColor
+        button.layer.borderColor = UIColor.lightGray.cgColor
         button.setTitle("Scan Devices", for: .normal)
         button.addTarget(self, action: #selector(scanDev), for: .touchUpInside)
         return button
@@ -704,7 +710,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         }
         // 设置表格布局，设置其代理和数据来源，将其加入视图
         tableView.frame = CGRect(x: 0, y: 64, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height-108)
-//        tableView.backgroundColor = ThemeColor
+        tableView.separatorColor = UIColor.clear
         tableView.backgroundColor = UIColor.clear
         tableView.delegate = self
         tableView.dataSource = self
@@ -875,7 +881,7 @@ extension BLEViewController{
         timer1 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updataScanSecond), userInfo: nil, repeats: true)
         //调用fire()会立即启动计时器
         timer1!.fire()
-        self.button.setDeselected()
+//        self.button.setDeselected()
         self.button.isEnabled = false
         self.button.setTitle("Scanning Devices..", for: .normal)
      }
@@ -898,7 +904,7 @@ extension BLEViewController{
             self.centralManager?.stopScan()
 //            self.loadV.stopIndicator()
 //            self.loadV.removeFromSuperview()
-            self.button.setSelected()
+//            self.button.setSelected()
             self.button.isEnabled = true
             self.button.setTitle("Scan Devices", for: .normal)
             // 不要忘了设置second以便下次使用
