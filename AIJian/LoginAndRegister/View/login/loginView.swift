@@ -108,10 +108,9 @@ class loginView: UIView {
         // 艾康图标布局
         self.addSubview(AJImageView)
         AJImageView.snp.makeConstraints{(make) in
-//            make.width.equalTo(AJScreenWidth/2)
-            make.height.equalTo(AJScreenWidth/5)
-            make.left.equalTo(AJScreenWidth/7)
+            make.left.equalTo(AJScreenWidth/5)
             make.right.equalTo(-AJScreenWidth/7)
+            make.height.equalTo(AJScreenWidth/7)
             make.top.equalTo(navigationBarHeight)
         }
         

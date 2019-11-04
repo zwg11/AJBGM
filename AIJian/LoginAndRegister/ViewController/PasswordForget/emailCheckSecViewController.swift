@@ -89,6 +89,9 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
             return
         }else if password!.count >= 30{
             return
+        }else if FormatMethodUtil.validatePasswd(passwd: password!) != true{
+            alertController.custom(self, "Attention", "Password (at least 8 characters)")
+            return
         }else if password != passwordSec{
              alertController.custom(self, "Attention", "Passwords Not Match")
             return
