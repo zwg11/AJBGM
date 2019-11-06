@@ -144,6 +144,7 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
     lazy var datePicker:UIDatePicker = {
         let datePicker = UIDatePicker()
         //datePicker.frame.size = CGSize(width: UIScreen.main.bounds.width - 20, height: 150)
+        datePicker.locale = Locale(identifier: "en_US")
         datePicker.datePickerMode = .date
         datePicker.backgroundColor = UIColor.white
         datePicker.maximumDate = Date()

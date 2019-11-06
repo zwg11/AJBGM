@@ -127,6 +127,10 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }()
     
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        self.navigationController!.navigationBar.shadowImage = UIImage()
+        self.navigationController!.navigationBar.isTranslucent = true
+        self.automaticallyAdjustsScrollViewInsets = false
         homeTableView.reloadData()
         // 图表重新画
         recent7View.reloadChart()
@@ -161,14 +165,33 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         super.viewDidLoad()
 //        self.view.clipsToBounds = true
 
+//        let view11 = UIView()
+//        view11.clipsToBounds = true
+//        view11.backgroundColor = UIColor.lightGray
+//        self.view.addSubview(view11)
+//        view11.snp.makeConstraints{(make) in
+//            make.left.right.equalToSuperview()
+//
+//            if #available(iOS 11.0, *) {
+//                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+//                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+//            } else {
+//                make.top.equalTo(topLayoutGuide.snp.bottom)
+//                make.bottom.equalTo(bottomLayoutGuide.snp.top)
+//                // Fallback on earlier versions
+//            }
+//
+//        }
         
         self.view.addSubview(homeTableView)
         homeTableView.snp.makeConstraints{(make) in
             make.left.right.equalToSuperview()
-            make.top.equalToSuperview()
+            
             if #available(iOS 11.0, *) {
+                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
                 make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
             } else {
+                make.top.equalTo(topLayoutGuide.snp.bottom)
                 make.bottom.equalTo(bottomLayoutGuide.snp.top)
                 // Fallback on earlier versions
             }

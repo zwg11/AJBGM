@@ -12,6 +12,8 @@ import HandyJSON
 
 class InsertViewController: UIViewController {
 
+    private let path = PlistSetting.getFilePath(File: "inputChoose.plist")
+    
     let AlamofireManager:Alamofire.SessionManager = {
         let conf = URLSessionConfiguration.default
         conf.timeoutIntervalForRequest = 10
@@ -36,15 +38,21 @@ class InsertViewController: UIViewController {
     
     // 选择药物按钮弹出的alert
     private var medicineChooseAlert:alertViewController = {
+        
+        let path1 = PlistSetting.getFilePath(File: "inputChoose.plist")
         // 读取配置文件
-        //        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
-        
+        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path1)!
+        let arr = data["medicine"] as! NSArray
+        var mess = ""
+        if arr.count >= 8{
+            mess = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+        }else{
+            for _ in 0 ..< arr.count{
+                mess += "\n\n"
+            }
+        }
+        let VC = alertViewController(title: "Please Select", message: mess, preferredStyle: .alert)
 
-        let VC = alertViewController(title: "Please Select", message: "", preferredStyle: .alert)
-
-        //        medicineChooseAlert.alertData = data["medicine"] as! [String]
-        //        viewController.setupUI()
-        
         // 避免懒加载导致数据未初始化就被使用
         VC.setupUI()
         return VC
@@ -80,7 +88,7 @@ class InsertViewController: UIViewController {
     // 设置导航栏右按钮样式
     private lazy var rightButton:UIButton = {
         let button = UIButton.init(type: .system)
-        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        button.frame = CGRect(x: 0, y: 0, width: AJScreenWidth/8, height: 30)
         button.setTitle("Save", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
@@ -90,7 +98,7 @@ class InsertViewController: UIViewController {
     
     // 获取配置文件路径
     //private let path = Bundle.main.path(forResource: "inputChoose", ofType: "plist")
-    private let path = PlistSetting.getFilePath(File: "inputChoose.plist")
+    
    // let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path!)!
     // MARK: - viewDidLoad()
     override func viewDidLoad() {
@@ -140,9 +148,9 @@ class InsertViewController: UIViewController {
         // 设置框的高度，根据单元格数量和表格上下约束计算得出
         medicineChooseAlert.view.snp.updateConstraints{(make) in
             if arr.count>8{
-                make.height.equalTo(8*35+90)
+                make.height.equalTo(8*33+80)
             }else{
-                make.height.equalTo(arr.count*35+90)
+                make.height.equalTo(arr.count*33+80)
             }
             
         }
@@ -176,6 +184,7 @@ class InsertViewController: UIViewController {
             }else if alert.textFields![0].text!.removeHeadAndTailSpacePro.count >= 50 { //单个不能超过100个字符
                 return
             }else{
+                self.medicineChooseAlert.message! += "\n\n"
                 arr.append(alert.textFields![0].text!.removeHeadAndTailSpacePro)
             }
 
@@ -674,6 +683,8 @@ class InsertViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         // 每次进入界面滚动视图都是在最顶部
         self.input.scrollView.contentOffset = CGPoint(x: 0, y: 0)
+        
+        self.automaticallyAdjustsScrollViewInsets = false
         // 隐藏tabbar
         self.tabBarController?.tabBar.isHidden = true
         //重新判断加载视图
@@ -733,7 +744,7 @@ class InsertViewController: UIViewController {
         //a与b之间的交集
         if fromLength > 0{
             // 设置按钮标题
-            input.bodyInfo.medicineChooseButton.setTitle("\(fromLength)Selected", for: .normal)
+            input.bodyInfo.medicineChooseButton.setTitle("\(fromLength) Item selected", for: .normal)
             
             for i in 0..<medicine.count{
                 
@@ -744,6 +755,7 @@ class InsertViewController: UIViewController {
                         medicineChooseAlert.boolArray[i] = true
                         medicineChooseAlert.selectedNum += 1
                         arrtemp[j] = ""
+                        medicineChooseAlert.message! += "\n\n"
 //                        arrtemp.remove(at: j)//如果相等,则将对应的数剔除
                     }
                 }

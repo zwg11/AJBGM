@@ -41,7 +41,7 @@ class loginViewController: UIViewController,UITextFieldDelegate {
         //navigation顶部的title
         self.navigationController?.navigationItem.leftBarButtonItem = nil
         self.navigationController?.isNavigationBarHidden = true
-        self.navigationController?.navigationBar.backgroundColor = ThemeColor
+//        self.navigationController?.navigationBar.backgroundColor = ThemeColor
 //        self.title = "登  录"
         self.view.backgroundColor = UIColor.clear
         self.view.addSubview(loginview)
@@ -59,6 +59,11 @@ class loginViewController: UIViewController,UITextFieldDelegate {
             
         }
         self.navigationController?.isNavigationBarHidden = true
+        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        //        self.navigationController!.navigationBar.shadowImage = UIImage()
+        self.navigationController!.navigationBar.isTranslucent = true
+        
+        self.automaticallyAdjustsScrollViewInsets = false
     }
     
     /*

@@ -16,7 +16,7 @@ class ChartView: UIView ,ChartViewDelegate{
     lazy var lineChartView:LineChartView = {
         //let _lineChartView = LineChartView.init(frame: CGRect.init(x: 0, y: 20, width: 300, height: 300))
         let _lineChartView = LineChartView()
-        //_lineChartView.delegate = self//
+        _lineChartView.delegate = self
         _lineChartView.backgroundColor = UIColor.clear
         _lineChartView.doubleTapToZoomEnabled = false
         _lineChartView.chartDescription?.text = ""//设置为""隐藏描述文字
@@ -73,7 +73,7 @@ class ChartView: UIView ,ChartViewDelegate{
         xAxis.axisMaximum = 7
         xAxis.labelCount = 5 // 标签个数，不一定是这个数，但会大约是,这也会影响标签的显示个数
         // 设置代理，使得代理方法实现
-        _lineChartView.delegate = self
+//        _lineChartView.delegate = self
         
         return _lineChartView
     }()
@@ -113,8 +113,10 @@ class ChartView: UIView ,ChartViewDelegate{
         set1.colors = [UIColor.green]
         // 设置 点的样式
         set1.drawCirclesEnabled = true//绘制转折点
-        // 不显示十字线
-        set1.highlightEnabled = false
+        // 显示十字线
+        set1.highlightEnabled = true
+        // 十字线颜色
+        set1.highlightColor = .clear
         // 绘制转折点内圆
         set1.drawCircleHoleEnabled = false
         // 转折点是否显示y轴的值
@@ -224,26 +226,29 @@ class ChartView: UIView ,ChartViewDelegate{
     
     
     //折线上的点选中回调
-    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry,highlight: Highlight) {
-        print("选中了一个数据")
-        //显示该点的MarkerView标签
-        self.showMarkerView(value: "\(entry.y)")
-    }
-
-
-    //显示MarkerView标签
-    func showMarkerView(value:String){
-        let marker = MarkerView(frame: CGRect(x: 20, y: 20, width: 80, height: 20))
-        marker.chartView = self.lineChartView
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
-        label.text = value + GetUnit.getBloodUnit()
-        label.textColor = UIColor.white
-        label.font = UIFont.systemFont(ofSize: 12)
-        label.backgroundColor = UIColor.gray
-        label.textAlignment = .center
-        marker.addSubview(label)
-        self.lineChartView.marker = marker
-    }
+//    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry,highlight: Highlight) {
+//        print("选中了一个数据")
+//        //显示该点的MarkerView标签
+//        self.showMarkerView(value: "\(entry.y)")
+//    }
+//
+//    func chartValueNothingSelected(_ chartView: ChartViewBase) {
+//        print("nothing ")
+//    }
+//
+//    //显示MarkerView标签
+//    func showMarkerView(value:String){
+//        let marker = MarkerView(frame: CGRect(x: 20, y: 20, width: 80, height: 20))
+//        marker.chartView = self.lineChartView
+//        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 80, height: 40))
+//        label.text = "value\n" + value + GetUnit.getBloodUnit()
+//        label.textColor = UIColor.white
+//        label.font = UIFont.systemFont(ofSize: 12)
+//        label.backgroundColor = UIColor.gray
+//        label.textAlignment = .center
+//        marker.addSubview(label)
+//        self.lineChartView.marker = marker
+//    }
     
     func setupUI(){
         self.addSubview(lineChartView)

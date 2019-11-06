@@ -73,21 +73,21 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         cell?.backgroundColor = UIColor.clear
         return cell!
     }
-    // 设置表格头部背景颜色
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        guard let header = view as? UITableViewHeaderFooterView else {return}
-        header.textLabel?.textColor = UIColor.white
-        view.tintColor = UIColor.clear
-        view.layer.borderColor = UIColor.white.cgColor
-        
-    }
-    // 表格头部信息
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Connected Glucose Meter"
-    }
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 44
-    }
+//    // 设置表格头部背景颜色
+//    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+//        guard let header = view as? UITableViewHeaderFooterView else {return}
+//        header.textLabel?.textColor = UIColor.white
+//        view.tintColor = UIColor.clear
+//        view.layer.borderColor = UIColor.white.cgColor
+//
+//    }
+//    // 表格头部信息
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return "Connected Glucose Meter"
+//    }
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 44
+//    }
     
     // 点击单元格连接相应的设备
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -197,7 +197,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
     }
     //  MARK: - 连接设备后
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        if time != nil{
+        if timer != nil{
             timer!.invalidate() //销毁timer
             timer = nil
         }
@@ -675,6 +675,14 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
+        
+        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        self.navigationController!.navigationBar.shadowImage = UIImage()
+        self.navigationController!.navigationBar.isTranslucent = true
+        
+        self.automaticallyAdjustsScrollViewInsets = false
+        // 隐藏tabbar
         self.tabBarController?.tabBar.isHidden = true
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor:UIColor.white]
         // 初始化数据
@@ -708,8 +716,46 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
 //            }
             make.height.equalTo(44)
         }
+        
+        let tableHeadLabel = UILabel()
+        tableHeadLabel.backgroundColor = UIColor.clear
+        tableHeadLabel.textColor = UIColor.white
+        tableHeadLabel.textAlignment = .left
+        tableHeadLabel.text = "Connected Glucose Meter"
+        tableHeadLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        self.view.addSubview(tableHeadLabel)
+        tableHeadLabel.snp.makeConstraints{(make) in
+            make.right.equalToSuperview()
+            make.left.equalToSuperview().offset(15)
+            make.height.equalTo(44)
+            if #available(iOS 11.0, *) {
+                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(10)
+                //                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+            } else {
+                make.top.equalTo(topLayoutGuide.snp.bottom)
+                //                make.bottom.equalTo(bottomLayoutGuide.snp.top)
+                // Fallback on earlier versions
+            }
+            
+        }
         // 设置表格布局，设置其代理和数据来源，将其加入视图
-        tableView.frame = CGRect(x: 0, y: 64, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height-108)
+//        tableView.frame.size = CGSize(width: UIScreen.ma in.bounds.width, height: UIScreen.main.bounds.height-108)
+        self.view.addSubview(tableView)
+        tableView.backgroundColor = UIColor.lightGray
+        tableView.snp.makeConstraints{(make) in
+            make.left.right.equalToSuperview()
+            make.bottom.equalTo(button.snp.top)
+            make.top.equalTo(tableHeadLabel.snp.bottom)
+//            if #available(iOS 11.0, *) {
+//                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+////                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+//            } else {
+//                make.top.equalTo(topLayoutGuide.snp.bottom)
+////                make.bottom.equalTo(bottomLayoutGuide.snp.top)
+//                // Fallback on earlier versions
+//            }
+
+        }
         tableView.separatorColor = UIColor.clear
         tableView.backgroundColor = UIColor.clear
         tableView.delegate = self

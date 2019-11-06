@@ -14,7 +14,10 @@ class loginNavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavBarAppearence()
-        self.view.backgroundColor = UIColor.init(patternImage: UIImage(named: "bg")!)
+        let img = UIImage(named: "bg")
+//        self.view.backgroundColor = UIColor.init(patternImage: UIImage(named: "bg")!)
+        self.view.layer.contents = img?.cgImage
+        self.view.backgroundColor = UIColor.clear
         
 //        let login = loginViewController()
 //        

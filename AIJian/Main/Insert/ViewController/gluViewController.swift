@@ -251,6 +251,7 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.automaticallyAdjustsScrollViewInsets = false
         print(BLEglucoseMark)
         print("laseRecord:\(lastRecord)")
     }
@@ -272,8 +273,14 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         self.view.addSubview(button)
         tableView.snp.makeConstraints{(make) in
             make.left.right.equalToSuperview()
-            make.top.equalToSuperview()
+//            make.top.equalToSuperview()
             make.bottom.equalToSuperview().offset(-44)
+            if #available(iOS 11.0, *) {
+                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+            } else {
+                // Fallback on earlier versions
+                make.top.equalTo(topLayoutGuide.snp.bottom)
+            }
         }
         button.snp.makeConstraints{(make) in
             make.left.right.bottom.equalToSuperview()

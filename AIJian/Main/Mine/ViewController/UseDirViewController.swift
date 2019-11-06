@@ -24,6 +24,7 @@ class UseDirViewController: UIViewController {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.automaticallyAdjustsScrollViewInsets = false
         self.title="Instruction"
         
 //        self.view.backgroundColor = ThemeColor

@@ -30,7 +30,7 @@ class VersionUViewController: UIViewController {
         
         override func viewDidLoad() {
             super.viewDidLoad()
-            
+            self.automaticallyAdjustsScrollViewInsets = false
             self.title = "Update"
 //            self.view.backgroundColor = ThemeColor
             self.view.backgroundColor = UIColor.clear
