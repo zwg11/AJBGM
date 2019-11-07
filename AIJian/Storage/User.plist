@@ -10,5 +10,7 @@
 	<string></string>
 	<key>userId</key>
 	<integer>0</integer>
+	<key>isFirst</key>
+	<true/>
 </dict>
 </plist>

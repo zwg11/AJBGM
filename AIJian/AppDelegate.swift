@@ -16,10 +16,11 @@ import IQKeyboardManagerSwift
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
     var isFirstStart:Bool?
 
     var blockRotation = false
+    
     let AlamofireManager:Alamofire.SessionManager = {
         let conf = URLSessionConfiguration.default
         conf.timeoutIntervalForRequest = 10
@@ -32,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enable = true
         // 先确认是否初始化plist文件，没有则初始化
         let isPlistInit = PlistSetting.initPlistFile()
-//        PlistSetting.initPlistFile()
+        
         
         let tabBarController = AJTabbarController()
 //        tabBarController.tabBar.barTintColor = ThemeColor
@@ -48,6 +49,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //判断文件中的token是否为空。  如果为空时，则为第一次登陆。
         //如果不为空时，则需要再次判断
         if isPlistInit{
+            print(UserInfo.getIsFirst())
+            
             if UserInfo.getToken() == ""{  //跳转到登陆界面
                 print("token为空:\(UserInfo.getToken())")
                 window?.rootViewController = loginNv
@@ -81,36 +84,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                 }
             }
+            if UserInfo.getIsFirst() == true{
+                self.setStaticGuidePage()
+                print("进入轮播图")
+            }else{
+                //公司宣传页
+            }
         }
-        
         
         window?.makeKeyAndVisible()
         Siren.shared.wail()
-//        let startImageView = AJStartView.init(imageName: "startView-1", timer: 3)
-//        self.window?.rootViewController?.view.addSubview(startImageView)
-        isFirstStart = false
-        if isFirstStart == true{
-            self.setStaticGuidePage()
-        }
         return true
     }
 
     // 设置启动页轮播图
     func setStaticGuidePage() {
-        let imageNameArray: [String] = ["yindao01", "yindao02","yindao03"]
+        let imageNameArray: [String] = ["yindao01", "yindao02"]
         let guideView = AJGuidePageView.init(imageNameArray: imageNameArray, isHiddenSkipButton: false)
+        print("启动页方法")
+        print(imageNameArray)
         self.window?.rootViewController?.view.addSubview(guideView)
+        guideView.snp.remakeConstraints{ (make) in
+            make.width.equalToSuperview()
+            make.height.equalToSuperview()
+            make.top.equalToSuperview()
+        }
     }
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
     }
-
+    //程序即将进入后台
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
-
+    //程序即将进入前台
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
     }
@@ -118,7 +127,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
-
+    //程序终止
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
       

@@ -31,7 +31,8 @@ class MineViewController: UIViewController {
 
     let _imgArr   = ["user-info","Units-Setup","Change-Password","Targets-Setting","Instructions","About-Us","Update",]
 
-    let tableview = UITableView(frame: CGRect(x: 0, y:  0, width: AJScreenWidth, height: AJScreenHeight*7/12+AJScreenHeight/15+55+AJScreenWidth*0.35))
+    var tableview:UITableView = UITableView()
+//    let tableview = UITableView(frame: CGRect(x: 0, y:  0, width: AJScreenWidth, height: AJScreenHeight/12 * 7+AJScreenHeight/15+55+AJScreenWidth*0.35))
     //点击跳转对应页面
     public lazy var clickArray: [UIViewController] = {
         return [InfoViewController(),UnitViewController(),PassChangeViewController(),BloodSetViewController(), UseDirViewController(),AboutUsViewController(),VersionUViewController()
@@ -49,17 +50,14 @@ class MineViewController: UIViewController {
 //    }
 //    
     override func viewWillAppear(_ animated: Bool) {
-        // ****** 弹出加载风火轮 ******
-        
-        // 初始化UI
-//        indicator.setupUI("Logining in...")
-        // 设置风火轮视图在父视图中心
-        // 检查数据库是否有相关用户的信息
-        
-//        indicator.snp.makeConstraints{(make) in
-//            make.edges.equalToSuperview()
-//        }
-        
+        //将所有按钮添加到scrollview中，还需要修改相对布局
+        let userInfo = DBSQLiteManager.manager.selectUserRecord(userId: UserInfo.getUserId())
+        // 如果得到的实体是空的，说明没有相关信息
+        // 那么就需向服务器请求数据
+        if userInfo.user_name == nil{
+            requestUserInfo()
+        }
+        self.tableview.reloadRows(at: [IndexPath(row:0,section:0)], with: .none)
        
     }
     override func viewDidLoad() {
@@ -76,7 +74,17 @@ class MineViewController: UIViewController {
         if userInfo.user_name == nil{
             requestUserInfo()
         }
-       
+        self.view.addSubview(tableview)
+        tableview.snp.makeConstraints{(make) in
+            make.left.right.equalToSuperview()
+            make.top.equalToSuperview()
+            if #available(iOS 11.0, *) {
+                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+            } else {
+                make.bottom.equalTo(bottomLayoutGuide.snp.top)
+                // Fallback on earlier versions
+            }
+        }
         //分割线
 //        tableview.separatorStyle = .singleLine
         tableview.separatorColor = UIColor.white
@@ -85,9 +93,10 @@ class MineViewController: UIViewController {
         tableview.register(UITableViewCell.self, forCellReuseIdentifier:"cell")
         tableview.delegate = self
         tableview.dataSource = self
-//        tableview.backgroundColor = ThemeColor
+        tableview.isScrollEnabled = true
         tableview.backgroundColor = UIColor.clear
         self.view.addSubview(tableview)
+        self.view.bringSubviewToFront(tableview)
         // 将风火轮移除，并停止转动
         self.indicator.stopIndicator()
         self.indicator.removeFromSuperview()

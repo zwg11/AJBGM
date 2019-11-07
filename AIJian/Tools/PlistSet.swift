@@ -8,7 +8,7 @@
 
 // MARK: - 该文件的作用：使得plist文件可以在真机上读写
 // 需要读写的plist文件有:
-// GlobalValue.plist、UnitSetting.plist、User.plist、inputChoose.plist、userBloodSetting.plist
+// GlobalValue.plist、UnitSetting.plist、User.plist、inputChoose.plist、userBloodSetting.plist、userBloodSettingMgdl.plist
 
 import Foundation
 
@@ -24,7 +24,6 @@ class PlistSetting{
         let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true) as NSArray
 
         // 获取目标文件路径，实际上就是在文件夹路径添加文件名
-        let GlobalValuePath = (documentDirectory[0] as AnyObject).appendingPathComponent("GlobalValue.plist") as String
         
         let UnitSettingPath = (documentDirectory[0] as AnyObject).appendingPathComponent("UnitSetting.plist") as String
         
@@ -34,36 +33,22 @@ class PlistSetting{
         
         let userBloodSettingPath = (documentDirectory[0] as AnyObject).appendingPathComponent("userBloodSetting.plist") as String
         
-        print("文件路径1：\(GlobalValuePath)")
-        print("文件路径2：\(UnitSettingPath)")
-        print("文件路径3：\(UserPath)")
-        print("文件路径4：\(inputChoosePath)")
-        print("文件路径5：\(userBloodSettingPath)")
+        let userBloodSettingMgdlPath = (documentDirectory[0] as AnyObject).appendingPathComponent("userBloodSettingMgdl.plist") as String
+//        print("文件路径1：\(GlobalValuePath)")
+//        print("文件路径2：\(UnitSettingPath)")
+//        print("文件路径3：\(UserPath)")
+//        print("文件路径4：\(inputChoosePath)")
+//        print("文件路径5：\(userBloodSettingPath)")
         
         // 检查文件夹中是否存在对应的文件
-        let GlobalValueExit      = fileManager.fileExists(atPath: GlobalValuePath)
         let UnitSettingExit      = fileManager.fileExists(atPath: UnitSettingPath)
         let UserExit             = fileManager.fileExists(atPath: UserPath)
         let inputChooseExit      = fileManager.fileExists(atPath: inputChoosePath)
         let userBloodSettingExit = fileManager.fileExists(atPath: userBloodSettingPath)
+        let userBloodSettingMgdlExit = fileManager.fileExists(atPath: userBloodSettingMgdlPath)
         
         // 如果文件不存在说明App是第一次运行，需要将相关文件拷贝至目标路径
-        // GlobalValue.plist 配置文件检查
-        if(GlobalValueExit != true){
-            // 获取源文件路径
-            let path = Bundle.main.path(forResource: "GlobalValue", ofType: "plist")!
-            //let path = PlistSetting.getFilePath(File: "GlobalValue.plist")
-            
-            do{
-                // 将文件从源文件夹复制到目标文件夹
-                try fileManager.copyItem(atPath: path, toPath: GlobalValuePath)
-                print("源文件路径：\(path)")
-                print("GlobalValuePath文件\(GlobalValuePath)")
-                
-            }catch{
-                print("异常")
-            }
-        }
+         //文件写在了user.plist中
         
         // UnitSetting.plist 配置文件检查
         if(UnitSettingExit != true){
@@ -72,11 +57,11 @@ class PlistSetting{
             
             do{
                 try fileManager.copyItem(atPath: path, toPath: UnitSettingPath)
-                print("源文件路径：\(path)")
-                print("UnitSettingPath文件\(UnitSettingPath)")
+//                print("源文件路径：\(path)")
+//                print("UnitSettingPath文件\(UnitSettingPath)")
                 
             }catch{
-                print("异常")
+//                print("异常")
             }
         }
         
@@ -88,11 +73,11 @@ class PlistSetting{
             
             do{
                 try fileManager.copyItem(atPath: path, toPath: UserPath)
-                print("源文件路径：\(path)")
-                print("UserPath文件\(UserPath)")
+//                print("源文件路径：\(path)")
+//                print("UserPath文件\(UserPath)")
                 
             }catch{
-                print("异常")
+//                print("异常")
             }
         }
         
@@ -103,11 +88,11 @@ class PlistSetting{
             
             do{
                 let _ = try fileManager.copyItem(atPath: path, toPath: inputChoosePath)
-                print("源文件路径：\(path)")
-                print("inputChoosePath文件\(inputChoosePath)")
+//                print("源文件路径：\(path)")
+//                print("inputChoosePath文件\(inputChoosePath)")
                 
             }catch{
-                print("异常")
+//                print("异常")
             }
             
         }
@@ -119,14 +104,32 @@ class PlistSetting{
             
             do{
                 let _ = try fileManager.copyItem(atPath: path, toPath: userBloodSettingPath)
-                print("源文件路径：\(path)")
-                print("userBloodSettingPath文件\(userBloodSettingPath)")
+//                print("源文件路径：\(path)")
+//                print("userBloodSettingPath文件\(userBloodSettingPath)")
                 
             }catch{
                 print("异常")
             }
             
         }
+        
+        // userBloodSettingMgdl.plist 配置文件检查
+        if(userBloodSettingMgdlExit != true){
+            let path = Bundle.main.path(forResource: "userBloodSettingMgdl", ofType: "plist")!
+//            print(path)
+            //            let path = PlistSetting.getFilePath(File: "userBloodSetting.plist")
+            
+            do{
+                let _ = try fileManager.copyItem(atPath: path, toPath: userBloodSettingMgdlPath)
+                //                print("源文件路径：\(path)")
+                //                print("userBloodSettingPath文件\(userBloodSettingPath)")
+                
+            }catch{
+                print("异常加载不到mgdl文件")
+            }
+            
+        }
+        
         return true
         
     }

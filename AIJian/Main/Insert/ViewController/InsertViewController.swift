@@ -828,7 +828,7 @@ extension InsertViewController{
         
         // 体重
         if let weight = x.weightKg{
-            if GetUnit.getWeightUnit() == "kg"{
+            if GetUnit.getWeightUnit() == "Kg"{
                 self.input.setWeightValue("\(weight)")
             }else{
                 self.input.setWeightValue(String(format: "%.0f", x.weightLbs!))

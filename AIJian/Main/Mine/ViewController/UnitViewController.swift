@@ -138,6 +138,7 @@ class UnitViewController: UIViewController {
         button.addTarget(self, action: #selector(save), for: .touchUpInside)
         button.setTitle("Save", for: .normal)
         button.tintColor = ThemeColor
+         button.frame = CGRect(x: 0, y: 0, width: AJScreenWidth/8, height: AJScreenWidth/8)
         return button
     }()
     

@@ -48,6 +48,15 @@ class UserInfo{
         return meterID
     }
     
+    //从Plist文件中提取 isFirst
+    static func getIsFirst() ->Bool{
+        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
+        var isFirst:Bool
+        isFirst = data["isFirst"] as! Bool
+        return isFirst
+    }
+    
+    
     // 设置plist 文件中的 userId
     static func setUserId(_ id:Int64){
         //let path = Bundle.main.path(forResource: "User", ofType: "plist")
@@ -81,6 +90,12 @@ class UserInfo{
         // 更新配置文件内容
         arr[meterID] = record
         data["meterID"] = arr
+        data.write(toFile: path, atomically: true)
+    }
+    //设置Plist文件中提取 isFirst
+    static func setIsFirst(_ isFirst:Bool) {
+        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
+        data["isFirst"] = isFirst
         data.write(toFile: path, atomically: true)
     }
 }

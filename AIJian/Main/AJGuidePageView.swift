@@ -42,7 +42,7 @@ class AJGuidePageView: UIView {
         if self.imageArray == nil || self.imageArray?.count == 0{
             return
         }
-        self.addScrollView(frame:frame)
+        self.addScrollView(frame:CGRect(x: 0, y: 0, width: AJScreenWidth, height: AJScreenHeight))
         self.addImages()
         self.addSkipButton(isHiddenSkipButton: isHiddenSkipButton)
         self.addPageControl()
@@ -76,7 +76,7 @@ extension AJGuidePageView{
         }
         let skipButton = UIButton.init(frame: CGRect.init(x: HHScreenWidth * 0.75, y: HHScreenHeight * 0.1, width: 70, height: 35))
         skipButton.setTitle("Skip", for:.normal)
-        skipButton.backgroundColor = UIColor.gray
+        skipButton.backgroundColor = UIColor.init(red: 26/255.0, green: 90/255.0, blue: 145/255.0, alpha: 0.3)
         skipButton.setTitleColor(UIColor.white, for: .normal)
         skipButton.layer.cornerRadius = skipButton.frame.size.height * 0.5
         skipButton.addTarget(self, action: #selector(skipButtonClick), for: .touchUpInside)
@@ -108,7 +108,7 @@ extension AJGuidePageView{
                 startButton.setTitle("Start experiencing", for: .normal)
                 startButton.setTitleColor(UIColor.white, for: .normal)
                 startButton.layer.cornerRadius = startButton.frame.size.height * 0.5
-                startButton.backgroundColor = UIColor.orange
+                startButton.backgroundColor = UIColor.init(red: 26/255.0, green: 90/255.0, blue: 145/255.0, alpha: 0.3)
                 startButton.addTarget(self, action: #selector(skipButtonClick), for: .touchUpInside)
                 imageView.addSubview(startButton)
             }

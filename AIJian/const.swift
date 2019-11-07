@@ -58,7 +58,7 @@ let tabBarHeight : CGFloat = isIphoneX ? 49 + 34 : 49
 
 
 
-var weightUnit : String = "kg"
+var weightUnit : String = "Kg"
 var heightUnit : String = "cm"
 var bloodUnit : String = "mmol/L"
 

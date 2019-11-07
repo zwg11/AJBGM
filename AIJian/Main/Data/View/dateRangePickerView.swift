@@ -72,7 +72,9 @@ class dateRangePickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         self.sureButton.snp.makeConstraints{(make) in
             make.right.equalToSuperview()
             make.width.equalTo(UIScreen.main.bounds.width/3)
-            make.top.bottom.equalTo(cancelButton)
+            make.top.equalToSuperview()
+            make.height.equalTo(UIScreen.main.bounds.height/15)
+//            make.top.bottom.equalTo(cancelButton)
             //make.height.equalTo(UIScreen.main.bounds.height/15)
         }
         

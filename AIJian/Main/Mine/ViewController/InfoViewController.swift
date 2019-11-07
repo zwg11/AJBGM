@@ -41,7 +41,7 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
 //            infoDataArray[1] = (userInfo.height! == 0) ? "男":"女"
 //        }
         
-        if GetUnit.getWeightUnit() == "kg"{
+        if GetUnit.getWeightUnit() == "Kg"{
             infoDataArray[2] = (userInfo.weight_kg != nil) ? "\(userInfo.weight_kg!)":""
         }else{
             infoDataArray[2] = (userInfo.weight_lbs != nil) ? "\(userInfo.weight_lbs!)":""
@@ -66,8 +66,10 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
     lazy var rightButton:UIButton = {
         let button = UIButton(type: .system)
         button.addTarget(self, action: #selector(saveUserInfo), for: .touchUpInside)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         button.setTitle("Save", for: .normal)
         button.tintColor = UIColor.white
+        button.frame = CGRect(x: 0, y: 0, width: AJScreenWidth/8, height: AJScreenWidth/8)
         return button
     }()
     
@@ -117,7 +119,7 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
         updateUserInfo.userName = (infoDataArray[0] == "") ? nil:infoDataArray[0]
         updateUserInfo.gender = (infoDataArray[1] == "Male") ? 0:1
         if infoDataArray[2] != ""{
-            if GetUnit.getWeightUnit() == "kg"{
+            if GetUnit.getWeightUnit() == "Kg"{
                 updateUserInfo.weightKg = Double(infoDataArray[2])
                 updateUserInfo.weightLbs = WeightUnitChange.KgToLbs(num: Double(infoDataArray[2])!)
             }else{

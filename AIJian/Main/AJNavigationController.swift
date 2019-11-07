@@ -21,7 +21,13 @@ class AJNavigationController: UINavigationController {
         super.viewDidLoad()
         setNavBarAppearence()
         //navigationController
-        self.view.backgroundColor = UIColor.init(patternImage: UIImage(named: "bg")!)
+        let imageView = UIImage(named:"bg")!.withRenderingMode(.alwaysOriginal)
+      
+//        print(imageView?.renderingMode)
+//        imageView?.renderingMode = .alwaysOriginal
+//        imageView.image = UIImage(named:"bg")
+//        self.backgroundImage = imageView
+        self.view.backgroundColor = UIColor.init(patternImage: imageView)
         
     }
 
