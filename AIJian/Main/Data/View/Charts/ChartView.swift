@@ -29,6 +29,7 @@ class ChartView: UIView ,ChartViewDelegate{
         // 是否支持拖拽
         _lineChartView.scaleXEnabled = true
         _lineChartView.scaleYEnabled = false
+        _lineChartView.maxHighlightDistance = 10
         
         
         // x、y轴是否支持自动缩放
@@ -223,32 +224,6 @@ class ChartView: UIView ,ChartViewDelegate{
         lineChartView.leftAxis.addLimitLine(limitLine)
     }
     
-    
-    
-    //折线上的点选中回调
-//    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry,highlight: Highlight) {
-//        print("选中了一个数据")
-//        //显示该点的MarkerView标签
-//        self.showMarkerView(value: "\(entry.y)")
-//    }
-//
-//    func chartValueNothingSelected(_ chartView: ChartViewBase) {
-//        print("nothing ")
-//    }
-//
-//    //显示MarkerView标签
-//    func showMarkerView(value:String){
-//        let marker = MarkerView(frame: CGRect(x: 20, y: 20, width: 80, height: 20))
-//        marker.chartView = self.lineChartView
-//        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 80, height: 40))
-//        label.text = "value\n" + value + GetUnit.getBloodUnit()
-//        label.textColor = UIColor.white
-//        label.font = UIFont.systemFont(ofSize: 12)
-//        label.backgroundColor = UIColor.gray
-//        label.textAlignment = .center
-//        marker.addSubview(label)
-//        self.lineChartView.marker = marker
-//    }
     
     func setupUI(){
         self.addSubview(lineChartView)

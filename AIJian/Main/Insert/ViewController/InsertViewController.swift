@@ -35,6 +35,7 @@ class InsertViewController: UIViewController {
     private lazy var sdView = sliderView.init(frame: CGRect(x: 0, y: 0, width: AJScreenWidth*0.9, height: 2))
     // 该页面是编辑还是输入
     var isInsert: Bool = true
+    var isHome = false
     
     // 选择药物按钮弹出的alert
     private var medicineChooseAlert:alertViewController = {
@@ -342,7 +343,7 @@ class InsertViewController: UIViewController {
             weight_lbs = input.getWeightValue()
             // 体重不为空
             if weight_lbs != nil{
-                weight_kg = WeightUnitChange.KgToLbs(num: weight_lbs!)
+                weight_kg = WeightUnitChange.LbsToKg(num: weight_lbs!)
             }
         }
         
@@ -629,10 +630,15 @@ class InsertViewController: UIViewController {
                                 print("更新成功")
                                 // 向数据库更新数据
                                 DBSQLiteManager.manager.updateGlucoseRecord(data: insertData)
-                                // 更新所展示的数据
-                                initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())
-                                sortedTimeOfData()
-                                chartData()
+                                // 如果不是home页面进来的，更新所展示的数据
+                                // 否则不更新
+                                if !self.isHome{
+                                    // 更新所展示的数据
+                                    initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())
+                                    sortedTimeOfData()
+                                    chartData()
+                                }
+                                
                                 // 风火轮停止
                                 indicator.stopIndicator()
                                 indicator.removeFromSuperview()
@@ -646,7 +652,7 @@ class InsertViewController: UIViewController {
                                     })
                                 })
 
-                                NotificationCenter.default.post(name: NSNotification.Name("Data Update success"), object: self, userInfo: nil)
+//                                NotificationCenter.default.post(name: NSNotification.Name("Data Update success"), object: self, userInfo: nil)
 
                             }else{
                                 print(responseModel.code)
@@ -840,7 +846,7 @@ extension InsertViewController{
         
         // 体重
         if let weight = x.weightKg{
-            if GetUnit.getWeightUnit() == "kg"{
+            if GetUnit.getWeightUnit() == "Kg"{
                 self.input.setWeightValue("\(weight)")
             }else{
                 self.input.setWeightValue(String(format: "%.0f", x.weightLbs!))

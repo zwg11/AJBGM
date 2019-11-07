@@ -104,30 +104,6 @@ class InputView: UIView,UIScrollViewDelegate {
         button.frame = CGRect(x: 0, y: 0, width: AJScreenWidth, height: AJScreenHeight)
         return button
     }()
-//    //第七部分：左侧按钮
-//      lazy var leftButton:UIButton = {
-//        let leftButton = UIButton.init(type: .system)
-//        leftButton.backgroundColor = UIColor.gray
-//        leftButton.setTitle("取消", for: .normal)
-//        leftButton.setTitleColor(UIColor.white, for: .normal)
-//        leftButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
-//        leftButton.layer.cornerRadius = 5
-//        leftButton.layer.masksToBounds = true
-//        return leftButton
-//    }()
-//    //第七部分：右侧按钮
-//     lazy var rightButton:UIButton = {
-//        let rightButton = UIButton.init(type: .system)
-//        rightButton.backgroundColor = UIColor.gray
-//        rightButton.setTitle("保存", for: .normal)
-//        rightButton.setTitleColor(UIColor.white, for: .normal)
-//        rightButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
-//        rightButton.layer.cornerRadius = 5
-//        rightButton.layer.masksToBounds = true
-//        return rightButton
-//    }()
-    
-    
     
     //视图约束
     func setupUI() {
@@ -211,24 +187,6 @@ class InputView: UIView,UIScrollViewDelegate {
             make.height.equalTo(AJScreenWidth/4)
         }
         
-//        //leftButton左侧按钮：取消
-//        self.scrollView.addSubview(leftButton)
-//        leftButton.snp.makeConstraints{ (make) in
-//            make.left.equalTo(AJScreenWidth/2)
-//            make.height.equalTo(AJScreenWidth/15*2)
-//            make.width.equalTo(AJScreenWidth/2-4)
-//            make.top.equalTo(remark.snp.bottom)
-//        }
-   
-//        //rightButton右侧按钮:保存
-//        self.scrollView.addSubview(rightButton)
-//        rightButton.snp.makeConstraints{ (make) in
-//            make.right.equalTo(AJScreenWidth/2)
-//            make.height.equalTo(AJScreenWidth/15*2)
-//            make.width.equalTo(AJScreenWidth/2-4)
-//            make.top.equalTo(remark.snp.bottom)
-//        }
-        
         
         self.bringSubviewToFront(picker)
     }
@@ -253,24 +211,6 @@ class InputView: UIView,UIScrollViewDelegate {
         UIView.animate(withDuration: 0.5, animations: appear)
     }
     
-//    // 选择 事件 按钮被点击时的动作
-//    @objc func chooseOccurTime(){
-//        print("choose occurTime button clicked,appear done.")
-//        style = .occurTime
-//        // 添加背景按钮
-//        self.addSubview(backButton)
-//        UIView.animate(withDuration: 0.5, animations: appear)
-//    }
-    
-    // 选择 进餐量 按钮被点击时的动作
-//    @objc func choosePortion(){
-//        print("choose occurTime button clicked,appear done.")
-//        style = .portions
-//        // 添加背景按钮
-//        self.addSubview(backButton)
-//        UIView.animate(withDuration: 0.5, animations: appear)
-//    }
-    
     // 选择 胰岛素 按钮被点击时的动作
     @objc func chooseInsulin(){
         print("choose occurTime button clicked,appear done.")
@@ -288,16 +228,6 @@ class InputView: UIView,UIScrollViewDelegate {
         self.addSubview(backButton)
         UIView.animate(withDuration: 0.5, animations: appear)
     }
-    
-//    // 选择 运动强度 按钮被点击时的动作
-//    @objc func chooseExerIntensity(){
-//        print("choose sport button clicked,appear done.")
-//        style = .exerintensity
-//        // 添加背景按钮
-//        self.addSubview(backButton)
-//        UIView.animate(withDuration: 0.5, animations: appear)
-//    }
-//
     
     
     func dismiss(){

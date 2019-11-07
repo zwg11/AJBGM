@@ -52,7 +52,7 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             
             let cell = LastResultTableViewCell(style: .value1, reuseIdentifier: id)
             cell.selectionStyle = .none
-
+            cell.accessoryType = .disclosureIndicator
             cell.backgroundColor = UIColor.clear
             return cell
         case 2:
@@ -104,6 +104,7 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             if data != nil{
                 // 初始化insert界面
                 let insert = InsertViewController()
+                insert.isHome = true
                 insert.EditData(date: data!)
                 self.navigationController?.pushViewController(insert, animated: false)
             }else{
@@ -127,9 +128,11 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }()
     
     override func viewWillAppear(_ animated: Bool) {
+        // 设置导航栏为透明
         self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
 //        self.navigationController!.navigationBar.shadowImage = UIImage()
         self.navigationController!.navigationBar.isTranslucent = true
+        // 设置滚动视图和表格视图不自动调整位移量
         self.automaticallyAdjustsScrollViewInsets = false
         homeTableView.reloadData()
         // 图表重新画
@@ -163,25 +166,6 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.view.clipsToBounds = true
-
-//        let view11 = UIView()
-//        view11.clipsToBounds = true
-//        view11.backgroundColor = UIColor.lightGray
-//        self.view.addSubview(view11)
-//        view11.snp.makeConstraints{(make) in
-//            make.left.right.equalToSuperview()
-//
-//            if #available(iOS 11.0, *) {
-//                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
-//                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
-//            } else {
-//                make.top.equalTo(topLayoutGuide.snp.bottom)
-//                make.bottom.equalTo(bottomLayoutGuide.snp.top)
-//                // Fallback on earlier versions
-//            }
-//
-//        }
         
         self.view.addSubview(homeTableView)
         homeTableView.snp.makeConstraints{(make) in

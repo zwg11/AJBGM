@@ -87,12 +87,6 @@ class portionAndInsulinView: UIView,UITextFieldDelegate {
     }
     
     // **********************胰岛素***********************
-//    // 胰岛素图标
-//    private lazy var insulinImageView:UIImageView = {
-//        let imageView = UIImageView()
-//        imageView.image = UIImage(named: "事件")
-//        return imageView
-//    }()
     // 胰岛素label
     private lazy var insulinLabel:UILabel = {
         let label = UILabel()
@@ -138,12 +132,6 @@ class portionAndInsulinView: UIView,UITextFieldDelegate {
 //        self.backgroundColor = kRGBColor(130, 154, 249, 1)
         self.backgroundColor = UIColor.clear
         // **********************进餐量***********************
-        // 进餐量图标布局设置
-//        self.addSubview(portionImageView)
-//        portionImageView.snp.makeConstraints{(make) in
-//            make.left.top.equalToSuperview().offset(AJScreenWidth/20)
-//            make.height.width.equalTo(AJScreenWidth/15)
-//        }
         
         // 进餐量label布局z设置
         self.addSubview(portionLabel)
@@ -153,14 +141,6 @@ class portionAndInsulinView: UIView,UITextFieldDelegate {
             make.width.equalTo(AJScreenWidth/10)
         }
         
-//        // 进餐量选择按钮
-//        self.addSubview(portionButton)
-//        portionButton.snp.makeConstraints{(make) in
-//            make.centerX.equalToSuperview()
-//            make.top.equalTo(portionLabel.snp.bottom).offset(AJScreenWidth/40)
-//            make.width.equalTo(AJScreenWidth/2)
-//            make.height.equalTo(AJScreenWidth/12)
-//        }
         // 进餐量选择按钮，共4个
         self.addSubview(portionNoButton)
         self.addSubview(portionMuchButton)
@@ -193,12 +173,6 @@ class portionAndInsulinView: UIView,UITextFieldDelegate {
         }
         
         // **********************胰岛素***********************
-//        // 胰岛素图标布局
-//        self.addSubview(insulinImageView)
-//        insulinImageView.snp.makeConstraints{(make) in
-//            make.left.right.height.equalTo(portionImageView)
-//            make.top.equalTo(portionLittleButton.snp.bottom).offset(AJScreenWidth/40)
-//        }
         
         // 胰岛素label布局
         self.addSubview(insulinLabel)

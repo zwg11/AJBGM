@@ -85,7 +85,7 @@ class dataTableViewCell: UITableViewCell {
         // 如果体重不为空
         if let weight = sortedData[secion][row].weightKg{
             // 根据单位设置不同形式的值
-            if GetUnit.getWeightUnit() == "kg"{
+            if GetUnit.getWeightUnit() == "Kg"{
                 weightLabel.text =  "\(weight)"
             }else{
                 weightLabel.text =  String(format: "%.0f", sortedData[secion][row].weightLbs!)
@@ -118,9 +118,12 @@ class dataTableViewCell: UITableViewCell {
         
         // 先判断有没有运动量，若没有再判断有没有运动类型
         // 运动
+        sportLabel.font = UIFont.systemFont(ofSize: 15)
+        medicineLabel.minimumScaleFactor = 0.3
+        medicineLabel.adjustsFontSizeToFitWidth = true
         if sortedData[secion][row].sportTime != nil{
             sportLabel.text = String(sortedData[secion][row].sportType!) + "\n" + String(sortedData[secion][row].sportTime!) + "min"
-            sportLabel.font = UIFont.systemFont(ofSize: 10)
+            
         }else if sortedData[secion][row].sportType != nil && sortedData[secion][row].sportType != "Nothing"{
 
             sportLabel.text = String(sortedData[secion][row].sportType!)

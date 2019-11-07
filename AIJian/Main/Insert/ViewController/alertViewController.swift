@@ -68,7 +68,7 @@ class alertViewController: UIAlertController,UITableViewDelegate,UITableViewData
             cell?.imageView?.image = UIImage(named: "unselected")
         }
         
-        cell?.backgroundColor = UIColor.clear
+        cell?.backgroundColor = UIColor.white
         return cell!
     }
     
@@ -109,7 +109,7 @@ class alertViewController: UIAlertController,UITableViewDelegate,UITableViewData
     func setupUI(){
         // 设置单元格允许多选
         tabelView.allowsMultipleSelection = true
-        tabelView.backgroundColor = UIColor.clear
+        tabelView.backgroundColor = UIColor.white
         // 读取配置文件中的药物种类
         let path = PlistSetting.getFilePath(File: "inputChoose.plist")
         let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!

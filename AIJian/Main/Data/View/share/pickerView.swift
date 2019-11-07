@@ -19,8 +19,6 @@ class pickerView: UIView {
         button.contentHorizontalAlignment = .right
         // 设置内边界，使得按钮的字体不那么靠右
         button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width/20)
-        // 此处修改了***************************************************
-        //button.addTarget(chatViewController.self, action: #selector(chatViewController.pickViewSelected), for: .touchUpInside)
         return button
     }()
     // 取消按钮

@@ -169,24 +169,6 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         
     }()
     
-//    // 创建 事件 选择器
-//    lazy var eventPicker:UIPickerView = {
-//        let pickerView = UIPickerView()
-//        pickerView.dataSource = self
-//        pickerView.delegate = self
-//        initPickerView(pickerView: pickerView)
-//        return pickerView
-//    }()
-    
-//    // 创建 进餐量 选择器
-//    lazy var portionPicker:UIPickerView = {
-//        let pickerView = UIPickerView()
-//        pickerView.dataSource = self
-//        pickerView.delegate = self
-//        initPickerView(pickerView: pickerView)
-//        return pickerView
-//    }()
-    
     // 创建 胰岛素 选择器
     lazy var insulinPicker:UIPickerView = {
         let pickerView = UIPickerView()
