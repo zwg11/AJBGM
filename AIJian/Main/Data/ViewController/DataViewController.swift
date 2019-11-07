@@ -108,6 +108,7 @@ class DataViewController: UIViewController {
         // 设置页面支持横屏
 //        appDelegate.blockRotation = true
         self.view.backgroundColor = UIColor.clear
+//        self.view.backgroundColor = UIColor.lightGray
         // 超过页面范围的子页面不显示
         self.view.clipsToBounds = true
         // 设置pickerView初始位置
@@ -115,10 +116,10 @@ class DataViewController: UIViewController {
         
         // 添加标题视图
         let titleview = pageViewManager.titleView
-       
-        view.addSubview(titleview)
+//        titleview.backgroundColor = UIColor.red
+        view.addSubview(pageViewManager.titleView)
         // 设置标题视图左右约束为对齐屏幕，顶部对齐导航栏，高度为44
-        titleview.snp.makeConstraints{(make )in
+        pageViewManager.titleView.snp.makeConstraints{(make )in
             make.left.right.equalToSuperview()
             make.height.equalTo(44)
             //make.top.equalTo((self.navigationController?.navigationBar.snp.bottom)!)
@@ -167,7 +168,7 @@ class DataViewController: UIViewController {
                 self.topConstraint = make.top.equalTo(self.navigationController!.view.safeAreaLayoutGuide.snp.bottom).offset(40).constraint
             } else {
                 // Fallback on earlier versions
-                self.topConstraint = make.top.equalTo(bottomLayoutGuide.snp.bottom).offset(40).constraint
+                self.topConstraint = make.top.equalTo(self.navigationController!.bottomLayoutGuide.snp.bottom).offset(40).constraint
             }
         }
 
@@ -185,6 +186,12 @@ class DataViewController: UIViewController {
     
     // 页面出现，tabbar隐藏
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController!.navigationBar.shadowImage = UIImage()
+        self.navigationController!.navigationBar.isTranslucent = true
+        
+        self.automaticallyAdjustsScrollViewInsets = false
+//        self.extendedLayoutIncludesOpaqueBars = true;
         // 隐藏 tabbar
         self.tabBarController?.tabBar.isHidden = true
 //        self.pageViewManager.titleView.currentIndex = 0
@@ -306,7 +313,8 @@ class DataViewController: UIViewController {
     // 点击取消按钮，时间选择器界面移到屏幕外，视觉效果为消失
     @objc func pickViewDismiss(){
         backButton.removeFromSuperview()
-        UIView.animate(withDuration: 0.5, animations: dismiss)
+        dismiss()
+//        UIView.animate(withDuration: 0.5, animations: dismiss)
         print("cancel button clicked")
     }
     
@@ -314,21 +322,26 @@ class DataViewController: UIViewController {
     // 根据被选项内容执行不同的动作
     @objc func pickViewSelected(){
         backButton.removeFromSuperview()
-        UIView.animate(withDuration: 0.5, animations: dismiss)
+        dismiss()
+//        UIView.animate(withDuration: 0.5, animations: dismiss)
         // 如果选择了自定义，那么弹出2个时间选择器供用户选择时间范围
         if dateRangePicker.selectedContent == "Custom"{
-            self.view.addSubview(customRange)
+            self.navigationController!.view.addSubview(customRange)
             customRange.snp.makeConstraints{(make)  in
-                make.left.right.top.equalToSuperview()
+                make.left.right.equalToSuperview()
+//                make.bottom.equalTo(self.navigationController!.view.snp.bottom)
                 if #available(iOS 11.0, *) {
-                    make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+                    make.bottom.equalTo(self.navigationController!.view.safeAreaLayoutGuide.snp.bottom)
                 } else {
                     // Fallback on earlier versions
-                    make.bottom.equalTo(bottomLayoutGuide.snp.top)
+                    make.bottom.equalTo(self.navigationController!.bottomLayoutGuide.snp.top)
                 }
+                make.height.equalTo(AJScreenHeight)
             }
+            self.navigationController!.view.layoutIfNeeded()
         }// 否则更新按钮标题
         else{
+//            UIView.animate(withDuration: 0.5, animations: dismiss)
             // 更新按钮标题
             rangePickerButton.setTitle(dateRangePicker.selectedContent ?? "Last 7 days", for: .normal)
             
@@ -361,14 +374,14 @@ class DataViewController: UIViewController {
         print("func dismiss done.")
         // 删除顶部约束
         self.bottomConstraint?.uninstall()
-        dateRangePicker.snp_makeConstraints{(make) in
-            
+        dateRangePicker.snp.makeConstraints{(make) in
+//            self.topConstraint = make.top.equalTo(self.navigationController!.view.snp.bottom).offset(40).constraint
             // 添加底部约束
             if #available(iOS 11.0, *) {
                 self.topConstraint = make.top.equalTo(self.navigationController!.view.safeAreaLayoutGuide.snp.bottom).offset(40).constraint
             } else {
                 // Fallback on earlier versions
-                self.topConstraint = make.top.equalTo(bottomLayoutGuide.snp.bottom).offset(40).constraint
+                self.topConstraint = make.top.equalTo(self.navigationController!.bottomLayoutGuide.snp.bottom).offset(40).constraint
             }
         }
         // 告诉当前控制器的View要更新约束了，动态更新约束，没有这句的话更新约束就没有动画效果
@@ -385,13 +398,13 @@ class DataViewController: UIViewController {
         // 删除顶部约束
         self.topConstraint?.uninstall()
         dateRangePicker.snp_makeConstraints{(make) in
-            
+//            self.bottomConstraint = make.bottom.equalTo(self.navigationController!.view.snp.bottom).constraint
             // 添加底部约束
             if #available(iOS 11.0, *) {
                 self.bottomConstraint = make.bottom.equalTo(self.navigationController!.view.safeAreaLayoutGuide.snp.bottom).constraint
             } else {
                 // Fallback on earlier versions
-                self.bottomConstraint = make.bottom.equalTo(bottomLayoutGuide.snp.top).constraint
+                self.bottomConstraint = make.bottom.equalTo(self.navigationController!.bottomLayoutGuide.snp.top).constraint
             }
         }
         self.navigationController!.view.layoutIfNeeded()

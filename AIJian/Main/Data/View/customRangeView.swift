@@ -14,11 +14,12 @@ class customRangeView: UIView {
     lazy var startDatePicker:UIDatePicker = {
         let datePicker = UIDatePicker()
         datePicker.datePickerMode = .date
+        datePicker.locale = Locale(identifier: "en_US")
         datePicker.maximumDate = Date()
         datePicker.backgroundColor = UIColor.white
         datePicker.layer.borderColor = UIColor.gray.cgColor
         datePicker.layer.borderWidth = 1
-        datePicker.locale = Locale(identifier: Locale.current.identifier)
+//        datePicker.locale = Locale(identifier: Locale.current.identifier)
         return datePicker
         
     }()
@@ -27,12 +28,13 @@ class customRangeView: UIView {
     lazy var endDatePicker:UIDatePicker = {
         let datePicker = UIDatePicker()
         datePicker.datePickerMode = .date
+        datePicker.locale = Locale(identifier: "en_US")
         datePicker.maximumDate = Date()
         datePicker.backgroundColor = UIColor.white
         datePicker.layer.borderColor = UIColor.gray.cgColor
         datePicker.layer.borderWidth = 1
         // 获取本地时间，使得datePicker 日期与本地一致
-        datePicker.locale = Locale(identifier: Locale.current.identifier)
+//        datePicker.locale = Locale(identifier: Locale.current.identifier)
         return datePicker
         
     }()
@@ -82,7 +84,7 @@ class customRangeView: UIView {
     }()
     // 实现点击背景 该视图 消失的效果
     @objc func dismissCustom(){
-        print("back button 00000000 clicked")
+//        print("back button 00000000 clicked")
         //backButton1.removeFromSuperview()
         self.removeFromSuperview()
     }

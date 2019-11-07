@@ -10,6 +10,7 @@ import UIKit
 import Charts
 
 class VDChartAxisValueFormatter: NSObject,IAxisValueFormatter {
+    
     var values:NSArray?;
     override init() {
         super.init();
@@ -22,7 +23,6 @@ class VDChartAxisValueFormatter: NSObject,IAxisValueFormatter {
         if values == nil {
             return "\(value)";
         }
-        
         return values?.object(at: Int(value)) as! String;
     }
 }

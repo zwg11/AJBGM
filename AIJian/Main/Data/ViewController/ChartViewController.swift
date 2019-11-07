@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import Charts
+import SwiftDate
 
-class ChartViewController: UIViewController{
+class ChartViewController: UIViewController,ChartViewDelegate{
     
     private lazy var headerView:ChartHeaderView = {
         let view = ChartHeaderView()
@@ -19,6 +21,7 @@ class ChartViewController: UIViewController{
     
     lazy var lineChartView:ChartView = {
         let view = ChartView()
+        view.lineChartView.delegate = self
         view.setupUI()
 
 //        view.lineChartView.delegate = self
@@ -71,6 +74,7 @@ class ChartViewController: UIViewController{
         // Do any additional setup after loading the view.
         // 监听所选时间范围的变化
         NotificationCenter.default.addObserver(self, selector: #selector(test), name: NSNotification.Name(rawValue: "reloadChart"), object: nil)
+        initChart()
     }
     
     @objc func test(){
@@ -116,5 +120,100 @@ class ChartViewController: UIViewController{
         default:
             lineChartView.drawLineChart(xAxisArray: xAxisArray(startDate: startD!, endDate: endD!) as NSArray,xAxisData: DateToData(startD!, endD!))
         }
+    }
+    
+    
+//    折线上的点选中回调
+    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry,highlight: Highlight) {
+        print("选中了一个数据")
+        //显示该点的MarkerView标签
+        self.showMarkerView(valuey: "\(entry.y)",valuex:"\(entry.x)")
+
+    }
+    // 点击空白处回调
+//    func chartValueNothingSelected(_ chartView: ChartViewBase) {
+//        print("nothing 111")
+//    }
+//    
+    // 背景图，点击后MarkerView消失
+    private lazy var backButton:UIButton = {
+            let button = UIButton.init(type: .system)
+            button.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.2)
+            button.addTarget(self, action: #selector(ViewDismiss), for: .touchUpInside)
+            button.frame = CGRect(x: 0, y: 0, width: AJScreenWidth, height: AJScreenHeight)
+            return button
+        }()
+    
+    @objc func ViewDismiss()
+    {
+        backButton.removeFromSuperview()
+        markerView.removeFromSuperview()
+    }
+    
+    private lazy var markerView:UIView = {
+        let view = UIView()
+        view.addSubview(MarkTimelabel)
+        view.addSubview(MarkValuelabel)
+        view.backgroundColor = UIColor.white
+        view.layer.cornerRadius = 5
+        return view
+        
+    }()
+    
+    private lazy var MarkTimelabel:UILabel = {
+        let label =  UILabel(frame: CGRect(x: 10, y: 10, width: 200, height: 30))
+        label.textColor = UIColor.black
+        label.font = UIFont.systemFont(ofSize: 18)
+//        label.backgroundColor = UIColor.gray
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    private lazy var MarkValuelabel:UILabel = {
+            let label =  UILabel(frame: CGRect(x: 10, y: 40, width: 200, height: 30))
+            label.textColor = UIColor.black
+            label.font = UIFont.systemFont(ofSize: 15)
+//            label.backgroundColor = UIColor.gray
+            label.textAlignment = .left
+            label.numberOfLines = 0
+            return label
+        }()
+    
+    //显示MarkerView标签
+    func showMarkerView(valuey:String,valuex:String){
+        let currentX = Double(valuex)! * 1440.0
+        // 创建一个时间格式器
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+
+        let xxxx = startD! + Int(currentX).minutes
+        MarkTimelabel.text = "\(dateFormatter.string(from: xxxx))"
+        MarkValuelabel.text = "BG value:\(valuey)" + GetUnit.getBloodUnit()
+        
+//        let marker = MarkerView()
+//        marker.chartView = self.lineChartView.lineChartView
+//        marker.addSubview(MarkTimelabel)
+//        marker.addSubview(MarkValuelabel)
+        
+//        UIView.animate(withDuration: 5, animations: {
+            self.navigationController?.view.addSubview(self.backButton)
+            self.navigationController?.view.addSubview(self.markerView)
+            self.backButton.snp.makeConstraints{(make) in
+                make.edges.equalToSuperview()
+                
+            }
+        
+            self.markerView.snp.makeConstraints{(make) in
+                make.center.equalToSuperview()
+                make.width.equalTo(AJScreenWidth/5*4)
+                make.height.equalTo(80)
+            }
+//        })
+        
+        
+        
+//        marker.addSubview(label)
+//        self.lineChartView.lineChartView.marker = marker
     }
 }

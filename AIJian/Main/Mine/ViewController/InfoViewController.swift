@@ -80,7 +80,7 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
 
         self.title = "Personal Information"
 //        self.navigationController?.navigationBar.barTintColor = ThemeColor
-        self.navigationController?.navigationBar.isTranslucent = false
+//        self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: NaviTitleColor]
         self.view.backgroundColor = ThemeColor
         self.view.backgroundColor = UIColor.clear
@@ -185,6 +185,11 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
     
     
     override func viewWillAppear(_ animated: Bool) {
+//        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        self.navigationController!.navigationBar.shadowImage = UIImage()
+//        self.navigationController!.navigationBar.isTranslucent = true
+        
+        self.automaticallyAdjustsScrollViewInsets = false
         //当每一次视图将要出现的时候，都要重新reload一下体重，防止那边换了单位，这边的信息还没换
         initInfoDataArray()
         self.tableview.reloadData()

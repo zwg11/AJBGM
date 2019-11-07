@@ -71,18 +71,54 @@ class InsulinViewController: UIViewController ,UITableViewDelegate,UITableViewDa
         }
         View.removeFromSuperview()
     }
+    
+    // 设置导航栏左按钮样式
+    private lazy var leftButton:UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        button.setImage(UIImage(named: "back"), for: .normal)
+        //button.setTitleColor(UIColor.blue, for: .normal)
+        button.addTarget(self, action: #selector(leftButtonClick), for: .touchUpInside)
+        return button
+    }()
+    // 导航栏左按钮动作
+    @objc func leftButtonClick(){
+        // 设置返回原页面
+        self.navigationController?.popViewController(animated: false)
+    }
 
     let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: AJScreenWidth, height: 120))
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // 添加导航栏左按钮
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
+        
+        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        self.navigationController!.navigationBar.shadowImage = UIImage()
+        self.navigationController!.navigationBar.isTranslucent = true
+        
+        self.automaticallyAdjustsScrollViewInsets = false
         
         tableView.delegate = self
         tableView.dataSource = self
         tableView.isScrollEnabled = false
         tableView.backgroundColor = UIColor.clear
         self.view.addSubview(tableView)
-        self.view.backgroundColor = ThemeColor
+        tableView.snp.makeConstraints{(make) in
+            make.left.right.equalToSuperview()
+            make.height.equalTo(120)
+            if #available(iOS 11.0, *) {
+                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+//                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+            } else {
+                make.top.equalTo(topLayoutGuide.snp.bottom)
+//                make.bottom.equalTo(bottomLayoutGuide.snp.top)
+                // Fallback on earlier versions
+            }
+
+        }
+//        self.view.backgroundColor = ThemeColor
         self.title = "Insulin Choose"
         
         backView.addTarget(self, action: #selector(back), for: .touchUpInside)
@@ -110,7 +146,7 @@ class InsulinViewController: UIViewController ,UITableViewDelegate,UITableViewDa
 
         tableView.deselectRow(at: indexPath, animated: true)
         
-        self.view.addSubview(View)
+        self.navigationController!.view.addSubview(View)
         View.snp.makeConstraints{(make) in
             make.edges.equalToSuperview()
         }
@@ -126,7 +162,7 @@ class InsulinViewController: UIViewController ,UITableViewDelegate,UITableViewDa
             Bolus.snp.makeConstraints{(make) in
                 make.left.equalToSuperview().offset(AJScreenWidth/20)
                 make.right.equalToSuperview().offset(-AJScreenWidth/20)
-                make.top.equalToSuperview().offset(AJScreenWidth/10)
+                make.top.equalToSuperview().offset(100)
                 make.height.equalTo(320)
             }
         case 1:
@@ -134,7 +170,7 @@ class InsulinViewController: UIViewController ,UITableViewDelegate,UITableViewDa
             Basal.snp.makeConstraints{(make) in
                 make.left.equalToSuperview().offset(AJScreenWidth/20)
                 make.right.equalToSuperview().offset(-AJScreenWidth/20)
-                make.top.equalToSuperview().offset(AJScreenWidth/10)
+                make.top.equalToSuperview().offset(100)
                 make.height.equalTo(280)
             }
         default:
@@ -144,7 +180,7 @@ class InsulinViewController: UIViewController ,UITableViewDelegate,UITableViewDa
 //                make.right.equalToSuperview().offset(-AJScreenWidth/20)
 //                make.top.equalToSuperview().offset(AJScreenWidth/10)
 //                make.height.equalTo(320)
-                make.edges.equalToSuperview().inset(UIEdgeInsets(top: 20,left: 20,bottom: 100,right: 20))
+                make.edges.equalToSuperview().inset(UIEdgeInsets(top: 100,left: 20,bottom: 100,right: 20))
             }
         }
         

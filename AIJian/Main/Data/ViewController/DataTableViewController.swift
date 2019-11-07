@@ -89,8 +89,8 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         DATETableView.delegate = self
         DATETableView.isScrollEnabled = false
         
-//        DATETableView.backgroundColor = ThemeColor
         DATETableView.backgroundColor = UIColor.clear
+
         // 内含滚动视图设置
         scroll.showsHorizontalScrollIndicator = true
         scroll.indicatorStyle = .black
@@ -107,7 +107,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
 //        scroll.addSubview(DATATableView)
         
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTable), name: NSNotification.Name(rawValue: "reloadTable"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(UpdateSuccess), name: NSNotification.Name(rawValue: "Update success"), object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(UpdateSuccess), name: NSNotification.Name(rawValue: "Update success"), object: nil)
         
     }
     
@@ -308,14 +308,9 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
                 }
             }
         }
-        // 如果设置其为透明可保证 其颜色与其他地方颜色相同时 视觉上一致
-        //self.navigationController?.navigationBar.isTranslucent = false
-        // 设置背景颜色
         
         // 设置整个视图的 滚动视图
         mainScrollView.contentSize = CGSize(width: AJScreenWidth, height: CGFloat(scHeight))
-        
-        
         
         mainScrollView.addSubview(DATETableView)
         DATETableView.snp.remakeConstraints{(make) in
@@ -324,7 +319,6 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
             make.height.equalTo(scHeight)
             make.width.equalTo(80)
         }
-        
         
         // 设置数据滚动视图内容的大小，该滚动视图只允许横向滚动
         scroll.contentSize = CGSize(width: 720+200, height: scHeight)
@@ -353,6 +347,8 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         DATATableView.delegate = self
         DATATableView.isScrollEnabled = false
         DATATableView.backgroundColor = UIColor.clear
+        // 设置分割线颜色
+        DATATableView.separatorColor = UIColor.clear
         // 清除滚动视图中的内容
         while scroll.subviews.last != nil{
             scroll.subviews.last?.removeFromSuperview()

@@ -37,7 +37,7 @@ class alertViewController: UIAlertController,UITableViewDelegate,UITableViewData
     }
     //单元格的行高
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 35
+        return 33
     }
     
     // 设置单元格内容和图片
@@ -50,6 +50,7 @@ class alertViewController: UIAlertController,UITableViewDelegate,UITableViewData
         
         var cell = tableView.dequeueReusableCell(withIdentifier: "id")
         cell?.selectionStyle = .none
+        
         if(cell == nil){
             // 该单元格可根据单元格选中状态设置图片显示内容
             cell = UITableViewCell(style: .default, reuseIdentifier: "id")
@@ -67,7 +68,7 @@ class alertViewController: UIAlertController,UITableViewDelegate,UITableViewData
             cell?.imageView?.image = UIImage(named: "unselected")
         }
         
-      
+        cell?.backgroundColor = UIColor.white
         return cell!
     }
     
@@ -108,7 +109,7 @@ class alertViewController: UIAlertController,UITableViewDelegate,UITableViewData
     func setupUI(){
         // 设置单元格允许多选
         tabelView.allowsMultipleSelection = true
-        
+        tabelView.backgroundColor = UIColor.white
         // 读取配置文件中的药物种类
         let path = PlistSetting.getFilePath(File: "inputChoose.plist")
         let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
@@ -131,7 +132,7 @@ class alertViewController: UIAlertController,UITableViewDelegate,UITableViewData
         self.view.addSubview(tabelView)
         tabelView.snp.makeConstraints{(make) in
             make.left.right.equalToSuperview()
-            make.top.equalToSuperview().offset(50)
+            make.top.equalToSuperview().offset(40)
             make.bottom.equalToSuperview().offset(-40)
         }
         
@@ -166,6 +167,7 @@ class alertViewController: UIAlertController,UITableViewDelegate,UITableViewData
         })
         cancelAction.setValue(UIColor.black, forKey: "_titleTextColor")
         okAction.setValue(UIColor.black, forKey: "_titleTextColor")
+        
         self.addAction(cancelAction)
         self.addAction(okAction)
     }

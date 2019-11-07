@@ -21,24 +21,11 @@ class ChartHeaderView: UIView {
         label.minimumScaleFactor = 0.3
         return label
     }()
-    // title image
-//    private lazy var titleImageView:UIImageView = {
-//       let imageView = UIImageView()
-//        imageView.image = UIImage(named: "tend_pic")
-//        return imageView
-//    }()
     
     
     func setUpUI(){
         
         self.backgroundColor = UIColor.clear
-//        self.addSubview(self.titleImageView)
-//        self.titleImageView.snp.makeConstraints{ (make) in
-//            make.left.equalToSuperview().offset(AJScreenWidth/15)
-//            make.width.height.equalTo(30)
-//            make.centerY.equalToSuperview()
-//
-//        }
         
         self.addSubview(self.textLabel)
         self.textLabel.snp.makeConstraints{ (make) in

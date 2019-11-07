@@ -133,12 +133,6 @@ class GeneralStatusView: UIView {
         case 1,2,3:
             chart.lineChartView.xAxis.axisMaximum = Double(daysNum!)
             chart.drawLineChartWithoutAnimate(xAxisArray: array as NSArray,xAxisData: data1)
-//        case 2:
-//            chart.lineChartView.xAxis.axisMaximum = 7
-//            chart.drawLineChartWithoutAnimate(xAxisArray: array as NSArray,xAxisData: data1)
-//        case 3:
-//            chart.lineChartView.xAxis.axisMaximum = 30
-//            chart.drawLineChart(xAxisArray: array as NSArray,xAxisData: data1)
         default:
             chart.lineChartView.xAxis.axisMaximum = Double(daysNum!)
             chart.drawLineChartWithoutAnimate(xAxisArray: xAxisArray(startDate: startD!, endDate: endD!) as NSArray,xAxisData: DateToData(startD!, endD!))

@@ -21,21 +21,25 @@ class AJNavigationController: UINavigationController {
         super.viewDidLoad()
         setNavBarAppearence()
         //navigationController
-        let imageView = UIImage(named:"bg")!.withRenderingMode(.alwaysOriginal)
-      
-//        print(imageView?.renderingMode)
-//        imageView?.renderingMode = .alwaysOriginal
-//        imageView.image = UIImage(named:"bg")
-//        self.backgroundImage = imageView
-        self.view.backgroundColor = UIColor.init(patternImage: imageView)
+
+//        self.view.backgroundColor = UIColor.init(patternImage: UIImage(named: "bg")!)
+        let img = UIImage(named: "bg")
+        self.view.layer.contents = img?.cgImage
+        self.view.backgroundColor = UIColor.clear
+
         
     }
 
     func setNavBarAppearence()
     {
+//        self.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        self.navigationBar.shadowImage = UIImage()
+//        self.navigationBar.isTranslucent = false
+        
         // 设置 导航栏颜色 和 标题字体颜色
-//        self.navigationBar.barTintColor = UIColor.clear
-        self.navigationBar.barTintColor = UIColor.init(patternImage: UIImage(named: "bg")!)
+//        self.navigationBar.barTintColor = kRGBColor(0, 0, 0, 0)
+//        self.navigationBar.tintColor = kRGBColor(0, 0, 0, 0)
+//        self.navigationBar.barTintColor = UIColor.init(patternImage: UIImage(named: "bg")!)
         let navigationTitleAttribute: NSDictionary = NSDictionary(object: UIColor.white, forKey: NSAttributedString.Key.foregroundColor as NSCopying)
         self.navigationBar.titleTextAttributes = navigationTitleAttribute as? [NSAttributedString.Key : Any]    
     
@@ -51,7 +55,7 @@ extension AJNavigationController
     }
     
     
-    
+    // 设置页面横竖屏
    override var shouldAutorotate: Bool {
         return self.visibleViewController?.shouldAutorotate ?? false
     }

@@ -54,7 +54,7 @@ extension UIButton{
         // 保存当前的背景颜色
         let defaultColor = self.backgroundColor
         // 设置倒计时,按钮背景颜色
-        backgroundColor = UIColor.gray
+        backgroundColor = kRGBColor(17, 56, 86, 1)
         
         var remainingCount: Int = count {
             willSet {

@@ -81,6 +81,14 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
         self.navigationController?.popViewController(animated: false)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        //        self.navigationController!.navigationBar.shadowImage = UIImage()
+        self.navigationController!.navigationBar.isTranslucent = true
+        
+        self.automaticallyAdjustsScrollViewInsets = false
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -89,14 +97,22 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
         self.navigationController?.isNavigationBarHidden = false
 //        self.navigationController?.navigationBar.backgroundColor = ThemeColor
 //        self.navigationController?.navigationBar.barTintColor = ThemeColor
-        self.navigationController?.navigationBar.isTranslucent = false
+//        self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: NaviTitleColor]
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
         self.view.backgroundColor = UIColor.clear
         self.view.addSubview(infoinputView)
         infoinputView.snp.makeConstraints{(make) in
             make.height.equalTo(AJScreenHeight)
-            make.top.equalToSuperview()
+//            make.top.equalToSuperview()
+            if #available(iOS 11.0, *) {
+                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+//                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+            } else {
+                make.top.equalTo(topLayoutGuide.snp.bottom)
+//                make.bottom.equalTo(bottomLayoutGuide.snp.top)
+                // Fallback on earlier versions
+            }
             make.left.right.equalToSuperview()
         }
         

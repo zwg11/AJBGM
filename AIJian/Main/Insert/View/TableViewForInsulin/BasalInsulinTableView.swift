@@ -48,7 +48,7 @@ class BasalInsulinView: UIView, UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: AJScreenWidth - 50, height: 40))
-        let label = UILabel.init(frame: CGRect(x: 20, y: 0, width: AJScreenWidth/4, height: 40))
+        let label = UILabel.init(frame: CGRect(x: 20, y: 0, width: AJScreenWidth/2, height: 40))
         label.text = "Basal Insulin"
         label.font = UIFont.systemFont(ofSize: 20)
         label.textColor = UIColor.white

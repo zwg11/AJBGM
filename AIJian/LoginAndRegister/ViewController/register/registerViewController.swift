@@ -67,11 +67,20 @@ class registerViewController: UIViewController,UITextFieldDelegate {
     @objc private func leftButtonClick(){
         self.navigationController?.popViewController(animated: false)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        //        self.navigationController!.navigationBar.shadowImage = UIImage()
+        self.navigationController!.navigationBar.isTranslucent = true
+
+        self.automaticallyAdjustsScrollViewInsets = false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
 //        self.navigationController?.navigationBar.barTintColor = ThemeColor
-        self.navigationController?.navigationBar.isTranslucent = false
+//        self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: NaviTitleColor]
          self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
 //        self.view.backgroundColor = ThemeColor
@@ -82,7 +91,16 @@ class registerViewController: UIViewController,UITextFieldDelegate {
         self.view.addSubview(register)
         register.snp.makeConstraints{(make) in
             make.height.equalTo(AJScreenHeight)
-            make.top.left.right.equalToSuperview()
+            make.left.right.equalToSuperview()
+//            make.top.left.right.equalToSuperview()
+            if #available(iOS 11.0, *) {
+                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+//                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+            } else {
+                make.top.equalTo(topLayoutGuide.snp.bottom)
+//                make.bottom.equalTo(bottomLayoutGuide.snp.top)
+                // Fallback on earlier versions
+            }
         }
         // Do any additional setup after loading the view.
     }

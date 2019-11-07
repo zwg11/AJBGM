@@ -31,8 +31,9 @@ class MineViewController: UIViewController {
 
     let _imgArr   = ["user-info","Units-Setup","Change-Password","Targets-Setting","Instructions","About-Us","Update",]
 
+
     var tableview:UITableView = UITableView()
-//    let tableview = UITableView(frame: CGRect(x: 0, y:  0, width: AJScreenWidth, height: AJScreenHeight/12 * 7+AJScreenHeight/15+55+AJScreenWidth*0.35))
+
     //点击跳转对应页面
     public lazy var clickArray: [UIViewController] = {
         return [InfoViewController(),UnitViewController(),PassChangeViewController(),BloodSetViewController(), UseDirViewController(),AboutUsViewController(),VersionUViewController()
@@ -50,6 +51,7 @@ class MineViewController: UIViewController {
 //    }
 //    
     override func viewWillAppear(_ animated: Bool) {
+
         //将所有按钮添加到scrollview中，还需要修改相对布局
         let userInfo = DBSQLiteManager.manager.selectUserRecord(userId: UserInfo.getUserId())
         // 如果得到的实体是空的，说明没有相关信息
@@ -58,17 +60,22 @@ class MineViewController: UIViewController {
             requestUserInfo()
         }
         self.tableview.reloadRows(at: [IndexPath(row:0,section:0)], with: .none)
-       
+
+        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController!.navigationBar.shadowImage = UIImage()
+        self.navigationController!.navigationBar.isTranslucent = true
+        //自动调整滚动视图和表格视图的偏移量
+        self.automaticallyAdjustsScrollViewInsets = false
+        
+
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.view.backgroundColor = ThemeColor
+//        self.view.backgroundColor = UIColor.lightGray
         self.view.backgroundColor = UIColor.clear
         //将所有按钮添加到scrollview中，还需要修改相对布局
         let userInfo = DBSQLiteManager.manager.selectUserRecord(userId: UserInfo.getUserId())
-        indicator.startIndicator()
-        self.view.addSubview(indicator)
-        self.view.bringSubviewToFront(indicator)
+
         // 如果得到的实体是空的，说明没有相关信息
         // 那么就需向服务器请求数据
         if userInfo.user_name == nil{
@@ -77,10 +84,12 @@ class MineViewController: UIViewController {
         self.view.addSubview(tableview)
         tableview.snp.makeConstraints{(make) in
             make.left.right.equalToSuperview()
-            make.top.equalToSuperview()
+           
             if #available(iOS 11.0, *) {
+                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
                 make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
             } else {
+                make.top.equalTo(topLayoutGuide.snp.bottom)
                 make.bottom.equalTo(bottomLayoutGuide.snp.top)
                 // Fallback on earlier versions
             }
@@ -88,7 +97,7 @@ class MineViewController: UIViewController {
         //分割线
 //        tableview.separatorStyle = .singleLine
         tableview.separatorColor = UIColor.white
-        
+        tableview.isScrollEnabled = true
         //将CELL的标识，在此处进行设置
         tableview.register(UITableViewCell.self, forCellReuseIdentifier:"cell")
         tableview.delegate = self
@@ -96,10 +105,25 @@ class MineViewController: UIViewController {
         tableview.isScrollEnabled = true
         tableview.backgroundColor = UIColor.clear
         self.view.addSubview(tableview)
-        self.view.bringSubviewToFront(tableview)
+
+        // tableview布局
+        tableview.snp.makeConstraints{(make) in
+            make.left.right.equalToSuperview()
+//            make.height.equalTo(AJScreenHeight*7/12+AJScreenHeight/15+55+AJScreenWidth*0.35)
+            if #available(iOS 11.0, *) {
+                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+            } else {
+                make.top.equalTo(topLayoutGuide.snp.bottom)
+                make.bottom.equalTo(bottomLayoutGuide.snp.top)
+                // Fallback on earlier versions
+            }
+
+        }
+
         // 将风火轮移除，并停止转动
-        self.indicator.stopIndicator()
-        self.indicator.removeFromSuperview()
+//        self.indicator.stopIndicator()
+//        self.indicator.removeFromSuperview()
         self.tableview.reloadRows(at: [IndexPath(row:0,section:0)], with: .none)
         
     }

@@ -46,7 +46,13 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
     @objc private func leftButtonClick(){
         self.navigationController?.popViewController(animated: false)
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        //        self.navigationController!.navigationBar.shadowImage = UIImage()
+        self.navigationController!.navigationBar.isTranslucent = true
+        
+        self.automaticallyAdjustsScrollViewInsets = false
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 //        let x = emailCheckViewController()

@@ -144,6 +144,7 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
     lazy var datePicker:UIDatePicker = {
         let datePicker = UIDatePicker()
         //datePicker.frame.size = CGSize(width: UIScreen.main.bounds.width - 20, height: 150)
+        datePicker.locale = Locale(identifier: "en_US")
         datePicker.datePickerMode = .date
         datePicker.backgroundColor = UIColor.white
         datePicker.maximumDate = Date()
@@ -167,24 +168,6 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         return timePicker
         
     }()
-    
-//    // 创建 事件 选择器
-//    lazy var eventPicker:UIPickerView = {
-//        let pickerView = UIPickerView()
-//        pickerView.dataSource = self
-//        pickerView.delegate = self
-//        initPickerView(pickerView: pickerView)
-//        return pickerView
-//    }()
-    
-//    // 创建 进餐量 选择器
-//    lazy var portionPicker:UIPickerView = {
-//        let pickerView = UIPickerView()
-//        pickerView.dataSource = self
-//        pickerView.delegate = self
-//        initPickerView(pickerView: pickerView)
-//        return pickerView
-//    }()
     
     // 创建 胰岛素 选择器
     lazy var insulinPicker:UIPickerView = {

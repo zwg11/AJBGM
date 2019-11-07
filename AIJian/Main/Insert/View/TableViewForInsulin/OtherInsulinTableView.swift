@@ -47,7 +47,7 @@ class OtherInsulinView: UIView, UITableViewDelegate, UITableViewDataSource{
         
         let view = UIView(frame: CGRect(x: 0, y: 0, width: AJScreenWidth - 50, height: 40))
         
-        let label = UILabel.init(frame: CGRect(x: 20, y: 0, width: AJScreenWidth/4, height: 40))
+        let label = UILabel.init(frame: CGRect(x: 20, y: 0, width: AJScreenWidth/2, height: 40))
         
         label.text = "Other Insulin"
         label.font = UIFont.systemFont(ofSize: 20)

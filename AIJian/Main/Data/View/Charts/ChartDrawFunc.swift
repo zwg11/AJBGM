@@ -48,7 +48,28 @@ func xAxisArrayToWeek(Days:Int)->[String]{
     //dates.sort()
     var xAxisStrings:[String] = []
     for i in dates{
-        xAxisStrings.append("           " + i.weekdayName(.standaloneShort))
+        var x = "Mon"
+        switch i.weekdayName(.standaloneShort){
+            
+        case "周一":
+            x = "Mon"
+        case "周二":
+            x = "Tue"
+        case "周三":
+            x = "Wed"
+        case "周四":
+            x = "Thur"
+        case "周五":
+            x = "Fri"
+        case "周六":
+            x = "Sat"
+        case "周日":
+            x = "Sun"
+        default:
+            x = i.weekdayName(.standaloneShort)
+        }
+        xAxisStrings.append("           " + x)
+        
     }
     print(xAxisStrings)
     //xAxisStrings[0] = ""
@@ -80,6 +101,9 @@ func recentDaysData(Days:Int)->[Double]{
             
             // 根据分钟差计算出相对于 零点的x坐标
             xAxisData.append(Double(result1)/1440.0)
+            // 获得时间戳
+//            let timeInterval = i.timeIntervalSince1970
+//            xAxisData.append(timeInterval)
         }
     }
     return xAxisData
