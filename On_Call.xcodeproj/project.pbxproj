@@ -300,15 +300,15 @@
 		03703B9D5A4517C1D27073C4C4F20A55 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
+				A5A1585583F171AC210D37D0F2F28C6E /* User.plist */,
+				946C4B448C4368010D25171286A04DC5 /* UnitSetting.plist */,
+				7BD87968C7A6DBA89B736444D0C1C80C /* userBloodSetting.plist */,
+				367F547FD8A2D05AB23C071F7752C480 /* defaultBloodSetting.plist */,
 				8459D7BF237407EC00A8D1BB /* userBloodSettingMgdl.plist */,
+				8459D7BB2372BD4800A8D1BB /* defaultBloodSettingMgdl.plist */,
 				D1B29EA5E3861CBD4A8333DE8EB3A45A /* CountryEn.plist */,
 				60235DEE16226B1877D4F759DD359050 /* Insulin.plist */,
-				946C4B448C4368010D25171286A04DC5 /* UnitSetting.plist */,
-				A5A1585583F171AC210D37D0F2F28C6E /* User.plist */,
-				367F547FD8A2D05AB23C071F7752C480 /* defaultBloodSetting.plist */,
 				327249D87EBD50F9CA3CF88F34F49D5F /* inputChoose.plist */,
-				7BD87968C7A6DBA89B736444D0C1C80C /* userBloodSetting.plist */,
-				8459D7BB2372BD4800A8D1BB /* defaultBloodSettingMgdl.plist */,
 			);
 			path = Storage;
 			sourceTree = "<group>";

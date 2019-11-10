@@ -18,8 +18,6 @@ class loginViewController: UIViewController,UITextFieldDelegate {
     // 记录密码
     var password:String?
 
-
-
     private lazy var indicator = CustomIndicatorView()
 
     private lazy var loginview:loginView = {
@@ -41,8 +39,6 @@ class loginViewController: UIViewController,UITextFieldDelegate {
         //navigation顶部的title
         self.navigationController?.navigationItem.leftBarButtonItem = nil
         self.navigationController?.isNavigationBarHidden = true
-//        self.navigationController?.navigationBar.backgroundColor = ThemeColor
-//        self.title = "登  录"
         self.view.backgroundColor = UIColor.clear
         self.view.addSubview(loginview)
         loginview.snp.makeConstraints{(make) in
@@ -71,15 +67,10 @@ class loginViewController: UIViewController,UITextFieldDelegate {
      */
     @objc func login(){
         print("login clicked.")
-        
-        
-        //let path = Bundle.main.path(forResource: "User", ofType: "plist")
         let path = PlistSetting.getFilePath(File: "User.plist")
-        print("path：\(path)")
         
         let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
 
-//        self.present(AJTabbarController(), animated: false, completion: nil)
         //在此处获取邮箱和密码最为恰当
         let alertController = CustomAlertController()
         email = loginview.userNameTextField.text!.removeHeadAndTailSpacePro
@@ -112,7 +103,7 @@ class loginViewController: UIViewController,UITextFieldDelegate {
 //            let user = User.deserialize(from: jsonString)
             print(dictString)
             //  此处的参数需要传入一个字典类型
-            Alamofire.request(LOGIN_API,method: .post,parameters: dictString).responseString{ (response) in
+            AlamofireManager.request(LOGIN_API,method: .post,parameters: dictString).responseString{ (response) in
 
                 if response.result.isSuccess {
 
@@ -138,9 +129,6 @@ class loginViewController: UIViewController,UITextFieldDelegate {
                                 data["userId"] = responseModel.data?.userId!
                                 data["token"] = responseModel.data?.token!
                                 data["email"] = self.email!
-//                                data.setObject(responseModel.data?.userId! as Any, forKey: "userId" as NSCopying )
-//                                data.setObject(responseModel.data?.token! as Any, forKey: "token" as NSCopying )
-//                                data.setObject(self.email!, forKey: "email" as NSCopying )
                                 // 保存
                                 data.write(toFile: path, atomically: true)
 
@@ -161,8 +149,8 @@ class loginViewController: UIViewController,UITextFieldDelegate {
 
  
                             }else{
-                                print(responseModel)
-                                  print(responseModel.data)
+//                                print(responseModel)
+//                                  print(responseModel.data)
                                 // 将风火轮移除，并停止转动
                                 self.indicator.stopIndicator()
                                 self.indicator.removeFromSuperview()
@@ -252,7 +240,7 @@ extension loginViewController{
                     /*
                      利用JSONDeserializer封装成一个对象。然后再把这个对象解析为
                      */
-                    print("jsonString:\(jsonString)")
+//                    print("jsonString:\(jsonString)")
                     if let recordInDaysResponse = JSONDeserializer<recordInDaysResponse>.deserializeFrom(json: jsonString) {
                         // 如果 返回信息说明 请求数据失败，则弹出警示框宝报错
                         if recordInDaysResponse.code != 1{
@@ -326,7 +314,7 @@ extension loginViewController{
             if response.result.isSuccess {
                 if let jsonString = response.result.value {
                     print("进入验证过程")
-                    print(jsonString)
+//                    print(jsonString)
                     // json转model
                     // 写法一：responseModel.deserialize(from: jsonString)
                     // 写法二：用JSONDeserializer<T>
@@ -335,11 +323,11 @@ extension loginViewController{
                      //                         */
                     if let responseModel = JSONDeserializer<METERINFO_GET_RESPONSE>.deserializeFrom(json: jsonString) {
                         /// model转json 为了方便在控制台查看
-                        print("瞧瞧输出的是什么",responseModel.toJSONString(prettyPrint: true)!)
+//                        print("瞧瞧输出的是什么",responseModel.toJSONString(prettyPrint: true)!)
                         /*  此处为跳转和控制逻辑
                          */
                         if(responseModel.code == 1 ){
-                            print(responseModel.code as Any)
+//                            print(responseModel.code as Any)
                             print("插入成功")
                             
                             // 向配置文件存储最新记录
@@ -359,7 +347,7 @@ extension loginViewController{
                             isSuccess = true
                             
                         }else{
-                            print(responseModel.code as Any)
+//                            print(responseModel.code as Any)
                             print("插入失败")
                             isSuccess = false
                         }

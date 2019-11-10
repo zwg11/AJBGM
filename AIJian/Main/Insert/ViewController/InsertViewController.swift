@@ -14,12 +14,6 @@ class InsertViewController: UIViewController {
 
     private let path = PlistSetting.getFilePath(File: "inputChoose.plist")
     
-    let AlamofireManager:Alamofire.SessionManager = {
-        let conf = URLSessionConfiguration.default
-        conf.timeoutIntervalForRequest = 10
-        return Alamofire.SessionManager(configuration: conf)
-    }()
-    
     lazy var input:InputView = {
         let view = InputView()
         view.setupUI()

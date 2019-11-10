@@ -8,6 +8,15 @@
 
 import Foundation
 import UIKit
+import Alamofire
+
+// 设置网络请求时间限制
+let AlamofireManager:Alamofire.SessionManager = {
+    let conf = URLSessionConfiguration.default
+    // 请求时间显示为10s
+    conf.timeoutIntervalForRequest = 10
+    return Alamofire.SessionManager(configuration: conf)
+}()
 
 //全局登录逻辑值
 let shift_path = Bundle.main.path(forResource: "GlobalValue", ofType: "plist")
