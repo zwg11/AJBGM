@@ -21,6 +21,9 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
     // 记录邮箱验证码
     var email_code:String?
     
+    //请求出现转的效果，增加用户体验
+    private lazy var indicator = CustomIndicatorView()
+    
     
     private lazy var emailCheck:emailCheckView = {
         let view = emailCheckView()
@@ -88,7 +91,18 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
         //邮箱不能为空
         if email == ""{
             alertController.custom(self, "Attention", "Email Empty")
+            return
         }else{
+            // 初始化UI
+            indicator.setupUI("")
+            // 设置风火轮视图在父视图中心
+            // 开始转
+            indicator.startIndicator()
+            self.view.addSubview(indicator)
+            indicator.snp.makeConstraints{(make) in
+                make.edges.equalToSuperview()
+            }
+            
             let dictString:Dictionary = [ "email":String(email!),"verifyCode":String(email_code!)]
             print(dictString)
             //找回密码第一步
@@ -110,18 +124,28 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
                             if(responseModel.code == 1 ){
                                 print("邮箱验证成功")
                                 print("跳转到修改密码那一页")
+                                // 请求成功，将风火轮移除，并停止转动
+                                self.indicator.stopIndicator()
+                                self.indicator.removeFromSuperview()
                                 secViewController.email = self.email
                                 secViewController.verifyString = responseModel.data
                                 self.navigationController?.pushViewController(secViewController, animated: false)
                             }else{
-//                                secViewController.email = self.email
-//                                secViewController.verifyString = "gy riut u"
-//                                self.navigationController?.pushViewController(secViewController, animated: true)
+                                // // 请求失败，将风火轮移除，并停止转动
+                                self.indicator.stopIndicator()
+                                self.indicator.removeFromSuperview()
                                 alertController.custom(self,"Attention", "Incorrect Email or Password")
                                 return
                             }
                         } //end of letif
                     }
+                }else{
+                    //没网
+                    // 将风火轮移除，并停止转动
+                    self.indicator.stopIndicator()
+                    self.indicator.removeFromSuperview()
+                    
+                    alertController.custom(self,"Attention", "Internet Error！")
                 }
             }//end of request
         }

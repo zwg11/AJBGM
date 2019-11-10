@@ -25,6 +25,10 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
     var verifyString:String?
     //修改谁的邮箱，由前一页传过来的
     var email:String?
+    
+    //请求出现转的效果，增加用户体验
+    private lazy var indicator = CustomIndicatorView()
+    
     private lazy var emailCheckSec:emailCheckSecondView = {
         let view = emailCheckSecondView()
         view.passwordTextField.delegate = self
@@ -102,6 +106,15 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
              alertController.custom(self, "Attention", "Passwords Not Match")
             return
         }else{//经过前端验证之后，需要进行后端验证
+            // 初始化UI
+            indicator.setupUI("")
+            // 设置风火轮视图在父视图中心
+            // 开始转
+            indicator.startIndicator()
+            self.view.addSubview(indicator)
+            indicator.snp.makeConstraints{(make) in
+                make.edges.equalToSuperview()
+            }
             print(email!)
             print(verifyString!)
             let dictString:Dictionary = [ "newPassword":String(password!),"email":String(email!),"verifyString":String(verifyString!)]
@@ -124,15 +137,23 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
                             if(responseModel.code == 1 ){
                                 print("重置成功")
                                 print("跳转到修改密码那一页")
+                                self.indicator.stopIndicator()
+                                self.indicator.removeFromSuperview()
                                 self.navigationController?.popToRootViewController(animated: false)
                                  alertController.custom_cengji(self,"Attention", "Password Reset Success")
                             }else{
                                 //先转，后弹
+                                self.indicator.stopIndicator()
+                                self.indicator.removeFromSuperview()
                                 self.navigationController?.popToRootViewController(animated: false)
                                 alertController.custom_cengji(self,"Attention", "Password Reset Failed")
                             }
                         } //end of letif
                     }
+                }else{
+                    self.indicator.stopIndicator()
+                    self.indicator.removeFromSuperview()
+                    alertController.custom(self,"Attention", "Internet Error！")
                 }
             }//end of request
         }

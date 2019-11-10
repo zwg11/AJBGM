@@ -28,13 +28,10 @@ class registerViewController: UIViewController,UITextFieldDelegate {
     var data:String?
     
     var isAgree:Bool = false
+    
+    //请求出现转的效果，增加用户体验
+    private lazy var indicator = CustomIndicatorView()
     // 协议警示框
-//    private lazy var ProtocolAlert:UIAlertController = {
-//        let alert = UIAlertController(title: "Protocol", message: "", preferredStyle: .alert)
-//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-//        alert.addAction(cancelAction)
-//        return alert
-//    }()
 
     
     // 协议内容
@@ -161,7 +158,17 @@ class registerViewController: UIViewController,UITextFieldDelegate {
             return
         }else if isAgree == false{
             alertController.custom(self, "Attention", "Please Agree the Protocol")
+            return
         }else{
+            // 初始化UI
+            indicator.setupUI("")
+            // 设置风火轮视图在父视图中心
+            // 开始转
+            indicator.startIndicator()
+            self.view.addSubview(indicator)
+            indicator.snp.makeConstraints{(make) in
+                make.edges.equalToSuperview()
+            }
             let dictString:Dictionary = [ "email":String(email!),"verifyCode":String(email_code!),"password":String(password!)]
             //            let user = User.deserialize(from: jsonString)
             print(dictString)
@@ -185,13 +192,14 @@ class registerViewController: UIViewController,UITextFieldDelegate {
                             /*  此处为跳转和控制逻辑
                              */
                             if(responseModel.code == 1 ){
+                                self.indicator.stopIndicator()
+                                self.indicator.removeFromSuperview()
                                infoInput_next.email = self.email  //将数据传入下一个页面
                                infoInput_next.verifyString = responseModel.data
                                self.navigationController?.pushViewController(infoInput_next, animated: false)  //然后跳转
                             }else{
-//                                infoInput_next.email = self.email
-//                                infoInput_next.verifyString = "edbdkeisoaoen45673"
-//                                self.navigationController?.pushViewController(infoInput_next, animated: true)
+                                self.indicator.stopIndicator()
+                                self.indicator.removeFromSuperview()
                                 alertController.custom(self,"Attention", "Code Error")
                                 return 
                             }
@@ -199,14 +207,13 @@ class registerViewController: UIViewController,UITextFieldDelegate {
                         } //得到响应
                     }
                 }else{
+                    self.indicator.stopIndicator()
+                    self.indicator.removeFromSuperview()
                     alertController.custom(self,"Attention", "Internet Error")
                     return
                 }
             }
         }
-//
-//        let nv = infoInputViewController()
-//        self.navigationController?.pushViewController(infoInputViewController(), animated: true)
     }
     
     func initDelegate(){
