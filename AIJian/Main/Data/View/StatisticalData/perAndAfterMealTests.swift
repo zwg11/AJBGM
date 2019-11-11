@@ -82,17 +82,17 @@ class perAndAfterMealTests: UIView {
     
     //***********低于正常值*************
     private lazy var lower:UILabel = {
-        let label = initLabel(setTextColor: UIColor.orange, setText: "Low")
+        let label = initLabel(setTextColor: UIColor.yellow, setText: "Low")
         return label
     }()
     
     private lazy var lowerValue:UILabel = {
-        let label = initLabel(setTextColor: UIColor.orange, setText: "0")
+        let label = initLabel(setTextColor: UIColor.yellow, setText: "0")
         return label
     }()
     
     private lazy var lowerPercent:UILabel = {
-        let label = initLabel(setTextColor: UIColor.orange, setText: "0%")
+        let label = initLabel(setTextColor: UIColor.yellow, setText: "0%")
         return label
     }()
     
@@ -114,17 +114,17 @@ class perAndAfterMealTests: UIView {
     
     //***********高于正常值*************
     private lazy var higherNormal:UILabel = {
-        let label = initLabel(setTextColor: blueColor, setText: "Hyper")
+        let label = initLabel(setTextColor: UIColor.red, setText: "Hyper")
         return label
     }()
     
     private lazy var higherNormalValue:UILabel = {
-        let label = initLabel(setTextColor: blueColor, setText: "0")
+        let label = initLabel(setTextColor: UIColor.red, setText: "0")
         return label
     }()
     
     private lazy var higherNormalPercent:UILabel = {
-        let label = initLabel(setTextColor: blueColor, setText: "0%")
+        let label = initLabel(setTextColor: UIColor.red, setText: "0%")
         
         return label
     }()

@@ -33,6 +33,7 @@ class InputView: UIView,UIScrollViewDelegate {
     private var topConstraint:Constraint?
     private var bottomConstraint:Constraint?
     
+    private lazy var keyWin = UIApplication.shared.keyWindow
     var scrollView:UIScrollView = UIScrollView()
     
     //第一部分：时间与日期
@@ -340,7 +341,7 @@ class InputView: UIView,UIScrollViewDelegate {
             timeString = time  //当用户选择时间时，进行赋值
 //        //事件
 //        case .occurTime:
-//            glucose.eventButton.setTitle(picker.eventStr ?? "Nothing", for: .normal)
+//            glucose.eventButton.setTitle(picker.eventStr ?? "None", for: .normal)
 //        //进餐量
 //        case .portions:
 //            porAndIns.portionButton.setTitle(picker.portionStr ?? "No Meal", for: .normal)
@@ -349,7 +350,7 @@ class InputView: UIView,UIScrollViewDelegate {
             if let str = picker.insulinStr {
                 if str == "Edit Entry"{
                     NotificationCenter.default.post(name: NSNotification.Name("chooseInsulin"), object: self, userInfo: nil)
-                    porAndIns.insulinButton.setTitle("Nothing", for: .normal)
+                    porAndIns.insulinButton.setTitle("None", for: .normal)
                 }else{
                     porAndIns.insulinButton.setTitle(str, for: .normal)
                 }
@@ -357,11 +358,11 @@ class InputView: UIView,UIScrollViewDelegate {
             }
             
         case .sport:
-            sport.sportButton.setTitle(picker.sportStr ?? "Nothing", for: .normal)
+            sport.sportButton.setTitle(picker.sportStr ?? "None", for: .normal)
 //        case .exerintensity:
 //            sport.exerIntensityButton.setTitle(picker.exerItensityStr, for: .normal)
 //        default:
-//            sport.exerIntensityButton.setTitle(picker.exerItensityStr ?? "Nothing" , for: .normal)
+//            sport.exerIntensityButton.setTitle(picker.exerItensityStr ?? "None" , for: .normal)
             
         }
         UIView.animate(withDuration: 0.5, animations: dismiss)

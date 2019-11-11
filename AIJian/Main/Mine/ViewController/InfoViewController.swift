@@ -304,7 +304,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
             
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-        let okAction = UIAlertAction(title: "Sure", style: .default, handler: {
+        let okAction = UIAlertAction(title: "Done", style: .default, handler: {
             action in
             let UserName = alertController.textFields!.first!
             if String(UserName.text!).removeHeadAndTailSpacePro == ""  {
@@ -348,7 +348,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
  
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-        let okAction = UIAlertAction(title: "Sure", style: .default, handler: {
+        let okAction = UIAlertAction(title: "Done", style: .default, handler: {
             action in
             let UserName = alertController.textFields!.first!
             if String(UserName.text!) == ""  {
@@ -377,7 +377,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
             textField.tag = 0
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-        let okAction = UIAlertAction(title: "Sure", style: .default, handler: {
+        let okAction = UIAlertAction(title: "Done", style: .default, handler: {
             action in
             let UserName = alertController.textFields!.first!
             if String(UserName.text!) == ""  {
@@ -424,7 +424,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
 //            textField.placeholder = "电话"
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-        let okAction = UIAlertAction(title: "Sure", style: .default, handler: {
+        let okAction = UIAlertAction(title: "Done", style: .default, handler: {
             action in
             let PhoneNum = alertController.textFields!.first!
             if String(PhoneNum.text!).removeHeadAndTailSpacePro == ""  {

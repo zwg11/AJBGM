@@ -124,7 +124,7 @@ class GeneralStatusView: UIView {
         for i in chart.lineChartView.leftAxis.limitLines{
             chart.lineChartView.leftAxis.removeLimitLine(i)
         }
-        chart.addLimitLine(GetBloodLimit.getRandomDinnerLow(), "低于", UIColor.orange)
+        chart.addLimitLine(GetBloodLimit.getRandomDinnerLow(), "低于", UIColor.yellow)
         chart.addLimitLine(GetBloodLimit.getRandomDinnerTop(), "高于", UIColor.red)
         switch pickerSelectedRow{
         case 1,2,3:

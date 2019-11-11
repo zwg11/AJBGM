@@ -97,7 +97,7 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
     // 药物选择按钮
     lazy var medicineChooseButton:UIButton = {
         let button = UIButton(type: .system)
-        button.NorStyle(title: "Nothing")
+        button.NorStyle(title: "None")
         return button
     }()
     

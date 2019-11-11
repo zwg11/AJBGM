@@ -17,11 +17,19 @@ class LastResultTableViewCell: UITableViewCell {
     
     private lazy var content: UIView = {
         let view = UIView()
-//        view.layer.borderColor = UIColor.gray.cgColor
-//        view.layer.borderWidth = 2
-//        view.layer.cornerRadius = 5
+        view.layer.borderColor = UIColor.gray.cgColor
+        view.layer.borderWidth = 2
+        view.layer.cornerRadius = 5
         return view
         
+    }()
+    
+    private lazy var imageview: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "details")
+        view.contentMode = .center
+        
+        return view
     }()
     
     private lazy var glucoseValueLabel:UILabel = {
@@ -87,6 +95,14 @@ class LastResultTableViewCell: UITableViewCell {
             make.left.equalToSuperview().offset(AJScreenWidth/20)
             make.right.equalToSuperview().offset(-AJScreenWidth/20)
             make.top.bottom.equalToSuperview()
+        }
+        
+        content.addSubview(imageview)
+        imageview.snp.makeConstraints{(make) in
+            make.right.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.width.equalTo(AJScreenWidth/6)
+            make.height.equalTo(AJScreenWidth/6)
         }
         
         content.addSubview(rangeLabel)

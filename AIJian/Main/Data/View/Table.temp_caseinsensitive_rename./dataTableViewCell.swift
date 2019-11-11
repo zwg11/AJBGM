@@ -124,7 +124,7 @@ class dataTableViewCell: UITableViewCell {
         if sortedData[secion][row].sportTime != nil{
             sportLabel.text = String(sortedData[secion][row].sportType!) + "\n" + String(sortedData[secion][row].sportTime!) + "min"
             
-        }else if sortedData[secion][row].sportType != nil && sortedData[secion][row].sportType != "Nothing"{
+        }else if sortedData[secion][row].sportType != nil && sortedData[secion][row].sportType != "None"{
 
             sportLabel.text = String(sortedData[secion][row].sportType!)
         }
