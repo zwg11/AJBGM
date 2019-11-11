@@ -41,7 +41,7 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
 //            infoDataArray[1] = (userInfo.height! == 0) ? "男":"女"
 //        }
         
-        if GetUnit.getWeightUnit() == "Kg"{
+        if GetUnit.getWeightUnit() == "kg"{
             infoDataArray[2] = (userInfo.weight_kg != nil) ? "\(userInfo.weight_kg!)":""
         }else{
             infoDataArray[2] = (userInfo.weight_lbs != nil) ? "\(userInfo.weight_lbs!)":""
@@ -119,7 +119,7 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
         updateUserInfo.userName = (infoDataArray[0] == "") ? nil:infoDataArray[0]
         updateUserInfo.gender = (infoDataArray[1] == "Male") ? 0:1
         if infoDataArray[2] != ""{
-            if GetUnit.getWeightUnit() == "Kg"{
+            if GetUnit.getWeightUnit() == "kg"{
                 updateUserInfo.weightKg = Double(infoDataArray[2])
                 updateUserInfo.weightLbs = WeightUnitChange.KgToLbs(num: Double(infoDataArray[2])!)
             }else{
@@ -304,7 +304,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
             
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-        let okAction = UIAlertAction(title: "Sure", style: .default, handler: {
+        let okAction = UIAlertAction(title: "Done", style: .default, handler: {
             action in
             let UserName = alertController.textFields!.first!
             if String(UserName.text!).removeHeadAndTailSpacePro == ""  {
@@ -348,7 +348,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
  
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-        let okAction = UIAlertAction(title: "Sure", style: .default, handler: {
+        let okAction = UIAlertAction(title: "Done", style: .default, handler: {
             action in
             let UserName = alertController.textFields!.first!
             if String(UserName.text!) == ""  {
@@ -377,7 +377,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
             textField.tag = 0
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-        let okAction = UIAlertAction(title: "Sure", style: .default, handler: {
+        let okAction = UIAlertAction(title: "Done", style: .default, handler: {
             action in
             let UserName = alertController.textFields!.first!
             if String(UserName.text!) == ""  {
@@ -424,7 +424,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
 //            textField.placeholder = "电话"
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-        let okAction = UIAlertAction(title: "Sure", style: .default, handler: {
+        let okAction = UIAlertAction(title: "Done", style: .default, handler: {
             action in
             let PhoneNum = alertController.textFields!.first!
             if String(PhoneNum.text!).removeHeadAndTailSpacePro == ""  {
@@ -460,7 +460,7 @@ extension InfoViewController{
             var numFrontDot:Int = 2
             var numAfterDot:Int = 2
             if textField.tag == 1{  //体重
-                if GetUnit.getWeightUnit() == "Kg"{
+                if GetUnit.getWeightUnit() == "kg"{
                     numFrontDot = 3
                     numAfterDot = 2
                 }else{

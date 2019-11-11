@@ -73,13 +73,13 @@ class averageView: UIView {
         let label = UILabel()
         label.text = String(avgGlucoseValue ?? 0)
         label.textColor = greenColor
-        //label.font = UIFont.systemFont(ofSize: 20)
+        label.font = UIFont.systemFont(ofSize: 20)
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         label.backgroundColor = UIColor.clear
-        label.layer.borderColor = borderColor.cgColor
-        label.layer.borderWidth = 1
-        label.layer.cornerRadius = AJScreenWidth/24
+//        label.layer.borderColor = borderColor.cgColor
+//        label.layer.borderWidth = 1
+//        label.layer.cornerRadius = AJScreenWidth/24
         return label
         
     }()
@@ -190,7 +190,7 @@ class averageView: UIView {
         self.avgView.addSubview(standardDeValue)
         standardDeValue.sizeToFit()
         self.standardDeValue.snp.makeConstraints{ (make) in
-            make.centerX.equalTo(glucoseUnit.snp.centerX)
+            make.centerX.equalTo(glucoseValue)
             make.bottom.equalTo(sDLabel.snp.bottom)
             make.height.equalTo(sDLabel.snp.height)
             //make.width.equalTo((AJScreenWidth-20)/8 )
@@ -200,7 +200,7 @@ class averageView: UIView {
         // 检测次数label布局
         self.avgView.addSubview(testNum)
         self.testNum.snp.makeConstraints{ (make) in
-            make.centerX.equalTo(standardDeValue.snp.centerX)
+            make.centerX.equalTo(glucoseValue)
             make.bottom.equalTo(checkNumLabel.snp.bottom)
             make.height.equalTo(20)
             make.width.equalTo((AJScreenWidth-20)/8 )
@@ -212,6 +212,8 @@ class averageView: UIView {
 
     // 初始化视图数据
     func labelUpdate(){
+        // 单位更新
+        glucoseUnit.text = GetUnit.getBloodUnit()
         // 如果有数据
         if sortedByDateOfData!.count > 0{
             // 计算各个label应有的内容

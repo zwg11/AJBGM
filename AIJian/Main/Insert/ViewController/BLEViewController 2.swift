@@ -722,14 +722,14 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         tableHeadLabel.textColor = UIColor.white
         tableHeadLabel.textAlignment = .left
         tableHeadLabel.text = "Connected Glucose Meter"
-        tableHeadLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        tableHeadLabel.font = UIFont.boldSystemFont(ofSize: 16)
         self.view.addSubview(tableHeadLabel)
         tableHeadLabel.snp.makeConstraints{(make) in
             make.right.equalToSuperview()
             make.left.equalToSuperview().offset(15)
             make.height.equalTo(44)
             if #available(iOS 11.0, *) {
-                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(10)
+                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
                 //                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
             } else {
                 make.top.equalTo(topLayoutGuide.snp.bottom)

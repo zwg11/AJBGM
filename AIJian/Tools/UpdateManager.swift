@@ -50,7 +50,7 @@ class UpdateManager:NSObject{
             UIApplication.shared.keyWindow?.rootViewController?.present(alertC, animated: true, completion: nil)
         }else{
             let alertC = UIAlertController.init(title: "Latest Version", message: "", preferredStyle: .alert)
-            let noAction = UIAlertAction.init(title: "Sure", style: .cancel, handler: nil)
+            let noAction = UIAlertAction.init(title: "Done", style: .cancel, handler: nil)
             alertC.addAction(noAction)
             
             UIApplication.shared.keyWindow?.rootViewController?.present(alertC, animated: true, completion: nil)

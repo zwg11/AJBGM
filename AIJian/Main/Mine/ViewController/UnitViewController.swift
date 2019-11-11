@@ -71,7 +71,7 @@ class UnitViewController: UIViewController {
     
     lazy var kg_Button:UIButton = {
         let kg_Button = UIButton(frame: CGRect())
-        kg_Button.setTitle("Kg", for: .normal)
+        kg_Button.setTitle("kg", for: .normal)
         kg_Button.contentHorizontalAlignment = .center
         kg_Button.setTitleColor(UIColor.white, for: .normal)
         kg_Button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
@@ -114,7 +114,7 @@ class UnitViewController: UIViewController {
     
     lazy var KPa_Button:UIButton = {
         let KPa_Button = UIButton(frame: CGRect())
-        KPa_Button.setTitle("KPa", for: .normal)
+        KPa_Button.setTitle("kPa", for: .normal)
         KPa_Button.contentHorizontalAlignment = .center
         KPa_Button.setTitleColor(UIColor.white, for: .normal)
         KPa_Button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
@@ -295,13 +295,13 @@ class UnitViewController: UIViewController {
             mmol_Button.layer.borderWidth = 0.5
             mmol_Button.layer.borderColor = unselectedTextColor.cgColor
         }
-        if unitDataArray[1] == "Kg"{
+        if unitDataArray[1] == "kg"{
             print("等于Kg")
         }else{
             print("不等于Kg")
         }
         
-        if unitDataArray[1] == "Kg"{
+        if unitDataArray[1] == "kg"{
             kg_Button.backgroundColor = ButtonColor
             kg_Button.setTitleColor(UIColor.white, for: .normal)
             kg_Button.layer.borderWidth = 0.5
@@ -375,7 +375,7 @@ class UnitViewController: UIViewController {
    
     
     @objc private func ClickKgButton(){
-        currentWeightUnit = "Kg"
+        currentWeightUnit = "kg"
         kg_Button.backgroundColor = ButtonColor
         kg_Button.setTitleColor(UIColor.white, for: .normal)
         kg_Button.layer.borderWidth = 0.5
@@ -413,7 +413,7 @@ class UnitViewController: UIViewController {
     }
     
     @objc private func ClickKpaButton(){
-        currentBloodUnit = "KPa"
+        currentBloodUnit = "kPa"
         KPa_Button.backgroundColor = ButtonColor
         KPa_Button.setTitleColor(UIColor.white, for: .normal)
         KPa_Button.layer.borderWidth = 0.5

@@ -40,13 +40,13 @@ class ChartViewController: UIViewController,ChartViewDelegate{
         super.viewDidLoad()
 
 
-        self.view.addSubview(headerView)
-        
-        self.headerView.snp.makeConstraints{(make) in
-            make.left.right.top.equalToSuperview()
-            make.height.equalTo(44)
-            
-        }
+//        self.view.addSubview(headerView)
+//        
+//        self.headerView.snp.makeConstraints{(make) in
+//            make.left.right.top.equalToSuperview()
+//            make.height.equalTo(44)
+//            
+//        }
         
         self.view.addSubview(staticV)
         staticV.snp.makeConstraints{(make) in
@@ -65,7 +65,8 @@ class ChartViewController: UIViewController,ChartViewDelegate{
             make.left.equalToSuperview().offset(AJScreenWidth/30)
             make.right.equalToSuperview().offset(-AJScreenWidth/30)
             
-            make.top.equalTo(self.headerView.snp.bottom)
+//            make.top.equalTo(self.headerView.snp.bottom)
+            make.top.equalToSuperview()
             make.bottom.equalTo(staticV.snp.top)
         }
         
@@ -109,7 +110,7 @@ class ChartViewController: UIViewController,ChartViewDelegate{
         
         let low = GetBloodLimit.getRandomDinnerLow()
         let high = GetBloodLimit.getRandomDinnerTop()
-        lineChartView.addLimitLine(low, "\(low)", UIColor.orange)
+        lineChartView.addLimitLine(low, "\(low)", UIColor.yellow)
         lineChartView.addLimitLine(high, "\(high)", UIColor.red)
         // 设置x轴的最大坐标值
         lineChartView.lineChartView.xAxis.axisMaximum = Double(daysNum!)

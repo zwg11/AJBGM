@@ -97,7 +97,7 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
     // 药物选择按钮
     lazy var medicineChooseButton:UIButton = {
         let button = UIButton(type: .system)
-        button.NorStyle(title: "Nothing")
+        button.NorStyle(title: "None")
         return button
     }()
     
@@ -232,8 +232,8 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
     //重新设置单位
     func resetWeightAndPressureUnit(){
         //设置体重单位
-        if GetUnit.getWeightUnit() == "Kg"{
-            self.weightUnitLabel.normalLabel(text: "Kg")
+        if GetUnit.getWeightUnit() == "kg"{
+            self.weightUnitLabel.normalLabel(text: "kg")
             self.weightTextfield.keyboardType = UIKeyboardType.decimalPad //弹出带小数点的文本框
             
             
@@ -266,7 +266,7 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
             var numFrontDot:Int = 2
             var numAfterDot:Int = 2
             if textField == weightTextfield{
-                if GetUnit.getWeightUnit() == "Kg"{
+                if GetUnit.getWeightUnit() == "kg"{
                     numFrontDot = 3
                     numAfterDot = 2
                 }else{

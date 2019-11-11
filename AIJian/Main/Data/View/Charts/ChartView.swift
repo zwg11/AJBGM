@@ -130,7 +130,7 @@ class ChartView: UIView ,ChartViewDelegate{
             if set1[i].y > GetBloodLimit.getRandomDinnerTop(){
                 colors.append(UIColor.red)
             }else if set1[i].y < GetBloodLimit.getRandomDinnerLow(){
-                colors.append(UIColor.orange)
+                colors.append(UIColor.yellow)
             }else{
                 colors.append(UIColor.green)
             }
@@ -193,7 +193,7 @@ class ChartView: UIView ,ChartViewDelegate{
             if set1[i].y > GetBloodLimit.getRandomDinnerTop(){
                 colors.append(UIColor.red)
             }else if set1[i].y < GetBloodLimit.getRandomDinnerLow(){
-                colors.append(UIColor.orange)
+                colors.append(UIColor.yellow)
             }else{
                 colors.append(UIColor.green)
             }

@@ -28,7 +28,7 @@ class sportView: UIView ,UITextFieldDelegate{
     // 运动选择按钮
     lazy var sportButton:UIButton = {
         let button = UIButton(type: .system)
-        button.NorStyle(title: "Nothing")
+        button.NorStyle(title: "None")
         return button
     }()
     //******************持续时间*****************

@@ -95,7 +95,7 @@ class BHJPickerView: UIView , UIPickerViewDelegate, UIPickerViewDataSource{
         let doneButton = UIButton.init(type: UIButton.ButtonType.custom)
         doneButton.frame = CGRect.init(x: AJScreenWidth - 60, y: 0, width: 60, height: 44)
         doneButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-        doneButton.setTitle("Sure", for: UIControl.State.normal)
+        doneButton.setTitle("Done", for: UIControl.State.normal)
         doneButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
         doneButton.addTarget(self, action: #selector(doneButtonClick), for: UIControl.Event.touchUpInside)
         self.addSubview(doneButton)
@@ -167,7 +167,7 @@ class BHJPickerView: UIView , UIPickerViewDelegate, UIPickerViewDataSource{
                     dataArray = NSMutableArray.init(array: ["mg/dL","mmol/L"])
                     self.pickerView(bloodPicker, didSelectRow: 0, inComponent: 0)
                 case 2:  //体重
-                    dataArray = NSMutableArray.init(array: ["Kg","lbs"])
+                    dataArray = NSMutableArray.init(array: ["kg","lbs"])
                     self.pickerView(weightPicker, didSelectRow: 0, inComponent: 0)
                 case 3:  //血压
                     dataArray = NSMutableArray.init(array: ["mmHg","kPa"])

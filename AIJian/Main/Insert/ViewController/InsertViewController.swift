@@ -65,7 +65,7 @@ class InsertViewController: UIViewController {
         if medicineChooseAlert.selectedNum>0{
             input.bodyInfo.medicineChooseButton.setTitle("\(medicineChooseAlert.selectedNum) Item selected", for: .normal)
         }else{
-            input.bodyInfo.medicineChooseButton.setTitle("Nothing", for: .normal)
+            input.bodyInfo.medicineChooseButton.setTitle("None", for: .normal)
         }
 
     }
@@ -169,7 +169,7 @@ class InsertViewController: UIViewController {
         // 添加取消按钮
         let actionCancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         // 添加保存按钮，将文本框中数据保存到沙盒中
-        let actionSure = UIAlertAction(title: "Sure", style: .destructive, handler: {(UIAlertAction)-> Void in
+        let actionSure = UIAlertAction(title: "Done", style: .destructive, handler: {(UIAlertAction)-> Void in
             // 读取配置文件
             let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: self.path)!
             var arr = data["medicine"] as! [String]
@@ -311,7 +311,7 @@ class InsertViewController: UIViewController {
         // ****************** 胰岛素使用量 ******************
         let insulin_num:Double? = input.getInsNumValue()
         if insulin_num != nil{
-            if insulin_type == "Nothing"{
+            if insulin_type == "None"{
                 Message += "\nEmpty Insulin Type"
             }else if insulin_num! > 100.0{
                 Message += "\nInsulin Range:100"
@@ -323,7 +323,7 @@ class InsertViewController: UIViewController {
         // ******************** 体重 ********************
         var weight_kg:Double?
         var weight_lbs:Double?
-        if GetUnit.getWeightUnit() == "Kg"{
+        if GetUnit.getWeightUnit() == "kg"{
             // 体重不为空
             weight_kg = input.getWeightValue()
             if weight_kg != nil{
@@ -463,7 +463,7 @@ class InsertViewController: UIViewController {
         
         // 有运动时间无运动类型报错
         // 运动时间不在正常范围报错
-        if sport == "Nothing"{
+        if sport == "None"{
             sport_strength = nil
             if sport_time != nil{
                 Message += "\nSelect Exercise Based on Time and Strength"
@@ -509,7 +509,7 @@ class InsertViewController: UIViewController {
         insertData.bloodGlucoseMmol = bloodGlucoseValueMmol!
         insertData.bloodGlucoseMg = bloodGlucoseValueMg!
         insertData.eatNum = Int64(eat_num)
-        insertData.insulinType = (insulin_type == "Nothing") ? nil:insulin_type
+        insertData.insulinType = (insulin_type == "None") ? nil:insulin_type
         insertData.insulinNum = insulin_num
         insertData.weightKg = weight_kg
         insertData.weightLbs = weight_lbs
@@ -518,7 +518,7 @@ class InsertViewController: UIViewController {
         insertData.diastolicPressureMmhg = dis_press_mmHg
         insertData.diastolicPressureKpa = dis_press_kPa
         insertData.medicine = (medicine_string == "") ? nil:medicine_string
-        insertData.sportType = (sport == "Nothing") ? nil:sport
+        insertData.sportType = (sport == "None") ? nil:sport
         insertData.sportTime = sport_time
         insertData.sportStrength = sport_strength
         insertData.inputType = 1
@@ -836,11 +836,11 @@ extension InsertViewController{
         }
         
         // 胰岛素类型
-        self.input.setInsValue(x.insulinType ?? "Nothing")
+        self.input.setInsValue(x.insulinType ?? "None")
         
         // 体重
         if let weight = x.weightKg{
-            if GetUnit.getWeightUnit() == "Kg"{
+            if GetUnit.getWeightUnit() == "kg"{
                 self.input.setWeightValue("\(weight)")
             }else{
                 self.input.setWeightValue(String(format: "%.0f", x.weightLbs!))
@@ -876,7 +876,7 @@ extension InsertViewController{
         }
         
         // 运动
-        self.input.setSportType(x.sportType ?? "Nothing")
+        self.input.setSportType(x.sportType ?? "None")
         
         // 运动时间
         if let sportTime = x.sportTime{

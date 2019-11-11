@@ -4,14 +4,14 @@
 <dict>
 	<key>exerIntensity</key>
 	<array>
-		<string>Nothing</string>
+		<string>None</string>
 		<string>Light</string>
 		<string>Medium</string>
 		<string>Hard</string>
 	</array>
 	<key>insulin</key>
 	<array>
-		<string>Nothing</string>
+		<string>None</string>
 		<string>Generic Bolus (Rapid-acting)</string>
 		<string>Generic Basal (Long-acting)</string>
 		<string>25/75 (Premixed)</string>
@@ -19,7 +19,7 @@
 	</array>
 	<key>sport</key>
 	<array>
-		<string>Nothing</string>
+		<string>None</string>
 		<string>Swimming</string>
 		<string>Running</string>
 		<string>Walking</string>

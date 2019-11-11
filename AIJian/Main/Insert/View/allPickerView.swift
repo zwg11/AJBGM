@@ -121,7 +121,7 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
     // 确定按钮
     lazy var sureButton:UIButton = {
         let button = UIButton()
-        button.setTitle("Sure", for: .normal)
+        button.setTitle("Done", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.contentHorizontalAlignment = .right
         // 设置内边界，使得按钮的字体不那么靠右

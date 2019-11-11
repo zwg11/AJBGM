@@ -245,7 +245,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         // 点击删除时弹出的警示框
         let alert1 = UIAlertController(title: "Are You Sure To Delete", message: "", preferredStyle: .alert)
         // 该动作删除一条记录
-        let sureAction = UIAlertAction(title: "Sure", style: .default, handler: {(UIAlertAction)->Void in
+        let sureAction = UIAlertAction(title: "Done", style: .default, handler: {(UIAlertAction)->Void in
             self.deleteData(section: indexPath.section, row: indexPath.row)
         })
     

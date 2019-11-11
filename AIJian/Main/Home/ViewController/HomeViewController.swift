@@ -52,7 +52,6 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             
             let cell = LastResultTableViewCell(style: .value1, reuseIdentifier: id)
             cell.selectionStyle = .none
-            cell.accessoryType = .disclosureIndicator
             cell.backgroundColor = UIColor.clear
             return cell
         case 2:
@@ -120,8 +119,6 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     private lazy var recent7View:recentTrendView = {
         let view = recentTrendView()
-        // 分割线颜色设为白色
-        homeTableView.separatorColor = UIColor.lightGray
         view.setupUI()
         view.backgroundColor = UIColor.clear
         return view
@@ -183,6 +180,8 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         }
         homeTableView.delegate = self
         homeTableView.dataSource = self
+        // 单元格分割线、背景为透明
+        homeTableView.separatorColor = UIColor.clear
         homeTableView.backgroundColor = UIColor.clear
         homeTableView.isScrollEnabled = true
         self.view.backgroundColor = UIColor.clear

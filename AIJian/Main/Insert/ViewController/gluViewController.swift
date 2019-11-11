@@ -39,7 +39,7 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         // 点击删除时弹出的警示框
         let alert = UIAlertController(title: "Back Without Save Data?", message: "", preferredStyle: .alert)
         // 该动作删除一条记录
-        let sureAction = UIAlertAction(title: "Sure", style: .default, handler: {(UIAlertAction)->Void in
+        let sureAction = UIAlertAction(title: "Done", style: .default, handler: {(UIAlertAction)->Void in
             self.navigationController?.popViewController(animated: true)
         })
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -66,7 +66,7 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
                 cell?.textLabel?.textColor = UIColor.red
             }else{
                 if BLEglucoseValue[indexPath.row]<Int(GetBloodLimit.getRandomDinnerLow()){
-                    cell?.textLabel?.textColor = UIColor.orange
+                    cell?.textLabel?.textColor = UIColor.yellow
                 }
                 else{
                     cell?.textLabel?.textColor = UIColor.green
@@ -77,7 +77,7 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
                 cell?.textLabel?.textColor = UIColor.red
             }else{
                 if UnitConversion.mgTomm(num: Double(BLEglucoseValue[indexPath.row]))<GetBloodLimit.getRandomDinnerLow(){
-                    cell?.textLabel?.textColor = UIColor.orange
+                    cell?.textLabel?.textColor = UIColor.yellow
                 }
                 else{
                     cell?.textLabel?.textColor = UIColor.green
@@ -168,7 +168,7 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
                 insertData.bloodGlucoseMmol = UnitConversion.mgTomm(num: Double(BLEglucoseValue[i]))
                 insertData.bloodGlucoseMg = Double(BLEglucoseValue[i])
                 insertData.eatNum = 2
-                insertData.sportType = "Nothing"
+                insertData.sportType = "None"
                 insertData.inputType = 0
                 //第二步：先封装进一个数组
                 datas.append(insertData)

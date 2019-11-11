@@ -16,7 +16,7 @@ public class IntensityChange{
     static func intensityTonum(_ str:String)->Int{
         var a:Int
         switch str {
-        case "Nothing":
+        case "None":
             a = 0
         case "Light":  //低
             a = 1
@@ -36,7 +36,7 @@ public class IntensityChange{
         var a:String = "No Meal"
         switch num {
         case 0:
-            a = "Nothing"    //无运动类型
+            a = "None"    //无运动类型
         case 1:
             a = "Light"      //运动强度低
         case 2:
@@ -44,7 +44,7 @@ public class IntensityChange{
         case 3:
             a = "Hard"       //运动强度高
         default:
-            a = "Nothing"
+            a = "None"
         }
         return a
     }
