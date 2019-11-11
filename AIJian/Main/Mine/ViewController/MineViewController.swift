@@ -316,7 +316,7 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
     //回调方法，监听点击事件
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let col = indexPath.row
-        
+        tableView.deselectRow(at: indexPath, animated: true)
         if col == 0{
             
         }else if col == 8{

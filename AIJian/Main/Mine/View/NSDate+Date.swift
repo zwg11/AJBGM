@@ -19,7 +19,7 @@ public extension Date {
         let timeZone = TimeZone.init(identifier: "UTC")
         let formatter = DateFormatter()
         formatter.timeZone = timeZone
-        formatter.locale = Locale.init(identifier: "zh_CN")
+        formatter.locale = Locale.init(identifier: "en_US")
         formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
         let date = formatter.string(from: fromDate)
         return date.components(separatedBy: " ").first!

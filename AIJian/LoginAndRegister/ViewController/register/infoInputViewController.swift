@@ -246,6 +246,7 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
                 userData.weight_kg = weightKg
             }
             userData.country = String(country!)
+            userData.birthday = brithday!.components(separatedBy: "/").joined(separator: "-")
             if userData.phone_number != nil{
                 userData.phone_number = String(phoneNumber!)
             }

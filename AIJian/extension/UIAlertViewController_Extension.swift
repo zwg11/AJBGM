@@ -33,4 +33,12 @@ extension UIAlertController{
     @objc func cancelAlert(){
         self.dismiss(animated: true, completion: nil)
     }
+    
+    open override var supportedInterfaceOrientations:UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.portrait
+    }
+    open override var shouldAutorotate:Bool {
+        return false
+    }
+  
 }

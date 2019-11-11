@@ -34,9 +34,12 @@ var sortedData:[[glucoseDate]] = []
 func initDataSortedByDate(startDate:Date,endDate:Date,userId:Int64){
     var data:[glucoseDate]?
     // 向数据库请求数据
+    print("开始时间为：",startDate)
+    print("结束时间为：",endDate)
     let sqliteManager = DBSQLiteManager()
     data = sqliteManager.selectGlucoseRecordInRange(start: startDate, end: endDate, userId: userId)
     // 将请求的数据赋值给数组
+    print(data)
     sortedByDateOfData = data
 }
 

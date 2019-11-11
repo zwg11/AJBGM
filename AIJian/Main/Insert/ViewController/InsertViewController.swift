@@ -248,6 +248,7 @@ class InsertViewController: UIViewController {
         // 记录需要警告的内容
         var Message:String = ""
         let date = input.getDate()
+        print("当前创建的date:",date)
         let time = input.getTime()
         print("获得日期:",date)
         print("获得时间:",time)

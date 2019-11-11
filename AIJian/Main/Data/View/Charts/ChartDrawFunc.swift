@@ -82,6 +82,7 @@ func xAxisArrayToWeek(Days:Int)->[String]{
 func recentDaysData(Days:Int)->[Double]{
     let today = DateInRegion().dateAt(.endOfDay).date
     let end = today + 1.seconds
+    print(end)
     let start = end - Days.days
     // 向数据库提取近些天的数据
     initDataSortedByDate(startDate: start, endDate: end, userId: UserInfo.getUserId())
