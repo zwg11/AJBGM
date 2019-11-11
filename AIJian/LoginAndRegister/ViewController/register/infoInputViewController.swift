@@ -95,9 +95,6 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
         self.title = "Personal Information"
 //        self.view.backgroundColor = UIColor.white
         self.navigationController?.isNavigationBarHidden = false
-//        self.navigationController?.navigationBar.backgroundColor = ThemeColor
-//        self.navigationController?.navigationBar.barTintColor = ThemeColor
-//        self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: NaviTitleColor]
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
         self.view.backgroundColor = UIColor.clear
@@ -210,7 +207,7 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
         // 创建一个日期格式器
         let dateFormatter = DateFormatter()
         // 为格式器设置格式字符串,时间所属区域
-        dateFormatter.dateFormat="yyyy-MM-dd"
+        dateFormatter.dateFormat="yyyy/MM/dd"
         // 绑定一个时间选择器，并按格式返回时间
         brithday = dateFormatter.string(from: picker.datePicker.date)
         infoinputView.dateButton.setTitle(brithday, for: .normal)

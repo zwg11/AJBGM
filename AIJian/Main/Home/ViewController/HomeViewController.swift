@@ -43,7 +43,7 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
 
             // 显示时间
             if let time = data?.createTime{
-                cell.detailTextLabel?.text = time.toDate()?.date.toFormat("yyyy-MM-dd HH:mm")
+                cell.detailTextLabel?.text = time.toDate()?.date.toFormat("yyyy/MM/dd HH:mm")
             }
             
             return cell

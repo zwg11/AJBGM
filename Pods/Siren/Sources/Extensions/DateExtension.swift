@@ -27,7 +27,7 @@ extension Date {
     static func days(since dateString: String) -> Int? {
         let dateformatter = DateFormatter()
         dateformatter.locale = Locale(identifier: "en_US_POSIX")
-        dateformatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+        dateformatter.dateFormat = "yyyy/MM/dd'T'HH:mm:ss'Z'"
 
         guard let releaseDate = dateformatter.date(from: dateString) else {
             return nil

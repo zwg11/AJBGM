@@ -397,7 +397,7 @@ public class DBSQLiteManager:NSObject{
         let db = DBSQLiteManager.shareManager().openDB()
         // 由于数据库中的 create_time 为字符串，这里要将时间转为字符串
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
         // 此处在日期转字符串时完了8小时
         let st = dateFormatter.string(from: start)
         let en = dateFormatter.string(from: end)

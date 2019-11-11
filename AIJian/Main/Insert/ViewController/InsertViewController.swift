@@ -794,7 +794,7 @@ extension InsertViewController{
         // 血糖记录ID
         self.recordId = x.bloodGlucoseRecordId!
         // 时间
-        self.input.setDate((x.createTime?.toDate()?.date.toFormat("yyyy-MM-dd"))!)
+        self.input.setDate((x.createTime?.toDate()?.date.toFormat("yyyy/MM/dd"))!)
         self.input.setTime((x.createTime?.toDate()?.date.toFormat("HH:mm"))!)
         // 血糖量
         if let value = x.bloodGlucoseMmol{

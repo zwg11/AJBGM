@@ -18,6 +18,7 @@ class HZTextView: UITextView {
         super.init(frame: frame, textContainer: textContainer)
         // 设置默认字体
         self.font = UIFont.systemFont(ofSize: 15)
+        
         // 使用通知监听文字改变
         NotificationCenter.default.addObserver(self, selector: #selector(textDidChange(_:)), name: UITextView.textDidChangeNotification, object: nil)
     }
@@ -41,9 +42,18 @@ class HZTextView: UITextView {
         
         // 文字
         var rect1 = rect
+        print(rect1)
+        print("rect1.origin.x", rect1.origin.x)
+        print("rect1.origin.y", rect1.origin.y)
         rect1.origin.x = 5
         rect1.origin.y = 8
         rect1.size.width = rect1.size.width - 2*rect1.origin.x
+         print("rect1.origin.x", rect1.origin.x)
+         print("rect1.origin.y", rect1.origin.y)
+        print("rect1.size.width",rect1.size.width)
+        rect1.origin.x = 0
+        rect1.origin.y = 0
+        
         (self.placeholder! as NSString).draw(in: rect1, withAttributes: attrs)
     }
     

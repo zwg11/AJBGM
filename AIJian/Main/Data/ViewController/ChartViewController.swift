@@ -185,7 +185,7 @@ class ChartViewController: UIViewController,ChartViewDelegate{
         let currentX = Double(valuex)! * 1440.0
         // 创建一个时间格式器
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+        dateFormatter.dateFormat = "yyyy/MM/dd HH:mm"
 
         let xxxx = startD! + Int(currentX).minutes
         MarkTimelabel.text = "\(dateFormatter.string(from: xxxx))"

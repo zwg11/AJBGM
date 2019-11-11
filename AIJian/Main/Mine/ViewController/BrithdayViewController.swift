@@ -168,7 +168,7 @@ class BrithdayViewController: UIViewController {
                 // 创建一个日期格式器
                 let dateFormatter = DateFormatter()
                 // 为格式器设置格式字符串,时间所属区域
-                dateFormatter.dateFormat="yyyy-MM-dd"
+                dateFormatter.dateFormat="yyyy/MM/dd"
                 // 绑定一个时间选择器，并按格式返回时间
                 date = dateFormatter.string(from: picker.datePicker.date)
                 

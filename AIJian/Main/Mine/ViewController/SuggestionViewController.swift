@@ -108,7 +108,8 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
 //        self.view.backgroundColor = ThemeColor
         self.view.backgroundColor = UIColor.clear
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
-        
+        //自动调整滚动视图和表格视图的偏移量
+        self.automaticallyAdjustsScrollViewInsets = false
         content_field.placeholder = "Please Enter Your Comments"
 //        content_field.backgroundColor = ThemeColor
         content_field.backgroundColor = UIColor.clear
@@ -163,7 +164,6 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
         pickerView.pickerViewShow()
     }
     func selectedCountry(_ pickerView: BHJPickerView, _ countryStr: String) {
-//        infoinputView.nationButton.setTitle(countryStr, for: .normal)
         nationCp.nationButton.setTitle(countryStr, for:.normal)
         country = countryStr
     }
@@ -180,14 +180,6 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
             return
         }
         
-//        if  telephoneCommponent.textField.text! == ""{
-//            alert.custom(self, "Attention", "Phone Empty！")
-//            return
-//        }
-//        if  telephoneCommponent.textField.text!.count == 255{
-//            alert.custom(self, "Attention", "Phone Error！")
-//            return
-//        }
         print(content_field.text!.count)
         if content_field.text!.count >= 300{
             alert.custom(self, "Attention", "Words should be less than 300！")

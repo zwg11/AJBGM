@@ -56,7 +56,6 @@ class loginViewController: UIViewController,UITextFieldDelegate {
         }
         self.navigationController?.isNavigationBarHidden = true
         self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        //        self.navigationController!.navigationBar.shadowImage = UIImage()
         self.navigationController!.navigationBar.isTranslucent = true
         
         self.automaticallyAdjustsScrollViewInsets = false
@@ -179,7 +178,7 @@ class loginViewController: UIViewController,UITextFieldDelegate {
     //跳转到注册界面
     @objc func register(){
         print("register clicked.")
-        self.navigationController?.pushViewController(registerViewController(), animated: false)
+        self.navigationController?.pushViewController(infoInputViewController(), animated: false)
     }
 
     //此处只做收回键盘的动作

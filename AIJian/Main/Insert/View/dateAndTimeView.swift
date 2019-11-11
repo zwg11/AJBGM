@@ -30,7 +30,7 @@ class dateAndTimeView: UIView {
         let now = Date()
         // 创建一个时间格式器
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.dateFormat = "yyyy/MM/dd"
         button.NorStyle(title: "\(dateFormatter.string(from: now))")
         return button
     }()

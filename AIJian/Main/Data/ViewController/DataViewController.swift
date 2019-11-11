@@ -304,7 +304,7 @@ class DataViewController: UIViewController {
     
     func dateManage(date:Date) -> Date{
         let dateformat = DateFormatter()
-        dateformat.dateFormat = "yyyy-MM-dd"
+        dateformat.dateFormat = "yyyy/MM/dd"
         let res = dateformat.string(from: date)
         let x = res.toDate()?.date
         return x!

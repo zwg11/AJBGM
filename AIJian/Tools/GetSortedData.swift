@@ -57,7 +57,7 @@ func sortedTimeOfData(){
             }else{
                 // 先判断二维数组中对应的同一天有没有其他时间了
                 //如果有，则在对应的数组添加该日期
-                if sortedByDateOfData![i].createTime!.toDate()!.toFormat("yyyy-MM-dd") == sortedByDateOfData![i-1].createTime!.toDate()!.toFormat("yyyy-MM-dd"){
+                if sortedByDateOfData![i].createTime!.toDate()!.toFormat("yyyy/MM/dd") == sortedByDateOfData![i-1].createTime!.toDate()!.toFormat("yyyy/MM/dd"){
                     let index = Time.count - 1
                     Time[index].append(date.date)
                     Data[index].append(sortedByDateOfData![i])

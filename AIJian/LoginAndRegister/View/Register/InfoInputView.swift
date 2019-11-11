@@ -23,7 +23,6 @@ class InfoInputView: UIView {
     lazy var userNameTextField:UITextField = {
         let textField = UITextField()
         textField.initTextField(placeholder: " Name",keyboardType: .default)
-//        let textField = initTextField(placeholder: " Name",keyboardType: .default)
         let imageView = UIImageView(image: UIImage(named: "Name"))
         textField.leftView = imageView
         textField.leftViewMode = .always
@@ -34,7 +33,7 @@ class InfoInputView: UIView {
     /*性别标签*/
     lazy var gender_label:UIButton = {
         let gender_man_label = UIButton(frame: CGRect())
-        gender_man_label.setImage(UIImage(named: "Gender"), for: .normal)
+        gender_man_label.setImage(UIImage(named: " Gender"), for: .normal)
         gender_man_label.setTitle(" Gender", for: .normal)
         gender_man_label.contentHorizontalAlignment = .left
         gender_man_label.setTitleColor(TextColor, for: .normal)
@@ -64,70 +63,7 @@ class InfoInputView: UIView {
         return gender_woman_button
     }()
     
-    
-//    /*身高标签*/
-//    lazy var height_label:UILabel = {
-//        let height_label = UILabel(frame: CGRect())
-//        height_label.text = "身   高"
-//        height_label.font = UIFont.systemFont(ofSize: 18)
-//        return height_label
-//    }()
-//
-//    // 输入身高文本框
-//    lazy var heightTextField:UITextField = {
-//        let textField = initTextField(placeholder: " 输入身高",keyboardType: .numberPad)
-//        return textField
-//    }()
-//
-//    /*身高单位标签*/
-//    lazy var height_unit_label:UILabel = {
-//        let height_unit_label = UILabel(frame: CGRect())
-//        height_unit_label.text = "cm"
-//        height_unit_label.font = UIFont.systemFont(ofSize: 18)
-//        return height_unit_label
-//    }()
-//
-//
-//    /*体重标签*/
-//    lazy var weight_label:UILabel = {
-//        let weight_label = UILabel(frame: CGRect())
-//        weight_label.text = "体   重"
-//        weight_label.font = UIFont.systemFont(ofSize: 18)
-//        return weight_label
-//    }()
-    
-//    // 输入体重文本框
-//    lazy var weightTextField:UITextField = {
-//        let textField = initTextField(placeholder: " 输入体重",keyboardType: .numberPad)
-//        return textField
-//    }()
-//
-//    /*体重单位标签*/
-//    lazy var weight_unit_label:UILabel = {
-//        let weight_unit_label = UILabel(frame: CGRect())
-//        weight_unit_label.text = "kg"
-//        weight_unit_label.font = UIFont.systemFont(ofSize: 18)
-//        return weight_unit_label
-//    }()
-//
-    
-//    /*国家标签*/
-//    lazy var nation_label:UILabel = {
-//        let nation_label = UILabel(frame: CGRect())
-//        nation_label.text = "国   家"
-//        nation_label.font = UIFont.systemFont(ofSize: 18)
-//        return nation_label
-//    }()
-    
-    // 输入国家文本框
-//    lazy var nationTextField:UITextField = {
-//        let textField = initTextField(placeholder: " China",keyboardType: .default)
-//        let imageView = UIImageView(image: UIImage(named: "email"))
-//        textField.leftView = imageView
-//        textField.leftViewMode = .always
-//        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
-//        return textField
-//    }()
+
     lazy var nationButton:UIButton = {
         let button = UIButton(type: .custom)
         button.setImage(UIImage(named: "Country"), for: .normal)
@@ -148,14 +84,7 @@ class InfoInputView: UIView {
         return textField
     }()
     
-//    /*电话标签*/
-//    lazy var phone_label:UILabel = {
-//        let phone_label = UILabel(frame: CGRect())
-//        phone_label.text = "电   话"
-//        phone_label.font = UIFont.systemFont(ofSize: 18)
-//        return phone_label
-//    }()
-//
+
     // 输入电话文本框
     lazy var phoneTextField:UITextField = {
         let textField = UITextField()
@@ -187,7 +116,7 @@ class InfoInputView: UIView {
         let now = Date()
         // 创建一个时间格式器
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.dateFormat = "yyyy/MM/dd"
         button.NorStyle(title: "\(dateFormatter.string(from: now))")
         button.setTitleColor(UIColor.white, for: .normal)
         button.layer.borderWidth = 0.5
