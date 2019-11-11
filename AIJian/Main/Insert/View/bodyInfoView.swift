@@ -232,8 +232,8 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
     //重新设置单位
     func resetWeightAndPressureUnit(){
         //设置体重单位
-        if GetUnit.getWeightUnit() == "Kg"{
-            self.weightUnitLabel.normalLabel(text: "Kg")
+        if GetUnit.getWeightUnit() == "kg"{
+            self.weightUnitLabel.normalLabel(text: "kg")
             self.weightTextfield.keyboardType = UIKeyboardType.decimalPad //弹出带小数点的文本框
             
             
@@ -266,7 +266,7 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
             var numFrontDot:Int = 2
             var numAfterDot:Int = 2
             if textField == weightTextfield{
-                if GetUnit.getWeightUnit() == "Kg"{
+                if GetUnit.getWeightUnit() == "kg"{
                     numFrontDot = 3
                     numAfterDot = 2
                 }else{
@@ -274,7 +274,7 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
                     numAfterDot = 0
                 }
             }else{
-                if GetUnit.getPressureUnit() == "kpa"{
+                if GetUnit.getPressureUnit() == "kPa"{
                     numFrontDot = 2
                     numAfterDot = 2
                 }else{

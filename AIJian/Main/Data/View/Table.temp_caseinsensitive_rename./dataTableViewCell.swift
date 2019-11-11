@@ -85,7 +85,7 @@ class dataTableViewCell: UITableViewCell {
         // 如果体重不为空
         if let weight = sortedData[secion][row].weightKg{
             // 根据单位设置不同形式的值
-            if GetUnit.getWeightUnit() == "Kg"{
+            if GetUnit.getWeightUnit() == "kg"{
                 weightLabel.text =  "\(weight)"
             }else{
                 weightLabel.text =  String(format: "%.0f", sortedData[secion][row].weightLbs!)

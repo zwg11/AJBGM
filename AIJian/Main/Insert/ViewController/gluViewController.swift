@@ -24,11 +24,6 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     // 最新记录
     var lastRecord = ""
     
-    let AlamofireManager:Alamofire.SessionManager = {
-        let conf = URLSessionConfiguration.default
-        conf.timeoutIntervalForRequest = 10
-        return Alamofire.SessionManager(configuration: conf)
-    }()
     
     // 设置导航栏左按钮x样式
     private lazy var leftButton:UIButton = {

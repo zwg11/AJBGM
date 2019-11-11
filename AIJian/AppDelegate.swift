@@ -21,11 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var blockRotation = false
     
-    let AlamofireManager:Alamofire.SessionManager = {
-        let conf = URLSessionConfiguration.default
-        conf.timeoutIntervalForRequest = 10
-        return Alamofire.SessionManager(configuration: conf)
-    }()
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         

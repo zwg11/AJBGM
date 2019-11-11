@@ -35,11 +35,8 @@ class VersionUViewController: UIViewController {
 //            self.view.backgroundColor = ThemeColor
             self.view.backgroundColor = UIColor.clear
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
-            
-            
-//
-//            let tableview = UITableView.init(frame: CGRect(x: 0, y: navigationBarHeight, width: AJScreenWidth, height: AJScreenHeight/15*4))
-                let tableview = UITableView()
+
+            let tableview = UITableView()
             //将CELL的标识，在此处进行设置
 //            tableview.backgroundColor = ThemeColor
             tableview.isScrollEnabled = false
@@ -50,7 +47,7 @@ class VersionUViewController: UIViewController {
             tableview.separatorColor = UIColor.white
             self.view.addSubview(tableview)
             tableview.snp.remakeConstraints{ (make) in
-                make.height.equalTo(AJScreenHeight/15*4)
+                make.height.equalTo(AJScreenHeight/15*2)
                 make.width.equalToSuperview()
                 make.top.equalTo(topLayoutGuide.snp.bottom)
             }
@@ -102,14 +99,14 @@ extension VersionUViewController:UITableViewDelegate,UITableViewDataSource{
                     print("第一行")
                 case 1:  //跳转到反馈页面
                     self.navigationController?.pushViewController(SuggestionViewController(), animated: false)
-                case 2:  //跳转到去评分界面
-                    if #available(iOS 10.3, *) {
-                        SKStoreReviewController.requestReview()
-                    } else {
-                        // Fallback on earlier versions
-                    }
-                case 3:  //跳转到版本更新
-                    UpdateManager.init()
+//                case 2:  //跳转到去评分界面
+//                    if #available(iOS 10.3, *) {
+//                        SKStoreReviewController.requestReview()
+//                    } else {
+//                        // Fallback on earlier versions
+//                    }
+//                case 3:  //跳转到版本更新
+//                    UpdateManager.init()
                 default:  //缺省不跳
                     print("第五行")
                }

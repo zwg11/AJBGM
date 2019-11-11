@@ -94,10 +94,7 @@ class GeneralStatusView: UIView {
             make.height.equalTo(300)
         }
 
-//        initTable()
-
         self.backgroundColor = UIColor.white
-//        print("table height:\(scHeight)")
         self.frame = CGRect(x: 0, y: 2000, width: 1200, height: 1100 )
         NotificationCenter.default.addObserver(self, selector: #selector(test), name: NSNotification.Name(rawValue: "reloadView"), object: nil)
         

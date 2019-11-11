@@ -62,10 +62,10 @@ class AJTabbarController: UITabBarController {
         let nv4 = AJNavigationController(rootViewController: Mine)
 //        nv4.navigationBar.barTintColor = ThemeColor
         nv4.navigationBar.isTranslucent = false
-        Mine.navigationItem.title = "Mine"
+        Mine.navigationItem.title = ""  //navigationbartitle不要设置
         nv4.tabBarItem.image = UIImage(named: "wode.png")?.withRenderingMode(.automatic)
 //        nv4.tabBarItem.selectedImage = UIImage(named: "wode-2.png")?.withRenderingMode(.alwaysOriginal)
-        nv4.tabBarItem.title = "Mine"
+        nv4.tabBarItem.title = "Me"  //底下改个bar
 //        nv4.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.font:UIFont.systemFont(ofSize: 20),NSAttributedString.Key.foregroundColor:UIColor.white], for: .highlighted)
 //        nv4.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.font:UIFont.systemFont(ofSize: 20),NSAttributedString.Key.foregroundColor:UIColor.blue], for: .selected)
 //        nv4.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.font:UIFont.systemFont(ofSize: 10),NSAttributedString.Key.foregroundColor:UIColor.white], for: .normal)

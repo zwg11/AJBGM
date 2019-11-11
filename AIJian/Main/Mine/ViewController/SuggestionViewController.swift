@@ -104,7 +104,7 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Suggestion"
+        self.title = "Help"
 //        self.view.backgroundColor = ThemeColor
         self.view.backgroundColor = UIColor.clear
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)

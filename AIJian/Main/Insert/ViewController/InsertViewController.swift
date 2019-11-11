@@ -14,12 +14,6 @@ class InsertViewController: UIViewController {
 
     private let path = PlistSetting.getFilePath(File: "inputChoose.plist")
     
-    let AlamofireManager:Alamofire.SessionManager = {
-        let conf = URLSessionConfiguration.default
-        conf.timeoutIntervalForRequest = 10
-        return Alamofire.SessionManager(configuration: conf)
-    }()
-    
     lazy var input:InputView = {
         let view = InputView()
         view.setupUI()
@@ -329,7 +323,7 @@ class InsertViewController: UIViewController {
         // ******************** 体重 ********************
         var weight_kg:Double?
         var weight_lbs:Double?
-        if GetUnit.getWeightUnit() == "Kg"{
+        if GetUnit.getWeightUnit() == "kg"{
             // 体重不为空
             weight_kg = input.getWeightValue()
             if weight_kg != nil{
@@ -846,7 +840,7 @@ extension InsertViewController{
         
         // 体重
         if let weight = x.weightKg{
-            if GetUnit.getWeightUnit() == "Kg"{
+            if GetUnit.getWeightUnit() == "kg"{
                 self.input.setWeightValue("\(weight)")
             }else{
                 self.input.setWeightValue(String(format: "%.0f", x.weightLbs!))

@@ -5,7 +5,7 @@
 	<key>PressureUnit</key>
 	<string>mmHg</string>
 	<key>WeightUnit</key>
-	<string>Kg</string>
+	<string>kg</string>
 	<key>BloodUnit</key>
 	<string>mmol/L</string>
 </dict>

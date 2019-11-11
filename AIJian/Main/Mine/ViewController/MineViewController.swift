@@ -20,12 +20,7 @@ class MineViewController: UIViewController {
         //view.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.1)
         return view
     }()
-    // 设置数据请求超时时间
-    let AlamofireManager:Alamofire.SessionManager = {
-        let conf = URLSessionConfiguration.default
-        conf.timeoutIntervalForRequest = 10
-        return Alamofire.SessionManager(configuration: conf)
-    }()
+
     //列表数据
     let _titleArr = ["User Info","Units Setup","Change Password","Targets Setting","Instructions","About Us","Update"]
 
