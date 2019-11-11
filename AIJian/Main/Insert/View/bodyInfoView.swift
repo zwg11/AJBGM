@@ -274,7 +274,7 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
                     numAfterDot = 0
                 }
             }else{
-                if GetUnit.getPressureUnit() == "kpa"{
+                if GetUnit.getPressureUnit() == "kPa"{
                     numFrontDot = 2
                     numAfterDot = 2
                 }else{

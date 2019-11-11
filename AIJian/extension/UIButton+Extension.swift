@@ -58,7 +58,7 @@ extension UIButton{
         
         var remainingCount: Int = count {
             willSet {
-                setTitle("Resend(\(newValue))", for: .normal)
+                setTitle("(\(newValue)s)", for: .normal)
                 
                 if newValue <= 0 {
                     setTitle("Resend", for: .normal)

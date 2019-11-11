@@ -35,16 +35,7 @@ class MineViewController: UIViewController {
         ]
     }()
     
-//    override func viewWillAppear(_ animated: Bool) {
-//
-//
-//    }
-
-//    //设定已经消失的时候，reload一次tableview
-//    override func viewDidDisappear(_ animated: Bool) {
-//        self.tableview.reloadRows(at: [IndexPath(row:0,section:0)], with: .none)
-//    }
-//    
+   
     override func viewWillAppear(_ animated: Bool) {
 
         //将所有按钮添加到scrollview中，还需要修改相对布局
@@ -163,14 +154,14 @@ class MineViewController: UIViewController {
                 }
             }else{
               
+                // 将风火轮移除，并停止转动
+                self.indicator.stopIndicator()
+                self.indicator.removeFromSuperview()
                 let alert = CustomAlertController()
                 alert.custom(self, "Attension", "Unable to get the information")
             }
         }//end of request
         
-        // 将风火轮移除，并停止转动
-        self.indicator.stopIndicator()
-        self.indicator.removeFromSuperview()
         self.tableview.reloadRows(at: [IndexPath(row:0,section:0)], with: .none)
         
     } //end of requestUserInfo

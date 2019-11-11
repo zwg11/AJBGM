@@ -22,13 +22,10 @@ class ProtocalViewController: UIViewController {
     let textView = UITextView()
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = ""
+        self.title = "Registration Protocol"
         //        self.view.backgroundColor = ThemeColor
         self.view.backgroundColor = UIColor.clear
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
-        
-        //        let textView = UITextView(frame: CGRect(x: 0, y: navigationBarHeight, width: AJScreenWidth, height: AJScreenHeight))
-        
         
         let ABOUTUS_STRING = """
         Overview

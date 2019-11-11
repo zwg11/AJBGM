@@ -93,15 +93,9 @@ class loginViewController: UIViewController,UITextFieldDelegate {
             indicator.snp.makeConstraints{(make) in
                 make.edges.equalToSuperview()
             }
-//            indicator.center = self.view.center
-//            indicator.frame.size = CGSize(width: 40, height: 60)
-            
-            
             
             //程序到达此处，说明其他的验证已经成功,然后对数据进行校验
             let dictString:Dictionary = [ "email":String(email!),"password":String(password!)]
-//            let user = User.deserialize(from: jsonString)
-            print(dictString)
             //  此处的参数需要传入一个字典类型
             AlamofireManager.request(LOGIN_API,method: .post,parameters: dictString).responseString{ (response) in
 
@@ -149,9 +143,6 @@ class loginViewController: UIViewController,UITextFieldDelegate {
 
  
                             }else{
-//                                print(responseModel)
-//                                  print(responseModel.data)
-                                // 将风火轮移除，并停止转动
                                 self.indicator.stopIndicator()
                                 self.indicator.removeFromSuperview()
                                 
@@ -160,6 +151,7 @@ class loginViewController: UIViewController,UITextFieldDelegate {
                         }
                     }
                 }else{
+                    //没网
                     // 将风火轮移除，并停止转动
                     self.indicator.stopIndicator()
                     self.indicator.removeFromSuperview()
