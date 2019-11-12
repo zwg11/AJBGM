@@ -413,8 +413,10 @@ class DataViewController: UIViewController {
     
     // 对于导航栏右按钮的标题不同，做不同的事情
     func setDaysAndRange(){
-        
+        let x = Date().dateAt(.endOfDay)
+        print("x",x)
         let today = DateInRegion().dateAt(.endOfDay).date
+        print("today:",today)
         
         // 监听导航栏右按钮的文本，对于不同的文本生成对应的数据
         switch pickerSelectedRow{

@@ -28,7 +28,7 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     // 设置导航栏左按钮x样式
     private lazy var leftButton:UIButton = {
         let button = UIButton.init(type: .custom)
-        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 44)
         button.setImage(UIImage(named: "back"), for: .normal)
         button.addTarget(self, action: #selector(leftButtonClick), for: .touchUpInside)
         return button
@@ -51,7 +51,7 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return BLEglucoseDate.count
     }
-    // 每个 cell 打印 血糖值 和 日期
+    // MARK:- 每个 cell 打印 血糖值 和 日期
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: "glucose")
         if cell == nil{
@@ -89,19 +89,8 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         cell?.selectionStyle = .none
         cell?.detailTextLabel?.text = mark + "   " + BLEglucoseDate[indexPath.row]
         cell?.detailTextLabel?.textColor = UIColor.white
-//        cell?.backgroundColor = ThemeColor
         cell?.backgroundColor = UIColor.clear
         return cell!
-    }
-    // 设置表格头部背景颜色
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        view.tintColor = SendButtonColor
-    }
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Blood Glucose Record"
-    }
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
     }
     
     private func markToString(_ mark:Int) -> String{
@@ -140,21 +129,27 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     // 该按钮实现App对血糖的记录
     private var button:UIButton = {
         let button = UIButton(type: .system)
-//        button.tintColor = UIColor.white
-//        button.backgroundColor = UIColor.blue
         button.setTitle("Record Result", for: .normal)
-//        button.setTitleColor(UIColor.white, for: .normal)
-        button.setSelected()
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.backgroundColor = ThemeColor
+        button.layer.borderColor = UIColor.lightGray.cgColor
         button.addTarget(self, action: #selector(BLEDataSave), for: .touchUpInside)
         return button
     }()
-    // 保存血糖数据动作
+    // MARK:- 保存血糖数据动作
     @objc func BLEDataSave(){
-        
+        // 添加风火轮并使其旋转
+        self.navigationController?.view.addSubview(indicator)
+        indicator.setLabelText("Inserting Data...")
+        indicator.startIndicator()
+        indicator.snp.makeConstraints{(make) in
+            make.edges.equalToSuperview()
+        }
+        // 数据处理
         var datas:[glucoseDate] = []
         for i in 0...BLEglucoseValue.count-1{
             print("第\(i)个数据")
-            //第一步：先封装成一个对象
+            // MARK:- 第一步：先封装成一个对象
             var  insertData:glucoseDate = glucoseDate()
             insertData.userId = UserInfo.getUserId()
             // 创建一个recordId
@@ -170,13 +165,13 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
                 insertData.eatNum = 2
                 insertData.sportType = "None"
                 insertData.inputType = 0
-                //第二步：先封装进一个数组
+                // MARK:- 第二步：先封装进一个数组
                 datas.append(insertData)
             }
             
         }
         
-        //第三步：再将这个数组直接toString
+        // MARK:- 第三步：再将这个数组直接toString
         let GlucoseJsonData = datas.toJSONString()!
         //手动输入数据，请求部分
         let dictString = [ "token":UserInfo.getToken(),"userId":UserInfo.getUserId() as Any,"userBloodGlucoseRecords":GlucoseJsonData] as [String : Any]
@@ -200,10 +195,28 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
                         if(responseModel.code == 1 ){
                             print(responseModel.code)
                             print("插入成功")
-                            // 向数据库插入数据
+                            // MARK:- 向数据库插入数据
                             DBSQLiteManager.manager.addGlucoseRecords(add: datas)
+                            // MARK:- 记录此仪器传输的仪器类型和最近一次的血糖记录
                             if self.UpdateMeterInfo(){
                                 let x = UIAlertController(title: "", message: "Insert Success.", preferredStyle: .alert)
+                                // 移除风火轮
+                                self.indicator.stopIndicator()
+                                self.indicator.removeFromSuperview()
+                                
+
+//                                // 读取配置文件，获取meterID的内容
+//                                let path = PlistSetting.getFilePath(File: "User.plist")
+//                                let data1:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
+//
+//                                // 设置为字典型
+//                                let meterIDs = data1["meterID"] as? NSMutableDictionary
+//                                // 将数据写入配置文件
+//                                meterIDs![self.meterID] = self.lastRecord
+//                                data1["meterID"] = meterIDs
+//                                data1.write(toFile: path, atomically: true)
+                                
+                                // 警示框出现
                                 self.present(x, animated: true, completion: {()->Void in
                                     sleep(1)
                                     x.dismiss(animated: true, completion: {
@@ -219,14 +232,22 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
                             }else{
                                 print(responseModel.code)
                                 print("插入失败")
-                                // 插入成功
+                                // 插入失败
                                 let alert = CustomAlertController()
+                                // 移除风火轮
+                                self.indicator.stopIndicator()
+                                self.indicator.removeFromSuperview()
+                                // 警示框出现
                                 alert.custom(self, "", "Insert Failed,Please Try Again Later.")
                             }
                         }else{
                             print(responseModel.code)
                             print("插入失败")
                             // 插入失败
+                            // 移除风火轮
+                            self.indicator.stopIndicator()
+                            self.indicator.removeFromSuperview()
+                            // 警示框出现
                             let alert = CustomAlertController()
                             alert.custom(self, "", "Insert Failed,Please Try Again Later.")
                             
@@ -234,6 +255,10 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
                     } //end of letif
                 }
             }else{
+                // 移除风火轮
+                self.indicator.stopIndicator()
+                self.indicator.removeFromSuperview()
+                // 警示框出现
                 print("插入失败")
                 // 插入成功
                 let alert = CustomAlertController()
@@ -249,33 +274,66 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         self.automaticallyAdjustsScrollViewInsets = false
         print(BLEglucoseMark)
         print("laseRecord:\(lastRecord)")
+        let array:Array<String> = lastRecord.components(separatedBy: " ")
+        // 将字符串拆成 每个字符串只包含一个字符 的 字符串数组
+        //let data = array[0].components(separatedBy: "")
+        print("处理后的最后记录\(array)")
     }
+    
+    private lazy var indicator:CustomIndicatorView = {
+       let view = CustomIndicatorView()
+        view.setupUI("")
+        return view
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // 添加导航栏左按钮
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
-        
+        // 头部标签
+        let tableHeadLabel = UILabel()
+        tableHeadLabel.backgroundColor = UIColor.clear
+        tableHeadLabel.textColor = UIColor.white
+        tableHeadLabel.textAlignment = .left
+        tableHeadLabel.text = "Connected Glucose Meter"
+        tableHeadLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        self.view.addSubview(tableHeadLabel)
+        tableHeadLabel.snp.makeConstraints{(make) in
+            make.right.equalToSuperview()
+            make.left.equalToSuperview().offset(15)
+            make.height.equalTo(44)
+            if #available(iOS 11.0, *) {
+                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+                //                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+            } else {
+                make.top.equalTo(topLayoutGuide.snp.bottom)
+                //                make.bottom.equalTo(bottomLayoutGuide.snp.top)
+                // Fallback on earlier versions
+            }
+            
+        }
+        // 添加导航栏标题
+        self.title = "Data"
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.frame = CGRect(x: 0, y: 64, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height-200)
+
 //        tableView.backgroundColor = ThemeColor
         tableView.backgroundColor = UIColor.clear
-        button.frame = CGRect(x: 0, y: UIScreen.main.bounds.maxY-44, width: UIScreen.main.bounds.width, height: 44)
+//        button.frame = CGRect(x: 0, y: UIScreen.main.bounds.maxY-44, width: UIScreen.main.bounds.width, height: 44)
         // Do any additional setup after loading the view.
         self.view.backgroundColor = UIColor.clear
         self.view.addSubview(tableView)
         self.view.addSubview(button)
         tableView.snp.makeConstraints{(make) in
             make.left.right.equalToSuperview()
-//            make.top.equalToSuperview()
+            make.top.equalTo(tableHeadLabel.snp.bottom)
             make.bottom.equalToSuperview().offset(-44)
-            if #available(iOS 11.0, *) {
-                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
-            } else {
-                // Fallback on earlier versions
-                make.top.equalTo(topLayoutGuide.snp.bottom)
-            }
+//            if #available(iOS 11.0, *) {
+//                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+//            } else {
+//                // Fallback on earlier versions
+//                make.top.equalTo(topLayoutGuide.snp.bottom)
+//            }
         }
         button.snp.makeConstraints{(make) in
             make.left.right.bottom.equalToSuperview()
@@ -288,7 +346,7 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
 
 
 extension gluViewController{
-    // 更新用户血糖仪使用信息
+    // MARK:- 更新用户血糖仪使用信息
     func UpdateMeterInfo()->Bool{
         //手动输入数据，请求部分
         var isSuccess = true
@@ -327,10 +385,11 @@ extension gluViewController{
                                     print(data)
                                     print("meterID更新成功")
                                     isSuccess = true
+                                    
                                 }else{
                                     print(responseModel.code)
                                     print("meterID插更新失败")
-                                    isSuccess = false
+//                                    return false
                                 }
                             } //end of letif
                             else{
@@ -343,7 +402,6 @@ extension gluViewController{
                     else{
                         isSuccess = false
                     }
-//                    return isSuccess
                 }//end of request
         return isSuccess
     }

@@ -83,7 +83,7 @@ class InsertViewController: UIViewController {
     // 设置导航栏右按钮样式
     private lazy var rightButton:UIButton = {
         let button = UIButton.init(type: .system)
-        button.frame = CGRect(x: 0, y: 0, width: AJScreenWidth/8, height: 30)
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         button.setTitle("Save", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
@@ -248,6 +248,7 @@ class InsertViewController: UIViewController {
         // 记录需要警告的内容
         var Message:String = ""
         let date = input.getDate()
+        print("当前创建的date:",date)
         let time = input.getTime()
         print("获得日期:",date)
         print("获得时间:",time)
@@ -562,7 +563,7 @@ class InsertViewController: UIViewController {
                                 indicator.stopIndicator()
                                 indicator.removeFromSuperview()
 
-                                let x = UIAlertController(title: "", message: "Insert Success.", preferredStyle: .alert)
+                                let x = UIAlertController(title: "", message: "Data Input Success", preferredStyle: .alert)
                                 self.present(x, animated: true, completion: {()->Void in
                                     sleep(1)
                                     x.dismiss(animated: true, completion: {

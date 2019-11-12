@@ -425,7 +425,7 @@ class InputView: UIView,UIScrollViewDelegate {
     /************************************************/
     //时间和日期的设置和获取方法
     func getDate()->String{
-        dateString = dateAndTime.dateButton.currentTitle
+        dateString = dateAndTime.dateButton.currentTitle!.components(separatedBy: "/").joined(separator: "-")
         return dateString!
     }
     

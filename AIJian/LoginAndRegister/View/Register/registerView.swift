@@ -57,7 +57,7 @@ class registerView: UIView {
     
     // 获取验证码按钮
     lazy var getAuthCodeButton:UIButton = {
-        let button = UIButton(type: .system)
+        let button = UIButton(type: .custom)
         button.setTitle(" Send Code", for: .normal)
         button.backgroundColor = SendButtonColor
         button.setTitleColor(UIColor.white, for: .normal)
@@ -116,7 +116,7 @@ class registerView: UIView {
     //免责条例的用户信息
     lazy var NoResponseProtocolInfo:UIButton = {
         let NoResponseProtocol = UIButton(frame: CGRect())
-        NoResponseProtocol.setTitle("Agreed \"Registration Protocol and Submit the Information\" ", for: .normal)
+        NoResponseProtocol.setTitle("Agreed \"Registration Protocol\" and Submit the Information ", for: .normal)
         NoResponseProtocol.setTitleColor(TextColor, for: .normal)
         NoResponseProtocol.titleLabel?.font = UIFont.systemFont(ofSize: 10)
         return NoResponseProtocol
@@ -257,7 +257,7 @@ class registerView: UIView {
         
         self.addSubview(NoResponseProtocolLogo)
         NoResponseProtocolLogo.snp.makeConstraints{ (make) in
-            make.height.equalTo(20)
+            make.height.equalTo(23)
             make.width.equalTo(AJScreenWidth/18)
             make.left.equalTo(AJScreenWidth/15)
             make.top.equalTo(line_frame4.snp.bottom).offset(5)
@@ -265,9 +265,9 @@ class registerView: UIView {
         self.addSubview(NoResponseProtocolInfo)
         NoResponseProtocolInfo.snp.makeConstraints{ (make) in
             make.height.equalTo(20)
-            make.width.equalTo(AJScreenWidth)
-            make.left.equalTo(NoResponseProtocolLogo.snp.right).offset(1)
-            make.right.equalTo(-AJScreenWidth/15)
+//            make.width.equalTo(AJScreenWidth)
+            make.left.equalTo(NoResponseProtocolLogo.snp.right).offset(5)
+//            make.right.equalTo(-AJScreenWidth/15)
             make.top.equalTo(line_frame4.snp.bottom).offset(5)
         }
         

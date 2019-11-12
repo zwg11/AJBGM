@@ -59,8 +59,6 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
         super.viewDidLoad()
 
         self.navigationController?.isNavigationBarHidden = false
-//        self.navigationController?.navigationBar.barTintColor = ThemeColor
-//        self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: NaviTitleColor]
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
 //        self.view.backgroundColor = ThemeColor
@@ -134,7 +132,7 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
                                 // // 请求失败，将风火轮移除，并停止转动
                                 self.indicator.stopIndicator()
                                 self.indicator.removeFromSuperview()
-                                alertController.custom(self,"Attention", "Incorrect Email or Password")
+                                alertController.custom(self,"Attention", "Incorrect Code")
                                 return
                             }
                         } //end of letif

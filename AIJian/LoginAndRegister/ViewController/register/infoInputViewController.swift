@@ -232,6 +232,9 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
             return
         }else if phoneNumber!.count >= 254 {
             return
+        }else if phoneNumber == ""{
+            alertController.custom(self, "Attention", "Phone Empty")
+            return
         }else if country == ""{
              alertController.custom(self, "Attention", "Country Empty")
             return
@@ -246,6 +249,7 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
                 userData.weight_kg = weightKg
             }
             userData.country = String(country!)
+            userData.birthday = brithday!.components(separatedBy: "/").joined(separator: "-")
             if userData.phone_number != nil{
                 userData.phone_number = String(phoneNumber!)
             }

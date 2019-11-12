@@ -71,7 +71,8 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         DATETableView.separatorColor = UIColor.white
         // 刷新控件设置
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-        refreshControl.attributedTitle = NSAttributedString(string: "松开后自动刷新")
+        //不需要松开自动刷新数据
+//        refreshControl.attributedTitle = NSAttributedString(string: "松开后自动刷新")
         mainScrollView.addSubview(refreshControl)
 
 //        mainScrollView.backgroundColor = ThemeColor
@@ -132,7 +133,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
     }
     
     @objc func UpdateSuccess(){
-        let x = UIAlertController(title: "", message: "Update Success.", preferredStyle: .alert)
+        let x = UIAlertController(title: "", message: "Data Update Success", preferredStyle: .alert)
         self.present(x, animated: true, completion: {()->Void in
             sleep(1)
             x.dismiss(animated: true, completion: nil)
@@ -249,7 +250,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
             self.deleteData(section: indexPath.section, row: indexPath.row)
         })
     
-        let alert = UIAlertController(title: "Choose To", message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Select", message: "", preferredStyle: .alert)
         // 该动作编辑一条记录
         let editAction = UIAlertAction(title: "Edit", style: .default, handler: {(UIAlertAction)->Void in
 
@@ -437,7 +438,7 @@ extension DataTableViewController{
                             if dbSql.deleteGlucoseRecord(gluData.bloodGlucoseRecordId!){
                                 // 弹出警示框，提示用户
                                 let alert = CustomAlertController()
-                                alert.custom(self, "", "Deleted Successfully")
+                                alert.custom(self, "", "Delete Success")
                                 // 初始化展示数据
                                 initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())
                                 // 表格数据初始化
@@ -458,10 +459,10 @@ extension DataTableViewController{
             }// 如果请求得到回复
                 
                 // 如果请求未得到回复
-            else{
+            else{//删除数据时，网络错误
                 // 弹出警示框，提示用户
                 let alert = CustomAlertController()
-                alert.custom(self, "Error", "Network exception, Please re-operate")
+                alert.custom(self, "Error", "Internet Error.Please Try Again!")
                 return
             }// 如果请求未得到回复
         }

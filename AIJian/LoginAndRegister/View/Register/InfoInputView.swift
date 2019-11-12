@@ -33,11 +33,11 @@ class InfoInputView: UIView {
     /*性别标签*/
     lazy var gender_label:UIButton = {
         let gender_man_label = UIButton(frame: CGRect())
-        gender_man_label.setImage(UIImage(named: " Gender"), for: .normal)
+        gender_man_label.setImage(UIImage(named: "Gender"), for: .normal)
         gender_man_label.setTitle(" Gender", for: .normal)
-        gender_man_label.contentHorizontalAlignment = .left
         gender_man_label.setTitleColor(TextColor, for: .normal)
         gender_man_label.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        gender_man_label.contentHorizontalAlignment = .left
         return gender_man_label
     }()
     
