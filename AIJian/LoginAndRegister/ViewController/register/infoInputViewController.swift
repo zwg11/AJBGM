@@ -232,6 +232,9 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
             return
         }else if phoneNumber!.count >= 254 {
             return
+        }else if phoneNumber == ""{
+            alertController.custom(self, "Attention", "Phone Empty")
+            return
         }else if country == ""{
              alertController.custom(self, "Attention", "Country Empty")
             return

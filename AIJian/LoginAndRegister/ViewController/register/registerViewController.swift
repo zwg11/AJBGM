@@ -200,7 +200,7 @@ class registerViewController: UIViewController,UITextFieldDelegate {
                             }else{
                                 self.indicator.stopIndicator()
                                 self.indicator.removeFromSuperview()
-                                alertController.custom(self,"Attention", "Code Error")
+                                alertController.custom(self,"Attention", "Incorrect Code")
                                 return 
                             }
                             

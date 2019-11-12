@@ -17,7 +17,7 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
     var num:Int = 0
 
     //列表数据
-    public lazy var infoArray: Array = ["Name","Gender","Weight","Height","Data of Birth","Country","Phone"]
+    public lazy var infoArray: Array = ["Name","Gender","Weight","Height","Date of Birth","Country","Phone"]
     //图标数据
     public lazy var infoIconArray:Array = ["Name","Gender","Weight","Height","Date-of-Birth","Country","Phone"]
     public lazy var infoDataArray : [String] = ["","","","","","",""]

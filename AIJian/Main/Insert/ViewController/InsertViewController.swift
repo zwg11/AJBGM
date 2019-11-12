@@ -563,7 +563,7 @@ class InsertViewController: UIViewController {
                                 indicator.stopIndicator()
                                 indicator.removeFromSuperview()
 
-                                let x = UIAlertController(title: "", message: "Insert Success.", preferredStyle: .alert)
+                                let x = UIAlertController(title: "", message: "Data Input Success", preferredStyle: .alert)
                                 self.present(x, animated: true, completion: {()->Void in
                                     sleep(1)
                                     x.dismiss(animated: true, completion: {
