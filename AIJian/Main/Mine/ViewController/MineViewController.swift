@@ -328,7 +328,7 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footview = UIView()
-        footview.backgroundColor = ThemeColor
+        footview.backgroundColor = UIColor.clear
         return footview
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
