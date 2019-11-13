@@ -19,7 +19,7 @@ extension String{
     
 
     //subscript函数可以检索数组中的值
-    // 实现利用下标获取子字符串
+    // 实现利用下标获取子字符串,左右都是闭的
     subscript(_ start:Int,_ end:Int) -> String{
         let start = self.index(self.startIndex, offsetBy: start)
         let end = self.index(self.startIndex, offsetBy: end)

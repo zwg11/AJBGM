@@ -83,7 +83,7 @@ class InsertViewController: UIViewController {
     // 设置导航栏右按钮样式
     private lazy var rightButton:UIButton = {
         let button = UIButton.init(type: .system)
-        button.frame = CGRect(x: 0, y: 0, width: AJScreenWidth/8, height: 30)
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         button.setTitle("Save", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18)

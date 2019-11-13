@@ -73,15 +73,20 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         cell?.backgroundColor = UIColor.clear
         return cell!
     }
-//    // 设置表格头部背景颜色
+    // 设置表格头部背景颜色
 //    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-//        guard let header = view as? UITableViewHeaderFooterView else {return}
-//        header.textLabel?.textColor = UIColor.white
-//        view.tintColor = UIColor.clear
-//        view.layer.borderColor = UIColor.white.cgColor
+////        guard let header = view as? UITableViewHeaderFooterView else {return}
+////        header.textLabel?.textColor = UIColor.white
+////        view.tintColor = UIColor.clear
+////        view.layer.borderColor = UIColor.white.cgColor
+//        let header = view as? UITableViewHeaderFooterView
+//        //        view.tintColor = UIColor.white
+//        header?.backgroundColor = UIColor.clear
+//        header?.textLabel?.textColor = UIColor.white
+//        header?.textLabel?.text = "Data in Glucose Meter"
 //
 //    }
-//    // 表格头部信息
+    // 表格头部信息
 //    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 //        return "Connected Glucose Meter"
 //    }
@@ -473,7 +478,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                         
                         self.dataOrder += 1
                         // 改变显示在屏幕的提示标签文本
-                        self.loadV.setLabelText("Receiving Blood Glucose Data\(self.dataOrder)\\\(self.dataCount)")
+                        self.loadV.setLabelText("Receiving Blood Glucose Data \(self.dataOrder)\\\(self.dataCount)")
                         // 将数据分析出来并将数据结果放到对应的数组中存储起来
                         self.glucoseDataAnalysis(replyDateStr)
                         // data 不能直接转 [Int],选择先转 [UInt8]
@@ -537,42 +542,56 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                             }
                             else{
                                 print("CRC:\(String(replyDateStr[2,replyDateStr.count-1])) 验证正确。跳转页面显示血糖数据")
+                                
                                 // 将加载视图移除界面，并使其图片动画停止
 //                                self.loadV.removeFromSuperview()
                                 self.loadV.stopIndicator()
-                                // 转到展示数据的页面
-                                let gluVC = gluViewController()
-                                // 初始化数据，并刷新表格
-                                gluVC.BLEglucoseDate = self.BLEglucoseDate
-                                gluVC.BLEglucoseMark = self.BLEglucoseMark
-                                gluVC.BLEglucoseValue = self.BLEglucoseValue
-                                gluVC.lastRecord = self.lastRecord
-                                gluVC.meterID = self.meterID
-                                gluVC.tableView.reloadData()
-                                self.navigationController?.pushViewController(gluVC, animated: true)
+                                if(wrongInfo != nil){
+                                    // 转到展示数据的页面
+                                    let gluVC = gluViewController()
+                                    // 初始化数据，并刷新表格
+                                    gluVC.BLEglucoseDate = self.BLEglucoseDate
+                                    gluVC.BLEglucoseMark = self.BLEglucoseMark
+                                    gluVC.BLEglucoseValue = self.BLEglucoseValue
+                                    // 要去掉最后一个字符
+                                    let strRange = self.lastRecord.count - 2
+                                    gluVC.lastRecord = self.lastRecord[0,strRange]
+                                    gluVC.meterID = self.meterID
+                                    gluVC.tableView.reloadData()
+                                    self.navigationController?.pushViewController(gluVC, animated: true)
+                                }else{
+                                    print("有错误，不跳转")
+                                }
+                                
                             }
                         }
                         else{
-                            // 如果传过来的是对”No Data“的yes确认回复，说明没有数据要传输
-                            if replyDateStr[2] == "y"{
-                                // 改变显示在屏幕的提示标签文本
-                                self.loadV.setLabelText("No Data In Machine")
-                                // 将加载视图移除界面，并使其图片动画停止
-//                                self.loadV.removeFromSuperview()
-                                self.loadV.stopIndicator()
-                                wrongInfo = "No Data In Machine"
-                                //                                    self.sthWrong = true
-                                
-                                
-                                print("No Data Need To Send.")
-                            }else{
-                                print("将要传输的数据数量量")
-                                // 包含空格，那么该数据包含将要发送过来的数据数量
-                                // 形式类似于 &N10 63614
-                                let array:Array<String> = replyDateStr.components(separatedBy: " ")
-                                print("将要传输\(array[0][2,array[0].count-1])个数据。")
-                                self.dataCount = Int(array[0][2,array[0].count-1])!
-                            }
+                            
+                                // 如果传过来的是对”No Data“的yes确认回复，说明没有数据要传输
+                                if replyDateStr[2] == "y"{
+                                    // 改变显示在屏幕的提示标签文本
+                                    self.loadV.setLabelText("No Data In Machine")
+                                    // 将加载视图移除界面，并使其图片动画停止
+                                    //                                self.loadV.removeFromSuperview()
+                                    self.loadV.stopIndicator()
+                                    wrongInfo = "No Data In Machine"
+                                    
+                                    
+                                    print("No Data Need To Send.")
+                                }else{
+                                    print("将要传输的数据数量量")
+                                    // 包含空格，那么该数据包含将要发送过来的数据数量
+                                    // 形式类似于 &N10 63614
+                                    let array:Array<String> = replyDateStr.components(separatedBy: " ")
+                                    print("将要传输\(array[0][2,array[0].count-1])个数据。")
+                                    if array[0][2,array[0].count-1] == "0"{
+                                        wrongInfo = "No New Data In Machine"
+                                        print("No New Data In Machine")
+                                    }
+                                    self.dataCount = Int(array[0][2,array[0].count-1])!
+                                }
+                            
+                            
                         }
                     }
                 default:
@@ -678,7 +697,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         
         
         self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//        self.navigationController!.navigationBar.shadowImage = UIImage()
+        self.navigationController!.navigationBar.shadowImage = UIImage()
         self.navigationController!.navigationBar.isTranslucent = true
         
         self.automaticallyAdjustsScrollViewInsets = false
@@ -740,32 +759,47 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         }
         // 设置表格布局，设置其代理和数据来源，将其加入视图
 //        tableView.frame.size = CGSize(width: UIScreen.ma in.bounds.width, height: UIScreen.main.bounds.height-108)
-        self.view.addSubview(tableView)
-        tableView.backgroundColor = UIColor.lightGray
-        tableView.snp.makeConstraints{(make) in
-            make.left.right.equalToSuperview()
-            make.bottom.equalTo(button.snp.top)
-            make.top.equalTo(tableHeadLabel.snp.bottom)
-//            if #available(iOS 11.0, *) {
-//                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
-////                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
-//            } else {
-//                make.top.equalTo(topLayoutGuide.snp.bottom)
-////                make.bottom.equalTo(bottomLayoutGuide.snp.top)
-//                // Fallback on earlier versions
-//            }
-
-        }
+//        self.view.addSubview(tableView)
+//        tableView.snp.makeConstraints{(make) in
+//            make.left.right.equalToSuperview()
+//            make.bottom.equalTo(button.snp.top)
+//            make.top.equalTo(tableHeadLabel.snp.bottom)
+////            if #available(iOS 11.0, *) {
+////                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+//////                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+////            } else {
+////                make.top.equalTo(topLayoutGuide.snp.bottom)
+//////                make.bottom.equalTo(bottomLayoutGuide.snp.top)
+////                // Fallback on earlier versions
+////            }
+//
+//        }
+        // tableView设置
         tableView.separatorColor = UIColor.clear
         tableView.backgroundColor = UIColor.clear
         tableView.delegate = self
         tableView.dataSource = self
         self.view.addSubview(tableView)
+        //        tableView.snp.makeConstraints{(make) in
+        //            make.left.right.equalToSuperview()
+        //            make.top.equalToSuperview()
+        //            make.bottom.equalToSuperview().offset(-44)
+        //        }
+        tableView.clipsToBounds = true
+        self.view.addSubview(tableView)
         tableView.snp.makeConstraints{(make) in
             make.left.right.equalToSuperview()
-            make.top.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-44)
+            make.top.equalTo(tableHeadLabel.snp.bottom)
+            make.bottom.equalTo(button.snp.top)
+//            if #available(iOS 11.0, *) {
+//                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+//                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+//            } else {
+//                make.top.equalTo(topLayoutGuide.snp.bottom)
+//                make.bottom.equalTo(bottomLayoutGuide.snp.top)
+//            }
         }
+        
         // 设置中心设备代理
         centralManager = CBCentralManager.init(delegate: self, queue: nil)
         

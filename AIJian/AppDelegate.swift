@@ -129,6 +129,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       
     }
     
+    // 如果blockRotation为false，当前应用支持横屏；否则支持竖屏
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
         if blockRotation{
             return .allButUpsideDown
