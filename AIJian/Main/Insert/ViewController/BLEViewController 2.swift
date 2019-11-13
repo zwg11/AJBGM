@@ -546,7 +546,8 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                                 // 将加载视图移除界面，并使其图片动画停止
 //                                self.loadV.removeFromSuperview()
                                 self.loadV.stopIndicator()
-                                if(wrongInfo != nil){
+                                //如果lastRecord不为”“，说明有数据，跳转
+                                if(self.lastRecord != ""){
                                     // 转到展示数据的页面
                                     let gluVC = gluViewController()
                                     // 初始化数据，并刷新表格
@@ -559,6 +560,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                                     gluVC.meterID = self.meterID
                                     gluVC.tableView.reloadData()
                                     self.navigationController?.pushViewController(gluVC, animated: true)
+                                    
                                 }else{
                                     print("有错误，不跳转")
                                 }

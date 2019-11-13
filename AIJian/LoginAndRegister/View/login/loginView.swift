@@ -35,7 +35,7 @@ class loginView: UIView {
     
     // 输入用户文本框
     lazy var userNameTextField:UITextField = {
-        let textField = initTextField(imageName: "email", placeholder: "Email Address")
+        let textField = initTextField(imageName: "email", placeholder: "Email")
         textField.keyboardType = UIKeyboardType.emailAddress
         return textField
     }()
