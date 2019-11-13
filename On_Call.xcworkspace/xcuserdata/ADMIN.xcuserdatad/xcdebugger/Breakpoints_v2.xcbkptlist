@@ -449,7 +449,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "60A6545D-4FE9-405E-AE71-351CBB045292"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AIJian/Main/Insert/ViewController/BLEViewController 2.swift"
@@ -465,7 +465,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "522B5C96-0DAA-4C47-BEDF-BB48E8287CB5"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AIJian/Main/Insert/ViewController/BLEViewController 2.swift"
@@ -481,7 +481,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "E8B40B61-93DB-451A-884D-634B66C80F28"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AIJian/Main/Insert/ViewController/BLEViewController 2.swift"

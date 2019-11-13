@@ -636,7 +636,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
 //        button.setSelected()
         button.backgroundColor = ThemeColor
         button.layer.borderColor = UIColor.lightGray.cgColor
-        button.setTitle("Scan Devices", for: .normal)
+        button.setTitle("Scan", for: .normal)
         button.addTarget(self, action: #selector(scanDev), for: .touchUpInside)
         return button
     }()
@@ -963,7 +963,7 @@ extension BLEViewController{
         timer1!.fire()
 //        self.button.setDeselected()
         self.button.isEnabled = false
-        self.button.setTitle("Scanning Devices..", for: .normal)
+        self.button.setTitle("Scanning...", for: .normal)
      }
 
      // 2.定时操作
@@ -986,7 +986,7 @@ extension BLEViewController{
 //            self.loadV.removeFromSuperview()
 //            self.button.setSelected()
             self.button.isEnabled = true
-            self.button.setTitle("Scan Devices", for: .normal)
+            self.button.setTitle("Scan", for: .normal)
             // 不要忘了设置second以便下次使用
             second1 = 10
          }
