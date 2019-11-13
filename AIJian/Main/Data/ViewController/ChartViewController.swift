@@ -190,7 +190,7 @@ class ChartViewController: UIViewController,ChartViewDelegate{
 
         let xxxx = startD! + Int(currentX).minutes
         MarkTimelabel.text = "\(dateFormatter.string(from: xxxx))"
-        MarkValuelabel.text = "BG value:\(valuey)" + GetUnit.getBloodUnit()
+        MarkValuelabel.text = "BG Value:\(valuey)" + GetUnit.getBloodUnit()
         
 //        let marker = MarkerView()
 //        marker.chartView = self.lineChartView.lineChartView
