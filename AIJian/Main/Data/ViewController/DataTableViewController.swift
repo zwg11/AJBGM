@@ -174,7 +174,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
                 }else if sortedTime[section][0].compare(.isYesterday){
                     label.text = "Yesterday"
                 }else{
-                    label.text = sortedTime[section][0].toFormat("MM-dd")
+                    label.text = sortedTime[section][0].toFormat("MM/dd")
                 }
                 
             }

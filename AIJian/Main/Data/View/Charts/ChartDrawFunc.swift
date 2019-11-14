@@ -25,7 +25,7 @@ func xAxisArray(Days:Int)->[String]{
     //dates.sort()
     var xAxisStrings:[String] = []
     for i in dates{
-        xAxisStrings.append(i.toFormat("MM-dd"))
+        xAxisStrings.append(i.toFormat("MM/dd"))
     }
     print(xAxisStrings)
     xAxisStrings[0] = ""
@@ -127,7 +127,7 @@ func xAxisArray(startDate:Date,endDate:Date)->[String]{
     //dates.sort()
     var xAxisStrings:[String] = []
     for i in dates{
-        xAxisStrings.append(i.toFormat("MM-dd"))
+        xAxisStrings.append(i.toFormat("MM/dd"))
     }
     print(xAxisStrings)
     xAxisStrings[0] = ""
