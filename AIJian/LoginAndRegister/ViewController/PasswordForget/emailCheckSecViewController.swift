@@ -140,7 +140,8 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
                                 self.indicator.stopIndicator()
                                 self.indicator.removeFromSuperview()
                                 self.navigationController?.popToRootViewController(animated: false)
-                                 alertController.custom_cengji(self,"Attention", "Password Reset Success")
+                                //更新成功不需要，attention
+                                 alertController.custom_cengji(self,"", "Password Reset Success")
                             }else{
                                 //先转，后弹
                                 self.indicator.stopIndicator()

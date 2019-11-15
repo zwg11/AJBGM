@@ -47,7 +47,8 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
             infoDataArray[2] = (userInfo.weight_lbs != nil) ? "\(userInfo.weight_lbs!)":""
         }
         infoDataArray[3] = (userInfo.height != nil) ? "\(userInfo.height!)":""
-        infoDataArray[4] = userInfo.birthday ?? ""
+        let dd = userInfo.birthday!.components(separatedBy: "-").joined(separator: "/")
+        infoDataArray[4] = dd
         infoDataArray[5] = userInfo.country ?? ""
         infoDataArray[6] = userInfo.phone_number ?? ""
         
@@ -151,22 +152,33 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
                         if(responseModel.code! == 1 ){
                             // 向数据库插入数据
                             self.updateUserInfoInSqlite(updateUserInfo)
+//                            let x = UIAlertController(title: "", message: "Update Success", preferredStyle: .alert)
+//                            self.present(x, animated: true, completion: {()->Void in
+//                                sleep(1)
+//                                x.dismiss(animated: true, completion: {
+//                                    // 跳转到原来的界面
+//                                    self.navigationController?.popToRootViewController(animated: false)
+//                                    // 发送通知，提示插入成功
+////                                    NotificationCenter.default.post(name: NSNotification.Name("InsertData"), object: self, userInfo: nil)
+//                                })
+//                            })
                             let alert = CustomAlertController()
-                            alert.custom(self, "Attension", "Update Successed")
+                            alert.custom(self, "Attention", "Update Success")
+                           
                         }else{
                             let alert = CustomAlertController()
-                            alert.custom(self, "Attension", "Update Failed")
+                            alert.custom(self, "Attention", "Update Failure")
                             print(responseModel.code!)
                         }
                     } //end of letif
                 }
             }else{
                 let alert = CustomAlertController()
-                alert.custom(self, "Attension", "Update Successed")
+                alert.custom(self, "Attention", "Internet Error")
             }
         }//end of request
     }
-    
+    //放入数据库中的是，--，取出来的是//
     func updateUserInfoInSqlite(_ UpdateUserInfo:USER_UPDATE){
         var info = USER_INFO()
         info.userId = UserInfo.getUserId()
@@ -176,7 +188,7 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
         info.height = UpdateUserInfo.height
         info.weightLbs = UpdateUserInfo.weightLbs
         info.weightKg = UpdateUserInfo.weightKg
-        info.birthday = UpdateUserInfo.birthday
+        info.birthday = UpdateUserInfo.birthday!.components(separatedBy: "/").joined(separator: "-")
         info.phoneNumber = UpdateUserInfo.phoneNumber
         info.country = UpdateUserInfo.country
         // 将更新内容放入
@@ -237,6 +249,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
                 cell?.textLabel?.text = infoArray[indexPath.row]
             case 4:
                 cell?.imageView?.image = UIImage(named: infoIconArray[4])
+                
                 cell?.detailTextLabel?.text = infoDataArray[4]=="" ? "-":infoDataArray[4]
                 cell?.textLabel?.text = infoArray[indexPath.row]
             case 5:
