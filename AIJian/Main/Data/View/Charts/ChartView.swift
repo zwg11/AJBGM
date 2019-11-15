@@ -48,8 +48,8 @@ class ChartView: UIView ,ChartViewDelegate{
         
         
         //网格
-        leftAxis.gridColor = UIColor.init(red: 233/255.0, green: 233/255.0, blue: 233/255.0, alpha: 1.0)
-        leftAxis.gridColor = UIColor.lightGray
+//        leftAxis.gridColor = UIColor.init(red: 233/255.0, green: 233/255.0, blue: 233/255.0, alpha: 1.0)
+//        leftAxis.gridColor = UIColor.lightGray
         leftAxis.gridAntialiasEnabled = false//抗锯齿
         if GetUnit.getBloodUnit() == "mg/dL"{
             
@@ -67,7 +67,7 @@ class ChartView: UIView ,ChartViewDelegate{
         xAxis.labelPosition = .bottom
         xAxis.labelRotatedHeight = 2
         //xAxis.gridColor = UIColor.init(red: 233/255.0, green: 233/255.0, blue: 233/255.0, alpha: 1.0)
-        xAxis.gridColor = UIColor.lightGray
+//        xAxis.gridColor = UIColor.lightGray
         xAxis.axisLineColor = UIColor.black
         xAxis.axisMinimum = 0
         // ********该处需随需求变动************
@@ -111,7 +111,8 @@ class ChartView: UIView ,ChartViewDelegate{
 //        print(yDataArray1)
         let set1 = LineChartDataSet.init(entries: yDataArray1, label: "")
         // 设置线 的颜色
-        set1.colors = [UIColor.green]
+        let color1 = UIColor.init(red: 2/255.0, green: 118/255.0, blue: 114/255.0, alpha: 1)
+        set1.colors = [color1]
         // 设置 点的样式
         set1.drawCirclesEnabled = true//绘制转折点
         // 显示十字线

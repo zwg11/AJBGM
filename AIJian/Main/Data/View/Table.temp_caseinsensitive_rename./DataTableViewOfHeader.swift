@@ -33,7 +33,8 @@ class DataTableViewOfHeader: UIView {
         // 备注信息宽度为200
         remarkLabel.frame = CGRect(x: offsetX, y: 0, width: 200, height: 40)
         self.addSubview(remarkLabel)
-        self.backgroundColor = ThemeColor
+//        self.backgroundColor = ThemeColor
+        self.backgroundColor = kRGBColor(17, 56, 86, 1)
         self.frame = CGRect(x: 0, y: 0, width: 9920, height: 40)
         
     }

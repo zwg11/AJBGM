@@ -82,7 +82,7 @@ class MineViewController: UIViewController {
         }
         //分割线
 //        tableview.separatorStyle = .singleLine
-        tableview.separatorColor = UIColor.white
+        tableview.separatorColor = TextGrayColor
         tableview.isScrollEnabled = true
         //将CELL的标识，在此处进行设置
         tableview.register(UITableViewCell.self, forCellReuseIdentifier:"cell")
@@ -336,7 +336,8 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
             case 0:
                 return AJScreenWidth*0.35 + 35
             case 8:
-                return AJScreenHeight/15 + 20
+//                return AJScreenHeight/15 + 20
+                return AJScreenHeight/15
             default:
                 return AJScreenHeight/12
         }

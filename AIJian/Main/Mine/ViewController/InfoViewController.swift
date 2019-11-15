@@ -69,7 +69,7 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         button.setTitle("Save", for: .normal)
         button.tintColor = UIColor.white
-        button.frame = CGRect(x: 0, y: 0, width: AJScreenWidth/8, height: AJScreenWidth/8)
+        button.frame = CGRect(x: 0, y: 0, width: AJScreenWidth/8, height: 44)
         return button
     }()
     

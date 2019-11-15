@@ -105,7 +105,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
 //        UIApplication.shared.keyWindow?.addSubview(loadV)
         self.navigationController?.view.addSubview(loadV)
 //        self.view.addSubview(loadV)
-        loadV.setLabelText("Connecting Device..")
+        loadV.setLabelText("Connecting ...")
         startTimer()
     }
     
@@ -367,7 +367,8 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                         if self.meterIDs![replyDateStr] != nil{
                             // 改变显示在屏幕的提示标签文本
 //                            self.loadV.setLabelText("发现之前的通讯记录，传输记录")
-                            self.loadV.setLabelText("Discover Past Communication Records,Transferring Records")
+//                            self.loadV.setLabelText("Discover Past Communication Records,Transferring Records")
+                            self.loadV.setLabelText("Data is in History Transmission Records")
                             print("通信过，发送App记录的最晚通讯记录，包括时间、血糖值、标记位")
                             // 获取上一次传输的最新记录
                             let str = self.meterIDs![replyDateStr] as! String
@@ -385,7 +386,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                         else{
                             // 改变显示在屏幕的提示标签文本
 //                            self.loadV.setLabelText("未发现之前的通讯记录，让血糖仪发送所有数据")
-                            self.loadV.setLabelText("It's a New Device,Accept All Data in Device.")
+                            self.loadV.setLabelText("No History Transmission Record.Accept All Data from Meter")
                             peripheral.writeValue("&N1 13183".data(using: .utf8)!, for: self.writeCharacteristic!, type: .withoutResponse)
                             //self.meterIDs![replyDateStr] = ""
                         }
@@ -478,7 +479,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                         
                         self.dataOrder += 1
                         // 改变显示在屏幕的提示标签文本
-                        self.loadV.setLabelText("Receiving Blood Glucose Data \(self.dataOrder)\\\(self.dataCount)")
+                        self.loadV.setLabelText("Receiving  Data \(self.dataOrder)\\\(self.dataCount)")
                         // 将数据分析出来并将数据结果放到对应的数组中存储起来
                         self.glucoseDataAnalysis(replyDateStr)
                         // data 不能直接转 [Int],选择先转 [UInt8]
@@ -572,11 +573,11 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                                 // 如果传过来的是对”No Data“的yes确认回复，说明没有数据要传输
                                 if replyDateStr[2] == "y"{
                                     // 改变显示在屏幕的提示标签文本
-                                    self.loadV.setLabelText("No Data In Machine")
+                                    self.loadV.setLabelText("No Data in the Meter")
                                     // 将加载视图移除界面，并使其图片动画停止
                                     //                                self.loadV.removeFromSuperview()
                                     self.loadV.stopIndicator()
-                                    wrongInfo = "No Data In Machine"
+                                    wrongInfo = "No Data in the Meter"
                                     
                                     
                                     print("No Data Need To Send.")
@@ -587,7 +588,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                                     let array:Array<String> = replyDateStr.components(separatedBy: " ")
                                     print("将要传输\(array[0][2,array[0].count-1])个数据。")
                                     if array[0][2,array[0].count-1] == "0"{
-                                        wrongInfo = "No New Data In Machine"
+                                        wrongInfo = "No Data in the Meter"
                                         print("No New Data In Machine")
                                     }
                                     self.dataCount = Int(array[0][2,array[0].count-1])!
@@ -738,27 +739,27 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
             make.height.equalTo(44)
         }
         
-        let tableHeadLabel = UILabel()
-        tableHeadLabel.backgroundColor = UIColor.clear
-        tableHeadLabel.textColor = UIColor.white
-        tableHeadLabel.textAlignment = .left
-        tableHeadLabel.text = "Connected Glucose Meter"
-        tableHeadLabel.font = UIFont.boldSystemFont(ofSize: 16)
-        self.view.addSubview(tableHeadLabel)
-        tableHeadLabel.snp.makeConstraints{(make) in
-            make.right.equalToSuperview()
-            make.left.equalToSuperview().offset(15)
-            make.height.equalTo(44)
-            if #available(iOS 11.0, *) {
-                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
-                //                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
-            } else {
-                make.top.equalTo(topLayoutGuide.snp.bottom)
-                //                make.bottom.equalTo(bottomLayoutGuide.snp.top)
-                // Fallback on earlier versions
-            }
-            
-        }
+//        let tableHeadLabel = UILabel()
+//        tableHeadLabel.backgroundColor = UIColor.clear
+//        tableHeadLabel.textColor = UIColor.white
+//        tableHeadLabel.textAlignment = .left
+//        tableHeadLabel.text = "Connected Glucose Meter"
+//        tableHeadLabel.font = UIFont.boldSystemFont(ofSize: 16)
+//        self.view.addSubview(tableHeadLabel)
+//        tableHeadLabel.snp.makeConstraints{(make) in
+//            make.right.equalToSuperview()
+//            make.left.equalToSuperview().offset(15)
+//            make.height.equalTo(44)
+//            if #available(iOS 11.0, *) {
+//                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+//                //                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+//            } else {
+//                make.top.equalTo(topLayoutGuide.snp.bottom)
+//                //                make.bottom.equalTo(bottomLayoutGuide.snp.top)
+//                // Fallback on earlier versions
+//            }
+//
+//        }
         // 设置表格布局，设置其代理和数据来源，将其加入视图
 //        tableView.frame.size = CGSize(width: UIScreen.ma in.bounds.width, height: UIScreen.main.bounds.height-108)
 //        self.view.addSubview(tableView)
@@ -791,15 +792,16 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         self.view.addSubview(tableView)
         tableView.snp.makeConstraints{(make) in
             make.left.right.equalToSuperview()
-            make.top.equalTo(tableHeadLabel.snp.bottom)
+//            make.top.equalTo(tableHeadLabel.snp.bottom)
+            if #available(iOS 11.0, *) {
+                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+                //                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+            } else {
+                make.top.equalTo(topLayoutGuide.snp.bottom)
+                //                make.bottom.equalTo(bottomLayoutGuide.snp.top)
+                // Fallback on earlier versions
+            }
             make.bottom.equalTo(button.snp.top)
-//            if #available(iOS 11.0, *) {
-//                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
-//                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
-//            } else {
-//                make.top.equalTo(topLayoutGuide.snp.bottom)
-//                make.bottom.equalTo(bottomLayoutGuide.snp.top)
-//            }
         }
         
         // 设置中心设备代理

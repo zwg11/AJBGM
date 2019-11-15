@@ -31,6 +31,7 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
     // 体重单位label
     private  var weightUnitLabel:UILabel = {
         let label = UILabel()
+        label.textColor = TextGrayColor
         label.text = GetUnit.getWeightUnit()
         label.font = UIFont.systemFont(ofSize: 16)
         label.minimumScaleFactor = 0.5
@@ -79,6 +80,7 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
     private lazy var bloodPressureUnitLabel:UILabel = {
         let label = UILabel()
         label.text = GetUnit.getPressureUnit()
+        label.textColor = TextGrayColor
         label.font = UIFont.systemFont(ofSize: 16)
         label.minimumScaleFactor = 0.5
         label.adjustsFontSizeToFitWidth = true
@@ -231,24 +233,28 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
     
     //重新设置单位
     func resetWeightAndPressureUnit(){
+        self.weightUnitLabel.text = GetUnit.getWeightUnit()
+        self.blood_sysPressureTextfield.text = GetUnit.getPressureUnit()
+        self.weightUnitLabel.textColor = TextGrayColor
+        self.bloodPressureUnitLabel.textColor = TextGrayColor
         //设置体重单位
         if GetUnit.getWeightUnit() == "kg"{
-            self.weightUnitLabel.normalLabel(text: "kg")
+//            self.weightUnitLabel.normalLabel(text: "kg")
             self.weightTextfield.keyboardType = UIKeyboardType.decimalPad //弹出带小数点的文本框
             
             
         }else{
-            self.weightUnitLabel.normalLabel(text: "lbs")
+//            self.weightUnitLabel.normalLabel(text: "lbs")
             self.weightTextfield.keyboardType = UIKeyboardType.numberPad  //弹出不带小数点的文本框
         }
         //设置血压单位
         if GetUnit.getPressureUnit() == "mmHg"{
-            self.bloodPressureUnitLabel.normalLabel(text: "mmHg")
+//            self.bloodPressureUnitLabel.normalLabel(text: "mmHg")
             //不能有小数
             self.blood_sysPressureTextfield.keyboardType = UIKeyboardType.numberPad  //收缩压
             self.blood_diaPressureTextfield.keyboardType = UIKeyboardType.numberPad  //舒张压
         }else{
-            self.bloodPressureUnitLabel.normalLabel(text: "kPa")
+//            self.bloodPressureUnitLabel.normalLabel(text: "kPa")
             //可以有小数
             self.blood_sysPressureTextfield.keyboardType = UIKeyboardType.decimalPad
             self.blood_diaPressureTextfield.keyboardType = UIKeyboardType.decimalPad

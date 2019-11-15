@@ -40,7 +40,7 @@ class recentTableViewCell: UITableViewCell {
     }()
     private lazy var checkNum:glucoseRecentView = {
         let view = glucoseRecentView()
-        view.setupUI(title: "Times", value: "\(result[1])", unit: "Times")
+        view.setupUI(title: "Times", value: "\(result[1])", unit: "times")
         return view
     }()
     

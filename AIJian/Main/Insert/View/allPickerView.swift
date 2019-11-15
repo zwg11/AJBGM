@@ -158,10 +158,11 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
     // 创建 时间 选择器
     lazy var timePicker:UIDatePicker = {
         let timePicker = UIDatePicker()
-        
         timePicker.calendar = Calendar.current
         timePicker.locale = Locale(identifier: "en_US")
+        
         timePicker.datePickerMode = .time
+        timePicker.date = Date()
         timePicker.backgroundColor = UIColor.white
         timePicker.layer.borderColor = UIColor.gray.cgColor
         timePicker.layer.borderWidth = 1

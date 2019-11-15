@@ -40,7 +40,14 @@ class GeneralStatusView: UIView {
         return label
     }
     // 时间范围label
-    lazy  var rangeLabel = UILabel()
+    lazy  var rangeLabel:UILabel = {
+        let dateformat = DateFormatter()
+        dateformat.dateFormat = "yyyy/MM/dd"
+        let st = dateformat.string(from: startD!)
+        let end = dateformat.string(from: endD!)
+        let label = initLabel("\(st)--\(end)")
+        return label
+    }()
     
     private lazy var chart = ChartView()
     

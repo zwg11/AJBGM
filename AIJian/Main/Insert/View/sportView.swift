@@ -54,6 +54,7 @@ class sportView: UIView ,UITextFieldDelegate{
         let label = UILabel()
         label.normalLabel(text: "minutes")
         label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = TextGrayColor
         
         return label
     }()

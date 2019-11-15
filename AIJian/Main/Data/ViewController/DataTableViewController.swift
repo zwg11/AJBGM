@@ -67,8 +67,8 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
         // 分割线颜色
-        DATATableView.separatorColor = UIColor.white
-        DATETableView.separatorColor = UIColor.white
+//        DATATableView.separatorColor = UIColor.white
+        DATETableView.separatorColor = TextGrayColor
         // 刷新控件设置
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         //不需要松开自动刷新数据
@@ -159,7 +159,8 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
             let view = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 40))
             let label = UILabel(frame: CGRect(x: 0, y: 0, width: 80, height: 40))
 
-            label.backgroundColor = SendButtonColor
+//            label.backgroundColor = SendButtonColor
+            label.backgroundColor = kRGBColor(17, 56, 86, 1)
             label.textColor = UIColor.white
             label.textAlignment = .center
             label.font = UIFont.systemFont(ofSize: 15)
@@ -174,7 +175,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
                 }else if sortedTime[section][0].compare(.isYesterday){
                     label.text = "Yesterday"
                 }else{
-                    label.text = sortedTime[section][0].toFormat("MM-dd")
+                    label.text = sortedTime[section][0].toFormat("MM/dd")
                 }
                 
             }
@@ -209,7 +210,8 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
 
             remarkLabel.frame = CGRect(x: offsetX, y: 0, width: 200, height: 40)
             view.addSubview(remarkLabel)
-            view.backgroundColor = ThemeColor
+            //        view.backgroundColor = ThemeColor
+            view.backgroundColor = kRGBColor(17, 56, 86, 1)
 
             return view
         }

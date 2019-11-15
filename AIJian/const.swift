@@ -34,6 +34,8 @@ let ThemeColor = UIColor.init(red: 11/255.0, green: 41/255.0, blue: 63/255.0, al
 let NavBarColor = UIColor.init(red: 9/255.0, green: 39/255.0, blue: 55/255.0, alpha: 1)
 //页面字体颜色
 let TextColor = UIColor.init(red: 141/255.0, green: 177/255.0, blue: 213/255.0, alpha: 1)
+// h字体灰色
+let TextGrayColor = UIColor.init(red: 136/255.0, green: 136/255.0, blue: 136/255.0, alpha: 1)
 //按钮背景色
 let ButtonColor = UIColor.init(red: 14/255.0, green: 60/255.0, blue: 100/255.0, alpha: 1)
 //线的颜色
@@ -41,7 +43,7 @@ let LineColor = UIColor.init(red: 70/255.0, green: 102/255.0, blue: 131/255.0, a
 //navigationBar中文字的颜色
 let NaviTitleColor = UIColor.init(red: 173/255.0, green: 176/255.0, blue: 181/255.0, alpha: 1)
 //send code 按钮背景色
-let SendButtonColor = UIColor.init(red: 26/255.0, green: 90/255.0, blue: 145/255.0, alpha: 1)
+let SendButtonColor = UIColor.init(red: 9/255.0, green: 68/255.0, blue: 108/255.0, alpha: 1)
 
 //我的页面姓名的字体颜色
 let MineNameTextColor = UIColor.init(red: 196/255.0, green: 197/255.0, blue: 198/255.0, alpha: 1)
