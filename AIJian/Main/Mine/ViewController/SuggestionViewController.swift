@@ -202,7 +202,17 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
                         
                         /*  此处为跳转和控制逻辑*/
                         if(responseModel.code == 1 ){
-                            alert.custom_cengji(self,"Attention", "Submitted.Thanks for your feedback！")
+//                            let x = UIAlertController(title: "", message: "Submitted.Thanks for your feedback！", preferredStyle: .alert)
+//                            self.present(x, animated: true, completion: {()->Void in
+//                                sleep(1)
+//                                x.dismiss(animated: true, completion: {
+//                                    // 跳转到原来的界面
+//                                    self.navigationController?.popToRootViewController(animated: false)
+//                                    // 发送通知，提示插入成功
+//                                    //                                    NotificationCenter.default.post(name: NSNotification.Name("InsertData"), object: self, userInfo: nil)
+//                                })
+//                            })
+                            alert.custom_cengji(self,"", "Submitted.Thanks for your feedback！")
                             self.content_field.text! = ""
                             self.emailCommponent.textField.text! = UserInfo.getEmail()
                             self.telephoneCommponent.textField.text! = ""

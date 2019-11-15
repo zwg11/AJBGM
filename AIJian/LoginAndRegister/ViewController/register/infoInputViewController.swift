@@ -278,7 +278,7 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
                             if(responseModel.code == 1 ){
                                 print(responseModel.code)
                                 self.navigationController?.popToRootViewController(animated: false)
-                                alertController.custom_cengji(self,"Attention", "Sign Up Success！")
+                                alertController.custom_cengji(self,"", "Sign Up Success！")
                             }else{
                                 print(responseModel.code)
                                 self.navigationController?.popToRootViewController(animated: false)

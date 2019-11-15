@@ -148,7 +148,7 @@ class MineViewController: UIViewController {
                             self.indicator.stopIndicator()
                             self.indicator.removeFromSuperview()
                             let alert = CustomAlertController()
-                            alert.custom(self, "Attension", "Unable to get the information")
+                            alert.custom(self, "Attention", "Unable to get the information")
                         }
                     } //end of letif
                 }
@@ -158,7 +158,7 @@ class MineViewController: UIViewController {
                 self.indicator.stopIndicator()
                 self.indicator.removeFromSuperview()
                 let alert = CustomAlertController()
-                alert.custom(self, "Attension", "Unable to get the information")
+                alert.custom(self, "Attention", "Unable to get the information")
             }
         }//end of request
         
