@@ -194,7 +194,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
         let recoverBlood = UIButton(type:.system)
         recoverBlood.backgroundColor = ThemeColor
         recoverBlood.setTitle("Default Settings", for:.normal)
-        recoverBlood.tintColor = UIColor.init(red: 28/255.0, green: 97/255.0, blue: 157/255.0, alpha: 1)
+        recoverBlood.tintColor = UIColor.init(red: 28/255.0, green: 97/255.0, blue: 157/255.0, alpha: 0)
         recoverBlood.titleLabel?.font = UIFont.systemFont(ofSize:18)
         recoverBlood.titleLabel?.textColor = UIColor.white
         recoverBlood.layer.borderWidth = 0.5
