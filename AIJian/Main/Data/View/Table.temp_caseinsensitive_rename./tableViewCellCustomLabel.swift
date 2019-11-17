@@ -17,8 +17,9 @@ class tableViewCellCustomLabel: UILabel {
         let markLabelText = text
         self.textAlignment = .center
         self.textColor = UIColor.white
-        self.font = UIFont.systemFont(ofSize: 16)
-        self.backgroundColor = SendButtonColor
+        self.font = UIFont.systemFont(ofSize: 13)
+//        self.backgroundColor = SendButtonColor
+        self.backgroundColor = kRGBColor(8, 52, 84, 1)
         self.numberOfLines = 0
 //        self.layer.borderColor = UIColor.white.cgColor
 //        self.layer.borderWidth = 1
@@ -31,7 +32,7 @@ class tableViewCellCustomLabel: UILabel {
         // 添加图片
         let markattach = NSTextAttachment()
         markattach.image = UIImage(named: image)
-        markattach.bounds = CGRect(x: 0, y: -10, width: 30, height: 30)
+        markattach.bounds = CGRect(x: 0, y: -5, width: 30, height: 30)
         
         let markAttackStr = NSAttributedString(attachment: markattach)
         // 放置 markAttackStr 的位置

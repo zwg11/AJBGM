@@ -118,7 +118,7 @@ class portionAndInsulinView: UIView,UITextFieldDelegate {
         label.font = UIFont.systemFont(ofSize: 16)
         label.textAlignment = .right
         label.sizeToFit()
-        
+        label.textColor = TextGrayColor
         return label
     }()
     

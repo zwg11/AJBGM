@@ -739,27 +739,27 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
             make.height.equalTo(44)
         }
         
-        let tableHeadLabel = UILabel()
-        tableHeadLabel.backgroundColor = UIColor.clear
-        tableHeadLabel.textColor = UIColor.white
-        tableHeadLabel.textAlignment = .left
-        tableHeadLabel.text = "Connected Glucose Meter"
-        tableHeadLabel.font = UIFont.boldSystemFont(ofSize: 16)
-        self.view.addSubview(tableHeadLabel)
-        tableHeadLabel.snp.makeConstraints{(make) in
-            make.right.equalToSuperview()
-            make.left.equalToSuperview().offset(15)
-            make.height.equalTo(44)
-            if #available(iOS 11.0, *) {
-                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
-                //                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
-            } else {
-                make.top.equalTo(topLayoutGuide.snp.bottom)
-                //                make.bottom.equalTo(bottomLayoutGuide.snp.top)
-                // Fallback on earlier versions
-            }
-            
-        }
+//        let tableHeadLabel = UILabel()
+//        tableHeadLabel.backgroundColor = UIColor.clear
+//        tableHeadLabel.textColor = UIColor.white
+//        tableHeadLabel.textAlignment = .left
+//        tableHeadLabel.text = "Connected Glucose Meter"
+//        tableHeadLabel.font = UIFont.boldSystemFont(ofSize: 16)
+//        self.view.addSubview(tableHeadLabel)
+//        tableHeadLabel.snp.makeConstraints{(make) in
+//            make.right.equalToSuperview()
+//            make.left.equalToSuperview().offset(15)
+//            make.height.equalTo(44)
+//            if #available(iOS 11.0, *) {
+//                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+//                //                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+//            } else {
+//                make.top.equalTo(topLayoutGuide.snp.bottom)
+//                //                make.bottom.equalTo(bottomLayoutGuide.snp.top)
+//                // Fallback on earlier versions
+//            }
+//
+//        }
         // 设置表格布局，设置其代理和数据来源，将其加入视图
 //        tableView.frame.size = CGSize(width: UIScreen.ma in.bounds.width, height: UIScreen.main.bounds.height-108)
 //        self.view.addSubview(tableView)
@@ -792,15 +792,16 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         self.view.addSubview(tableView)
         tableView.snp.makeConstraints{(make) in
             make.left.right.equalToSuperview()
-            make.top.equalTo(tableHeadLabel.snp.bottom)
+//            make.top.equalTo(tableHeadLabel.snp.bottom)
+            if #available(iOS 11.0, *) {
+                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+                //                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+            } else {
+                make.top.equalTo(topLayoutGuide.snp.bottom)
+                //                make.bottom.equalTo(bottomLayoutGuide.snp.top)
+                // Fallback on earlier versions
+            }
             make.bottom.equalTo(button.snp.top)
-//            if #available(iOS 11.0, *) {
-//                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
-//                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
-//            } else {
-//                make.top.equalTo(topLayoutGuide.snp.bottom)
-//                make.bottom.equalTo(bottomLayoutGuide.snp.top)
-//            }
         }
         
         // 设置中心设备代理

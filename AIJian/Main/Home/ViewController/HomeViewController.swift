@@ -164,6 +164,15 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        homeTableView.delegate = self
+        homeTableView.dataSource = self
+        // 单元格分割线、背景为透明
+        homeTableView.separatorColor = UIColor.clear
+        homeTableView.backgroundColor = UIColor.clear
+        homeTableView.isScrollEnabled = true
+        
+        self.view.backgroundColor = UIColor.clear
+        
         self.view.addSubview(homeTableView)
         homeTableView.snp.makeConstraints{(make) in
             make.left.right.equalToSuperview()
@@ -178,13 +187,7 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             }
 
         }
-        homeTableView.delegate = self
-        homeTableView.dataSource = self
-        // 单元格分割线、背景为透明
-        homeTableView.separatorColor = UIColor.clear
-        homeTableView.backgroundColor = UIColor.clear
-        homeTableView.isScrollEnabled = true
-        self.view.backgroundColor = UIColor.clear
+        
     }
 }
 

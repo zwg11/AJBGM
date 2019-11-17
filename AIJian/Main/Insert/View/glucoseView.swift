@@ -51,7 +51,7 @@ class glucoseView: UIView ,UITextFieldDelegate{
         let label = UILabel()
         label.text = GetUnit.getBloodUnit()
         label.font = UIFont.systemFont(ofSize: 16)
-        label.textColor = UIColor.white
+        label.textColor = TextGrayColor
         label.minimumScaleFactor = 0.5
         label.adjustsFontSizeToFitWidth = true
         return label

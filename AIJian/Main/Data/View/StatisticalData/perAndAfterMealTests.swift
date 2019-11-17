@@ -41,25 +41,25 @@ class perAndAfterMealTests: UIView {
     // 以下为4个下划线
     private lazy var lineView1:UIView = {
         let view = UIView()
-        view.backgroundColor = borderColor
+        view.backgroundColor = TextGrayColor
         return view
     }()
     
     private lazy var lineView2:UIView = {
         let view = UIView()
-        view.backgroundColor = borderColor
+        view.backgroundColor = TextGrayColor
         return view
     }()
     
     private lazy var lineView3:UIView = {
         let view = UIView()
-        view.backgroundColor = borderColor
+        view.backgroundColor = TextGrayColor
         return view
     }()
     
     private lazy var lineView4:UIView = {
         let view = UIView()
-        view.backgroundColor = borderColor
+        view.backgroundColor = TextGrayColor
         return view
     }()
     // 设置标题
@@ -75,7 +75,7 @@ class perAndAfterMealTests: UIView {
     private lazy var testView:UIView = {
         let view = UIView()
         view.layer.borderWidth = 1
-        view.layer.borderColor = borderColor.cgColor
+        view.layer.borderColor = TextGrayColor.cgColor
         return view
     }()
 

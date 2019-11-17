@@ -31,7 +31,7 @@ class averageView: UIView {
     private lazy var avgView:UIView = {
         let view = UIView()
         view.layer.borderWidth = 1
-        view.layer.borderColor = borderColor.cgColor
+        view.layer.borderColor = TextGrayColor.cgColor
         view.layer.cornerRadius = 5
         return view
     }()
@@ -39,7 +39,7 @@ class averageView: UIView {
     private lazy var glucoseLabel:UILabel = {
         let label = UILabel()
         label.text = "Blood Glucose"
-        label.textColor = UIColor.white
+        label.textColor = TextGrayColor
         label.font = UIFont.systemFont(ofSize: 16)
         label.textAlignment = .left
         return label
@@ -49,7 +49,7 @@ class averageView: UIView {
     private lazy var sDLabel:UILabel = {
         let label = UILabel()
         label.text = "Standard Deviation"
-        label.textColor = UIColor.white
+        label.textColor = TextGrayColor
         label.font = UIFont.systemFont(ofSize: 16)
         label.textAlignment = .left
         return label
@@ -59,7 +59,7 @@ class averageView: UIView {
     private lazy var checkNumLabel:UILabel = {
         let label = UILabel()
         label.text = "Frequency/Day"
-        label.textColor = UIColor.white
+        label.textColor = TextGrayColor
         label.font = UIFont.systemFont(ofSize: 16)
         label.textAlignment = .left
         return label
@@ -72,8 +72,8 @@ class averageView: UIView {
     private lazy var glucoseValue:UILabel = {
         let label = UILabel()
         label.text = String(avgGlucoseValue ?? 0)
-        label.textColor = greenColor
-        label.font = UIFont.systemFont(ofSize: 20)
+        label.textColor = UIColor.white
+        label.font = UIFont.systemFont(ofSize: 16)
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         label.backgroundColor = UIColor.clear
@@ -182,7 +182,7 @@ class averageView: UIView {
         self.glucoseValue.snp.makeConstraints{ (make) in
             make.right.equalTo(glucoseUnit.snp.left).offset(-10)
             make.bottom.equalTo(glucoseLabel.snp.bottom)
-            make.height.width.equalTo(AJScreenWidth/12)
+            make.height.equalTo(20)
             make.width.equalTo(AJScreenWidth/12)
         }
         

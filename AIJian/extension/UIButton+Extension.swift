@@ -15,7 +15,7 @@ extension UIButton{
         self.setTitle(string, for: .normal)
         self.setTitleColor(UIColor.white, for: .normal)
         self.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        self.layer.borderColor = UIColor.lightGray.cgColor
+        self.layer.borderColor = UIColor.gray.cgColor
         self.layer.borderWidth = 1
         self.layer.cornerRadius = 3
         self.backgroundColor = SendButtonColor
@@ -35,7 +35,7 @@ extension UIButton{
     func setSelected(){
         self.setTitleColor(UIColor.white, for: .normal)
         self.backgroundColor = SendButtonColor
-        self.layer.borderColor = UIColor.lightGray.cgColor
+        self.layer.borderColor = UIColor.gray.cgColor
         self.layer.borderWidth = 1
         
     }
@@ -43,7 +43,7 @@ extension UIButton{
     // 用于手动输入页面，按钮未被选中时的样式
     func setDeselected(){
         self.setTitleColor(UIColor.gray, for: .normal)
-        self.backgroundColor = kRGBColor(17, 56, 86, 1)
+        self.backgroundColor = kRGBColor(8, 52, 84, 1)
         self.layer.borderWidth = 0
     }
     
