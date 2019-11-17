@@ -132,7 +132,7 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
                                 // // 请求失败，将风火轮移除，并停止转动
                                 self.indicator.stopIndicator()
                                 self.indicator.removeFromSuperview()
-                                alertController.custom(self,"Attention", "Incorrect Code")
+                                alertController.custom(self,"Attention", responseModel.msg)
                                 return
                             }
                         } //end of letif

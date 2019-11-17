@@ -88,7 +88,7 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
         
-        tableview.separatorColor = UIColor.white
+         tableview.separatorColor = TextGrayColor
         tableview.register(UITableViewCell.self, forCellReuseIdentifier:"infocell")
         tableview.delegate = self
         tableview.dataSource = self
