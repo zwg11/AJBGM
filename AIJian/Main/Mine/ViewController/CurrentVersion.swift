@@ -47,7 +47,7 @@ class CurrentVersion:UIViewController{
         line.backgroundColor = TextColor
         self.view.addSubview(line)
         line.snp.makeConstraints{ (make) in
-            make.height.equalTo(2)
+            make.height.equalTo(1)
             make.left.equalToSuperview().offset(AJScreenWidth/8)
             make.right.equalToSuperview().offset(-AJScreenWidth/8)
             make.top.equalTo(glucoseImage.snp.bottom).offset(AJScreenHeight/20)
@@ -60,7 +60,7 @@ class CurrentVersion:UIViewController{
         information.font = UIFont.systemFont(ofSize: 18)
         self.view.addSubview(information)
         information.snp.makeConstraints{ (make) in
-            make.height.equalTo(20)
+            make.height.equalTo(30)
             make.left.equalToSuperview().offset(AJScreenWidth/5)
             make.right.equalToSuperview().offset(-AJScreenWidth/5)
             make.top.equalTo(line.snp.bottom).offset(AJScreenHeight/30)

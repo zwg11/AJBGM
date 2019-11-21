@@ -337,7 +337,7 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
                 return AJScreenWidth*0.35 + 35
             case 8:
 //                return AJScreenHeight/15 + 20
-                return AJScreenHeight/15
+                return AJScreenHeight/15 + 20
             default:
                 return AJScreenHeight/12
         }

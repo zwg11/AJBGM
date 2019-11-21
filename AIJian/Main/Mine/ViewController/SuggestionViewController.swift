@@ -107,6 +107,7 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
         self.title = "Help"
 //        self.view.backgroundColor = ThemeColor
         self.view.backgroundColor = UIColor.clear
+        
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
         //自动调整滚动视图和表格视图的偏移量
         self.automaticallyAdjustsScrollViewInsets = false
@@ -132,7 +133,7 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
 //        sugTableView.backgroundColor = ThemeColor
         sugTableView.backgroundColor = UIColor.clear
         sugTableView.isScrollEnabled = false
-        sugTableView.separatorColor = UIColor.white
+         sugTableView.separatorColor = TextGrayColor
         self.view.addSubview(sugTableView)
         sugTableView.snp.makeConstraints{  (make) in
             make.top.equalTo(content_field.snp.bottom).offset(5)

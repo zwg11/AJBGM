@@ -44,7 +44,8 @@ class VersionUViewController: UIViewController {
             tableview.delegate = self
             tableview.dataSource = self
             tableview.backgroundColor = UIColor.clear
-            tableview.separatorColor = UIColor.white
+             tableview.separatorColor = TextGrayColor
+//            tableview.separatorColor = UIColor.white
             self.view.addSubview(tableview)
             tableview.snp.remakeConstraints{ (make) in
                 make.height.equalTo(AJScreenHeight/15*2)

@@ -82,13 +82,13 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
         self.title = "Personal Information"
 //        self.navigationController?.navigationBar.barTintColor = ThemeColor
 //        self.navigationController?.navigationBar.isTranslucent = false
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: NaviTitleColor]
+//        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: NaviTitleColor]
         self.view.backgroundColor = ThemeColor
         self.view.backgroundColor = UIColor.clear
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
         
-        tableview.separatorColor = UIColor.white
+         tableview.separatorColor = TextGrayColor
         tableview.register(UITableViewCell.self, forCellReuseIdentifier:"infocell")
         tableview.delegate = self
         tableview.dataSource = self
