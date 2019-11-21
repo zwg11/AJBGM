@@ -116,7 +116,7 @@ class DataViewController: UIViewController {
         dateRangePicker.rangePicker.selectRow(1, inComponent: 0, animated: false)
         
         // 添加标题视图
-        let titleview = pageViewManager.titleView
+//        let titleview = pageViewManager.titleView
 //        titleview.backgroundColor = UIColor.red
         view.addSubview(pageViewManager.titleView)
         // 设置标题视图左右约束为对齐屏幕，顶部对齐导航栏，高度为44

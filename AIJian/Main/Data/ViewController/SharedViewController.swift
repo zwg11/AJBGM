@@ -77,6 +77,12 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
         //设置名字和电话
         general.nameLabel.text = name?.removeHeadAndTailSpacePro
         general.phoneLabel.text = phone?.removeHeadAndTailSpacePro
+        let dateformat = DateFormatter()
+        dateformat.dateFormat = "yyyy/MM/dd"
+        let st = dateformat.string(from: startD!)
+        let end = dateformat.string(from: endD!)
+        
+        general.rangeLabel.text = "\(st)--\(end)"
 
         // 将视图生成文件
         let image = viewToImage.getImageFromView(view: general)

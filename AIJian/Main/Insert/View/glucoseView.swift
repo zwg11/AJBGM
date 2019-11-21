@@ -84,16 +84,16 @@ class glucoseView: UIView ,UITextFieldDelegate{
     }
     
     
-    func setValueAndThumbColor(value:Float){
-        XTSlider.setValue(value, animated: true)
-        if value <= Float(GetBloodLimit.getRandomDinnerLow()){
-            XTSlider.thumbTintColor = UIColor.red
-        }else if value >= Float(GetBloodLimit.getRandomDinnerTop()){
-            XTSlider.thumbTintColor = UIColor.yellow
-        }else{
-            XTSlider.thumbTintColor = UIColor.green
-        }
-    }
+//    func setValueAndThumbColor(value:Float){
+//        XTSlider.setValue(value, animated: true)
+//        if value <= Float(GetBloodLimit.getRandomDinnerLow()){
+//            XTSlider.thumbTintColor = UIColor.red
+//        }else if value >= Float(GetBloodLimit.getRandomDinnerTop()){
+//            XTSlider.thumbTintColor = UIColor.yellow
+//        }else{
+//            XTSlider.thumbTintColor = UIColor.green
+//        }
+//    }
     //**********************************事件*************************
     private lazy var BeforeButton:UIButton = {
         let button = UIButton()

@@ -108,10 +108,12 @@ class ChartViewController: UIViewController,ChartViewDelegate{
             lineChartView.lineChartView.leftAxis.removeLimitLine(i)
         }
         
-        let low = GetBloodLimit.getRandomDinnerLow()
+        let low = GetBloodLimit.getBeforeDinnerLow()
         let high = GetBloodLimit.getRandomDinnerTop()
-        lineChartView.addLimitLine(low, "\(low)", UIColor.yellow)
-        lineChartView.addLimitLine(high, "\(high)", UIColor.red)
+        let Orange = kRGBColor(255, 165, 0, 0.8)
+        let Red = kRGBColor(255, 0, 0, 0.8)
+        lineChartView.addLimitLine(low, "\(low)", Orange)
+        lineChartView.addLimitLine(high, "\(high)", Red)
         // 设置x轴的最大坐标值
         lineChartView.lineChartView.xAxis.axisMaximum = Double(daysNum!)
         // 根据所选中的时间范围器元素决定各界面的数据如何初始化
@@ -207,7 +209,7 @@ class ChartViewController: UIViewController,ChartViewDelegate{
         
             self.markerView.snp.makeConstraints{(make) in
                 make.center.equalToSuperview()
-                make.width.equalTo(AJScreenWidth/5*4)
+                make.width.equalTo(AJScreenWidth/5*3)
                 make.height.equalTo(80)
             }
 //        })

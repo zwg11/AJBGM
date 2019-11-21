@@ -31,6 +31,7 @@ class InsulinViewController: UIViewController ,UITableViewDelegate,UITableViewDa
         let array = getInsulin.getInsArray()
         cell.detailTextLabel?.text = array[indexPath.row+1] as? String
         cell.detailTextLabel?.textColor = UIColor.white
+        cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 14)
         
         cell.backgroundColor = UIColor.clear
         return cell

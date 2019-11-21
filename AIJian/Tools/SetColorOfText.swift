@@ -28,7 +28,8 @@ class SetColorOfLabelText{
             case 0:
                 // 如果小于正常范围，设为橘色
                 if value < GetBloodLimit.getBeforeDinnerLow(){
-                    label.textColor = UIColor.yellow
+//                    label.textColor = UIColor.yellow
+                    label.textColor = UIColor.orange
                 }// 如果大于正常范围，设为红色
                 else if value >= GetBloodLimit.getBeforeDinnerTop(){
                     label.textColor = UIColor.red
@@ -40,7 +41,8 @@ class SetColorOfLabelText{
             case 1:
                 // 如果小于正常范围，设为y橘色
                 if value < GetBloodLimit.getAfterDinnerLow(){
-                    label.textColor = UIColor.yellow
+//                    label.textColor = UIColor.yellow
+                    label.textColor = UIColor.orange
                 }// 如果大于正常范围，设红色
                 else if value >= GetBloodLimit.getAfterDinnerTop(){
                     label.textColor = UIColor.red
@@ -52,7 +54,8 @@ class SetColorOfLabelText{
             case 2:
                 // 如果小于正常范围，设为橘色
                 if value < GetBloodLimit.getEmptyStomachLow(){
-                    label.textColor = UIColor.yellow
+//                    label.textColor = UIColor.yellow
+                    label.textColor = UIColor.orange
                 }// 如果大于正常范围，设为红色
                 else if value >= GetBloodLimit.getEmptyStomachTop(){
                     label.textColor = UIColor.red
@@ -64,7 +67,8 @@ class SetColorOfLabelText{
             default:
                 // 如果小于正常范围，设为橘色
                 if value < GetBloodLimit.getRandomDinnerLow(){
-                    label.textColor = UIColor.yellow
+//                    label.textColor = UIColor.yellow
+                    label.textColor = UIColor.orange
                 }// 如果大于正常范围，设为红色
                 else if value >= GetBloodLimit.getRandomDinnerTop(){
                     label.textColor = UIColor.red
