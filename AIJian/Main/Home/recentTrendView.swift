@@ -66,8 +66,10 @@ class recentTrendView: UIView {
         // 画限制线
         let low = GetBloodLimit.getRandomDinnerLow()
         let high = GetBloodLimit.getRandomDinnerTop()
-        recentTrendView.addLimitLine(low, "\(low)", UIColor.yellow)
-        recentTrendView.addLimitLine(high, "\(high)", UIColor.red)
+        let Orange = kRGBColor(255, 165, 0, 0.8)
+        let Red = kRGBColor(255, 0, 0, 0.8)
+        recentTrendView.addLimitLine(low, "\(low)", Orange)
+        recentTrendView.addLimitLine(high, "\(high)", Red)
     }
 
 }

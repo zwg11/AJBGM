@@ -729,13 +729,13 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
 //        button.frame = CGRect(x: 0, y: UIScreen.main.bounds.maxY-40, width: UIScreen.main.bounds.width, height: 44)
         self.view.addSubview(button)
         button.snp.makeConstraints{(make) in
-            make.left.right.bottom.equalToSuperview()
-//            if #available(iOS 11.0, *) {
-//                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
-//            } else {
-//                // Fallback on earlier versions
-//                make.bottom.equalTo(bottomLayoutGuide.snp.top)
-//            }
+            make.left.right.equalToSuperview()
+            if #available(iOS 11.0, *) {
+                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+            } else {
+                // Fallback on earlier versions
+                make.bottom.equalTo(bottomLayoutGuide.snp.top)
+            }
             make.height.equalTo(44)
         }
         

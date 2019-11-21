@@ -840,9 +840,9 @@ extension InsertViewController{
         self.input.setInsValue(x.insulinType ?? "None")
         
         // 体重
-        if let weight = x.weightKg{
+        if x.weightKg != nil{
             if GetUnit.getWeightUnit() == "kg"{
-                self.input.setWeightValue("\(weight)")
+                self.input.setWeightValue(String(format: "%.1f", x.weightKg!))
             }else{
                 self.input.setWeightValue(String(format: "%.0f", x.weightLbs!))
             }
@@ -857,12 +857,12 @@ extension InsertViewController{
         //        }
         
         // 血压
-        if let sysValue = x.systolicPressureKpa{
+        if x.systolicPressureKpa != nil{
             if GetUnit.getPressureUnit() == "mmHg"{
                 self.input.setSysValue(String(format: "%.0f", x.systolicPressureMmhg!))
                 self.input.setDiaValue(String(format: "%.0f", x.diastolicPressureMmhg!))
             }else{
-                self.input.setSysValue("\(sysValue)")
+                self.input.setSysValue("\(x.systolicPressureKpa!)")
                 self.input.setDiaValue("\(x.diastolicPressureKpa!)")
             }
         }else{

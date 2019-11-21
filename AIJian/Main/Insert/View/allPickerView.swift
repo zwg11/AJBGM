@@ -159,7 +159,8 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
     lazy var timePicker:UIDatePicker = {
         let timePicker = UIDatePicker()
         timePicker.calendar = Calendar.current
-        timePicker.locale = Locale(identifier: "en_US")
+        timePicker.locale = Locale(identifier: "en_GB")
+//        timePicker.locale = NSLocale.system
         
         timePicker.datePickerMode = .time
         timePicker.date = Date()

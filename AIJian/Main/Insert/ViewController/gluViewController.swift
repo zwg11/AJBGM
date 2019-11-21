@@ -66,7 +66,8 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
                 cell?.textLabel?.textColor = UIColor.red
             }else{
                 if BLEglucoseValue[indexPath.row]<Int(GetBloodLimit.getRandomDinnerLow()){
-                    cell?.textLabel?.textColor = UIColor.yellow
+//                    cell?.textLabel?.textColor = UIColor.yellow
+                    cell?.textLabel?.textColor = UIColor.orange
                 }
                 else{
                     cell?.textLabel?.textColor = UIColor.green
@@ -77,7 +78,8 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
                 cell?.textLabel?.textColor = UIColor.red
             }else{
                 if UnitConversion.mgTomm(num: Double(BLEglucoseValue[indexPath.row]))<GetBloodLimit.getRandomDinnerLow(){
-                    cell?.textLabel?.textColor = UIColor.yellow
+//                    cell?.textLabel?.textColor = UIColor.yellow
+                    cell?.textLabel?.textColor = UIColor.orange
                 }
                 else{
                     cell?.textLabel?.textColor = UIColor.green
@@ -336,7 +338,13 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
 //            }
         }
         button.snp.makeConstraints{(make) in
-            make.left.right.bottom.equalToSuperview()
+            make.left.right.equalToSuperview()
+            if #available(iOS 11.0, *) {
+                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+            } else {
+                // Fallback on earlier versions
+                make.bottom.equalTo(bottomLayoutGuide.snp.top)
+            }
             make.height.equalTo(44)
         }
         

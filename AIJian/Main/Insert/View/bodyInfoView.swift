@@ -234,7 +234,7 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
     //重新设置单位
     func resetWeightAndPressureUnit(){
         self.weightUnitLabel.text = GetUnit.getWeightUnit()
-        self.blood_sysPressureTextfield.text = GetUnit.getPressureUnit()
+        self.bloodPressureUnitLabel.text = GetUnit.getPressureUnit()
         self.weightUnitLabel.textColor = TextGrayColor
         self.bloodPressureUnitLabel.textColor = TextGrayColor
         //设置体重单位

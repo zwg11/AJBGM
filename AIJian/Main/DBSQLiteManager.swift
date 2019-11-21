@@ -362,6 +362,8 @@ public class DBSQLiteManager:NSObject{
                 dataGlucose.detectionTime         = record?[detection_time]
                 dataGlucose.bloodGlucoseMmol      = record?[glucose_mmol]
                 dataGlucose.bloodGlucoseMg        = record?[glucose_mg]
+                dataGlucose.weightKg              = record?[weight_kg]
+                dataGlucose.weightLbs             = record?[weight_lbs]
                 dataGlucose.eatType               = record?[eat_type]
                 dataGlucose.eatNum                = record?[eat_num]
                 dataGlucose.insulinType           = record?[insulin_type]
