@@ -220,6 +220,9 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
             }else if verfiedP!.count >= 30 {
                 //不能让密码大于30个字符
                 return 
+            }else if oldP == newP {  //让旧密码和新密码不能一样
+                alert.custom(self, "Attention", "New Password Matches Old")
+                return
             }else if FormatMethodUtil.validatePasswd(passwd: verfiedP!) != true{
                 alert.custom(self, "Attention", "New Password (at least 8 characters)")
                 return

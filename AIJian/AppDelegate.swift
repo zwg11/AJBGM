@@ -79,13 +79,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                 }
             }
-            if UserInfo.getIsFirst() == true{
-                self.setStaticGuidePage()
-                print("进入轮播图")
-                UserInfo.setIsFirst(false)
-            }else{
-                //公司宣传页
-            }
+//            if UserInfo.getIsFirst() == true{
+//                self.setStaticGuidePage()
+//                print("进入轮播图")
+//                UserInfo.setIsFirst(false)
+//            }else{
+//                //公司宣传页
+//            }
         }
         
         window?.makeKeyAndVisible()

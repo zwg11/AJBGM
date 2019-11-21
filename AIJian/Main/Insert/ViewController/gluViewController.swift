@@ -295,7 +295,7 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         tableHeadLabel.backgroundColor = UIColor.clear
         tableHeadLabel.textColor = UIColor.white
         tableHeadLabel.textAlignment = .left
-        tableHeadLabel.text = "Connected Glucose Meter"
+        tableHeadLabel.text = "BG Data"
         tableHeadLabel.font = UIFont.boldSystemFont(ofSize: 16)
         self.view.addSubview(tableHeadLabel)
         tableHeadLabel.snp.makeConstraints{(make) in
