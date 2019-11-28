@@ -133,8 +133,8 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         let button = UIButton(type: .system)
         button.setTitle("Record Result", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
-        button.backgroundColor = ThemeColor
-        button.layer.borderColor = UIColor.lightGray.cgColor
+        button.backgroundColor = UIColor.clear
+        button.layer.borderColor = ThemeColor.cgColor
         button.addTarget(self, action: #selector(BLEDataSave), for: .touchUpInside)
         return button
     }()

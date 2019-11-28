@@ -110,8 +110,8 @@ class ChartViewController: UIViewController,ChartViewDelegate{
         
         let low = GetBloodLimit.getBeforeDinnerLow()
         let high = GetBloodLimit.getRandomDinnerTop()
-        let Orange = kRGBColor(255, 165, 0, 0.8)
-        let Red = kRGBColor(255, 0, 0, 0.8)
+        let Orange = kRGBColor(255, 165, 0, 0.5)
+        let Red = kRGBColor(255, 0, 0, 0.5)
         lineChartView.addLimitLine(low, "\(low)", Orange)
         lineChartView.addLimitLine(high, "\(high)", Red)
         // 设置x轴的最大坐标值

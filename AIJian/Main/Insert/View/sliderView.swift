@@ -17,8 +17,8 @@ class sliderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        lowView.backgroundColor = UIColor.yellow
-        normalView.backgroundColor = UIColor.white
+        lowView.backgroundColor = UIColor.orange
+        normalView.backgroundColor = UIColor.green
         highView.backgroundColor = UIColor.red
         self.addSubview(lowView)
         self.addSubview(normalView)
@@ -38,7 +38,8 @@ class sliderView: UIView {
             }
             // 正常视图
             normalView.snp.makeConstraints{(make) in
-                make.top.bottom.equalTo(lowView)
+//                make.top.bottom.equalTo(lowView)
+                make.top.height.equalToSuperview()
                 make.left.equalTo(lowView.snp.right)
                 make.width.equalToSuperview().multipliedBy(high/16)
                 
@@ -46,7 +47,8 @@ class sliderView: UIView {
             // 高于视图
             highView.snp.makeConstraints{(make) in
                 make.left.equalTo(normalView.snp.right)
-                make.top.bottom.equalTo(lowView)
+//                make.top.bottom.equalTo(lowView)
+                make.top.height.equalToSuperview()
                 make.right.equalToSuperview()
             }
         }else{

@@ -32,7 +32,7 @@ class LastResultTableViewCell: UITableViewCell {
         return view
     }()
     
-    private lazy var glucoseValueLabel:UILabel = {
+    lazy var glucoseValueLabel:UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 60)
         label.textAlignment = .left

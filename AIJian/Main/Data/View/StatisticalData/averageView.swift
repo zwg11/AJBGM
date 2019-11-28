@@ -182,8 +182,8 @@ class averageView: UIView {
         self.glucoseValue.snp.makeConstraints{ (make) in
             make.right.equalTo(glucoseUnit.snp.left).offset(-10)
             make.bottom.equalTo(glucoseLabel.snp.bottom)
-            make.height.equalTo(20)
-            make.width.equalTo(AJScreenWidth/12)
+            make.height.equalTo(glucoseLabel.snp.height)
+            make.width.equalTo(AJScreenWidth/10)
         }
         
         // 标准差label布局
@@ -193,7 +193,7 @@ class averageView: UIView {
             make.centerX.equalTo(glucoseValue)
             make.bottom.equalTo(sDLabel.snp.bottom)
             make.height.equalTo(sDLabel.snp.height)
-            //make.width.equalTo((AJScreenWidth-20)/8 )
+            make.width.equalTo((AJScreenWidth-20)/8 )
             
         }
         
