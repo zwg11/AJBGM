@@ -588,7 +588,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                                     let array:Array<String> = replyDateStr.components(separatedBy: " ")
                                     print("将要传输\(array[0][2,array[0].count-1])个数据。")
                                     if array[0][2,array[0].count-1] == "0"{
-                                        wrongInfo = "No Data in the Meter"
+                                        wrongInfo = "No New Data in the Meter"
                                         print("No New Data In Machine")
                                     }
                                     self.dataCount = Int(array[0][2,array[0].count-1])!

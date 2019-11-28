@@ -192,9 +192,9 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
     
     lazy var recoverBlood:UIButton = {
         let recoverBlood = UIButton(type:.system)
-        recoverBlood.backgroundColor = ThemeColor
+        recoverBlood.backgroundColor = UIColor.clear
         recoverBlood.setTitle("Default Settings", for:.normal)
-        recoverBlood.tintColor = UIColor.init(red: 28/255.0, green: 97/255.0, blue: 157/255.0, alpha: 0)
+        recoverBlood.tintColor = UIColor.init(red: 28/255.0, green: 97/255.0, blue: 157/255.0, alpha: 1)
         recoverBlood.titleLabel?.font = UIFont.systemFont(ofSize:18)
         recoverBlood.titleLabel?.textColor = UIColor.white
         recoverBlood.layer.borderWidth = 0.5
@@ -622,6 +622,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         emptyStomach_left.layer.borderColor = UIColor.red.cgColor
                         emptyStomach_left.layer.borderWidth = 1
+                        return
                     }
             }else{
                 //用户啥也没输入
@@ -641,6 +642,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         emptyStomach_right.layer.borderColor = UIColor.red.cgColor
                         emptyStomach_right.layer.borderWidth = 1
+                        return
                     }
             }else{
                 print("空腹上限啥事也没干")
@@ -662,6 +664,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         beforeDinner_left.layer.borderColor = UIColor.red.cgColor
                         beforeDinner_left.layer.borderWidth = 1
+                        return
                     }
             }else{
                 print("餐前下限啥事也没干")
@@ -683,6 +686,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         beforeDinner_right.layer.borderColor = UIColor.red.cgColor
                         beforeDinner_right.layer.borderWidth = 1
+                        return
                     }
             }else{
                 print("餐前上限啥事也没干")
@@ -705,6 +709,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         afterDinner_left.layer.borderColor = UIColor.red.cgColor
                         afterDinner_left.layer.borderWidth = 1
+                        return
                     }
             }else{
                 print("餐后下限啥事也没干")
@@ -726,6 +731,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         afterDinner_right.layer.borderColor = UIColor.red.cgColor
                         afterDinner_right.layer.borderWidth = 1
+                        return
                     }
             }else{
                 print("餐后上限啥事也没干")
@@ -747,6 +753,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         randomDinner_left.layer.borderColor = UIColor.red.cgColor
                         randomDinner_left.layer.borderWidth = 1
+                        return
                     }
             }else{
                 print("随机下限啥事也没干")
@@ -769,6 +776,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         randomDinner_right.layer.borderColor = UIColor.red.cgColor
                         randomDinner_right.layer.borderWidth = 1
+                        return
                     }
             }else{
                 print("随机上限啥事也没干")
@@ -789,7 +797,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             let h_Double:Double = Double(((save_data["randomDinnerHighLimit"] as? NSNumber)?.stringValue)!)!
             showPlaceholder(String(a_Double),String(b_Double),String(c_Double),String(d_Double),String(e_Double),String(f_Double),String(g_Double),String(h_Double))
             clearEmpty()
-            
+            alert.custom_cengji(self,"","Save Success")
             
             
         }else{  //此单位为mg/dL
@@ -810,6 +818,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         emptyStomach_left.layer.borderColor = UIColor.red.cgColor
                         emptyStomach_left.layer.borderWidth = 1
+                        return
                     }
             }else{
                 print("空腹下限啥事也没干")
@@ -827,7 +836,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         emptyStomach_right.layer.borderColor = UIColor.red.cgColor
                         emptyStomach_right.layer.borderWidth = 1
-                        alert.custom(self, "Attention", "空腹血糖上限限范围为90--300")
+                        return
                     }
             }else{
                 print("mg空腹上限啥事也没干")
@@ -848,6 +857,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         beforeDinner_left.layer.borderColor = UIColor.red.cgColor
                         beforeDinner_left.layer.borderWidth = 1
+                        return
                     }
             }else{
                 print("餐前下限啥事也没干")
@@ -869,6 +879,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         beforeDinner_right.layer.borderColor = UIColor.red.cgColor
                         beforeDinner_right.layer.borderWidth = 1
+                        return
                 }
             }else{
                 print("餐前上限啥事也没干")
@@ -890,6 +901,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         afterDinner_left.layer.borderColor = UIColor.red.cgColor
                         afterDinner_left.layer.borderWidth = 1
+                        return
                     }
             }else{
                 print("餐后下限啥事也没干")
@@ -910,6 +922,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         afterDinner_right.layer.borderColor = UIColor.red.cgColor
                         afterDinner_right.layer.borderWidth = 1
+                        return
                     }
             }else{
                 print("餐后上限啥事也没干")
@@ -930,6 +943,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         randomDinner_left.layer.borderColor = UIColor.red.cgColor
                         randomDinner_left.layer.borderWidth = 1
+                        return
                     }
             }else{
                 print("随机下限啥事也没干")
@@ -951,6 +965,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         randomDinner_right.layer.borderColor = UIColor.red.cgColor
                         randomDinner_right.layer.borderWidth = 1
+                        return
                     }
             }else{
                 print("随机上限啥事也没干")
@@ -973,6 +988,8 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             showPlaceholder(String(a_Int),String(b_Int),String(c_Int),String(d_Int),String(e_Int),String(f_Int),String(g_Int),String(h_Int))
             clearEmpty()
         } //end of mg/dl
+        
+         alert.custom_cengji(self,"","Save Success")
     }
     
     //恢复默认设置的按钮
