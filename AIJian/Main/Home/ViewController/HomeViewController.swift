@@ -51,6 +51,12 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             //var cell = tableView.dequeueReusableCell(withIdentifier: id)
             
             let cell = LastResultTableViewCell(style: .value1, reuseIdentifier: id)
+            // 在数据库取出最近一次的血糖记录
+            let x = DBSQLiteManager.shareManager()
+            let data = x.selectLastGlucoseRecord(UserInfo.getUserId())
+            if data != nil{
+                SetColorOfLabelText.SetGlucoseTextColor(data!, label: cell.glucoseValueLabel)
+            }
             cell.selectionStyle = .none
             cell.backgroundColor = UIColor.clear
             return cell
@@ -153,6 +159,8 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         print("配置文件内容\(data)")
         let arr = data["meterID"] as! NSMutableDictionary
         print("配置文件中的meterID内容：\(arr)")
+        
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {

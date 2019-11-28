@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        sleep(2)
         // 设置文本框适应键盘
         IQKeyboardManager.shared.enable = true
         // 先确认是否初始化plist文件，没有则初始化

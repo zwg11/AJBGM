@@ -788,7 +788,7 @@ extension InsertViewController{
         let x = date
 //        let y = sortedTime[section][row]
         // 设置当前标题
-        self.title = "Update Data"
+        self.title = "Update"
         
         // 手动输入标志位设置
         self.isInsert = false

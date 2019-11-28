@@ -637,8 +637,9 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         // button.titleLabel?.text = "扫描设备"
         button.setTitleColor(UIColor.white, for: .normal)
 //        button.setSelected()
-        button.backgroundColor = ThemeColor
-        button.layer.borderColor = UIColor.lightGray.cgColor
+        button.backgroundColor = UIColor.clear
+        button.layer.borderColor = ThemeColor.cgColor
+        button.layer.borderWidth = 1
         button.setTitle("Scan", for: .normal)
         button.addTarget(self, action: #selector(scanDev), for: .touchUpInside)
         return button
@@ -692,7 +693,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
     @objc func rightButtonClick(){
         // 设置去手动输入界面
         let insert = InsertViewController()
-        insert.title = "Add Data"
+        insert.title = "Add"
         self.navigationController?.pushViewController(insert, animated: false)
     }
     
