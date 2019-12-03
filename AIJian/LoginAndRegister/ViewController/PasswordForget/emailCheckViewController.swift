@@ -104,7 +104,7 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
             let dictString:Dictionary = [ "email":String(email!),"verifyCode":String(email_code!)]
             print(dictString)
             //找回密码第一步
-            Alamofire.request(RETRIEVEFIRST,method: .post,parameters: dictString).responseString{ (response) in
+            Alamofire.request(RETRIEVEFIRST,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
                 if response.result.isSuccess {
                     if let jsonString = response.result.value {
                         print("进入验证过程")
@@ -166,7 +166,7 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
             emailCheck.getAuthCodeButton.countDown(count: 90)
             let  dictString:Dictionary = [ "email":String(email!)]
             print(dictString)
-            Alamofire.request(get_Code,method: .post,parameters: dictString).responseString{ (response) in
+            Alamofire.request(get_Code,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
                 if response.result.isSuccess {
                     if let jsonString = response.result.value {
                         if let responseModel = JSONDeserializer<responseModel>.deserializeFrom(json: jsonString) {

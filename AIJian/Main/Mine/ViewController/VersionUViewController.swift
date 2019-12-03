@@ -25,6 +25,7 @@ class VersionUViewController: UIViewController {
         return button
     }()
     
+    private lazy var indicator = CustomIndicatorView()
         //列表数据
         public lazy var versionDataArray: Array = ["Current Version","Feedback","Score","Version Update"]
         
@@ -48,7 +49,7 @@ class VersionUViewController: UIViewController {
 //            tableview.separatorColor = UIColor.white
             self.view.addSubview(tableview)
             tableview.snp.remakeConstraints{ (make) in
-                make.height.equalTo(AJScreenHeight/15*2)
+                make.height.equalTo(AJScreenHeight/15*4)
                 make.width.equalToSuperview()
                 make.top.equalTo(topLayoutGuide.snp.bottom)
             }
@@ -100,13 +101,28 @@ extension VersionUViewController:UITableViewDelegate,UITableViewDataSource{
                     print("第一行")
                 case 1:  //跳转到反馈页面
                     self.navigationController?.pushViewController(SuggestionViewController(), animated: false)
-//                case 2:  //跳转到去评分界面
-//                    if #available(iOS 10.3, *) {
-//                        SKStoreReviewController.requestReview()
-//                    } else {
-//                        // Fallback on earlier versions
-//                    }
-//                case 3:  //跳转到版本更新
+                case 2:  //跳转到去评分界面
+                    
+                    if #available(iOS 10.3, *) {
+                        // 初始化UI
+                        indicator.setupUI("")
+                        // 设置风火轮视图在父视图中心
+                        // 开始转
+                        indicator.startIndicator()
+                        self.view.addSubview(indicator)
+                        self.view.bringSubviewToFront(indicator)
+                        indicator.snp.makeConstraints{(make) in
+                            make.edges.equalToSuperview()
+                        }
+                        SKStoreReviewController.requestReview()
+                        self.indicator.stopIndicator()
+                        self.indicator.removeFromSuperview()
+                    } else {
+                        // Fallback on earlier versions
+                    }
+                
+                case 3:  //跳转到版本更新
+                    print(vheader)
 //                    UpdateManager.init()
                 default:  //缺省不跳
                     print("第五行")

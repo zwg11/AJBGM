@@ -56,7 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("token不为空:\(UserInfo.getToken())")
                 //此处分为两种情况：一种是判断token过没过期。第二种是没有网络怎么办
                 let dictString:Dictionary = [ "userId":UserInfo.getUserId() ,"token":UserInfo.getToken()] as [String : Any]
-                AlamofireManager.request(CHECK_TOKEN,method: .post,parameters: dictString).responseString{ (response) in
+                AlamofireManager.request(CHECK_TOKEN,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
                     if response.result.isSuccess {
                         if let jsonString = response.result.value {
                             if let responseModel = JSONDeserializer<responseModel>.deserializeFrom(json: jsonString) {

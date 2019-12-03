@@ -414,7 +414,7 @@ extension DataTableViewController{
         print(dicStr)
         // 请求删除数据，请求信息如上字典
         //********
-        Alamofire.request(DELETE_DATA_URL,method: .post,parameters: dicStr).responseString{ (response) in
+        Alamofire.request(DELETE_DATA_URL,method: .post,parameters: dicStr, headers:vheader).responseString{ (response) in
             // 如果请求得到回复
             if response.result.isSuccess {
                 print("收到删除的回复")

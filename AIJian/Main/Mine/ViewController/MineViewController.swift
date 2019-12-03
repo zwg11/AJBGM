@@ -123,7 +123,7 @@ class MineViewController: UIViewController {
         
         let dictString = ["userId":UserInfo.getUserId(),"token":UserInfo.getToken()] as [String : Any]
         // 数据请求超时时间为10s
-        AlamofireManager.request(USER_INFO_REQUEST,method: .post,parameters: dictString).responseString{ (response) in
+        AlamofireManager.request(USER_INFO_REQUEST,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
             if response.result.isSuccess {
                 if let jsonString = response.result.value {
                     // json转model

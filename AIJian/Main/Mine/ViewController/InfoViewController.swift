@@ -135,7 +135,7 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
         updateUserInfo.phoneNumber = (infoDataArray[6] == "") ? nil:infoDataArray[6]
         
         let dictString = ["userId":UserInfo.getUserId(),"user":updateUserInfo.toJSONString()!,"token":UserInfo.getToken()] as [String : Any]
-        Alamofire.request(UPDATE_USERINFO,method: .post,parameters: dictString).responseString{ (response) in
+        Alamofire.request(UPDATE_USERINFO,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
             if response.result.isSuccess {
                 if let jsonString = response.result.value {
                     print(jsonString)

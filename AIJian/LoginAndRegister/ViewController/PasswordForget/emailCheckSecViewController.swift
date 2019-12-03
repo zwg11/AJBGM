@@ -119,7 +119,7 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
             print(verifyString!)
             let dictString:Dictionary = [ "newPassword":String(password!),"email":String(email!),"verifyString":String(verifyString!)]
              print(dictString)
-             Alamofire.request(RETRIEVESECOND,method: .post,parameters: dictString).responseString{ (response) in
+             Alamofire.request(RETRIEVESECOND,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
                 if response.result.isSuccess {
                     if let jsonString = response.result.value {
                         print("进入验证过程")

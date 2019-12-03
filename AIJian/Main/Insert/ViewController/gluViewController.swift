@@ -178,7 +178,7 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         //手动输入数据，请求部分
         let dictString = [ "token":UserInfo.getToken(),"userId":UserInfo.getUserId() as Any,"userBloodGlucoseRecords":GlucoseJsonData] as [String : Any]
         // 向服务器申请插入数据请求
-        AlamofireManager.request(INSERT_RECORD,method: .post,parameters: dictString).responseString{ (response) in
+        AlamofireManager.request(INSERT_RECORD,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
             if response.result.isSuccess {
                 if let jsonString = response.result.value {
                     print("进入验证过程")
@@ -361,7 +361,7 @@ extension gluViewController{
         print("当前血糖仪为\(meterID),其最后插入的记录为\(lastRecord)")
         let dictString = [ "userId":UserInfo.getUserId() as Any,"token":UserInfo.getToken(),"meterId":meterID,"recentRecord":lastRecord] as [String : Any]
                 // 向服务器申请插入数据请求
-                Alamofire.request(METERID_SAVE,method: .post,parameters: dictString).responseString{ (response) in
+                Alamofire.request(METERID_SAVE,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
                     if response.result.isSuccess {
                         if let jsonString = response.result.value {
                             print("进入验证过程")

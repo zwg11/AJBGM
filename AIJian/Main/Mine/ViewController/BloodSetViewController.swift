@@ -44,6 +44,8 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
     let UIPAGEColor = UIColor.init(red: 128/255.0, green: 136/255.0, blue: 146/255.0, alpha: 1)
     let UITITLEColor = UIColor.init(red: 136/255.0, green: 172/255.0, blue: 207/255.0, alpha: 1)
     let AnotherColor = UIColor.init(red: 136/255.0, green: 136/255.0, blue: 136/255.0, alpha: 1)
+    
+    let alert = CustomAlertController()
     //空腹相关的全局变量
     lazy var emptyStomach_left:UITextField = {
         let emptyStomach_left = UITextField()
@@ -53,7 +55,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
         emptyStomach_left.borderStyle = .line
         emptyStomach_left.textAlignment = .center
         emptyStomach_left.textColor = TextColor
-        emptyStomach_left.layer.borderColor = UIColor.white.cgColor
+        emptyStomach_left.layer.borderColor = UIColor.gray.cgColor
         emptyStomach_left.layer.borderWidth = 1
         return emptyStomach_left
     }()
@@ -66,7 +68,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
         emptyStomach_right.borderStyle = .line
         emptyStomach_right.textAlignment = .center
         emptyStomach_right.textColor = TextColor
-        emptyStomach_right.layer.borderColor = UIColor.white.cgColor
+        emptyStomach_right.layer.borderColor = UIColor.gray.cgColor
         emptyStomach_right.layer.borderWidth = 1
         return emptyStomach_right
     }()
@@ -87,7 +89,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
         beforeDinner_left.borderStyle = .line
         beforeDinner_left.textAlignment = .center
         beforeDinner_left.textColor = TextColor
-        beforeDinner_left.layer.borderColor = UIColor.white.cgColor
+        beforeDinner_left.layer.borderColor = UIColor.gray.cgColor
         beforeDinner_left.layer.borderWidth = 1
         return beforeDinner_left
     }()
@@ -100,7 +102,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
         beforeDinner_right.borderStyle = .line
         beforeDinner_right.textAlignment = .center
         beforeDinner_right.textColor = TextColor
-        beforeDinner_right.layer.borderColor = UIColor.white.cgColor
+        beforeDinner_right.layer.borderColor = UIColor.gray.cgColor
         beforeDinner_right.layer.borderWidth = 1
         return beforeDinner_right
     }()
@@ -121,7 +123,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
         afterDinner_left.borderStyle = .line
         afterDinner_left.textAlignment = .center
         afterDinner_left.textColor = TextColor
-        afterDinner_left.layer.borderColor = UIColor.white.cgColor
+        afterDinner_left.layer.borderColor = UIColor.gray.cgColor
         afterDinner_left.layer.borderWidth = 1
         return afterDinner_left
     }()
@@ -134,7 +136,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
         afterDinner_right.borderStyle = .line
         afterDinner_right.textAlignment = .center
         afterDinner_right.textColor = TextColor
-        afterDinner_right.layer.borderColor = UIColor.white.cgColor
+        afterDinner_right.layer.borderColor = UIColor.gray.cgColor
         afterDinner_right.layer.borderWidth = 1
         return afterDinner_right
     }()
@@ -155,7 +157,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
         randomDinner_left.borderStyle = .line
         randomDinner_left.textAlignment = .center
         randomDinner_left.textColor = TextColor
-        randomDinner_left.layer.borderColor = UIColor.white.cgColor
+        randomDinner_left.layer.borderColor = UIColor.gray.cgColor
         randomDinner_left.layer.borderWidth = 1
         return randomDinner_left
     }()
@@ -167,7 +169,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
         randomDinner_right.borderStyle = .line
         randomDinner_right.textAlignment = .center
         randomDinner_right.textColor = TextColor
-        randomDinner_right.layer.borderColor = UIColor.white.cgColor
+        randomDinner_right.layer.borderColor = UIColor.gray.cgColor
         randomDinner_right.layer.borderWidth = 1
         return randomDinner_right
     }()
@@ -559,7 +561,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
      */
     
     @objc private func save(){
-        let alert = CustomAlertController()
+        
         //读取用户单位设置文件。
         let unit_path = PlistSetting.getFilePath(File: "UnitSetting.plist")
         let unit_data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: unit_path)!
@@ -1073,7 +1075,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             //当单位为mg/dL
             showPlaceholder(String(amg_Double),String(bmg_Double),String(cmg_Double),String(dmg_Double),String(emg_Double),String(fmg_Double),String(gmg_Double),String(hmg_Double))
         }
-       
+       alert.custom_cengji(self,"","Save Success")
     }
     //函数功能：清空用户在文本框中的输入
     func clearEmpty(){

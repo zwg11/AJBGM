@@ -233,7 +233,7 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
                 let dictString:Dictionary = [ "oldPassword":String(oldP!),"newPassword":String(newP!),"email":String(email),"token":String(token),"userId":UserInfo.getUserId()] as [String : Any]
                 print(dictString)
               //  此处的参数需要传入一个字典类型
-                Alamofire.request(PASSWDRESET,method: .post,parameters: dictString).responseString{ (response) in
+                Alamofire.request(PASSWDRESET,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
                     
                     if response.result.isSuccess {
                         
