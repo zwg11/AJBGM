@@ -29,7 +29,7 @@ class dataTableViewCell: UITableViewCell {
     }
     
     convenience init(style: UITableViewCell.CellStyle, reuseIdentifier: String?,secion:Int,row:Int){
-        print("sortedData：\(sortedData[secion][row])")
+//        print("sortedData：\(sortedData[secion][row])")
         self.init(style: style, reuseIdentifier: reuseIdentifier)
         // 清空该cell的内容
 //        while self.contentView.subviews.last != nil{

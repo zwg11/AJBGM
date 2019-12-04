@@ -202,13 +202,18 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
     }
     //  MARK: - 连接设备后
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        if timer != nil{
-            timer!.invalidate() //销毁timer
-            timer = nil
-        }
+        //原来
+//        if timer != nil{
+//            timer!.invalidate() //销毁timer
+//            timer = nil
+//        }
+//         停止扫描
+//        central.stopScan()
+        //现在，计时器停止，扫描结束
+        stopScanTimer()
         print("connnected success!!")
-        // 停止扫描
-        central.stopScan()
+
+        
         // 设置外设代理，并记录连接的外设对象
         peripheral.delegate = self
 //        self.myperipheral = peripheral
@@ -675,6 +680,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
     }()
     // 点击左按钮的动作
     @objc func leftButtonClick(){
+        stopScanTimer()
         // 设置返回首页
         self.tabBarController?.selectedIndex = 0
         self.tabBarController?.tabBar.isHidden = false
@@ -691,6 +697,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
     }()
     // 点击右按钮的动作
     @objc func rightButtonClick(){
+        stopScanTimer()
         // 设置去手动输入界面
         let insert = InsertViewController()
         insert.title = "Add"
@@ -712,10 +719,13 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         initAllDate()
     }
     
-//    // 页面消失，tabbar隐藏
-//    override func viewWillDisappear(_ animated: Bool) {
+    // 页面消失，tabbar隐藏
+    override func viewWillDisappear(_ animated: Bool) {
 //        self.tabBarController?.tabBar.isHidden = false
-//    }
+        self.button.setTitle("Scan", for: .normal)
+//        stopScanTimer()
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -994,6 +1004,7 @@ extension BLEViewController{
             self.button.setTitle("Scan", for: .normal)
             // 不要忘了设置second以便下次使用
             second1 = 10
+            print("stop scan")
          }
      }
 }

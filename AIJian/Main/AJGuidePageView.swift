@@ -102,16 +102,16 @@ extension AJGuidePageView{
             self.guidePageView.addSubview(imageView)
             
             // 在最后一张图添加开始体验按钮
-            if i == imageArray.count - 1 {
-                imageView.isUserInteractionEnabled = true
-                let startButton = UIButton.init(frame: CGRect.init(x: HHScreenWidth * 0.1, y: HHScreenHeight * 0.8, width: HHScreenWidth * 0.8, height: HHScreenHeight * 0.08))
-                startButton.setTitle("Start experiencing", for: .normal)
-                startButton.setTitleColor(UIColor.white, for: .normal)
-                startButton.layer.cornerRadius = startButton.frame.size.height * 0.5
-                startButton.backgroundColor = UIColor.init(red: 26/255.0, green: 90/255.0, blue: 145/255.0, alpha: 0.3)
-                startButton.addTarget(self, action: #selector(skipButtonClick), for: .touchUpInside)
-                imageView.addSubview(startButton)
-            }
+//            if i == imageArray.count - 1 {
+//                imageView.isUserInteractionEnabled = true
+//                let startButton = UIButton.init(frame: CGRect.init(x: HHScreenWidth * 0.1, y: HHScreenHeight * 0.8, width: HHScreenWidth * 0.8, height: HHScreenHeight * 0.08))
+//                startButton.setTitle("Start experiencing", for: .normal)
+//                startButton.setTitleColor(UIColor.white, for: .normal)
+//                startButton.layer.cornerRadius = startButton.frame.size.height * 0.5
+//                startButton.backgroundColor = UIColor.init(red: 26/255.0, green: 90/255.0, blue: 145/255.0, alpha: 0.3)
+//                startButton.addTarget(self, action: #selector(skipButtonClick), for: .touchUpInside)
+//                imageView.addSubview(startButton)
+//            }
         }
     }
     // 添加转页控制

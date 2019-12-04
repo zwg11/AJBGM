@@ -50,7 +50,7 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
     // 收缩压 血压值输入文本框
      lazy var blood_sysPressureTextfield:UITextField = {
         let textfield = UITextField()
-        textfield.norStyle(placeholder: "")
+        textfield.norStyle(placeholder: "SBP")
 //        textfield.backgroundColor = UIColor.red
 //        textfield.keyboardType = .numberPad
         textfield.textAlignment = .center
@@ -60,7 +60,7 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
     // 舒张压 血压值输入文本框
      lazy var blood_diaPressureTextfield:UITextField = {
         let textfield = UITextField()
-        textfield.norStyle(placeholder: "")
+        textfield.norStyle(placeholder: "DBP")
 //        textfield.backgroundColor = UIColor.yellow
 //        textfield.keyboardType = .numberPad
         textfield.textAlignment = .center
