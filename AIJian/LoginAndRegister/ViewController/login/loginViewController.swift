@@ -96,7 +96,7 @@ class loginViewController: UIViewController,UITextFieldDelegate {
             //程序到达此处，说明其他的验证已经成功,然后对数据进行校验
             let dictString:Dictionary = [ "email":String(email!),"password":String(password!)]
             //  此处的参数需要传入一个字典类型
-            AlamofireManager.request(LOGIN_API,method: .post,parameters: dictString).responseString{ (response) in
+            AlamofireManager.request(LOGIN_API,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
 
                 if response.result.isSuccess {
 
@@ -220,7 +220,7 @@ extension loginViewController{
         let dicStr:Dictionary = ["day":day,"userId":usr_id,"token":tk] as [String : Any]
         print(dicStr)
         // 请求数据，请求信息如上字典
-        Alamofire.request(REQUEST_DATA_URL,method: .post,parameters: dicStr).responseString{ (response) in
+        Alamofire.request(REQUEST_DATA_URL,method: .post,parameters: dicStr, headers:vheader).responseString{ (response) in
             if response.result.isSuccess {
                 print("收到回复")
                 if let jsonString = response.result.value {
@@ -301,7 +301,7 @@ extension loginViewController{
         var isSuccess = true
         let dictString = [ "userId":UserInfo.getUserId() as Any,"token":UserInfo.getToken()] as [String : Any]
         // 向服务器申请插入数据请求
-        Alamofire.request(METERID_GET,method: .post,parameters: dictString).responseString{ (response) in
+        Alamofire.request(METERID_GET,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
             if response.result.isSuccess {
                 if let jsonString = response.result.value {
                     print("进入验证过程")

@@ -173,7 +173,7 @@ class registerViewController: UIViewController,UITextFieldDelegate {
             //            let user = User.deserialize(from: jsonString)
             print(dictString)
             //  此处的参数需要传入一个字典类型
-            Alamofire.request(UserRegister,method: .post,parameters: dictString).responseString{ (response) in
+            Alamofire.request(UserRegister,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
                 
                 if response.result.isSuccess {
                     
@@ -234,7 +234,7 @@ class registerViewController: UIViewController,UITextFieldDelegate {
             self.register.getAuthCodeButton.countDown(count: 90)
             let  dictString:Dictionary = [ "email":String(email!)]
             print(dictString)
-            Alamofire.request(get_Code,method: .post,parameters: dictString).responseString{ (response) in
+            Alamofire.request(get_Code,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
                 if response.result.isSuccess {
                     if let jsonString = response.result.value {
                         if let responseModel = JSONDeserializer<responseModel>.deserializeFrom(json: jsonString) {

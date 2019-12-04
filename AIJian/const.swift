@@ -17,6 +17,8 @@ let AlamofireManager:Alamofire.SessionManager = {
     conf.timeoutIntervalForRequest = 10
     return Alamofire.SessionManager(configuration: conf)
 }()
+//请求头部
+let vheader:HTTPHeaders = ["OnCall-Version":"1.2"]
 
 //全局登录逻辑值
 let shift_path = Bundle.main.path(forResource: "GlobalValue", ofType: "plist")

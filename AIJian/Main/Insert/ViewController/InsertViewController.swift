@@ -537,7 +537,7 @@ class InsertViewController: UIViewController {
         // 插入和修改的网络请求是不一样的
         if isInsert{
             // 向服务器申请插入数据请求
-            AlamofireManager.request(INSERT_RECORD,method: .post,parameters: dictString).responseString{ (response) in
+            AlamofireManager.request(INSERT_RECORD,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
                 if response.result.isSuccess {
                     if let jsonString = response.result.value {
                         print("进入验证过程")
@@ -604,7 +604,7 @@ class InsertViewController: UIViewController {
             let dic = ["userId":UserInfo.getUserId(),"token":UserInfo.getToken(),"userBloodGlucoseRecord":insertData.toJSONString()!] as [String : Any]
             print("dic:\(dic)")
             // 向服务器申请更新数据请求
-            AlamofireManager.request(UPDATE_RECORD,method: .post,parameters: dic as Parameters).responseString{ (response) in
+            AlamofireManager.request(UPDATE_RECORD,method: .post,parameters: dic as Parameters, headers:vheader).responseString{ (response) in
                 if response.result.isSuccess {
                     if let jsonString = response.result.value {
                         print("进入验证过程")

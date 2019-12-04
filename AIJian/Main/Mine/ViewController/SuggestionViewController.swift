@@ -191,7 +191,7 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
         let dictString:Dictionary = [ "email":String(emailCommponent.textField.text!),"phoneNumber":String(telephoneCommponent.textField.text!),"country":String(country ?? "--"),"feedback":String(content_field.text!.removeHeadAndTailSpacePro),"token":UserInfo.getToken(),"userId":UserInfo.getUserId()] as [String : Any]
         print(dictString)
         //  此处的参数需要传入一个字典类型
-        Alamofire.request(FEEDBACK,method: .post,parameters: dictString).responseString{ (response) in
+        Alamofire.request(FEEDBACK,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
             
             if response.result.isSuccess {
                 

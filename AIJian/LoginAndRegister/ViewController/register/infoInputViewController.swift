@@ -262,7 +262,7 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
                 "verifyString":String(verifyString!)
                    ]
             print(dictString)
-            Alamofire.request(FillUserInfo,method: .post,parameters: dictString).responseString{ (response) in
+            Alamofire.request(FillUserInfo,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
                 if response.result.isSuccess {
                     if let jsonString = response.result.value {
                         // json转model
