@@ -135,6 +135,7 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         button.setTitleColor(UIColor.white, for: .normal)
         button.backgroundColor = UIColor.clear
         button.layer.borderColor = ThemeColor.cgColor
+        button.layer.borderWidth = 1
         button.addTarget(self, action: #selector(BLEDataSave), for: .touchUpInside)
         return button
     }()
@@ -297,12 +298,14 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         tableHeadLabel.backgroundColor = UIColor.clear
         tableHeadLabel.textColor = UIColor.white
         tableHeadLabel.textAlignment = .left
-        tableHeadLabel.text = "BG Data"
+        tableHeadLabel.text = "    BG Data"
         tableHeadLabel.font = UIFont.boldSystemFont(ofSize: 16)
+//        tableHeadLabel.layer.borderColor = ThemeColor.cgColor
+//        tableHeadLabel.layer.borderWidth = 1
         self.view.addSubview(tableHeadLabel)
         tableHeadLabel.snp.makeConstraints{(make) in
             make.right.equalToSuperview()
-            make.left.equalToSuperview().offset(15)
+            make.left.equalToSuperview()
             make.height.equalTo(44)
             if #available(iOS 11.0, *) {
                 make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)

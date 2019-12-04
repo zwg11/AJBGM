@@ -203,13 +203,12 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
     //  MARK: - 连接设备后
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         //原来
-//        if timer != nil{
-//            timer!.invalidate() //销毁timer
-//            timer = nil
-//        }
+        if timer != nil{
+            timer!.invalidate() //销毁timer
+            timer = nil
+        }
 //         停止扫描
 //        central.stopScan()
-        //现在，计时器停止，扫描结束
         stopScanTimer()
         print("connnected success!!")
 
@@ -221,23 +220,24 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         //peripheral.discoverServices("需要用的服务UUID")
         
     }
-    // 连接设备失败时回调的方法
+    
+    // MARK: - 连接设备失败时回调的方法
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         print("连接失败")
-//        loadV.stopIndicator()
-//        let x = UIAlertController(title: "", message: "Connect Failed", preferredStyle: .alert)
-//        self.present(x, animated: true, completion: {()->Void in
-//            sleep(1)
-//            x.dismiss(animated: true, completion: {
-//            })
-//        })
+        loadV.stopIndicator()
+        let x = UIAlertController(title: "", message: "Connect Failed", preferredStyle: .alert)
+        self.present(x, animated: true, completion: {()->Void in
+            sleep(1)
+            x.dismiss(animated: true, completion: {
+            })
+        })
     }
     
     // 断开连接时回调的方法
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         print("断开连接")
         loadV.stopIndicator()
-        let x = UIAlertController(title: "", message: "Disconnect Occured", preferredStyle: .alert)
+        let x = UIAlertController(title: "", message: "Disconnect From Meter", preferredStyle: .alert)
         self.present(x, animated: true, completion: {()->Void in
             sleep(1)
             x.dismiss(animated: true, completion: {
@@ -565,6 +565,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                                     gluVC.lastRecord = self.lastRecord[0,strRange]
                                     gluVC.meterID = self.meterID
                                     gluVC.tableView.reloadData()
+                                    
                                     self.navigationController?.pushViewController(gluVC, animated: true)
                                     
                                 }else{
@@ -717,6 +718,8 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor:UIColor.white]
         // 初始化数据
         initAllDate()
+        // 重新加载表格视图
+        self.tableView.reloadData()
     }
     
     // 页面消失，tabbar隐藏
