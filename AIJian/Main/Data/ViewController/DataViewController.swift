@@ -83,7 +83,8 @@ class DataViewController: UIViewController {
         button.setTitle("Last 7 days", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        button.titleLabel?.textAlignment = .right
+//        button.titleLabel?.textAlignment = .right
+        button.contentHorizontalAlignment = .right
         button.frame.size = CGSize(width: AJScreenWidth/3, height: 44)
         return button
     }()

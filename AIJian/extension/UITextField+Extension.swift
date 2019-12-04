@@ -20,7 +20,10 @@ extension UITextField{
         // 设置文字内容在文本框中的内边距
         self.textRect(forBounds: CGRect(x: 10, y: 0, width: self.bounds.width, height: self.bounds.height))
         // 设置placeholder
-        self.placeholder = string
+        
+        
+        let placeholderString = NSMutableAttributedString(string: string, attributes: [.foregroundColor:UIColor.gray])
+        self.attributedPlaceholder = placeholderString
         // 设置背景颜色
         self.backgroundColor = SendButtonColor
         // 设置字体大小

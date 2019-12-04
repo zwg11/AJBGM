@@ -13,7 +13,7 @@ class UpdateManager:NSObject{
         super.init()
         let appId:String = "1421026171"
         //获取appstore上的最新版本号
-        let appUrl = URL.init(string: "https://itunes.apple.com/lookup?id=" + appId)
+        let appUrl = URL.init(string: "itms-apps://itunes.apple.com/app/id" + appId)
         //        let appUrl = URL.init(string: "http://itunes.apple.com/lookup?bundleId=" + appId)
         guard let appMsg = try? String.init(contentsOf: appUrl!, encoding: .utf8) else{
             return
@@ -60,7 +60,7 @@ class UpdateManager:NSObject{
     
     //去更新
     func updateApp(appId:String) {
-        let updateUrl:URL = URL.init(string: "https://www.apple.com/ios/app-store/id" + appId)!
+        let updateUrl:URL = URL.init(string: "itms-apps://itunes.apple.com/app/id" + appId+"?action=write-review")!
         if #available(iOS 10.0, *) {
             UIApplication.shared.open(updateUrl, options: [:], completionHandler: nil)
         } else {

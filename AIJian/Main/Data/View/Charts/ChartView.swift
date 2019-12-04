@@ -90,7 +90,7 @@ class ChartView: UIView ,ChartViewDelegate{
         
         let xData = xAxisData
         //xData.sort()
-        print("xdata:\(xData)")
+//        print("xdata:\(xData)")
         // 先检查是否有数据，若没有则不添加，若有则添加
         if glucoseTime.count != 0{
             for i in 0...glucoseTime.count-1 {
@@ -161,7 +161,7 @@ class ChartView: UIView ,ChartViewDelegate{
         
         let xData = xAxisData
         //xData.sort()
-        print("xdata:\(xData)")
+//        print("xdata:\(xData)")
         // 先检查是否有数据，若没有则不添加，若有则添加
         if glucoseTime.count != 0{
             for i in 0...glucoseTime.count-1 {
