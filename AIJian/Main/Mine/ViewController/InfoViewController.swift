@@ -129,7 +129,7 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
             }
         }
         updateUserInfo.height = (infoDataArray[3] == "") ? nil:Double(infoDataArray[3])
-        updateUserInfo.birthday = (infoDataArray[4] == "") ? nil:infoDataArray[4]
+        updateUserInfo.birthday = (infoDataArray[4] == "") ? nil:infoDataArray[4].components(separatedBy: "/").joined(separator: "-")
 
         updateUserInfo.country = (infoDataArray[5] == "") ? nil:infoDataArray[5]
         updateUserInfo.phoneNumber = (infoDataArray[6] == "") ? nil:infoDataArray[6]

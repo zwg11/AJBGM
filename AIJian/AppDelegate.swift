@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        
+        print(".....")
         // 设置文本框适应键盘
         IQKeyboardManager.shared.enable = true
         // 先确认是否初始化plist文件，没有则初始化
@@ -42,7 +42,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let viewController = loginViewController()
         let loginNv = loginNavigationController(rootViewController: viewController)  //登陆界面
         
-        sleep(2)
+        if UserInfo.getIsFirst() == true{
+          
+        }else{
+            sleep(2)
+    
+        }
+        
         //判断文件中的token是否为空。  如果为空时，则为第一次登陆。
         //如果不为空时，则需要再次判断
         if isPlistInit{
@@ -142,12 +148,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }else{
             return .portrait
         }
-        
-        
     }
-    
-    
-    
-
-    
 }
+
+
