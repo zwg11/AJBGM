@@ -552,6 +552,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                                 // 将加载视图移除界面，并使其图片动画停止
 //                                self.loadV.removeFromSuperview()
                                 self.loadV.stopIndicator()
+                                
                                 //如果lastRecord不为”“，说明有数据，跳转
                                 if(self.lastRecord != ""){
                                     // 转到展示数据的页面
@@ -565,7 +566,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                                     gluVC.lastRecord = self.lastRecord[0,strRange]
                                     gluVC.meterID = self.meterID
                                     gluVC.tableView.reloadData()
-                                    
+                                    self.initAllDate()
                                     self.navigationController?.pushViewController(gluVC, animated: true)
                                     
                                 }else{
@@ -614,6 +615,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                     // 将加载视图移除界面，并使其图片动画停止
 //                    self.loadV.removeFromSuperview()
                     self.loadV.stopIndicator()
+                    self.initAllDate()
                     // 弹出警示框，说明相关错误信息
                     let alert = CustomAlertController()
                     alert.custom(self, "", x)
@@ -878,7 +880,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         //self.viewController.tableView.reloadData()
         
     }
-    
+    // MARK:- 初始化所有全局变量
     func initAllDate(){
         // 首先确定命令字符串
         let crc = CRC16()
@@ -927,6 +929,13 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         
         // 以int型存储要传过来的血糖数据以便使用CRC验证码验证
         dataSting = []
+        
+        // 存储读取的数据中的血糖记录的时间
+        BLEglucoseDate = []
+        // 存取读取的数据中的血糖值
+        BLEglucoseValue = []
+        // 存储读取的数据中的血糖标志位
+        BLEglucoseMark = []
     }
     
     
