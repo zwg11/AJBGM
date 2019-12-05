@@ -49,7 +49,7 @@ class VersionUViewController: UIViewController {
 //            tableview.separatorColor = UIColor.white
             self.view.addSubview(tableview)
             tableview.snp.remakeConstraints{ (make) in
-                make.height.equalTo(AJScreenHeight/15*4)
+                make.height.equalTo(AJScreenHeight/15*2)
                 make.width.equalToSuperview()
                 make.top.equalTo(topLayoutGuide.snp.bottom)
             }
@@ -102,27 +102,33 @@ extension VersionUViewController:UITableViewDelegate,UITableViewDataSource{
                 case 1:  //跳转到反馈页面
                     self.navigationController?.pushViewController(SuggestionViewController(), animated: false)
                 case 2:  //跳转到去评分界面
-                    
-                    if #available(iOS 10.3, *) {
-                        // 初始化UI
-                        indicator.setupUI("")
-                        // 设置风火轮视图在父视图中心
-                        // 开始转
-                        indicator.startIndicator()
-                        self.view.addSubview(indicator)
-                        self.view.bringSubviewToFront(indicator)
-                        indicator.snp.makeConstraints{(make) in
-                            make.edges.equalToSuperview()
-                        }
-                        SKStoreReviewController.requestReview()
-                        self.indicator.stopIndicator()
-                        self.indicator.removeFromSuperview()
+                    guard let url = URL(string: "itms-apps://itunes.apple.com/app/id1421026171")else {return }
+                    if #available(iOS 10.0, *) {
+                        UIApplication.shared.open(url,options: [:],completionHandler: nil)
                     } else {
                         // Fallback on earlier versions
                     }
                 
-                case 3:  //跳转到版本更新
-                    print(vheader)
+//                    if #available(iOS 10.3, *) {
+//                        // 初始化UI
+//                        indicator.setupUI("")
+//                        // 设置风火轮视图在父视图中心
+//                        // 开始转
+//                        indicator.startIndicator()
+//                        self.view.addSubview(indicator)
+//                        self.view.bringSubviewToFront(indicator)
+//                        indicator.snp.makeConstraints{(make) in
+//                            make.edges.equalToSuperview()
+//                        }
+//                        SKStoreReviewController.requestReview()
+//                        self.indicator.stopIndicator()
+//                        self.indicator.removeFromSuperview()
+//                    } else {
+//                        // Fallback on earlier versions
+//                    }
+                
+            case 3: break  //跳转到版本更新
+//                    print(vheader)
 //                    UpdateManager.init()
                 default:  //缺省不跳
                     print("第五行")
