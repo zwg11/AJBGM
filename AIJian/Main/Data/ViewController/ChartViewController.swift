@@ -100,7 +100,7 @@ class ChartViewController: UIViewController,ChartViewDelegate{
 
         // 画限制线，标明低于和高于的界限
         // 该界限获取自动适应单位，所以不需判断单位
-        print("lowLimit:\(GetBloodLimit.getRandomDinnerLow())")
+//        print("lowLimit:\(GetBloodLimit.getRandomDinnerLow())")
         // 移除所有限制线
         for i in lineChartView.lineChartView.leftAxis.limitLines{
             lineChartView.lineChartView.leftAxis.removeLimitLine(i)
@@ -120,14 +120,14 @@ class ChartViewController: UIViewController,ChartViewDelegate{
             if maxGluValue < 16.6{
                 lineChartView.lineChartView.leftAxis.axisMaximum = 16.6
             }else{
-                lineChartView.lineChartView.leftAxis.axisMaximum = maxGluValue
+                lineChartView.lineChartView.leftAxis.axisMaximum = maxGluValue+2
             }
             
         }else{
             if maxGluValue < 300{
                 lineChartView.lineChartView.leftAxis.axisMaximum = 300
             }else{
-                lineChartView.lineChartView.leftAxis.axisMaximum = maxGluValue
+                lineChartView.lineChartView.leftAxis.axisMaximum = maxGluValue+10
             }
             //                lineChartView.lineChartView.leftAxis.axisMaximum = 300
         }

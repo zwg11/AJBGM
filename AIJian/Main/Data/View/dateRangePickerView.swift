@@ -21,7 +21,7 @@ class dateRangePickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         return rangeDate[row]
     }
 
-    private let rangeDate:[String] = ["Last 3 days","Last 7 days","Last 30 days","Custom"]
+    private let rangeDate:[String] = ["Last 3 Days","Last 7 Days","Last 30 Days","Custom"]
     // 确定按钮和取消按钮
     // 确定按钮
     lazy var sureButton:UIButton = {

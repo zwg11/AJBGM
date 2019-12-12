@@ -65,7 +65,7 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             
             let cell = UITableViewCell(style: .default, reuseIdentifier: id)
             cell.selectionStyle = .none
-            cell.textLabel?.text = "Last 7 days"
+            cell.textLabel?.text = "Last 7 Days"
             cell.textLabel?.textColor = UIColor.white
             cell.backgroundColor = UIColor.clear
             return cell
