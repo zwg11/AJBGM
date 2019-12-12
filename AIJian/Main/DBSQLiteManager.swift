@@ -400,9 +400,14 @@ public class DBSQLiteManager:NSObject{
         // 由于数据库中的 create_time 为字符串，这里要将时间转为字符串
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let timezone = TimeZone(identifier: "UTC")
+//        dateFormatter.locale = Locale(identifier: "zh_CN")
+        dateFormatter.timeZone = timezone
+//        print(Locale.current)
         // 由于数据库存的是字符串，所以要把z日期转化为字符串
         let st = dateFormatter.string(from: start)
         let en = dateFormatter.string(from: end)
+        print("st:",st,"en:",en)
         var datasOfGlucose:[glucoseDate] = []
         
 //        for record in try! db.prepare(glucose_record){

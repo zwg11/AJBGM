@@ -195,12 +195,16 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             }
 
         }
+        // 检查token的有效性
         isTokenEffective()
+        // 检查App是否更新
+        isUpdateApp()
         
     }
 }
 
 extension HomeViewController{
+    // 检查token的有效性
     func isTokenEffective(){
         //此处分为两种情况：一种是判断token过没过期。第二种是没有网络怎么办
         let dictString:Dictionary = [ "userId":UserInfo.getUserId() ,"token":UserInfo.getToken()] as [String : Any]
@@ -254,5 +258,40 @@ extension HomeViewController{
         }
         // alamofire end
     }
+    
+    // 检查App是否需要更新
+    func isUpdateApp(){
+        //请求网络，是否有最新版本，需要更新
+//        print(UIDevice.current.systemVersion)
+        AlamofireManager.request(VersionUpdate,method: .post, headers:vheader).responseString{ (response) in
+            if response.result.isSuccess {
+                if let jsonString = response.result.value {
+                    if let responseModel = JSONDeserializer<UPDATA_INFO_RESPONSE>.deserializeFrom(json: jsonString) {
+                        print(responseModel.toJSONString(prettyPrint: true)!)
+                        if(responseModel.data?.update == 1 ){
+                            let alertUpdate = UIAlertController.init(title: "Version Update", message: responseModel.data?.log!, preferredStyle: .alert)
+                            let yesAction = UIAlertAction.init(title: "Update", style: .default, handler: { (handler) in
+                                let updateUrl:URL = URL.init(string: (responseModel.data?.url!)!)!
+                                if #available(iOS 10.0, *) {
+                                    UIApplication.shared.open(updateUrl, options: [:], completionHandler: nil)
+                                } else {
+                                    UIApplication.shared.openURL(updateUrl)
+                                }
+                            })
+                            let noAction = UIAlertAction.init(title: "Later", style: .default, handler: nil)
+                            yesAction.setValue(UIColor.black, forKey: "_titleTextColor")
+                            noAction.setValue(UIColor.black, forKey: "_titleTextColor")
+                            alertUpdate.addAction(yesAction)
+                            alertUpdate.addAction(noAction)
+                            self.present(alertUpdate, animated: true, completion: nil)
+                        }else{
+                            print("没有")
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     
 }

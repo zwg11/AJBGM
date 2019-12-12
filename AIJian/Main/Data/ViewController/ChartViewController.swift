@@ -91,8 +91,8 @@ class ChartViewController: UIViewController,ChartViewDelegate{
 //        }else{
 //            lineChartView.lineChartView.leftAxis.axisMaximum = 300
 //        }
-//        initChart()
-//        staticV.initLabelText()
+        initChart()
+        staticV.initLabelText()
     }
         
     func initChart(){
@@ -139,16 +139,18 @@ class ChartViewController: UIViewController,ChartViewDelegate{
         let Red = kRGBColor(255, 0, 0, 0.3)
         lineChartView.addLimitLine(low, "\(low)", Orange)
         lineChartView.addLimitLine(high, "\(high)", Red)
-        // 设置x轴的最大坐标值
-        lineChartView.lineChartView.xAxis.axisMaximum = Double(daysNum!)
         // 根据所选中的时间范围器元素决定各界面的数据如何初始化
         switch pickerSelectedRow{
         case 1,2,3:
             // 初始化 图标所需要的数据
             let array = xAxisArray(Days: daysNum!)
             let data1 = recentDaysData(Days: daysNum!)
+            // 设置x轴的最大坐标值
+            lineChartView.lineChartView.xAxis.axisMaximum = Double(daysNum!)
             lineChartView.drawLineChart(xAxisArray: array as NSArray,xAxisData: data1)
         default:
+            // 设置x轴的最大坐标值
+            lineChartView.lineChartView.xAxis.axisMaximum = Double(daysNum!)
             lineChartView.drawLineChart(xAxisArray: xAxisArray(startDate: startD!, endDate: endD!) as NSArray,xAxisData: DateToData(startD!, endD!))
         }
     }
@@ -217,7 +219,8 @@ class ChartViewController: UIViewController,ChartViewDelegate{
         // 创建一个时间格式器
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy/MM/dd HH:mm"
-
+        let timezone = TimeZone(identifier: "UTC")
+        dateFormatter.timeZone = timezone
         let xxxx = startD! + Int(currentX).minutes
         MarkTimelabel.text = "\(dateFormatter.string(from: xxxx))"
         MarkValuelabel.text = "BG Value:\(valuey)" + GetUnit.getBloodUnit()

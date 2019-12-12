@@ -64,3 +64,6 @@ let METERID_SAVE = BASE_URL + "app/bloodGlucoseRecord/saveMeter"
 
 // 得到meterID信息
 let METERID_GET = BASE_URL + "app/bloodGlucoseRecord/judgeMeter"
+
+// 版本更新
+let VersionUpdate = BASE_URL + "app/versionUpdate"

@@ -18,7 +18,7 @@ let AlamofireManager:Alamofire.SessionManager = {
     return Alamofire.SessionManager(configuration: conf)
 }()
 //请求头部
-let vheader:HTTPHeaders = ["OnCall-Version":"1.2"]
+let vheader:HTTPHeaders = ["OnCall-Version":"1.2","User-Agent":"iOS" + UIDevice.current.systemVersion]
 
 //全局登录逻辑值
 let shift_path = Bundle.main.path(forResource: "GlobalValue", ofType: "plist")

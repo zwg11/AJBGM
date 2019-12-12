@@ -267,10 +267,12 @@ class DataViewController: UIViewController {
         let customSD = customRange.startDatePicker.date
         let customED = customRange.endDatePicker.date
         
-        print("开始时间：\(customRange.startDatePicker.date)")
-        print("结束时间：\(customRange.endDatePicker.date)")
+//        print("开始时间：\(customRange.startDatePicker.date)")
+//        print("结束时间：\(customRange.endDatePicker.date)")
+        // 求出开始时间与结束时间之间相隔的天数
         let components = NSCalendar.current.dateComponents([.day], from: customSD, to: customED)
-        if customRange.startDatePicker.date > customRange.endDatePicker.date{
+//        let components = customED - customSD
+        if customSD > customED{
             let alert = CustomAlertController()
             alert.custom(self, "Attention", "Start Date Needs to Come Before End Date")
         }else if components.day! > 31{
@@ -284,13 +286,17 @@ class DataViewController: UIViewController {
             rangePickerButton.setTitle(dateRangePicker.selectedContent, for: .normal)
             // 设置开始时间和结束时间
             // 开始时间
-            let SD = dateManage(date: customRange.startDatePicker.date)
-            startD = SD.dateAt(.startOfDay)
-//            print("startD:\(startD)")
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            let SD = dateFormatter.string(from: customSD)
+            let ED = dateFormatter.string(from: customED)
+            startD = DateInRegion(SD)?.date.dateAt(.startOfDay)
+//            startD = customSD.dateAt(.startOfDay)
+            print("startD:\(startD)")
             // 结束时间
-            let ED = customRange.endDatePicker.date
-            endD = ED.dateAt(.endOfDay)
-//            print("endD:\(endD)")
+//            let ED = customED
+            endD = (DateInRegion(ED)?.date.dateAt(.endOfDay))!+1.seconds
+            print("endD:\(endD)")
             // 设定被选中的标志位
             pickerSelectedRow = 4
             
@@ -299,9 +305,6 @@ class DataViewController: UIViewController {
             // 打印 开始时间 和 结束时间
             //print("startD:\(startD),endD:\(endD)")
         }
-        
-        
-        
     }
     
     func dateManage(date:Date) -> Date{
@@ -451,6 +454,7 @@ class DataViewController: UIViewController {
             let components = Calendar.current.dateComponents([.day], from: startD!, to: endD!+1.seconds)
             daysNum = components.day
             print("daysNum:\(String(describing: daysNum))")
+            print(startD!,endD!)
             initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())
             sortedTimeOfData()
             chartData()

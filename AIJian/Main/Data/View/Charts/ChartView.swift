@@ -54,7 +54,8 @@ class ChartView: UIView ,ChartViewDelegate{
         if GetUnit.getBloodUnit() == "mg/dL"{
             
         }
-        leftAxis.axisMaximum = 17//最大值
+        leftAxis.axisMaximum
+            = 17//最大值
         leftAxis.axisMinimum = 0
         leftAxis.labelCount = 7//多少等分
         leftAxis.decimals = 1 //小数位
