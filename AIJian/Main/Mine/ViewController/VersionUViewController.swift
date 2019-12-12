@@ -101,13 +101,13 @@ extension VersionUViewController:UITableViewDelegate,UITableViewDataSource{
                     print("第一行")
                 case 1:  //跳转到反馈页面
                     self.navigationController?.pushViewController(SuggestionViewController(), animated: false)
-                case 2:  //跳转到去评分界面
-                    guard let url = URL(string: "itms-apps://itunes.apple.com/app/id1421026171")else {return }
-                    if #available(iOS 10.0, *) {
-                        UIApplication.shared.open(url,options: [:],completionHandler: nil)
-                    } else {
-                        // Fallback on earlier versions
-                    }
+//                case 2:  //跳转到去评分界面
+//                    guard let url = URL(string: "itms-apps://itunes.apple.com/app/id1421026171")else {return }
+//                    if #available(iOS 10.0, *) {
+//                        UIApplication.shared.open(url,options: [:],completionHandler: nil)
+//                    } else {
+//                        // Fallback on earlier versions
+//                    }
                 
 //                    if #available(iOS 10.3, *) {
 //                        // 初始化UI

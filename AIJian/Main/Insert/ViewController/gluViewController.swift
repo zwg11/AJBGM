@@ -239,6 +239,8 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
                                 })
 
                                 
+                            }else if (responseModel.code! == 2 ){
+                                LoginOff.loginOff(self)
                             }else{
                                 print(responseModel.code)
                                 print("插入失败")
@@ -403,6 +405,8 @@ extension gluViewController{
                                     print("meterID更新成功")
                                     isSuccess = true
                                     
+                                }else if (responseModel.code! == 2 ){
+                                    LoginOff.loginOff(self)
                                 }else{
                                     print(responseModel.code)
                                     print("meterID插更新失败")

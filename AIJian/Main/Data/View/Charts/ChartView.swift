@@ -54,7 +54,8 @@ class ChartView: UIView ,ChartViewDelegate{
         if GetUnit.getBloodUnit() == "mg/dL"{
             
         }
-        leftAxis.axisMaximum = 17//最大值
+        leftAxis.axisMaximum
+            = 17//最大值
         leftAxis.axisMinimum = 0
         leftAxis.labelCount = 7//多少等分
         leftAxis.decimals = 1 //小数位
@@ -127,7 +128,7 @@ class ChartView: UIView ,ChartViewDelegate{
         var colors:[UIColor] = []
         // 根据entry的y坐标的大小不同设置不同的颜色
         for i in 0..<set1.count{
-            print("要画的第\(i)个点。")
+//            print("要画的第\(i)个点。")
             if set1[i].y > GetBloodLimit.getRandomDinnerTop(){
                 colors.append(UIColor.red)
             }else if set1[i].y < GetBloodLimit.getRandomDinnerLow(){
@@ -175,7 +176,7 @@ class ChartView: UIView ,ChartViewDelegate{
                 yDataArray1.append(entry)
             }
         }
-        print(yDataArray1)
+//        print(yDataArray1)
         let set1 = LineChartDataSet.init(entries: yDataArray1, label: "")
         // 设置线 的颜色
         set1.colors = [UIColor.black]
@@ -191,7 +192,7 @@ class ChartView: UIView ,ChartViewDelegate{
         var colors:[UIColor] = []
         // 根据entry的y坐标的大小不同设置不同的颜色
         for i in 0..<set1.count{
-            print("要画的第\(i)个点。")
+//            print("要画的第\(i)个点。")
             if set1[i].y > GetBloodLimit.getRandomDinnerTop(){
                 colors.append(UIColor.red)
             }else if set1[i].y < GetBloodLimit.getRandomDinnerLow(){

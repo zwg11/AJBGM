@@ -580,6 +580,8 @@ class InsertViewController: UIViewController {
 //                                self.tabBarController?.selectedIndex = 0
 
                                 
+                            }else if (responseModel.code! == 2 ){
+                                LoginOff.loginOff(self)
                             }else{
                                 print(responseModel.code)
                                 print("插入失败")
@@ -649,6 +651,8 @@ class InsertViewController: UIViewController {
 
 //                                NotificationCenter.default.post(name: NSNotification.Name("Data Update success"), object: self, userInfo: nil)
 
+                            }else if (responseModel.code! == 2 ){
+                                LoginOff.loginOff(self)
                             }else{
                                 print(responseModel.code)
                                 print("更新失败")

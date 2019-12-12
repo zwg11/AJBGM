@@ -250,6 +250,8 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
                                     self.newPasswd_textF.text! = ""
                                     self.verfiedPasswd_textF.text! = ""
                                     self.navigationController?.popToRootViewController(animated: false)
+                                }else if (responseModel.code! == 2 ){
+                                    LoginOff.loginOff(self)
                                 }else{
                                     alert.custom_cengji(self,"Attention", "Password Reset Failure")
                                     self.oldPasswd_textF.text! = ""

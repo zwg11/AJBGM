@@ -86,20 +86,18 @@ class ChartViewController: UIViewController,ChartViewDelegate{
     override func viewWillAppear(_ animated: Bool) {
         print("chartViewController appear.")
         
-        if GetUnit.getBloodUnit() == "mmol/L"{
-            lineChartView.lineChartView.leftAxis.axisMaximum = 16.6
-        }else{
-            lineChartView.lineChartView.leftAxis.axisMaximum = 300
-        }
+//        if GetUnit.getBloodUnit() == "mmol/L"{
+//            lineChartView.lineChartView.leftAxis.axisMaximum = 16.6
+//        }else{
+//            lineChartView.lineChartView.leftAxis.axisMaximum = 300
+//        }
         initChart()
         staticV.initLabelText()
     }
         
     func initChart(){
         
-        // 初始化 图标所需要的数据
-        let array = xAxisArray(Days: daysNum!)
-        let data1 = recentDaysData(Days: daysNum!)
+
         // 画限制线，标明低于和高于的界限
         // 该界限获取自动适应单位，所以不需判断单位
         print("lowLimit:\(GetBloodLimit.getRandomDinnerLow())")
@@ -107,20 +105,52 @@ class ChartViewController: UIViewController,ChartViewDelegate{
         for i in lineChartView.lineChartView.leftAxis.limitLines{
             lineChartView.lineChartView.leftAxis.removeLimitLine(i)
         }
+        // 得到数据中的血糖最大值
+        var maxGluValue = 0.0
+        if glucoseTimeAndValue.count > 0{
+            for i in glucoseTimeAndValue{
+                if maxGluValue < i.value{
+                    maxGluValue = i.value
+                }
+            }
+        }
+        print("maxgluvalue:",maxGluValue)
+        // 如果maxGluValue不超过300，则y轴坐标最大值为300，否则设为maxGluValue+10
+        if GetUnit.getBloodUnit() == "mmol/L"{
+            if maxGluValue < 16.6{
+                lineChartView.lineChartView.leftAxis.axisMaximum = 16.6
+            }else{
+                lineChartView.lineChartView.leftAxis.axisMaximum = maxGluValue
+            }
+            
+        }else{
+            if maxGluValue < 300{
+                lineChartView.lineChartView.leftAxis.axisMaximum = 300
+            }else{
+                lineChartView.lineChartView.leftAxis.axisMaximum = maxGluValue
+            }
+            //                lineChartView.lineChartView.leftAxis.axisMaximum = 300
+        }
+        
         
         let low = GetBloodLimit.getBeforeDinnerLow()
         let high = GetBloodLimit.getRandomDinnerTop()
-        let Orange = kRGBColor(255, 165, 0, 0.5)
-        let Red = kRGBColor(255, 0, 0, 0.5)
+        let Orange = kRGBColor(255, 165, 0, 0.3)
+        let Red = kRGBColor(255, 0, 0, 0.3)
         lineChartView.addLimitLine(low, "\(low)", Orange)
         lineChartView.addLimitLine(high, "\(high)", Red)
-        // 设置x轴的最大坐标值
-        lineChartView.lineChartView.xAxis.axisMaximum = Double(daysNum!)
         // 根据所选中的时间范围器元素决定各界面的数据如何初始化
         switch pickerSelectedRow{
         case 1,2,3:
+            // 初始化 图标所需要的数据
+            let array = xAxisArray(Days: daysNum!)
+            let data1 = recentDaysData(Days: daysNum!)
+            // 设置x轴的最大坐标值
+            lineChartView.lineChartView.xAxis.axisMaximum = Double(daysNum!)
             lineChartView.drawLineChart(xAxisArray: array as NSArray,xAxisData: data1)
         default:
+            // 设置x轴的最大坐标值
+            lineChartView.lineChartView.xAxis.axisMaximum = Double(daysNum!)
             lineChartView.drawLineChart(xAxisArray: xAxisArray(startDate: startD!, endDate: endD!) as NSArray,xAxisData: DateToData(startD!, endD!))
         }
     }
@@ -189,7 +219,8 @@ class ChartViewController: UIViewController,ChartViewDelegate{
         // 创建一个时间格式器
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy/MM/dd HH:mm"
-
+        let timezone = TimeZone(identifier: "UTC")
+        dateFormatter.timeZone = timezone
         let xxxx = startD! + Int(currentX).minutes
         MarkTimelabel.text = "\(dateFormatter.string(from: xxxx))"
         MarkValuelabel.text = "BG Value:\(valuey)" + GetUnit.getBloodUnit()

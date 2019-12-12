@@ -53,21 +53,39 @@ class recentTrendView: UIView {
     func reloadChart(){
         // 移除所有限制线
         for i in recentTrendView.lineChartView.leftAxis.limitLines{
-            print(i)
+//            print(i)
             recentTrendView.lineChartView.leftAxis.removeLimitLine(i)
         }
-        // 设置y轴最大值
-        if GetUnit.getBloodUnit() == "mmol/L"{
-            recentTrendView.lineChartView.leftAxis.axisMaximum = 16.6
+        
+        // 得到数据中的血糖最大值
+        var maxGluValue = 0.0
+        if sortedByDateOfData != nil{
+            for i in sortedByDateOfData!{
+                if maxGluValue < i.bloodGlucoseMg!{
+                    maxGluValue = i.bloodGlucoseMg!
+                }
+            }
+        }
+        // 如果maxGluValue不超过300，则y轴坐标最大值为300，否则设为maxGluValue+10
+        if maxGluValue < 300{
+            if GetUnit.getBloodUnit() == "mmol/L"{
+                recentTrendView.lineChartView.leftAxis.axisMaximum = 16.6
+            }else{
+                recentTrendView.lineChartView.leftAxis.axisMaximum = 300
+            }
         }else{
-            recentTrendView.lineChartView.leftAxis.axisMaximum = 300
+            if GetUnit.getBloodUnit() == "mmol/L"{
+                recentTrendView.lineChartView.leftAxis.axisMaximum = UnitConversion.mgTomm(num: maxGluValue+10)
+            }else{
+                recentTrendView.lineChartView.leftAxis.axisMaximum = maxGluValue+10
+            }
         }
         
         // 画限制线
         let low = GetBloodLimit.getRandomDinnerLow()
         let high = GetBloodLimit.getRandomDinnerTop()
-        let Orange = kRGBColor(255, 165, 0, 0.5)
-        let Red = kRGBColor(255, 0, 0, 0.5)
+        let Orange = kRGBColor(255, 165, 0, 0.3)
+        let Red = kRGBColor(255, 0, 0, 0.3)
         recentTrendView.addLimitLine(low, "\(low)", Orange)
         recentTrendView.addLimitLine(high, "\(high)", Red)
     }

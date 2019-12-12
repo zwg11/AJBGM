@@ -39,7 +39,7 @@ class customRangeView: UIView {
         
     }()
     
-    lazy var startLabel:UILabel = {
+    private lazy var startLabel:UILabel = {
         let label = UILabel()
         label.text = "Start Date"
         label.textAlignment = .center
@@ -48,7 +48,7 @@ class customRangeView: UIView {
         return label
     }()
     
-    lazy var endLabel:UILabel = {
+    private lazy var endLabel:UILabel = {
         let label = UILabel()
         label.text = "End Date"
         label.textAlignment = .center

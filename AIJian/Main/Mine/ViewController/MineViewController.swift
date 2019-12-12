@@ -143,6 +143,8 @@ class MineViewController: UIViewController {
                             self.indicator.removeFromSuperview()
                         DBSQLiteManager.manager.updateUserInfo(responseModel.data!)
                             self.tableview.reloadRows(at: [IndexPath(row:0,section:0)], with: .none)
+                        }else if (responseModel.code! == 2 ){
+                            LoginOff.loginOff(self)
                         }else{
                             // 将风火轮移除，并停止转动
                             self.indicator.stopIndicator()
@@ -179,22 +181,24 @@ class MineViewController: UIViewController {
      每个present,都需要对应一个dismiss.
      */
     @objc public func loginOff(){
-        //用do...catch语句来做。。。无论怎么样，都进行dismiss。如果出错了，就直接present
-        // 回到登录界面
-        self.dismiss(animated: true, completion: nil)
-        let viewController = loginViewController()
-        let nv = loginNavigationController(rootViewController: viewController)
-        // 设置弹出模式为占满屏幕
-        nv.modalPresentationStyle = .fullScreen
-        self.present(nv, animated: true, completion: nil)
         
-        // 将对应的用户的token设为空
-        //let path = Bundle.main.path(forResource: "User", ofType: "plist")
-        let path = PlistSetting.getFilePath(File: "User.plist")
-        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
-        //退出登录，需要把token清空
-        data.setObject("", forKey: "token" as NSCopying )
-        data.write(toFile: path, atomically: true)
+//        //用do...catch语句来做。。。无论怎么样，都进行dismiss。如果出错了，就直接present
+//        // 回到登录界面
+     
+        LoginOff.loginOff(self)
+//        let viewController = loginViewController()
+//        let nv = loginNavigationController(rootViewController: viewController)
+//        // 设置弹出模式为占满屏幕
+//        nv.modalPresentationStyle = .fullScreen
+//        self.present(nv, animated: true, completion: nil)
+//
+//        // 将对应的用户的token设为空
+//        //let path = Bundle.main.path(forResource: "User", ofType: "plist")
+//        let path = PlistSetting.getFilePath(File: "User.plist")
+//        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
+//        //退出登录，需要把token清空
+//        data.setObject("", forKey: "token" as NSCopying )
+//        data.write(toFile: path, atomically: true)
     }
 }
 extension MineViewController:UITableViewDelegate,UITableViewDataSource{

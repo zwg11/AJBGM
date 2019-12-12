@@ -27,7 +27,7 @@ func xAxisArray(Days:Int)->[String]{
     for i in dates{
         xAxisStrings.append(i.toFormat("MM/dd"))
     }
-    print(xAxisStrings)
+//    print(xAxisStrings)
     xAxisStrings[0] = ""
     xAxisStrings[xAxisStrings.count-1] = ""
     return xAxisStrings
@@ -71,7 +71,7 @@ func xAxisArrayToWeek(Days:Int)->[String]{
         xAxisStrings.append("           " + x)
         
     }
-    print(xAxisStrings)
+//    print(xAxisStrings)
     //xAxisStrings[0] = ""
     xAxisStrings[xAxisStrings.count-1] = ""
     return xAxisStrings
@@ -97,7 +97,7 @@ func recentDaysData(Days:Int)->[Double]{
         if i>=start && i<=end{
             // 计算 start 和 i之间的分钟差
             let res = calendar.dateComponents([.minute], from: start, to: i.date)
-            print(res.minute!)
+//            print(res.minute!)
             let result1 = res.minute!
             
             // 根据分钟差计算出相对于 零点的x坐标
@@ -129,7 +129,7 @@ func xAxisArray(startDate:Date,endDate:Date)->[String]{
     for i in dates{
         xAxisStrings.append(i.toFormat("MM/dd"))
     }
-    print(xAxisStrings)
+//    print(xAxisStrings)
     xAxisStrings[0] = ""
     xAxisStrings[xAxisStrings.count-1] = ""
     return xAxisStrings
@@ -151,7 +151,7 @@ func DateToData(_ start:Date,_ end:Date)->[Double]{
     for i in glucoseTime{
         // 先求出 日期数组中各个日期 与 开头日期的 分钟差
         let res = calendar.dateComponents([.minute], from: start, to: i.date)
-        print(res.minute!)
+//        print(res.minute!)
         let result1 = res.minute!
         // 保留3位小数
         //var rrr = String(format: "%.3f", Double(result1)/1440.0)

@@ -433,6 +433,8 @@ extension DataTableViewController{
                             alert.custom(self, "Attention", "Delete failed, please try again later.")
                             // 删除失败函数直接退出
                             return
+                        }else if (deleteResponse.code! == 2 ){
+                            LoginOff.loginOff(self)
                         }else{
                             // 如果删除成功
                             // ******** 删除数据库对应的数据 ***********
