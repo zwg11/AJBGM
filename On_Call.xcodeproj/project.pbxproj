@@ -593,8 +593,8 @@
 		A812E9EFA8B37373CD2D05DBB08FDB65 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				A32EB0E8DBAE9B6ABD130E92D422FA94 /* BLEViewController 2.swift */,
 				F3EA8AF88908000078EAC3AC949A8176 /* BLEViewController.swift */,
+				A32EB0E8DBAE9B6ABD130E92D422FA94 /* BLEViewController 2.swift */,
 				13E708809ACCA305E2B4107ADF6D21D4 /* InsertViewController.swift */,
 				FCE379B051D4A0168749A671811BD868 /* InsulinViewController.swift */,
 				12334E6F67A1C77D5D81A3AA8A2BEB74 /* alertViewController.swift */,
@@ -1177,7 +1177,6 @@
 			baseConfigurationReference = 506CB3382B337BC12C8E6AB1 /* Pods-On_Call.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-1";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9QH38524SB;
@@ -1200,7 +1199,6 @@
 			baseConfigurationReference = 191DB7CB7341E4FF91B2196C /* Pods-On_Call.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-1";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9QH38524SB;

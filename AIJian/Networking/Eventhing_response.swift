@@ -157,3 +157,17 @@ struct RECENT_REC:HandyJSON{
     var recentRecord:String?
     
 }
+
+
+struct UPDATA_INFO:HandyJSON{
+    var update:Int64?
+    var size:String?
+    var log:String?
+    var url:String?
+}
+//信息更新返回响应体：
+struct UPDATA_INFO_RESPONSE:HandyJSON{
+    var code:Int64?
+    var msg:String?
+    var data:UPDATA_INFO?
+}

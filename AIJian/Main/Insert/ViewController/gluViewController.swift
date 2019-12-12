@@ -58,10 +58,11 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
             cell = UITableViewCell(style: .value1, reuseIdentifier: "id")
         }
         
-        cell?.textLabel?.text = String(BLEglucoseValue[indexPath.row]) + "mg/dL"
         cell?.textLabel?.font = UIFont.systemFont(ofSize: 20)
         // 根据血糖值在不同的范围设置不同的字颜色，以表示血糖的正常与否
         if GetUnit.getBloodUnit() == "mg/dL"{
+            // 由于原数据为mg/dL,所以不需转换
+            cell?.textLabel?.text = String(BLEglucoseValue[indexPath.row]) + GetUnit.getBloodUnit()
             if BLEglucoseValue[indexPath.row] > Int(GetBloodLimit.getRandomDinnerTop()){
                 cell?.textLabel?.textColor = UIColor.red
             }else{
@@ -74,10 +75,14 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
                 }
             }
         }else{
-            if UnitConversion.mgTomm(num: Double(BLEglucoseValue[indexPath.row]))>GetBloodLimit.getRandomDinnerTop(){
+            // 需转换单位
+            let result = UnitConversion.mgTomm(num: Double(BLEglucoseValue[indexPath.row]))
+            cell?.textLabel?.text = String(result) + GetUnit.getBloodUnit()
+            
+            if result>GetBloodLimit.getRandomDinnerTop(){
                 cell?.textLabel?.textColor = UIColor.red
             }else{
-                if UnitConversion.mgTomm(num: Double(BLEglucoseValue[indexPath.row]))<GetBloodLimit.getRandomDinnerLow(){
+                if result<GetBloodLimit.getRandomDinnerLow(){
 //                    cell?.textLabel?.textColor = UIColor.yellow
                     cell?.textLabel?.textColor = UIColor.orange
                 }
@@ -150,6 +155,7 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         }
         // 数据处理
         var datas:[glucoseDate] = []
+        print("bleglucosemark:",BLEglucoseMark)
         for i in 0...BLEglucoseValue.count-1{
             print("第\(i)个数据")
             // MARK:- 第一步：先封装成一个对象
@@ -158,6 +164,7 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
             // 创建一个recordId
             let uuid = UUID().uuidString.components(separatedBy: "-").joined()
             insertData.bloodGlucoseRecordId = uuid
+            
             // 判断是否为控制液数据，不是则存储
             if BLEglucoseMark[i] != 12{
                 // 数据初始化
@@ -173,7 +180,7 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
             }
             
         }
-        
+        print("插入的数据量：",datas.count)
         // MARK:- 第三步：再将这个数组直接toString
         let GlucoseJsonData = datas.toJSONString()!
         //手动输入数据，请求部分
@@ -268,7 +275,6 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
                 alert.custom(self, "", "Insert Failed,Please Try Again Later.")
             }
         }//end of request
-        
         
         
     }

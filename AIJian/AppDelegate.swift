@@ -15,6 +15,7 @@ import IQKeyboardManagerSwift
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    
     var window: UIWindow?
     
     var isFirstStart:Bool?
@@ -22,9 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var blockRotation = false
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        
-        print(".....")
+
         // 设置文本框适应键盘
         IQKeyboardManager.shared.enable = true
         // 先确认是否初始化plist文件，没有则初始化
@@ -92,6 +91,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("进入轮播图")
                 UserInfo.setIsFirst(false)
             }else{
+                //请求网络，是否有最新版本，需要更新
+                print(UIDevice.current.systemVersion)
+                AlamofireManager.request(VersionUpdate,method: .post, headers:vheader).responseString{ (response) in
+                    if response.result.isSuccess {
+                        if let jsonString = response.result.value {
+                            if let responseModel = JSONDeserializer<UPDATA_INFO_RESPONSE>.deserializeFrom(json: jsonString) {
+                                print(responseModel.toJSONString(prettyPrint: true)!)
+                                if(responseModel.data?.update == 1 ){
+                                    let alertUpdate = UIAlertController.init(title: "Version Update", message: responseModel.data?.log!, preferredStyle: .alert)
+                                    let yesAction = UIAlertAction.init(title: "Update", style: .default, handler: { (handler) in
+                                        let updateUrl:URL = URL.init(string: (responseModel.data?.url!)!)!
+                                        if #available(iOS 10.0, *) {
+                                            UIApplication.shared.open(updateUrl, options: [:], completionHandler: nil)
+                                        } else {
+                                            UIApplication.shared.openURL(updateUrl)
+                                        }
+                                    })
+                                    let noAction = UIAlertAction.init(title: "Later", style: .default, handler: nil)
+                                    yesAction.setValue(UIColor.black, forKey: "_titleTextColor")
+                                    noAction.setValue(UIColor.black, forKey: "_titleTextColor")
+                                    alertUpdate.addAction(yesAction)
+                                    alertUpdate.addAction(noAction)
+                                    UIApplication.shared.keyWindow?.rootViewController?.present(alertUpdate, animated: true, completion: nil)
+                                    
+                                    print(responseModel.data?.log)
+                                    print(responseModel.data?.url)
+                                }else{
+                                    print("没有")
+                                }
+                            }
+                        }
+                    }else{  //没网的时候
+                        print("网络链接失败")
+                        self.window?.rootViewController = tabBarController  //没网的时候也跳到选择界面
+                        //具体的提示，homeViewController   自己会做
+                    }
+                }
+                
+                
 //                let siren = Siren.shared
 //                siren.launchAppStore()
                 //公司宣传页

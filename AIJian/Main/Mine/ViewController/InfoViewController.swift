@@ -37,18 +37,19 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
         }
         
         
-//        if (userInfo.height != nil){
-//            infoDataArray[1] = (userInfo.height! == 0) ? "男":"女"
-//        }
-        
         if GetUnit.getWeightUnit() == "kg"{
             infoDataArray[2] = (userInfo.weight_kg != nil) ? "\(userInfo.weight_kg!)":""
         }else{
             infoDataArray[2] = (userInfo.weight_lbs != nil) ? "\(userInfo.weight_lbs!)":""
         }
         infoDataArray[3] = (userInfo.height != nil) ? "\(userInfo.height!)":""
-        let dd = userInfo.birthday!.components(separatedBy: "-").joined(separator: "/")
-        infoDataArray[4] = dd
+        print("-----",userInfo.birthday)
+        if userInfo.birthday == nil{
+            infoDataArray[4] = ""
+        }else{
+            infoDataArray[4] = userInfo.birthday!.components(separatedBy: "-").joined(separator: "/")
+        }
+        
         infoDataArray[5] = userInfo.country ?? ""
         infoDataArray[6] = userInfo.phone_number ?? ""
         
@@ -188,7 +189,12 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
         info.height = UpdateUserInfo.height
         info.weightLbs = UpdateUserInfo.weightLbs
         info.weightKg = UpdateUserInfo.weightKg
-        info.birthday = UpdateUserInfo.birthday!.components(separatedBy: "/").joined(separator: "-")
+        if UpdateUserInfo.birthday == ""{
+            info.birthday = ""
+        }else{
+            info.birthday = UpdateUserInfo.birthday!.components(separatedBy: "/").joined(separator: "-")
+        }
+        
         info.phoneNumber = UpdateUserInfo.phoneNumber
         info.country = UpdateUserInfo.country
         // 将更新内容放入
