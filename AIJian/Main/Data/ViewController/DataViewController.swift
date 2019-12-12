@@ -20,7 +20,8 @@ var endD:Date?
 //  表示该时间范围的天数
 var daysNum:Int?
 
-// 范围选择器选中的目标，作为标志位
+// 时间范围选择器选中的目标，作为标志位
+// 从1~4，分别表示 Last 3 days，Last 7 days，Last 30 days，Custom
 var pickerSelectedRow = 2
 
 class DataViewController: UIViewController {
@@ -80,7 +81,7 @@ class DataViewController: UIViewController {
         let button = UIButton(type:.system)
         button.addTarget(self, action: #selector(chooseDate), for: .touchUpInside)
         button.titleLabel?.adjustsFontSizeToFitWidth = true
-        button.setTitle("Last 7 days", for: .normal)
+        button.setTitle("Last 7 Days", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
 //        button.titleLabel?.textAlignment = .right
@@ -343,22 +344,26 @@ class DataViewController: UIViewController {
                 }
                 make.height.equalTo(AJScreenHeight)
             }
+            // 设定picker的标志位
+            pickerSelectedRow = 4
             self.navigationController!.view.layoutIfNeeded()
         }// 否则更新按钮标题
         else{
 //            UIView.animate(withDuration: 0.5, animations: dismiss)
             // 更新按钮标题
-            rangePickerButton.setTitle(dateRangePicker.selectedContent ?? "Last 7 days", for: .normal)
+            rangePickerButton.setTitle(dateRangePicker.selectedContent ?? "Last 7 Days", for: .normal)
             
             // 监听导航栏右按钮的文本，对于不同的文本设定不同的标志位
             switch dateRangePicker.selectedContent{
                 
-            case "Last 3 days":
+            case "Last 3 Days":
                 pickerSelectedRow = 1
-            case "Last 7 days":
+            case "Last 7 Days":
                 pickerSelectedRow = 2
-            case "Last 30 days":
+            case "Last 30 Days":
                 pickerSelectedRow = 3
+            case "Custom":
+                pickerSelectedRow = 4
             default:
                 print("error.No selelcted row in picker.")
                 

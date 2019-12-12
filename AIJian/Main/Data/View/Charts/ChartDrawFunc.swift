@@ -18,7 +18,7 @@ func xAxisArray(Days:Int)->[String]{
     var x = start
     var dates:[Date] = []
     // 使得日期数组都装着每天的开始
-    while x <= end {
+    while x <= end+1.days {
         dates.append(x)
         x = x + 1.days
     }
