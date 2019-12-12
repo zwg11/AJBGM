@@ -557,10 +557,23 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                                 if(self.lastRecord != ""){
                                     // 转到展示数据的页面
                                     let gluVC = gluViewController()
+                                    var glucoseMark:[Int] = []
+                                    var glucoseDate:[String] = []
+                                    var glucoseValue:[Int] = []
+                                    if glucoseMark.count>0{
+                                        for i in 0...self.BLEglucoseMark.count-1{
+                                            if self.BLEglucoseMark[i] != 12{
+                                                glucoseMark.append(self.BLEglucoseMark[i])
+                                                glucoseDate.append(self.BLEglucoseDate[i])
+                                                glucoseValue.append(self.BLEglucoseValue[i])
+                                            }
+                                        }
+                                    }
+                                    
                                     // 初始化数据，并刷新表格
-                                    gluVC.BLEglucoseDate = self.BLEglucoseDate
-                                    gluVC.BLEglucoseMark = self.BLEglucoseMark
-                                    gluVC.BLEglucoseValue = self.BLEglucoseValue
+                                    gluVC.BLEglucoseDate = glucoseDate
+                                    gluVC.BLEglucoseMark = glucoseMark
+                                    gluVC.BLEglucoseValue = glucoseValue
                                     // 要去掉最后一个字符
                                     let strRange = self.lastRecord.count - 2
                                     gluVC.lastRecord = self.lastRecord[0,strRange]

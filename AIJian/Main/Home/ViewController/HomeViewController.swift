@@ -153,12 +153,12 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         let value = UIInterfaceOrientation.portrait.rawValue
         UIDevice.current.setValue(value, forKey: "orientation")
 
-        // 读取配置文件，获取meterID的内容
-        let path = PlistSetting.getFilePath(File: "User.plist")
-        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
-        print("配置文件内容\(data)")
-        let arr = data["meterID"] as! NSMutableDictionary
-        print("配置文件中的meterID内容：\(arr)")
+//        // 读取配置文件，获取meterID的内容
+//        let path = PlistSetting.getFilePath(File: "User.plist")
+//        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
+//        print("配置文件内容\(data)")
+//        let arr = data["meterID"] as! NSMutableDictionary
+//        print("配置文件中的meterID内容：\(arr)")
         
         
     }
@@ -195,7 +195,64 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             }
 
         }
+        isTokenEffective()
         
     }
 }
 
+extension HomeViewController{
+    func isTokenEffective(){
+        //此处分为两种情况：一种是判断token过没过期。第二种是没有网络怎么办
+        let dictString:Dictionary = [ "userId":UserInfo.getUserId() ,"token":UserInfo.getToken()] as [String : Any]
+        // alamofire begin
+        AlamofireManager.request(CHECK_TOKEN,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
+            if response.result.isSuccess {
+                if let jsonString = response.result.value {
+                    if let responseModel = JSONDeserializer<responseModel>.deserializeFrom(json: jsonString) {
+                        print(responseModel.toJSONString(prettyPrint: true)!)
+                        if(responseModel.code == 1 ){  //token没过期
+                            //没过期，允许使用，跳转到tabBar这个地方
+                            print("你的token还能用")
+//                            self.window?.rootViewController = tabBarController
+                        }else{  //token过期了,不让用
+                            //过期了，需要清空app文件中的token
+                            print("你的token过期了")
+                            //                                UserInfo.setToken("")
+                            // 跳转到登录界面
+                            let viewController = loginViewController()
+                            let loginNv = loginNavigationController(rootViewController: viewController)
+                            let alertToLigin = UIAlertController(title: "Attention", message: "Your ligin information has expired.", preferredStyle: .alert)
+                            let okAction = UIAlertAction(title: "Done", style: .default, handler:{
+                                action in
+                                // 跳转到登录界面
+                                self.present(loginNv, animated: true, completion: nil)
+                                // 清空token
+                                UserInfo.setToken("")
+                            })
+                            alertToLigin.addAction(okAction)
+                            self.present(alertToLigin, animated: true, completion: nil)
+                        }
+                    }
+                }
+            }else{  //没网的时候
+                print("网络链接失败")
+                // 跳转到登录界面
+//                let viewController = loginViewController()
+//                let loginNv = loginNavigationController(rootViewController: viewController)
+                let alertToLigin = UIAlertController(title: "Attention", message: "The Internet Doesn't Work,Data Change is Not Allowed.", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "Done", style: .default, handler:{
+                    action in
+//                    // 跳转到登录界面
+//                    self.present(loginNv, animated: true, completion: nil)
+//                    // 清空token
+//                    UserInfo.setToken("")
+                })
+                alertToLigin.addAction(okAction)
+                self.present(alertToLigin, animated: true, completion: nil)
+                //具体的提示，homeViewController   自己会做
+            }
+        }
+        // alamofire end
+    }
+    
+}

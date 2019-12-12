@@ -39,7 +39,7 @@ func initDataSortedByDate(startDate:Date,endDate:Date,userId:Int64){
     let sqliteManager = DBSQLiteManager()
     data = sqliteManager.selectGlucoseRecordInRange(start: startDate, end: endDate, userId: userId)
     // 将请求的数据赋值给数组
-    print(data)
+//    print(data)
     sortedByDateOfData = data
 }
 
@@ -76,8 +76,8 @@ func sortedTimeOfData(){
     // 将排好序的时间和数据赋值给准备好的数组
     sortedTime = Time
     sortedData = Data
-    print(sortedData)
-    print(sortedTime)
+//    print(sortedData)
+//    print(sortedTime)
     
 }
 
@@ -110,7 +110,7 @@ func chartData(){
     // 将处理好的数组赋值给对应数组
     glucoseTime = Time
     glucoseTimeAndValue = TimeAndValue
-    print("glucoseTimeAndValue:\(glucoseTimeAndValue)")
+//    print("glucoseTimeAndValue:\(glucoseTimeAndValue)")
     
 }
 
