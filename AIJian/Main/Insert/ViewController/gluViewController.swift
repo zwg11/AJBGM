@@ -241,6 +241,9 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
                                 
                             }else if (responseModel.code! == 2 ){
                                 LoginOff.loginOff(self)
+                                
+                                let alert = CustomAlertController()
+                                alert.custom(self, "", "Your account is already logged in at the other end!")
                             }else{
                                 print(responseModel.code)
                                 print("插入失败")
@@ -407,6 +410,9 @@ extension gluViewController{
                                     
                                 }else if (responseModel.code! == 2 ){
                                     LoginOff.loginOff(self)
+                                    
+                                    let alert = CustomAlertController()
+                                    alert.custom(self, "", "Your account is already logged in at the other end!")
                                 }else{
                                     print(responseModel.code)
                                     print("meterID插更新失败")

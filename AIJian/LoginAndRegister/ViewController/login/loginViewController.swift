@@ -46,6 +46,7 @@ class loginViewController: UIViewController,UITextFieldDelegate {
             make.left.right.top.equalToSuperview()
         }
          hideKeyboardWhenTappedAround()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

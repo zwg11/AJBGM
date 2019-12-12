@@ -582,6 +582,9 @@ class InsertViewController: UIViewController {
                                 
                             }else if (responseModel.code! == 2 ){
                                 LoginOff.loginOff(self)
+                                
+                                let alert = CustomAlertController()
+                                alert.custom(self, "", "Your account is already logged in at the other end!")
                             }else{
                                 print(responseModel.code)
                                 print("插入失败")
@@ -653,6 +656,9 @@ class InsertViewController: UIViewController {
 
                             }else if (responseModel.code! == 2 ){
                                 LoginOff.loginOff(self)
+                                
+                                let alert = CustomAlertController()
+                                alert.custom(self, "", "Your account is already logged in at the other end!")
                             }else{
                                 print(responseModel.code)
                                 print("更新失败")

@@ -168,6 +168,9 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
                            
                         }else if (responseModel.code! == 2 ){
                            LoginOff.loginOff(self)
+                            
+                            let alert = CustomAlertController()
+                            alert.custom(self, "", "Your account is already logged in at the other end!")
                         }else{
                             let alert = CustomAlertController()
                             alert.custom(self, "Attention", "Update Failure")

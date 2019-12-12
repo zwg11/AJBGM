@@ -145,6 +145,9 @@ class MineViewController: UIViewController {
                             self.tableview.reloadRows(at: [IndexPath(row:0,section:0)], with: .none)
                         }else if (responseModel.code! == 2 ){
                             LoginOff.loginOff(self)
+                            
+                            let alert = CustomAlertController()
+                            alert.custom(self, "", "Your account is already logged in at the other end!")
                         }else{
                             // 将风火轮移除，并停止转动
                             self.indicator.stopIndicator()

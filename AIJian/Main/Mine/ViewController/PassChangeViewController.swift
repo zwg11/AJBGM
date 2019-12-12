@@ -252,6 +252,9 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
                                     self.navigationController?.popToRootViewController(animated: false)
                                 }else if (responseModel.code! == 2 ){
                                     LoginOff.loginOff(self)
+                                    
+                                    let alert = CustomAlertController()
+                                    alert.custom(self, "", "Your account is already logged in at the other end!")
                                 }else{
                                     alert.custom_cengji(self,"Attention", "Password Reset Failure")
                                     self.oldPasswd_textF.text! = ""
