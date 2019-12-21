@@ -217,6 +217,11 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
                             self.content_field.text! = ""
                             self.emailCommponent.textField.text! = UserInfo.getEmail()
                             self.telephoneCommponent.textField.text! = ""
+                        }else if (responseModel.code! == 2 ){
+                            LoginOff.loginOff(self)
+                            
+                            let alert = CustomAlertController()
+                            alert.custom(self, "", "Your account is already logged in at the other end!")
                         }else{
                             alert.custom_cengji(self,"Attention", "Sorry.Feedback Failure！")
                             self.navigationController?.popViewController(animated: false)
