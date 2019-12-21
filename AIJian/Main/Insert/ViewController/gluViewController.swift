@@ -335,17 +335,6 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         self.view.backgroundColor = UIColor.clear
         self.view.addSubview(tableView)
         self.view.addSubview(button)
-        tableView.snp.makeConstraints{(make) in
-            make.left.right.equalToSuperview()
-            make.top.equalTo(tableHeadLabel.snp.bottom)
-            make.bottom.equalToSuperview().offset(-44)
-//            if #available(iOS 11.0, *) {
-//                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
-//            } else {
-//                // Fallback on earlier versions
-//                make.top.equalTo(topLayoutGuide.snp.bottom)
-//            }
-        }
         button.snp.makeConstraints{(make) in
             make.left.right.equalToSuperview()
             if #available(iOS 11.0, *) {
@@ -355,6 +344,17 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
                 make.bottom.equalTo(bottomLayoutGuide.snp.top)
             }
             make.height.equalTo(44)
+        }
+        tableView.snp.makeConstraints{(make) in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(tableHeadLabel.snp.bottom)
+            make.bottom.equalTo(button.snp.top)
+//            if #available(iOS 11.0, *) {
+//                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+//            } else {
+//                // Fallback on earlier versions
+//                make.top.equalTo(topLayoutGuide.snp.bottom)
+//            }
         }
         
     }
