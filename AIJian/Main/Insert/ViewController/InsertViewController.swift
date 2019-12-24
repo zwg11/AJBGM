@@ -373,7 +373,9 @@ class InsertViewController: UIViewController {
         var dis_press_kPa:Double?
         // 单位为 mmHg
         if GetUnit.getPressureUnit() == "mmHg"{
+            // 收缩压
             sys_press_mmHg = input.getSysValue()
+            // 舒张压
             dis_press_mmHg = input.getDiaValue()
             // 如果不都为空
             if sys_press_mmHg != nil || dis_press_mmHg != nil{
@@ -383,7 +385,7 @@ class InsertViewController: UIViewController {
                         || dis_press_mmHg! < 45 || dis_press_mmHg! > 300{
                         Message += "\nBlood Pressure Range is:45~300"
                     }else if dis_press_mmHg! >= sys_press_mmHg!{  //收缩压必须大于舒张压
-                        Message += "\nDBP Should be Greater than SBP "
+                        Message += "\nSBP Should be Greater than DBP "
                     }else{
                         sys_press_kPa = PressureUnitChange.mmHgTokPa(num: sys_press_mmHg!)
                         dis_press_kPa = PressureUnitChange.mmHgTokPa(num: dis_press_mmHg!)
