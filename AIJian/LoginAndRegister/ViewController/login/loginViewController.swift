@@ -41,6 +41,7 @@ class loginViewController: UIViewController,UITextFieldDelegate {
         self.navigationController?.isNavigationBarHidden = true
         self.view.backgroundColor = UIColor.clear
         self.view.addSubview(loginview)
+       
         loginview.snp.makeConstraints{(make) in
             make.height.equalTo(AJScreenHeight)
             make.left.right.top.equalToSuperview()
@@ -50,6 +51,8 @@ class loginViewController: UIViewController,UITextFieldDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+//         print("qqqqqqqqqqqqqqqq",FormatMethodUtil.validateEmail(email: "berapin.wu@aconlab.com.cn"))
+//        print("qqqqqqqqqqqqqqqq",FormatMethodUtil.validateEmail(email: "berapin_.wu@_aconlab.com.cn"))
         if UserInfo.getEmail() != ""{
             loginview.userNameTextField.text! = UserInfo.getEmail()
         }else{
