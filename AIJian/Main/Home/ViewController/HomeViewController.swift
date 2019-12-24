@@ -222,7 +222,7 @@ extension HomeViewController{
                             //过期了，需要清空app文件中的token
                             print("你的token过期了")
                             //                                UserInfo.setToken("")
-                            // 跳转到登录界面
+                            // 跳转到登录界面 
                             let viewController = loginViewController()
                             let loginNv = loginNavigationController(rootViewController: viewController)
                             let alertToLigin = UIAlertController(title: "Attention", message: "Your login information has expired.", preferredStyle: .alert)
