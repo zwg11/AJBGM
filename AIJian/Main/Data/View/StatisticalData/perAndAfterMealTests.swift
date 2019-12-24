@@ -161,7 +161,7 @@ class perAndAfterMealTests: UIView {
             make.left.equalToSuperview().offset(10)
             make.top.equalToSuperview()
             make.height.equalTo(44)
-            make.width.equalTo((AJScreenWidth-20)/2)
+            make.width.equalTo(AJScreenWidth-20)
         }
         
         // 设置 检测视图 布局
