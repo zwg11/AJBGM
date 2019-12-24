@@ -4,9 +4,9 @@
  */
 
 
-let BASE_URL = "http://120.78.167.239:8080/"
+//let BASE_URL = "http://120.78.167.239:8080/"
 
-let OTHER_URL = "http://120.78.167.239:8080/"
+let BASE_URL = "https://bgapp.acondiabetescare.com/"
 
 
 
