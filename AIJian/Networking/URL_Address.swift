@@ -19,6 +19,9 @@ let CHECK_TOKEN = BASE_URL + "app/checkToken"
 // 获取验证码
 let get_Code = BASE_URL + "app/sendCode"
 
+// 忘记密码时，获取验证码
+let get_Code_forget = BASE_URL + "app/sendPasswordCode"
+
 // 修改密码之前的，邮箱验证
 let RETRIEVEFIRST = BASE_URL + "app/passwordRetrieveFirst"
 

@@ -142,6 +142,10 @@ class loginViewController: UIViewController,UITextFieldDelegate {
                                 self.requestData(day: 1000)
 
  
+                            }else if(responseModel.code == -1){
+                                self.indicator.stopIndicator()
+                                self.indicator.removeFromSuperview()
+                                alertController.custom(self,"Attention", "Your acount has been disabled.Please contact BGApp@acondiabetescare.com")
                             }else{
                                 self.indicator.stopIndicator()
                                 self.indicator.removeFromSuperview()

@@ -93,12 +93,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                // alamofire end
             }
             //**********************
-            if UserInfo.getIsFirst() == true{
-                self.setStaticGuidePage()
-                print("进入轮播图")
-                UserInfo.setIsFirst(false)
-            }else{
-            }
+//            if UserInfo.getIsFirst() == true{
+//                self.setStaticGuidePage()
+//                print("进入轮播图")
+//                UserInfo.setIsFirst(false)
+//            }else{
+//            }
         }
         window?.makeKeyAndVisible()
         Siren.shared.wail()

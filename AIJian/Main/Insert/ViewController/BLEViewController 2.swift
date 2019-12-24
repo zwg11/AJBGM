@@ -560,7 +560,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                                     var glucoseMark:[Int] = []
                                     var glucoseDate:[String] = []
                                     var glucoseValue:[Int] = []
-                                    if glucoseMark.count>0{
+                                    if self.BLEglucoseMark.count>0{
                                         for i in 0...self.BLEglucoseMark.count-1{
                                             if self.BLEglucoseMark[i] != 12{
                                                 glucoseMark.append(self.BLEglucoseMark[i])
