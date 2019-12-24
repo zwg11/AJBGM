@@ -132,7 +132,7 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
                                 // // 请求失败，将风火轮移除，并停止转动
                                 self.indicator.stopIndicator()
                                 self.indicator.removeFromSuperview()
-                                alertController.custom(self,"Attention", responseModel.msg)
+                                alertController.custom(self,"Attention", "Code Error!")
                                 return
                             }
                         } //end of letif
@@ -166,7 +166,7 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
             emailCheck.getAuthCodeButton.countDown(count: 90)
             let  dictString:Dictionary = [ "email":String(email!)]
             print(dictString)
-            Alamofire.request(get_Code,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
+            Alamofire.request(get_Code_forget,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
                 if response.result.isSuccess {
                     if let jsonString = response.result.value {
                         if let responseModel = JSONDeserializer<responseModel>.deserializeFrom(json: jsonString) {
@@ -176,8 +176,9 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
                              */
                             if(responseModel.code == 1 ){
                                 //返回1，让其倒计时                                
-                            }else{
-                                alertController.custom(self,"Attention", "Email Not Found")
+                            }else if responseModel.code == -1{
+                                alertController.custom(self,"Attention", "Email is not registered")
+                                
                             }
                             print("注册时，获取验证码阶段")
                         }

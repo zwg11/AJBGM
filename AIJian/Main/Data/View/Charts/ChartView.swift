@@ -49,7 +49,7 @@ class ChartView: UIView ,ChartViewDelegate{
         
         //网格
 //        leftAxis.gridColor = UIColor.init(red: 233/255.0, green: 233/255.0, blue: 233/255.0, alpha: 1.0)
-        leftAxis.gridColor = UIColor.init(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 0.3)
+        leftAxis.gridColor = UIColor.init(red: 233/255.0, green: 233/255.0, blue: 233/255.0, alpha: 0.3)
         leftAxis.gridAntialiasEnabled = false//抗锯齿
         if GetUnit.getBloodUnit() == "mg/dL"{
             
@@ -67,7 +67,7 @@ class ChartView: UIView ,ChartViewDelegate{
         xAxis.labelFont = UIFont.systemFont(ofSize: 10.0)
         xAxis.labelPosition = .bottom
         xAxis.labelRotatedHeight = 2
-        xAxis.gridColor = UIColor.init(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 0.3)
+        xAxis.gridColor = UIColor.init(red: 233/255.0, green: 233/255.0, blue: 233/255.0, alpha: 0.3)
 //        xAxis.gridColor = UIColor.lightGray
         xAxis.axisLineColor = UIColor.black
         xAxis.axisMinimum = 0
