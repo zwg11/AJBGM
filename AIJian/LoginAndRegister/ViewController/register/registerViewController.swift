@@ -231,7 +231,7 @@ class registerViewController: UIViewController,UITextFieldDelegate {
         }
         if FormatMethodUtil.validateEmail(email: email!) == true{
             //只要邮箱正确，就给发送邮件
-            self.register.getAuthCodeButton.countDown(count: 90)
+            self.register.getAuthCodeButton.setButtonDisable()
             let  dictString:Dictionary = [ "email":String(email!)]
             print(dictString)
             Alamofire.request(get_Code,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
@@ -244,8 +244,10 @@ class registerViewController: UIViewController,UITextFieldDelegate {
                              */
                             if(responseModel.code == 1 ){
                                 //返回1，让其倒计时
+                                self.register.getAuthCodeButton.countDown(count: 90)
                             }else{
                                 alertController.custom(self,"Attention", "Email or Password Error")
+                                self.register.getAuthCodeButton.setButtonEnable()
                             }
                     }
                   }//end of response.result.value
