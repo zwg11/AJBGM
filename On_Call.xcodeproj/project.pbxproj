@@ -1184,14 +1184,14 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9QH38524SB;
+				DEVELOPMENT_TEAM = U556FBGR65;
 				INFOPLIST_FILE = AIJian/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.acon.glucose;
+				PRODUCT_BUNDLE_IDENTIFIER = com.acon.bleglucose;
 				PRODUCT_NAME = OnCall;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
@@ -1207,14 +1207,14 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9QH38524SB;
+				DEVELOPMENT_TEAM = U556FBGR65;
 				INFOPLIST_FILE = AIJian/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.acon.glucose;
+				PRODUCT_BUNDLE_IDENTIFIER = com.acon.bleglucose;
 				PRODUCT_NAME = OnCall;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
