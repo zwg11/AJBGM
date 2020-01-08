@@ -13,6 +13,14 @@ import HandyJSON
 
 class PassChangeViewController: UIViewController,UITextFieldDelegate {
     
+    //请求出现转的效果，增加用户体验
+    private lazy var indicator:CustomIndicatorView = {
+        let view = CustomIndicatorView.init(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: AJScreenHeight))
+        view.setupUI("")
+        //view.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.1)
+        return view
+    }()
+    
         var email:String = ""
         var oldP:String?
         var newP:String?
@@ -224,12 +232,15 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
                 alert.custom(self, "Attention", "New Password Matches Old")
                 return
             }else if FormatMethodUtil.validatePasswd(passwd: verfiedP!) != true{
-                alert.custom(self, "Attention", "New Password (at least 8 characters)")
+                alert.custom(self, "Attention", "Incorrect Password Format.The password format is a combination of at least two of numbers,letters,and special characters.")
                 return
             }else if newP != verfiedP{
                 alert.custom(self, "Attention", "Passwords Not Match")
                 return
             }else{
+                indicator.startIndicator()
+                self.view.addSubview(indicator)
+                self.view.bringSubviewToFront(indicator)
                 let dictString:Dictionary = [ "oldPassword":String(oldP!),"newPassword":String(newP!),"email":String(email),"token":String(token),"userId":UserInfo.getUserId()] as [String : Any]
                 print(dictString)
               //  此处的参数需要传入一个字典类型
@@ -242,19 +253,23 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
                             if let responseModel = JSONDeserializer<responseAModel>.deserializeFrom(json: jsonString) {
                                 // model转json 为了方便在控制台查看
                                 print(responseModel.toJSONString(prettyPrint: true)!)
-                                
+                                self.indicator.stopIndicator()
+                                self.indicator.removeFromSuperview()
                                 /*  此处为跳转和控制逻辑*/
                                 if(responseModel.code == 1 ){
-                                    alert.custom_cengji(self,"Attention", "Password Reset Success")
+                                    alert.custom_cengji(self,"", "Password Reset Success")
                                     self.oldPasswd_textF.text! = ""
                                     self.newPasswd_textF.text! = ""
                                     self.verfiedPasswd_textF.text! = ""
                                     self.navigationController?.popToRootViewController(animated: false)
                                 }else if (responseModel.code! == 2 ){
                                     LoginOff.loginOff(self)
-                                    
                                     let alert = CustomAlertController()
-                                    alert.custom(self, "", "Your account is already logged in at the other end!")
+                                    alert.custom(self, "Attention", "Your account is already logged in at the other end!")
+                                }else if (responseModel.code! == 3){
+                                    LoginOff.loginOff(self)
+                                    let alert = CustomAlertController()
+                                    alert.custom(self,"Attention", "Your account has been disabled.Please contact BGApp@acondiabetescare.com")
                                 }else{
                                     alert.custom_cengji(self,"Attention", "Password Reset Failure")
                                     self.oldPasswd_textF.text! = ""
@@ -266,13 +281,12 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
                             }
                         }
                     }else{
+                        self.indicator.stopIndicator()
+                        self.indicator.removeFromSuperview()
                         alert.custom(self,"Attention", "Internet Error")
                     }
                 }
             }   
-            print(self.oldPasswd_textF.text!)
-            print(self.newPasswd_textF.text!)
-            print(self.verfiedPasswd_textF.text!)
         }
         
 

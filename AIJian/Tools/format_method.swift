@@ -28,7 +28,9 @@ public class FormatMethodUtil{
     
     //验证密码强度校验
     static func validatePasswd(passwd:String) -> Bool{
-        let passwdRegex = "[\\w]{8,16}"
+//        let passwdRegex = "[\\w]{8,16}"
+//        let passwdRegex = "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,18}$"   //"^[@A-Za-z0-9!#\\$%\\^&*\\.~_]{6,20}$"
+        let passwdRegex = "^(?![\\d]+$)(?![a-zA-Z]+$)(?![^\\da-zA-Z]+$).{6,20}$"
         let passwdTest:NSPredicate = NSPredicate(format: "SELF MATCHES %@", passwdRegex)
         return passwdTest.evaluate(with: passwd)
     }

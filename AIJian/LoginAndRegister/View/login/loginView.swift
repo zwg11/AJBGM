@@ -58,7 +58,7 @@ class loginView: UIView {
     // 忘记密码按钮
     lazy var forgetPasswordButton:UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Forgot password", for: .normal)
+        button.setTitle("Forgot Password", for: .normal)
         button.backgroundColor = UIColor.clear
         button.setTitleColor(TextColor, for: .normal)
         button.contentHorizontalAlignment = .right

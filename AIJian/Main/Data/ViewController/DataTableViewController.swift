@@ -448,6 +448,10 @@ extension DataTableViewController{
                         }else if (deleteResponse.code! == 2 ){
                             self.loadV.stopIndicator()
                             LoginOff.loginOff(self)
+                        }else if (deleteResponse.code! == 3){
+                            LoginOff.loginOff(self)
+                            let alert = CustomAlertController()
+                            alert.custom(self,"Attention", "Your account has been disabled.Please contact BGApp@acondiabetescare.com")
                         }else{
                             // 如果删除成功
                             self.loadV.stopIndicator()

@@ -13,6 +13,14 @@ import HandyJSON
 
 class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,PickerDelegate {
     
+    
+    private lazy var indicator:CustomIndicatorView = {
+        let view = CustomIndicatorView.init(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: AJScreenHeight))
+        view.setupUI("")
+        //view.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.1)
+        return view
+    }()
+    
     var email:String?
     var phone:String?
     let id = "reusedId"
@@ -186,7 +194,9 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
             alert.custom(self, "Attention", "Words should be less than 300！")
             return
         }
-        
+        indicator.startIndicator()
+        self.view.addSubview(indicator)
+        self.view.bringSubviewToFront(indicator)
         //网络请求
         let dictString:Dictionary = [ "email":String(emailCommponent.textField.text!),"phoneNumber":String(telephoneCommponent.textField.text!),"country":String(country ?? "--"),"feedback":String(content_field.text!.removeHeadAndTailSpacePro),"token":UserInfo.getToken(),"userId":UserInfo.getUserId()] as [String : Any]
         print(dictString)
@@ -200,7 +210,8 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
                     if let responseModel = JSONDeserializer<responseModel>.deserializeFrom(json: jsonString) {
                         // model转json 为了方便在控制台查看
                         print(responseModel.toJSONString(prettyPrint: true)!)
-                        
+                        self.indicator.stopIndicator()
+                        self.indicator.removeFromSuperview()
                         /*  此处为跳转和控制逻辑*/
                         if(responseModel.code == 1 ){
 //                            let x = UIAlertController(title: "", message: "Submitted.Thanks for your feedback！", preferredStyle: .alert)
@@ -221,7 +232,11 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
                             LoginOff.loginOff(self)
                             
                             let alert = CustomAlertController()
-                            alert.custom(self, "", "Your account is already logged in at the other end!")
+                            alert.custom(self, "Attention", "Your account is already logged in at the other end!")
+                        }else if (responseModel.code! == 3){
+                            LoginOff.loginOff(self)
+                            let alert = CustomAlertController()
+                            alert.custom(self,"Attention", "Your account has been disabled.Please contact BGApp@acondiabetescare.com")
                         }else{
                             alert.custom_cengji(self,"Attention", "Sorry.Feedback Failure！")
                             self.navigationController?.popViewController(animated: false)
@@ -229,6 +244,8 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
                     }
                 }
             }else{
+                self.indicator.stopIndicator()
+                self.indicator.removeFromSuperview()
                 alert.custom(self,"Attention", "Internet Error")
             }
     }

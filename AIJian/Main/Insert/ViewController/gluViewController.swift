@@ -413,6 +413,10 @@ extension gluViewController{
                                     
                                     let alert = CustomAlertController()
                                     alert.custom(self, "", "Your account is already logged in at the other end!")
+                                }else if (responseModel.code! == 3){
+                                    LoginOff.loginOff(self)
+                                    let alert = CustomAlertController()
+                                    alert.custom(self,"Attention", "Your account has been disabled.Please contact BGApp@acondiabetescare.com")
                                 }else{
                                     print(responseModel.code)
                                     print("meterID插更新失败")
