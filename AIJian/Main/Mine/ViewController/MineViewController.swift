@@ -136,22 +136,22 @@ class MineViewController: UIViewController {
                         /// model转json 为了方便在控制台查看
                         /*  此处为跳转和控制逻辑
                          */
+                        self.indicator.stopIndicator()
+                        self.indicator.removeFromSuperview()
                         if(responseModel.code! == 1 ){
                             // 向数据库插入数据
                             // 将风火轮移除，并停止转动
-                            self.indicator.stopIndicator()
-                            self.indicator.removeFromSuperview()
                         DBSQLiteManager.manager.updateUserInfo(responseModel.data!)
                             self.tableview.reloadRows(at: [IndexPath(row:0,section:0)], with: .none)
                         }else if (responseModel.code! == 2 ){
                             LoginOff.loginOff(self)
-                            
                             let alert = CustomAlertController()
                             alert.custom(self, "", "Your account is already logged in at the other end!")
+                        }else if (responseModel.code! == 3){
+                            LoginOff.loginOff(self)
+                            let alert = CustomAlertController()
+                            alert.custom(self,"Attention", "Your account has been disabled.Please contact BGApp@acondiabetescare.com")
                         }else{
-                            // 将风火轮移除，并停止转动
-                            self.indicator.stopIndicator()
-                            self.indicator.removeFromSuperview()
                             let alert = CustomAlertController()
                             alert.custom(self, "Attention", "Unable to get the information")
                         }

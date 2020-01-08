@@ -145,10 +145,10 @@ class loginViewController: UIViewController,UITextFieldDelegate {
                                 self.requestData(day: 1000)
 
  
-                            }else if(responseModel.code == -1){
+                            }else if(responseModel.code == -1){  //返回-1,表示账号被挤下去了
                                 self.indicator.stopIndicator()
                                 self.indicator.removeFromSuperview()
-                                alertController.custom(self,"Attention", "Your acount has been disabled.Please contact BGApp@acondiabetescare.com")
+                                alertController.custom(self,"Attention", "Your account has been disabled.Please contact BGApp@acondiabetescare.com")
                             }else{
                                 self.indicator.stopIndicator()
                                 self.indicator.removeFromSuperview()

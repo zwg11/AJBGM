@@ -34,7 +34,8 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
     //上个界面传过来的verfiyString
     var verifyString:String? = ""
     
-    
+    //请求出现转的效果，增加用户体验
+    private lazy var indicator = CustomIndicatorView()
     
     // 个人信息页界面
     private lazy var infoinputView:InfoInputView = {
@@ -53,6 +54,7 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
         view.nationButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 0)
         view.dateButton.addTarget(self, action: #selector(chooseDate), for: .touchUpInside)
         view.finishButton.addTarget(self, action: #selector(finish), for: .touchUpInside)
+        
         return view
     }()
     
@@ -98,6 +100,9 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: NaviTitleColor]
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
         self.view.backgroundColor = UIColor.clear
+        
+        self.brithday = infoinputView.dateButton.currentTitle
+
         self.view.addSubview(infoinputView)
         infoinputView.snp.makeConstraints{(make) in
             make.height.equalTo(AJScreenHeight)
@@ -242,6 +247,7 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
             //设置了国家和用户名不能为空
 
             var userData:USER = USER()
+//            userData.email = "1115824104@qq.com"
             userData.email = String(email!)
             userData.user_name = String(userName!)
             userData.gender = gender
@@ -253,6 +259,10 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
             if userData.phone_number != nil{
                 userData.phone_number = String(phoneNumber!)
             }
+//            print(userData)
+//            print(userData)
+//            print(userData)
+//            print(userData)
             //toJSONGString的过程
 //            let tempArray = [userData]
             let user = userData.toJSONString()!
@@ -261,7 +271,18 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
                 "user":user,
                 "verifyString":String(verifyString!)
                    ]
-            print(dictString)
+//            print(dictString)
+            
+            // 初始化UI
+            indicator.setupUI("")
+            // 设置风火轮视图在父视图中心
+            // 开始转
+            indicator.startIndicator()
+            self.view.addSubview(indicator)
+            indicator.snp.makeConstraints{(make) in
+                make.edges.equalToSuperview()
+            }
+            
             Alamofire.request(FillUserInfo,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
                 if response.result.isSuccess {
                     if let jsonString = response.result.value {
@@ -276,20 +297,26 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
                             /*  此处为跳转和控制逻辑
                              */
                             if(responseModel.code == 1 ){
+                                self.indicator.stopIndicator()
+                                self.indicator.removeFromSuperview()
                                 print(responseModel.code)
                                 self.navigationController?.popToRootViewController(animated: false)
                                 alertController.custom_cengji(self,"", "Sign Up Success！")
                             }else{
+                                self.indicator.stopIndicator()
+                                self.indicator.removeFromSuperview()
                                 print(responseModel.code)
                                 self.navigationController?.popToRootViewController(animated: false)
-                                alertController.custom_cengji(self,"Attention", "Sign Up Failure！")
+                                alertController.custom_cengji(self,"Attention", "Sign Up Success！")
                             }
                         } //end of letif
                     }
+                }else{
+                    self.indicator.stopIndicator()
+                    self.indicator.removeFromSuperview()
+                    alertController.custom(self, "Attention", "Internet Error")
                 }
             }//end of request
-            
-            
         }
         
     }  //函数结束

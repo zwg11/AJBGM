@@ -152,7 +152,7 @@ class registerViewController: UIViewController,UITextFieldDelegate {
             alertController.custom(self, "Attention", "Password Not Match")
             return
         }else if FormatMethodUtil.validatePasswd(passwd: password!) != true{
-            alertController.custom(self, "Attention", "Password (at least 8 characters)")
+            alertController.custom(self, "Attention", "Incorrect Password Format.The password format is a combination of at least two of numbers,letters,and special characters.")
             return
         }else if passwordSec!.count >= 254 {
             return
@@ -188,19 +188,17 @@ class registerViewController: UIViewController,UITextFieldDelegate {
                         if let responseModel = JSONDeserializer<responseModel>.deserializeFrom(json: jsonString) {
                             /// model转json 为了方便在控制台查看
                             print(responseModel.toJSONString(prettyPrint: true)!)
-                            
+                            self.indicator.stopIndicator()
+                            self.indicator.removeFromSuperview()
                             /*  此处为跳转和控制逻辑
                              */
                             if(responseModel.code == 1 ){
-                                self.indicator.stopIndicator()
-                                self.indicator.removeFromSuperview()
                                infoInput_next.email = self.email  //将数据传入下一个页面
                                infoInput_next.verifyString = responseModel.data
                                self.navigationController?.pushViewController(infoInput_next, animated: false)  //然后跳转
                             }else{
-                                self.indicator.stopIndicator()
-                                self.indicator.removeFromSuperview()
-                                alertController.custom(self,"Attention", responseModel.msg)
+                                
+                                alertController.custom(self,"Attention", "Sign Up Failure")
                                 return 
                             }
                             
@@ -230,6 +228,15 @@ class registerViewController: UIViewController,UITextFieldDelegate {
             return
         }
         if FormatMethodUtil.validateEmail(email: email!) == true{
+            // 初始化UI
+            indicator.setupUI("")
+            // 设置风火轮视图在父视图中心
+            // 开始转
+            indicator.startIndicator()
+            self.view.addSubview(indicator)
+            indicator.snp.makeConstraints{(make) in
+                make.edges.equalToSuperview()
+            }
             //只要邮箱正确，就给发送邮件
             self.register.getAuthCodeButton.setButtonDisable()
             let  dictString:Dictionary = [ "email":String(email!)]
@@ -242,21 +249,30 @@ class registerViewController: UIViewController,UITextFieldDelegate {
                             print(responseModel.toJSONString(prettyPrint: true)!)
                             /*  此处为跳转和控制逻辑
                              */
+                            self.indicator.stopIndicator()
+                            self.indicator.removeFromSuperview()
                             if(responseModel.code == 1 ){
                                 //返回1，让其倒计时
                                 self.register.getAuthCodeButton.countDown(count: 90)
+                            }else if(responseModel.code == -1 ){
+                                alertController.custom(self,"Attention", "Email Registered")
+                                self.register.getAuthCodeButton.setButtonEnable()
+                            }else if responseModel.code == 3{
+                                alertController.custom(self,"Attention", "Your account has been disabled.Please contact BGApp@acondiabetescare.com")
                             }else{
-                                alertController.custom(self,"Attention", "Email or Password Error")
+                                alertController.custom(self,"Attention", "Email Send Error")
                                 self.register.getAuthCodeButton.setButtonEnable()
                             }
                     }
                   }//end of response.result.value
                 }else{
+                    self.indicator.stopIndicator()
+                    self.indicator.removeFromSuperview()
                     alertController.custom(self, "Attention", "Internet Error")
                 }//end of response.result.isSuccess
             }//end of request
             
-        }else{
+        }else{//此处不需要添加移除操作
             alertController.custom(self,"Attention", "Incorrect Email Format")
             return
         }

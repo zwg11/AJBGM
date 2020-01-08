@@ -438,7 +438,8 @@ class UnitViewController: UIViewController {
         //接着写入到文件中
         data.write(toFile: path, atomically: true)
         let alert = CustomAlertController()
-        alert.custom(self, "Attention", "Save Success！")
+        //保存成功不需要attention
+        alert.custom(self, "", "Save Success！")
         
     }
     

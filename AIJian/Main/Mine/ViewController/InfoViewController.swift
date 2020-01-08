@@ -13,7 +13,13 @@ import HandyJSON
 class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
    
     
-    
+    //请求出现转的效果，增加用户体验
+    private lazy var indicator:CustomIndicatorView = {
+        let view = CustomIndicatorView.init(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: AJScreenHeight))
+        view.setupUI("")
+        //view.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.1)
+        return view
+    }()
     var num:Int = 0
 
     //列表数据
@@ -35,7 +41,6 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
         }else{
             infoDataArray[1] = "Female"
         }
-        
         
         if GetUnit.getWeightUnit() == "kg"{
             infoDataArray[2] = (userInfo.weight_kg != nil) ? "\(userInfo.weight_kg!)":""
@@ -115,9 +120,21 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
             self.navigationController?.popViewController(animated: false)
             return
         }
+        // 开始转
+        indicator.startIndicator()
+        self.view.addSubview(indicator)
+        self.view.bringSubviewToFront(indicator)
         // 如果有需要更新的内容
         var updateUserInfo = USER_UPDATE()
         updateUserInfo.email = UserInfo.getEmail()
+        //此处需要判断用户如果没有用户名的话，不让其保存
+        if infoDataArray[0] == ""{
+            let alertController = CustomAlertController()
+            alertController.custom(self, "Attention", "Username Empty")
+            self.indicator.stopIndicator()
+            self.indicator.removeFromSuperview()
+            return
+        }
         updateUserInfo.userName = (infoDataArray[0] == "") ? nil:infoDataArray[0]
         updateUserInfo.gender = (infoDataArray[1] == "Male") ? 0:1
         if infoDataArray[2] != ""{
@@ -150,8 +167,10 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
                         /// model转json 为了方便在控制台查看
                         /*  此处为跳转和控制逻辑
                          */
+                        self.indicator.stopIndicator()
+                        self.indicator.removeFromSuperview()
                         if(responseModel.code! == 1 ){
-                            // 向数据库插入数据
+                            // 向数据库插入数据  更新完远端，再更新本地
                             self.updateUserInfoInSqlite(updateUserInfo)
 //                            let x = UIAlertController(title: "", message: "Update Success", preferredStyle: .alert)
 //                            self.present(x, animated: true, completion: {()->Void in
@@ -164,13 +183,17 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
 //                                })
 //                            })
                             let alert = CustomAlertController()
-                            alert.custom(self, "Attention", "Update Success")
+                            alert.custom(self, "", "Update Success")
                            
                         }else if (responseModel.code! == 2 ){
+                            let alert = CustomAlertController()
+                            alert.custom(self, "Attention", "Your account is already logged in at the other end!")
                            LoginOff.loginOff(self)
                             
+                        }else if responseModel.code! == 3{
+                            LoginOff.loginOff(self)
                             let alert = CustomAlertController()
-                            alert.custom(self, "", "Your account is already logged in at the other end!")
+                            alert.custom(self,"Attention", "Your account has been disabled.Please contact BGApp@acondiabetescare.com")
                         }else{
                             let alert = CustomAlertController()
                             alert.custom(self, "Attention", "Update Failure")
@@ -179,12 +202,14 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
                     } //end of letif
                 }
             }else{
+                self.indicator.stopIndicator()
+                self.indicator.removeFromSuperview()
                 let alert = CustomAlertController()
                 alert.custom(self, "Attention", "Internet Error")
             }
         }//end of request
     }
-    //放入数据库中的是，--，取出来的是//
+     //更新本地数据库
     func updateUserInfoInSqlite(_ UpdateUserInfo:USER_UPDATE){
         var info = USER_INFO()
         info.userId = UserInfo.getUserId()
@@ -194,9 +219,11 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
         info.height = UpdateUserInfo.height
         info.weightLbs = UpdateUserInfo.weightLbs
         info.weightKg = UpdateUserInfo.weightKg
-        if UpdateUserInfo.birthday == ""{
+        print(UpdateUserInfo.birthday)
+        if UpdateUserInfo.birthday == "" || UpdateUserInfo.birthday == nil{
             info.birthday = ""
         }else{
+             //放入数据库中的是，--，取出来的是//
             info.birthday = UpdateUserInfo.birthday!.components(separatedBy: "/").joined(separator: "-")
         }
         
@@ -204,6 +231,7 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
         info.country = UpdateUserInfo.country
         // 将更新内容放入
         DBSQLiteManager.manager.updateUserInfo(info)
+        updateSth = false
     }
     
     
@@ -243,6 +271,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
         cell!.backgroundColor = UIColor.clear
         switch indexPath.row{
             case 0:
+                //此处为username
                 cell?.imageView?.image = UIImage(named: infoIconArray[0])
                 cell?.detailTextLabel?.text = infoDataArray[0]=="" ? "-":infoDataArray[0]
                 cell?.textLabel?.text = infoArray[indexPath.row]
@@ -374,10 +403,16 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
         let okAction = UIAlertAction(title: "Done", style: .default, handler: {
             action in
-            let UserName = alertController.textFields!.first!
-            if String(UserName.text!) == ""  {
+            let UserWeight = alertController.textFields!.first!.text!
+//            let DuserWeight = Double(UserWeight)
+            print(UserWeight)
+            if String(UserWeight) == ""  {
+//            }else if DuserWeight > 453.0{
+                
+            }else if Double(UserWeight)! > 453{
+                
             }else{
-                self.infoDataArray[2] = UserName.text!
+                self.infoDataArray[2] = UserWeight
                 self.updateSth = true
                 self.tableview.reloadRows(at: [IndexPath(row:self.num,section:0)], with: .fade)
             }

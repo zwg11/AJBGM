@@ -161,7 +161,17 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
          */
         if email == ""{
             alertController.custom(self, "Attention", "Email Empty")
+            return
         }else if FormatMethodUtil.validateEmail(email: email!) == true{
+            // 初始化UI
+            indicator.setupUI("")
+            // 设置风火轮视图在父视图中心
+            // 开始转
+            indicator.startIndicator()
+            self.view.addSubview(indicator)
+            indicator.snp.makeConstraints{(make) in
+                make.edges.equalToSuperview()
+            }
             //只要邮箱正确，就给发送邮件
             emailCheck.getAuthCodeButton.setButtonDisable()
             let  dictString:Dictionary = [ "email":String(email!)]
@@ -174,27 +184,37 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
                             print(responseModel.toJSONString(prettyPrint: true)!)
                             /*  此处为跳转和控制逻辑
                              */
+                            // 请求成功，将风火轮移除，并停止转动
+                            self.indicator.stopIndicator()
+                            self.indicator.removeFromSuperview()
                             if(responseModel.code == 1 ){
                                 //返回1，让其倒计时
 //                                self.emailCheck.getAuthCodeButton.setButtonEnable()
                                 self.emailCheck.getAuthCodeButton.countDown(count: 90)
                             }else if responseModel.code == -1{
-                                alertController.custom(self,"Attention", "Email is not registered")
+                                alertController.custom(self,"Attention", "Email is not Registered")
                                 self.emailCheck.getAuthCodeButton.setButtonEnable()
                             }else if responseModel.code == 0{
                                 alertController.custom(self,"Attention", "Send Error")
                                 self.emailCheck.getAuthCodeButton.setButtonEnable()
 //                                self.emailCheck.getAuthCodeButton.setTitle("Resend", for: .normal)
 //                                self.emailCheck.getAuthCodeButton.countDown(count: 0)
+                            }else if responseModel.code == 3{
+                                 alertController.custom(self,"Attention", "Your account has been disabled.Please contact BGApp@acondiabetescare.com")
                             }
                             print("注册时，获取验证码阶段")
                         }
                     }//end of response.result.value
                 }else{
+                    self.indicator.stopIndicator()
+                    self.indicator.removeFromSuperview()
                     alertController.custom(self, "Attention", "Internet Error")
                 }//end of response.result.isSuccess
             }//end of request
            
+        }else{
+            alertController.custom(self, "Attention", "Incorrect Email Format")
+            return 
         }
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
