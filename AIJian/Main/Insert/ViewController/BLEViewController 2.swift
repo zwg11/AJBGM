@@ -506,19 +506,18 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                         
                         // 若不包含空格，肯定是CRC验证码
                         if !replyDateStr.contains(" "){
-                            print("收到CRC验证码")
-                            print(self.BLEglucoseDate)
-                            print(self.BLEglucoseValue)
-                            print(self.BLEglucoseMark)
+//                            print("收到CRC验证码")
+//                            print(self.BLEglucoseDate)
+//                            print(self.BLEglucoseValue)
+//                            print(self.BLEglucoseMark)
                             
+                            // 主动断开连接
+                            self.centralManager?.cancelPeripheralConnection(peripheral)
                             // 加入 ”&N“
                             let str2check:String = "&N"
                             for scalar in str2check.unicodeScalars{
                                 self.dataSting.append(Int(scalar.value))
                             }
-                            //                            print("dataString：\(self.dataSting)")
-                            //                            print("CRC:*******\(self.crc.getCRC(arr: self.dataSting))******")
-                            //                            print("CRC:*******\(self.crc.getCRC(arr: self.dataSting))******")
                             /*
                              
                              for i in replyDateStr{
@@ -561,7 +560,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                                     var glucoseDate:[String] = []
                                     var glucoseValue:[Int] = []
                                     if self.BLEglucoseMark.count>0{
-                                        for i in 0...self.BLEglucoseMark.count-1{
+                                        for i in 0..<self.BLEglucoseMark.count{
                                             if self.BLEglucoseMark[i] != 12{
                                                 glucoseMark.append(self.BLEglucoseMark[i])
                                                 glucoseDate.append(self.BLEglucoseDate[i])
@@ -619,12 +618,13 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                     }
                 default:
                     print("unknown")
-                    //                        self.sthWrong = true
                     wrongInfo = "unknown error occured."
                     
                 }
                 // 若传输数据过程中有任何异常或无数据传输，执行
                 if let x = wrongInfo{
+                    // 主动断开连接
+                    self.centralManager?.cancelPeripheralConnection(peripheral)
                     // 将加载视图移除界面，并使其图片动画停止
 //                    self.loadV.removeFromSuperview()
                     self.loadV.stopIndicator()
@@ -633,7 +633,6 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                     let alert = CustomAlertController()
                     alert.custom(self, "", x)
                 }
-                //                    self.sthWrong = false
             }
         }
     }

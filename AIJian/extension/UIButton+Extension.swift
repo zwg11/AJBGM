@@ -46,6 +46,15 @@ extension UIButton{
         self.backgroundColor = kRGBColor(8, 52, 84, 1)
         self.layer.borderWidth = 0
     }
+   
+    func setButtonDisable(){
+        isEnabled = false
+    }
+    
+    func setButtonEnable(){
+        isEnabled = true
+    }
+    
     
     func countDown(count: Int){
         // 倒计时开始,禁止点击事件

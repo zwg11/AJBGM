@@ -163,7 +163,7 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
             alertController.custom(self, "Attention", "Email Empty")
         }else if FormatMethodUtil.validateEmail(email: email!) == true{
             //只要邮箱正确，就给发送邮件
-            emailCheck.getAuthCodeButton.countDown(count: 90)
+            emailCheck.getAuthCodeButton.setButtonDisable()
             let  dictString:Dictionary = [ "email":String(email!)]
             print(dictString)
             Alamofire.request(get_Code_forget,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
@@ -175,10 +175,17 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
                             /*  此处为跳转和控制逻辑
                              */
                             if(responseModel.code == 1 ){
-                                //返回1，让其倒计时                                
+                                //返回1，让其倒计时
+//                                self.emailCheck.getAuthCodeButton.setButtonEnable()
+                                self.emailCheck.getAuthCodeButton.countDown(count: 90)
                             }else if responseModel.code == -1{
                                 alertController.custom(self,"Attention", "Email is not registered")
-                                
+                                self.emailCheck.getAuthCodeButton.setButtonEnable()
+                            }else if responseModel.code == 0{
+                                alertController.custom(self,"Attention", "Send Error")
+                                self.emailCheck.getAuthCodeButton.setButtonEnable()
+//                                self.emailCheck.getAuthCodeButton.setTitle("Resend", for: .normal)
+//                                self.emailCheck.getAuthCodeButton.countDown(count: 0)
                             }
                             print("注册时，获取验证码阶段")
                         }

@@ -50,7 +50,14 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         }
     }
 
-
+    // 加载视图
+    private lazy var loadV:CustomIndicatorView = {
+        let view = CustomIndicatorView.init(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: AJScreenHeight))
+        view.setupUI("")
+        //view.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.1)
+        return view
+    }()
+    
     // 日期tableView
     var DATETableView:UITableView = UITableView()
     // 数据tableView
@@ -296,7 +303,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         // 可以刷新了
         initTable()
         initScroll()
-        
+        print("当前控制器的父控制器",self.parent ?? "没有")
     }
     // MARK: - initScroll
     // 初始化滚动视图、设置页面的所有滚动视图和表格的大小和坐标
@@ -404,6 +411,10 @@ extension DataTableViewController{
     // 包括对本地数据库的删除、全局变量的删除
     // MARK: - deleteData()
     func deleteData(section:Int,row:Int){
+        // 加载风火轮
+        loadV.startIndicator()
+        // 使得风火轮视图全屏显示
+        self.parent?.navigationController?.view.addSubview(loadV)
         
         let gluData = sortedData[section][row]
         let recordId = gluData.bloodGlucoseRecordId!
@@ -414,7 +425,7 @@ extension DataTableViewController{
         print(dicStr)
         // 请求删除数据，请求信息如上字典
         //********
-        Alamofire.request(DELETE_DATA_URL,method: .post,parameters: dicStr, headers:vheader).responseString{ (response) in
+        AlamofireManager.request(DELETE_DATA_URL,method: .post,parameters: dicStr, headers:vheader).responseString{ (response) in
             // 如果请求得到回复
             if response.result.isSuccess {
                 print("收到删除的回复")
@@ -429,20 +440,21 @@ extension DataTableViewController{
                     if let deleteResponse = JSONDeserializer<deleteResponse>.deserializeFrom(json: jsonString) {
                         // 如果 返回信息说明 请删除失败，则弹出警示框报错
                         if deleteResponse.code != 1{
+                            self.loadV.stopIndicator()
                             let alert = CustomAlertController()
                             alert.custom(self, "Attention", "Delete failed, please try again later.")
                             // 删除失败函数直接退出
                             return
                         }else if (deleteResponse.code! == 2 ){
+                            self.loadV.stopIndicator()
                             LoginOff.loginOff(self)
                         }else{
                             // 如果删除成功
+                            self.loadV.stopIndicator()
                             // ******** 删除数据库对应的数据 ***********
                             let dbSql = DBSQLiteManager()
                             if dbSql.deleteGlucoseRecord(gluData.bloodGlucoseRecordId!){
-                                // 弹出警示框，提示用户
-                                let alert = CustomAlertController()
-                                alert.custom(self, "", "Delete Success")
+                                
                                 // 初始化展示数据
                                 initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())
                                 // 表格数据初始化
@@ -454,6 +466,10 @@ extension DataTableViewController{
                                 self.initScroll()
                                 
                                 
+                                // 弹出警示框，提示用户
+                                let alert = CustomAlertController()
+                                alert.custom(self, "", "Delete Success")
+                                
                             }
                         }
                         
@@ -464,6 +480,7 @@ extension DataTableViewController{
                 
                 // 如果请求未得到回复
             else{//删除数据时，网络错误
+                self.loadV.stopIndicator()
                 // 弹出警示框，提示用户
                 let alert = CustomAlertController()
                 alert.custom(self, "Error", "Internet Error.Please Try Again!")

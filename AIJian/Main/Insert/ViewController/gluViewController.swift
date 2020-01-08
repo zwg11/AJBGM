@@ -103,15 +103,15 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     private func markToString(_ mark:Int) -> String{
         switch mark {
         case 0:
-            return "random"
+            return "Random"
         case 1:
             return "After Meal"
         case 2:
             return "Before Meal"
         case 4:
-            return "random"
+            return "Random"
         default:
-            return "Test"
+            return "Random"
         }
 
     }
@@ -122,7 +122,7 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
             return 3
         case 1:
             return 1
-        case 2:
+        case 2,3:
             return 0
         case 4:
             return 3
