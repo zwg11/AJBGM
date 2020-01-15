@@ -223,7 +223,8 @@ class ChartViewController: UIViewController,ChartViewDelegate{
         dateFormatter.timeZone = timezone
         let xxxx = startD! + Int(currentX).minutes
         MarkTimelabel.text = "\(dateFormatter.string(from: xxxx))"
-        MarkValuelabel.text = "BG Value:\(valuey)" + GetUnit.getBloodUnit()
+        MarkValuelabel.text = "\(valuey) " + GetUnit.getBloodUnit()
+//        MarkValuelabel.text = "BG Value:\(valuey)" + GetUnit.getBloodUnit()
         
 //        let marker = MarkerView()
 //        marker.chartView = self.lineChartView.lineChartView

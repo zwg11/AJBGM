@@ -62,7 +62,7 @@ class alertViewController: UIAlertController,UITableViewDelegate,UITableViewData
         // 读取数组设置 单元格 是否被选中  每次弹出的时候，都是去检测boolarr这个数组。
         if boolarr[indexPath.row]{
             tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
-            cell?.imageView?.image = UIImage(named: "selected")
+            cell?.imageView?.image = UIImage(named: "selected-1")
         }else{
             tableView.deselectRow(at: indexPath, animated: true)
             cell?.imageView?.image = UIImage(named: "unselected")
@@ -75,7 +75,7 @@ class alertViewController: UIAlertController,UITableViewDelegate,UITableViewData
     // 设置单元格被选中时动作
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         let cell = tableView.cellForRow(at: indexPath)
-        cell?.imageView?.image = UIImage(named: "selected")
+        cell?.imageView?.image = UIImage(named: "selected-1")
         // 设置该行状态为选中
         boolArray[indexPath.row] = true
         
