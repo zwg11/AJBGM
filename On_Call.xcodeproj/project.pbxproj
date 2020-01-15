@@ -278,7 +278,7 @@
 		F0BB31FFA0EA717578FBF645BF4D701F /* UIAlertViewController_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertViewController_Extension.swift; sourceTree = "<group>"; };
 		F3E6BF264A7759F39EE60E2FC55F2DB6 /* averageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = averageView.swift; sourceTree = "<group>"; };
 		F3EA8AF88908000078EAC3AC949A8176 /* BLEViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEViewController.swift; sourceTree = "<group>"; };
-		F42164E20D884983B9B2042EA7CE3CFA /* OnCall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnCall.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F42164E20D884983B9B2042EA7CE3CFA /* On Call.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "On Call.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7152151493753A2D1A697BD37767901 /* DataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewController.swift; sourceTree = "<group>"; };
 		F87C7D3F47A2F01DF9F52E6E047E342A /* CRC16.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CRC16.swift; sourceTree = "<group>"; };
 		F8A34F9A4CB476E221493BFF4FA2AA03 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
@@ -531,7 +531,7 @@
 		9981F23105401ED460A32BF2E0D28AA2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F42164E20D884983B9B2042EA7CE3CFA /* OnCall.app */,
+				F42164E20D884983B9B2042EA7CE3CFA /* On Call.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -801,7 +801,7 @@
 			);
 			name = On_Call;
 			productName = AIJian;
-			productReference = F42164E20D884983B9B2042EA7CE3CFA /* OnCall.app */;
+			productReference = F42164E20D884983B9B2042EA7CE3CFA /* On Call.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1184,15 +1184,15 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = U556FBGR65;
+				DEVELOPMENT_TEAM = 9QH38524SB;
 				INFOPLIST_FILE = AIJian/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.acon.bleglucose;
-				PRODUCT_NAME = OnCall;
+				PRODUCT_BUNDLE_IDENTIFIER = com.acon.glucose;
+				PRODUCT_NAME = "On Call";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1207,15 +1207,15 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = U556FBGR65;
+				DEVELOPMENT_TEAM = 9QH38524SB;
 				INFOPLIST_FILE = AIJian/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.acon.bleglucose;
-				PRODUCT_NAME = OnCall;
+				PRODUCT_BUNDLE_IDENTIFIER = com.acon.glucose;
+				PRODUCT_NAME = "On Call";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

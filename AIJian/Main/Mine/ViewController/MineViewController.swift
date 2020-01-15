@@ -22,16 +22,16 @@ class MineViewController: UIViewController {
     }()
 
     //列表数据
-    let _titleArr = ["User Info","Units Setup","Change Password","Targets Setting","Instructions","About Us","Update"]
+    let _titleArr = ["User Info","Units Setup","Change Password","Targets Setting","Instructions","Contact Us","Feedback","Update"]
 
-    let _imgArr   = ["user-info","Units-Setup","Change-Password","Targets-Setting","Instructions","About-Us","Update",]
+    let _imgArr   = ["user-info","Units-Setup","Change-Password","Targets-Setting","Instructions","About-Us","Update","Update"]
 
 
     var tableview:UITableView = UITableView()
 
     //点击跳转对应页面
     public lazy var clickArray: [UIViewController] = {
-        return [InfoViewController(),UnitViewController(),PassChangeViewController(),BloodSetViewController(), UseDirViewController(),AboutUsViewController(),VersionUViewController()
+        return [InfoViewController(),UnitViewController(),PassChangeViewController(),BloodSetViewController(), UseDirViewController(),AboutUsViewController(),SuggestionViewController(),VersionUViewController()
         ]
     }()
     
@@ -42,7 +42,8 @@ class MineViewController: UIViewController {
         let userInfo = DBSQLiteManager.manager.selectUserRecord(userId: UserInfo.getUserId())
         // 如果得到的实体是空的，说明没有相关信息
         // 那么就需向服务器请求数据
-        if userInfo.user_name == nil{
+        if userInfo.user_name == nil || userInfo.user_name == ""{
+            print("个人信息页面开始请求")
             requestUserInfo()
         }
         self.tableview.reloadRows(at: [IndexPath(row:0,section:0)], with: .none)
@@ -63,8 +64,8 @@ class MineViewController: UIViewController {
         let userInfo = DBSQLiteManager.manager.selectUserRecord(userId: UserInfo.getUserId())
 
         // 如果得到的实体是空的，说明没有相关信息
-        // 那么就需向服务器请求数据
-        if userInfo.user_name == nil{
+        // 那么就需向服务器请求数据  || userInfo.user_name == ""
+        if userInfo.user_name == nil {
             requestUserInfo()
         }
         self.view.addSubview(tableview)
@@ -132,7 +133,7 @@ class MineViewController: UIViewController {
                     /*
                      利用JSONDeserializer封装成一个对象。然后再解析这个对象，此处返回的不同，需要封装成responseAModel的响应体
                      //                         */
-                    if let responseModel = JSONDeserializer<USERINFO_REQUEST>.deserializeFrom(json: jsonString) {
+                    if var responseModel = JSONDeserializer<USERINFO_REQUEST>.deserializeFrom(json: jsonString) {
                         /// model转json 为了方便在控制台查看
                         /*  此处为跳转和控制逻辑
                          */
@@ -141,7 +142,15 @@ class MineViewController: UIViewController {
                         if(responseModel.code! == 1 ){
                             // 向数据库插入数据
                             // 将风火轮移除，并停止转动
-                        DBSQLiteManager.manager.updateUserInfo(responseModel.data!)
+                            print(responseModel.data!)
+                            if responseModel.data!.userName == nil{
+                                responseModel.data!.userName = ""
+                            }
+                            if responseModel.data!.gender == nil{
+                                responseModel.data!.gender = 1
+                            }
+                            print(responseModel.data!)
+                            DBSQLiteManager.manager.updateUserInfo(responseModel.data!)
                             self.tableview.reloadRows(at: [IndexPath(row:0,section:0)], with: .none)
                         }else if (responseModel.code! == 2 ){
                             LoginOff.loginOff(self)
@@ -210,9 +219,9 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    //每个分区有几行 头部+7个cell+退出登录
+    //每个分区有几行 头部+8个cell+退出登录
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 9
+        return 10
     }
     //每一个cell，里面的内容
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -302,6 +311,16 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
                 cell.backgroundColor = UIColor.clear
                 return cell
             case 8:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
+                cell.selectionStyle = .none
+                cell.imageView?.image = UIImage(named: _imgArr[7])
+                cell.textLabel?.text = _titleArr[7]
+                cell.accessoryType = .disclosureIndicator
+                cell.textLabel?.textColor = TextColor
+                 cell.backgroundColor = ThemeColor
+                cell.backgroundColor = UIColor.clear
+                return cell
+            case 9:
                 let cell = QuitCellView(style: .value1, reuseIdentifier: cellquit)
                 cell.selectionStyle = .none
                 cell.quitButton.addTarget(self, action: #selector(loginOff), for: .touchUpInside)
@@ -326,7 +345,7 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
         tableView.deselectRow(at: indexPath, animated: true)
         if col == 0{
             
-        }else if col == 8{
+        }else if col == 9{
             
         }else{
             self.navigationController?.pushViewController(clickArray[col-1], animated: false)
@@ -342,7 +361,7 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
         switch indexPath.row {
             case 0:
                 return AJScreenWidth*0.35 + 35
-            case 8:
+            case 9:
 //                return AJScreenHeight/15 + 20
                 return AJScreenHeight/15 + 20
             default:

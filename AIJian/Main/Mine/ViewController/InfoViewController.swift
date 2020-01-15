@@ -35,6 +35,7 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
     func initInfoDataArray(){
         let userInfo = DBSQLiteManager.manager.selectUserRecord(userId: UserInfo.getUserId())
         infoDataArray[0] = userInfo.user_name ?? ""
+        print("用户名为：",infoDataArray[0])
         //0为女
         if let gender = userInfo.gender{
             infoDataArray[1] = (gender == 0) ? "Female":"Male"
@@ -281,11 +282,11 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
                 cell?.textLabel?.text = infoArray[indexPath.row]
             case 2:
                 cell?.imageView?.image = UIImage(named: infoIconArray[2])
-                cell?.detailTextLabel?.text = (infoDataArray[2]=="" ? "-":(infoDataArray[2]) + GetUnit.getWeightUnit())
+                cell?.detailTextLabel?.text = (infoDataArray[2]=="" ? ("-"+GetUnit.getWeightUnit()):(infoDataArray[2]) + GetUnit.getWeightUnit())
                 cell?.textLabel?.text = infoArray[indexPath.row]
             case 3:
                 cell?.imageView?.image = UIImage(named: infoIconArray[3])
-                cell?.detailTextLabel?.text = infoDataArray[3]=="" ? "-":(infoDataArray[3] + "cm")
+                cell?.detailTextLabel?.text = infoDataArray[3]=="" ? "-cm":(infoDataArray[3] + "cm")
                 cell?.textLabel?.text = infoArray[indexPath.row]
             case 4:
                 cell?.imageView?.image = UIImage(named: infoIconArray[4])

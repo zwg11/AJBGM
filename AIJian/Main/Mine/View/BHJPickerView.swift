@@ -294,17 +294,17 @@ class BHJPickerView: UIView , UIPickerViewDelegate, UIPickerViewDataSource{
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         switch List{
-        case 0:
-            selectedGender = dataArray[row] as! String
-        case 1:
-            selectedBlood = dataArray[row] as! String
-        case 2:
-            selectedWeight = dataArray[row] as! String
-        case 3:
-            selectedPressure = dataArray[row] as! String
-        default:
-            selectedCountry = dataArray[row] as! String
-        }
+            case 0:
+                selectedGender = dataArray[row] as! String
+            case 1:
+                selectedBlood = dataArray[row] as! String
+            case 2:
+                selectedWeight = dataArray[row] as! String
+            case 3:
+                selectedPressure = dataArray[row] as! String
+            default:
+                selectedCountry = dataArray[row] as! String
+            }
     }
     
     func getCountry()->Array<Any>{

@@ -38,6 +38,7 @@ class InfoInputView: UIView {
         gender_man_label.setTitleColor(TextColor, for: .normal)
         gender_man_label.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         gender_man_label.contentHorizontalAlignment = .left
+        gender_man_label.isUserInteractionEnabled = false
         return gender_man_label
     }()
     

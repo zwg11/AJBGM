@@ -53,6 +53,7 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
         view.nationButton.addTarget(self, action: #selector(selectNation), for: .touchUpInside)
         view.nationButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 0)
         view.dateButton.addTarget(self, action: #selector(chooseDate), for: .touchUpInside)
+        view.brithday_label.addTarget(self, action: #selector(chooseDate), for: .touchUpInside)
         view.finishButton.addTarget(self, action: #selector(finish), for: .touchUpInside)
         
         return view

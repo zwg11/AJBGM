@@ -191,7 +191,7 @@ public class DBSQLiteManager:NSObject{
         let updateData = user.filter(user_id == userObject.userId!)
         try! db.run(updateData.update( user_id <- userObject.userId!,
                                        email <- userObject.email!,
-                                       user_name <- userObject.userName!,
+                                       user_name <- userObject.userName,
                                        head_img <- userObject.headImg,
                                        gender <- userObject.gender,
                                        birthday <- userBirthday,
