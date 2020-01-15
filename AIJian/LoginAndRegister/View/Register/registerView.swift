@@ -34,24 +34,16 @@ class registerView: UIView {
     // 输入邮箱文本框
     lazy var emailTextField:UITextField = {
         let textField = UITextField()
-        textField.initTextField(placeholder: " Email",keyboardType: .emailAddress)
-//        let textField = initTextField(placeholder: " Email",keyboardType: .emailAddress)
-        let imageView = UIImageView(image: UIImage(named: "email"))
-        textField.leftView = imageView
-        textField.leftViewMode = .always
-
+        textField.init_secondmethod_TextField(imageName: "email", placeholder: "Email")
+        textField.keyboardType = .emailAddress
         return textField
     }()
     
     // 输入验证码文本框
     lazy var authCodeTextField:UITextField = {
         let textField = UITextField()
-        textField.initTextField(placeholder: " Code",keyboardType: .numberPad)
-//        let textField = initTextField(placeholder: " Code",keyboardType: .numberPad)
-        let imageView = UIImageView(image: UIImage(named: "iCode"))
-        textField.leftView = imageView
-        textField.leftViewMode = .always
-
+        textField.init_secondmethod_TextField(imageName: "iCode", placeholder: "Code")
+        textField.keyboardType = .numberPad
         return textField
     }()
     
@@ -68,8 +60,8 @@ class registerView: UIView {
     // 输入密码文本框
     lazy var passwordTextField:UITextField = {
         let textField = UITextField()
-        textField.initTextField(placeholder: " Set a Password",keyboardType: .default)
-//        let textField = initTextField(placeholder: " Password",keyboardType: .default)
+        textField.init_secondmethod_TextField(imageName: "mima", placeholder: "Set a Password")
+        textField.keyboardType = .default
         textField.isSecureTextEntry = true
         if #available(iOS 11.0, *) {
             textField.textContentType = UITextContentType.password;
@@ -79,18 +71,14 @@ class registerView: UIView {
         } else {
             // Fallback on earlier versions
         }
-        let imageView = UIImageView(image: UIImage(named: "mima"))
-        textField.leftView = imageView
-        textField.leftViewMode = .always
-
         return textField
     }()
     
     // 输入确认密码文本框
     lazy var passwordSecTextField:UITextField = {
         let textField = UITextField()
-        textField.initTextField(placeholder: " Confirm the Password",keyboardType: .default)
-//        let textField = initTextField(placeholder: " Confirm the Password",keyboardType: .default)
+        textField.init_secondmethod_TextField(imageName: "mima", placeholder: "Confirm a Password")
+        textField.keyboardType = .default
         textField.isSecureTextEntry = true
         if #available(iOS 11.0, *) {
             textField.textContentType = UITextContentType.password;
@@ -100,10 +88,6 @@ class registerView: UIView {
         } else {
             // Fallback on earlier versions
         }
-        let imageView = UIImageView(image: UIImage(named: "mima"))
-        textField.leftView = imageView
-        textField.leftViewMode = .always
-
         return textField
     }()
     //免责条例的Logo

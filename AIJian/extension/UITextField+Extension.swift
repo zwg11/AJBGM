@@ -35,13 +35,29 @@ extension UITextField{
     //初始化textField的placeholder大小及颜色和键盘类型
     func initTextField(placeholder string:String,keyboardType type:UIKeyboardType){
 //        let textField = UITextField()
-        self.placeholder = string
+//        self.placeholder = string
         self.textAlignment = .left
         self.keyboardType = type
         self.textColor = TextColor
+        self.autocapitalizationType = .none
+//        self.beginFloatingCursor(at: CGPoint(x:0,y:-5))
         self.setValue(NSNumber(value: 10), forKey: "paddingLeft")
         let str:NSMutableAttributedString = NSMutableAttributedString(string: string, attributes: [NSAttributedString.Key.foregroundColor:TextColor])
         self.attributedPlaceholder = str
 //        return textField
+    }
+    //另一种方式
+    func init_secondmethod_TextField(imageName image:String,placeholder text:String){
+//            let textField = UITextField()
+            let imageView = UIImageView(image: UIImage(named: image))
+            self.leftView = imageView
+    //        textField.placeholder = text
+            self.leftViewMode = .always
+            self.autocapitalizationType = .none
+            self.font = UIFont.systemFont(ofSize: 16)
+            self.textColor = TextColor
+            let str:NSMutableAttributedString = NSMutableAttributedString(string: text, attributes: [NSAttributedString.Key.foregroundColor:TextColor])
+            self.attributedPlaceholder = str
+//            return textField
     }
 }

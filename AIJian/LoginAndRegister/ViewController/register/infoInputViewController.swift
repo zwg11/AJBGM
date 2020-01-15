@@ -58,17 +58,7 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
         
         return view
     }()
-    
-    // 出生日期按钮
-    private lazy var picker : pickerView = {
-        let view = pickerView()
-        view.setupUI()
-        view.cancelButton.setTitleColor(UIColor.black, for: .normal)
-        view.sureButton.setTitleColor(UIColor.black, for: .normal)
-        view.sureButton.addTarget(self, action: #selector(pickViewSelected), for: .touchUpInside)
-        view.cancelButton.addTarget(self, action: #selector(pickViewDismiss), for: .touchUpInside)
-        return view
-    }()
+
     var topConstraint:Constraint?
     var bottomConstraint:Constraint?
     // 设置导航栏左按钮样式
@@ -119,25 +109,25 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
             make.left.right.equalToSuperview()
         }
         
-        // 时间选择器视图设置
-        self.view.addSubview(picker)
-        // 设置时间选择器界面约束，之后会修改此约束达到界面显现和消失的效果
-        picker.snp_makeConstraints{(make) in
-            make.left.equalTo(self.view.snp.left)
-            make.right.equalTo(self.view.snp.right)
-            make.height.equalTo(UIScreen.main.bounds.height/3)
-            if #available(iOS 11.0, *) {
-                self.topConstraint = make.top.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).constraint
-            } else {
-                // Fallback on earlier versions
-                self.topConstraint = make.top.equalTo(bottomLayoutGuide.snp.bottom).constraint
-            }
-            //make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
-        }
+//        // 时间选择器视图设置
+//        self.view.addSubview(picker)
+//        // 设置时间选择器界面约束，之后会修改此约束达到界面显现和消失的效果
+//        picker.snp_makeConstraints{(make) in
+//            make.left.equalTo(self.view.snp.left)
+//            make.right.equalTo(self.view.snp.right)
+//            make.height.equalTo(UIScreen.main.bounds.height/3)
+//            if #available(iOS 11.0, *) {
+//                self.topConstraint = make.top.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).constraint
+//            } else {
+//                // Fallback on earlier versions
+//                self.topConstraint = make.top.equalTo(bottomLayoutGuide.snp.bottom).constraint
+//            }
+//            //make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+//        }
+//
+//        self.view.bringSubviewToFront(picker)
         
-        self.view.bringSubviewToFront(picker)
-        
-        
+         hideKeyboardWhenTappedAround()
     }
     func initDelegate(){
         // 设置所有的文本框的代理，使得代理方法对所有文本框有效
@@ -159,70 +149,7 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
         infoinputView.gender_man_button.setImage(UIImage(named: "unselected"), for: .normal)
         gender = 0
     }
-    
-    //选择出生日期
-    @objc func chooseDate(){
-        UIView.animate(withDuration: 0.5, animations: appear)
-    }
-    func appear(){
-        
-        // 重新布置约束
-        // 时间选择器界面移到屏幕内底部，视觉效果为出现
-        // 删除顶部约束
-        self.topConstraint?.uninstall()
-        picker.snp_makeConstraints{(make) in
-            
-            // 添加底部约束
-            if #available(iOS 11.0, *) {
-                self.bottomConstraint = make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).constraint
-            } else {
-                // Fallback on earlier versions
-                self.bottomConstraint = make.bottom.equalTo(bottomLayoutGuide.snp.top).constraint
-                
-            }
-        }
-        self.view.layoutIfNeeded()
-    }
-    func dismiss(){
-        // 重新布置约束
-        // 时间选择器界面移到屏幕外，视觉效果为消失
-        //shareV.pickDateView.frame.origin = CGPoint(x: 0, y: shareV.snp.bottom)
-        // 删除顶部约束
-        self.bottomConstraint?.uninstall()
-        picker.snp_makeConstraints{(make) in
-            
-            // 添加底部约束
-            if #available(iOS 11.0, *) {
-                self.topConstraint = make.top.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).constraint
-            } else {
-                // Fallback on earlier versions
-                self.topConstraint = make.top.equalTo(bottomLayoutGuide.snp.bottom).constraint
-            }
-        }
-        // 告诉当前控制器的View要更新约束了，动态更新约束，没有这句的话更新约束就没有动画效果
-        self.view.layoutIfNeeded()
-    }
-    
-    
-    // 点击取消按钮，时间选择器界面移到屏幕外，视觉效果为消失
-    @objc func pickViewDismiss(){
-        UIView.animate(withDuration: 0.5, animations: dismiss)
-    }
-    // 点击确定按钮，时间选择器界面移到屏幕外，视觉效果为消失，按钮文本显示日期
-    @objc func pickViewSelected(){
-        // 创建一个日期格式器
-        let dateFormatter = DateFormatter()
-        // 为格式器设置格式字符串,时间所属区域
-        dateFormatter.dateFormat="yyyy/MM/dd"
-        // 绑定一个时间选择器，并按格式返回时间
-        brithday = dateFormatter.string(from: picker.datePicker.date)
-        infoinputView.dateButton.setTitle(brithday, for: .normal)
-        
-        UIView.animate(withDuration: 0.5, animations: dismiss)
-        
-    }
-    
-    
+  
     
     //完成的点击方法
     @objc func finish(){
@@ -326,6 +253,19 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
         textField.resignFirstResponder()
         return true
     }
+     //选择出生日期
+    @objc func chooseDate(){
+        let pickerView = BHJPickerView.init(self, .date)
+        pickerView.pickerViewShow()
+    //        UIView.animate(withDuration: 0.5, animations: appear)
+    }
+    func selectedDate(_ pickerView: BHJPickerView, _ dateStr: Date) {
+        let messge = Date().dateStringWithDate_format_another(dateStr)
+        print(messge)
+        // 绑定一个时间选择器，并按格式返回时间
+        brithday = messge
+        infoinputView.dateButton.setTitle(brithday, for: .normal)
+    }
     @objc func selectNation(){
         let pickerView = BHJPickerView.init(self, .country)
         pickerView.pickerViewShow()
@@ -333,5 +273,17 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
     func selectedCountry(_ pickerView: BHJPickerView, _ countryStr: String) {
           infoinputView.nationButton.setTitle(countryStr, for: .normal)
           country = countryStr
+    }
+    func hideKeyboardWhenTappedAround(){
+        // 添加手势，使得点击视图键盘收回/Users/ADMIN/Desktop/swift1
+        let tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        // 视图是否接受手势，false为接受
+        tap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tap)
+    }
+ 
+    // 设置手势动作
+    @objc func dismissKeyboard(){
+        self.view.endEditing(true)
     }
 }

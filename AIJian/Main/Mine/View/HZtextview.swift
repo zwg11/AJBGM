@@ -51,8 +51,6 @@ class HZTextView: UITextView {
          print("rect1.origin.x", rect1.origin.x)
          print("rect1.origin.y", rect1.origin.y)
         print("rect1.size.width",rect1.size.width)
-        rect1.origin.x = 0
-        rect1.origin.y = 0
         
         (self.placeholder! as NSString).draw(in: rect1, withAttributes: attrs)
     }

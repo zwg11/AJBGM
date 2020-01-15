@@ -221,7 +221,7 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
     }
     //每个分区有几行 头部+8个cell+退出登录
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return _titleArr.count+2
     }
     //每一个cell，里面的内容
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

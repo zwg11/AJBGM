@@ -22,11 +22,8 @@ class InfoInputView: UIView {
     // 输入用户名文本框
     lazy var userNameTextField:UITextField = {
         let textField = UITextField()
-        textField.initTextField(placeholder: " Name",keyboardType: .default)
-        let imageView = UIImageView(image: UIImage(named: "Name"))
-        textField.leftView = imageView
-        textField.leftViewMode = .always
-//        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
+        textField.init_secondmethod_TextField(imageName: "Name", placeholder: "Name")
+        textField.keyboardType = .default
         return textField
     }()
     
@@ -89,12 +86,8 @@ class InfoInputView: UIView {
     // 输入电话文本框
     lazy var phoneTextField:UITextField = {
         let textField = UITextField()
-        textField.initTextField(placeholder: " Phone",keyboardType: .numberPad)
-//        let textField = initTextField(placeholder: " Phone",keyboardType: .emailAddress)
-        let imageView = UIImageView(image: UIImage(named: "Phone"))
-        textField.leftView = imageView
-        textField.leftViewMode = .always
-//        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
+        textField.init_secondmethod_TextField(imageName: "Phone", placeholder: "Phone")
+        textField.keyboardType = .numberPad
         return textField
     }()
     
@@ -117,7 +110,7 @@ class InfoInputView: UIView {
         let now = Date()
         // 创建一个时间格式器
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy/MM/dd"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         button.NorStyle(title: "\(dateFormatter.string(from: now))")
         button.setTitleColor(UIColor.white, for: .normal)
         button.layer.borderWidth = 0.5

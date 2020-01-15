@@ -105,7 +105,7 @@ class registerViewController: UIViewController,UITextFieldDelegate {
     
     @objc func ClickIcon(){
         if isAgree == false{
-            register.NoResponseProtocolLogo.setImage(UIImage(named: "selected"), for: .normal)
+            register.NoResponseProtocolLogo.setImage(UIImage(named: "selected-1"), for: .normal)
             isAgree = true
         }else{
             register.NoResponseProtocolLogo.setImage(UIImage(named: "unselected"), for: .normal)

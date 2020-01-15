@@ -15,23 +15,16 @@ class emailCheckView: UIView {
     // 输入邮箱文本框
     lazy var emailTextField:UITextField = {
         let textField = UITextField()
-        textField.initTextField(placeholder: " Email",keyboardType: .emailAddress)
-        let imageView = UIImageView(image: UIImage(named: "email"))
-        textField.leftView = imageView
-        textField.leftViewMode = .always
-//        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
+        textField.init_secondmethod_TextField(imageName: "email", placeholder: "Email")
+        textField.keyboardType = .emailAddress
         return textField
     }()
     
     // 输入验证码文本框
     lazy var authCodeTextField:UITextField = {
         let textField = UITextField()
-        textField.initTextField(placeholder: " Code",keyboardType: .numberPad)
-//        let textField = initTextField(placeholder: " Code",keyboardType: .numberPad)
-        let imageView = UIImageView(image: UIImage(named: "iCode"))
-        textField.leftView = imageView
-        textField.leftViewMode = .always
-//        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
+        textField.init_secondmethod_TextField(imageName: "iCode", placeholder: "Code")
+        textField.keyboardType = .numberPad
         return textField
     }()
     

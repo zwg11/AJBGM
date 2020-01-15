@@ -96,6 +96,7 @@ class loginView: UIView {
         textField.leftView = imageView
 //        textField.placeholder = text
         textField.leftViewMode = .always
+        textField.autocapitalizationType = .none
         textField.font = UIFont.systemFont(ofSize: 16)
         textField.textColor = TextColor
         let str:NSMutableAttributedString = NSMutableAttributedString(string: text, attributes: [NSAttributedString.Key.foregroundColor:TextColor])

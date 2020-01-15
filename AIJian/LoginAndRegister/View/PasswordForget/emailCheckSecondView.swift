@@ -14,9 +14,9 @@ class emailCheckSecondView: UIView {
 
     // 输入新密码文本框
     lazy var passwordTextField:UITextField = {
-        
         let textField = UITextField()
-        textField.initTextField(placeholder: "New Password",keyboardType: .default)
+        textField.init_secondmethod_TextField(imageName: "mima", placeholder: "New Password")
+        textField.keyboardType = .default
         textField.isSecureTextEntry = true
         if #available(iOS 11.0, *) {
             textField.textContentType = UITextContentType.password;
@@ -26,16 +26,14 @@ class emailCheckSecondView: UIView {
         } else {
             // Fallback on earlier versions
         }
-        let imageView = UIImageView(image: UIImage(named: "mima"))
-        textField.leftView = imageView
-        textField.leftViewMode = .always
         return textField
     }()
     
     // 输入确认新密码文本框
     lazy var passwordSecTextField:UITextField = {
         let textField = UITextField()
-        textField.initTextField(placeholder: "Confirm the Password",keyboardType: .default)
+        textField.init_secondmethod_TextField(imageName: "mima", placeholder: "Confirm the Password")
+        textField.keyboardType = .default
         textField.isSecureTextEntry = true
         if #available(iOS 11.0, *) {
             textField.textContentType = UITextContentType.password;
@@ -45,10 +43,6 @@ class emailCheckSecondView: UIView {
         } else {
             // Fallback on earlier versions
         }
-        let imageView = UIImageView(image: UIImage(named: "mima"))
-        textField.leftView = imageView
-        textField.leftViewMode = .always
-//        textField.setValue(TextColor, forKeyPath: "_placeholderLabel.textColor")
         return textField
     }()
     

@@ -186,7 +186,7 @@ class loginViewController: UIViewController,UITextFieldDelegate {
     //跳转到注册界面
     @objc func register(){
         print("register clicked.")
-        self.navigationController?.pushViewController(infoInputViewController(), animated: false)
+        self.navigationController?.pushViewController(registerViewController(), animated: false)
     }
 
     //此处只做收回键盘的动作

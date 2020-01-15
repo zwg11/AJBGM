@@ -24,6 +24,16 @@ public extension Date {
         let date = formatter.string(from: fromDate)
         return date.components(separatedBy: " ").first!
     }
+    func dateStringWithDate_format_another(_ fromDate : Date) -> String{
+           
+           let timeZone = TimeZone.init(identifier: "UTC")
+           let formatter = DateFormatter()
+           formatter.timeZone = timeZone
+           formatter.locale = Locale.init(identifier: "en_US")
+           formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+           let date = formatter.string(from: fromDate)
+           return date.components(separatedBy: " ").first!
+       }
     
     /// 获取时间差
     ///
