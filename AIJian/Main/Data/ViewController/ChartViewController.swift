@@ -194,7 +194,7 @@ class ChartViewController: UIViewController,ChartViewDelegate{
     }()
     
     private lazy var MarkTimelabel:UILabel = {
-        let label =  UILabel(frame: CGRect(x: 10, y: 10, width: 200, height: 30))
+        let label =  UILabel(frame: CGRect(x: 10, y: 10, width: 300, height: 30))
         label.textColor = UIColor.black
         label.font = UIFont.systemFont(ofSize: 18)
 //        label.backgroundColor = UIColor.gray
@@ -206,7 +206,7 @@ class ChartViewController: UIViewController,ChartViewDelegate{
     private lazy var MarkValuelabel:UILabel = {
             let label =  UILabel(frame: CGRect(x: 10, y: 40, width: 200, height: 30))
             label.textColor = UIColor.black
-            label.font = UIFont.systemFont(ofSize: 15)
+            label.font = UIFont.systemFont(ofSize: 18)
 //            label.backgroundColor = UIColor.gray
             label.textAlignment = .left
             label.numberOfLines = 0
