@@ -142,7 +142,7 @@ class loginViewController: UIViewController,UITextFieldDelegate {
                                 sqliteManager.addUserRecord(user1)
                                 // 登陆成功，请求数据
                                 self.indicator.setLabelText("Login in Success，Initializing Data..")
-                                self.requestData(day: 1000)
+                                self.requestData(day: 3000)
 
  
                             }else if(responseModel.code == -1){  //返回-1,表示账号被挤下去了

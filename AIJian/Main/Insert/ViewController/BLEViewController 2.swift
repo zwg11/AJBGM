@@ -561,7 +561,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                                     var glucoseValue:[Int] = []
                                     if self.BLEglucoseMark.count>0{
                                         for i in 0..<self.BLEglucoseMark.count{
-                                            if self.BLEglucoseMark[i] != 12{
+                                            if self.BLEglucoseMark[i] != 12 && self.BLEglucoseMark[i] != 3{
                                                 glucoseMark.append(self.BLEglucoseMark[i])
                                                 glucoseDate.append(self.BLEglucoseDate[i])
                                                 glucoseValue.append(self.BLEglucoseValue[i])
@@ -910,7 +910,6 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         meterIDs = data1["meterID"] as? NSMutableDictionary
         print("存储的meterID有:\(String(describing: meterIDs))")
         // 初始化数据
-        
         meterType = 0
         //        byteDate = nil
         //        // 记录扫描到的设备的UUID

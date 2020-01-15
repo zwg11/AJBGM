@@ -362,6 +362,19 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
 //            }
         }
         
+        // 页面刚出现时弹出，让用户直接确认是否保存数据
+        let alert_save = UIAlertController(title: "", message: "Save Result?", preferredStyle: .alert)
+        // 保存数据动作
+        let save_action = UIAlertAction(title: "Save", style: .default) { (UIAlertAction) in
+            self.BLEDataSave()
+//            self.navigationController?.popViewController(animated: true)
+        }
+        // 取消数据动作
+        let cancel_action = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert_save.addAction(save_action)
+        alert_save.addAction(cancel_action)
+        self.present(alert_save, animated: true, completion: nil)
+        
     }
     
 }

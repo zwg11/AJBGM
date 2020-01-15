@@ -70,9 +70,9 @@ class LastResultTableViewCell: UITableViewCell {
         let low = GetBloodLimit.getRandomDinnerLow()
         let high = GetBloodLimit.getRandomDinnerTop()
         if unit == "mg/dL"{
-            label.text = "Reference value \(Int(low))" + unit + "-" + "\(Int(high))" + unit
+            label.text = "Reference value \(Int(low))-" + "\(Int(high)) " + unit
         }else{
-            label.text = "Reference value \(low)" + unit + "-" + "\(high)" + unit
+            label.text = "Reference value \(low)-" + "\(high) " + unit
         }
         
         label.textAlignment = .left

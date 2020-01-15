@@ -92,6 +92,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+<<<<<<< HEAD
             uuid = "A80924A7-B191-4AF6-ABB5-3D71AF6A1FC9"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -102,6 +103,34 @@
             startingLineNumber = "35"
             endingLineNumber = "35"
             landmarkName = "initInfoDataArray()"
+=======
+            uuid = "267E1F4A-E0D3-4624-878B-BCC36F7FCA2B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AIJian/Main/Data/ViewController/SharedViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "sendImage()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8690AC4F-64D4-4287-83F4-06D2A8D4032F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AIJian/Main/Data/ViewController/SharedViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "sendImage()"
+>>>>>>> 78f559f8309eacd9dc39d6b1479840b9751694fd
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

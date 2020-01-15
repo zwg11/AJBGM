@@ -28,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // 设置文本框适应键盘
         IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         // 先确认是否初始化plist文件，没有则初始化
         let isPlistInit = PlistSetting.initPlistFile()
         

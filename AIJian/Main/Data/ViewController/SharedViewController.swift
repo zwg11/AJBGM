@@ -13,7 +13,7 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
 
     // 加载视图
     private lazy var indicator:CustomIndicatorView = {
-        let view = CustomIndicatorView.init(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: AJScreenHeight))
+        let view = CustomIndicatorView()
         view.setupUI("")
         return view
     }()
@@ -23,6 +23,8 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
     var name:String?
     // 记录电话
     var phone:String?
+    
+
     private lazy var shareV:SharedView = {
         let view = SharedView()
         view.setupUI()
@@ -74,6 +76,14 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
         if phone!.count >= 30{
             return
         }
+        // 加载视图旋转
+        self.parent?.navigationController?.view.addSubview(indicator)
+        self.parent?.navigationController?.view.bringSubviewToFront(indicator)
+        indicator.snp.makeConstraints{(make) in
+            make.edges.equalToSuperview()
+        }
+        indicator.startIndicator()
+        
         //设置名字和电话
         general.nameLabel.text = name?.removeHeadAndTailSpacePro
         general.phoneLabel.text = phone?.removeHeadAndTailSpacePro
@@ -90,8 +100,11 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
 //        UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.savedPhotosAlbum(_:didFinishSavingWithError:contextInfo:)), nil)
         // 要分享的内容封装成数组
         let activityItems = [image]
+        
         // 创建
         let toVC = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+        // 加载视图移除
+        indicator.stopIndicator()
         self.present(toVC, animated: true, completion: nil)
     }
     
@@ -127,6 +140,9 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // 加载视图初始化
+        indicator.setupUI("")
+        
         self.view.backgroundColor = UIColor.clear
 //        self.view.backgroundColor = ThemeColor
         self.view.clipsToBounds = true
