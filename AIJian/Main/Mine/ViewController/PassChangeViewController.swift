@@ -269,7 +269,7 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
                                 }else if (responseModel.code! == 3){
                                     LoginOff.loginOff(self)
                                     let alert = CustomAlertController()
-                                    alert.custom(self,"Attention", "Your account has been disabled.Please contact BGApp@acondiabetescare.com")
+                                    alert.custom(self,"Attention", "Your account has been disabled.Please contact oncall@acondiabetescare.com")
                                 }else{
                                     alert.custom_cengji(self,"Attention", "Password Reset Failure")
                                     self.oldPasswd_textF.text! = ""

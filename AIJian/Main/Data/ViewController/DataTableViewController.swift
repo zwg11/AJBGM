@@ -204,8 +204,9 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
             let bloodPressureLabel = tableViewCellCustomLabel.init(text: "\(GetUnit.getPressureUnit())",image: "blood pressure")
             let medicineLabel = tableViewCellCustomLabel.init(text: "",image: "medicine")
             let sportLabel = tableViewCellCustomLabel.init(text: "",image: "yundong")
+            let modelLabel = tableViewCellCustomLabel.init(text: "",image: "类型")
             let remarkLabel = tableViewCellCustomLabel.init(text: "",image: "remark")
-            let labels:[tableViewCellCustomLabel] = [glucoseLabel,eventLabel,appetiteLabel,insulinLabel,weightLabel,bloodPressureLabel,medicineLabel,sportLabel]
+            let labels:[tableViewCellCustomLabel] = [glucoseLabel,eventLabel,appetiteLabel,insulinLabel,weightLabel,bloodPressureLabel,medicineLabel,sportLabel,modelLabel]
             var offsetX:CGFloat = 0
             //remarkLabel.frame = CGRect(x: offsetX, y: 0, width: 200, height: 40)
             for i in labels{
@@ -331,7 +332,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         }
         
         // 设置数据滚动视图内容的大小，该滚动视图只允许横向滚动
-        scroll.contentSize = CGSize(width: 720+200, height: scHeight)
+        scroll.contentSize = CGSize(width: 9*90+200, height: scHeight)
 //        scroll.showsHorizontalScrollIndicator = true
 //        scroll.indicatorStyle = .black
 //        scroll.bounces = false
@@ -352,7 +353,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         
         // create a tableView
         // **********其宽度要根据计算得出，高度也是根据数据量计算得出************
-        DATATableView.frame = CGRect(x: 0, y: 0, width: 720 + 200, height: scHeight)
+        DATATableView.frame = CGRect(x: 0, y: 0, width: 9*90 + 200, height: scHeight)
         DATATableView.dataSource = self
         DATATableView.delegate = self
         DATATableView.isScrollEnabled = false
@@ -451,7 +452,7 @@ extension DataTableViewController{
                         }else if (deleteResponse.code! == 3){
                             LoginOff.loginOff(self)
                             let alert = CustomAlertController()
-                            alert.custom(self,"Attention", "Your account has been disabled.Please contact BGApp@acondiabetescare.com")
+                            alert.custom(self,"Attention", "Your account has been disabled.Please contact oncall@acondiabetescare.com")
                         }else{
                             // 如果删除成功
                             self.loadV.stopIndicator()

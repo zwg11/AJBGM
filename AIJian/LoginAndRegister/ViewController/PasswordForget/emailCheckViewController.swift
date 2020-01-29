@@ -200,7 +200,7 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
 //                                self.emailCheck.getAuthCodeButton.setTitle("Resend", for: .normal)
 //                                self.emailCheck.getAuthCodeButton.countDown(count: 0)
                             }else if responseModel.code == 3{
-                                 alertController.custom(self,"Attention", "Your account has been disabled.Please contact BGApp@acondiabetescare.com")
+                                 alertController.custom(self,"Attention", "Your account has been disabled.Please contact oncall@acondiabetescare.com")
                             }
                             print("注册时，获取验证码阶段")
                         }

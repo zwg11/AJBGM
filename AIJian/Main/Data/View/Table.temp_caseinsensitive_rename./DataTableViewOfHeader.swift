@@ -20,8 +20,9 @@ class DataTableViewOfHeader: UIView {
         let bloodPressureLabel = tableViewCellCustomLabel.init(text: "\(GetUnit.getPressureUnit())",image: "blood pressure")
         let medicineLabel = tableViewCellCustomLabel.init(text: "",image: "medicine")
         let sportLabel = tableViewCellCustomLabel.init(text: "",image: "yundong")
+        let modelLabel = tableViewCellCustomLabel.init(text: "",image: "yundong")
         let remarkLabel = tableViewCellCustomLabel.init(text: "",image: "remark")
-        let labels:[tableViewCellCustomLabel] = [glucoseLabel,eventLabel,appetiteLabel,insulinLabel,weightLabel,bloodPressureLabel,medicineLabel,sportLabel]
+        let labels:[tableViewCellCustomLabel] = [glucoseLabel,eventLabel,appetiteLabel,insulinLabel,weightLabel,bloodPressureLabel,medicineLabel,sportLabel,modelLabel]
         var offsetX:CGFloat = 0
         // 设置每个label的布局
         for i in labels{

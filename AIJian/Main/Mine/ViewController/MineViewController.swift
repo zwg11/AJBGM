@@ -159,7 +159,7 @@ class MineViewController: UIViewController {
                         }else if (responseModel.code! == 3){
                             LoginOff.loginOff(self)
                             let alert = CustomAlertController()
-                            alert.custom(self,"Attention", "Your account has been disabled.Please contact BGApp@acondiabetescare.com")
+                            alert.custom(self,"Attention", "Your account has been disabled.Please contact oncall@acondiabetescare.com")
                         }else{
                             let alert = CustomAlertController()
                             alert.custom(self, "Attention", "Unable to get the information")

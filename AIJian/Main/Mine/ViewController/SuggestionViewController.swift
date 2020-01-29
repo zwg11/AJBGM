@@ -236,7 +236,7 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
                         }else if (responseModel.code! == 3){
                             LoginOff.loginOff(self)
                             let alert = CustomAlertController()
-                            alert.custom(self,"Attention", "Your account has been disabled.Please contact BGApp@acondiabetescare.com")
+                            alert.custom(self,"Attention", "Your account has been disabled.Please contact oncall@acondiabetescare.com")
                         }else{
                             alert.custom_cengji(self,"Attention", "Sorry.Feedback Failure！")
                             self.navigationController?.popViewController(animated: false)

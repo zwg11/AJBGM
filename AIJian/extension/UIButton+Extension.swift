@@ -46,6 +46,26 @@ extension UIButton{
         self.backgroundColor = kRGBColor(8, 52, 84, 1)
         self.layer.borderWidth = 0
     }
+    
+    // 用于输入模式选择页面
+    func inputModelStyle(background:UIImage,image:UIImage,title:String,offset:CGFloat){
+        self.setBackgroundImage(background, for: .normal)
+//        self.setImage(image, for: .normal)
+        self.setTitle(title, for: .normal)
+//        let x = self.imageView?.frame.minX
+//        print("图片位置在",x!)
+//        self.imageEdgeInsets = UIEdgeInsets.init(top: 0, left: -x!, bottom: 0, right: x!)
+        self.contentHorizontalAlignment = .left
+        self.titleEdgeInsets = UIEdgeInsets.init(top: 0, left: offset, bottom: 0, right: -offset)
+    }
+    // 按钮被选中时背景
+    func modelSelected(background:UIImage){
+        self.setBackgroundImage(background, for: .normal)
+    }
+    // 按钮未被选中时背景
+    func modelDeselected(background:UIImage){
+        self.setBackgroundImage(background, for: .normal)
+    }
    
     func setButtonDisable(){
         isEnabled = false

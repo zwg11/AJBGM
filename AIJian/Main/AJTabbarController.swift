@@ -48,11 +48,12 @@ class AJTabbarController: UITabBarController {
         
         self.addChild(nv2)
         
-        let BLE = BLEViewController()
-        let nv3 = AJNavigationController(rootViewController: BLE)
+//        let BLE = BLEViewController()
+        let model = modelViewController()
+        let nv3 = AJNavigationController(rootViewController: model)
 //        nv3.navigationBar.barTintColor = ThemeColor
         nv3.navigationBar.isTranslucent = false
-        BLE.navigationItem.title = "Data Transfer"
+        model.navigationItem.title = "Input Model"
         nv3.tabBarItem.image = UIImage(named: "shuru.png")?.withRenderingMode(.automatic)
 //        nv3.tabBarItem.selectedImage = UIImage(named: "shuru-2.png")?.withRenderingMode(.alwaysOriginal)
         nv3.tabBarItem.title = "Add"

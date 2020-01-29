@@ -20,6 +20,7 @@ class dataTableViewCell: UITableViewCell {
     var bloodPressureLabel:UILabel = UILabel()
     var medicineLabel: UILabel = UILabel()
     var sportLabel:UILabel = UILabel()
+    var modelLabel:UILabel = UILabel()
     var remarkLabel:UILabel = UILabel()
     
     
@@ -131,6 +132,13 @@ class dataTableViewCell: UITableViewCell {
         else{
             sportLabel.text = "-"
         }
+        // 输入类型
+        if sortedData[secion][row].recordType == 1{
+            modelLabel = tableViewCellCustomLabel.init(text: "", image: "手动输入图标")
+        }else{
+            modelLabel = tableViewCellCustomLabel.init(text: "", image:  "蓝牙图标")
+        }
+        modelLabel.backgroundColor = UIColor.clear
         
         // 备注
         remarkLabel.textAlignment = .center
@@ -141,7 +149,7 @@ class dataTableViewCell: UITableViewCell {
         }
         
         
-        let labels:[UILabel] = [glucoseLabel,eventLabel,appetiteLabel,isulinLabel,weightLabel,bloodPressureLabel,medicineLabel,sportLabel,remarkLabel]
+        let labels:[UILabel] = [glucoseLabel,eventLabel,appetiteLabel,isulinLabel,weightLabel,bloodPressureLabel,medicineLabel,sportLabel,modelLabel,remarkLabel]
         
         var offsetX:CGFloat = 0
         for i in labels{

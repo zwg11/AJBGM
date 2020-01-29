@@ -258,7 +258,7 @@ class registerViewController: UIViewController,UITextFieldDelegate {
                                 alertController.custom(self,"Attention", "Email Registered")
                                 self.register.getAuthCodeButton.setButtonEnable()
                             }else if responseModel.code == 3{
-                                alertController.custom(self,"Attention", "Your account has been disabled.Please contact BGApp@acondiabetescare.com")
+                                alertController.custom(self,"Attention", "Your account has been disabled.Please contact oncall@acondiabetescare.com")
                             }else{
                                 alertController.custom(self,"Attention", "Email Send Error")
                                 self.register.getAuthCodeButton.setButtonEnable()

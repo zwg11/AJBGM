@@ -429,7 +429,7 @@ extension gluViewController{
                                 }else if (responseModel.code! == 3){
                                     LoginOff.loginOff(self)
                                     let alert = CustomAlertController()
-                                    alert.custom(self,"Attention", "Your account has been disabled.Please contact BGApp@acondiabetescare.com")
+                                    alert.custom(self,"Attention", "Your account has been disabled.Please contact oncall@acondiabetescare.com")
                                 }else{
                                     print(responseModel.code)
                                     print("meterID插更新失败")
