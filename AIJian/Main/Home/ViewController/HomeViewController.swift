@@ -280,8 +280,8 @@ extension HomeViewController{
                                 }
                             })
                             let noAction = UIAlertAction.init(title: "Later", style: .default, handler: nil)
-                            yesAction.setValue(UIColor.black, forKey: "_titleTextColor")
-                            noAction.setValue(UIColor.black, forKey: "_titleTextColor")
+//                            yesAction.setValue(UIColor.black, forKey: "_titleTextColor")
+//                            noAction.setValue(UIColor.black, forKey: "_titleTextColor")
                             alertUpdate.addAction(yesAction)
                             alertUpdate.addAction(noAction)
                             self.present(alertUpdate, animated: true, completion: nil)

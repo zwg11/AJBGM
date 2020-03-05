@@ -199,8 +199,7 @@ class InsertViewController: UIViewController {
             self.medicineChooseAlert.selectedNum += 1
    
         })
-        actionCancel.setValue(UIColor.black, forKey: "_titleTextColor")
-        actionSure.setValue(UIColor.black, forKey: "_titleTextColor")
+//        actionCancel.setValue(UIColor.black, forKey: "_titleTextColor")
         // 添加2个按钮到 警示框中
         alert.addAction(actionCancel)
         alert.addAction(actionSure)

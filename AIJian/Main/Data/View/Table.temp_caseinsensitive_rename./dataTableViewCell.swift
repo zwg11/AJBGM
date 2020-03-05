@@ -134,9 +134,9 @@ class dataTableViewCell: UITableViewCell {
         }
         // 输入类型
         if sortedData[secion][row].recordType == 1{
-            modelLabel = tableViewCellCustomLabel.init(text: "", image: "手动输入图标")
+            modelLabel = tableViewCellCustomLabel.init(text: "", image: "蓝牙图标")
         }else{
-            modelLabel = tableViewCellCustomLabel.init(text: "", image:  "蓝牙图标")
+            modelLabel = tableViewCellCustomLabel.init(text: "", image:  "手动输入图标")
         }
         modelLabel.backgroundColor = UIColor.clear
         

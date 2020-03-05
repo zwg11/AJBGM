@@ -67,8 +67,13 @@ class alertViewController: UIAlertController,UITableViewDelegate,UITableViewData
             tableView.deselectRow(at: indexPath, animated: true)
             cell?.imageView?.image = UIImage(named: "unselected")
         }
-        
-        cell?.backgroundColor = UIColor.white
+        if #available(iOS 13.0, *) {
+            cell?.backgroundColor = UIColor.systemBackground
+        } else {
+            // Fallback on earlier versions
+            cell?.backgroundColor = UIColor.white
+        }
+//        cell?.backgroundColor = UIColor.white
         return cell!
     }
     
@@ -109,7 +114,13 @@ class alertViewController: UIAlertController,UITableViewDelegate,UITableViewData
     func setupUI(){
         // 设置单元格允许多选
         tabelView.allowsMultipleSelection = true
-        tabelView.backgroundColor = UIColor.white
+        if #available(iOS 13.0, *) {
+            tabelView.backgroundColor = UIColor.systemBackground
+        } else {
+            // Fallback on earlier versions
+            tabelView.backgroundColor = UIColor.white
+        }
+        
         // 读取配置文件中的药物种类
         let path = PlistSetting.getFilePath(File: "inputChoose.plist")
         let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
@@ -136,7 +147,7 @@ class alertViewController: UIAlertController,UITableViewDelegate,UITableViewData
             make.bottom.equalToSuperview().offset(-40)
         }
         
-        let cancelAction = UIAlertAction(title: "cancel", style: .default, handler: {
+        let cancelAction = UIAlertAction(title: "cancel", style: .cancel, handler: {
             action in
             print("Cancel")
             //如果取消的话，需要将原先保留下来的状态数组boolarr。替换成用户选择了的数组
@@ -165,8 +176,8 @@ class alertViewController: UIAlertController,UITableViewDelegate,UITableViewData
 //            self.tabelView.reloadData()
             
         })
-        cancelAction.setValue(UIColor.black, forKey: "_titleTextColor")
-        okAction.setValue(UIColor.black, forKey: "_titleTextColor")
+//        cancelAction.setValue(UIColor.black, forKey: "_titleTextColor")
+//        okAction.setValue(UIColor.black, forKey: "_titleTextColor")
         
         self.addAction(cancelAction)
         self.addAction(okAction)

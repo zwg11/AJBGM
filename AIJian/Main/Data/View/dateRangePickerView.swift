@@ -20,6 +20,26 @@ class dateRangePickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return rangeDate[row]
     }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+
+        //修改字体，大小，颜色
+        var pickerLabel = view as? UILabel
+        if pickerLabel == nil{
+            pickerLabel = UILabel()
+//            pickerLabel?.font = UIFont.systemFont(ofSize: 16)
+            pickerLabel?.textAlignment = .center
+            if #available(iOS 13.0, *) {
+                pickerLabel?.textColor = UIColor.label
+            } else {
+                // Fallback on earlier versions
+                pickerLabel?.textColor = UIColor.black
+            }
+        }
+        pickerLabel?.text = self.pickerView(pickerView, titleForRow: row, forComponent: component)
+
+        return pickerLabel!
+    }
 
     private let rangeDate:[String] = ["Last 3 Days","Last 7 Days","Last 30 Days","Custom"]
     // 确定按钮和取消按钮
@@ -27,7 +47,13 @@ class dateRangePickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
     lazy var sureButton:UIButton = {
         let button = UIButton()
         button.setTitle("Done", for: .normal)
-        button.setTitleColor(UIColor.black, for: .normal)
+//        button.setTitleColor(UIColor.black, for: .normal)
+        if #available(iOS 13.0, *) {
+            button.setTitleColor(UIColor.label, for: .normal)
+        } else {
+            // Fallback on earlier versions
+            button.setTitleColor(UIColor.black, for: .normal)
+        }
         button.contentHorizontalAlignment = .right
         // 设置内边界，使得按钮的字体不那么靠右
         button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width/20)
@@ -37,7 +63,14 @@ class dateRangePickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
     lazy var cancelButton:UIButton = {
         let button = UIButton()
         button.setTitle("Cancel", for: .normal)
-        button.setTitleColor(UIColor.black, for: .normal)
+//        button.setTitleColor(UIColor.black, for: .normal)
+        // adapt dark model
+        if #available(iOS 13.0, *) {
+            button.setTitleColor(UIColor.label, for: .normal)
+        } else {
+            // Fallback on earlier versions
+            button.setTitleColor(UIColor.black, for: .normal)
+        }
         button.contentHorizontalAlignment = .left
         button.contentEdgeInsets = UIEdgeInsets(top: 0, left: UIScreen.main.bounds.width/20, bottom: 0, right: 0)
         return button
@@ -56,7 +89,14 @@ class dateRangePickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
     
     func setupUI(){
         // 设置视图背景、边框
-        self.backgroundColor = UIColor.white
+//        self.backgroundColor = UIColor.white
+        if #available(iOS 13.0, *) {
+            self.backgroundColor = UIColor.systemBackground
+        } else {
+            // Fallback on earlier versions
+            self.backgroundColor = UIColor.white
+        }
+        
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.gray.cgColor
         // 取消按钮布局
@@ -94,3 +134,25 @@ class dateRangePickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
     }
 
 }
+
+//extension UIPickerViewDelegate{
+//    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+//
+//        //修改字体，大小，颜色
+//        var pickerLabel = view as? UILabel
+//        if pickerLabel == nil{
+//            pickerLabel = UILabel()
+////            pickerLabel?.font = UIFont.systemFont(ofSize: 16)
+//            pickerLabel?.textAlignment = .center
+//            if #available(iOS 13.0, *) {
+//                pickerLabel?.textColor = UIColor.label
+//            } else {
+//                // Fallback on earlier versions
+//                pickerLabel?.textColor = UIColor.black
+//            }
+//        }
+//        pickerLabel?.text = self.pickerView!(pickerView, titleForRow: row, forComponent: component)
+//
+//        return pickerLabel!
+//    }
+//}

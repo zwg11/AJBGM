@@ -271,15 +271,20 @@ class DataViewController: UIViewController {
 //        print("开始时间：\(customRange.startDatePicker.date)")
 //        print("结束时间：\(customRange.endDatePicker.date)")
         // 求出开始时间与结束时间之间相隔的天数
-        let components = NSCalendar.current.dateComponents([.day], from: customSD, to: customED)
+//        let components = NSCalendar.current.dateComponents([.day], from: customSD, to: customED)
 //        let components = customED - customSD
+//        如果开始日期在结束日期之后
         if customSD > customED{
             let alert = CustomAlertController()
             alert.custom(self, "Attention", "Start Date Needs to Come Before End Date")
-        }else if components.day! > 31{
-            let alert = CustomAlertController()
-            alert.custom(self, "Attention", "The Time Span Shall Not Greater Than 31 Days")
         }
+//            如果超过31天警告
+//        else if components.day! > 31{
+//            let alert = CustomAlertController()
+//            alert.custom(self, "Attention", "The Time Span Shall Not Greater Than 31 Days")
+//        }
+            
+//            将日期选择器移除并处理数据
         else{
             // 选择日期范围视图移除
             customRange.removeFromSuperview()
@@ -293,11 +298,11 @@ class DataViewController: UIViewController {
             let ED = dateFormatter.string(from: customED)
             startD = DateInRegion(SD)?.date.dateAt(.startOfDay)
 //            startD = customSD.dateAt(.startOfDay)
-            print("startD:\(startD)")
+//            print("startD:\(startD)")
             // 结束时间
 //            let ED = customED
             endD = (DateInRegion(ED)?.date.dateAt(.endOfDay))!+1.seconds
-            print("endD:\(endD)")
+//            print("endD:\(endD)")
             // 设定被选中的标志位
             pickerSelectedRow = 4
             

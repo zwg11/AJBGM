@@ -79,7 +79,13 @@ class BHJPickerView: UIView , UIPickerViewDelegate, UIPickerViewDataSource{
         let frame = CGRect.init(x: 0, y: AJScreenHeight, width: AJScreenWidth, height: AJScreenHeight)
         super.init(frame: frame)
         let view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: AJScreenWidth, height: AJScreenHeight))
-        view.backgroundColor = kRGBColor(230, 230, 230, 1)
+        // adopt dark model
+        if #available(iOS 13.0, *) {
+            view.backgroundColor = UIColor.systemBackground
+        } else {
+            // Fallback on earlier versions
+            view.backgroundColor = kRGBColor(230, 230, 230, 1)
+        }
         self.addSubview(view)
         
         // 取消按钮  字体需要黑色
@@ -87,7 +93,7 @@ class BHJPickerView: UIView , UIPickerViewDelegate, UIPickerViewDataSource{
         cancelButton.frame = CGRect.init(x: 0, y: 0, width: 60, height: 44)
         cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         cancelButton.setTitle("Cancel", for: UIControl.State.normal)
-        cancelButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
+//        cancelButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
         cancelButton.addTarget(self, action: #selector(cancelButtonClick), for: UIControl.Event.touchUpInside)
         self.addSubview(cancelButton)
         
@@ -96,8 +102,18 @@ class BHJPickerView: UIView , UIPickerViewDelegate, UIPickerViewDataSource{
         doneButton.frame = CGRect.init(x: AJScreenWidth - 60, y: 0, width: 60, height: 44)
         doneButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         doneButton.setTitle("Done", for: UIControl.State.normal)
-        doneButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
+//        doneButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
         doneButton.addTarget(self, action: #selector(doneButtonClick), for: UIControl.Event.touchUpInside)
+        
+        // adopt dark model
+        if #available(iOS 13.0, *) {
+            cancelButton.setTitleColor(UIColor.label, for: .normal)
+            doneButton.setTitleColor(UIColor.label, for: .normal)
+        } else {
+            // Fallback on earlier versions
+            cancelButton.setTitleColor(UIColor.black, for: .normal)
+            doneButton.setTitleColor(UIColor.black, for: .normal)
+        }
         self.addSubview(doneButton)
         
         //点击背景，取消
@@ -105,14 +121,21 @@ class BHJPickerView: UIView , UIPickerViewDelegate, UIPickerViewDataSource{
         backgroundButton.frame = CGRect.init(x: 0, y: 0, width: AJScreenWidth, height: AJScreenHeight)
         backgroundButton.backgroundColor = kRGBColor(0, 0, 0, 0)
         backgroundButton.addTarget(self, action: #selector(cancelButtonClick), for: UIControl.Event.touchUpInside)
+        
+        // here ignore the backgroundcolor of picker
         switch style {
             case .date:
                 datePicker = UIDatePicker.init(frame: CGRect.init(x: 0, y: 44, width: AJScreenWidth, height: pickerH - 44))
                 datePicker.datePickerMode = UIDatePicker.Mode.date
                 datePicker.locale = Locale.init(identifier: "en_US")
                 datePicker.maximumDate = Date()
-                
-                datePicker.backgroundColor = UIColor.white
+                // adopt dark model
+                if #available(iOS 13.0, *) {
+                    datePicker.setValue(UIColor.label, forKey: "textColor")
+                } else {
+                    // Fallback on earlier versions
+                }
+//                datePicker.backgroundColor = UIColor.white
                 datePicker.addTarget(self, action: #selector(BHJPickerView.dateSelected(_:)), for: UIControl.Event.valueChanged)
                 datePicker.setDate(Date(), animated: true)
                 self.addSubview(datePicker)
@@ -121,7 +144,7 @@ class BHJPickerView: UIView , UIPickerViewDelegate, UIPickerViewDataSource{
                 genderPicker = UIPickerView.init(frame: CGRect.init(x: 0, y: 44, width: AJScreenWidth, height: pickerH - 44))
                 genderPicker.delegate = self
                 genderPicker.dataSource = self
-                genderPicker.backgroundColor = UIColor.white
+//                genderPicker.backgroundColor = UIColor.white
                 List = 0
 //                isAddress = false
                 self.addSubview(genderPicker)
@@ -129,7 +152,7 @@ class BHJPickerView: UIView , UIPickerViewDelegate, UIPickerViewDataSource{
                 bloodPicker = UIPickerView.init(frame: CGRect.init(x: 0, y: 44, width: AJScreenWidth, height: pickerH - 44))
                 bloodPicker.delegate = self
                 bloodPicker.dataSource = self
-                bloodPicker.backgroundColor = UIColor.white
+//                bloodPicker.backgroundColor = UIColor.white
                 List = 1
                 //              isAddress = false
                 self.addSubview(bloodPicker)
@@ -137,7 +160,7 @@ class BHJPickerView: UIView , UIPickerViewDelegate, UIPickerViewDataSource{
                 weightPicker = UIPickerView.init(frame: CGRect.init(x: 0, y: 44, width: AJScreenWidth, height: pickerH - 44))
                 weightPicker.delegate = self
                 weightPicker.dataSource = self
-                weightPicker.backgroundColor = UIColor.white
+//                weightPicker.backgroundColor = UIColor.white
                 List = 2
                 //                isAddress = false
                 self.addSubview(weightPicker)
@@ -145,7 +168,7 @@ class BHJPickerView: UIView , UIPickerViewDelegate, UIPickerViewDataSource{
                 pressurePicker = UIPickerView.init(frame: CGRect.init(x: 0, y: 44, width: AJScreenWidth, height: pickerH - 44))
                 pressurePicker.delegate = self
                 pressurePicker.dataSource = self
-                pressurePicker.backgroundColor = UIColor.white
+//                pressurePicker.backgroundColor = UIColor.white
                 List = 3
                 //                isAddress = false
                 self.addSubview(pressurePicker)
@@ -153,7 +176,7 @@ class BHJPickerView: UIView , UIPickerViewDelegate, UIPickerViewDataSource{
                 countryPicker = UIPickerView.init(frame: CGRect.init(x: 0, y: 44, width: AJScreenWidth, height: pickerH - 44))
                 countryPicker.delegate = self
                 countryPicker.dataSource = self
-                countryPicker.backgroundColor = UIColor.white
+//                countryPicker.backgroundColor = UIColor.white
                 List = 4
                 self.addSubview(countryPicker)
         }
@@ -283,6 +306,27 @@ class BHJPickerView: UIView , UIPickerViewDelegate, UIPickerViewDataSource{
             title = dataArray[row] as! String
             return title
         
+    }
+    
+    // adopt dark model
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+
+        //修改字体，大小，颜色
+        var pickerLabel = view as? UILabel
+        if pickerLabel == nil{
+            pickerLabel = UILabel()
+//            pickerLabel?.font = UIFont.systemFont(ofSize: 16)
+            pickerLabel?.textAlignment = .center
+            if #available(iOS 13.0, *) {
+                pickerLabel?.textColor = UIColor.label
+            } else {
+                // Fallback on earlier versions
+                pickerLabel?.textColor = UIColor.black
+            }
+        }
+        pickerLabel?.text = self.pickerView(pickerView, titleForRow: row, forComponent: component)
+
+        return pickerLabel!
     }
     
     /// 选择列、行

@@ -112,6 +112,15 @@ class modelViewController: UIViewController {
             make.height.width.equalTo(34)
             
         }
+    // 设置监听器，监听是否弹出插入成功r弹窗
+        NotificationCenter.default.addObserver(self, selector: #selector(InsertSuccess), name: NSNotification.Name(rawValue: "InsertData"), object: nil)
+
+    }
+
+    @objc func InsertSuccess(){
+        // 跳转到home界面
+        self.tabBarController?.selectedIndex = 0
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

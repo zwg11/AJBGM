@@ -357,7 +357,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
             (textField: UITextField!) -> Void in
             
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let okAction = UIAlertAction(title: "Done", style: .default, handler: {
             action in
             let UserName = alertController.textFields!.first!
@@ -373,8 +373,8 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
             }
            
         })
-        okAction.setValue(UIColor.black, forKey: "_titleTextColor")
-        cancelAction.setValue(UIColor.black, forKey: "_titleTextColor")
+//        okAction.setValue(UIColor.black, forKey: "_titleTextColor")
+//        cancelAction.setValue(UIColor.black, forKey: "_titleTextColor")
         alertController.addAction(cancelAction)
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)
@@ -401,7 +401,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
            
  
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let okAction = UIAlertAction(title: "Done", style: .default, handler: {
             action in
             let UserWeight = alertController.textFields!.first!.text!
@@ -419,8 +419,8 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
             }
             
         })
-        okAction.setValue(UIColor.black, forKey: "_titleTextColor")
-        cancelAction.setValue(UIColor.black, forKey: "_titleTextColor")
+//        okAction.setValue(UIColor.black, forKey: "_titleTextColor")
+//        cancelAction.setValue(UIColor.black, forKey: "_titleTextColor")
         alertController.addAction(cancelAction)
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)
@@ -436,7 +436,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
             textField.delegate = self
             textField.tag = 0
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let okAction = UIAlertAction(title: "Done", style: .default, handler: {
             action in
             let UserName = alertController.textFields!.first!
@@ -449,8 +449,8 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
             }
             
         })
-        okAction.setValue(UIColor.black, forKey: "_titleTextColor")
-        cancelAction.setValue(UIColor.black, forKey: "_titleTextColor")
+//        okAction.setValue(UIColor.black, forKey: "_titleTextColor")
+//        cancelAction.setValue(UIColor.black, forKey: "_titleTextColor")
         alertController.addAction(cancelAction)
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)
@@ -483,7 +483,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
             textField.keyboardType = .numberPad
 //            textField.placeholder = "电话"
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let okAction = UIAlertAction(title: "Done", style: .default, handler: {
             action in
             let PhoneNum = alertController.textFields!.first!
@@ -498,8 +498,8 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
             }
             
         })
-        okAction.setValue(UIColor.black, forKey: "_titleTextColor")
-        cancelAction.setValue(UIColor.black, forKey: "_titleTextColor")
+//        okAction.setValue(UIColor.black, forKey: "_titleTextColor")
+//        cancelAction.setValue(UIColor.black, forKey: "_titleTextColor")
         alertController.addAction(cancelAction)
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)

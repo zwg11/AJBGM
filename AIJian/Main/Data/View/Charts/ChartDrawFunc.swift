@@ -58,7 +58,7 @@ func xAxisArrayToWeek(Days:Int)->[String]{
         case "周三":
             x = "Wed"
         case "周四":
-            x = "Thur"
+            x = "Thu"
         case "周五":
             x = "Fri"
         case "周六":

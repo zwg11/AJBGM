@@ -23,8 +23,8 @@ class ChartViewController: UIViewController,ChartViewDelegate{
         let view = ChartView()
         view.lineChartView.delegate = self
         view.setupUI()
-
-//        view.lineChartView.delegate = self
+        
+        //        view.lineChartView.delegate = self
         view.lineChartView.xAxis.labelCount = 4
         return view
     }()
@@ -35,18 +35,18 @@ class ChartViewController: UIViewController,ChartViewDelegate{
         view.initLabelText()
         return view
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-
-//        self.view.addSubview(headerView)
-//        
-//        self.headerView.snp.makeConstraints{(make) in
-//            make.left.right.top.equalToSuperview()
-//            make.height.equalTo(44)
-//            
-//        }
+        
+        
+        //        self.view.addSubview(headerView)
+        //
+        //        self.headerView.snp.makeConstraints{(make) in
+        //            make.left.right.top.equalToSuperview()
+        //            make.height.equalTo(44)
+        //
+        //        }
         
         self.view.addSubview(staticV)
         staticV.snp.makeConstraints{(make) in
@@ -65,12 +65,12 @@ class ChartViewController: UIViewController,ChartViewDelegate{
             make.left.equalToSuperview().offset(AJScreenWidth/30)
             make.right.equalToSuperview().offset(-AJScreenWidth/30)
             
-//            make.top.equalTo(self.headerView.snp.bottom)
+            //            make.top.equalTo(self.headerView.snp.bottom)
             make.top.equalToSuperview()
             make.bottom.equalTo(staticV.snp.top)
         }
         
-//        self.view.backgroundColor = ThemeColor
+        //        self.view.backgroundColor = ThemeColor
         self.view.backgroundColor = UIColor.clear
         // Do any additional setup after loading the view.
         // 监听所选时间范围的变化
@@ -86,21 +86,21 @@ class ChartViewController: UIViewController,ChartViewDelegate{
     override func viewWillAppear(_ animated: Bool) {
         print("chartViewController appear.")
         
-//        if GetUnit.getBloodUnit() == "mmol/L"{
-//            lineChartView.lineChartView.leftAxis.axisMaximum = 16.6
-//        }else{
-//            lineChartView.lineChartView.leftAxis.axisMaximum = 300
-//        }
+        //        if GetUnit.getBloodUnit() == "mmol/L"{
+        //            lineChartView.lineChartView.leftAxis.axisMaximum = 16.6
+        //        }else{
+        //            lineChartView.lineChartView.leftAxis.axisMaximum = 300
+        //        }
         initChart()
         staticV.initLabelText()
     }
-        
+    
     func initChart(){
         
-
+        
         // 画限制线，标明低于和高于的界限
         // 该界限获取自动适应单位，所以不需判断单位
-//        print("lowLimit:\(GetBloodLimit.getRandomDinnerLow())")
+        //        print("lowLimit:\(GetBloodLimit.getRandomDinnerLow())")
         // 移除所有限制线
         for i in lineChartView.lineChartView.leftAxis.limitLines{
             lineChartView.lineChartView.leftAxis.removeLimitLine(i)
@@ -156,26 +156,26 @@ class ChartViewController: UIViewController,ChartViewDelegate{
     }
     
     
-//    折线上的点选中回调
+    //    折线上的点选中回调
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry,highlight: Highlight) {
         print("选中了一个数据")
         //显示该点的MarkerView标签
         self.showMarkerView(valuey: "\(entry.y)",valuex:"\(entry.x)")
-
+        
     }
     // 点击空白处回调
-//    func chartValueNothingSelected(_ chartView: ChartViewBase) {
-//        print("nothing 111")
-//    }
-//    
+    //    func chartValueNothingSelected(_ chartView: ChartViewBase) {
+    //        print("nothing 111")
+    //    }
+    //
     // 背景图，点击后MarkerView消失
     private lazy var backButton:UIButton = {
-            let button = UIButton.init(type: .system)
-            button.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.2)
-            button.addTarget(self, action: #selector(ViewDismiss), for: .touchUpInside)
-            button.frame = CGRect(x: 0, y: 0, width: AJScreenWidth, height: AJScreenHeight)
-            return button
-        }()
+        let button = UIButton.init(type: .system)
+        button.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.2)
+        button.addTarget(self, action: #selector(ViewDismiss), for: .touchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: AJScreenWidth, height: AJScreenHeight)
+        return button
+    }()
     
     @objc func ViewDismiss()
     {
@@ -187,7 +187,13 @@ class ChartViewController: UIViewController,ChartViewDelegate{
         let view = UIView()
         view.addSubview(MarkTimelabel)
         view.addSubview(MarkValuelabel)
-        view.backgroundColor = UIColor.white
+        // adopt dark model
+        if #available(iOS 13.0, *) {
+            view.backgroundColor = UIColor.systemBackground
+        } else {
+            // Fallback on earlier versions
+            view.backgroundColor = UIColor.white
+        }
         view.layer.cornerRadius = 5
         return view
         
@@ -195,23 +201,34 @@ class ChartViewController: UIViewController,ChartViewDelegate{
     
     private lazy var MarkTimelabel:UILabel = {
         let label =  UILabel(frame: CGRect(x: 10, y: 10, width: 300, height: 30))
-        label.textColor = UIColor.black
+        if #available(iOS 13.0, *) {
+            label.textColor = UIColor.label
+        } else {
+            // Fallback on earlier versions
+            label.textColor = UIColor.black
+        }
         label.font = UIFont.systemFont(ofSize: 18)
-//        label.backgroundColor = UIColor.gray
+        //        label.backgroundColor = UIColor.gray
         label.textAlignment = .left
         label.numberOfLines = 0
         return label
     }()
     
     private lazy var MarkValuelabel:UILabel = {
-            let label =  UILabel(frame: CGRect(x: 10, y: 40, width: 200, height: 30))
+        let label =  UILabel(frame: CGRect(x: 10, y: 40, width: 200, height: 30))
+        if #available(iOS 13.0, *) {
+            label.textColor = UIColor.label
+        } else {
+            // Fallback on earlier versions
             label.textColor = UIColor.black
-            label.font = UIFont.systemFont(ofSize: 18)
-//            label.backgroundColor = UIColor.gray
-            label.textAlignment = .left
-            label.numberOfLines = 0
-            return label
-        }()
+        }
+        
+        label.font = UIFont.systemFont(ofSize: 18)
+        //            label.backgroundColor = UIColor.gray
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        return label
+    }()
     
     //显示MarkerView标签
     func showMarkerView(valuey:String,valuex:String){
@@ -224,31 +241,31 @@ class ChartViewController: UIViewController,ChartViewDelegate{
         let xxxx = startD! + Int(currentX).minutes
         MarkTimelabel.text = "\(dateFormatter.string(from: xxxx))"
         MarkValuelabel.text = "\(valuey) " + GetUnit.getBloodUnit()
-//        MarkValuelabel.text = "BG Value:\(valuey)" + GetUnit.getBloodUnit()
+        //        MarkValuelabel.text = "BG Value:\(valuey)" + GetUnit.getBloodUnit()
         
-//        let marker = MarkerView()
-//        marker.chartView = self.lineChartView.lineChartView
-//        marker.addSubview(MarkTimelabel)
-//        marker.addSubview(MarkValuelabel)
+        //        let marker = MarkerView()
+        //        marker.chartView = self.lineChartView.lineChartView
+        //        marker.addSubview(MarkTimelabel)
+        //        marker.addSubview(MarkValuelabel)
         
-//        UIView.animate(withDuration: 5, animations: {
-            self.navigationController?.view.addSubview(self.backButton)
-            self.navigationController?.view.addSubview(self.markerView)
-            self.backButton.snp.makeConstraints{(make) in
-                make.edges.equalToSuperview()
-                
-            }
+        //        UIView.animate(withDuration: 5, animations: {
+        self.navigationController?.view.addSubview(self.backButton)
+        self.navigationController?.view.addSubview(self.markerView)
+        self.backButton.snp.makeConstraints{(make) in
+            make.edges.equalToSuperview()
+            
+        }
         
-            self.markerView.snp.makeConstraints{(make) in
-                make.center.equalToSuperview()
-                make.width.equalTo(AJScreenWidth/5*3)
-                make.height.equalTo(80)
-            }
-//        })
+        self.markerView.snp.makeConstraints{(make) in
+            make.center.equalToSuperview()
+            make.width.equalTo(AJScreenWidth/5*3)
+            make.height.equalTo(80)
+        }
+        //        })
         
         
         
-//        marker.addSubview(label)
-//        self.lineChartView.lineChartView.marker = marker
+        //        marker.addSubview(label)
+        //        self.lineChartView.lineChartView.marker = marker
     }
 }

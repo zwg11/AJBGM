@@ -38,12 +38,12 @@ class UpdateManager:NSObject{
                 self.updateApp(appId:appId)
             })
             let noAction = UIAlertAction.init(title: "Later", style: .default, handler: nil)
-            let cancelAction = UIAlertAction.init(title: "Dismiss", style: .default, handler: { (handler) in
+            let cancelAction = UIAlertAction.init(title: "Dismiss", style: .cancel, handler: { (handler) in
                 self.noAlertAgain()
             })
-            yesAction.setValue(UIColor.black, forKey: "_titleTextColor")
-            noAction.setValue(UIColor.black, forKey: "_titleTextColor")
-            cancelAction.setValue(UIColor.black, forKey: "_titleTextColor")
+//            yesAction.setValue(UIColor.black, forKey: "_titleTextColor")
+//            noAction.setValue(UIColor.black, forKey: "_titleTextColor")
+//            cancelAction.setValue(UIColor.black, forKey: "_titleTextColor")
             alertC.addAction(yesAction)
             alertC.addAction(noAction)
             alertC.addAction(cancelAction)

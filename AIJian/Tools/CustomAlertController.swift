@@ -20,7 +20,7 @@ public class CustomAlertController {
         let okAction = UIAlertAction(title: "Done", style: .default, handler: {
             action in
         })
-        okAction.setValue(UIColor.black, forKey: "_titleTextColor")
+//        okAction.setValue(UIColor.black, forKey: "_titleTextColor")
         //只加入确定按钮
         alertController.addAction(okAction)
         viewController.present(alertController, animated: true, completion: nil)
@@ -33,7 +33,7 @@ public class CustomAlertController {
             action in
             viewController.navigationController?.popViewController(animated: false)
         })
-        okAction.setValue(UIColor.black, forKey: "_titleTextColor")
+//        okAction.setValue(UIColor.black, forKey: "_titleTextColor")
         //只加入确定按钮
         alertController.addAction(okAction)
         viewController.present(alertController, animated: true, completion: nil)

@@ -15,7 +15,13 @@ class pickerView: UIView {
     lazy var sureButton:UIButton = {
         let button = UIButton()
         button.setTitle("Done", for: .normal)
-        button.setTitleColor(UIColor.black, for: .normal)
+        // adopt dark model
+        if #available(iOS 13.0, *) {
+            button.setTitleColor(UIColor.label, for: .normal)
+        } else {
+            // Fallback on earlier versions
+            button.setTitleColor(UIColor.black, for: .normal)
+        }
         button.contentHorizontalAlignment = .right
         // 设置内边界，使得按钮的字体不那么靠右
         button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width/20)
@@ -25,7 +31,14 @@ class pickerView: UIView {
     lazy var cancelButton:UIButton = {
         let button = UIButton()
         button.setTitle("Cancel", for: .normal)
-        button.setTitleColor(UIColor.black, for: .normal)
+        // adopt dark model
+        if #available(iOS 13.0, *) {
+            button.setTitleColor(UIColor.label, for: .normal)
+        } else {
+            // Fallback on earlier versions
+            button.setTitleColor(UIColor.black, for: .normal)
+        }
+        
         button.contentHorizontalAlignment = .left
         button.contentEdgeInsets = UIEdgeInsets(top: 0, left: UIScreen.main.bounds.width/20, bottom: 0, right: 0)
         //button.addTarget(chatViewController.self, action: #selector(chatViewController.pickViewDismiss), for: .touchUpInside)

@@ -117,6 +117,26 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         }
     }
     
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+
+        //修改字体，大小，颜色
+        var pickerLabel = view as? UILabel
+        if pickerLabel == nil{
+            pickerLabel = UILabel()
+//            pickerLabel?.font = UIFont.systemFont(ofSize: 16)
+            pickerLabel?.textAlignment = .center
+            if #available(iOS 13.0, *) {
+                pickerLabel?.textColor = UIColor.label
+            } else {
+                // Fallback on earlier versions
+                pickerLabel?.textColor = UIColor.black
+            }
+        }
+        pickerLabel?.text = self.pickerView(pickerView, titleForRow: row, forComponent: component)
+
+        return pickerLabel!
+    }
+    
     // 确定按钮和取消按钮
     // 确定按钮
     lazy var sureButton:UIButton = {
@@ -124,6 +144,13 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         button.setTitle("Done", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.contentHorizontalAlignment = .right
+        // adapt dark model
+        if #available(iOS 13.0, *) {
+            button.setTitleColor(UIColor.label, for: .normal)
+        } else {
+            // Fallback on earlier versions
+            button.setTitleColor(UIColor.black, for: .normal)
+        }
         // 设置内边界，使得按钮的字体不那么靠右
         button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width/20)
         // 此处修改了***************************************************
@@ -136,6 +163,13 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         button.setTitle("Cancel", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.contentHorizontalAlignment = .left
+        // adapt dark model
+        if #available(iOS 13.0, *) {
+            button.setTitleColor(UIColor.label, for: .normal)
+        } else {
+            // Fallback on earlier versions
+            button.setTitleColor(UIColor.black, for: .normal)
+        }
         button.contentEdgeInsets = UIEdgeInsets(top: 0, left: UIScreen.main.bounds.width/20, bottom: 0, right: 0)
         return button
     }()
@@ -146,16 +180,26 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         //datePicker.frame.size = CGSize(width: UIScreen.main.bounds.width - 20, height: 150)
         datePicker.locale = Locale(identifier: "en_US")
         datePicker.datePickerMode = .date
-        datePicker.backgroundColor = UIColor.white
+//        datePicker.backgroundColor = UIColor.white
         datePicker.maximumDate = Date()
         datePicker.date = Date()
         datePicker.layer.borderColor = UIColor.gray.cgColor
         datePicker.layer.borderWidth = 1
+        // adapt dark model
+        if #available(iOS 13.0, *) {
+            datePicker.setValue(UIColor.label, forKey: "textColor")
+            datePicker.backgroundColor = UIColor.systemBackground
+        } else {
+            // Fallback on earlier versions
+            datePicker.backgroundColor = UIColor.white
+            
+        }
         return datePicker
         
     }()
     
     // 创建 时间 选择器
+    
     lazy var timePicker:UIDatePicker = {
         let timePicker = UIDatePicker()
         timePicker.calendar = Calendar.current
@@ -164,9 +208,17 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         
         timePicker.datePickerMode = .time
         timePicker.date = Date()
-        timePicker.backgroundColor = UIColor.white
+//        timePicker.backgroundColor = UIColor.white
         timePicker.layer.borderColor = UIColor.gray.cgColor
         timePicker.layer.borderWidth = 1
+        // adapt dark model
+        if #available(iOS 13.0, *) {
+            timePicker.setValue(UIColor.label, forKey: "textColor")
+            timePicker.backgroundColor = UIColor.systemBackground
+        } else {
+            // Fallback on earlier versions
+            timePicker.backgroundColor = UIColor.white
+        }
         return timePicker
         
     }()
@@ -202,7 +254,13 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
     // 设置选择器统一外观
     func initPickerView(pickerView:UIPickerView){
         // 背景颜色为白色，一定要设置，因为默认为透明
-        pickerView.backgroundColor = UIColor.white
+        if #available(iOS 13.0, *) {
+            pickerView.backgroundColor = UIColor.systemBackground
+        } else {
+            // Fallback on earlier versions
+            pickerView.backgroundColor = UIColor.white
+        }
+        
         // 设置边界颜色和宽度
         pickerView.layer.borderColor = UIColor.gray.cgColor
         pickerView.layer.borderWidth = 1
@@ -227,8 +285,14 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
 
         
         
-        // 设置视图背景、边框
-        self.backgroundColor = UIColor.white
+        // 设置视图背景、边框 ,adapt dark model       
+        if #available(iOS 13.0, *) {
+            self.backgroundColor = UIColor.systemBackground
+        } else {
+            // Fallback on earlier versions
+            self.backgroundColor = UIColor.white
+        }
+        
         self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.gray.cgColor
         // 取消 按钮布局

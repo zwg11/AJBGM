@@ -49,9 +49,9 @@ class InputView: UIView,UIScrollViewDelegate {
     lazy var picker:allPickerView = {
         let view = allPickerView()
         view.setupUI()
-        view.backgroundColor = UIColor.white
-        view.sureButton.tintColor = UIColor.black
-        view.cancelButton.tintColor = UIColor.black
+//        view.backgroundColor = UIColor.white
+//        view.sureButton.tintColor = UIColor.black
+//        view.cancelButton.tintColor = UIColor.black
         view.sureButton.addTarget(self, action: #selector(pickViewSelected), for: .touchUpInside)
         view.cancelButton.addTarget(self, action: #selector(pickViewDismiss), for: .touchUpInside)
         //view.frame = CGRect(x: 0, y: self.frame.maxY-10,width: AJScreenWidth,height: AJScreenHeight/3)
