@@ -81,7 +81,23 @@ class DataViewController: UIViewController {
         let button = UIButton(type:.system)
         button.addTarget(self, action: #selector(chooseDate), for: .touchUpInside)
         button.titleLabel?.adjustsFontSizeToFitWidth = true
-        button.setTitle("Last 7 Days", for: .normal)
+        let path = PlistSetting.getFilePath(File: "otherSettings.plist")
+        
+        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
+        let dataRange = data["dataRange"] as! String
+        button.setTitle(dataRange, for: .normal)
+        // 监听导航栏右按钮的文本，对于不同的文本设定不同的标志位
+        switch dataRange{
+            
+        case "Last 3 Days":
+            pickerSelectedRow = 1
+        case "Last 7 Days":
+            pickerSelectedRow = 2
+        case "Last 30 Days":
+            pickerSelectedRow = 3
+        default:
+            pickerSelectedRow = 2
+        }
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
 //        button.titleLabel?.textAlignment = .right
@@ -114,8 +130,22 @@ class DataViewController: UIViewController {
 //        self.view.backgroundColor = UIColor.lightGray
         // 超过页面范围的子页面不显示
         self.view.clipsToBounds = true
+        let rangeData = self.rangePickerButton.titleLabel?.text
+        // 监听导航栏右按钮的文本，对于不同的文本设定不同的标志位
+        var selectedRow = 0
+        switch rangeData{
+            
+        case "Last 3 Days":
+            selectedRow = 0
+        case "Last 7 Days":
+            selectedRow = 1
+        case "Last 30 Days":
+            selectedRow = 2
+        default:
+            selectedRow = 1
+        }
         // 设置pickerView初始位置
-        dateRangePicker.rangePicker.selectRow(1, inComponent: 0, animated: false)
+        dateRangePicker.rangePicker.selectRow(selectedRow, inComponent: 0, animated: false)
         
         // 添加标题视图
 //        let titleview = pageViewManager.titleView
@@ -208,6 +238,7 @@ class DataViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
         // 添加导航栏右按钮
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rangePickerButton)
+        
         
         // 识别 导航栏右按钮标题，做出相应值的设置
         setDaysAndRange()
@@ -357,7 +388,13 @@ class DataViewController: UIViewController {
 //            UIView.animate(withDuration: 0.5, animations: dismiss)
             // 更新按钮标题
             rangePickerButton.setTitle(dateRangePicker.selectedContent ?? "Last 7 Days", for: .normal)
+            // plist file change
+            let path = PlistSetting.getFilePath(File: "otherSettings.plist")
             
+            let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
+            data["dataRange"] = dateRangePicker.selectedContent ?? "Last 7 Days"
+            // 保存
+            data.write(toFile: path, atomically: true)
             // 监听导航栏右按钮的文本，对于不同的文本设定不同的标志位
             switch dateRangePicker.selectedContent{
                 

@@ -221,7 +221,8 @@ class InsertViewController: UIViewController {
     
     @objc func leftButtonClick(){
         // 设置返回原页面
-        self.navigationController?.popViewController(animated: false)
+//        self.navigationController?.popViewController(animated: false)
+        self.navigationController?.popToRootViewController(animated: false)
     }
     
     @objc func cancel(){

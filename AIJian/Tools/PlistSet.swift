@@ -34,6 +34,7 @@ class PlistSetting{
         let userBloodSettingPath = (documentDirectory[0] as AnyObject).appendingPathComponent("userBloodSetting.plist") as String
         
         let userBloodSettingMgdlPath = (documentDirectory[0] as AnyObject).appendingPathComponent("userBloodSettingMgdl.plist") as String
+        let otherSettingsPath = (documentDirectory[0] as AnyObject).appendingPathComponent("otherSettings.plist") as String
 //        print("文件路径1：\(GlobalValuePath)")
 //        print("文件路径2：\(UnitSettingPath)")
 //        print("文件路径3：\(UserPath)")
@@ -46,6 +47,7 @@ class PlistSetting{
         let inputChooseExit      = fileManager.fileExists(atPath: inputChoosePath)
         let userBloodSettingExit = fileManager.fileExists(atPath: userBloodSettingPath)
         let userBloodSettingMgdlExit = fileManager.fileExists(atPath: userBloodSettingMgdlPath)
+        let otherSettingsExit = fileManager.fileExists(atPath: otherSettingsPath)
         
         // 如果文件不存在说明App是第一次运行，需要将相关文件拷贝至目标路径
          //文件写在了user.plist中
@@ -126,6 +128,19 @@ class PlistSetting{
                 
             }catch{
                 print("异常加载不到mgdl文件")
+            }
+            
+        }
+        
+        // otherSettings.plist 配置文件检查
+        if(otherSettingsExit != true){
+            let path = Bundle.main.path(forResource: "otherSettings", ofType: "plist")!
+            
+            do{
+                let _ = try fileManager.copyItem(atPath: path, toPath: otherSettingsPath)
+                
+            }catch{
+                print("异常加载不到dataRange文件")
             }
             
         }

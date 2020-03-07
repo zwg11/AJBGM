@@ -163,7 +163,7 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
             return
         }else if userName!.count >= 254 {   //设置用户名长度和电话长度
             return
-        }else if phoneNumber!.count >= 254 {
+        }else if phoneNumber!.count >= 16 {
             return
         }else if phoneNumber == ""{
             alertController.custom(self, "Attention", "Phone Empty")

@@ -489,7 +489,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
             let PhoneNum = alertController.textFields!.first!
             if String(PhoneNum.text!).removeHeadAndTailSpacePro == ""  {
             
-            }else if String(PhoneNum.text!).count >= 255 {
+            }else if String(PhoneNum.text!).count >= 16 {
                     
             }else{
                 self.infoDataArray[6] = PhoneNum.text!.removeHeadAndTailSpacePro

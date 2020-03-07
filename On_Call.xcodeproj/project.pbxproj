@@ -69,6 +69,7 @@
 		846FF63523DD5E02001DF34E /* modelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846FF63423DD5E02001DF34E /* modelViewController.swift */; };
 		84847BC2FE082A7DD9416B04C6429EAB /* BHJPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE608F63498A45B84C3679D6251C8601 /* BHJPickerView.swift */; };
 		84B2355B23A22D120075230B /* LoginOff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B2355A23A22D120075230B /* LoginOff.swift */; };
+		84E80684241373FC006DDDDC /* otherSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84E80683241373FC006DDDDC /* otherSettings.plist */; };
 		85BF4AD1556507F03E9CF1AB13F34571 /* BloodSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCA193DA6A5E1E858111B284800163C /* BloodSetViewController.swift */; };
 		875E6FED57826107D84E47853B2A507F /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5C68EDC76F69EA0E7DCD122ED6AB4 /* UITextField+Extension.swift */; };
 		88B422202CF871BF6F10A6D4FD24F651 /* GetUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3389A85E5BFB5D3E18B8DAA0516CC7 /* GetUnit.swift */; };
@@ -220,6 +221,7 @@
 		846FF63423DD5E02001DF34E /* modelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = modelViewController.swift; sourceTree = "<group>"; };
 		84B2355A23A22D120075230B /* LoginOff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOff.swift; sourceTree = "<group>"; };
 		84CC5CB3237148DA007D9851 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		84E80683241373FC006DDDDC /* otherSettings.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = otherSettings.plist; sourceTree = "<group>"; };
 		88B84B902E4E28BB9EBAC8F34677E2D8 /* loginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginViewController.swift; sourceTree = "<group>"; };
 		89CBBA20E99A5A8B3CA9B0B2BAF4201B /* protocolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = protocolViewController.swift; sourceTree = "<group>"; };
 		8A18E98B74565B5E695548D96DE09E13 /* SuggestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionViewController.swift; sourceTree = "<group>"; };
@@ -313,6 +315,7 @@
 				D1B29EA5E3861CBD4A8333DE8EB3A45A /* CountryEn.plist */,
 				60235DEE16226B1877D4F759DD359050 /* Insulin.plist */,
 				327249D87EBD50F9CA3CF88F34F49D5F /* inputChoose.plist */,
+				84E80683241373FC006DDDDC /* otherSettings.plist */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -856,6 +859,7 @@
 				2C9DC80088BFE63075C792E21BA74909 /* LaunchScreen.storyboard in Resources */,
 				8459D7C0237407EC00A8D1BB /* userBloodSettingMgdl.plist in Resources */,
 				8459D7BC2372BD4800A8D1BB /* defaultBloodSettingMgdl.plist in Resources */,
+				84E80684241373FC006DDDDC /* otherSettings.plist in Resources */,
 				71937B70E5629695BD05C1C077D5607B /* UnitSetting.plist in Resources */,
 				8459D7C32374088900A8D1BB /* Main.storyboard in Resources */,
 				CDAE1F2D93FE04AAC0DB578104CB6109 /* User.plist in Resources */,
