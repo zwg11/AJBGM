@@ -67,8 +67,10 @@ class LastResultTableViewCell: UITableViewCell {
         label.adjustsFontSizeToFitWidth = true
         // 显示血糖正常范围
         let unit = GetUnit.getBloodUnit()
-        let low = GetBloodLimit.getRandomDinnerLow()
-        let high = GetBloodLimit.getRandomDinnerTop()
+        let low = GetBloodLimit.getEmptyStomachLow()
+        let high = GetBloodLimit.getAfterDinnerTop()
+//        let low = GetBloodLimit.getRandomDinnerLow()
+//        let high = GetBloodLimit.getRandomDinnerTop()
         if unit == "mg/dL"{
             label.text = "Reference Range: \(Int(low))-" + "\(Int(high)) " + unit
         }else{

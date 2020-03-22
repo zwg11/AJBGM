@@ -237,14 +237,14 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
     func numberOfSections(in tableView: UITableView) -> Int {
         if (sortedTime.count != 0) {
             if tableView == DATATableView{
-                print("DATATableView num of section:\(sortedTime.count)")
+               // print("DATATableView num of section:\(sortedTime.count)")
             }else{
-                print("num of section:\(sortedTime.count)")
+               // print("num of section:\(sortedTime.count)")
             }
             return sortedTime.count
         }
         else{
-            print("num of section:\(sortedTime.count)")
+           // print("num of section:\(sortedTime.count)")
             return 0
         }
     }
@@ -296,7 +296,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
     override func viewWillAppear(_ animated: Bool) {
         
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor:UIColor.white]
-        print("DateTableView appear.")
+        //print("DateTableView appear.")
         // 将滚动视图置于初始状态
         self.mainScrollView.contentOffset = CGPoint(x: 0, y: 0)
         self.scroll.contentOffset = CGPoint(x: 0, y: 0)
@@ -304,7 +304,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         // 可以刷新了
         initTable()
         initScroll()
-        print("当前控制器的父控制器",self.parent ?? "没有")
+       // print("当前控制器的父控制器",self.parent ?? "没有")
     }
     // MARK: - initScroll
     // 初始化滚动视图、设置页面的所有滚动视图和表格的大小和坐标
@@ -423,13 +423,13 @@ extension DataTableViewController{
         let tk = UserInfo.getToken()
         // 设置信息请求字典
         let dicStr:Dictionary = ["bloodGlucoseRecordId":recordId,"token":tk,"userId":usr_id] as [String : Any]
-        print(dicStr)
+        //print(dicStr)
         // 请求删除数据，请求信息如上字典
         //********
         AlamofireManager.request(DELETE_DATA_URL,method: .post,parameters: dicStr, headers:vheader).responseString{ (response) in
             // 如果请求得到回复
             if response.result.isSuccess {
-                print("收到删除的回复")
+               // print("收到删除的回复")
                 if let jsonString = response.result.value {
                     
                     /// json转model
@@ -475,6 +475,8 @@ extension DataTableViewController{
                                 let alert = CustomAlertController()
                                 alert.custom(self, "", "Delete Success")
                                 
+                            }else{
+                                // not local data
                             }
                         }
                         

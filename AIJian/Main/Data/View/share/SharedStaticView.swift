@@ -14,7 +14,8 @@ class SharedStaticView: UIView {
         let label = UILabel()
         label.text = "Statistics"
         label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 20)
+        label.textColor = UIColor.black
+        label.font = UIFont.systemFont(ofSize: 30)
         return label
     }()
     
@@ -23,16 +24,18 @@ class SharedStaticView: UIView {
     private lazy var bloodGlucoseLabel:UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.text = "Blood Glucose"
-        label.font = UIFont.systemFont(ofSize: 20)
+//        label.text = "Blood Glucose"
+        label.textColor = UIColor.black
+        label.font = UIFont.systemFont(ofSize: 27)
         return label
     }()
     
     private lazy var TestNumTitleLabel:UILabel = {
         let label = UILabel()
         label.textAlignment = .right
-        label.text = "Number of Tests"
-        label.font = UIFont.systemFont(ofSize: 20)
+        label.text = "Detection Times"
+        label.textColor = UIColor.black
+        label.font = UIFont.systemFont(ofSize: 25)
         return label
     }()
     
@@ -40,7 +43,8 @@ class SharedStaticView: UIView {
         let label = UILabel()
         label.textAlignment = .right
         label.text = "Average(\(GetUnit.getBloodUnit()))"
-        label.font = UIFont.systemFont(ofSize: 20)
+        label.textColor = UIColor.black
+        label.font = UIFont.systemFont(ofSize: 25)
         return label
     }()
     
@@ -48,7 +52,8 @@ class SharedStaticView: UIView {
         let label = UILabel()
         label.textAlignment = .right
         label.text = "Standard Deviation"
-        label.font = UIFont.systemFont(ofSize: 20)
+        label.textColor = UIColor.black
+        label.font = UIFont.systemFont(ofSize: 25)
         return label
     }()
     
@@ -56,7 +61,8 @@ class SharedStaticView: UIView {
         let label = UILabel()
         label.textAlignment = .right
         label.text = "Above Target Range"
-        label.font = UIFont.systemFont(ofSize: 20)
+        label.textColor = UIColor.black
+        label.font = UIFont.systemFont(ofSize: 25)
         return label
     }()
     
@@ -64,7 +70,8 @@ class SharedStaticView: UIView {
         let label = UILabel()
         label.textAlignment = .right
         label.text = "Within Target Range"
-        label.font = UIFont.systemFont(ofSize: 20)
+        label.textColor = UIColor.black
+        label.font = UIFont.systemFont(ofSize: 25)
         return label
     }()
     
@@ -72,7 +79,8 @@ class SharedStaticView: UIView {
         let label = UILabel()
         label.textAlignment = .right
         label.text = "Below Target Range"
-        label.font = UIFont.systemFont(ofSize: 20)
+        label.textColor = UIColor.black
+        label.font = UIFont.systemFont(ofSize: 25)
         return label
     }()
     
@@ -222,15 +230,17 @@ class MealStatic: UIView {
     lazy var MealTitleLabel:UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 20)
+        label.font = UIFont.systemFont(ofSize: 25)
+        label.textColor = UIColor.black
         return label
     }()
 
     // label的统一行形式
     func initLabel() -> UILabel{
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15)
+        label.font = UIFont.systemFont(ofSize: 24)
         label.textAlignment = .center
+        label.textColor = UIColor.black
         label.layer.borderWidth = 1
         //label.frame.size = CGSize(width: 200, height: 30)
         return label

@@ -22,16 +22,16 @@ class MineViewController: UIViewController {
     }()
 
     //列表数据
-    let _titleArr = ["User Info","Units Setup","Change Password","Targets Setting","Instructions","Contact Us","Feedback","Update"]
+    let _titleArr = ["User Info","Units Setup","Change Password","Targets Setting","Instructions","Contact Us","Update","Feedback"]
 
-    let _imgArr   = ["user-info","Units-Setup","Change-Password","Targets-Setting","Instructions","About-Us","Update","Update"]
-
+    let _imgArr   = ["user-info","Units-Setup","Change-Password","Targets-Setting","Instructions","About-Us","Update","feedback_Image"]
+    //last item is feedback
 
     var tableview:UITableView = UITableView()
 
     //点击跳转对应页面
     public lazy var clickArray: [UIViewController] = {
-        return [InfoViewController(),UnitViewController(),PassChangeViewController(),BloodSetViewController(), UseDirViewController(),AboutUsViewController(),SuggestionViewController(),VersionUViewController()
+        return [InfoViewController(),UnitViewController(),PassChangeViewController(),BloodSetViewController(), UseDirViewController(),AboutUsViewController(),VersionUViewController(),SuggestionViewController()
         ]
     }()
     
@@ -43,7 +43,7 @@ class MineViewController: UIViewController {
         // 如果得到的实体是空的，说明没有相关信息
         // 那么就需向服务器请求数据
         if userInfo.user_name == nil || userInfo.user_name == ""{
-            print("个人信息页面开始请求")
+            //print("个人信息页面开始请求")
             requestUserInfo()
         }
         self.tableview.reloadRows(at: [IndexPath(row:0,section:0)], with: .none)
@@ -142,14 +142,14 @@ class MineViewController: UIViewController {
                         if(responseModel.code! == 1 ){
                             // 向数据库插入数据
                             // 将风火轮移除，并停止转动
-                            print(responseModel.data!)
+                            //print(responseModel.data!)
                             if responseModel.data!.userName == nil{
                                 responseModel.data!.userName = ""
                             }
                             if responseModel.data!.gender == nil{
                                 responseModel.data!.gender = 1
                             }
-                            print(responseModel.data!)
+                            //print(responseModel.data!)
                             DBSQLiteManager.manager.updateUserInfo(responseModel.data!)
                             self.tableview.reloadRows(at: [IndexPath(row:0,section:0)], with: .none)
                         }else if (responseModel.code! == 2 ){

@@ -172,7 +172,7 @@ class UnitViewController: UIViewController {
             make.width.equalTo(AJScreenWidth/5)
             make.top.equalTo(topLayoutGuide.snp.bottom).offset(AJScreenWidth/15)
         }
-        print("进入单位设置")
+        //print("进入单位设置")
         mmol_Button.addTarget(self, action: #selector(ClickMmolButton), for: .touchUpInside)
         self.view.addSubview(mmol_Button)
         mmol_Button.snp.makeConstraints{  (make) in
@@ -262,17 +262,17 @@ class UnitViewController: UIViewController {
         //let path = Bundle.main.path(forResource: "UnitSetting", ofType: "plist")
         let path = PlistSetting.getFilePath(File: "UnitSetting.plist")
         let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
-//        print("dkdkdkdkdkdkd",data.description)
-//        print("有几个数",data.count)
+//        //print("dkdkdkdkdkdkd",data.description)
+//        //print("有几个数",data.count)
         unitDataArray[0] = data["BloodUnit"]! as! String
         unitDataArray[1] = data["WeightUnit"]! as! String
         unitDataArray[2] = data["PressureUnit"]! as! String
         currentGlucoseUnit = unitDataArray[0]
         currentWeightUnit = unitDataArray[1]
         currentBloodUnit = unitDataArray[2]
-        print("BloodUnit",data["BloodUnit"]!)
-        print("WeightUnit",data["WeightUnit"]!)
-        print("PressureUnit",data["PressureUnit"]!)
+        //print("BloodUnit",data["BloodUnit"]!)
+        //print("WeightUnit",data["WeightUnit"]!)
+        //print("PressureUnit",data["PressureUnit"]!)
         if unitDataArray[0] == "mmol/L"{
             mmol_Button.backgroundColor = ButtonColor
             
@@ -296,9 +296,9 @@ class UnitViewController: UIViewController {
             mmol_Button.layer.borderColor = unselectedTextColor.cgColor
         }
         if unitDataArray[1] == "kg"{
-            print("等于Kg")
+            //print("等于Kg")
         }else{
-            print("不等于Kg")
+            //print("不等于Kg")
         }
         
         if unitDataArray[1] == "kg"{
@@ -343,9 +343,9 @@ class UnitViewController: UIViewController {
             mmhg_Button.layer.borderWidth = 0.5
             mmhg_Button.layer.borderColor = unselectedTextColor.cgColor
         }
-        print("BloodUnit",data["BloodUnit"]!)
-        print("WeightUnit",data["WeightUnit"]!)
-        print("PressureUnit",data["PressureUnit"]!)
+        //print("BloodUnit",data["BloodUnit"]!)
+        //print("WeightUnit",data["WeightUnit"]!)
+        //print("PressureUnit",data["PressureUnit"]!)
     }
     @objc private func ClickMmolButton(){
         currentGlucoseUnit = "mmol/L"
@@ -461,7 +461,7 @@ class UnitViewController: UIViewController {
 //    }
 //    //每一个cell，里面的内容
 //    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        print("到达个人信息页", indexPath)
+//        //print("到达个人信息页", indexPath)
 //        //根据注册的cell类ID值获取到载体cell
 //        var cell = tableView.dequeueReusableCell(withIdentifier: "infocell")
 //
@@ -486,7 +486,7 @@ class UnitViewController: UIViewController {
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        //行
 //        let row = indexPath.row
-//        print(row)
+//        //print(row)
 //        switch row {
 //        case 0:
 //            let pickerView = BHJPickerView.init(self, .blood)
@@ -510,15 +510,15 @@ class UnitViewController: UIViewController {
 //    }
 //
 //    func selectedAddress(_ pickerView: BHJPickerView, _ procince: AddressModel, _ city: AddressModel, _ area: AddressModel) {
-//        print("选择地址")
+//        //print("选择地址")
 //    }
 //
 //    func selectedDate(_ pickerView: BHJPickerView, _ dateStr: Date) {
-//        print("选择日期")
+//        //print("选择日期")
 //    }
 //
 //    func selectedGender(_ pickerView: BHJPickerView, _ genderStr: String) {
-//        print("选择性别")
+//        //print("选择性别")
 //    }
 //
 //    //修改血糖单位
@@ -535,7 +535,7 @@ class UnitViewController: UIViewController {
 //        self.unitDataArray[self.num] = messge
 //        //最后重新加载更新第一行数据
 //        self.tableview.reloadRows(at: [IndexPath(row:self.num,section:0)], with: .fade)
-//        print("选择血糖")
+//        //print("选择血糖")
 //    }
 //    //修改体重单位
 //    func selectedWeight(_ pickerView: BHJPickerView, _ weightStr: String) {
@@ -550,12 +550,12 @@ class UnitViewController: UIViewController {
 //        self.unitDataArray[self.num] = messge
 //        //更新第一行数据
 //        self.tableview.reloadRows(at: [IndexPath(row:self.num,section:0)], with: .fade)
-//        print("选择体重")
+//        //print("选择体重")
 //    }
 //    //修改血压单位
 //    func selectedPressure(_ pickerView: BHJPickerView, _ pressureStr: String) {
 //        let messge = pressureStr
-//        print(messge)
+//        //print(messge)
 ////        let path = Bundle.main.path(forResource: "UnitSetting", ofType: "plist")
 //        let path = PlistSetting.getFilePath(File: "UnitSetting.plist")
 //        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
@@ -565,9 +565,9 @@ class UnitViewController: UIViewController {
 //        data.write(toFile: path, atomically: true)
 //        self.unitDataArray[self.num] = messge
 //        //更新第一行数据
-//        print(self.num)
+//        //print(self.num)
 //        self.tableview.reloadRows(at: [IndexPath(row:self.num,section:0)], with: .fade)
-//        print("选择血压")
+//        //print("选择血压")
 //    }
 //
 //

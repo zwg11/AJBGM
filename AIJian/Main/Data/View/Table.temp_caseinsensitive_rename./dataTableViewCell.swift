@@ -133,7 +133,7 @@ class dataTableViewCell: UITableViewCell {
             sportLabel.text = "-"
         }
         // 输入类型
-        if sortedData[secion][row].recordType == 1{
+        if sortedData[secion][row].inputType == 0{
             modelLabel = tableViewCellCustomLabel.init(text: "", image: "蓝牙图标")
         }else{
             modelLabel = tableViewCellCustomLabel.init(text: "", image:  "手动输入图标")

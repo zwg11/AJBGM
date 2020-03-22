@@ -128,7 +128,7 @@ class alertViewController: UIAlertController,UITableViewDelegate,UITableViewData
         
         // 初始化 存储表格状态的数组,保持数组大小与药物种类一致
         for i in 0...arr.count-1{
-            print(i)
+//            //print(i)
             boolarr.append(false)
         }
         boolArray = boolarr
@@ -147,13 +147,13 @@ class alertViewController: UIAlertController,UITableViewDelegate,UITableViewData
             make.bottom.equalToSuperview().offset(-40)
         }
         
-        let cancelAction = UIAlertAction(title: "cancel", style: .cancel, handler: {
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
             action in
-            print("Cancel")
+//            //print("Cancel")
             //如果取消的话，需要将原先保留下来的状态数组boolarr。替换成用户选择了的数组
             self.boolArray = self.boolarr
-            print("定义中，点击了取消之后的更新数据",self.boolArray)
-            print("定义中，点击了取消之后的初始化数据",self.boolarr)
+//            //print("定义中，点击了取消之后的更新数据",self.boolArray)
+//            //print("定义中，点击了取消之后的初始化数据",self.boolarr)
             self.tabelView.reloadData()
             var sum = 0
             //判断用户选择了几个项目，然后显示已经选择了几个项目
@@ -167,11 +167,11 @@ class alertViewController: UIAlertController,UITableViewDelegate,UITableViewData
         })
         let okAction = UIAlertAction(title: "Ok", style: .default, handler: {
             action in
-            print("确定")
+            //print("确定")
             //如果取消的话，需要将用户选择了的数组。替换成原先保留下来的状态数组boolarr
             self.boolarr = self.boolArray
-            print("定义中，点击了确定之后的更新数据",self.boolArray)
-            print("定义中，点击了确定之后的初始化数据",self.boolarr)
+            //print("定义中，点击了确定之后的更新数据",self.boolArray)
+            //print("定义中，点击了确定之后的初始化数据",self.boolarr)
 
 //            self.tabelView.reloadData()
             

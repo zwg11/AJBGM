@@ -18,7 +18,7 @@ let AlamofireManager:Alamofire.SessionManager = {
     return Alamofire.SessionManager(configuration: conf)
 }()
 //请求头部
-let vheader:HTTPHeaders = ["OnCall-Version":"1.4","User-Agent":"OnCall/1.4/iOS" + UIDevice.current.systemVersion]
+let vheader:HTTPHeaders = ["OnCall-Version":"1.0","User-Agent":"OnCall/1.0/iOS" + UIDevice.current.systemVersion]
 
 //全局登录逻辑值
 let shift_path = Bundle.main.path(forResource: "GlobalValue", ofType: "plist")
@@ -90,6 +90,6 @@ let kPrintLog = 1  // 控制台输出开关 1：打开   0：关闭
 // 控制台打印
 func PLog(item: Any...) {
     if kPrintLog == 1 {
-        print(item.last!)
+//        print(item.last!)
     }
 }

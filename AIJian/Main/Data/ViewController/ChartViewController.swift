@@ -75,24 +75,42 @@ class ChartViewController: UIViewController,ChartViewDelegate{
         // Do any additional setup after loading the view.
         // 监听所选时间范围的变化
         NotificationCenter.default.addObserver(self, selector: #selector(test), name: NSNotification.Name(rawValue: "reloadChart"), object: nil)
-        initChart()
+//        initChart()
     }
     
     @objc func test(){
+        // 风火轮启动
+//        let indicator = CustomIndicatorView.init(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: AJScreenHeight))
+        // 这样不行，不显示
+        // 风火轮启动
+//        let indicator = CustomIndicatorView()
+//        indicator.setupUI("")
+//        self.parent?.navigationController?.view.addSubview(indicator)
+//        indicator.snp.makeConstraints{ (make) in
+//            make.edges.equalToSuperview()
+//        }
+//        indicator.startIndicator()
         initChart()
         staticV.initLabelText()
+//        indicator.stopIndicator()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("chartViewController appear.")
+//        print("chartViewController appear.")
+
+        // 风火轮启动
+//        let indicator = CustomIndicatorView()
+//        indicator.setupUI("")
+//        self.view.addSubview(indicator)
+//        indicator.snp.makeConstraints{ (make) in
+//            make.edges.equalToSuperview()
+//        }
+//        indicator.startIndicator()
         
-        //        if GetUnit.getBloodUnit() == "mmol/L"{
-        //            lineChartView.lineChartView.leftAxis.axisMaximum = 16.6
-        //        }else{
-        //            lineChartView.lineChartView.leftAxis.axisMaximum = 300
-        //        }
         initChart()
         staticV.initLabelText()
+        
+//        indicator.stopIndicator()
     }
     
     func initChart(){
@@ -114,7 +132,7 @@ class ChartViewController: UIViewController,ChartViewDelegate{
                 }
             }
         }
-        print("maxgluvalue:",maxGluValue)
+       // print("maxgluvalue:",maxGluValue)
         // 如果maxGluValue不超过300，则y轴坐标最大值为300，否则设为maxGluValue+10
         if GetUnit.getBloodUnit() == "mmol/L"{
             if maxGluValue < 16.6{
@@ -133,8 +151,8 @@ class ChartViewController: UIViewController,ChartViewDelegate{
         }
         
         
-        let low = GetBloodLimit.getBeforeDinnerLow()
-        let high = GetBloodLimit.getRandomDinnerTop()
+        let low = GetBloodLimit.getEmptyStomachLow()
+        let high = GetBloodLimit.getAfterDinnerTop()
         let Orange = kRGBColor(255, 165, 0, 0.3)
         let Red = kRGBColor(255, 0, 0, 0.3)
         lineChartView.addLimitLine(low, "\(low)", Orange)
@@ -158,7 +176,7 @@ class ChartViewController: UIViewController,ChartViewDelegate{
     
     //    折线上的点选中回调
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry,highlight: Highlight) {
-        print("选中了一个数据")
+      //  print("选中了一个数据")
         //显示该点的MarkerView标签
         self.showMarkerView(valuey: "\(entry.y)",valuex:"\(entry.x)")
         

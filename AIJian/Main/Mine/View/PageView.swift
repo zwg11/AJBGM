@@ -69,8 +69,8 @@ extension PageView{
         self.imagePageControl = UIPageControl.init(frame: CGRect.init(x: 0, y: AJScreenHeight-2*navigationBarHeight, width: AJScreenWidth, height: AJScreenHeight*0.1))
         self.imagePageControl?.currentPage = 0
         self.imagePageControl?.numberOfPages = self.imageArray?.count ?? 0
-        self.imagePageControl?.pageIndicatorTintColor = UIColor.gray
-        self.imagePageControl?.currentPageIndicatorTintColor = UIColor.white
+//        self.imagePageControl?.pageIndicatorTintColoSr = UIColor.gray
+//        self.imagePageControl?.currentPageIndicatorTintColor = UIColor.white
         self.addSubview(self.imagePageControl!)
     }
 }

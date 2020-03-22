@@ -42,15 +42,15 @@ class HZTextView: UITextView {
         
         // 文字
         var rect1 = rect
-        print(rect1)
-        print("rect1.origin.x", rect1.origin.x)
-        print("rect1.origin.y", rect1.origin.y)
+        //print(rect1)
+        //print("rect1.origin.x", rect1.origin.x)
+        //print("rect1.origin.y", rect1.origin.y)
         rect1.origin.x = 5
         rect1.origin.y = 8
         rect1.size.width = rect1.size.width - 2*rect1.origin.x
-         print("rect1.origin.x", rect1.origin.x)
-         print("rect1.origin.y", rect1.origin.y)
-        print("rect1.size.width",rect1.size.width)
+         //print("rect1.origin.x", rect1.origin.x)
+         //print("rect1.origin.y", rect1.origin.y)
+        //print("rect1.size.width",rect1.size.width)
         
         (self.placeholder! as NSString).draw(in: rect1, withAttributes: attrs)
     }

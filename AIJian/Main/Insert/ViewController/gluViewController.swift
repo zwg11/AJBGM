@@ -127,7 +127,7 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         case 4:
             return 3
         default:
-            return 12
+            return 0
         }
     }
     
@@ -147,6 +147,7 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     // MARK:- 保存血糖数据动作
     @objc func BLEDataSave(){
         // 添加风火轮并使其旋转
+        self.button.isEnabled = false
         self.navigationController?.view.addSubview(indicator)
         indicator.setLabelText("Inserting Data...")
         indicator.startIndicator()
@@ -155,9 +156,9 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         }
         // 数据处理
         var datas:[glucoseDate] = []
-        print("bleglucosemark:",BLEglucoseMark)
+        //print("bleglucosemark:",BLEglucoseMark)
         for i in 0...BLEglucoseValue.count-1{
-            print("第\(i)个数据")
+            //print("第\(i)个数据")
             // MARK:- 第一步：先封装成一个对象
             var  insertData:glucoseDate = glucoseDate()
             insertData.userId = UserInfo.getUserId()
@@ -175,12 +176,13 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
                 insertData.eatNum = 2
                 insertData.sportType = "None"
                 insertData.inputType = 0
+                insertData.machineId = meterID
                 // MARK:- 第二步：先封装进一个数组
                 datas.append(insertData)
             }
             
         }
-        print("插入的数据量：",datas.count)
+        //print("插入的数据量：",datas.count)
         // MARK:- 第三步：再将这个数组直接toString
         let GlucoseJsonData = datas.toJSONString()!
         //手动输入数据，请求部分
@@ -189,8 +191,8 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         AlamofireManager.request(INSERT_RECORD,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
             if response.result.isSuccess {
                 if let jsonString = response.result.value {
-                    print("进入验证过程")
-                    print(jsonString)
+                    //print("进入验证过程")
+                    //print(jsonString)
                     // json转model
                     // 写法一：responseModel.deserialize(from: jsonString)
                     // 写法二：用JSONDeserializer<T>
@@ -199,12 +201,12 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
                      //                         */
                     if let responseModel = JSONDeserializer<responseModel>.deserializeFrom(json: jsonString) {
                         /// model转json 为了方便在控制台查看
-                        print("瞧瞧输出的是什么",responseModel.toJSONString(prettyPrint: true)!)
+                        //print("瞧瞧输出的是什么",responseModel.toJSONString(prettyPrint: true)!)
                         /*  此处为跳转和控制逻辑
                          */
                         if(responseModel.code == 1 ){
-                            print(responseModel.code)
-                            print("插入成功")
+                            //print(responseModel.code)
+                            //print("插入成功")
                             // MARK:- 向数据库插入数据
                             DBSQLiteManager.manager.addGlucoseRecords(add: datas)
                             // MARK:- 记录此仪器传输的仪器类型和最近一次的血糖记录
@@ -240,13 +242,14 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
 
                                 
                             }else if (responseModel.code! == 2 ){
-                                LoginOff.loginOff(self)
                                 
+                                self.button.isEnabled = true
                                 let alert = CustomAlertController()
                                 alert.custom(self, "", "Your account is already logged in at the other end!")
+                                LoginOff.loginOff(self)
                             }else{
-                                print(responseModel.code)
-                                print("插入失败")
+                                //print(responseModel.code)
+                                //print("插入失败")
                                 // 插入失败
                                 let alert = CustomAlertController()
                                 // 移除风火轮
@@ -254,10 +257,11 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
                                 self.indicator.removeFromSuperview()
                                 // 警示框出现
                                 alert.custom(self, "", "Insert Failed,Please Try Again Later.")
+                                self.button.isEnabled = true
                             }
                         }else{
-                            print(responseModel.code)
-                            print("插入失败")
+                            //print(responseModel.code)
+                            //print("插入失败")
                             // 插入失败
                             // 移除风火轮
                             self.indicator.stopIndicator()
@@ -274,24 +278,25 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
                 self.indicator.stopIndicator()
                 self.indicator.removeFromSuperview()
                 // 警示框出现
-                print("插入失败")
+                //print("插入失败")
                 // 插入成功
                 let alert = CustomAlertController()
                 alert.custom(self, "", "Insert Failed,Please Try Again Later.")
+                self.button.isEnabled = true
             }
         }//end of request
-        
+//        self.button.isEnabled = true
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.automaticallyAdjustsScrollViewInsets = false
-        print(BLEglucoseMark)
-        print("laseRecord:\(lastRecord)")
-        let array:Array<String> = lastRecord.components(separatedBy: " ")
+        //print(BLEglucoseMark)
+        //print("laseRecord:\(lastRecord)")
+//        let array:Array<String> = lastRecord.components(separatedBy: " ")
         // 将字符串拆成 每个字符串只包含一个字符 的 字符串数组
         //let data = array[0].components(separatedBy: "")
-        print("处理后的最后记录\(array)")
+        //print("处理后的最后记录\(array)")
     }
     
     private lazy var indicator:CustomIndicatorView = {
@@ -363,7 +368,7 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         }
         
         // 页面刚出现时弹出，让用户直接确认是否保存数据
-        let alert_save = UIAlertController(title: "", message: "Save Result?", preferredStyle: .alert)
+        let alert_save = UIAlertController(title: "", message: "Save Results?", preferredStyle: .alert)
         // 保存数据动作
         let save_action = UIAlertAction(title: "Save", style: .default) { (UIAlertAction) in
             self.BLEDataSave()
@@ -385,14 +390,14 @@ extension gluViewController{
     func UpdateMeterInfo()->Bool{
         //手动输入数据，请求部分
         var isSuccess = true
-        print("当前血糖仪为\(meterID),其最后插入的记录为\(lastRecord)")
+        //print("当前血糖仪为\(meterID),其最后插入的记录为\(lastRecord)")
         let dictString = [ "userId":UserInfo.getUserId() as Any,"token":UserInfo.getToken(),"meterId":meterID,"recentRecord":lastRecord] as [String : Any]
                 // 向服务器申请插入数据请求
                 Alamofire.request(METERID_SAVE,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
                     if response.result.isSuccess {
                         if let jsonString = response.result.value {
-                            print("进入验证过程")
-                            print(jsonString)
+                            //print("进入验证过程")
+                            //print(jsonString)
                             // json转model
                             // 写法一：responseModel.deserialize(from: jsonString)
                             // 写法二：用JSONDeserializer<T>
@@ -401,7 +406,7 @@ extension gluViewController{
                              //                         */
                             if let responseModel = JSONDeserializer<responseModel>.deserializeFrom(json: jsonString) {
                                 /// model转json 为了方便在控制台查看
-                                print("瞧瞧输出的是什么",responseModel.toJSONString(prettyPrint: true)!)
+                                //print("瞧瞧输出的是什么",responseModel.toJSONString(prettyPrint: true)!)
                                 /*  此处为跳转和控制逻辑
                                  */
                                 if(responseModel.code == 1 ){
@@ -410,15 +415,15 @@ extension gluViewController{
                                     // 向配置文件存储最新记录
                                     // 读取配置文件，获取meterID的内容
 //                                    UserInfo.setMeterID(self.meterID, self.lastRecord)
-                                    let path = PlistSetting.getFilePath(File: "User.plist")
+                                    let path = PlistSetting.getFilePath(File: "otherSettings.plist")
                                     let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
                                     let arr = data["meterID"] as! NSMutableDictionary
                                     // 更新配置文件内容
                                     arr[self.meterID] = self.lastRecord
                                     data["meterID"] = arr
                                     data.write(toFile: path, atomically: true)
-                                    print(data)
-                                    print("meterID更新成功")
+                                    //print(data)
+                                    //print("meterID更新成功")
                                     isSuccess = true
                                     
                                 }else if (responseModel.code! == 2 ){
@@ -431,7 +436,7 @@ extension gluViewController{
                                     let alert = CustomAlertController()
                                     alert.custom(self,"Attention", "Your account has been disabled.Please contact oncall@acondiabetescare.com")
                                 }else{
-                                    print(responseModel.code)
+                                    //print(responseModel.code)
                                     print("meterID插更新失败")
 //                                    return false
                                 }

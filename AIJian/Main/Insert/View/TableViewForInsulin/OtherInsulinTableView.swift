@@ -11,7 +11,7 @@ import UIKit
 class OtherInsulinView: UIView, UITableViewDelegate, UITableViewDataSource{
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 25
+        return 26
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -30,8 +30,12 @@ class OtherInsulinView: UIView, UITableViewDelegate, UITableViewDataSource{
         cell?.accessoryType = .none
         
         let array = getInsulin.getInsArray()
+        let content = array[3] as? String
+        //        let index = content?.index(of: " ")
+        let index1 = content?.index(content!.startIndex, offsetBy: 6)
+        let a = content?[index1!..<content!.endIndex]
         // 如果该单元格内容与手动输入界面的Insulin栏中的内容一致，设其为被选中状态
-        if Insulin[indexPath.row] as! String == array[3] as! String{
+        if Insulin[indexPath.row] as! String == String(a!){
             cell?.accessoryType = .checkmark
             // 设置表格该行被选中
             tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
@@ -67,6 +71,7 @@ class OtherInsulinView: UIView, UITableViewDelegate, UITableViewDataSource{
         view.bounces = false
         view.dataSource = self
         view.delegate = self
+        view.allowsMultipleSelection = false
         self.addSubview(view)
         view.snp.makeConstraints{(make) in
             make.edges.equalToSuperview()
@@ -77,11 +82,11 @@ class OtherInsulinView: UIView, UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         cell?.accessoryType = .checkmark
-        print("s selceted")
+//        print("s selceted")
         let Insulin = getInsulin.getInsulinArray("Other Insulin")
         // 改变配置文件中的内容
         let array = getInsulin.getInsArray()
-        array[3] = Insulin[indexPath.row]
+        array[3] = "Ins 3 " + (Insulin[indexPath.row] as! String)
         getInsulin.setInsArray(array)
  
         // 重新加载insert中Insulin选择器内容和InsulinViewControllerv表格内容

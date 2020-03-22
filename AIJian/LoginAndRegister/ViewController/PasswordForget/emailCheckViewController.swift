@@ -64,7 +64,7 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
 //        self.view.backgroundColor = ThemeColor
         self.view.backgroundColor = UIColor.clear
         self.title = "Email Verification"
-        print("到达邮箱验证界面")
+       // print("到达邮箱验证界面")
         self.view.addSubview(emailCheck)
         emailCheck.snp.makeConstraints{(make) in
             make.height.equalTo(AJScreenHeight)
@@ -102,12 +102,12 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
             }
             
             let dictString:Dictionary = [ "email":String(email!),"verifyCode":String(email_code!)]
-            print(dictString)
+           // print(dictString)
             //找回密码第一步
             Alamofire.request(RETRIEVEFIRST,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
                 if response.result.isSuccess {
                     if let jsonString = response.result.value {
-                        print("进入验证过程")
+                        //print("进入验证过程")
                         // json转model
                         // 写法一：responseModel.deserialize(from: jsonString)
                         // 写法二：用JSONDeserializer<T>
@@ -116,12 +116,12 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
                          */
                         if let responseModel = JSONDeserializer<responseModel>.deserializeFrom(json: jsonString) {
                             /// model转json 为了方便在控制台查看
-                            print(responseModel.toJSONString(prettyPrint: true)!)
+                          //  print(responseModel.toJSONString(prettyPrint: true)!)
                             /*  此处为跳转和控制逻辑
                              */
                             if(responseModel.code == 1 ){
-                                print("邮箱验证成功")
-                                print("跳转到修改密码那一页")
+                               // print("邮箱验证成功")
+                                //print("跳转到修改密码那一页")
                                 // 请求成功，将风火轮移除，并停止转动
                                 self.indicator.stopIndicator()
                                 self.indicator.removeFromSuperview()
@@ -152,10 +152,10 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
     
     //点击获取验证码
     @objc func getAuthCode(){
-        print("点击获取验证码")
+       // print("点击获取验证码")
         let alertController = CustomAlertController()
         email = emailCheck.emailTextField.text!.removeHeadAndTailSpacePro
-        print(email!)
+       // print(email!)
         /*
          需要判断邮箱不为空才能获取验证码
          */
@@ -175,13 +175,13 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
             //只要邮箱正确，就给发送邮件
             emailCheck.getAuthCodeButton.setButtonDisable()
             let  dictString:Dictionary = [ "email":String(email!)]
-            print(dictString)
+            //print(dictString)
             Alamofire.request(get_Code_forget,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
                 if response.result.isSuccess {
                     if let jsonString = response.result.value {
                         if let responseModel = JSONDeserializer<responseModel>.deserializeFrom(json: jsonString) {
                             /// model转json 为了方便在控制台查看
-                            print(responseModel.toJSONString(prettyPrint: true)!)
+                            //print(responseModel.toJSONString(prettyPrint: true)!)
                             /*  此处为跳转和控制逻辑
                              */
                             // 请求成功，将风火轮移除，并停止转动
@@ -202,7 +202,7 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
                             }else if responseModel.code == 3{
                                  alertController.custom(self,"Attention", "Your account has been disabled.Please contact oncall@acondiabetescare.com")
                             }
-                            print("注册时，获取验证码阶段")
+                          //  print("注册时，获取验证码阶段")
                         }
                     }//end of response.result.value
                 }else{

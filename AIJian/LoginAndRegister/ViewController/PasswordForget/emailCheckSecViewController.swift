@@ -62,9 +62,9 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
 //        let x = emailCheckViewController()
 //        let y = x.email
 
-        print("上一页传过来的email",email)
+        //print("上一页传过来的email",email)
         
-        print("上一页传过来的verifyString",verifyString)
+        //print("上一页传过来的verifyString",verifyString)
         self.navigationController?.isNavigationBarHidden = false
 //        self.navigationController?.navigationBar.backgroundColor = NavBarColor
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: NaviTitleColor]
@@ -115,14 +115,14 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
             indicator.snp.makeConstraints{(make) in
                 make.edges.equalToSuperview()
             }
-            print(email!)
-            print(verifyString!)
+           // print(email!)
+            //print(verifyString!)
             let dictString:Dictionary = [ "newPassword":String(password!),"email":String(email!),"verifyString":String(verifyString!)]
              print(dictString)
              Alamofire.request(RETRIEVESECOND,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
                 if response.result.isSuccess {
                     if let jsonString = response.result.value {
-                        print("进入验证过程")
+                        //print("进入验证过程")
                         // json转model
                         // 写法一：responseModel.deserialize(from: jsonString)
                         // 写法二：用JSONDeserializer<T>
@@ -131,12 +131,12 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
                          */
                         if let responseModel = JSONDeserializer<responseAModel>.deserializeFrom(json: jsonString) {
                             /// model转json 为了方便在控制台查看
-                            print(responseModel.toJSONString(prettyPrint: true)!)
+                            //print(responseModel.toJSONString(prettyPrint: true)!)
                             /*  此处为跳转和控制逻辑
                              */
                             if(responseModel.code == 1 ){
-                                print("重置成功")
-                                print("跳转到修改密码那一页")
+                               // print("重置成功")
+                                //print("跳转到修改密码那一页")
                                 self.indicator.stopIndicator()
                                 self.indicator.removeFromSuperview()
                                 self.navigationController?.popToRootViewController(animated: false)

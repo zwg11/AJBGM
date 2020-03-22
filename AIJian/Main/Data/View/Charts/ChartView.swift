@@ -83,7 +83,7 @@ class ChartView: UIView ,ChartViewDelegate{
     // 该函数应传值 x轴坐标 和 x轴对应label
     func drawLineChart(xAxisArray:NSArray,xAxisData:[Double]){
 
-        print("xAxisArray",xAxisArray)
+//        print("xAxisArray",xAxisArray)
         // 根据日期范围生成对应的x轴的label,这里需自定义 x轴坐标显示
         lineChartView.xAxis.valueFormatter = VDChartAxisValueFormatter.init(xAxisArray)
 
@@ -180,7 +180,9 @@ class ChartView: UIView ,ChartViewDelegate{
 //        print(yDataArray1)
         let set1 = LineChartDataSet.init(entries: yDataArray1, label: "")
         // 设置线 的颜色
-        set1.colors = [UIColor.black]
+        let color1 = UIColor.init(red: 2/255.0, green: 118/255.0, blue: 114/255.0, alpha: 1)
+        set1.colors = [color1]
+//        set1.colors = [UIColor.black]
         // 设置 点的样式
         set1.drawCirclesEnabled = true//绘制转折点
         // 不显示十字线
@@ -223,8 +225,9 @@ class ChartView: UIView ,ChartViewDelegate{
         limitLine.lineColor = color
         limitLine.lineDashLengths = [4.0,0]
         //文字
-        limitLine.valueFont = UIFont.systemFont(ofSize: 10.0)
-        limitLine.valueTextColor = UIColor.white
+        limitLine.valueFont = UIFont.systemFont(ofSize: 12.0)
+        
+        limitLine.valueTextColor = color
         limitLine.labelPosition = .bottomLeft
         lineChartView.leftAxis.addLimitLine(limitLine)
     }

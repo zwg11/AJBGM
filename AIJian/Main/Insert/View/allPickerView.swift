@@ -76,7 +76,20 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
             let path = PlistSetting.getFilePath(File: "inputChoose.plist")
             let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
             let insulin = data["insulin"] as! NSArray
+//            let array = getInsulin.getInsArray()
+//            switch row {
+//            case 1,2,3:
+//
+//                let content = insulin[row] as? String
+//
+//                let index1 = content?.index(content!.startIndex, offsetBy: 6)
+//                let a = content?[index1!..<content!.endIndex]
+//                return String(a!)
+//            default:
+//                return insulin[row] as? String
+//            }
             return insulin[row] as? String
+            
             
         case sportPicker:
             return sport[row] as? String
@@ -104,7 +117,18 @@ class allPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
             let path = PlistSetting.getFilePath(File: "inputChoose.plist")
             let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
             let insulin = data["insulin"] as! NSArray
-            insulinStr = insulin[insulinPicker.selectedRow(inComponent: 0)] as? String
+            switch row {
+            case 1,2,3:
+                
+                let content = insulin[insulinPicker.selectedRow(inComponent: 0)] as? String
+                
+                let index1 = content?.index(content!.startIndex, offsetBy: 6)
+                let a = content?[index1!..<content!.endIndex]
+                insulinStr = String(a!)
+            default:
+                insulinStr = insulin[insulinPicker.selectedRow(inComponent: 0)] as? String
+            }
+//            insulinStr = insulin[insulinPicker.selectedRow(inComponent: 0)] as? String
         //运动选择器
         case sportPicker:
             sportStr = sport[sportPicker.selectedRow(inComponent: 0)] as? String

@@ -19,8 +19,8 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
     var userName:String?
     //标志位,用来设置性别的
     var flag:Bool = true
-    //性别  男为1   女为0
-    var gender:Int64 = 1
+    //性别  男为0   女为1
+    var gender:Int64 = 0
     //身高
     var height:Double?
     //体重
@@ -139,7 +139,7 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
    
         infoinputView.gender_man_button.setImage(UIImage(named: "selected"), for: .normal)
         infoinputView.gender_woman_button.setImage(UIImage(named: "unselected"), for: .normal)
-        gender = 1
+        gender = 0
        
         
     }
@@ -147,7 +147,7 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
     @objc func genderWoman(){
         infoinputView.gender_woman_button.setImage(UIImage(named: "selected"), for: .normal)
         infoinputView.gender_man_button.setImage(UIImage(named: "unselected"), for: .normal)
-        gender = 0
+        gender = 1
     }
   
     
@@ -184,9 +184,8 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
             }
             userData.country = String(country!)
             userData.birthday = brithday!.components(separatedBy: "/").joined(separator: "-")
-            if userData.phone_number != nil{
-                userData.phone_number = String(phoneNumber!)
-            }
+            userData.phone_number = String(phoneNumber!)
+            
 //            print(userData)
 //            print(userData)
 //            print(userData)
@@ -227,13 +226,13 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
                             if(responseModel.code == 1 ){
                                 self.indicator.stopIndicator()
                                 self.indicator.removeFromSuperview()
-                                print(responseModel.code)
+                               // print(responseModel.code)
                                 self.navigationController?.popToRootViewController(animated: false)
                                 alertController.custom_cengji(self,"", "Sign Up Success！")
                             }else{
                                 self.indicator.stopIndicator()
                                 self.indicator.removeFromSuperview()
-                                print(responseModel.code)
+                                //print(responseModel.code)
                                 self.navigationController?.popToRootViewController(animated: false)
                                 alertController.custom_cengji(self,"Attention", "Sign Up Success！")
                             }
@@ -261,7 +260,7 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
     }
     func selectedDate(_ pickerView: BHJPickerView, _ dateStr: Date) {
         let messge = Date().dateStringWithDate_format_another(dateStr)
-        print(messge)
+      //  print(messge)
         // 绑定一个时间选择器，并按格式返回时间
         brithday = messge
         infoinputView.dateButton.setTitle(brithday, for: .normal)

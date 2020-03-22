@@ -23,7 +23,7 @@ extension UIAlertController{
         let backView = self.view.superview?.subviews[1]
         // 以下操作失败
         //let backView = self.view.superview
-        print(self.view ?? "no")
+//        print(self.view ?? "no")
         // 设置手势点击背景警示框消失
         backView!.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer(target: self, action: #selector(cancelAlert))

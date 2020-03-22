@@ -32,8 +32,12 @@ class BolusInsulinView: UIView, UITableViewDelegate, UITableViewDataSource{
         cell?.selectionStyle = .none
         
         let array = getInsulin.getInsArray()
+        let content = array[1] as? String
+        //        let index = content?.index(of: " ")
+        let index1 = content?.index(content!.startIndex, offsetBy: 6)
+        let a = content?[index1!..<content!.endIndex]
         // 如果该单元格内容与手动输入界面的Insulin栏中的内容一致，设其为被选中状态
-        if Insulin[indexPath.row] as! String == array[1] as! String{
+        if Insulin[indexPath.row] as! String == String(a!){
             cell?.accessoryType = .checkmark
             // 设置表格该行被选中
             tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
@@ -72,11 +76,11 @@ class BolusInsulinView: UIView, UITableViewDelegate, UITableViewDataSource{
         let cell = tableView.cellForRow(at: indexPath)
         // 被选中时设置单元格状态
         cell?.accessoryType = .checkmark
-        print("s selceted")
+//        print("s selceted")
         let Insulin = getInsulin.getInsulinArray("Bolus Insulin")
         // 改变配置文件中的内容
         let array = getInsulin.getInsArray()
-        array[1] = Insulin[indexPath.row]
+        array[1] = "Ins 1 " + (Insulin[indexPath.row] as! String)
         getInsulin.setInsArray(array)
         
         // 重新加载insert中Insulin选择器内容和InsulinViewControllerv表格内容
@@ -96,7 +100,7 @@ class BolusInsulinView: UIView, UITableViewDelegate, UITableViewDataSource{
         view.bounces = false
         view.dataSource = self
         view.delegate = self
-        
+        view.allowsMultipleSelection = false
         self.addSubview(view)
         view.snp.makeConstraints{(make) in
             make.edges.equalToSuperview()

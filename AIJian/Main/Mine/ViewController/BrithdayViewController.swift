@@ -105,7 +105,7 @@ class BrithdayViewController: UIViewController {
             // MARK: - 以下为sharedView界面的时间选择器显示和消失的按钮动作
             // 选择出生日期按钮被点击时的动作
             @objc func chooseDate(){
-                print("choose date button clicked,appear done.")
+                //print("choose date button clicked,appear done.")
                 UIView.animate(withDuration: 0.5, animations: appear)
                 //appear()
             }
@@ -114,7 +114,7 @@ class BrithdayViewController: UIViewController {
                 // 重新布置约束
                 // 时间选择器界面移到屏幕外，视觉效果为消失
                 //shareV.pickDateView.frame.origin = CGPoint(x: 0, y: shareV.snp.bottom)
-                print("func dismiss done.")
+                //print("func dismiss done.")
                 // 删除顶部约束
                 self.bottomConstraint?.uninstall()
                 picker.snp_makeConstraints{(make) in
@@ -135,7 +135,7 @@ class BrithdayViewController: UIViewController {
                 // 重新布置约束
                 // 时间选择器界面移到屏幕内底部，视觉效果为出现
                 //shareV.pickDateView.frame.origin = CGPoint(x: 0, y: self.frame.size.height/3*2)
-                print("func appear done.")
+                //print("func appear done.")
                 // 删除顶部约束
                 self.topConstraint?.uninstall()
                 picker.snp_makeConstraints{(make) in
@@ -160,7 +160,7 @@ class BrithdayViewController: UIViewController {
                 //            make.top.equalTo(self.snp.bottom)
                 //
                 //        }
-                print("cancel button clicked")
+                //print("cancel button clicked")
                 
             }
             // 点击确定按钮，时间选择器界面移到屏幕外，视觉效果为消失，按钮文本显示日期
@@ -174,7 +174,7 @@ class BrithdayViewController: UIViewController {
                 
                 UIView.animate(withDuration: 0.5, animations: dismiss)
                 
-                print("sure button clicked")
+                //print("sure button clicked")
                 
             }
     

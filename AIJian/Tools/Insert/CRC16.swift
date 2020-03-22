@@ -42,7 +42,7 @@ class CRC16{
             arr.append(a[i].ascii)
         }
         //使用方法为传入一个数组，返回一个CRC的校验码
-        print(self.getCRC(arr:arr))
+//        print(self.getCRC(arr:arr))
         return String(self.getCRC(arr:arr))
     }
 }

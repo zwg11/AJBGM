@@ -16,9 +16,9 @@ public class UnitConversion{
     static func  mgTomm(num:Double) -> Double{
         var a:Double = num
         //先利用string格式化数值，保留一位,默认向上取整
-        print(a/18.02)
+//        print(a/18.02)
         let x = String(format: "%.1f", a/18.02)
-        print("截取三位以后：",x)
+//        print("截取三位以后：",x)
         //再转double
         a = Double(x)!
         return a

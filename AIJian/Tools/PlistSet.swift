@@ -110,7 +110,7 @@ class PlistSetting{
 //                print("userBloodSettingPath文件\(userBloodSettingPath)")
                 
             }catch{
-                print("异常")
+//                print("异常")
             }
             
         }
@@ -127,7 +127,7 @@ class PlistSetting{
                 //                print("userBloodSettingPath文件\(userBloodSettingPath)")
                 
             }catch{
-                print("异常加载不到mgdl文件")
+//                print("异常加载不到mgdl文件")
             }
             
         }
@@ -140,7 +140,7 @@ class PlistSetting{
                 let _ = try fileManager.copyItem(atPath: path, toPath: otherSettingsPath)
                 
             }catch{
-                print("异常加载不到dataRange文件")
+//                print("异常加载不到dataRange文件")
             }
             
         }

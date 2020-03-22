@@ -53,7 +53,7 @@ class AJTabbarController: UITabBarController {
         let nv3 = AJNavigationController(rootViewController: model)
 //        nv3.navigationBar.barTintColor = ThemeColor
         nv3.navigationBar.isTranslucent = false
-        model.navigationItem.title = "Input Model"
+        model.navigationItem.title = "Input Mode"
         nv3.tabBarItem.image = UIImage(named: "shuru.png")?.withRenderingMode(.automatic)
 //        nv3.tabBarItem.selectedImage = UIImage(named: "shuru-2.png")?.withRenderingMode(.alwaysOriginal)
         nv3.tabBarItem.title = "Add"

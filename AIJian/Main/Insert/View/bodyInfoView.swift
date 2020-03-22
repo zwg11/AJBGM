@@ -92,7 +92,7 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
     // 药物label
     private lazy var medicineLabel:UILabel = {
         let label = UILabel()
-        label.normalLabel(text: "Medicine")
+        label.normalLabel(text: "Medications")
         return label
     }()
     

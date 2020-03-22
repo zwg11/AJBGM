@@ -124,6 +124,11 @@ class DataViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // 添加导航栏左按钮
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
+        // 添加导航栏右按钮
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rangePickerButton)
         // 设置页面支持横屏
 //        appDelegate.blockRotation = true
         self.view.backgroundColor = UIColor.clear
@@ -234,11 +239,28 @@ class DataViewController: UIViewController {
 //        let value = UIInterfaceOrientation.portrait.rawValue
 //        UIDevice.current.setValue(value, forKey: "orientation")
         
-        // 添加导航栏左按钮
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
-        // 添加导航栏右按钮
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rangePickerButton)
+//        // 添加导航栏左按钮
+//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
+//        // 添加导航栏右按钮
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rangePickerButton)
         
+        let path = PlistSetting.getFilePath(File: "otherSettings.plist")
+        
+        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
+        let dataRange = data["dataRange"] as! String
+        rangePickerButton.setTitle(dataRange, for: .normal)
+        // 监听导航栏右按钮的文本，对于不同的文本设定不同的标志位
+        switch dataRange{
+            
+        case "Last 3 Days":
+            pickerSelectedRow = 1
+        case "Last 7 Days":
+            pickerSelectedRow = 2
+        case "Last 30 Days":
+            pickerSelectedRow = 3
+        default:
+            pickerSelectedRow = 2
+        }
         
         // 识别 导航栏右按钮标题，做出相应值的设置
         setDaysAndRange()
@@ -271,7 +293,7 @@ class DataViewController: UIViewController {
     // MARK: - 以下为时间范围选择器显示和消失的按钮动作
     // 选择日期按钮被点击时的动作
     @objc func chooseDate(){
-        print("choose range date button clicked,appear done.")
+       // print("choose range date button clicked,appear done.")
 
         // 添加背景按钮
         self.navigationController!.view.addSubview(backButton)
@@ -294,7 +316,7 @@ class DataViewController: UIViewController {
     // 自定义选择日期的 设置日期按钮被选中时 的动作
     @objc func selectCustomRange(){
         
-        print("select CustomRange")
+        //print("select CustomRange")
         
         let customSD = customRange.startDatePicker.date
         let customED = customRange.endDatePicker.date
@@ -357,7 +379,7 @@ class DataViewController: UIViewController {
         backButton.removeFromSuperview()
         dismiss()
 //        UIView.animate(withDuration: 0.5, animations: dismiss)
-        print("cancel button clicked")
+        //print("cancel button clicked")
     }
     
     // 点击确定按钮，时间范围选择器界面移到屏幕外，视觉效果为消失，按钮文本显示被选项
@@ -414,7 +436,7 @@ class DataViewController: UIViewController {
             setDaysAndRange()
         }
         
-        print("sure button clicked")
+      //  print("sure button clicked")
     }// 根据被选项内容执行不同的动作
     
     
@@ -423,7 +445,7 @@ class DataViewController: UIViewController {
         // 重新布置约束
         // 时间选择器界面移到屏幕外，视觉效果为消失
         //shareV.pickDateView.frame.origin = CGPoint(x: 0, y: shareV.snp.bottom)
-        print("func dismiss done.")
+       // print("func dismiss done.")
         // 删除顶部约束
         self.bottomConstraint?.uninstall()
         dateRangePicker.snp.makeConstraints{(make) in
@@ -446,7 +468,7 @@ class DataViewController: UIViewController {
         
         // 重新布置约束
         // 时间选择器界面移到屏幕内底部，视觉效果为出现
-        print("func appear done.")
+      //  print("func appear done.")
         // 删除顶部约束
         self.topConstraint?.uninstall()
         dateRangePicker.snp_makeConstraints{(make) in
@@ -465,10 +487,10 @@ class DataViewController: UIViewController {
     
     // 对于导航栏右按钮的标题不同，做不同的事情
     func setDaysAndRange(){
-        let x = Date().dateAt(.endOfDay)
-    print("x",x)
+//        let x = Date().dateAt(.endOfDay)
+//    print("x",x)
         let today = DateInRegion().dateAt(.endOfDay).date
-        print("today:",today)
+      //  print("today:",today)
         
         // 监听导航栏右按钮的文本，对于不同的文本生成对应的数据
         switch pickerSelectedRow{
@@ -500,8 +522,8 @@ class DataViewController: UIViewController {
         default:
             let components = Calendar.current.dateComponents([.day], from: startD!, to: endD!+1.seconds)
             daysNum = components.day
-            print("daysNum:\(String(describing: daysNum))")
-            print(startD!,endD!)
+            //print("daysNum:\(String(describing: daysNum))")
+           // print(startD!,endD!)
             initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())
             sortedTimeOfData()
             chartData()

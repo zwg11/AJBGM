@@ -26,7 +26,7 @@ class sugComponent: UIView {
     
     func  setupUI(title:String){
         self.frame = CGRect(x: 0, y: 0, width: AJScreenWidth, height: AJScreenHeight/15)
-        print("调用了组件层")
+//        print("调用了组件层")
         let str:NSMutableAttributedString = NSMutableAttributedString(string: title, attributes: [NSAttributedString.Key.foregroundColor:TextColor])
         textField.attributedPlaceholder = str
 //        textField.placeholder = title

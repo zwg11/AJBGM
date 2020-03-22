@@ -132,7 +132,7 @@ class InsertViewController: UIViewController {
     // ************** 药物选择栏按钮动作 **************
     // 选择 药物 按钮被点击时的动作
     @objc func chooseMedicine(){
-        print("choose medicine button clicked,appear done.")
+      //  print("choose medicine button clicked,appear done.")
         // 读取配置文件
         let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
         let arr = data["medicine"] as! NSArray
@@ -188,10 +188,10 @@ class InsertViewController: UIViewController {
             
             // 改变对应的选择器的内容和沙盒中对应队列的内容
             data["medicine"] = arr
-            print(self.path)
+            //print(self.path)
             // 将改变后的结果写入沙盒
             data.write(toFile: self.path, atomically: true)
-            print(data["medicine"] ?? "no medicine")
+           // print(data["medicine"] ?? "no medicine")
 //            print(self.medicineChooseAlert.alertData)
 //             将新添加的事件 添加到 表格状态数组中并值为 true
             self.medicineChooseAlert.boolarr.append(true)
@@ -226,7 +226,7 @@ class InsertViewController: UIViewController {
     }
     
     @objc func cancel(){
-        print("点击了取消")
+        //print("点击了取消")
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -238,6 +238,8 @@ class InsertViewController: UIViewController {
         // 风火轮启动
         let indicator = CustomIndicatorView.init(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: AJScreenHeight))
         indicator.setupUI("")
+        
+        self.rightButton.isEnabled = false
 //        UIApplication.shared.keyWindow?.addSubview(indicator)
         self.navigationController?.view.addSubview(indicator)
 //        self.view.addSubview(indicator)
@@ -248,13 +250,13 @@ class InsertViewController: UIViewController {
         // 记录需要警告的内容
         var Message:String = ""
         let date = input.getDate()
-        print("当前创建的date:",date)
+        //print("当前创建的date:",date)
         let time = input.getTime()
-        print("获得日期:",date)
-        print("获得时间:",time)
+        //print("获得日期:",date)
+        //print("获得时间:",time)
         // ********* 记录时间 *********
         let createTime = date + " " + time
-        print("存入到数据库的时间",createTime)
+        //print("存入到数据库的时间",createTime)
         
         // ********* 记录血糖 *********
         var bloodGlucoseValueMmol:Double?
@@ -262,13 +264,13 @@ class InsertViewController: UIViewController {
 //        如果血糖的单位为mg/dl,则范围为10到600
 //        如果血糖的单位为mmol/l,则范围为0.6到33.3
         if GetUnit.getBloodUnit() == "mg/dL"{
-            print("此时进入了mg/dl这个血糖单位")
+            //print("此时进入了mg/dl这个血糖单位")
             if input.glucose.XTTextfield.text! != ""{   //先判断空
                 if Double(input.glucose.XTTextfield.text!)! >= 10 && Double(input.glucose.XTTextfield.text!)! <= 600{
                     bloodGlucoseValueMg = Double(input.glucose.XTTextfield.text!)!
                     bloodGlucoseValueMmol = UnitConversion.mgTomm(num: bloodGlucoseValueMg!)
-                    print("血糖mg值",bloodGlucoseValueMg as Any)
-                    print("血糖mmol值",bloodGlucoseValueMmol as Any)
+                   // print("血糖mg值",bloodGlucoseValueMg as Any)
+                    //print("血糖mmol值",bloodGlucoseValueMmol as Any)
                 }else{
                     Message += "\nGlucose Range:10~600"
 //                    alert.custom(self, "Attention", "血糖的范围为10~600")
@@ -280,13 +282,13 @@ class InsertViewController: UIViewController {
 //                return
             }
         }else{ //mmol/L 单位
-            print("此时进入了mmol/l这个血糖单位")
+           // print("此时进入了mmol/l这个血糖单位")
             if input.glucose.XTTextfield.text! != ""{   //先判断空
                 if Double(input.glucose.XTTextfield.text!)! >= 0.6 && Double(input.glucose.XTTextfield.text!)! <= 33.3{
                     bloodGlucoseValueMmol = Double(input.glucose.XTTextfield.text!)!
                     bloodGlucoseValueMg = UnitConversion.mmTomgDouble(num: bloodGlucoseValueMmol!)
-                    print("血糖mg值",bloodGlucoseValueMg as Any)
-                    print("血糖mmol值",bloodGlucoseValueMmol as Any)
+                   // print("血糖mg值",bloodGlucoseValueMg as Any)
+                   // print("血糖mmol值",bloodGlucoseValueMmol as Any)
                 }else{
                     Message += "\nGlucose Range:0.6~33.3"
 //                    alert.custom(self, "Attention", "血糖的范围为0.6~33.3")
@@ -301,14 +303,14 @@ class InsertViewController: UIViewController {
         
         // **************** 检测时间段，非空 **************
         let event = input.getEventValue()
-        print("胰岛素的事件调试成功*********************")
+       // print("胰岛素的事件调试成功*********************")
         // **************** 进餐量，非空 *****************
         let eat_num = input.getPorValue()
-        print("胰岛素的进餐量调试成功*********************")
+       // print("胰岛素的进餐量调试成功*********************")
         // **************** 胰岛素类型，非空 ******************
         let insulin_type = input.getInsValue()
-        print("获得胰岛素类型",insulin_type)
-        print("胰岛素的类型调试成功*********************")
+       // print("获得胰岛素类型",insulin_type)
+        //print("胰岛素的类型调试成功*********************")
         // ****************** 胰岛素使用量 ******************
         let insulin_num:Double? = input.getInsNumValue()
         if insulin_num != nil{
@@ -318,8 +320,8 @@ class InsertViewController: UIViewController {
                 Message += "\nInsulin Range:100"
             }
         }
-        print("胰岛素的量",insulin_num ?? "no")
-        print("胰岛素的量调试成功*********************")
+        //print("胰岛素的量",insulin_num ?? "no")
+        //print("胰岛素的量调试成功*********************")
        
         // ******************** 体重 ********************
         var weight_kg:Double?
@@ -342,7 +344,7 @@ class InsertViewController: UIViewController {
             }
         }
         
-        print("体重调试成功")
+        //print("体重调试成功")
         
         
 //        //获取身高
@@ -365,8 +367,8 @@ class InsertViewController: UIViewController {
         
       
         // ***************** 血压 *******************
-        print("获得收缩压:",type(of:input.getSysValue()))
-        print("获的舒张压:",type(of:input.getDiaValue()))
+      //  print("获得收缩压:",type(of:input.getSysValue()))
+//        print("获的舒张压:",type(of:input.getDiaValue()))
         var sys_press_mmHg:Double?
         var sys_press_kPa:Double?
         var dis_press_mmHg:Double?
@@ -383,7 +385,7 @@ class InsertViewController: UIViewController {
                 if sys_press_mmHg != nil && dis_press_mmHg != nil{
                     if sys_press_mmHg! < 45 || sys_press_mmHg! > 300
                         || dis_press_mmHg! < 45 || dis_press_mmHg! > 300{
-                        Message += "\nBlood Pressure Range is:45~300"
+                        Message += "\nBlood Pressure Range:45~300"
                     }else if dis_press_mmHg! >= sys_press_mmHg!{  //收缩压必须大于舒张压
                         Message += "\nSBP Should be Greater than DBP "
                     }else{
@@ -403,9 +405,9 @@ class InsertViewController: UIViewController {
                 if sys_press_kPa != nil && dis_press_kPa != nil{
                     if sys_press_kPa! < 6 || sys_press_kPa! > 40
                         || dis_press_kPa! < 6 || dis_press_kPa! > 40{
-                        Message += "\nBlood Pressure range:6-40"
+                        Message += "\nBlood Pressure Range:6-40"
                     }else if dis_press_kPa! > sys_press_kPa!{
-                        Message += "\nDBP Should be Greater than SBP"
+                        Message += "\nSBP Should be Greater than DBP"
                     }else{
                         sys_press_mmHg = PressureUnitChange.kPaTommHg(num: sys_press_kPa!)
                         dis_press_mmHg = PressureUnitChange.kPaTommHg(num: dis_press_kPa!)
@@ -452,12 +454,12 @@ class InsertViewController: UIViewController {
 //                j = j + 1
 //            }
 //        }
-        print(medicine_string)
+//        print(medicine_string)
         
         
         // **************** 运动类型 **************
         let sport = input.getSportType()
-        print("获得运动类型:",sport)
+//        print("获得运动类型:",sport)
         // **************** 运动时间 **************
         let sport_time:Int64? = input.getSportTime()
 
@@ -474,24 +476,27 @@ class InsertViewController: UIViewController {
             }
         }else if let time = sport_time{
             if time < 5 && time > 360{
-                print(time)
+//                print(time)
                 Message += "\n Effective Duration of Exercise:5~360"
             }
         }
         
-        print("获得运动持续时间:",sport_time ?? "no sport time")
+//        print("获得运动持续时间:",sport_time ?? "no sport time")
 
         // 如果警示信息不为空，说明需要警示
         if Message != ""{
+            self.rightButton.isEnabled = true
             // 风火轮停止，并移除
             indicator.stopIndicator()
-            indicator.removeFromSuperview()
+//            indicator.removeFromSuperview()
             alert.custom(self, "Attention", Message)
+            
             return
         }
         
         //备注信息 不能超过100个字符
         if input.remark.remarkTextField.text!.removeHeadAndTailSpacePro.count >= 254{
+//            alert.custom(self, "Attention", Message)
             return
         }
         
@@ -527,14 +532,14 @@ class InsertViewController: UIViewController {
         insertData.inputType = 1
         insertData.remark = input.getRemark()?.removeHeadAndTailSpacePro
      
-        print("insertdata:\(insertData)")
+//        print("insertdata:\(insertData)")
         //第二步:再封装成一个数组
         let tempArray = [insertData]
         //第三步：再将这个数组直接toString
         let GlucoseJsonData = tempArray.toJSONString()!
         //手动输入数据，请求部分
         let dictString = [ "token":UserInfo.getToken(),"userId":UserInfo.getUserId() as Any,"userBloodGlucoseRecords":GlucoseJsonData] as [String : Any]
-        print(dictString)
+//        print(dictString)
         // 判断是修改数据还是插入数据
         // 插入和修改的网络请求是不一样的
         if isInsert{
@@ -542,8 +547,8 @@ class InsertViewController: UIViewController {
             AlamofireManager.request(INSERT_RECORD,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
                 if response.result.isSuccess {
                     if let jsonString = response.result.value {
-                        print("进入验证过程")
-                        print(jsonString)
+//                        print("进入验证过程")
+//                        print(jsonString)
                         // json转model
                         // 写法一：responseModel.deserialize(from: jsonString)
                         // 写法二：用JSONDeserializer<T>
@@ -552,18 +557,18 @@ class InsertViewController: UIViewController {
                          //                         */
                         if let responseModel = JSONDeserializer<responseModel>.deserializeFrom(json: jsonString) {
                             /// model转json 为了方便在控制台查看
-                            print("瞧瞧输出的是什么",responseModel.toJSONString(prettyPrint: true)!)
+//                            print("瞧瞧输出的是什么",responseModel.toJSONString(prettyPrint: true)!)
                             /*  此处为跳转和控制逻辑
                              */
                             if(responseModel.code == 1 ){
-                                print(responseModel.code)
-                                print("插入成功")
+//                                print(responseModel.code)
+//                                print("插入成功")
                                 
                                 // 向数据库插入数据
                                 DBSQLiteManager.manager.addGlucoseRecords(add: tempArray)
                                 // 风火轮启动
                                 indicator.stopIndicator()
-                                indicator.removeFromSuperview()
+//                                indicator.removeFromSuperview()
 
                                 let x = UIAlertController(title: "", message: "Data Input Success", preferredStyle: .alert)
                                 self.present(x, animated: true, completion: {()->Void in
@@ -580,43 +585,48 @@ class InsertViewController: UIViewController {
 //                                self.navigationController?.popViewController(animated: false)
                                 // 跳转到home界面
 //                                self.tabBarController?.selectedIndex = 0
-
+                                self.rightButton.isEnabled = true
                                 
                             }else if (responseModel.code! == 2 ){
                                 LoginOff.loginOff(self)
                                 
                                 let alert = CustomAlertController()
                                 alert.custom(self, "", "Your account is already logged in at the other end!")
+                                self.rightButton.isEnabled = true
                             }else{
-                                print(responseModel.code)
-                                print("插入失败")
+//                                print(responseModel.code)
+//                                print("插入失败")
                                 // 风火轮停止
                                 indicator.stopIndicator()
-                                indicator.removeFromSuperview()
+//                                indicator.removeFromSuperview()
                                 alert.custom(self, "", "Data Insertdate Failure.")
+                                self.rightButton.isEnabled = true
                                 
                             }
                         } //end of letif
                     }
                 }else{
-                print("插入失败")
+//                print("插入失败")
                 // 风火轮停止
-                indicator.stopIndicator()
-                indicator.removeFromSuperview()
+                    indicator.stopIndicator()
+    //                indicator.removeFromSuperview()
                     alert.custom(self, "Error", "Network Exception,Please Try Again Later.")
+                    self.rightButton.isEnabled = true
                     
                 }
             }//end of request
+//            indicator.stopIndicator()
+//            indicator.removeFromSuperview()
         }else{
             let dic = ["userId":UserInfo.getUserId(),"token":UserInfo.getToken(),"userBloodGlucoseRecord":insertData.toJSONString()!] as [String : Any]
-            print("dic:\(dic)")
+//            print("dic:\(dic)")
             // 向服务器申请更新数据请求
             AlamofireManager.request(UPDATE_RECORD,method: .post,parameters: dic as Parameters, headers:vheader).responseString{ (response) in
                 if response.result.isSuccess {
                     if let jsonString = response.result.value {
-                        print("进入验证过程")
-                        print(jsonString)
-                        // json转model
+//                        print("进入验证过程")
+//                        print(jsonString)
+//                        // json转model
                         // 写法一：responseModel.deserialize(from: jsonString)
                         // 写法二：用JSONDeserializer<T>
                         /*
@@ -624,12 +634,12 @@ class InsertViewController: UIViewController {
                          //                         */
                         if let responseModel = JSONDeserializer<responseModel>.deserializeFrom(json: jsonString) {
                             /// model转json 为了方便在控制台查看
-                            print("瞧瞧输出的是什么",responseModel.toJSONString(prettyPrint: true)!)
+//                            print("瞧瞧输出的是什么",responseModel.toJSONString(prettyPrint: true)!)
                             /*  此处为跳转和控制逻辑
                              */
                             if(responseModel.code == 1 ){
-                                print(responseModel.code)
-                                print("更新成功")
+//                                print(responseModel.code)
+//                                print("更新成功")
                                 // 向数据库更新数据
                                 DBSQLiteManager.manager.updateGlucoseRecord(data: insertData)
                                 // 如果不是home页面进来的，更新所展示的数据
@@ -643,7 +653,7 @@ class InsertViewController: UIViewController {
                                 
                                 // 风火轮停止
                                 indicator.stopIndicator()
-                                indicator.removeFromSuperview()
+//                                indicator.removeFromSuperview()
                                 // 提示更新成功
                                 let x = UIAlertController(title: "", message: "Update Success.", preferredStyle: .alert)
                                 self.present(x, animated: true, completion: {()->Void in
@@ -655,44 +665,49 @@ class InsertViewController: UIViewController {
                                 })
 
 //                                NotificationCenter.default.post(name: NSNotification.Name("Data Update success"), object: self, userInfo: nil)
-
+                                self.rightButton.isEnabled = true
                             }else if (responseModel.code! == 2 ){
                                 LoginOff.loginOff(self)
-                                
+                                self.rightButton.isEnabled = true
                                 let alert = CustomAlertController()
                                 alert.custom(self, "", "Your account is already logged in at the other end!")
                             }else if (responseModel.code! == 3){
                                 LoginOff.loginOff(self)
                                 let alert = CustomAlertController()
                                 alert.custom(self,"Attention", "Your account has been disabled.Please contact oncall@acondiabetescare.com")
+                                self.rightButton.isEnabled = true
                             }else{
-                                print(responseModel.code)
-                                print("更新失败")
+//                                print(responseModel.code)
+//                                print("更新失败")
                                 // 风火轮停止
                                 indicator.stopIndicator()
-                                indicator.removeFromSuperview()
+//                                indicator.removeFromSuperview()
                                 // 弹窗提示
                                 let alert = CustomAlertController()
 
                                 alert.custom(self, "Attention", "Data Update Failure")
-
+                                self.rightButton.isEnabled = true
                                 
                             }
                         } //end of letif
                     }
                 }else{
-                print("更新失败")
+//                print("更新失败")
                 // 风火轮停止
-                indicator.stopIndicator()
-                indicator.removeFromSuperview()
+                    indicator.stopIndicator()
+    //                indicator.removeFromSuperview()
                     alert.custom(self, "Error", "Network Exception,Please Try Again Later.")
+                    self.rightButton.isEnabled = true
                     
                 }
             }//end of request
+            
+//            indicator.stopIndicator()
+//            indicator.removeFromSuperview()
         }
-        
+//        self.rightButton.isEnabled = true
 
-        print("点击了保存")
+//        print("点击了保存")
         
     }
     
@@ -740,8 +755,8 @@ class InsertViewController: UIViewController {
         let arr1 = data["medicine"] as! NSArray
         for i in medicineChooseAlert.boolarr{
             if i{
-                print("药物")
-                print(i)
+//                print("药物")
+//                print(i)
                 arr.append(arr1[j] as! String)
             }
             j = j+1

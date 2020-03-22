@@ -14,12 +14,22 @@ import UIKit
 class GeneralStatusView: UIView {
 
     // 标题字符串
-    let str = "Trend-Blood Glucose"
+    let str = "Trend Report - Blood Glucose"
 
     // 姓名label
-    lazy  var nameLabel = UILabel()
+    lazy  var nameLabel:UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 30)
+        label.textColor = UIColor.black
+        return label
+    }()
     // 电话label
-    lazy  var phoneLabel = UILabel()
+    lazy  var phoneLabel:UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 30)
+        label.textColor = UIColor.black
+        return label
+    }()
     // 标题label
     private lazy  var titleLabel:UILabel = {
         let label = initLabel(str)
@@ -36,7 +46,8 @@ class GeneralStatusView: UIView {
     func initLabel(_ text:String) -> UILabel{
         let label = UILabel()
         label.text = text
-        label.font = UIFont.systemFont(ofSize: 20)
+        label.font = UIFont.systemFont(ofSize: 30)
+        label.textColor = UIColor.black
         return label
     }
     // 时间范围label
@@ -59,27 +70,27 @@ class GeneralStatusView: UIView {
         self.addSubview(rangeLabel)
         titleLabel.snp.makeConstraints{(make) in
             make.left.equalToSuperview().offset(20)
-            make.top.equalToSuperview().offset(20)
-            make.height.equalTo(40)
+            make.top.equalToSuperview()
+            make.height.equalTo(45)
         }
         
         rangeLabel.snp.makeConstraints{(make) in
             make.left.equalToSuperview().offset(20)
-            make.top.equalTo(titleLabel).offset(20)
-            make.height.equalTo(40)
+            make.top.equalTo(titleLabel.snp.bottom)
+            make.height.equalTo(45)
         }
         
         self.addSubview(nameLabel)
         self.addSubview(phoneLabel)
         nameLabel.snp.makeConstraints{(make) in
-            make.right.equalToSuperview().offset(-20)
+            make.right.equalToSuperview().offset(-100)
             make.top.equalTo(titleLabel)
-            make.height.equalTo(40)
+            make.height.equalTo(45)
         }
         phoneLabel.snp.makeConstraints{(make) in
-            make.right.equalToSuperview().offset(-20)
+            make.right.equalToSuperview().offset(-100)
             make.top.equalTo(rangeLabel)
-            make.height.equalTo(40)
+            make.height.equalTo(45)
         }
         // 画图标
         self.addSubview(chart)
@@ -115,12 +126,38 @@ class GeneralStatusView: UIView {
     }
     
     func initChart(){
-    
-        if GetUnit.getBloodUnit() == "mmol/L"{
-            chart.lineChartView.leftAxis.axisMaximum = 16.6
-        }else{
-            chart.lineChartView.leftAxis.axisMaximum = 300
-        }
+        // 得到数据中的血糖最大值
+         var maxGluValue = 0.0
+         if glucoseTimeAndValue.count > 0{
+             for i in glucoseTimeAndValue{
+                 if maxGluValue < i.value{
+                     maxGluValue = i.value
+                 }
+             }
+         }
+        // print("maxgluvalue:",maxGluValue)
+         // 如果maxGluValue不超过300，则y轴坐标最大值为300，否则设为maxGluValue+10
+         if GetUnit.getBloodUnit() == "mmol/L"{
+             if maxGluValue < 16.6{
+                 chart.lineChartView.leftAxis.axisMaximum = 16.6
+             }else{
+                 chart.lineChartView.leftAxis.axisMaximum = maxGluValue+2
+             }
+            chart.lineChartView.leftAxis.axisMaximum = maxGluValue+2
+             
+         }else{
+             if maxGluValue < 300{
+                 chart.lineChartView.leftAxis.axisMaximum = 300
+             }else{
+                 chart.lineChartView.leftAxis.axisMaximum = maxGluValue+10
+             }
+            chart.lineChartView.leftAxis.axisMaximum = maxGluValue+10
+         }
+//        if GetUnit.getBloodUnit() == "mmol/L"{
+//            chart.lineChartView.leftAxis.axisMaximum = 16.6
+//        }else{
+//            chart.lineChartView.leftAxis.axisMaximum = 300
+//        }
 
         // 初始化 图标所需要的数据
         let array = xAxisArray(Days: daysNum!)
@@ -131,8 +168,18 @@ class GeneralStatusView: UIView {
         for i in chart.lineChartView.leftAxis.limitLines{
             chart.lineChartView.leftAxis.removeLimitLine(i)
         }
-        chart.addLimitLine(GetBloodLimit.getRandomDinnerLow(), "低于", UIColor.yellow)
-        chart.addLimitLine(GetBloodLimit.getRandomDinnerTop(), "高于", UIColor.red)
+        let low = GetBloodLimit.getEmptyStomachLow()
+        let high = GetBloodLimit.getAfterDinnerTop()
+        let Orange = kRGBColor(255, 165, 0, 0.8)
+        let Red = kRGBColor(255, 0, 0, 0.8)
+        chart.addLimitLine(low, "\(low)", Orange)
+        chart.addLimitLine(high, "\(high)", Red)
+//        let Orange = kRGBColor(255, 165, 0, 0.3)
+//        let Red = kRGBColor(255, 0, 0, 0.3)
+        chart.addLimitLine(GetBloodLimit.getEmptyStomachLow(), "低于", Orange)
+        chart.addLimitLine(GetBloodLimit.getAfterDinnerTop(), "高于", Red)
+        chart.lineChartView.xAxis.gridColor = UIColor.lightGray
+        chart.lineChartView.leftAxis.gridColor = UIColor.lightGray
         switch pickerSelectedRow{
         case 1,2,3:
             chart.lineChartView.xAxis.axisMaximum = Double(daysNum!)

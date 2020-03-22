@@ -127,15 +127,15 @@ class registerViewController: UIViewController,UITextFieldDelegate {
    //注册时，点击下一步
     @objc func nextAction(){
         let infoInput_next: infoInputViewController = infoInputViewController()
-        print(infoInput_next)
+       // print(infoInput_next)
 //        let infoInput_next = infoInputViewController.self
         password = register.passwordTextField.text!.removeHeadAndTailSpacePro
         passwordSec = register.passwordSecTextField.text!
         email_code = register.authCodeTextField.text!
         email = register.emailTextField.text!
-        print(email_code!)
-        print(email!)
-        print(passwordSec!)
+       // print(email_code!)
+        //print(email!)
+       // print(passwordSec!)
         let alertController = CustomAlertController()
         if email == ""{
             alertController.custom(self, "Attention", "Email Empty")
@@ -171,7 +171,7 @@ class registerViewController: UIViewController,UITextFieldDelegate {
             }
             let dictString:Dictionary = [ "email":String(email!),"verifyCode":String(email_code!),"password":String(password!)]
             //            let user = User.deserialize(from: jsonString)
-            print(dictString)
+           // print(dictString)
             //  此处的参数需要传入一个字典类型
             Alamofire.request(UserRegister,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
                 
@@ -187,7 +187,7 @@ class registerViewController: UIViewController,UITextFieldDelegate {
                          */
                         if let responseModel = JSONDeserializer<responseModel>.deserializeFrom(json: jsonString) {
                             /// model转json 为了方便在控制台查看
-                            print(responseModel.toJSONString(prettyPrint: true)!)
+                           // print(responseModel.toJSONString(prettyPrint: true)!)
                             self.indicator.stopIndicator()
                             self.indicator.removeFromSuperview()
                             /*  此处为跳转和控制逻辑
@@ -240,13 +240,13 @@ class registerViewController: UIViewController,UITextFieldDelegate {
             //只要邮箱正确，就给发送邮件
             self.register.getAuthCodeButton.setButtonDisable()
             let  dictString:Dictionary = [ "email":String(email!)]
-            print(dictString)
+         //   print(dictString)
             Alamofire.request(get_Code,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
                 if response.result.isSuccess {
                     if let jsonString = response.result.value {
                         if let responseModel = JSONDeserializer<responseModel>.deserializeFrom(json: jsonString) {
                             /// model转json 为了方便在控制台查看
-                            print(responseModel.toJSONString(prettyPrint: true)!)
+                            //print(responseModel.toJSONString(prettyPrint: true)!)
                             /*  此处为跳转和控制逻辑
                              */
                             self.indicator.stopIndicator()

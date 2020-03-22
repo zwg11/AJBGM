@@ -196,7 +196,7 @@ class InputView: UIView,UIScrollViewDelegate {
     // MARK: - 以下为界面的日期和时间选择器显示和消失的按钮动作
     // 选择 日期 按钮被点击时的动作
     @objc func chooseDate(){
-        print("choose date button clicked,appear done.")
+       // print("choose date button clicked,appear done.")
         style = .date
         // 添加背景按钮
         self.addSubview(backButton)
@@ -205,7 +205,7 @@ class InputView: UIView,UIScrollViewDelegate {
     
     // 选择 时间 按钮被点击时的动作
     @objc func chooseTime(){
-        print("choose time button clicked,appear done.")
+       // print("choose time button clicked,appear done.")
         style = .time
         // 添加背景按钮
         self.addSubview(backButton)
@@ -214,7 +214,7 @@ class InputView: UIView,UIScrollViewDelegate {
     
     // 选择 胰岛素 按钮被点击时的动作
     @objc func chooseInsulin(){
-        print("choose occurTime button clicked,appear done.")
+      //  print("choose occurTime button clicked,appear done.")
         style = .insulin
         // 添加背景按钮
         self.addSubview(backButton)
@@ -223,7 +223,7 @@ class InputView: UIView,UIScrollViewDelegate {
     
     // 选择 运动 按钮被点击时的动作
     @objc func chooseSport(){
-        print("choose sport button clicked,appear done.")
+        //print("choose sport button clicked,appear done.")
         style = .sport
         // 添加背景按钮
         self.addSubview(backButton)
@@ -236,7 +236,7 @@ class InputView: UIView,UIScrollViewDelegate {
         backButton.removeFromSuperview()
         // 重新布置约束
         // 时间选择器界面移到屏幕外，视觉效果为消失
-        print("func dismiss done.")
+       // print("func dismiss done.")
         // 删除顶部约束
         self.bottomConstraint?.uninstall()
         picker.snp_makeConstraints{(make) in
@@ -297,7 +297,7 @@ class InputView: UIView,UIScrollViewDelegate {
             
         }
         //picker.bringSubviewToFront(picker.timePicker)
-        print("func appear done.")
+       // print("func appear done.")
         // 删除顶部约束
         self.topConstraint?.uninstall()
         picker.snp_makeConstraints{(make) in
@@ -311,7 +311,7 @@ class InputView: UIView,UIScrollViewDelegate {
     // 点击取消按钮，时间选择器界面移到屏幕外，视觉效果为消失
     @objc func pickViewDismiss(){
         UIView.animate(withDuration: 0.5, animations: dismiss)
-        print("cancel button clicked")
+       // print("cancel button clicked")
         
     }
     
@@ -329,7 +329,7 @@ class InputView: UIView,UIScrollViewDelegate {
             let date = dateFormatter.string(from: picker.datePicker.date)
             dateAndTime.dateButton.setTitle(date, for: .normal)
             dateString = date  //当用户选择日期时，进行赋值
-            print(date)
+//            print(date)
         case .time:
             // 创建一个时间格式器
             let dateFormatter = DateFormatter()
@@ -350,7 +350,7 @@ class InputView: UIView,UIScrollViewDelegate {
             if let str = picker.insulinStr {
                 if str == "Edit Entry"{
                     NotificationCenter.default.post(name: NSNotification.Name("chooseInsulin"), object: self, userInfo: nil)
-                    porAndIns.insulinButton.setTitle("None", for: .normal)
+//                    porAndIns.insulinButton.setTitle("None", for: .normal)
                 }else{
                     porAndIns.insulinButton.setTitle(str, for: .normal)
                 }
@@ -366,7 +366,7 @@ class InputView: UIView,UIScrollViewDelegate {
             
         }
         UIView.animate(withDuration: 0.5, animations: dismiss)
-        print("sure button clicked")
+//        print("sure button clicked")
         
     }
     
@@ -394,9 +394,9 @@ class InputView: UIView,UIScrollViewDelegate {
         // 记录scrollf的偏移量
         offset = self.scrollView.contentOffset.y
         
-        print(self.scrollView.contentOffset.y)
+       // print(self.scrollView.contentOffset.y)
         // button.frame.maxY 是相对于它的父视图的坐标，不是相对于滚动视图
-        print(button.frame.maxY)
+        //print(button.frame.maxY)
         let buttonY = (button.superview?.frame.minY)! + button.frame.maxY - offset!
         let pickerY = self.scrollView.frame.maxY - self.picker.frame.height
         //let movementDistance:CGFloat = -100

@@ -35,10 +35,12 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
     func initInfoDataArray(){
         let userInfo = DBSQLiteManager.manager.selectUserRecord(userId: UserInfo.getUserId())
         infoDataArray[0] = userInfo.user_name ?? ""
-        print("用户名为：",infoDataArray[0])
-        //0为女
-        if let gender = userInfo.gender{
-            infoDataArray[1] = (gender == 0) ? "Female":"Male"
+        //print("用户名为：",infoDataArray[0])
+        //print("xingbie:",infoDataArray[1])
+        //0为男
+        if userInfo.gender == 0 || userInfo.gender == nil{  //这个判断就是1 ，为女
+            //infoDataArray[1] = (gender == 0) ? "Female":"Male"
+            infoDataArray[1] = "Male"
         }else{
             infoDataArray[1] = "Female"
         }
@@ -49,7 +51,7 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
             infoDataArray[2] = (userInfo.weight_lbs != nil) ? "\(userInfo.weight_lbs!)":""
         }
         infoDataArray[3] = (userInfo.height != nil) ? "\(userInfo.height!)":""
-        print("-----",userInfo.birthday)
+        //print("-----",userInfo.birthday)
         if userInfo.birthday == nil{
             infoDataArray[4] = ""
         }else{
@@ -157,7 +159,7 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
         Alamofire.request(UPDATE_USERINFO,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
             if response.result.isSuccess {
                 if let jsonString = response.result.value {
-                    print(jsonString)
+                    //print(jsonString)
                     // json转model
                     // 写法一：responseModel.deserialize(from: jsonString)
                     // 写法二：用JSONDeserializer<T>
@@ -198,7 +200,7 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
                         }else{
                             let alert = CustomAlertController()
                             alert.custom(self, "Attention", "Update Failure")
-                            print(responseModel.code!)
+                            //print(responseModel.code!)
                         }
                     } //end of letif
                 }
@@ -220,7 +222,7 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
         info.height = UpdateUserInfo.height
         info.weightLbs = UpdateUserInfo.weightLbs
         info.weightKg = UpdateUserInfo.weightKg
-        print(UpdateUserInfo.birthday)
+        //print(UpdateUserInfo.birthday)
         if UpdateUserInfo.birthday == "" || UpdateUserInfo.birthday == nil{
             info.birthday = ""
         }else{
@@ -312,7 +314,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
         
         //行
         let row = indexPath.row
-        print(row)
+        //print(row)
         switch row {
             case 0:
                 inputUserName()  //用户名
@@ -385,7 +387,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
         let messge = genderStr
         self.infoDataArray[1] = messge
         self.tableview.reloadRows(at: [IndexPath(row:1,section:0)], with: .fade)
-        print(messge)
+        //print("选择了性别",messge)
         self.updateSth = true
     }
     //改体重
@@ -406,7 +408,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
             action in
             let UserWeight = alertController.textFields!.first!.text!
 //            let DuserWeight = Double(UserWeight)
-            print(UserWeight)
+            //print(UserWeight)
             if String(UserWeight) == ""  {
 //            }else if DuserWeight > 453.0{
                 
@@ -445,7 +447,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
                 self.infoDataArray[3] = UserName.text!
                 self.updateSth = true
                 self.tableview.reloadRows(at: [IndexPath(row:self.num,section:0)], with: .fade)
-                // print("用户名：\(String(describing: UserName.text)) ")
+                // //print("用户名：\(String(describing: UserName.text)) ")
             }
             
         })
@@ -461,7 +463,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
         let messge = Date().dateStringWithDate(dateStr)
         self.infoDataArray[4] = messge
         self.tableview.reloadRows(at: [IndexPath(row:self.num,section:0)], with: .fade)
-        print(messge)
+        //print(messge)
         self.updateSth = true
     }
     
@@ -470,7 +472,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
         let message = countryStr
         self.infoDataArray[5] = message
         self.tableview.reloadRows(at: [IndexPath(row:self.num,section:0)], with: .fade)
-        print(message)
+        //print(message)
         self.updateSth = true
     }
     

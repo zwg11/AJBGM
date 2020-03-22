@@ -55,15 +55,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //判断文件中的token是否为空。  如果为空时，则为第一次登陆。
         //如果不为空时，则需要再次判断
         if isPlistInit{
-            print(UserInfo.getIsFirst())
+//            print(UserInfo.getIsFirst())
             //****************
             if UserInfo.getToken() == ""{  //跳转到登陆界面
-                print("token为空:\(UserInfo.getToken())")
+//                print("token为空:\(UserInfo.getToken())")
                 window?.rootViewController = loginNv
             }else{
                 // 跳转到主页
                 self.window?.rootViewController = tabBarController
-                print("token不为空:\(UserInfo.getToken())")
+//                print("token不为空:\(UserInfo.getToken())")
 //                //此处分为两种情况：一种是判断token过没过期。第二种是没有网络怎么办
 //                let dictString:Dictionary = [ "userId":UserInfo.getUserId() ,"token":UserInfo.getToken()] as [String : Any]
 //                // alamofire begin

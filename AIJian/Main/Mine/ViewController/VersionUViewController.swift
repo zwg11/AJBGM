@@ -11,6 +11,8 @@
 import UIKit
 import SnapKit
 import StoreKit
+import Alamofire
+import HandyJSON
 
 
 class VersionUViewController: UIViewController {
@@ -25,9 +27,10 @@ class VersionUViewController: UIViewController {
         return button
     }()
     
+  
     private lazy var indicator = CustomIndicatorView()
         //列表数据
-        public lazy var versionDataArray: Array = ["Current Version","Feedback","Score","Version Update"]
+        public lazy var versionDataArray: Array = ["Current Version","Version Update"]
         
         override func viewDidLoad() {
             super.viewDidLoad()
@@ -49,7 +52,7 @@ class VersionUViewController: UIViewController {
 //            tableview.separatorColor = UIColor.white
             self.view.addSubview(tableview)
             tableview.snp.remakeConstraints{ (make) in
-                make.height.equalTo(AJScreenHeight/15*1)
+                make.height.equalTo(AJScreenHeight/15*2)
                 make.width.equalToSuperview()
                 make.top.equalTo(topLayoutGuide.snp.bottom)
             }
@@ -64,15 +67,15 @@ extension VersionUViewController:UITableViewDelegate,UITableViewDataSource{
         //设置有几个分区
         func numberOfSections(in tableView: UITableView) -> Int {
             return 1
-        }
+            }
         //每个分区有几行
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-           print("几行",versionDataArray.count)
+           //print("几行",versionDataArray.count)
             return versionDataArray.count
         }
         //每一个cell，里面的内容
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            print("到达版本更新页", indexPath)
+            //print("到达版本更新页", indexPath)
             //根据注册的cell类ID值获取到载体cell
             let cell = tableView.dequeueReusableCell(withIdentifier: "versioncell",for: indexPath)
 //            cell.backgroundColor = ThemeColor
@@ -96,11 +99,20 @@ extension VersionUViewController:UITableViewDelegate,UITableViewDataSource{
                 case 0:  //跳转到当前版本页面
                     //取出本地版本
                     let localVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
-                    print(localVersion)
+                    //print(localVersion)
                     self.navigationController?.pushViewController(CurrentVersion(), animated: false)
-                    print("第一行")
-//                case 1:  //跳转到反馈页面
-//                    self.navigationController?.pushViewController(SuggestionViewController(), animated: false)
+                    //print("第一行")
+                case 1:  //跳转到反馈页面
+                     indicator.setupUI("")
+                     // 设置风火轮视图在父视图中心
+                      // 开始转
+                      indicator.startIndicator()
+                      self.view.addSubview(indicator)
+                      self.view.bringSubviewToFront(indicator)
+                      indicator.snp.makeConstraints{(make) in
+                          make.edges.equalToSuperview()
+                      }
+                      isUpdateApp()
 ////                case 2:  //跳转到去评分界面
 //                    guard let url = URL(string: "itms-apps://itunes.apple.com/app/id1421026171")else {return }
 //                    if #available(iOS 10.0, *) {
@@ -128,7 +140,7 @@ extension VersionUViewController:UITableViewDelegate,UITableViewDataSource{
 //                    }
                 
 //            case 3: break  //跳转到版本更新
-//                    print(vheader)
+//                    //print(vheader)
 //                    UpdateManager.init()
                 default:  //缺省不跳
                     print("第五行")
@@ -137,4 +149,43 @@ extension VersionUViewController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return AJScreenHeight/15
     }
-}
+    
+    // 检查App是否需要更新
+        func isUpdateApp(){
+            //请求网络，是否有最新版本，需要更新
+    //        //print(UIDevice.current.systemVersion)
+            AlamofireManager.request(VersionUpdate,method: .post, headers:vheader).responseString{ (response) in
+                if response.result.isSuccess {
+                    if let jsonString = response.result.value {
+                        if let responseModel = JSONDeserializer<UPDATA_INFO_RESPONSE>.deserializeFrom(json: jsonString) {
+                            //print(responseModel.toJSONString(prettyPrint: true)!)
+                            if(responseModel.data?.update == 1 ){
+                                let alertUpdate = UIAlertController.init(title: "Version Update", message: responseModel.data?.log!, preferredStyle: .alert)
+                                let yesAction = UIAlertAction.init(title: "Update", style: .default, handler: { (handler) in
+                                    let updateUrl:URL = URL.init(string: (responseModel.data?.url!)!)!
+                                    if #available(iOS 10.0, *) {
+                                        UIApplication.shared.open(updateUrl, options: [:], completionHandler: nil)
+                                    } else {
+                                        UIApplication.shared.openURL(updateUrl)
+                                    }
+                                })
+                                self.indicator.stopIndicator()
+                                self.indicator.removeFromSuperview()
+                                let noAction = UIAlertAction.init(title: "Later", style: .default, handler: nil)
+    //                            yesAction.setValue(UIColor.black, forKey: "_titleTextColor")
+    //                            noAction.setValue(UIColor.black, forKey: "_titleTextColor")
+                                alertUpdate.addAction(yesAction)
+                                alertUpdate.addAction(noAction)
+                                self.present(alertUpdate, animated: true, completion: nil)
+                            }else{
+                                self.indicator.stopIndicator()
+                                self.indicator.removeFromSuperview()
+                                let alert = CustomAlertController()
+                                alert.custom(self, "", "Latest version")
+                                                                                      }
+                        }
+                    }
+                }
+            }
+        }
+        }

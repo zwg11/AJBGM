@@ -16,7 +16,13 @@ class customRangeView: UIView {
         datePicker.datePickerMode = .date
         datePicker.locale = Locale(identifier: "en_US")
         datePicker.maximumDate = Date()
-        datePicker.backgroundColor = UIColor.white
+        if #available(iOS 13.0, *) {
+            datePicker.backgroundColor = UIColor.systemBackground
+        } else {
+            // Fallback on earlier versions
+            datePicker.backgroundColor = UIColor.white
+        }
+        
         datePicker.layer.borderColor = UIColor.gray.cgColor
         datePicker.layer.borderWidth = 1
 //        datePicker.locale = Locale(identifier: Locale.current.identifier)
@@ -30,7 +36,12 @@ class customRangeView: UIView {
         datePicker.datePickerMode = .date
         datePicker.locale = Locale(identifier: "en_US")
         datePicker.maximumDate = Date()
-        datePicker.backgroundColor = UIColor.white
+        if #available(iOS 13.0, *) {
+            datePicker.backgroundColor = UIColor.systemBackground
+        } else {
+            // Fallback on earlier versions
+            datePicker.backgroundColor = UIColor.white
+        }
         datePicker.layer.borderColor = UIColor.gray.cgColor
         datePicker.layer.borderWidth = 1
         // 获取本地时间，使得datePicker 日期与本地一致
@@ -43,7 +54,12 @@ class customRangeView: UIView {
         let label = UILabel()
         label.text = "Start Date"
         label.textAlignment = .center
-        label.textColor = UIColor.black
+        if #available(iOS 13.0, *) {
+            label.textColor = UIColor.label
+        } else {
+            // Fallback on earlier versions
+            label.textColor = UIColor.black
+        }
         label.font = UIFont.systemFont(ofSize: 16)
         return label
     }()
@@ -52,7 +68,12 @@ class customRangeView: UIView {
         let label = UILabel()
         label.text = "End Date"
         label.textAlignment = .center
-        label.textColor = UIColor.black
+        if #available(iOS 13.0, *) {
+            label.textColor = UIColor.label
+        } else {
+            // Fallback on earlier versions
+            label.textColor = UIColor.black
+        }
         label.font = UIFont.systemFont(ofSize: 16)
         return label
     }()
@@ -60,8 +81,15 @@ class customRangeView: UIView {
     lazy var endbutton:UIButton = {
         let button = UIButton()
         button.setTitle("Setting Date Range", for: .normal)
-        button.backgroundColor = UIColor.white
-        button.setTitleColor(UIColor.black, for: .normal)
+        if #available(iOS 13.0, *) {
+            button.backgroundColor = UIColor.systemBackground
+            button.setTitleColor(UIColor.label, for: .normal)
+        } else {
+            // Fallback on earlier versions
+            button.backgroundColor = UIColor.white
+            button.setTitleColor(UIColor.black, for: .normal)
+        }
+//        button.setTitleColor(UIColor.black, for: .normal)
 
         return button
     }()
@@ -69,7 +97,12 @@ class customRangeView: UIView {
      // 该视图包含2个时间选择器，2个label，一个按钮
     lazy var contentView:UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.white
+        if #available(iOS 13.0, *) {
+            view.backgroundColor = UIColor.systemBackground
+        } else {
+            // Fallback on earlier versions
+            view.backgroundColor = UIColor.white
+        }
         return view
     }()
     

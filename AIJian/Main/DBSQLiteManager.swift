@@ -63,7 +63,7 @@ public class DBSQLiteManager:NSObject{
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
         //判断是否是第一次，第一次则创建，第二次则不创建。
         let db = try! Connection("\(path)/db.sqlite3")
-        print("创库连裤成功")
+        //print("创库连裤成功")
         return db
     }
     //创建表
@@ -89,7 +89,7 @@ public class DBSQLiteManager:NSObject{
             t.column(weight_lbs)
             t.column(country)
             t.column(phone_number)
-            print("创建用户表成功")
+            //print("创建用户表成功")
         })
         )
         
@@ -119,7 +119,7 @@ public class DBSQLiteManager:NSObject{
             t.column(remark)
             t.column(record_type)
             t.column(machine_id)
-            print("创建血糖表成功")
+            //print("创建血糖表成功")
         })
         )
     }
@@ -147,7 +147,7 @@ public class DBSQLiteManager:NSObject{
             ,country <- userObject.country
             ,phone_number <- userObject.phone_number
         ))
-        print("成功增加一条用户信息")
+        //print("成功增加一条用户信息")
     }
     //删除一条用户记录
     //输入一个用户的user_id,然后根据这个id,去删除
@@ -155,9 +155,9 @@ public class DBSQLiteManager:NSObject{
         let db = DBSQLiteManager.shareManager().openDB()
         let alice = user.filter(user_id == id)
         if  ((try? db.run(alice.delete())) != nil){
-            print("修改成功")
+            //print("修改成功")
         }else{
-            print("修改失败")
+            //print("修改失败")
         }
     }
     //更新一条用户记录
@@ -177,7 +177,7 @@ public class DBSQLiteManager:NSObject{
                                        country <- userObject.country!,
                                        phone_number <- userObject.phone_number!
         ))
-        print("成功更新一条用户信息")
+        //print("成功更新一条用户信息")
     }
     
     // 请求服务器来更新u用户信息
@@ -201,7 +201,7 @@ public class DBSQLiteManager:NSObject{
                                        country <- userObject.country,
                                        phone_number <- userObject.phoneNumber
         ))
-        print("成功更新一条用户信息")
+        //print("成功更新一条用户信息")
     }
     
     //更新用户的token
@@ -210,7 +210,7 @@ public class DBSQLiteManager:NSObject{
         try! db.run(user.update( user_id <- userObject.user_id!,
                                  email <- userObject.email!,
                                  token <- userObject.token!))
-        print("成功更新一条用户信息")
+        //print("成功更新一条用户信息")
     }
     
     //查询一条用户记录
@@ -238,9 +238,9 @@ public class DBSQLiteManager:NSObject{
             tempUser.phone_number = user![phone_number]
             
             dataCollection = tempUser
-            print("查询用户信息成功！")
+            //print("查询用户信息成功！")
         }catch{
-            print("查询失败，本地无相关信息")
+            //print("查询失败，本地无相关信息")
         }
         
         return dataCollection
@@ -280,7 +280,40 @@ public class DBSQLiteManager:NSObject{
                 ,record_type <- i.recordType
                 ,machine_id <- i.machineId
             ))
-            print("添加一条记录")
+            
+            /*do {
+                try db.run(glucose_record.insert(or: .replace
+                    ,glucose_record_id <- i.bloodGlucoseRecordId!
+                    ,user_glucose_id <- i.userId!
+                    ,create_time <- i.createTime!
+                    ,detection_time <- i.detectionTime
+                    ,glucose_mmol <- i.bloodGlucoseMmol!
+                    ,glucose_mg <- i.bloodGlucoseMg!
+                    ,eat_type <- i.eatType
+                    ,eat_num <- i.eatNum
+                    ,weight_kg <- i.weightKg
+                    ,weight_lbs <- i.weightLbs
+                    ,insulin_type <- i.insulinType
+                    ,insulin_num <- i.insulinNum
+                    ,systolic_pressure_mmhg <- i.systolicPressureMmhg
+                    ,diastolic_pressure_mmhg <- i.diastolicPressureMmhg
+                    ,systolic_pressure_kpa <- i.systolicPressureKpa
+                    ,diastolic_pressure_kpa <- i.diastolicPressureKpa
+                    ,medicine <- i.medicine
+                    ,sport_type <- i.sportType
+                    ,sport_time <- i.sportTime
+                    ,sport_strength <- i.sportStrength
+                    ,inputType <- i.inputType
+                    ,remark <- i.remark
+                    ,record_type <- i.recordType
+                    ,machine_id <- i.machineId
+                ))
+            } catch let error {
+                print("ERROR >> \(error)")
+            }*/
+            
+            
+            //print("添加一条记录")
         }
         
     }
@@ -293,14 +326,14 @@ public class DBSQLiteManager:NSObject{
         do {
             // DELETE FROM "glucose_record" WHERE ("glucose_record_id" = glucoseId)
             if try db.run(query.delete()) > 0{
-                print("删除记录成功")
+                //print("删除记录成功")
                 return true
             }else{
-                print("未找到对应记录")
+                //print("未找到对应记录")
                 return false
             }
         }catch{
-            print("删除失败:\(error)")
+            //print("删除失败:\(error)")
             return false
         }
     }
@@ -311,7 +344,7 @@ public class DBSQLiteManager:NSObject{
         // "user_glucose_id" == data.userId AND "glucose_record_id" == data.bloodGlucoseRecordId
         let record = glucose_record.filter(user_glucose_id == data.userId! && glucose_record_id == data.bloodGlucoseRecordId!)
         do{
-            // update data,if failer,it will print error information
+            // update data,if failer,it will //print error information
             if try db.run(record.update(glucose_record_id <- data.bloodGlucoseRecordId!
                 ,user_glucose_id <- data.userId!
                 ,create_time <- data.createTime!
@@ -337,12 +370,12 @@ public class DBSQLiteManager:NSObject{
                 ,record_type <- data.recordType
                 ,machine_id <- data.machineId
             )) > 0{
-                print("UPDATE record")
+                //print("UPDATE record")
             }else{
-                print("record NOT FOUND")
+                //print("record NOT FOUND")
             }
         }catch{
-            print("UPDATE FAILED:\(error)")
+            //print("UPDATE FAILED:\(error)")
         }
         
     }
@@ -387,7 +420,7 @@ public class DBSQLiteManager:NSObject{
             
             return dataGlucose
         }catch{
-            print("当前用户无数据")
+            //print("当前用户无数据")
             return nil
         }
 //        return dataGlucose
@@ -403,21 +436,21 @@ public class DBSQLiteManager:NSObject{
         let timezone = TimeZone(identifier: "UTC")
 //        dateFormatter.locale = Locale(identifier: "zh_CN")
         dateFormatter.timeZone = timezone
-//        print(Locale.current)
+//        //print(Locale.current)
         // 由于数据库存的是字符串，所以要把z日期转化为字符串
         let st = dateFormatter.string(from: start)
         let en = dateFormatter.string(from: end)
-        print("st:",st,"en:",en)
+        //print("st:",st,"en:",en)
         var datasOfGlucose:[glucoseDate] = []
         
 //        for record in try! db.prepare(glucose_record){
-//            print(record[create_time])
+//            //print(record[create_time])
 //        }
         // SELECT * FROM glucose_record WHERE BETWEEN (st,en) AND user_id = userId ORDERED BY DESCENDING
         let query = glucose_record.filter(create_time < en && create_time >= st && user_glucose_id == userId).order(create_time.desc)
         do{
             for record in try db.prepare(query){
-                print(record[create_time])
+                //print(record[create_time])
                 var dataGlucose:glucoseDate = glucoseDate()
                 dataGlucose.bloodGlucoseRecordId  = record[glucose_record_id]
                 dataGlucose.userId                = record[user_glucose_id]
@@ -449,7 +482,7 @@ public class DBSQLiteManager:NSObject{
             }
         }
         catch{
-            print("no record")
+            //print("no record")
         }
         return datasOfGlucose
         
@@ -460,7 +493,7 @@ public class DBSQLiteManager:NSObject{
     //        let db = DBSQLiteManager.shareManager().openDB()
     //        sqlite
     //        sqlite3_close(db)
-    //        print("数据库关闭成功")
+    //        //print("数据库关闭成功")
     //    }
 }
 
@@ -482,8 +515,8 @@ public class DBSQLiteManager:NSObject{
  userObject.phone_number = "123456789"
  DBSQLiteManager.shareManager().addUserRecord(userObject)
  let dataCollection:USER = DBSQLiteManager.shareManager().selectUserRecord()
- print(dataCollection)
- print("**********************")
+ //print(dataCollection)
+ //print("**********************")
  
  
  

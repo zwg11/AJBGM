@@ -494,7 +494,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
         let unit_path = PlistSetting.getFilePath(File: "UnitSetting.plist")
         let unit_data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: unit_path)!
         let unit = unit_data["BloodUnit"]! as! String
-        print(unit)
+        //print(unit)
         //设置用户的显示单位
         setLabelUnit(unit: unit)
         //清空用户的输入
@@ -608,19 +608,19 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             //空腹
             //获得用户缺省值的下限
             var a:Double = Double(((save_data["emptyStomachLowLimit"]  as? NSNumber)?.stringValue)!)!
-            print("空腹下限值",a)
+            //print("空腹下限值",a)
             if self.emptyStomach_left.text! != ""{
                 //判断是否为非法输入
 //                if FormatMethodUtil.validateBloodNumber(number: self.emptyStomach_left.text!) == true{
                     a = Double(self.emptyStomach_left.text!)!
                     if a <= 7.8 && a >= 3.3{
-                        print("用户的输入",a)
+                        //print("用户的输入",a)
                         emptyStomach_left_number = a as NSNumber
                         save_data.setObject(emptyStomach_left_number as Any, forKey: "emptyStomachLowLimit" as NSCopying)
                         //还需要将值转化一份，存入到mg/dl的文件中
                         let another = UnitConversion.mmTomg(num: emptyStomach_left_number as! Double)
                         save_mgdl_data.setObject(another as Any, forKey: "emptyStomachLowLimit" as NSCopying)
-                        print(type(of: self.emptyStomach_left_number))
+                        //print(type(of: self.emptyStomach_left_number))
                     }else{
                         emptyStomach_left.layer.borderColor = UIColor.red.cgColor
                         emptyStomach_left.layer.borderWidth = 1
@@ -628,11 +628,11 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }
             }else{
                 //用户啥也没输入
-                print("空腹下限啥事也没干")
+                //print("空腹下限啥事也没干")
             }
             
             var b:Double = Double(((save_data["emptyStomachHighLimit"]  as? NSNumber)?.stringValue)!)!
-            print("空腹上限值",b)
+            //print("空腹上限值",b)
             if self.emptyStomach_right.text! != ""{
                     b = Double(self.emptyStomach_right.text!)!
                     if b <= 16.6 && b >= 5.0 && b > a{  //注：上限的值必须大于下限
@@ -647,141 +647,141 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                         return
                     }
             }else{
-                print("空腹上限啥事也没干")
+                //print("空腹上限啥事也没干")
             }
             //餐前
             var c:Double = Double(((save_data["beforeDinnerLowLimit"]  as? NSNumber)?.stringValue)!)!
-            print("餐前下限值",c)
+            //print("餐前下限值",c)
             if self.beforeDinner_left.text! != ""{
                 //判断是否为非法输入
                     c = Double(self.beforeDinner_left.text!)!
                     if c <= 7.8 && c >= 3.3{
-                        print("用户的输入",c)
+                        //print("用户的输入",c)
                         beforeDinner_left_number = c as NSNumber
                         save_data.setObject(beforeDinner_left_number as Any, forKey: "beforeDinnerLowLimit" as NSCopying)
                         //还需要将值转化一份，存入到mg/dl的文件中
                         let another = UnitConversion.mmTomg(num: beforeDinner_left_number as! Double)
                         save_mgdl_data.setObject(another as Any, forKey: "beforeDinnerLowLimit" as NSCopying)
-                        print(type(of: beforeDinner_left_number))
+                        //print(type(of: beforeDinner_left_number))
                     }else{
                         beforeDinner_left.layer.borderColor = UIColor.red.cgColor
                         beforeDinner_left.layer.borderWidth = 1
                         return
                     }
             }else{
-                print("餐前下限啥事也没干")
+                //print("餐前下限啥事也没干")
             }
             
             var d:Double = Double(((save_data["beforeDinnerHighLimit"]  as? NSNumber)?.stringValue)!)!
-            print("餐前上限值",d)
+            //print("餐前上限值",d)
             if self.beforeDinner_right.text! != ""{
                 //判断是否为非法输入
                     d = Double(self.beforeDinner_right.text!)!
                     if d <= 16.6 && d >= 5.0 && d > c{
-                        print("用户的输入",d)
+                        //print("用户的输入",d)
                         beforeDinner_right_number = d as NSNumber
                         save_data.setObject(beforeDinner_right_number as Any, forKey: "beforeDinnerHighLimit" as NSCopying)
                         //还需要将值转化一份，存入到mg/dl的文件中
                         let another = UnitConversion.mmTomg(num: beforeDinner_right_number as! Double)
                         save_mgdl_data.setObject(another as Any, forKey: "beforeDinnerHighLimit" as NSCopying)
-                        print(type(of: beforeDinner_right_number))
+                        //print(type(of: beforeDinner_right_number))
                     }else{
                         beforeDinner_right.layer.borderColor = UIColor.red.cgColor
                         beforeDinner_right.layer.borderWidth = 1
                         return
                     }
             }else{
-                print("餐前上限啥事也没干")
+                //print("餐前上限啥事也没干")
             }
             
             //餐后
             var e:Double = Double(((save_data["afterDinnerLowLimit"]  as? NSNumber)?.stringValue)!)!
-            print("餐后下限值",e)
+            //print("餐后下限值",e)
             if self.afterDinner_left.text! != ""{
                 //判断是否为非法输入
                     e = Double(self.afterDinner_left.text!)!
                     if e <= 7.8 && e >= 3.3{
-                        print("用户的输入",e)
+                        //print("用户的输入",e)
                         afterDinner_left_number = e as NSNumber
                         save_data.setObject(afterDinner_left_number as Any, forKey: "afterDinnerLowLimit" as NSCopying)
                         //还需要将值转化一份，存入到mg/dl的文件中
                         let another = UnitConversion.mmTomg(num: afterDinner_left_number as! Double)
                         save_mgdl_data.setObject(another as Any, forKey: "afterDinnerLowLimit" as NSCopying)
-                        print(type(of: afterDinner_left_number))
+                        //print(type(of: afterDinner_left_number))
                     }else{
                         afterDinner_left.layer.borderColor = UIColor.red.cgColor
                         afterDinner_left.layer.borderWidth = 1
                         return
                     }
             }else{
-                print("餐后下限啥事也没干")
+                //print("餐后下限啥事也没干")
             }
             
             var f:Double = Double(((save_data["afterDinnerHighLimit"]  as? NSNumber)?.stringValue)!)!
-            print("餐后上限值",f)
+            //print("餐后上限值",f)
             if self.afterDinner_right.text! != ""{
                 //判断是否为非法输入
                     f = Double(self.afterDinner_right.text!)!
                     if f <= 16.6 && f >= 5.0 && f > e{
-                        print("用户的输入",f)
+                        //print("用户的输入",f)
                         afterDinner_right_number = f as NSNumber
                         save_data.setObject(afterDinner_right_number as Any, forKey: "afterDinnerHighLimit" as NSCopying)
                         //还需要将值转化一份，存入到mg/dl的文件中
                         let another = UnitConversion.mmTomg(num: afterDinner_right_number as! Double)
                         save_mgdl_data.setObject(another as Any, forKey: "afterDinnerHighLimit" as NSCopying)
-                        print(type(of: afterDinner_right_number))
+                        //print(type(of: afterDinner_right_number))
                     }else{
                         afterDinner_right.layer.borderColor = UIColor.red.cgColor
                         afterDinner_right.layer.borderWidth = 1
                         return
                     }
             }else{
-                print("餐后上限啥事也没干")
+                //print("餐后上限啥事也没干")
             }
             //随机
             var g:Double = Double(((save_data["randomDinnerLowLimit"]  as? NSNumber)?.stringValue)!)!
-            print("随机下限值",g)
+            //print("随机下限值",g)
             if self.randomDinner_left.text! != ""{
                 //判断是否为非法输入
                     g = Double(self.randomDinner_left.text!)!
                     if g <= 7.8 && g >= 3.3{
-                        print("用户的输入",g)
+                        //print("用户的输入",g)
                         randomDinner_left_number = g as NSNumber
                         save_data.setObject(randomDinner_left_number as Any, forKey: "randomDinnerLowLimit" as NSCopying)
                         //还需要将值转化一份，存入到mg/dl的文件中
                         let another = UnitConversion.mmTomg(num: randomDinner_left_number as! Double)
                         save_mgdl_data.setObject(another as Any, forKey: "randomDinnerLowLimit" as NSCopying)
-                        print(type(of: randomDinner_left_number))
+                        //print(type(of: randomDinner_left_number))
                     }else{
                         randomDinner_left.layer.borderColor = UIColor.red.cgColor
                         randomDinner_left.layer.borderWidth = 1
                         return
                     }
             }else{
-                print("随机下限啥事也没干")
+                //print("随机下限啥事也没干")
             }
             
             
             var h:Double = Double(((save_data["randomDinnerHighLimit"]  as? NSNumber)?.stringValue)!)!
-            print("随机上限值",h)
+            //print("随机上限值",h)
             if self.randomDinner_right.text! != ""{
                 //判断是否为非法输入
                     h = Double(self.randomDinner_right.text!)!
                     if h <= 16.6 && h >= 5.0 && h > g{
-                        print("用户的输入",h)
+                        //print("用户的输入",h)
                         randomDinner_right_number = h as NSNumber
                         save_data.setObject(randomDinner_right_number as Any, forKey: "randomDinnerHighLimit" as NSCopying)
                         //还需要将值转化一份，存入到mg/dl的文件中
                         let another = UnitConversion.mmTomg(num: randomDinner_right_number as! Double)
                         save_mgdl_data.setObject(another as Any, forKey: "randomDinnerHighLimit" as NSCopying)
-                        print(type(of: randomDinner_right_number))
+                        //print(type(of: randomDinner_right_number))
                     }else{
                         randomDinner_right.layer.borderColor = UIColor.red.cgColor
                         randomDinner_right.layer.borderWidth = 1
                         return
                     }
             }else{
-                print("随机上限啥事也没干")
+                //print("随机上限啥事也没干")
             }
             
             //第二步，保存写入userBloodSetting.plist文件中
@@ -806,12 +806,12 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             //空腹
             //获得用户缺省值的下限
             var a:Double = Double(((save_data["emptyStomachLowLimit"]  as? NSNumber)?.stringValue)!)!
-            print("mg空腹下限值",a)
+            //print("mg空腹下限值",a)
             if self.emptyStomach_left.text! != ""{
                 //判断是否为非法输入
                     a = Double(self.emptyStomach_left.text!)!
                     if a <= 140 && a >= 60{
-                        print("用户的输入",a)
+                        //print("用户的输入",a)
                         //把得到mg/dL单位的数据转化为mmol/L单位的数据，然后存入到文件中
                         save_mgdl_data.setObject(a as NSNumber as Any, forKey: "emptyStomachLowLimit" as NSCopying)
                         a = UnitConversion.mgTomm(num: a)
@@ -823,11 +823,11 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                         return
                     }
             }else{
-                print("空腹下限啥事也没干")
+                //print("空腹下限啥事也没干")
             }
             
             var b:Double = Double(((save_data["emptyStomachHighLimit"]  as? NSNumber)?.stringValue)!)!
-            print("mg空腹上限值",b)
+            //print("mg空腹上限值",b)
             if self.emptyStomach_right.text! != ""{
                     b = Double(self.emptyStomach_right.text!)!
                     if b <= 300 && b >= 90 && b > a{  //注：上限的值必须大于下限
@@ -841,136 +841,136 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                         return
                     }
             }else{
-                print("mg空腹上限啥事也没干")
+                //print("mg空腹上限啥事也没干")
             }
             //餐前
             var c:Double = Double(((save_data["beforeDinnerLowLimit"]  as? NSNumber)?.stringValue)!)!
-            print("餐前下限值",c)
+            //print("餐前下限值",c)
             if self.beforeDinner_left.text! != ""{
                 //判断是否为非法输入
                     c = Double(self.beforeDinner_left.text!)!
                     if c <= 140 && c >= 60{
-                        print("用户的输入",c)
+                        //print("用户的输入",c)
                         save_mgdl_data.setObject(c as NSNumber as Any, forKey: "beforeDinnerLowLimit" as NSCopying)
                         c = UnitConversion.mgTomm(num: c)
                         beforeDinner_left_number = c as NSNumber
                         save_data.setObject(beforeDinner_left_number as Any, forKey: "beforeDinnerLowLimit" as NSCopying)
-                        print(type(of: beforeDinner_left_number))
+                        //print(type(of: beforeDinner_left_number))
                     }else{
                         beforeDinner_left.layer.borderColor = UIColor.red.cgColor
                         beforeDinner_left.layer.borderWidth = 1
                         return
                     }
             }else{
-                print("餐前下限啥事也没干")
+                //print("餐前下限啥事也没干")
             }
             
             var d:Double = Double(((save_data["beforeDinnerHighLimit"]  as? NSNumber)?.stringValue)!)!
-            print("餐前上限值",d)
+            //print("餐前上限值",d)
             if self.beforeDinner_right.text! != ""{
                 //判断是否为非法输入
 //                if FormatMethodUtil.validateMgdlBloodNumber(number: self.beforeDinner_right.text!) == true{
                     d = Double(self.beforeDinner_right.text!)!
                     if d <= 300 && d >= 90 && d > c{
-                        print("用户的输入",d)
+                        //print("用户的输入",d)
                         save_mgdl_data.setObject(d  as NSNumber as Any, forKey: "beforeDinnerHighLimit" as NSCopying)
                         d = UnitConversion.mgTomm(num: d)
                         beforeDinner_right_number = d as NSNumber
                         save_data.setObject(beforeDinner_right_number as Any, forKey: "beforeDinnerHighLimit" as NSCopying)
-                        print(type(of: beforeDinner_right_number))
+                        //print(type(of: beforeDinner_right_number))
                     }else{
                         beforeDinner_right.layer.borderColor = UIColor.red.cgColor
                         beforeDinner_right.layer.borderWidth = 1
                         return
                 }
             }else{
-                print("餐前上限啥事也没干")
+                //print("餐前上限啥事也没干")
             }
             
             //餐后
             var e:Double = Double(((save_data["afterDinnerLowLimit"]  as? NSNumber)?.stringValue)!)!
-            print("餐后下限值",e)
+            //print("餐后下限值",e)
             if self.afterDinner_left.text! != ""{
                 //判断是否为非法输入
                     e = Double(self.afterDinner_left.text!)!
                     if e <= 140 && e >= 60{
-                        print("用户的输入",e)
+                        //print("用户的输入",e)
                         save_mgdl_data.setObject(e as NSNumber as Any, forKey: "afterDinnerLowLimit" as NSCopying)
                         e = UnitConversion.mgTomm(num: e)
                         afterDinner_left_number = e as NSNumber
                         save_data.setObject(afterDinner_left_number as Any, forKey: "afterDinnerLowLimit" as NSCopying)
-                        print(type(of: afterDinner_left_number))
+                        //print(type(of: afterDinner_left_number))
                     }else{
                         afterDinner_left.layer.borderColor = UIColor.red.cgColor
                         afterDinner_left.layer.borderWidth = 1
                         return
                     }
             }else{
-                print("餐后下限啥事也没干")
+                //print("餐后下限啥事也没干")
             }
             
             var f:Double = Double(((save_data["afterDinnerHighLimit"]  as? NSNumber)?.stringValue)!)!
-            print("餐后上限值",f)
+            //print("餐后上限值",f)
             if self.afterDinner_right.text! != ""{
                 //判断是否为非法输入
                     f = Double(self.afterDinner_right.text!)!
                     if f <= 300 && f >= 90 && f > e{
-                        print("用户的输入",f)
+                        //print("用户的输入",f)
                         save_mgdl_data.setObject(f as NSNumber as Any, forKey: "afterDinnerHighLimit" as NSCopying)
                         f = UnitConversion.mgTomm(num: f)
                         afterDinner_right_number = f as NSNumber
                         save_data.setObject(afterDinner_right_number as Any, forKey: "afterDinnerHighLimit" as NSCopying)
-                        print(type(of: afterDinner_right_number))
+                        //print(type(of: afterDinner_right_number))
                     }else{
                         afterDinner_right.layer.borderColor = UIColor.red.cgColor
                         afterDinner_right.layer.borderWidth = 1
                         return
                     }
             }else{
-                print("餐后上限啥事也没干")
+                //print("餐后上限啥事也没干")
             }
             //随机
             var g:Double = Double(((save_data["randomDinnerLowLimit"]  as? NSNumber)?.stringValue)!)!
-            print("随机下限值",g)
+            //print("随机下限值",g)
             if self.randomDinner_left.text! != ""{
                 //判断是否为非法输入
                     g = Double(self.randomDinner_left.text!)!
                     if g <= 140 && g >= 60{
-                        print("用户的输入",g)
+                        //print("用户的输入",g)
                         save_mgdl_data.setObject(g as NSNumber as Any, forKey: "randomDinnerLowLimit" as NSCopying)
                         g = UnitConversion.mgTomm(num: g)
                         randomDinner_left_number = g as NSNumber
                         save_data.setObject(randomDinner_left_number as Any, forKey: "randomDinnerLowLimit" as NSCopying)
-                        print(type(of: randomDinner_left_number))
+                        //print(type(of: randomDinner_left_number))
                     }else{
                         randomDinner_left.layer.borderColor = UIColor.red.cgColor
                         randomDinner_left.layer.borderWidth = 1
                         return
                     }
             }else{
-                print("随机下限啥事也没干")
+                //print("随机下限啥事也没干")
             }
             
             
             var h:Double = Double(((save_data["randomDinnerHighLimit"]  as? NSNumber)?.stringValue)!)!
-            print("随机上限值",h)
+            //print("随机上限值",h)
             if self.randomDinner_right.text! != ""{
                 //判断是否为非法输入
                     h = Double(self.randomDinner_right.text!)!
                     if h <= 300 && h >= 90 && h > g{
-                        print("用户的输入",h)
+                        //print("用户的输入",h)
                         save_mgdl_data.setObject(h as NSNumber as Any, forKey: "randomDinnerHighLimit" as NSCopying)
                         h = UnitConversion.mgTomm(num: h)
                         randomDinner_right_number = h as NSNumber
                         save_data.setObject(randomDinner_right_number as Any, forKey: "randomDinnerHighLimit" as NSCopying)
-                        print(type(of: randomDinner_right_number))
+                        //print(type(of: randomDinner_right_number))
                     }else{
                         randomDinner_right.layer.borderColor = UIColor.red.cgColor
                         randomDinner_right.layer.borderWidth = 1
                         return
                     }
             }else{
-                print("随机上限啥事也没干")
+                //print("随机上限啥事也没干")
             }
             
             

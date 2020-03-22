@@ -17,7 +17,7 @@ class UserInfo{
         let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
         var userId:Int64
         userId = data["userId"] as! Int64
-        print("userId:\(userId)")
+//        print("userId:\(userId)")
         return userId
     }
 
@@ -39,15 +39,7 @@ class UserInfo{
         return email
     }
     
-    // 从plist 文件中提取 meterID
-    static func getMeterID() -> Dictionary<String, String>{
-        //let path = Bundle.main.path(forResource: "User", ofType: "plist")
-        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
-        var meterID:Dictionary<String, String>
-        meterID = data["meterID"] as! Dictionary
-        return meterID
-    }
-    
+        
     //从Plist文件中提取 isFirst
     static func getIsFirst() ->Bool{
         let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
@@ -82,16 +74,7 @@ class UserInfo{
         data.write(toFile: path, atomically: true)
     }
     
-    // 设置plist 文件中的 meterID
-    static func setMeterID(_ meterID:String,_ record:String){
-        //let path = Bundle.main.path(forResource: "User", ofType: "plist")
-        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
-        let arr = data["meterID"] as! NSMutableDictionary
-        // 更新配置文件内容
-        arr[meterID] = record
-        data["meterID"] = arr
-        data.write(toFile: path, atomically: true)
-    }
+    
     //设置Plist文件中提取 isFirst
     static func setIsFirst(_ isFirst:Bool) {
         let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!

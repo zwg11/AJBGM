@@ -242,7 +242,7 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
                 self.view.addSubview(indicator)
                 self.view.bringSubviewToFront(indicator)
                 let dictString:Dictionary = [ "oldPassword":String(oldP!),"newPassword":String(newP!),"email":String(email),"token":String(token),"userId":UserInfo.getUserId()] as [String : Any]
-                print(dictString)
+                //print(dictString)
               //  此处的参数需要传入一个字典类型
                 Alamofire.request(PASSWDRESET,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
                     
@@ -252,7 +252,7 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
                             
                             if let responseModel = JSONDeserializer<responseAModel>.deserializeFrom(json: jsonString) {
                                 // model转json 为了方便在控制台查看
-                                print(responseModel.toJSONString(prettyPrint: true)!)
+                                //print(responseModel.toJSONString(prettyPrint: true)!)
                                 self.indicator.stopIndicator()
                                 self.indicator.removeFromSuperview()
                                 /*  此处为跳转和控制逻辑*/

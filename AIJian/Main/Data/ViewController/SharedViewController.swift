@@ -116,14 +116,14 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
             self.present(alert, animated: true, completion: nil)
             sleep(1)
             alert.dismiss(animated: true, completion: nil)
-            print("savw failed")
+          //  print("savw failed")
             
         } else {
             let alert = UIAlertController(title: "", message: "Generate Order Successfully", preferredStyle: .alert)
             self.present(alert, animated: true, completion: nil)
             sleep(1)
             alert.dismiss(animated: true, completion: nil)
-            print("savw success")
+            //print("savw success")
             
         }
     }
@@ -202,7 +202,7 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        print(textField.text ?? "")
+       // print(textField.text ?? "")
         
         // 将内容赋值给对应的字符串
         name = textField.text

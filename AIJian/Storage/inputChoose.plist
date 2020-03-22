@@ -12,19 +12,18 @@
 	<key>insulin</key>
 	<array>
 		<string>None</string>
-		<string>Generic Bolus (Rapid-acting)</string>
-		<string>Generic Basal (Long-acting)</string>
-		<string>25/75 (Premixed)</string>
+		<string>Ins 1 Generic Bolus (Rapid-acting)</string>
+		<string>Ins 2 Generic Basal (Long-acting)</string>
+		<string>Ins 3 25/75 (Premixed)</string>
 		<string>Edit Entry</string>
 	</array>
 	<key>sport</key>
 	<array>
 		<string>None</string>
-		<string>Swimming</string>
-		<string>Running</string>
 		<string>Walking</string>
-		<string>Riding</string>
-		<string>Others</string>
+		<string>Bicycling</string>
+		<string>Running</string>
+		<string>Other</string>
 	</array>
 	<key>medicine</key>
 	<array>

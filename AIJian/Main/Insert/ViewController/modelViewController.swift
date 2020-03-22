@@ -78,7 +78,8 @@ class modelViewController: UIViewController {
         super.viewDidLoad()
 
 //        self.title = "Input Model"
-        
+        // 添加导航栏左按钮
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
         // 按钮布局
         self.view.addSubview(bleButton)
         self.view.addSubview(inputButton)
@@ -130,6 +131,8 @@ class modelViewController: UIViewController {
         self.navigationController!.navigationBar.isTranslucent = true
         // 设置滚动视图和表格视图不自动调整位移量
         self.automaticallyAdjustsScrollViewInsets = false
+        // 隐藏 tabbar
+        self.tabBarController?.tabBar.isHidden = true
     }
     
 

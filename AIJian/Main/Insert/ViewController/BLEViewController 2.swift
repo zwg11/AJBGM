@@ -149,10 +149,10 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         switch central.state {
         case .unknown:
-            print("unknown.")
+           print("unknown.")
             
         case .resetting:
-            print("resetting..")
+           print("resetting..")
             
         case .unsupported:
             print("unsurpported")
@@ -561,7 +561,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                                     var glucoseValue:[Int] = []
                                     if self.BLEglucoseMark.count>0{
                                         for i in 0..<self.BLEglucoseMark.count{
-                                            if self.BLEglucoseMark[i] != 12 && self.BLEglucoseMark[i] != 3{
+                                            if self.BLEglucoseMark[i] == 0 || self.BLEglucoseMark[i] == 1 || self.BLEglucoseMark[i] == 2 || self.BLEglucoseMark[i] == 4{
                                                 glucoseMark.append(self.BLEglucoseMark[i])
                                                 glucoseDate.append(self.BLEglucoseDate[i])
                                                 glucoseValue.append(self.BLEglucoseValue[i])
@@ -841,14 +841,14 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         
         // 首先确定命令字符串
         let crc = CRC16()
-        let meterStr = "&T"+String(meterType)+" "
+        let meterStr = "&T"+String(meterType,radix:16)+" "
         let order = meterStr + crc.string2CRC(string: meterStr)
         
         // 将字符串转为Data，发送蓝牙命令必须为Data型
         byteDate = order.data(using: .utf8)
 
         // 读取配置文件，获取meterID的内容
-        let path = PlistSetting.getFilePath(File: "User.plist")
+        let path = PlistSetting.getFilePath(File: "otherSettings.plist")
         let data1:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
         
         // 设置为字典型
@@ -858,8 +858,8 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         //        print(meterIDs!.value(forKey: "&M103D003E5F3 12496") as! String)
         //         //查看是否有某个 key 值
         //        print(meterIDs!["&M103D003E5F3 12496"] != nil)
-    // 设置监听器，监听是否弹出插入成功r弹窗
-            NotificationCenter.default.addObserver(self, selector: #selector(InsertSuccess), name: NSNotification.Name(rawValue: "InsertData"), object: nil)
+        // 设置监听器，监听是否弹出插入成功r弹窗
+        NotificationCenter.default.addObserver(self, selector: #selector(InsertSuccess), name: NSNotification.Name(rawValue: "InsertData"), object: nil)
 
     }
 
@@ -898,21 +898,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
     }
     // MARK:- 初始化所有全局变量
     func initAllDate(){
-        // 首先确定命令字符串
-        let crc = CRC16()
-        let meterStr = "&T"+String(meterType)+" "
-        let order = meterStr + crc.string2CRC(string: meterStr)
         
-        // 将字符串转为Data，发送蓝牙命令必须为Data型
-        byteDate = order.data(using: .utf8)
-        
-        // 读取配置文件，获取meterID的内容
-        let path = PlistSetting.getFilePath(File: "User.plist")
-        let data1:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
-        
-        // 设置为字典型
-        meterIDs = data1["meterID"] as? NSMutableDictionary
-        print("存储的meterID有:\(String(describing: meterIDs))")
         // 初始化数据
         meterType = 0
         //        byteDate = nil
@@ -951,6 +937,22 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         BLEglucoseValue = []
         // 存储读取的数据中的血糖标志位
         BLEglucoseMark = []
+        
+        // 首先确定命令字符串
+        let crc = CRC16()
+        let meterStr = "&T"+String(self.meterType,radix: 16)+" "
+        let order = meterStr + crc.string2CRC(string: meterStr)
+        
+        // 将字符串转为Data，发送蓝牙命令必须为Data型
+        byteDate = order.data(using: .utf8)
+        
+        // 读取配置文件，获取meterID的内容
+        let path = PlistSetting.getFilePath(File: "otherSettings.plist")
+        let data1:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
+        
+        // 设置为字典型
+        meterIDs = data1["meterID"] as? NSMutableDictionary
+        print("存储的meterID有:\(String(describing: meterIDs))")
     }
     
     

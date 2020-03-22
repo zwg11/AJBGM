@@ -16,7 +16,7 @@ class SharedView: UIView ,UITextFieldDelegate{
     // 按钮说明
     private lazy var explainLabel:UILabel = {
         let label = UILabel()
-        label.text = "Shared the Report by Email"
+        label.text = "Share the Report by Email"
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = UIColor.white
         label.textAlignment = .center

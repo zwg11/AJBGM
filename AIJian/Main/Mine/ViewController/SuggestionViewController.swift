@@ -25,7 +25,7 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
     var phone:String?
     let id = "reusedId"
     
-    let userInfo = DBSQLiteManager.manager.selectUserRecord(userId: UserInfo.getUserId())
+    var userInfo = DBSQLiteManager.manager.selectUserRecord(userId: UserInfo.getUserId())
     var country:String?
     let emailCommponent = sugComponent()
     let telephoneCommponent = sugComponent()
@@ -109,6 +109,7 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
         button.addTarget(self, action: #selector(leftButtonClick), for: .touchUpInside)
         return button
     }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -167,7 +168,18 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
             make.top.equalTo(sugTableView.snp.bottom).offset(AJScreenHeight/7)
         }
     }
-    
+     override func viewWillAppear(_ animated: Bool) {
+        userInfo = DBSQLiteManager.manager.selectUserRecord(userId: UserInfo.getUserId())
+        if (userInfo.phone_number != nil){ //不等于空
+            telephoneCommponent.textField.text = userInfo.phone_number
+         }else{
+            telephoneCommponent.textField.text = "--"
+        }
+        sugTableView.reloadRows(at: [IndexPath(row:1,section:0)],with:.fade)
+        nationCp.setupUI(title: userInfo.country ?? "--")
+        country = userInfo.country
+        sugTableView.reloadRows(at: [IndexPath(row:2,section:0)],with:.fade)
+    }
     @objc func selectNation(){
         let pickerView = BHJPickerView.init(self, .country)
         pickerView.pickerViewShow()
@@ -181,7 +193,7 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
         self.navigationController?.popViewController(animated: false)
     }
     @objc private func save(){
-        print(content_field.text!)
+        //print(content_field.text!)
          let alert = CustomAlertController()
         
         if content_field.text!.removeHeadAndTailSpacePro == ""{
@@ -189,7 +201,7 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
             return
         }
         
-        print(content_field.text!.count)
+        //print(content_field.text!.count)
         if content_field.text!.count >= 300{
             alert.custom(self, "Attention", "Words should be less than 300！")
             return
@@ -199,7 +211,7 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
         self.view.bringSubviewToFront(indicator)
         //网络请求
         let dictString:Dictionary = [ "email":String(emailCommponent.textField.text!),"phoneNumber":String(telephoneCommponent.textField.text!),"country":String(country ?? "--"),"feedback":String(content_field.text!.removeHeadAndTailSpacePro),"token":UserInfo.getToken(),"userId":UserInfo.getUserId()] as [String : Any]
-        print(dictString)
+        //print(dictString)
         //  此处的参数需要传入一个字典类型
         Alamofire.request(FEEDBACK,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
             
@@ -209,7 +221,7 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
                     
                     if let responseModel = JSONDeserializer<responseModel>.deserializeFrom(json: jsonString) {
                         // model转json 为了方便在控制台查看
-                        print(responseModel.toJSONString(prettyPrint: true)!)
+                        //print(responseModel.toJSONString(prettyPrint: true)!)
                         self.indicator.stopIndicator()
                         self.indicator.removeFromSuperview()
                         /*  此处为跳转和控制逻辑*/

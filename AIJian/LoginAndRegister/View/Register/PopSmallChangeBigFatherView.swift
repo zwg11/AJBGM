@@ -62,7 +62,7 @@ class PopSmallChangeBigFatherView: UIView ,UIGestureRecognizerDelegate{
     
     //收回的动画效果
     @objc func tapBtnAndcancelBtnClick() {
-        print("点击了这里")
+        //print("点击了这里")
         
         for view in self.subviews {
             view.removeFromSuperview()
@@ -79,7 +79,7 @@ class PopSmallChangeBigFatherView: UIView ,UIGestureRecognizerDelegate{
     
     //收回
     @objc func tapClick(){
-        print("是否点击了，这个地方!")
+        //print("是否点击了，这个地方!")
         for view in WhiteView.subviews {
             view.removeFromSuperview()
         }

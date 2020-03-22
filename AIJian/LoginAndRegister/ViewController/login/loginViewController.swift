@@ -69,7 +69,7 @@ class loginViewController: UIViewController,UITextFieldDelegate {
      功能：点击登录按钮的动作
      */
     @objc func login(){
-        print("login clicked.")
+        //print("login clicked.")
         let path = PlistSetting.getFilePath(File: "User.plist")
         
         let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
@@ -114,13 +114,13 @@ class loginViewController: UIViewController,UITextFieldDelegate {
                          */
                         if let responseModel = JSONDeserializer<loginResponse>.deserializeFrom(json: jsonString) {
                             /// model转json 为了方便在控制台查看
-                            print(responseModel.toJSONString(prettyPrint: true)!)
+                           // print(responseModel.toJSONString(prettyPrint: true)!)
 
                             /*  此处为跳转和控制逻辑
                               */
                             if(responseModel.code == 1 ){
-                                print("登陆成功",responseModel)
-                                print("返回的code为1，登录成功")
+                              //  print("登陆成功",responseModel)
+                                //print("返回的code为1，登录成功")
 //                                print(responseModel.data)
                                 // 将返回的用户信息写入配置文件
                                 data["userId"] = responseModel.data?.userId!
@@ -166,18 +166,18 @@ class loginViewController: UIViewController,UITextFieldDelegate {
                     alertController.custom(self,"Attention", "Internet Error！")
                 }
             }
-            print("邮箱格式正确,登录成功")
+            //print("邮箱格式正确,登录成功")
             
             return
         }else{
             alertController.custom(self,"Attention", "Incorrect Email Format")
-            print("邮箱格式错误")
+            //print("邮箱格式错误")
             return
         }
 //       self.present(AJTabbarController(), animated: true, completion: nil)
     }
     @objc func forgetPassword(){
-        print("forgetPassword clicked.")
+        //print("forgetPassword clicked.")
         
         //测试过程中，修改密码时，先跳到第二页
         self.navigationController?.pushViewController(emailCheckViewController(), animated: false)
@@ -185,13 +185,13 @@ class loginViewController: UIViewController,UITextFieldDelegate {
     
     //跳转到注册界面
     @objc func register(){
-        print("register clicked.")
+        //print("register clicked.")
         self.navigationController?.pushViewController(registerViewController(), animated: false)
     }
 
     //此处只做收回键盘的动作
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        print(textField.text ?? "")
+        //print(textField.text ?? "")
         // 收起键盘
         textField.resignFirstResponder()
         return true
@@ -226,11 +226,11 @@ extension loginViewController{
         let tk = UserInfo.getToken()
         // 设置信息请求字典
         let dicStr:Dictionary = ["day":day,"userId":usr_id,"token":tk] as [String : Any]
-        print(dicStr)
+       // print(dicStr)
         // 请求数据，请求信息如上字典
         Alamofire.request(REQUEST_DATA_URL,method: .post,parameters: dicStr, headers:vheader).responseString{ (response) in
             if response.result.isSuccess {
-                print("收到回复")
+               // print("收到回复")
                 if let jsonString = response.result.value {
                     
                     /// json转model
@@ -292,7 +292,7 @@ extension loginViewController{
                 
                 let alert = CustomAlertController()
                 alert.custom(self, "Attention", "Internet Error")
-                print("没网了")
+              //  print("没网了")
             }
             
             
@@ -312,7 +312,7 @@ extension loginViewController{
         Alamofire.request(METERID_GET,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
             if response.result.isSuccess {
                 if let jsonString = response.result.value {
-                    print("进入验证过程")
+                   // print("进入验证过程")
 //                    print(jsonString)
                     // json转model
                     // 写法一：responseModel.deserialize(from: jsonString)
@@ -327,27 +327,31 @@ extension loginViewController{
                          */
                         if(responseModel.code == 1 ){
 //                            print(responseModel.code as Any)
-                            print("插入成功")
+//                            print("插入成功")
                             
                             // 向配置文件存储最新记录
                             // 读取配置文件，获取meterID的内容
-                            let path = PlistSetting.getFilePath(File: "User.plist")
-                            let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
-                            let arr = data["meterID"] as! NSMutableDictionary
+                            let path0 = PlistSetting.getFilePath(File: "otherSettings.plist")
+                            let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path0)!
+//                            let arr = data["meterID"] as! NSMutableDictionary
+                            let arr:NSMutableDictionary = [:]
+//                            var arr1:NSMutableDictionary = [:]
+//                            arr1["a"] = "b"
+//                            arr1 = arr
                             // 更新配置文件内容
                             if let Info = responseModel.data{
                                 for i in Info{
                                     arr[i.meterId as Any] = i.recentRecord
                                 }
                             }
-                            
+//                            arr["aa"] = "bb"
                             data["meterID"] = arr
-                            data.write(toFile: "User.plist", atomically: true)
+                            data.write(toFile: path0, atomically: true)
                             isSuccess = true
                             
                         }else{
 //                            print(responseModel.code as Any)
-                            print("插入失败")
+//                            print("插入失败")
                             isSuccess = false
                         }
                     } //end of letif

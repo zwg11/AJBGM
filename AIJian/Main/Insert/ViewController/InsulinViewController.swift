@@ -17,19 +17,24 @@ class InsulinViewController: UIViewController ,UITableViewDelegate,UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 40
+        return 50
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
         cell.selectionStyle = .none
         cell.accessoryType = .disclosureIndicator
         
         cell.textLabel?.text = InsulinType[indexPath.row]
         cell.textLabel?.textColor = UIColor.white
-        
+        //  获取配置文件中存的当前insulin的3种
         let array = getInsulin.getInsArray()
-        cell.detailTextLabel?.text = array[indexPath.row+1] as? String
+        let content = array[indexPath.row+1] as? String
+        let index = content?.index(of: " ")
+        let index1 = content?.index(index!, offsetBy: 3)
+//        let indexend = content?.endIndex
+        let a = content?[index1!..<content!.endIndex]
+        cell.detailTextLabel?.text = String(a!)
         cell.detailTextLabel?.textColor = UIColor.white
         cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 14)
         
@@ -88,7 +93,9 @@ class InsulinViewController: UIViewController ,UITableViewDelegate,UITableViewDa
         self.navigationController?.popViewController(animated: false)
     }
 
-    let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: AJScreenWidth, height: 120))
+//    let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: AJScreenWidth, height: 150))
+    let tableView = UITableView()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,7 +115,7 @@ class InsulinViewController: UIViewController ,UITableViewDelegate,UITableViewDa
         self.view.addSubview(tableView)
         tableView.snp.makeConstraints{(make) in
             make.left.right.equalToSuperview()
-            make.height.equalTo(120)
+            make.height.equalTo(160)
             if #available(iOS 11.0, *) {
                 make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
 //                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
@@ -120,7 +127,7 @@ class InsulinViewController: UIViewController ,UITableViewDelegate,UITableViewDa
 
         }
 //        self.view.backgroundColor = ThemeColor
-        self.title = "Insulin Choose"
+        self.title = "Insulin"
         
         backView.addTarget(self, action: #selector(back), for: .touchUpInside)
         backView.backgroundColor = UIColor.lightGray
@@ -146,7 +153,6 @@ class InsulinViewController: UIViewController ,UITableViewDelegate,UITableViewDa
 //        let View = UIView()
 
         tableView.deselectRow(at: indexPath, animated: true)
-        
         self.navigationController!.view.addSubview(View)
         View.snp.makeConstraints{(make) in
             make.edges.equalToSuperview()
@@ -160,11 +166,11 @@ class InsulinViewController: UIViewController ,UITableViewDelegate,UITableViewDa
         switch indexPath.row {
         case 0:
             View.addSubview(Bolus)
-            Bolus.snp.makeConstraints{(make) in
+                        Bolus.snp.makeConstraints{(make) in
                 make.left.equalToSuperview().offset(AJScreenWidth/20)
                 make.right.equalToSuperview().offset(-AJScreenWidth/20)
                 make.top.equalToSuperview().offset(100)
-                make.height.equalTo(320)
+                make.height.equalTo(440)
             }
         case 1:
             View.addSubview(Basal)
