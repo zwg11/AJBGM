@@ -23,6 +23,8 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     var meterID:String = ""
     // 最新记录
     var lastRecord = ""
+    //  uuid list 保存每个血糖记录的 血糖记录ID
+    var uuidList:[String] = []
     
     
     // 设置导航栏左按钮x样式
@@ -162,13 +164,14 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
             // MARK:- 第一步：先封装成一个对象
             var  insertData:glucoseDate = glucoseDate()
             insertData.userId = UserInfo.getUserId()
-            // 创建一个recordId
-            let uuid = UUID().uuidString.components(separatedBy: "-").joined()
-            insertData.bloodGlucoseRecordId = uuid
+            // get uuid from uuidList and set recordId
+//            let uuid = UUID().uuidString.components(separatedBy: "-").joined()
+//            insertData.bloodGlucoseRecordId = uuidList[i]
             
             // 判断是否为控制液数据，不是则存储
             if BLEglucoseMark[i] != 12{
                 // 数据初始化
+                insertData.bloodGlucoseRecordId = uuidList[i]
                 insertData.createTime = BLEglucoseDate[i]
                 insertData.detectionTime =  markToEventNum(BLEglucoseMark[i])
                 insertData.bloodGlucoseMmol = UnitConversion.mgTomm(num: Double(BLEglucoseValue[i]))
@@ -186,9 +189,9 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         // MARK:- 第三步：再将这个数组直接toString
         let GlucoseJsonData = datas.toJSONString()!
         //手动输入数据，请求部分
-        let dictString = [ "token":UserInfo.getToken(),"userId":UserInfo.getUserId() as Any,"userBloodGlucoseRecords":GlucoseJsonData] as [String : Any]
+        let dictString = [ "token":UserInfo.getToken(),"userId":UserInfo.getUserId() as Any,"userBloodGlucoseRecords":GlucoseJsonData,"recentRecord":lastRecord] as [String : Any]
         // 向服务器申请插入数据请求
-        AlamofireManager.request(INSERT_RECORD,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
+        AlamofireManagerForBLE.request(INSERT_RECORD,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
             if response.result.isSuccess {
                 if let jsonString = response.result.value {
                     //print("进入验证过程")
@@ -210,56 +213,47 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
                             // MARK:- 向数据库插入数据
                             DBSQLiteManager.manager.addGlucoseRecords(add: datas)
                             // MARK:- 记录此仪器传输的仪器类型和最近一次的血糖记录
-                            if self.UpdateMeterInfo(){
-                                let x = UIAlertController(title: "", message: "Insert Success.", preferredStyle: .alert)
-                                // 移除风火轮
-                                self.indicator.stopIndicator()
-                                self.indicator.removeFromSuperview()
-                                
-
-//                                // 读取配置文件，获取meterID的内容
-//                                let path = PlistSetting.getFilePath(File: "User.plist")
-//                                let data1:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
-//
-//                                // 设置为字典型
-//                                let meterIDs = data1["meterID"] as? NSMutableDictionary
-//                                // 将数据写入配置文件
-//                                meterIDs![self.meterID] = self.lastRecord
-//                                data1["meterID"] = meterIDs
-//                                data1.write(toFile: path, atomically: true)
-                                
-                                // 警示框出现
-                                self.present(x, animated: true, completion: {()->Void in
-                                    sleep(1)
-                                    x.dismiss(animated: true, completion: {
-                                        // 跳转到原来的界面
-                                        
-                                        self.navigationController?.popToRootViewController(animated: false)
-                                        // 发送通知，提示插入成功
-                                        NotificationCenter.default.post(name: NSNotification.Name("InsertData"), object: self, userInfo: nil)
-                                    })
+//                            if self.UpdateMeterInfo(){
+                            let x = UIAlertController(title: "", message: "Insert Success.", preferredStyle: .alert)
+                            // 移除风火轮
+                            self.indicator.stopIndicator()
+                            self.indicator.removeFromSuperview()
+                            
+                            
+                            //                                // 读取配置文件，获取meterID的内容
+                            //                                let path = PlistSetting.getFilePath(File: "User.plist")
+                            //                                let data1:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
+                            //
+                            //                                // 设置为字典型
+                            //                                let meterIDs = data1["meterID"] as? NSMutableDictionary
+                            //                                // 将数据写入配置文件
+                            //                                meterIDs![self.meterID] = self.lastRecord
+                            //                                data1["meterID"] = meterIDs
+                            //                                data1.write(toFile: path, atomically: true)
+                            
+                            // 警示框出现
+                            self.present(x, animated: true, completion: {()->Void in
+                                sleep(1)
+                                x.dismiss(animated: true, completion: {
+                                    // 跳转到原来的界面
+                                    
+                                    self.navigationController?.popToRootViewController(animated: false)
+                                    // 发送通知，提示插入成功
+                                    NotificationCenter.default.post(name: NSNotification.Name("InsertData"), object: self, userInfo: nil)
                                 })
-
+                            })
+                            self.button.isEnabled = true
                                 
-                            }else if (responseModel.code! == 2 ){
-                                
-                                self.button.isEnabled = true
-                                let alert = CustomAlertController()
-                                alert.custom(self, "", "Your account is already logged in at the other end!")
-                                LoginOff.loginOff(self)
-                            }else{
-                                //print(responseModel.code)
-                                //print("插入失败")
-                                // 插入失败
-                                let alert = CustomAlertController()
-                                // 移除风火轮
-                                self.indicator.stopIndicator()
-                                self.indicator.removeFromSuperview()
-                                // 警示框出现
-                                alert.custom(self, "", "Insert Failed,Please Try Again Later.")
-                                self.button.isEnabled = true
-                            }
-                        }else{
+//                            }
+                        }else if (responseModel.code! == 2 ){
+                            
+                            //                                self.button.isEnabled = true
+                            let alert = CustomAlertController()
+                            alert.custom(self, "", "Your account is already logged in at the other end!")
+                            LoginOff.loginOff(self)
+                            self.button.isEnabled = true
+                        }
+                        else{
                             //print(responseModel.code)
                             //print("插入失败")
                             // 插入失败
@@ -269,7 +263,7 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
                             // 警示框出现
                             let alert = CustomAlertController()
                             alert.custom(self, "", "Insert Failed,Please Try Again Later.")
-                            
+                            self.button.isEnabled = true
                         }
                     } //end of letif
                 }
@@ -297,6 +291,17 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         // 将字符串拆成 每个字符串只包含一个字符 的 字符串数组
         //let data = array[0].components(separatedBy: "")
         //print("处理后的最后记录\(array)")
+        
+        // set uuid list
+//        for i in 0...BLEglucoseValue.count-1{
+//            //print("第\(i)个数据")
+//            // MARK:- 第一步：先封装成一个对象
+//            var  insertData:glucoseDate = glucoseDate()
+//            insertData.userId = UserInfo.getUserId()
+//            // 创建一个recordId
+//            let uuid = UUID().uuidString.components(separatedBy: "-").joined()
+//            uuidList.append(uuid)
+//        }
     }
     
     private lazy var indicator:CustomIndicatorView = {
@@ -379,6 +384,7 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         alert_save.addAction(save_action)
         alert_save.addAction(cancel_action)
         self.present(alert_save, animated: true, completion: nil)
+        
         
     }
     

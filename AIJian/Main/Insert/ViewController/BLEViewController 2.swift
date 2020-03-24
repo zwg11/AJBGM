@@ -559,9 +559,15 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                                     var glucoseMark:[Int] = []
                                     var glucoseDate:[String] = []
                                     var glucoseValue:[Int] = []
+                                    var glucoseUUID:[String] = []
                                     if self.BLEglucoseMark.count>0{
                                         for i in 0..<self.BLEglucoseMark.count{
                                             if self.BLEglucoseMark[i] == 0 || self.BLEglucoseMark[i] == 1 || self.BLEglucoseMark[i] == 2 || self.BLEglucoseMark[i] == 4{
+                                                // set uuid list
+                                                // 创建一个recordId
+                                                let uuid = UUID().uuidString.components(separatedBy: "-").joined()
+                                                glucoseUUID.append(uuid)
+                                                
                                                 glucoseMark.append(self.BLEglucoseMark[i])
                                                 glucoseDate.append(self.BLEglucoseDate[i])
                                                 glucoseValue.append(self.BLEglucoseValue[i])
@@ -570,6 +576,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                                     }
                                     
                                     // 初始化数据，并刷新表格
+                                    gluVC.uuidList = glucoseUUID
                                     gluVC.BLEglucoseDate = glucoseDate
                                     gluVC.BLEglucoseMark = glucoseMark
                                     gluVC.BLEglucoseValue = glucoseValue

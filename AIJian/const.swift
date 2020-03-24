@@ -17,6 +17,12 @@ let AlamofireManager:Alamofire.SessionManager = {
     conf.timeoutIntervalForRequest = 10
     return Alamofire.SessionManager(configuration: conf)
 }()
+let AlamofireManagerForBLE:Alamofire.SessionManager = {
+    let conf = URLSessionConfiguration.default
+    // 请求时间显示为10s
+    conf.timeoutIntervalForRequest = 30
+    return Alamofire.SessionManager(configuration: conf)
+}()
 //请求头部
 let vheader:HTTPHeaders = ["OnCall-Version":"1.0","User-Agent":"OnCall/1.0/iOS" + UIDevice.current.systemVersion]
 

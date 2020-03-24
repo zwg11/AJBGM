@@ -31,6 +31,7 @@ class dateAndTimeView: UIView {
         // 创建一个时间格式器
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy/MM/dd"
+//        dateFormatter.timeZone = NSTimeZone.system
         button.NorStyle(title: "\(dateFormatter.string(from: now))")
         return button
     }()
@@ -42,6 +43,8 @@ class dateAndTimeView: UIView {
         // 创建一个时间格式器
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm"
+//        dateFormatter.timeZone = NSTimeZone.system
+//        print("time zone: \(NSTimeZone.system)")
         button.NorStyle(title: "\(dateFormatter.string(from: now))")
         return button
     }()

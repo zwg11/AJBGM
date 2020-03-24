@@ -13,7 +13,7 @@ import HandyJSON
 class InsertViewController: UIViewController {
 
     private let path = PlistSetting.getFilePath(File: "inputChoose.plist")
-    
+    private var recordUUID:String?
     lazy var input:InputView = {
         let view = InputView()
         view.setupUI()
@@ -505,8 +505,9 @@ class InsertViewController: UIViewController {
         insertData.userId = UserInfo.getUserId()
         // 如果为添加数据，创建一个recordId
         if isInsert{
-            let uuid = UUID().uuidString.components(separatedBy: "-").joined()
-            insertData.bloodGlucoseRecordId = uuid
+//            let uuid = UUID().uuidString.components(separatedBy: "-").joined()
+            insertData.bloodGlucoseRecordId = recordUUID
+//            print(recordUUID ?? "Not set uuid")
         }// 否则用从b上一页传过来的recordId
         else{
             insertData.bloodGlucoseRecordId = recordId!
@@ -538,10 +539,11 @@ class InsertViewController: UIViewController {
         //第三步：再将这个数组直接toString
         let GlucoseJsonData = tempArray.toJSONString()!
         //手动输入数据，请求部分
-        let dictString = [ "token":UserInfo.getToken(),"userId":UserInfo.getUserId() as Any,"userBloodGlucoseRecords":GlucoseJsonData] as [String : Any]
-//        print(dictString)
+        let dictString = [ "token":UserInfo.getToken() ,"userId":UserInfo.getUserId() as Any ,"userBloodGlucoseRecords":GlucoseJsonData] as [String : Any]
+        print(dictString)
         // 判断是修改数据还是插入数据
         // 插入和修改的网络请求是不一样的
+        print("isinsert:\(isInsert)")
         if isInsert{
             // 向服务器申请插入数据请求
             AlamofireManager.request(INSERT_RECORD,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
@@ -588,10 +590,19 @@ class InsertViewController: UIViewController {
                                 self.rightButton.isEnabled = true
                                 
                             }else if (responseModel.code! == 2 ){
-                                LoginOff.loginOff(self)
+                                let x = UIAlertController(title: "", message: "Your account is already logged in at the other end!", preferredStyle: .alert)
+                                let okAction = UIAlertAction(title: "Done", style: .default, handler: {
+                                    action in
+                                    LoginOff.loginOff(self)
+                                })
+                                //        okAction.setValue(UIColor.black, forKey: "_titleTextColor")
+                                        //只加入确定按钮
+                                        x.addAction(okAction)
+                                self.present(x, animated: true, completion: nil)
+//                                LoginOff.loginOff(self)
                                 
-                                let alert = CustomAlertController()
-                                alert.custom(self, "", "Your account is already logged in at the other end!")
+//                                let alert = CustomAlertController()
+//                                alert.custom(self, "", "Your account is already logged in at the other end!")
                                 self.rightButton.isEnabled = true
                             }else{
 //                                print(responseModel.code)
@@ -667,14 +678,32 @@ class InsertViewController: UIViewController {
 //                                NotificationCenter.default.post(name: NSNotification.Name("Data Update success"), object: self, userInfo: nil)
                                 self.rightButton.isEnabled = true
                             }else if (responseModel.code! == 2 ){
-                                LoginOff.loginOff(self)
+                                let x = UIAlertController(title: "", message: "Your account is already logged in at the other end!", preferredStyle: .alert)
+                                let okAction = UIAlertAction(title: "Done", style: .default, handler: {
+                                    action in
+                                    LoginOff.loginOff(self)
+                                })
+                                //        okAction.setValue(UIColor.black, forKey: "_titleTextColor")
+                                        //只加入确定按钮
+                                x.addAction(okAction)
+                                self.present(x, animated: true, completion: nil)
+//                                LoginOff.loginOff(self)
                                 self.rightButton.isEnabled = true
-                                let alert = CustomAlertController()
-                                alert.custom(self, "", "Your account is already logged in at the other end!")
+//                                let alert = CustomAlertController()
+//                                alert.custom(self, "", "Your account is already logged in at the other end!")
                             }else if (responseModel.code! == 3){
-                                LoginOff.loginOff(self)
-                                let alert = CustomAlertController()
-                                alert.custom(self,"Attention", "Your account has been disabled.Please contact oncall@acondiabetescare.com")
+                                let x = UIAlertController(title: "", message: "Your account is already logged in at the other end!", preferredStyle: .alert)
+                                let okAction = UIAlertAction(title: "Done", style: .default, handler: {
+                                    action in
+                                    LoginOff.loginOff(self)
+                                })
+                                //        okAction.setValue(UIColor.black, forKey: "_titleTextColor")
+                                        //只加入确定按钮
+                                x.addAction(okAction)
+                                self.present(x, animated: true, completion: nil)
+//                                LoginOff.loginOff(self)
+//                                let alert = CustomAlertController()
+//                                alert.custom(self,"Attention", "Your account has been disabled.Please contact oncall@acondiabetescare.com")
                                 self.rightButton.isEnabled = true
                             }else{
 //                                print(responseModel.code)
@@ -738,6 +767,8 @@ class InsertViewController: UIViewController {
         
         let value = UIInterfaceOrientation.portrait.rawValue
         UIDevice.current.setValue(value, forKey: "orientation")
+        
+        recordUUID = UUID().uuidString.components(separatedBy: "-").joined()
     }
     //视图将要消失的时候
     override func viewWillDisappear(_ animated: Bool) {

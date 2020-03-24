@@ -75,7 +75,7 @@ class ChartViewController: UIViewController,ChartViewDelegate{
         // Do any additional setup after loading the view.
         // 监听所选时间范围的变化
         NotificationCenter.default.addObserver(self, selector: #selector(test), name: NSNotification.Name(rawValue: "reloadChart"), object: nil)
-//        initChart()
+        initChart()
     }
     
     @objc func test(){
