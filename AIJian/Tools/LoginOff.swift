@@ -29,6 +29,7 @@ class LoginOff{
         let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
         data.setObject("", forKey: "token" as NSCopying )
         data.write(toFile: path, atomically: true)
+        DBSQLiteManager.manager.deleteAllGlucoseRecord()
     }
     
 }

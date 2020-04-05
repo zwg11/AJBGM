@@ -62,7 +62,7 @@ class dateAndTimeView: UIView {
             make.left.equalToSuperview().offset(AJScreenWidth/20)
             make.top.equalToSuperview().offset(AJScreenWidth/40)
             make.height.equalTo(AJScreenWidth/15)
-            make.width.equalTo(AJScreenWidth/10)
+            make.width.equalTo(AJScreenWidth/4)
         }
         
         
@@ -82,7 +82,7 @@ class dateAndTimeView: UIView {
             make.left.equalToSuperview().offset(AJScreenWidth/20)
             make.top.equalTo(dateButton.snp.bottom).offset(AJScreenWidth/40)
             make.height.equalTo(AJScreenWidth/15)
-            make.width.equalTo(AJScreenWidth/10)
+            make.width.equalTo(AJScreenWidth/4)
         }
         
         // 时间按钮布局

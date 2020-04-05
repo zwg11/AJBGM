@@ -37,7 +37,7 @@ class alertViewController: UIAlertController,UITableViewDelegate,UITableViewData
     }
     //单元格的行高
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 33
+        return 40
     }
     
     // 设置单元格内容和图片
@@ -49,13 +49,14 @@ class alertViewController: UIAlertController,UITableViewDelegate,UITableViewData
         let arr = data["medicine"] as! NSArray
         
         var cell = tableView.dequeueReusableCell(withIdentifier: "id")
+        cell = UITableViewCell(style: .default, reuseIdentifier: "id")
         cell?.selectionStyle = .none
         
-        if(cell == nil){
-            // 该单元格可根据单元格选中状态设置图片显示内容
-            cell = UITableViewCell(style: .default, reuseIdentifier: "id")
-            cell?.selectionStyle = .none
-        }
+//        if(cell == nil){
+//            // 该单元格可根据单元格选中状态设置图片显示内容
+//            cell = UITableViewCell(style: .default, reuseIdentifier: "id")
+//            cell?.selectionStyle = .none
+//        }
         
         // 表格文本内容与配置文件一致
         cell?.textLabel?.text = arr[indexPath.row] as? String
@@ -127,7 +128,7 @@ class alertViewController: UIAlertController,UITableViewDelegate,UITableViewData
         let arr = data["medicine"] as! NSArray
         
         // 初始化 存储表格状态的数组,保持数组大小与药物种类一致
-        for i in 0...arr.count-1{
+        for _ in 0...arr.count-1{
 //            //print(i)
             boolarr.append(false)
         }
@@ -140,13 +141,17 @@ class alertViewController: UIAlertController,UITableViewDelegate,UITableViewData
         tabelView.bounces = false
         tabelView.layer.borderColor = UIColor.lightGray.cgColor
         tabelView.layer.borderWidth = 1
+//        tabelView.frame = CGRect(x: 10, y: 50,width: self.view.bounds.size.width - 40,height: 140)
         self.view.addSubview(tabelView)
         tabelView.snp.makeConstraints{(make) in
+//            make.left.equalToSuperview().offset(10)
+//            make.right.equalToSuperview().offset(-10)
+            make.top.equalToSuperview().offset(50)
+//            make.height.equalTo(280)
+            make.bottom.equalToSuperview().offset(-45)
             make.left.right.equalToSuperview()
-            make.top.equalToSuperview().offset(40)
-            make.bottom.equalToSuperview().offset(-40)
         }
-        
+//
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
             action in
 //            //print("Cancel")
@@ -181,6 +186,7 @@ class alertViewController: UIAlertController,UITableViewDelegate,UITableViewData
         
         self.addAction(cancelAction)
         self.addAction(okAction)
+        
     }
     
 }

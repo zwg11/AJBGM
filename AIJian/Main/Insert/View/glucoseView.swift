@@ -166,7 +166,7 @@ class glucoseView: UIView ,UITextFieldDelegate{
         self.addSubview(XTLabel)
         XTLabel.snp.makeConstraints{(make) in
             make.left.top.equalToSuperview().offset(AJScreenWidth/20)
-            make.width.equalTo(AJScreenWidth/4)
+            make.width.equalTo(AJScreenWidth/2)
             make.height.equalTo(AJScreenWidth/15)
         }
         

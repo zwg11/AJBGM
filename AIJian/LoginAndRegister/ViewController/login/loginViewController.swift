@@ -69,6 +69,7 @@ class loginViewController: UIViewController,UITextFieldDelegate {
      功能：点击登录按钮的动作
      */
     @objc func login(){
+        
         //print("login clicked.")
         let path = PlistSetting.getFilePath(File: "User.plist")
         
@@ -143,12 +144,14 @@ class loginViewController: UIViewController,UITextFieldDelegate {
                                 // 登陆成功，请求数据
                                 self.indicator.setLabelText("Login in Success，Initializing Data..")
                                 self.requestData(day: 3000)
-
- 
                             }else if(responseModel.code == -1){  //返回-1,表示账号被挤下去了
                                 self.indicator.stopIndicator()
                                 self.indicator.removeFromSuperview()
                                 alertController.custom(self,"Attention", "Your account has been disabled.Please contact oncall@acondiabetescare.com")
+                            }else if(responseModel.code == -2){
+                                self.indicator.stopIndicator()
+                                self.indicator.removeFromSuperview()
+                                alertController.custom(self,"Attention", "Email is not Registered")
                             }else{
                                 self.indicator.stopIndicator()
                                 self.indicator.removeFromSuperview()

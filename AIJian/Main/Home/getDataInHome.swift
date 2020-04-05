@@ -76,15 +76,20 @@ class getDataInHome{
                 }
             }
             avgValue = avgValue/Double(checkNum)
-            // 平均值为1位小数
-            let x = String(format: "%.1f", avgValue)
-            result.append(x)
-            result.append(checkNum)
+            
             // 最高值和最低值根据单位判断是否有小数
             if GetUnit.getBloodUnit() == "mmol/L"{
+                // 平均值为1位小数
+                let x = String(format: "%.1f", avgValue)
+                result.append(x)
+                result.append(checkNum)
                 result.append(highestValue)
                 result.append(lowestValue)
             }else{
+                // 平均值为1位小数
+                let x = String(format: "%.1f", avgValue)
+                result.append(x)
+                result.append(checkNum)
                 result.append(String(format: "%.0f", highestValue))
                 result.append(String(format: "%.0f", lowestValue))
             }
@@ -92,7 +97,7 @@ class getDataInHome{
             return result
         }else{
             // 如果没数据，平均值、检测次数为0，最高值、最低值设为 --
-            result.append(avgValue)
+            result.append(Int(avgValue))
             result.append(checkNum)
             result.append("--")
             result.append("--")

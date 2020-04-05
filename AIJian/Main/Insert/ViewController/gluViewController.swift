@@ -179,6 +179,7 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
                 insertData.eatNum = 2
                 insertData.sportType = "None"
                 insertData.inputType = 0
+//                insertData.sportStrength = 1
                 insertData.machineId = meterID
                 // MARK:- 第二步：先封装进一个数组
                 datas.append(insertData)
@@ -213,23 +214,21 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
                             // MARK:- 向数据库插入数据
                             DBSQLiteManager.manager.addGlucoseRecords(add: datas)
                             // MARK:- 记录此仪器传输的仪器类型和最近一次的血糖记录
-//                            if self.UpdateMeterInfo(){
+                            // 向配置文件存储最新记录
+                            // 读取配置文件，获取meterID的内容
+                            let path = PlistSetting.getFilePath(File: "otherSettings.plist")
+                            let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
+                            let arr = data["meterID"] as! NSMutableDictionary
+                            // 更新配置文件内容
+                            arr[self.meterID] = self.lastRecord
+                            data["meterID"] = arr
+                            data.write(toFile: path, atomically: true)
+                            //                            if self.UpdateMeterInfo(){
                             let x = UIAlertController(title: "", message: "Insert Success.", preferredStyle: .alert)
                             // 移除风火轮
                             self.indicator.stopIndicator()
                             self.indicator.removeFromSuperview()
-                            
-                            
-                            //                                // 读取配置文件，获取meterID的内容
-                            //                                let path = PlistSetting.getFilePath(File: "User.plist")
-                            //                                let data1:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
-                            //
-                            //                                // 设置为字典型
-                            //                                let meterIDs = data1["meterID"] as? NSMutableDictionary
-                            //                                // 将数据写入配置文件
-                            //                                meterIDs![self.meterID] = self.lastRecord
-                            //                                data1["meterID"] = meterIDs
-                            //                                data1.write(toFile: path, atomically: true)
+
                             
                             // 警示框出现
                             self.present(x, animated: true, completion: {()->Void in
@@ -247,7 +246,6 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
 //                            }
                         }else if (responseModel.code! == 2 ){
                             
-                            //                                self.button.isEnabled = true
                             let alert = CustomAlertController()
                             alert.custom(self, "", "Your account is already logged in at the other end!")
                             LoginOff.loginOff(self)

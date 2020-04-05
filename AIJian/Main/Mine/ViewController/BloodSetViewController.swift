@@ -6,8 +6,8 @@
 //  Copyright © 2019 apple. All rights reserved.
 //  血糖设置界面
 /*
- 功能说明： 上限允许范围：5.0--16.6
- 下限允许范围：3.3--7.8
+ 功能说明： 上限允许范围：3.0--20.0
+          下限允许范围：3.0--10.0
  所有下限默认值为3.9，上限默认值为7.8
  */
 
@@ -613,7 +613,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                 //判断是否为非法输入
 //                if FormatMethodUtil.validateBloodNumber(number: self.emptyStomach_left.text!) == true{
                     a = Double(self.emptyStomach_left.text!)!
-                    if a <= 7.8 && a >= 3.3{
+                    if a <= 10.0 && a >= 3.0{
                         //print("用户的输入",a)
                         emptyStomach_left_number = a as NSNumber
                         save_data.setObject(emptyStomach_left_number as Any, forKey: "emptyStomachLowLimit" as NSCopying)
@@ -635,7 +635,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             //print("空腹上限值",b)
             if self.emptyStomach_right.text! != ""{
                     b = Double(self.emptyStomach_right.text!)!
-                    if b <= 16.6 && b >= 5.0 && b > a{  //注：上限的值必须大于下限
+                    if b <= 20.0 && b >= 3.0 && b > a{  //注：上限的值必须大于下限
                         emptyStomach_right_number = b as NSNumber
                         save_data.setObject(emptyStomach_right_number as Any, forKey: "emptyStomachHighLimit" as NSCopying)
                         //还需要将值转化一份，存入到mg/dl的文件中
@@ -655,7 +655,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             if self.beforeDinner_left.text! != ""{
                 //判断是否为非法输入
                     c = Double(self.beforeDinner_left.text!)!
-                    if c <= 7.8 && c >= 3.3{
+                    if c <= 10.0 && c >= 3.0{
                         //print("用户的输入",c)
                         beforeDinner_left_number = c as NSNumber
                         save_data.setObject(beforeDinner_left_number as Any, forKey: "beforeDinnerLowLimit" as NSCopying)
@@ -677,7 +677,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             if self.beforeDinner_right.text! != ""{
                 //判断是否为非法输入
                     d = Double(self.beforeDinner_right.text!)!
-                    if d <= 16.6 && d >= 5.0 && d > c{
+                    if d <= 20.0 && d >= 3.0 && d > c{
                         //print("用户的输入",d)
                         beforeDinner_right_number = d as NSNumber
                         save_data.setObject(beforeDinner_right_number as Any, forKey: "beforeDinnerHighLimit" as NSCopying)
@@ -700,7 +700,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             if self.afterDinner_left.text! != ""{
                 //判断是否为非法输入
                     e = Double(self.afterDinner_left.text!)!
-                    if e <= 7.8 && e >= 3.3{
+                    if e <= 10.0 && e >= 3.0{
                         //print("用户的输入",e)
                         afterDinner_left_number = e as NSNumber
                         save_data.setObject(afterDinner_left_number as Any, forKey: "afterDinnerLowLimit" as NSCopying)
@@ -722,7 +722,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             if self.afterDinner_right.text! != ""{
                 //判断是否为非法输入
                     f = Double(self.afterDinner_right.text!)!
-                    if f <= 16.6 && f >= 5.0 && f > e{
+                    if f <= 20.0 && f >= 3.0 && f > e{
                         //print("用户的输入",f)
                         afterDinner_right_number = f as NSNumber
                         save_data.setObject(afterDinner_right_number as Any, forKey: "afterDinnerHighLimit" as NSCopying)
@@ -744,7 +744,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             if self.randomDinner_left.text! != ""{
                 //判断是否为非法输入
                     g = Double(self.randomDinner_left.text!)!
-                    if g <= 7.8 && g >= 3.3{
+                    if g <= 10.0 && g >= 3.0{
                         //print("用户的输入",g)
                         randomDinner_left_number = g as NSNumber
                         save_data.setObject(randomDinner_left_number as Any, forKey: "randomDinnerLowLimit" as NSCopying)
@@ -767,7 +767,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             if self.randomDinner_right.text! != ""{
                 //判断是否为非法输入
                     h = Double(self.randomDinner_right.text!)!
-                    if h <= 16.6 && h >= 5.0 && h > g{
+                    if h <= 20.0 && h >= 3.0 && h > g{
                         //print("用户的输入",h)
                         randomDinner_right_number = h as NSNumber
                         save_data.setObject(randomDinner_right_number as Any, forKey: "randomDinnerHighLimit" as NSCopying)
@@ -810,7 +810,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             if self.emptyStomach_left.text! != ""{
                 //判断是否为非法输入
                     a = Double(self.emptyStomach_left.text!)!
-                    if a <= 140 && a >= 60{
+                    if a <= 180 && a >= 54{
                         //print("用户的输入",a)
                         //把得到mg/dL单位的数据转化为mmol/L单位的数据，然后存入到文件中
                         save_mgdl_data.setObject(a as NSNumber as Any, forKey: "emptyStomachLowLimit" as NSCopying)
@@ -830,7 +830,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             //print("mg空腹上限值",b)
             if self.emptyStomach_right.text! != ""{
                     b = Double(self.emptyStomach_right.text!)!
-                    if b <= 300 && b >= 90 && b > a{  //注：上限的值必须大于下限
+                    if b <= 360 && b >= 54 && b > a{  //注：上限的值必须大于下限
                         save_mgdl_data.setObject(b as NSNumber as Any, forKey: "emptyStomachHighLimit" as NSCopying)
                         b = UnitConversion.mgTomm(num: b)
                         emptyStomach_right_number = b as NSNumber
@@ -849,7 +849,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             if self.beforeDinner_left.text! != ""{
                 //判断是否为非法输入
                     c = Double(self.beforeDinner_left.text!)!
-                    if c <= 140 && c >= 60{
+                    if c <= 180 && c >= 54{
                         //print("用户的输入",c)
                         save_mgdl_data.setObject(c as NSNumber as Any, forKey: "beforeDinnerLowLimit" as NSCopying)
                         c = UnitConversion.mgTomm(num: c)
@@ -871,7 +871,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                 //判断是否为非法输入
 //                if FormatMethodUtil.validateMgdlBloodNumber(number: self.beforeDinner_right.text!) == true{
                     d = Double(self.beforeDinner_right.text!)!
-                    if d <= 300 && d >= 90 && d > c{
+                    if d <= 360 && d >= 54 && d > c{
                         //print("用户的输入",d)
                         save_mgdl_data.setObject(d  as NSNumber as Any, forKey: "beforeDinnerHighLimit" as NSCopying)
                         d = UnitConversion.mgTomm(num: d)
@@ -893,7 +893,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             if self.afterDinner_left.text! != ""{
                 //判断是否为非法输入
                     e = Double(self.afterDinner_left.text!)!
-                    if e <= 140 && e >= 60{
+                    if e <= 180 && e >= 54{
                         //print("用户的输入",e)
                         save_mgdl_data.setObject(e as NSNumber as Any, forKey: "afterDinnerLowLimit" as NSCopying)
                         e = UnitConversion.mgTomm(num: e)
@@ -914,7 +914,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             if self.afterDinner_right.text! != ""{
                 //判断是否为非法输入
                     f = Double(self.afterDinner_right.text!)!
-                    if f <= 300 && f >= 90 && f > e{
+                    if f <= 360 && f >= 54 && f > e{
                         //print("用户的输入",f)
                         save_mgdl_data.setObject(f as NSNumber as Any, forKey: "afterDinnerHighLimit" as NSCopying)
                         f = UnitConversion.mgTomm(num: f)
@@ -935,7 +935,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             if self.randomDinner_left.text! != ""{
                 //判断是否为非法输入
                     g = Double(self.randomDinner_left.text!)!
-                    if g <= 140 && g >= 60{
+                    if g <= 180 && g >= 54{
                         //print("用户的输入",g)
                         save_mgdl_data.setObject(g as NSNumber as Any, forKey: "randomDinnerLowLimit" as NSCopying)
                         g = UnitConversion.mgTomm(num: g)
@@ -957,7 +957,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             if self.randomDinner_right.text! != ""{
                 //判断是否为非法输入
                     h = Double(self.randomDinner_right.text!)!
-                    if h <= 300 && h >= 90 && h > g{
+                    if h <= 360 && h >= 54 && h > g{
                         //print("用户的输入",h)
                         save_mgdl_data.setObject(h as NSNumber as Any, forKey: "randomDinnerHighLimit" as NSCopying)
                         h = UnitConversion.mgTomm(num: h)
@@ -1075,7 +1075,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             //当单位为mg/dL
             showPlaceholder(String(amg_Double),String(bmg_Double),String(cmg_Double),String(dmg_Double),String(emg_Double),String(fmg_Double),String(gmg_Double),String(hmg_Double))
         }
-       alert.custom_cengji(self,"","Save Success")
+//       alert.custom_cengji(self,"","Save Success")
     }
     //函数功能：清空用户在文本框中的输入
     func clearEmpty(){
@@ -1129,12 +1129,12 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
         let inputString = string.components(separatedBy: char).joined(separator: "")
 
         if string == inputString{
-            //  mg/dl   60--140   90--300
+            //  mg/dl   54--180   54--360
         
             var numFrontDot:Int = 3
             var numAfterDot:Int = 0
             
-            // mmol/L   3.0-5.8  5.0--16.6  算上小数点
+            // mmol/L   3.0-5.8  3.0--20.0  算上小数点
             if GetUnit.getBloodUnit() == "mmol/L"{
                 numFrontDot = 2
                 numAfterDot = 2

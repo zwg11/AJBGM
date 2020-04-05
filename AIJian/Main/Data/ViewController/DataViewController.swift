@@ -118,7 +118,8 @@ class DataViewController: UIViewController {
     
     var topConstraint:Constraint?
     var bottomConstraint:Constraint?
-    
+    // 判断是否更新按钮
+    var isReload = true
     
     
     
@@ -209,10 +210,11 @@ class DataViewController: UIViewController {
                 self.topConstraint = make.top.equalTo(self.navigationController!.bottomLayoutGuide.snp.bottom).offset(40).constraint
             }
         }
-
-//        self.view.backgroundColor = UIColor.white
+        NotificationCenter.default.addObserver(self, selector: #selector(notReload), name: NSNotification.Name(rawValue: "notReload"), object: nil)
     }
-    
+    @objc func notReload(){
+        isReload = false
+    }
 
 //    override var shouldAutorotate: Bool{
 //            return true
@@ -244,24 +246,32 @@ class DataViewController: UIViewController {
 //        // 添加导航栏右按钮
 //        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rangePickerButton)
         
-        let path = PlistSetting.getFilePath(File: "otherSettings.plist")
         
-        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
-        let dataRange = data["dataRange"] as! String
-        rangePickerButton.setTitle(dataRange, for: .normal)
+        
         // 监听导航栏右按钮的文本，对于不同的文本设定不同的标志位
-        switch dataRange{
+        // 如果isReload为true,说明不是从updateu页面返回回来的
+        if isReload{
+            let path = PlistSetting.getFilePath(File: "otherSettings.plist")
             
-        case "Last 3 Days":
-            pickerSelectedRow = 1
-        case "Last 7 Days":
-            pickerSelectedRow = 2
-        case "Last 30 Days":
-            pickerSelectedRow = 3
-        default:
-            pickerSelectedRow = 2
+            let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
+            let dataRange = data["dataRange"] as! String
+            rangePickerButton.setTitle(dataRange, for: .normal)
+            
+            switch dataRange{
+                
+            case "Last 3 Days":
+                pickerSelectedRow = 1
+            case "Last 7 Days":
+                pickerSelectedRow = 2
+            case "Last 30 Days":
+                pickerSelectedRow = 3
+            default:
+                pickerSelectedRow = 2
+            }
+            
+        }else{ // 否则，重新设为true
+            isReload = true
         }
-        
         // 识别 导航栏右按钮标题，做出相应值的设置
         setDaysAndRange()
         
@@ -471,7 +481,7 @@ class DataViewController: UIViewController {
       //  print("func appear done.")
         // 删除顶部约束
         self.topConstraint?.uninstall()
-        dateRangePicker.snp_makeConstraints{(make) in
+        dateRangePicker.snp.makeConstraints{(make) in
 //            self.bottomConstraint = make.bottom.equalTo(self.navigationController!.view.snp.bottom).constraint
             // 添加底部约束
             if #available(iOS 11.0, *) {

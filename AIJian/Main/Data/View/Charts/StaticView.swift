@@ -57,6 +57,8 @@ class StaticView: UIView {
         label.textColor = UIColor.green
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 15)
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
         return label
     }()
     // 最大值标签
@@ -118,17 +120,21 @@ class StaticView: UIView {
             make.top.equalTo(frequencyLabel.snp.bottom)
             make.bottom.equalToSuperview()
         }
-        //平均值标签布局
-        AvgValueLabel.sizeToFit()
-        AvgValueLabel.snp.makeConstraints{(make) in
-            make.left.equalTo(freValueLabel)
-            make.top.equalTo(frequencyLabel.snp.bottom)
-            make.bottom.equalToSuperview()
-        }
+//        AverageLabel.sizeToFit()
+        
         // 最小标签布局
         MinLabel.snp.makeConstraints{(make) in
             make.left.right.equalTo(MaxLabel)
             make.top.equalTo(frequencyLabel.snp.bottom)
+            make.bottom.equalToSuperview()
+        }
+        
+        //平均值标签布局
+//        AvgValueLabel.sizeToFit()
+        AvgValueLabel.snp.makeConstraints{(make) in
+            make.left.equalTo(freValueLabel)
+            make.top.equalTo(frequencyLabel.snp.bottom)
+            make.right.equalTo(MinLabel.snp.left)
             make.bottom.equalToSuperview()
         }
         // 最小值标签布局

@@ -172,12 +172,12 @@ class GeneralStatusView: UIView {
         let high = GetBloodLimit.getAfterDinnerTop()
         let Orange = kRGBColor(255, 165, 0, 0.8)
         let Red = kRGBColor(255, 0, 0, 0.8)
-        chart.addLimitLine(low, "\(low)", Orange)
-        chart.addLimitLine(high, "\(high)", Red)
+        chart.addLimitLine(low, low, Orange)
+        chart.addLimitLine(high, high, Red)
 //        let Orange = kRGBColor(255, 165, 0, 0.3)
 //        let Red = kRGBColor(255, 0, 0, 0.3)
-        chart.addLimitLine(GetBloodLimit.getEmptyStomachLow(), "低于", Orange)
-        chart.addLimitLine(GetBloodLimit.getAfterDinnerTop(), "高于", Red)
+//        chart.addLimitLine(GetBloodLimit.getEmptyStomachLow(), "低于", Orange)
+//        chart.addLimitLine(GetBloodLimit.getAfterDinnerTop(), "高于", Red)
         chart.lineChartView.xAxis.gridColor = UIColor.lightGray
         chart.lineChartView.leftAxis.gridColor = UIColor.lightGray
         switch pickerSelectedRow{

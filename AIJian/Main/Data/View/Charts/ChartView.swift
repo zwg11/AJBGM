@@ -47,6 +47,7 @@ class ChartView: UIView ,ChartViewDelegate{
         leftAxis.labelPosition = .outsideChart
         
         
+        
         //网格
 //        leftAxis.gridColor = UIColor.init(red: 233/255.0, green: 233/255.0, blue: 233/255.0, alpha: 1.0)
         leftAxis.gridColor = UIColor.init(red: 233/255.0, green: 233/255.0, blue: 233/255.0, alpha: 0.3)
@@ -218,8 +219,9 @@ class ChartView: UIView ,ChartViewDelegate{
     
     
     // 限制线的添加
-    func addLimitLine(_ value:Double, _ desc:String,_ color:UIColor) {
-        let limitLine = ChartLimitLine.init(limit: value, label: desc)
+    func addLimitLine(_ value:Double, _ desc:Double,_ color:UIColor) {
+        let message = GetUnit.getBloodUnit() == "mmol/L" ? String(format: "%.1f", desc) : String(format: "%.0f", desc)
+        let limitLine = ChartLimitLine.init(limit: value, label: message)
         //线
         limitLine.lineWidth = 1
         limitLine.lineColor = color

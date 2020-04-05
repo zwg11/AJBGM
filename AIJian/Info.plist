@@ -34,9 +34,9 @@
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>APP need to use BLE to connect bloodglucose machine</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>APP要存储图片到你的相册</string>
+	<string></string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>APP要存储图片到你的相册</string>
+	<string></string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

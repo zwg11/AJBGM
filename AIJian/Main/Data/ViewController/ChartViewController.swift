@@ -153,10 +153,10 @@ class ChartViewController: UIViewController,ChartViewDelegate{
         
         let low = GetBloodLimit.getEmptyStomachLow()
         let high = GetBloodLimit.getAfterDinnerTop()
-        let Orange = kRGBColor(255, 165, 0, 0.3)
-        let Red = kRGBColor(255, 0, 0, 0.3)
-        lineChartView.addLimitLine(low, "\(low)", Orange)
-        lineChartView.addLimitLine(high, "\(high)", Red)
+        let Orange = kRGBColor(255, 165, 0, 0.5)
+        let Red = kRGBColor(255, 0, 0, 0.5)
+        lineChartView.addLimitLine(low, low, Orange)
+        lineChartView.addLimitLine(high, high, Red)
         // 根据所选中的时间范围器元素决定各界面的数据如何初始化
         switch pickerSelectedRow{
         case 1,2,3:
@@ -258,7 +258,9 @@ class ChartViewController: UIViewController,ChartViewDelegate{
         dateFormatter.timeZone = timezone
         let xxxx = startD! + Int(currentX).minutes
         MarkTimelabel.text = "\(dateFormatter.string(from: xxxx))"
-        MarkValuelabel.text = "\(valuey) " + GetUnit.getBloodUnit()
+        
+        let markValue = GetUnit.getBloodUnit()=="mmol/L" ? String(format: "%.1f", Double(valuey)!) : String(format: "%.0f", Double(valuey)!)
+        MarkValuelabel.text = "\(markValue) " + GetUnit.getBloodUnit()
         //        MarkValuelabel.text = "BG Value:\(valuey)" + GetUnit.getBloodUnit()
         
         //        let marker = MarkerView()

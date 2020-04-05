@@ -29,6 +29,11 @@
 	<array>
 		<string>Asipirin</string>
 		<string>Paracetamol</string>
+		<string>Metformin</string>
+		<string>Acarbose</string>
+		<string>Miglitol</string>
+		<string>Meglitinides</string>
+		<string>Glimepiride</string>
 	</array>
 	<key>portion</key>
 	<array>

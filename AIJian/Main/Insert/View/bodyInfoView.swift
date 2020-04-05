@@ -126,7 +126,7 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
         self.addSubview(weightLabel)
         weightLabel.snp.makeConstraints{(make) in
             make.left.top.equalToSuperview().offset(AJScreenWidth/20)
-            make.width.equalTo(AJScreenWidth/15*2)
+            make.width.equalTo(AJScreenWidth/2)
             make.height.equalTo(AJScreenWidth/15)
         }
         
@@ -155,7 +155,7 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
             make.left.equalTo(weightLabel)
             make.top.equalTo(weightTextfield.snp.bottom).offset(AJScreenWidth/40)
             make.height.equalTo(AJScreenWidth/15)
-            make.width.equalTo(AJScreenWidth/15*4)
+            make.width.equalTo(AJScreenWidth/2)
         }
         
         

@@ -10,7 +10,7 @@ import UIKit
 
 class sportView: UIView ,UITextFieldDelegate{
 
-    var intensityLevel = 1
+    var intensityLevel:Int?
     //***************************运动*************************
 //    // 运动图标
 //    private lazy var sportImageView:UIImageView = {
@@ -97,27 +97,43 @@ class sportView: UIView ,UITextFieldDelegate{
     
     
     // 将选中的按钮高亮，其他按钮不高亮
+    // 若按钮原来是亮的，设为不亮
     @objc func intensityChange(_ sender:UIButton){
         let buttons = [intensityHard,intensityMedium,intensityLight]
         for i in buttons{
             i.setDeselected()
         }
-        sender.setSelected()
-        intensityLevel = sender.tag
+        if intensityLevel == sender.tag{
+            intensityLevel = nil
+        }else{
+            sender.setSelected()
+            intensityLevel = sender.tag
+        }
+        
     }
     
-    func initIntensity(_ intensity:Int){
-        if intensity == 0 {
-            intensityChange(intensityLight)
-        }else if intensity == 1 {
-            intensityChange(intensityMedium)
+    func initIntensity(_ intensity:Int?){
+        if intensity != nil{
+            intensityLevel = intensity
+            switch intensity {
+//            case 0:
+//                intensityLight.setSelected()
+            case 1:
+                intensityMedium.setSelected()
+            case 2:
+                intensityHard.setSelected()
+            default:
+                intensityLight.setSelected()
+            }
         }else{
-            intensityChange(intensityHard)
+            intensityLevel = nil
         }
+        
     }
 
     func setupUI(){
-        initIntensity(intensityLevel)
+        // init button select status
+//        initIntensity(intensityLevel)
         // 设置视图背景颜色和边框
         self.layer.borderColor = UIColor.darkGray.cgColor
         self.layer.borderWidth = 1

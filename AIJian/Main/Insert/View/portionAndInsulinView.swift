@@ -138,7 +138,7 @@ class portionAndInsulinView: UIView,UITextFieldDelegate {
         portionLabel.snp.makeConstraints{(make) in
             make.left.top.equalToSuperview().offset(AJScreenWidth/20)
             make.height.equalTo(AJScreenWidth/15)
-            make.width.equalTo(AJScreenWidth/10)
+            make.width.equalTo(AJScreenWidth/2)
         }
         
         // 进餐量选择按钮，共4个
@@ -180,7 +180,7 @@ class portionAndInsulinView: UIView,UITextFieldDelegate {
             make.left.equalToSuperview().offset(AJScreenWidth/20)
             make.top.equalTo(portionNoButton.snp.bottom).offset(AJScreenWidth/40)
             make.height.equalTo(AJScreenWidth/15)
-            make.width.equalTo(AJScreenWidth/8)
+            make.width.equalTo(AJScreenWidth/2)
         }
         // 胰岛素选择按钮
         self.addSubview(insulinButton)

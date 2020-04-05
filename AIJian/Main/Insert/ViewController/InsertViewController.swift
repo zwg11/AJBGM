@@ -34,18 +34,20 @@ class InsertViewController: UIViewController {
     // 选择药物按钮弹出的alert
     private var medicineChooseAlert:alertViewController = {
         
-        let path1 = PlistSetting.getFilePath(File: "inputChoose.plist")
-        // 读取配置文件
-        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path1)!
-        let arr = data["medicine"] as! NSArray
+//        let path1 = PlistSetting.getFilePath(File: "inputChoose.plist")
+//        // 读取配置文件
+//        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path1)!
+//        let arr = data["medicine"] as! NSArray
         var mess = ""
-        if arr.count >= 8{
-            mess = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
-        }else{
-            for _ in 0 ..< arr.count{
-                mess += "\n\n"
-            }
-        }
+//        if arr.count >= 8{
+//            mess = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+//        }else{
+//            for _ in 0 ..< arr.count{
+//                mess += "\n\n"
+//            }
+//        }
+        mess = "\n\n\n\n\n\n\n\n"
+//        print(mess)
         let VC = alertViewController(title: "Please Select", message: mess, preferredStyle: .alert)
 
         // 避免懒加载导致数据未初始化就被使用
@@ -117,6 +119,10 @@ class InsertViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(test), name: NSNotification.Name(rawValue: "chooseInsulin"), object: nil)
         // 设置监听器，监听是否要重新加载胰岛素选择器条目
         NotificationCenter.default.addObserver(self, selector: #selector(reloadPicker), name: NSNotification.Name(rawValue: "reload"), object: nil)
+        
+//        medicineChooseAlert.view.snp.makeConstraints{(make) in
+//            make.height.equalTo(290)
+//        }
 
     }
     
@@ -134,25 +140,26 @@ class InsertViewController: UIViewController {
     @objc func chooseMedicine(){
       //  print("choose medicine button clicked,appear done.")
         // 读取配置文件
-        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
-        let arr = data["medicine"] as! NSArray
+//        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
+//        let arr = data["medicine"] as! NSArray
         // 由于 药物 一定是有可选项的，所以不需判断是否有可选项
         // 若需更新，重新加载数据和表格
     
 //        medicineChooseAlert.alertData = data["medicine"] as! [String]
         // 设置框的高度，根据单元格数量和表格上下约束计算得出
-        medicineChooseAlert.view.snp.updateConstraints{(make) in
-            if arr.count>8{
-                make.height.equalTo(8*33+80)
-            }else{
-                make.height.equalTo(arr.count*33+80)
-            }
-            
-        }
+//        medicineChooseAlert.view.snp.updateConstraints{(make) in
+//            if arr.count>8{
+//                make.height.equalTo(8*33+80)
+//            }else{
+//                make.height.equalTo(arr.count*33+80)
+//            }
+//
+//        }
         // 更新单元格
         medicineChooseAlert.tabelView.reloadData()
         // 显示 警示框
         self.present(medicineChooseAlert, animated: true, completion: nil)
+        print("alert success")
    
     }
     
@@ -179,8 +186,17 @@ class InsertViewController: UIViewController {
             }else if alert.textFields![0].text!.removeHeadAndTailSpacePro.count >= 50 { //单个不能超过100个字符
                 return
             }else{
-                self.medicineChooseAlert.message! += "\n\n"
-                arr.append(alert.textFields![0].text!.removeHeadAndTailSpacePro)
+//                self.medicineChooseAlert.message! += "\n\n"
+                //  检测添加的药物是否已存在
+                let addMedicine = alert.textFields![0].text!.removeHeadAndTailSpacePro
+                for i in arr{
+                    if addMedicine.lowercased() == i.lowercased(){
+                        let medicineExist = CustomAlertController()
+                        medicineExist.custom(self, "", "Added Medicine Already Exists.")
+                        return
+                    }
+                }
+                arr.append(addMedicine)
             }
 
 //            // 使得警示框的表格数据更新
@@ -220,9 +236,14 @@ class InsertViewController: UIViewController {
     }
     
     @objc func leftButtonClick(){
+        // 如果是更新界面
+        if !isInsert{
+            //  通知data页面不要更新日期范围
+            NotificationCenter.default.post(name: NSNotification.Name("notReload"), object: nil, userInfo: nil)
+        }
         // 设置返回原页面
-//        self.navigationController?.popViewController(animated: false)
         self.navigationController?.popToRootViewController(animated: false)
+        
     }
     
     @objc func cancel(){
@@ -257,7 +278,14 @@ class InsertViewController: UIViewController {
         // ********* 记录时间 *********
         let createTime = date + " " + time
         //print("存入到数据库的时间",createTime)
-        
+        let dateformater = DateFormatter()
+        dateformater.dateFormat = "yyyy-MM-dd HH:mm"
+        let date1 = dateformater.date(from: createTime) ?? Date()
+        let now = Date()
+        if(date1.compare(now) == .orderedDescending){
+            Message += "\nTime shall not be the future time."
+        }
+        print(createTime)
         // ********* 记录血糖 *********
         var bloodGlucoseValueMmol:Double?
         var bloodGlucoseValueMg:Double?
@@ -272,12 +300,12 @@ class InsertViewController: UIViewController {
                    // print("血糖mg值",bloodGlucoseValueMg as Any)
                     //print("血糖mmol值",bloodGlucoseValueMmol as Any)
                 }else{
-                    Message += "\nGlucose Range:10~600"
+                    Message += "\nGlucose Range:10~600."
 //                    alert.custom(self, "Attention", "血糖的范围为10~600")
                 }
             }
             else{
-                Message += "\nEmpty Glucose Data"
+                Message += "\nEmpty Glucose Data."
 //                alert.custom(self, "Attention", "血糖不能为空")
 //                return
             }
@@ -290,12 +318,12 @@ class InsertViewController: UIViewController {
                    // print("血糖mg值",bloodGlucoseValueMg as Any)
                    // print("血糖mmol值",bloodGlucoseValueMmol as Any)
                 }else{
-                    Message += "\nGlucose Range:0.6~33.3"
+                    Message += "\nGlucose Range:0.6~33.3."
 //                    alert.custom(self, "Attention", "血糖的范围为0.6~33.3")
                 }
             
             }else{
-                Message += "\nEmpty Glucose Data"
+                Message += "\nEmpty Glucose Data."
 //                alert.custom(self, "Attention", "血糖不能为空")
 //                return
             }
@@ -315,9 +343,9 @@ class InsertViewController: UIViewController {
         let insulin_num:Double? = input.getInsNumValue()
         if insulin_num != nil{
             if insulin_type == "None"{
-                Message += "\nEmpty Insulin Type"
+                Message += "\nEmpty Insulin Type."
             }else if insulin_num! > 100.0{
-                Message += "\nInsulin Range:100"
+                Message += "\nInsulin Range:100."
             }
         }
         //print("胰岛素的量",insulin_num ?? "no")
@@ -331,7 +359,7 @@ class InsertViewController: UIViewController {
             weight_kg = input.getWeightValue()
             if weight_kg != nil{
                 if weight_kg! >= 454.0{
-                    Message += "\nWeight Range:0~454"
+                    Message += "\nWeight Range:0~454."
                 }else{
                     weight_lbs = WeightUnitChange.KgToLbs(num: weight_kg!)
                 }
@@ -385,15 +413,15 @@ class InsertViewController: UIViewController {
                 if sys_press_mmHg != nil && dis_press_mmHg != nil{
                     if sys_press_mmHg! < 45 || sys_press_mmHg! > 300
                         || dis_press_mmHg! < 45 || dis_press_mmHg! > 300{
-                        Message += "\nBlood Pressure Range:45~300"
+                        Message += "\nBlood Pressure Range:45~300."
                     }else if dis_press_mmHg! >= sys_press_mmHg!{  //收缩压必须大于舒张压
-                        Message += "\nSBP Should be Greater than DBP "
+                        Message += "\nSBP Should be Greater than DBP."
                     }else{
                         sys_press_kPa = PressureUnitChange.mmHgTokPa(num: sys_press_mmHg!)
                         dis_press_kPa = PressureUnitChange.mmHgTokPa(num: dis_press_mmHg!)
                     }
                 }else{
-                    Message += "\nDBP or SBP Empty"
+                    Message += "\nDBP or SBP Empty."
                 }
             }
             
@@ -405,15 +433,15 @@ class InsertViewController: UIViewController {
                 if sys_press_kPa != nil && dis_press_kPa != nil{
                     if sys_press_kPa! < 6 || sys_press_kPa! > 40
                         || dis_press_kPa! < 6 || dis_press_kPa! > 40{
-                        Message += "\nBlood Pressure Range:6-40"
+                        Message += "\nBlood Pressure Range:6-40."
                     }else if dis_press_kPa! > sys_press_kPa!{
-                        Message += "\nSBP Should be Greater than DBP"
+                        Message += "\nSBP Should be Greater than DBP."
                     }else{
                         sys_press_mmHg = PressureUnitChange.kPaTommHg(num: sys_press_kPa!)
                         dis_press_mmHg = PressureUnitChange.kPaTommHg(num: dis_press_kPa!)
                     }
                 }else{
-                    Message += "\nDBP or SBP Empty"
+                    Message += "\nDBP or SBP Empty."
                 }
             }
         }
@@ -464,22 +492,51 @@ class InsertViewController: UIViewController {
         let sport_time:Int64? = input.getSportTime()
 
         // y*************** 运动强度 ****************
-        var sport_strength:Int64? = input.getSportStrength()
+        let sport_strength:Int64? = input.getSportStrength()
         
         // 有运动时间无运动类型报错
         // 运动时间不在正常范围报错
-        if sport == "None"{
-            sport_strength = nil
-            if sport_time != nil{
-                Message += "\nSelect Exercise Based on Time and Strength"
+        if sport_time != nil || sport_strength != nil{
+            // 如果时间k和强度都不为空，检测运动类型
+            if sport_time != nil && sport_strength != nil{
+                if sport == "None"{
+                    Message += "\nSelect Exercise Based on Duration and Intensity."
+                }
+            }else if let time = sport_time{ // 如果强度为空
+                // 检测运动类型
+                if sport == "None"{
+                    Message += "\nSelect Exercise and Intensity."
+                }else{
+                    Message += "\nSelect Intensity."
+                }
                 
-            }
-        }else if let time = sport_time{
-            if time < 5 && time > 360{
-//                print(time)
-                Message += "\n Effective Duration of Exercise:5~360"
+                if time < 5 && time > 360{
+                    Message += "\nEffective Duration of Exercise:5~360."
+                }
+            }else{ // 如果时间为空
+                // 检测运动类型
+                if sport == "None"{
+                    Message += "\nSelect Exercise and Duration."
+                }else{
+                    Message += "\nEmpty Duration."
+                }
             }
         }
+//        if sport == "None"{
+//            if sport_time != nil && sport_strength != nil{
+//                Message += "\nSelect Exercise Based on Time and Intensity."
+//
+//            }else if sport_time != nil{
+//                Message += "\nSelect Exercise and Intensity."
+//            }else{
+//                Message += "\nSelect Exercise and Time."
+//            }
+//        }else if let time = sport_time{
+//            if time < 5 && time > 360{
+////                print(time)
+//                Message += "\n Effective Duration of Exercise:5~360."
+//            }
+//        }
         
 //        print("获得运动持续时间:",sport_time ?? "no sport time")
 
@@ -610,7 +667,7 @@ class InsertViewController: UIViewController {
                                 // 风火轮停止
                                 indicator.stopIndicator()
 //                                indicator.removeFromSuperview()
-                                alert.custom(self, "", "Data Insertdate Failure.")
+                                alert.custom(self, "", "Data Insert Failure.")
                                 self.rightButton.isEnabled = true
                                 
                             }
@@ -628,7 +685,9 @@ class InsertViewController: UIViewController {
             }//end of request
 //            indicator.stopIndicator()
 //            indicator.removeFromSuperview()
-        }else{
+        }else{ // 这是数据更新页面
+            //  通知data页面不要更新日期范围
+            NotificationCenter.default.post(name: NSNotification.Name("notReload"), object: nil, userInfo: nil)
             let dic = ["userId":UserInfo.getUserId(),"token":UserInfo.getToken(),"userBloodGlucoseRecord":insertData.toJSONString()!] as [String : Any]
 //            print("dic:\(dic)")
             // 向服务器申请更新数据请求
@@ -818,8 +877,9 @@ class InsertViewController: UIViewController {
                         medicineChooseAlert.boolArray[i] = true
                         medicineChooseAlert.selectedNum += 1
                         arrtemp[j] = ""
-                        medicineChooseAlert.message! += "\n\n"
+//                        medicineChooseAlert.message! += "\n\n\n\n"
 //                        arrtemp.remove(at: j)//如果相等,则将对应的数剔除
+                        
                     }
                 }
             }
@@ -839,6 +899,7 @@ class InsertViewController: UIViewController {
         // 写入到文件中
         data["medicine"] = medicine
         data.write(toFile: path, atomically: true)
+        medicineChooseAlert.tabelView.reloadData()
     }
 }
 
@@ -847,6 +908,7 @@ extension InsertViewController{
     // MARK: - 当从表格视图转来时
     // 将单元格的内容传入手动输入界面
     func EditData(date:glucoseDate){
+        print(date)
         let x = date
 //        let y = sortedTime[section][row]
         // 设置当前标题
@@ -890,9 +952,9 @@ extension InsertViewController{
         
         
         // 检测时间段，非空
-        self.input.setEventValue(Int(x.detectionTime!))
+        self.input.setEventValue(Int(x.detectionTime ?? 3))
         // 进餐量，非空
-        self.input.setPorValue(Int(x.eatNum!))
+        self.input.setPorValue(Int(x.eatNum ?? 2))
         // 胰岛素量
         if let insNum = x.insulinNum{
             self.input.setInsNumValue("\(insNum)")
@@ -945,10 +1007,10 @@ extension InsertViewController{
         if let sportTime = x.sportTime{
             self.input.setSportTime("\(sportTime)")
         }else{
-            self.input.setSportTime("")
+//            self.input.setSportTime("")
         }
         // 运动强度
-        self.input.setSportStrength(x.sportStrength ?? 1)
+        self.input.setSportStrength(x.sportStrength)
         // 备注
         self.input.setRemark(text: x.remark ?? "")
         

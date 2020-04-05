@@ -550,13 +550,18 @@ class InputView: UIView,UIScrollViewDelegate {
     }
 
     //得到运动强度
-    func getSportStrength()->Int64{
-        let a = sport.intensityLevel
-        return Int64(a)
+    func getSportStrength()->Int64?{
+        if let level = sport.intensityLevel{
+            
+            return Int64(level)
+        }else{
+            return nil
+        }
+        
     }
     //设置运动强度
-    func setSportStrength(_ strength:Int64){
-        sport.initIntensity(Int(strength))
+    func setSportStrength(_ strength:Int64?){
+        sport.initIntensity(strength == nil ? nil : Int(strength ?? 1))
         
     }
     

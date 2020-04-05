@@ -120,8 +120,8 @@ class dataTableViewCell: UITableViewCell {
         // 先判断有没有运动量，若没有再判断有没有运动类型
         // 运动
         sportLabel.font = UIFont.systemFont(ofSize: 15)
-        medicineLabel.minimumScaleFactor = 0.3
-        medicineLabel.adjustsFontSizeToFitWidth = true
+        sportLabel.minimumScaleFactor = 0.3
+        sportLabel.adjustsFontSizeToFitWidth = true
         if sortedData[secion][row].sportTime != nil{
             sportLabel.text = String(sortedData[secion][row].sportType!) + "\n" + String(sortedData[secion][row].sportTime!) + "min"
             
