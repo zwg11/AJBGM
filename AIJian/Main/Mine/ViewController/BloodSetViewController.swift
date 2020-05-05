@@ -624,6 +624,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         emptyStomach_left.layer.borderColor = UIColor.red.cgColor
                         emptyStomach_left.layer.borderWidth = 1
+                        alert.custom(self, "", "Lower Limit Value is out of the range \"3.0-10.0 mmol/dL\"")
                         return
                     }
             }else{
@@ -644,6 +645,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         emptyStomach_right.layer.borderColor = UIColor.red.cgColor
                         emptyStomach_right.layer.borderWidth = 1
+                        alert.custom(self, "", "Upper Limit Value is out of the range \"3.0-20.0 mmol/dL\"")
                         return
                     }
             }else{
@@ -666,6 +668,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         beforeDinner_left.layer.borderColor = UIColor.red.cgColor
                         beforeDinner_left.layer.borderWidth = 1
+                         alert.custom(self, "", "Lower Limit Value is out of the range \"3.0-10.0 mmol/dL\"")
                         return
                     }
             }else{
@@ -688,6 +691,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         beforeDinner_right.layer.borderColor = UIColor.red.cgColor
                         beforeDinner_right.layer.borderWidth = 1
+                         alert.custom(self, "", "Upper Limit Value is out of the range \"3.0-20.0 mmol/dL\"")
                         return
                     }
             }else{
@@ -711,6 +715,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         afterDinner_left.layer.borderColor = UIColor.red.cgColor
                         afterDinner_left.layer.borderWidth = 1
+                         alert.custom(self, "", "Lower Limit Value is out of the range \"3.0-10.0 mmol/dL\"")
                         return
                     }
             }else{
@@ -733,6 +738,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         afterDinner_right.layer.borderColor = UIColor.red.cgColor
                         afterDinner_right.layer.borderWidth = 1
+                         alert.custom(self, "", "Upper Limit Value is out of the range \"3.0-20.0 mmol/dL\"")
                         return
                     }
             }else{
@@ -755,6 +761,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         randomDinner_left.layer.borderColor = UIColor.red.cgColor
                         randomDinner_left.layer.borderWidth = 1
+                         alert.custom(self, "", "Lower Limit Value is out of the range \"3.0-10.0 mmol/dL\"")
                         return
                     }
             }else{
@@ -778,10 +785,17 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         randomDinner_right.layer.borderColor = UIColor.red.cgColor
                         randomDinner_right.layer.borderWidth = 1
+                         alert.custom(self, "", "Upper Limit Value is out of the range \"3.0-20.0 mmol/dL\"")
                         return
                     }
             }else{
                 //print("随机上限啥事也没干")
+            }
+            if a >= f{
+                emptyStomach_left.layer.borderColor = UIColor.red.cgColor
+                emptyStomach_left.layer.borderWidth = 1
+                alert.custom(self, "", "The lower limit of fasting should be less than the upper limit of after meal")
+                return
             }
             
             //第二步，保存写入userBloodSetting.plist文件中
@@ -820,6 +834,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         emptyStomach_left.layer.borderColor = UIColor.red.cgColor
                         emptyStomach_left.layer.borderWidth = 1
+                        alert.custom(self, "", "Lower Limit Value is out of the range \"54-180 mg/dL\"")
                         return
                     }
             }else{
@@ -838,6 +853,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         emptyStomach_right.layer.borderColor = UIColor.red.cgColor
                         emptyStomach_right.layer.borderWidth = 1
+                        alert.custom(self, "", "Upper Limit Value is out of the range \"54-360 mg/dL\"")
                         return
                     }
             }else{
@@ -859,6 +875,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         beforeDinner_left.layer.borderColor = UIColor.red.cgColor
                         beforeDinner_left.layer.borderWidth = 1
+                        alert.custom(self, "", "Lower Limit Value is out of the range \"54-180 mg/dL\"")
                         return
                     }
             }else{
@@ -881,6 +898,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         beforeDinner_right.layer.borderColor = UIColor.red.cgColor
                         beforeDinner_right.layer.borderWidth = 1
+                        alert.custom(self, "", "Upper Limit Value is out of the range \"54-360 mg/dL\"")
                         return
                 }
             }else{
@@ -903,6 +921,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         afterDinner_left.layer.borderColor = UIColor.red.cgColor
                         afterDinner_left.layer.borderWidth = 1
+                        alert.custom(self, "", "Lower Limit Value is out of the range \"54-180 mg/dL\"")
                         return
                     }
             }else{
@@ -924,6 +943,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         afterDinner_right.layer.borderColor = UIColor.red.cgColor
                         afterDinner_right.layer.borderWidth = 1
+                        alert.custom(self, "", "Upper Limit Value is out of the range \"54-360 mg/dL\"")
                         return
                     }
             }else{
@@ -945,6 +965,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         randomDinner_left.layer.borderColor = UIColor.red.cgColor
                         randomDinner_left.layer.borderWidth = 1
+                        alert.custom(self, "", "Lower Limit Value is out of the range \"54-180 mg/dL\"")
                         return
                     }
             }else{
@@ -967,10 +988,18 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         randomDinner_right.layer.borderColor = UIColor.red.cgColor
                         randomDinner_right.layer.borderWidth = 1
+                        alert.custom(self, "", "Upper Limit Value is out of the range \"54-360 mg/dL\"")
                         return
                     }
             }else{
                 //print("随机上限啥事也没干")
+            }
+            //不能 让 a 大于 f
+            if a >= f{
+                emptyStomach_left.layer.borderColor = UIColor.red.cgColor
+                emptyStomach_left.layer.borderWidth = 1
+                alert.custom(self, "", "The lower limit of fasting should be less than the upper limit of after meal")
+                return
             }
             
             

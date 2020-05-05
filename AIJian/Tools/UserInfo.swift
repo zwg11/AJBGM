@@ -81,5 +81,13 @@ class UserInfo{
         data["isFirst"] = isFirst
         data.write(toFile: path, atomically: true)
     }
+    
+    static func clearUserInfo(){
+        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
+        data["email"] = ""
+        data["token"] = ""
+        data["userId"] = 0
+        data.write(toFile: path, atomically: true)
+    }
 }
 

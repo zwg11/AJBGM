@@ -149,7 +149,7 @@ public class DBSQLiteManager:NSObject{
         ))
         //print("成功增加一条用户信息")
     }
-    //删除一条用户记录
+    // MARK: - 删除一条用户记录
     //输入一个用户的user_id,然后根据这个id,去删除
     func deleteUserRecord(id:Int64){
         let db = DBSQLiteManager.shareManager().openDB()
@@ -160,6 +160,22 @@ public class DBSQLiteManager:NSObject{
             //print("修改失败")
         }
     }
+    
+    // MARK: - 删除所有用户数据
+    func deleteAllUserRecord(){
+        let db = DBSQLiteManager.shareManager().openDB()
+        do {
+            // DELETE FROM "user"
+            if try db.run(user.delete()) > 0{
+                print("删除用户记录成功")
+            }else{
+                print("未找到用户记录")
+            }
+        }catch{
+            print("删除用户信息失败:\(error)")
+        }
+    }
+    
     //更新一条用户记录
     //直接输入一个USER的对象，即可更新为传过来的对象内容
     func updateUserRecord(_ userObject:USER){

@@ -109,7 +109,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         startTimer()
     }
     
-    private var meterType:Int = 0
+    private var meterType:Int = 14
     private var byteDate:Data?
     private var tableView = UITableView()
     // 记录扫描到的设备的UUID
@@ -398,18 +398,20 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                     }
                     else{
                         // 尝试其他的 meter类型
-                        // 如果 meterType<16，说明
-                        if self.meterType<16{
+                        // 如果 meterType>=0，向ble发命令
+                        if self.meterType>=0{
                             // 首先确定命令字符串
-                            self.meterType += 1
-                            let meterStr = "&T"+String(self.meterType,radix: 16)+" "
+                            
+                            let meterStr = "&T"+String(self.meterType,radix: 16).uppercased()+" "
                             let order = meterStr + crc.string2CRC(string: meterStr)
                             
                             // 将字符串转为Data，发送蓝牙命令必须为Data型
                             let byteDate0 = order.data(using: .utf8)
                             peripheral.writeValue(byteDate0!, for: self.writeCharacteristic!, type: .withoutResponse)
+                            self.meterType -= 1
                         }
                         else{
+                            
                             print("无法识别的仪器类型")
                             wrongInfo = "Unrecognizable Meter Type"
                             
@@ -605,7 +607,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                                     self.loadV.stopIndicator()
                                     wrongInfo = "No Data in the Meter"
                                     
-                                    
+                                    self.meterType = 14
                                     print("No Data Need To Send.")
                                 }else{
                                     print("将要传输的数据数量量")
@@ -616,6 +618,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                                     if array[0][2,array[0].count-1] == "0"{
                                         wrongInfo = "No New Data in the Meter"
                                         print("No New Data In Machine")
+                                        self.meterType = 14
                                     }
                                     self.dataCount = Int(array[0][2,array[0].count-1])!
                                 }
@@ -624,12 +627,14 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                         }
                     }
                 default:
+                    self.meterType = 14
                     print("unknown")
                     wrongInfo = "unknown error occured."
                     
                 }
                 // 若传输数据过程中有任何异常或无数据传输，执行
                 if let x = wrongInfo{
+                    
                     // 主动断开连接
                     self.centralManager?.cancelPeripheralConnection(peripheral)
                     // 将加载视图移除界面，并使其图片动画停止
@@ -907,7 +912,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
     func initAllDate(){
         
         // 初始化数据
-        meterType = 0
+        meterType = 14
         //        byteDate = nil
         //        // 记录扫描到的设备的UUID
         //        deviceDic = []

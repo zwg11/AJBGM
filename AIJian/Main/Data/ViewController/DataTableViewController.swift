@@ -440,22 +440,43 @@ extension DataTableViewController{
                      */
                     if let deleteResponse = JSONDeserializer<deleteResponse>.deserializeFrom(json: jsonString) {
                         // 如果 返回信息说明 请删除失败，则弹出警示框报错
+                        self.loadV.stopIndicator()
                         if deleteResponse.code != 1{
-                            self.loadV.stopIndicator()
+//                            self.loadV.stopIndicator()
                             let alert = CustomAlertController()
                             alert.custom(self, "Attention", "Delete failed, please try again later.")
                             // 删除失败函数直接退出
                             return
                         }else if (deleteResponse.code! == 2 ){
-                            self.loadV.stopIndicator()
-                            LoginOff.loginOff(self)
+                            let x = UIAlertController(title: "", message: "Your account is already logged in at the other end!", preferredStyle: .alert)
+                             let okAction = UIAlertAction(title: "Done", style: .default, handler: {
+                                   action in
+                                    LoginOff.loginOff(self)
+                             })
+                            //只加入确定按钮
+                            x.addAction(okAction)
+                            self.present(x, animated: true, completion: nil)
                         }else if (deleteResponse.code! == 3){
-                            LoginOff.loginOff(self)
-                            let alert = CustomAlertController()
-                            alert.custom(self,"Attention", "Your account has been disabled.Please contact oncall@acondiabetescare.com")
+                            let x = UIAlertController(title: "", message: "Your account has been disabled.Please contact oncall@acondiabetescare.com", preferredStyle: .alert)
+                             let okAction = UIAlertAction(title: "Done", style: .default, handler: {
+                                   action in
+                                    LoginOff.loginOff(self)
+                             })
+                            //只加入确定按钮
+                            x.addAction(okAction)
+                            self.present(x, animated: true, completion: nil)
+                        }else if (deleteResponse.code! == 4){
+                            let x = UIAlertController(title: "", message: "Your account does not exist", preferredStyle: .alert)
+                             let okAction = UIAlertAction(title: "Done", style: .default, handler: {
+                                   action in
+                                    LoginOff.loginOff(self)
+                             })
+                            //只加入确定按钮
+                            x.addAction(okAction)
+                            self.present(x, animated: true, completion: nil)
                         }else{
                             // 如果删除成功
-                            self.loadV.stopIndicator()
+//                            self.loadV.stopIndicator()
                             // ******** 删除数据库对应的数据 ***********
                             let dbSql = DBSQLiteManager()
                             if dbSql.deleteGlucoseRecord(gluData.bloodGlucoseRecordId!){

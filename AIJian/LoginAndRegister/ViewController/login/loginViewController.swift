@@ -17,8 +17,11 @@ class loginViewController: UIViewController,UITextFieldDelegate {
     var email:String?
     // 记录密码
     var password:String?
+    // 血糖记录
+    var glucoseRecords:[glucoseDate]?
 
     private lazy var indicator = CustomIndicatorView()
+    private lazy var indicatorForMeter = CustomIndicatorView()
 
     private lazy var loginview:loginView = {
         //从这里去寻找登录的视图
@@ -144,14 +147,17 @@ class loginViewController: UIViewController,UITextFieldDelegate {
                                 // 登陆成功，请求数据
                                 self.indicator.setLabelText("Login in Success，Initializing Data..")
                                 self.requestData(day: 3000)
-                            }else if(responseModel.code == -1){  //返回-1,表示账号被挤下去了
+                            }else if(responseModel.code == -1){  //返回-1,表示账号被停用了
                                 self.indicator.stopIndicator()
                                 self.indicator.removeFromSuperview()
                                 alertController.custom(self,"Attention", "Your account has been disabled.Please contact oncall@acondiabetescare.com")
-                            }else if(responseModel.code == -2){
+                            }else if(responseModel.code == -2){   // 返回-2，表示该邮箱未注册
                                 self.indicator.stopIndicator()
                                 self.indicator.removeFromSuperview()
+                                // 这里的提示信息要改一下
+                                
                                 alertController.custom(self,"Attention", "Email is not Registered")
+                                
                             }else{
                                 self.indicator.stopIndicator()
                                 self.indicator.removeFromSuperview()
@@ -219,6 +225,7 @@ class loginViewController: UIViewController,UITextFieldDelegate {
 
 
 extension loginViewController{
+    
     // 该函数向服务器请求数据并进行一定程度的数据处理
     // 包括对数据根据日期进行排序，之后分出日期和时间、分健康信息等
     // MARK: - requestData()
@@ -231,7 +238,7 @@ extension loginViewController{
         let dicStr:Dictionary = ["day":day,"userId":usr_id,"token":tk] as [String : Any]
        // print(dicStr)
         // 请求数据，请求信息如上字典
-        Alamofire.request(REQUEST_DATA_URL,method: .post,parameters: dicStr, headers:vheader).responseString{ (response) in
+        AlamofireManager.request(REQUEST_DATA_URL,method: .post,parameters: dicStr, headers:vheader).responseString{ (response) in
             if response.result.isSuccess {
                // print("收到回复")
                 if let jsonString = response.result.value {
@@ -249,46 +256,47 @@ extension loginViewController{
                             // 将风火轮移除，并停止转动
                             self.indicator.stopIndicator()
                             self.indicator.removeFromSuperview()
+                            // 重新将用户配置文件设为空
+                            UserInfo.setToken("")
                             
                             let alert = CustomAlertController()
                             alert.custom(self, "Attention", "\(recordInDaysResponse.msg!)")
                             return
                         }
-                        // 如果请求meter信息失败，不进行数据库操作
-                        if !self.GetMeterInfo(){
-                            // 将风火轮移除，并停止转动
-                            self.indicator.stopIndicator()
-                            self.indicator.removeFromSuperview()
-                            
-                            let alert = CustomAlertController()
-                            alert.custom(self, "Attention", "\(recordInDaysResponse.msg!)")
-                            return
-                        }
+                        // 存储血糖信息，请求meter信息
+                        self.glucoseRecords = recordInDaysResponse.data
+                        print("开始请求meter数据")
+                        self.GetMeterInfo()
                         
-                        // ******** 将得到的所有数据都添加到数据库 ***********
-                        let sqliteManager = DBSQLiteManager()
-                        // 创建表
-                        sqliteManager.createTable()
-                        // 如果服务器中有对应用户的数据，将数据添加到数据库
-                        if recordInDaysResponse.data != nil{
-                            sqliteManager.addGlucoseRecords(add: recordInDaysResponse.data!)
-                            
-                        }
                         
-                        // 将风火轮移除，并停止转动
-                        self.indicator.stopIndicator()
-                        self.indicator.removeFromSuperview()
                         
-                        // 显示tabbar
-                        let tabbar = AJTabbarController()
-                        //                                tabbar.isLogin = true
-                        tabbar.modalPresentationStyle = .fullScreen
-                        self.present(tabbar, animated: true, completion: nil)
+//                        // ******** 将得到的所有数据都添加到数据库 ***********
+//                        let sqliteManager = DBSQLiteManager()
+//                        // 创建表
+//                        sqliteManager.createTable()
+//                        // 如果服务器中有对应用户的数据，将数据添加到数据库
+//
+//                        if recordInDaysResponse.data != nil{
+//                            sqliteManager.addGlucoseRecords(add: recordInDaysResponse.data!)
+//
+//                        }
+//
+//                        // 将风火轮移除，并停止转动
+//                        self.indicator.stopIndicator()
+//                        self.indicator.removeFromSuperview()
+//
+//                        // 显示tabbar
+//                        let tabbar = AJTabbarController()
+//                        //                                tabbar.isLogin = true
+//                        tabbar.modalPresentationStyle = .fullScreen
+//                        self.present(tabbar, animated: true, completion: nil)
                         // 重新加载表格内容
                         //self.homeTableView.reloadData()
                     }
                 }
             }else{
+                // 重新将用户配置文件设为空
+                UserInfo.setToken("")
                 // 将风火轮移除，并停止转动
                 self.indicator.stopIndicator()
                 self.indicator.removeFromSuperview()
@@ -307,9 +315,9 @@ extension loginViewController{
     
     // MARK: - GetMeterInfo()
     // 获取该用户所使用过的血糖仪的记录
-    func GetMeterInfo()->Bool{
+    func GetMeterInfo(){
         //手动输入数据，请求部分
-        var isSuccess = true
+        
         let dictString = [ "userId":UserInfo.getUserId() as Any,"token":UserInfo.getToken()] as [String : Any]
         // 向服务器申请插入数据请求
         Alamofire.request(METERID_GET,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
@@ -328,48 +336,90 @@ extension loginViewController{
 //                        print("瞧瞧输出的是什么",responseModel.toJSONString(prettyPrint: true)!)
                         /*  此处为跳转和控制逻辑
                          */
-                        if(responseModel.code == 1 ){
-//                            print(responseModel.code as Any)
-//                            print("插入成功")
-                            
+                        if(responseModel.code == 1 ){ // 如果请求到meter数据
+
                             // 向配置文件存储最新记录
                             // 读取配置文件，获取meterID的内容
                             let path0 = PlistSetting.getFilePath(File: "otherSettings.plist")
                             let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path0)!
-//                            let arr = data["meterID"] as! NSMutableDictionary
                             let arr:NSMutableDictionary = [:]
-//                            var arr1:NSMutableDictionary = [:]
-//                            arr1["a"] = "b"
-//                            arr1 = arr
                             // 更新配置文件内容
                             if let Info = responseModel.data{
                                 for i in Info{
                                     arr[i.meterId as Any] = i.recentRecord
                                 }
                             }
-//                            arr["aa"] = "bb"
+
                             data["meterID"] = arr
                             data.write(toFile: path0, atomically: true)
-                            isSuccess = true
                             
-                        }else{
-//                            print(responseModel.code as Any)
-//                            print("插入失败")
-                            isSuccess = false
+                            // ******** 将得到的所有血糖数据都添加到数据库 ***********
+                            let sqliteManager = DBSQLiteManager()
+                            // 创建表
+                            sqliteManager.createTable()
+                            // 如果服务器中有对应用户的数据，将数据添加到数据库
+                            
+                            if self.glucoseRecords != nil{
+                                sqliteManager.addGlucoseRecords(add: self.glucoseRecords!)
+                                
+                            }
+                            
+                            // 将风火轮移除，并停止转动
+                            self.indicator.stopIndicator()
+                            self.indicator.removeFromSuperview()
+                            
+                            // 显示tabbar
+                            let tabbar = AJTabbarController()
+                            
+                            tabbar.modalPresentationStyle = .fullScreen
+                            self.present(tabbar, animated: true, completion: {
+                                self.glucoseRecords = nil
+                            })
+                            
+                        }else{ // 如果没请求到数据
+                            // 重新将用户配置文件设为空
+                            UserInfo.setToken("")
+                            // 将风火轮移除，并停止转动
+                            self.indicator.stopIndicator()
+                            self.indicator.removeFromSuperview()
+                            
+                            let alert = CustomAlertController()
+                            alert.custom(self, "Attention", "\(responseModel.msg!)")
                         }
                     } //end of letif
                     else{
-                        isSuccess = false
+                        // 将风火轮移除，并停止转动
+                        // 重新将用户配置文件设为空
+                        UserInfo.setToken("")
+                        self.indicator.stopIndicator()
+                        self.indicator.removeFromSuperview()
+                        
+                        let alert = CustomAlertController()
+                        alert.custom(self, "Attention", "Internet Error")
                     }
                 }else{
-                    isSuccess = false
+                    // 将风火轮移除，并停止转动
+                    // 重新将用户配置文件设为空
+                    UserInfo.setToken("")
+                    self.indicator.stopIndicator()
+                    self.indicator.removeFromSuperview()
+                    
+                    let alert = CustomAlertController()
+                    alert.custom(self, "Attention", "Internet Error")
                 }
             }// 请求失败
             else{
-                isSuccess = false
+                // 重新将用户配置文件设为空
+                UserInfo.setToken("")
+                // 将风火轮移除，并停止转动
+                self.indicator.stopIndicator()
+                self.indicator.removeFromSuperview()
+                
+                let alert = CustomAlertController()
+                alert.custom(self, "Attention", "Internet Error")
             }
         }//end of request
-        return isSuccess
+        
     }
     
 

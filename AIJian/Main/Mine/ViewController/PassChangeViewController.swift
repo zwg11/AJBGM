@@ -263,13 +263,32 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
                                     self.verfiedPasswd_textF.text! = ""
                                     self.navigationController?.popToRootViewController(animated: false)
                                 }else if (responseModel.code! == 2 ){
-                                    LoginOff.loginOff(self)
-                                    let alert = CustomAlertController()
-                                    alert.custom(self, "Attention", "Your account is already logged in at the other end!")
+                                    let x = UIAlertController(title: "", message: "Your account is already logged in at the other end!", preferredStyle: .alert)
+                                    let okAction = UIAlertAction(title: "Done", style: .default, handler: {
+                                          action in
+                                            LoginOff.loginOff(self)
+                                     })
+                                     //只加入确定按钮
+                                    x.addAction(okAction)
+                                    self.present(x, animated: true, completion: nil)
                                 }else if (responseModel.code! == 3){
-                                    LoginOff.loginOff(self)
-                                    let alert = CustomAlertController()
-                                    alert.custom(self,"Attention", "Your account has been disabled.Please contact oncall@acondiabetescare.com")
+                                    let x = UIAlertController(title: "", message: "Your account has been disabled.Please contact oncall@acondiabetescare.com", preferredStyle: .alert)
+                                    let okAction = UIAlertAction(title: "Done", style: .default, handler: {
+                                             action in
+                                            LoginOff.loginOff(self)
+                                     })
+                                     //只加入确定按钮
+                                    x.addAction(okAction)
+                                     self.present(x, animated: true, completion: nil)
+                                }else if (responseModel.code! == 4){
+                                    let x = UIAlertController(title: "", message: "Your account does not exist", preferredStyle: .alert)
+                                    let okAction = UIAlertAction(title: "Done", style: .default, handler: {
+                                          action in
+                                           LoginOff.loginOff(self)
+                                     })
+                                      //只加入确定按钮
+                                    x.addAction(okAction)
+                                    self.present(x, animated: true, completion: nil)
                                 }else{
                                     alert.custom_cengji(self,"Attention", "Password Reset Failure")
                                     self.oldPasswd_textF.text! = ""

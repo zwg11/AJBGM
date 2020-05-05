@@ -72,7 +72,16 @@ class registerViewController: UIViewController,UITextFieldDelegate {
 
         self.automaticallyAdjustsScrollViewInsets = false
     }
-    
+//    let alertProctoController = UIAlertController(title: "Attention",message: "",
+//                                            preferredStyle: .alert)
+//
+//    func getNSAtributedString(str:String){
+//        let myMutableString = NSMutableAttributedString(string:str)
+//        let range2 = NSMakeRange(2, 2)
+//        myMutableString.addAttribute, range: <#T##NSRange#>)
+//    }
+        
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
@@ -83,6 +92,13 @@ class registerViewController: UIViewController,UITextFieldDelegate {
 //        self.view.backgroundColor = ThemeColor
         self.view.backgroundColor = UIColor.clear
         self.title = "Sign Up"
+        
+//        var labela = UILabel.init()
+//        let stringa = "Hello world"
+//        labela.attributedText = getNSAtributedString(str: stringa)
+//
+        
+        
         register.NoResponseProtocolLogo.addTarget(self, action: #selector(ClickIcon), for: .touchUpInside)
         register.NoResponseProtocolInfo.addTarget(self, action: #selector(ClickProtocol), for: .touchUpInside)
         self.view.addSubview(register)
@@ -157,7 +173,36 @@ class registerViewController: UIViewController,UITextFieldDelegate {
         }else if passwordSec!.count >= 254 {
             return
         }else if isAgree == false{
-            alertController.custom(self, "Attention", "Please Agree the Protocol")
+            let text = "Agree Registration Agreement and Submit the Information"
+            let textRange = NSMakeRange(6, 22)
+            let attributedText = NSMutableAttributedString(string:text)
+            attributedText.addAttribute(NSAttributedString.Key.underlineStyle,value: NSUnderlineStyle.single.rawValue, range: textRange)
+            
+            let lab = UILabel()
+           
+            let width1 = UIScreen.main.bounds.width
+            lab.numberOfLines = 0
+            lab.lineBreakMode = .byWordWrapping
+                        
+            lab.attributedText = attributedText
+            lab.textAlignment = .center
+            
+            lab.sizeToFit()
+            let alertController = UIAlertController(title: "Attention",message: "\n\n",
+            preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "Done", style: .default, handler: {
+                    action in
+            })
+            alertController.view.addSubview(lab)
+            lab.snp.makeConstraints{(make) in
+                make.width.equalTo(width1-80)
+                make.top.equalToSuperview().offset(20)
+                make.centerX.equalToSuperview()
+                make.height.equalTo(100)
+            }
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
+
             return
         }else{
             // 初始化UI

@@ -218,10 +218,26 @@ extension HomeViewController{
                             //没过期，允许使用，跳转到tabBar这个地方
                             //print("你的token还能用")
 //                            self.window?.rootViewController = tabBarController
-                        }else{  //token过期了,不让用
+                        }else if(responseModel.code == 4 ){ // 该用户不存在了
+                            // 跳转到登录界面
+                            let viewController = loginViewController()
+                            let loginNv = loginNavigationController(rootViewController: viewController)
+                            loginNv.modalPresentationStyle = .fullScreen
+                            let alertToLigin = UIAlertController(title: "Attention", message: "Your account does not exist", preferredStyle: .alert)
+                            let okAction = UIAlertAction(title: "Done", style: .default, handler:{
+                                action in
+                                // 跳转到登录界面
+                                self.present(loginNv, animated: true, completion: nil)
+                                // 清空token和userid和email
+                                UserInfo.setToken("")
+                                UserInfo.setUserId(0)
+                                UserInfo.setEmail("")
+                            })
+                            alertToLigin.addAction(okAction)
+                            self.present(alertToLigin, animated: true, completion: nil)
+                        }
+                        else{  //token过期了,不让用
                             //过期了，需要清空app文件中的token
-                            //print("你的token过期了")
-                            //                                UserInfo.setToken("")
                             // 跳转到登录界面 
                             let viewController = loginViewController()
                             let loginNv = loginNavigationController(rootViewController: viewController)
@@ -242,8 +258,6 @@ extension HomeViewController{
             }else{  //没网的时候
                 //print("网络链接失败")
                 // 跳转到登录界面
-//                let viewController = loginViewController()
-//                let loginNv = loginNavigationController(rootViewController: viewController)
                 let alertToLigin = UIAlertController(title: "Attention", message: "The Internet Doesn't Work,Data Change is Not Allowed.", preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "Done", style: .default, handler:{
                     action in

@@ -7,6 +7,6 @@
 	<key>WeightUnit</key>
 	<string>kg</string>
 	<key>BloodUnit</key>
-	<string>mmol/L</string>
+	<string>mg/dL</string>
 </dict>
 </plist>

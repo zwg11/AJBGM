@@ -29,7 +29,17 @@ class LoginOff{
         let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
         data.setObject("", forKey: "token" as NSCopying )
         data.write(toFile: path, atomically: true)
+        // 删除数据库中所有的血糖数据
         DBSQLiteManager.manager.deleteAllGlucoseRecord()
+        
+        // 清空meterid的数据
+        let path0 = PlistSetting.getFilePath(File: "otherSettings.plist")
+        let data0:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path0)!
+        
+        let arr:NSMutableDictionary = [:]
+        
+        data0["meterID"] = arr
+        data0.write(toFile: path0, atomically: true)
     }
     
 }

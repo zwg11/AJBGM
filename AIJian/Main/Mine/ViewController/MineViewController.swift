@@ -153,13 +153,32 @@ class MineViewController: UIViewController {
                             DBSQLiteManager.manager.updateUserInfo(responseModel.data!)
                             self.tableview.reloadRows(at: [IndexPath(row:0,section:0)], with: .none)
                         }else if (responseModel.code! == 2 ){
-                            LoginOff.loginOff(self)
-                            let alert = CustomAlertController()
-                            alert.custom(self, "", "Your account is already logged in at the other end!")
+                            let x = UIAlertController(title: "", message: "Your account is already logged in at the other end!", preferredStyle: .alert)
+                            let okAction = UIAlertAction(title: "Done", style: .default, handler: {
+                                        action in
+                                        LoginOff.loginOff(self)
+                            })
+                            //只加入确定按钮
+                             x.addAction(okAction)
+                             self.present(x, animated: true, completion: nil)
                         }else if (responseModel.code! == 3){
-                            LoginOff.loginOff(self)
-                            let alert = CustomAlertController()
-                            alert.custom(self,"Attention", "Your account has been disabled.Please contact oncall@acondiabetescare.com")
+                            let x = UIAlertController(title: "", message: "Your account has been disabled.Please contact oncall@acondiabetescare.com", preferredStyle: .alert)
+                            let okAction = UIAlertAction(title: "Done", style: .default, handler: {
+                                        action in
+                                        LoginOff.loginOff(self)
+                            })
+                            //只加入确定按钮
+                             x.addAction(okAction)
+                             self.present(x, animated: true, completion: nil)
+                        }else if(responseModel.code! == 4){
+                            let x = UIAlertController(title: "", message: "Your account does not exist", preferredStyle: .alert)
+                            let okAction = UIAlertAction(title: "Done", style: .default, handler: {
+                                        action in
+                                        LoginOff.loginOff(self)
+                            })
+                            //只加入确定按钮
+                             x.addAction(okAction)
+                             self.present(x, animated: true, completion: nil)
                         }else{
                             let alert = CustomAlertController()
                             alert.custom(self, "Attention", "Unable to get the information")

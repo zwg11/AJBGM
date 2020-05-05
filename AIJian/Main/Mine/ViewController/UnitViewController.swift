@@ -188,7 +188,7 @@ class UnitViewController: UIViewController {
         self.view.addSubview(line_frame1)
         line_frame1.snp.makeConstraints{ (make) in
             make.height.equalTo(0.5)
-            make.width.equalTo(AJScreenWidth)
+//            make.width.equalTo(AJScreenWidth)
             make.left.equalTo(AJScreenWidth/15)
             make.right.equalTo(-AJScreenWidth/15)
             make.top.equalTo(text_Glucose.snp.bottom).offset(1)
@@ -222,7 +222,7 @@ class UnitViewController: UIViewController {
         self.view.addSubview(line_frame2)
         line_frame2.snp.makeConstraints{ (make) in
             make.height.equalTo(0.5)
-            make.width.equalTo(AJScreenWidth)
+//            make.width.equalTo(AJScreenWidth)
             make.left.equalTo(AJScreenWidth/15)
             make.right.equalTo(-AJScreenWidth/15)
             make.top.equalTo(text_Weight.snp.bottom).offset(1)
