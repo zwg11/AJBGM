@@ -30,13 +30,13 @@
 		<true/>
 	</dict>
 	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>APP need to use BLE to connect bloodglucose machine</string>
+	<string>App needs to use BLE to connect bloodglucose machine</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>APP need to use BLE to connect bloodglucose machine</string>
+	<string>App needs to use BLE to connect bloodglucose machine</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string></string>
+	<string>App needs to generate photos for sharing or storing locally</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string></string>
+	<string>App needs to generate photos for sharing or storing locally</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

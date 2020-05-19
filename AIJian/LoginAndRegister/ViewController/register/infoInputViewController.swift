@@ -26,7 +26,7 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
     //体重
     var weightKg:Double? 
     //国家
-    var country:String? = "China"
+    var country:String? = "Azerbaijan"
     //电话
     var phoneNumber:String? = ""
     //时间

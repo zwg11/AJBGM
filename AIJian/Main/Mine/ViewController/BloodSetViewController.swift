@@ -797,7 +797,8 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
                 alert.custom(self, "", "The lower limit of fasting should be less than the upper limit of after meal")
                 return
             }
-            
+            //在每个用户输入之时，会保存两个时候的值， mg/dL和mmol/L都是有保存下来的，到最后全部保存到文件
+        
             //第二步，保存写入userBloodSetting.plist文件中
             save_data.write(toFile: save_path, atomically: true)
             save_mgdl_data.write(toFile: save_mgdl_path, atomically: true)
@@ -811,11 +812,11 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             let f_Double:Double = Double(((save_data["afterDinnerHighLimit"] as? NSNumber)?.stringValue)!)!
             let g_Double:Double = Double(((save_data["randomDinnerLowLimit"] as? NSNumber)?.stringValue)!)!
             let h_Double:Double = Double(((save_data["randomDinnerHighLimit"] as? NSNumber)?.stringValue)!)!
-            showPlaceholder(String(a_Double),String(b_Double),String(c_Double),String(d_Double),String(e_Double),String(f_Double),String(g_Double),String(h_Double))
+        showPlaceholder(String(a_Double),String(b_Double),String(c_Double),String(d_Double),String(e_Double),String(f_Double),String(g_Double),String(h_Double))
             clearEmpty()
             alert.custom_cengji(self,"","Save Success")
             
-            
+          //---------------------------------------------------------------------------------------------------------------------------------
         }else{  //此单位为mg/dL
             //空腹
             //获得用户缺省值的下限

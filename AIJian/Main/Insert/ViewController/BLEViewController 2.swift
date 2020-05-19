@@ -32,7 +32,9 @@ import HandyJSON
 // 需要用的服务的 CBUUID
 let glucoseDevServiceCBUUID = CBUUID(string: "C14D2C0A-401F-B7A9-841F-E2E93B80F631")
 
-
+/*
+ Obtain the Bluetooth permission of the device to connect to ble to transfer data
+ */
 
 class BLEViewController: UIViewController ,CBCentralManagerDelegate,
 CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
@@ -404,7 +406,8 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                             
                             let meterStr = "&T"+String(self.meterType,radix: 16).uppercased()+" "
                             let order = meterStr + crc.string2CRC(string: meterStr)
-                            
+                            print("所发字符"+meterStr)
+                            print("所发的顺序"+order)
                             // 将字符串转为Data，发送蓝牙命令必须为Data型
                             let byteDate0 = order.data(using: .utf8)
                             peripheral.writeValue(byteDate0!, for: self.writeCharacteristic!, type: .withoutResponse)
@@ -855,6 +858,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         let crc = CRC16()
         let meterStr = "&T"+String(meterType,radix:16)+" "
         let order = meterStr + crc.string2CRC(string: meterStr)
+        print("顺序"+order)
         
         // 将字符串转为Data，发送蓝牙命令必须为Data型
         byteDate = order.data(using: .utf8)

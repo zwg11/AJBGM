@@ -245,7 +245,7 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
                                 
 //                            }
                         }else if (responseModel.code! == 2 ){
-                            let x = UIAlertController(title: "", message: "Your account is already logged in at the other end!", preferredStyle: .alert)
+                            let x = UIAlertController(title: "", message: "Your account was logged in on another device,it will log out there!", preferredStyle: .alert)
                             let okAction = UIAlertAction(title: "Done", style: .default, handler: {
                                 action in
                                 LoginOff.loginOff(self)
@@ -296,7 +296,7 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
                 //print("插入失败")
                 // 插入成功
                 let alert = CustomAlertController()
-                alert.custom(self, "", "Insert Failed,Please Try Again Later.")
+                alert.custom(self, "", "Internet Error,Please Try Again Later.")
                 self.button.isEnabled = true
             }
         }//end of request
@@ -457,7 +457,7 @@ extension gluViewController{
                                     LoginOff.loginOff(self)
                                     
                                     let alert = CustomAlertController()
-                                    alert.custom(self, "", "Your account is already logged in at the other end!")
+                                    alert.custom(self, "", "Your account was logged in on another device,it will log out there!")
                                 }else if (responseModel.code! == 3){
                                     LoginOff.loginOff(self)
                                     let alert = CustomAlertController()
