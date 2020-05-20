@@ -28,7 +28,7 @@ class ChartViewController: UIViewController,ChartViewDelegate{
         view.lineChartView.xAxis.labelCount = 4
         return view
     }()
-    
+    let indicator = CustomIndicatorView()
     private lazy var staticV:StaticView = {
         let view = StaticView()
         view.setupUI()
@@ -73,6 +73,9 @@ class ChartViewController: UIViewController,ChartViewDelegate{
         //        self.view.backgroundColor = ThemeColor
         self.view.backgroundColor = UIColor.clear
         // Do any additional setup after loading the view.
+        
+        indicator.setupUI("",UIColor.clear)
+//        indicator.backgroundColor = UIColor.clear
         // 监听所选时间范围的变化
         NotificationCenter.default.addObserver(self, selector: #selector(test), name: NSNotification.Name(rawValue: "reloadChart"), object: nil)
         initChart()
@@ -106,7 +109,6 @@ class ChartViewController: UIViewController,ChartViewDelegate{
 //            make.edges.equalToSuperview()
 //        }
 //        indicator.startIndicator()
-        
         initChart()
         staticV.initLabelText()
         
@@ -114,78 +116,102 @@ class ChartViewController: UIViewController,ChartViewDelegate{
     }
     
     func initChart(){
-        
-        
-        // 画限制线，标明低于和高于的界限
-        // 该界限获取自动适应单位，所以不需判断单位
-        //        print("lowLimit:\(GetBloodLimit.getRandomDinnerLow())")
-        // 移除所有限制线
-        for i in lineChartView.lineChartView.leftAxis.limitLines{
-            lineChartView.lineChartView.leftAxis.removeLimitLine(i)
+        // 风火轮加载
+        self.view.addSubview(indicator)
+        indicator.snp.makeConstraints{ (make) in
+            make.edges.equalToSuperview()
         }
-        // 得到数据中的血糖最大值
-        var maxGluValue = 0.0
-        if glucoseTimeAndValue.count > 0{
-            for i in glucoseTimeAndValue{
-                if maxGluValue < i.value{
-                    maxGluValue = i.value
+        indicator.startIndicator()
+        // 移除原图表
+        lineChartView.removeFromSuperview()
+        // 异步设置图表
+        DispatchQueue.global().async {
+            // 设置x轴的最大坐标值
+//            self.lineChartView.lineChartView.xAxis.axisMaximum = Double(daysNum!)
+            // 画限制线，标明低于和高于的界限
+            // 该界限获取自动适应单位，所以不需判断单位
+            //        print("lowLimit:\(GetBloodLimit.getRandomDinnerLow())")
+            // 移除所有限制线
+            for i in self.lineChartView.lineChartView.leftAxis.limitLines{
+                self.lineChartView.lineChartView.leftAxis.removeLimitLine(i)
+            }
+            // 得到数据中的血糖最大值
+            var maxGluValue = 0.0
+            if glucoseTimeAndValue.count > 0{
+                for i in glucoseTimeAndValue{
+                    if maxGluValue < i.value{
+                        maxGluValue = i.value
+                    }
+                }
+            }
+            // print("maxgluvalue:",maxGluValue)
+            // 如果maxGluValue不超过300，则y轴坐标最大值为300，否则设为maxGluValue+10
+            if GetUnit.getBloodUnit() == "mmol/L"{
+                if maxGluValue < 16.6{
+                    self.lineChartView.lineChartView.leftAxis.axisMaximum = 16.6
+                }else{
+                    self.lineChartView.lineChartView.leftAxis.axisMaximum = maxGluValue+2
+                }
+                
+            }else{
+                if maxGluValue < 300{
+                    self.lineChartView.lineChartView.leftAxis.axisMaximum = 300
+                }else{
+                    self.lineChartView.lineChartView.leftAxis.axisMaximum = maxGluValue+10
+                }
+                //                lineChartView.lineChartView.leftAxis.axisMaximum = 300
+            }
+            
+            
+            let low = GetBloodLimit.getEmptyStomachLow()
+            let high = GetBloodLimit.getAfterDinnerTop()
+            let Orange = kRGBColor(255, 165, 0, 0.5)
+            let Red = kRGBColor(255, 0, 0, 0.5)
+            self.lineChartView.addLimitLine(low, low, Orange)
+            self.lineChartView.addLimitLine(high, high, Red)
+  
+            // 主程序中刷新图表
+            DispatchQueue.main.async {
+                self.lineChartView.lineChartView.xAxis.axisMaximum = Double(daysNum!)
+                // 根据所选中的时间范围器元素决定各界面的数据如何初始化
+                switch pickerSelectedRow{
+                case 1,2,3:
+                    // 初始化 图标所需要的数据
+                    let array = xAxisArray(Days: daysNum!)
+                    let data1 = recentDaysData(Days: daysNum!)
+                    // 设置x轴的最大坐标值
+                    //                 self.lineChartView.lineChartView.xAxis.axisMaximum = Double(daysNum!)
+                    self.lineChartView.drawLineChart(xAxisArray: array as NSArray,xAxisData: data1)
+                    //                NotificationCenter.default.post(name: NSNotification.Name("loadEnd"), object: self, userInfo: nil)
+                    
+                default:
+                    
+                    let list = DateToData(startD!, endD!)
+                    let xAxisArr = xAxisArray(startDate: startD!, endDate: endD!) as NSArray
+                    self.lineChartView.drawLineChart(xAxisArray: xAxisArr,xAxisData: list)
+                }
+                self.indicator.stopIndicator()
+                
+                self.view.addSubview(self.lineChartView)
+                self.lineChartView.snp.makeConstraints{(make) in
+                    make.left.equalToSuperview().offset(AJScreenWidth/30)
+                    make.right.equalToSuperview().offset(-AJScreenWidth/30)
+                    
+                    //            make.top.equalTo(self.headerView.snp.bottom)
+                    make.top.equalToSuperview()
+                    make.bottom.equalTo(self.staticV.snp.top)
                 }
             }
         }
-       // print("maxgluvalue:",maxGluValue)
-        // 如果maxGluValue不超过300，则y轴坐标最大值为300，否则设为maxGluValue+10
-        if GetUnit.getBloodUnit() == "mmol/L"{
-            if maxGluValue < 16.6{
-                lineChartView.lineChartView.leftAxis.axisMaximum = 16.6
-            }else{
-                lineChartView.lineChartView.leftAxis.axisMaximum = maxGluValue+2
-            }
-            
-        }else{
-            if maxGluValue < 300{
-                lineChartView.lineChartView.leftAxis.axisMaximum = 300
-            }else{
-                lineChartView.lineChartView.leftAxis.axisMaximum = maxGluValue+10
-            }
-            //                lineChartView.lineChartView.leftAxis.axisMaximum = 300
-        }
-        
-        
-        let low = GetBloodLimit.getEmptyStomachLow()
-        let high = GetBloodLimit.getAfterDinnerTop()
-        let Orange = kRGBColor(255, 165, 0, 0.5)
-        let Red = kRGBColor(255, 0, 0, 0.5)
-        lineChartView.addLimitLine(low, low, Orange)
-        lineChartView.addLimitLine(high, high, Red)
-        // 根据所选中的时间范围器元素决定各界面的数据如何初始化
-        switch pickerSelectedRow{
-        case 1,2,3:
-            // 初始化 图标所需要的数据
-            let array = xAxisArray(Days: daysNum!)
-            let data1 = recentDaysData(Days: daysNum!)
-            // 设置x轴的最大坐标值
-            lineChartView.lineChartView.xAxis.axisMaximum = Double(daysNum!)
-            lineChartView.drawLineChart(xAxisArray: array as NSArray,xAxisData: data1)
-        default:
-            // 设置x轴的最大坐标值
-            lineChartView.lineChartView.xAxis.axisMaximum = Double(daysNum!)
-            lineChartView.drawLineChart(xAxisArray: xAxisArray(startDate: startD!, endDate: endD!) as NSArray,xAxisData: DateToData(startD!, endD!))
-        }
+
     }
-    
     
     //    折线上的点选中回调
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry,highlight: Highlight) {
-      //  print("选中了一个数据")
         //显示该点的MarkerView标签
         self.showMarkerView(valuey: "\(entry.y)",valuex:"\(entry.x)")
-        
     }
-    // 点击空白处回调
-    //    func chartValueNothingSelected(_ chartView: ChartViewBase) {
-    //        print("nothing 111")
-    //    }
-    //
+    
     // 背景图，点击后MarkerView消失
     private lazy var backButton:UIButton = {
         let button = UIButton.init(type: .system)

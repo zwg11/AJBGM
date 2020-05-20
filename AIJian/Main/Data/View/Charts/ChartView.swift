@@ -150,7 +150,7 @@ class ChartView: UIView ,ChartViewDelegate{
         
         lineChartView.data = data
         // 设置画图动画
-        lineChartView.animate(xAxisDuration: 1.0, yAxisDuration: 1.0, easingOption: .easeInBack)
+//        lineChartView.animate(xAxisDuration: 1.0, yAxisDuration: 1.0, easingOption: .easeInBack)
     }
     
     // 该函数应传值 x轴坐标和

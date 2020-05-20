@@ -31,6 +31,7 @@ class CustomIndicatorView: UIView {
     }
     // 风火轮控件停止旋转
     func stopIndicator(){
+        sleep(1)
         Indicator.stopAnimating()
         self.removeFromSuperview()
     }
@@ -48,9 +49,9 @@ class CustomIndicatorView: UIView {
     }
     
     // 传入label的文本内容
-    func setupUI(_ text:String){
+    func setupUI(_ text:String,_ bgcolor:UIColor = UIColor.lightGray){
         // 设置背景为浅灰色
-        self.backgroundColor = UIColor.lightGray
+        self.backgroundColor = bgcolor
         // 设置透明度为0.8
         self.alpha = 0.5
         label.text = text
