@@ -241,7 +241,7 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
                             self.emailCommponent.textField.text! = UserInfo.getEmail()
                             self.telephoneCommponent.textField.text! = ""
                         }else if (responseModel.code! == 2 ){
-                            let x = UIAlertController(title: "", message: "Your account is already logged in at the other end!", preferredStyle: .alert)
+                            let x = UIAlertController(title: "", message: "Your account was logged in on another device,it will log out there!", preferredStyle: .alert)
                              let okAction = UIAlertAction(title: "Done", style: .default, handler: {
                                    action in
                                     LoginOff.loginOff(self)
