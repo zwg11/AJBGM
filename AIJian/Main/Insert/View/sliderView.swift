@@ -11,7 +11,7 @@ import SnapKit
 
 class sliderView: UIView {
 
-    private var lowView = UILabel()
+    private var lowView = UIView()
     private var normalView = UIView()
     private var highView = UIView()
     

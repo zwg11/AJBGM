@@ -74,16 +74,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
-        // 分割线颜色
-//        DATATableView.separatorColor = UIColor.white
-        DATETableView.separatorColor = TextGrayColor
-        // 刷新控件设置
-//        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-        //不需要松开自动刷新数据
-//        refreshControl.attributedTitle = NSAttributedString(string: "松开后自动刷新")
-//        mainScrollView.addSubview(refreshControl)
 
-//        mainScrollView.backgroundColor = ThemeColor
         mainScrollView.backgroundColor = UIColor.clear
         mainScrollView.alwaysBounceVertical = true
         self.view.addSubview(mainScrollView)
@@ -98,7 +89,8 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         DATETableView.dataSource = self
         DATETableView.delegate = self
         DATETableView.isScrollEnabled = false
-        
+        // 分割线和背景颜色
+        DATETableView.separatorColor = UIColor.clear
         DATETableView.backgroundColor = UIColor.clear
 
         // 内含滚动视图设置
@@ -110,24 +102,15 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         
 //        mainScrollView.addSubview(scroll)
         // 数据表格设置
-//        DATATableView.dataSource = self
-//        DATATableView.delegate = self
-//        DATATableView.isScrollEnabled = false
-//        DATATableView.backgroundColor = UIColor.clear
-//        scroll.addSubview(DATATableView)
+
+        DATATableView.dataSource = self
+        DATATableView.delegate = self
+        DATATableView.isScrollEnabled = false
+        DATATableView.backgroundColor = UIColor.clear
+        // 设置分割线颜色
+        DATATableView.separatorColor = UIColor.clear
         
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTable), name: NSNotification.Name(rawValue: "reloadTable"), object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(UpdateSuccess), name: NSNotification.Name(rawValue: "Update success"), object: nil)
-        
-        
-    }
-    
-    @objc func refreshData(){
-        // 重新加载列表数据
-        DATATableView.reloadData()
-        DATETableView.reloadData()
-        // 结束刷新
-//        refreshControl.endRefreshing()
     }
     
     @objc func reloadTable(){
@@ -155,15 +138,12 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
 
     }
     
-    
     // MARK: - 设置导航栏头部尾部高度，注意heightFor和viewFor函数都实现才能调节高度
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        
         return 40
     }
     // 设置单元格高度
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         return 44
     }
     // 设置表格头部视图
@@ -225,7 +205,6 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
 
             remarkLabel.frame = CGRect(x: offsetX, y: 0, width: 200, height: 40)
             view.addSubview(remarkLabel)
-            //        view.backgroundColor = ThemeColor
             view.backgroundColor = kRGBColor(17, 56, 86, 1)
 
             return view
@@ -362,12 +341,12 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         // create a tableView
         // **********其宽度要根据计算得出，高度也是根据数据量计算得出************
         DATATableView.frame = CGRect(x: 0, y: 0, width: 9*90 + 200, height: scHeight)
-        DATATableView.dataSource = self
-        DATATableView.delegate = self
-        DATATableView.isScrollEnabled = false
-        DATATableView.backgroundColor = UIColor.clear
-        // 设置分割线颜色
-        DATATableView.separatorColor = UIColor.clear
+//        DATATableView.dataSource = self
+//        DATATableView.delegate = self
+//        DATATableView.isScrollEnabled = false
+//        DATATableView.backgroundColor = UIColor.clear
+//        // 设置分割线颜色
+//        DATATableView.separatorColor = UIColor.clear
         // 清除滚动视图中的内容
         while scroll.subviews.last != nil{
             scroll.subviews.last?.removeFromSuperview()

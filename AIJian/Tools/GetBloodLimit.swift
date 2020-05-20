@@ -127,7 +127,7 @@ public class GetBloodLimit{
         let a:Double = Double(((mmsave_data["randomDinnerLowLimit"]  as? NSNumber)?.stringValue)!)!
         
         let mgsave_data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: unit_mgdl_save_path)!
-        let b:Double = Double(((mgsave_data["randomDinnerHighLimit"]  as? NSNumber)?.stringValue)!)!
+        let b:Double = Double(((mgsave_data["randomDinnerLowLimit"]  as? NSNumber)?.stringValue)!)!
         // 根据单位返回对应的正常范围
         if GetUnit.getBloodUnit() == "mmol/L"{
             return a

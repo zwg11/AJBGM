@@ -956,7 +956,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         
         // 首先确定命令字符串
         let crc = CRC16()
-        let meterStr = "&T"+String(self.meterType,radix: 16)+" "
+        let meterStr = "&T"+String(self.meterType,radix: 16).uppercased()+" "
         let order = meterStr + crc.string2CRC(string: meterStr)
         
         // 将字符串转为Data，发送蓝牙命令必须为Data型
