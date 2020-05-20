@@ -63,12 +63,13 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
     // 数据tableView
     var DATATableView:UITableView = UITableView()
 
+    let indicator = CustomIndicatorView()
     // 整个页面的滚动视图
     var mainScrollView:UIScrollView = UIScrollView()
     // 只含有 数据tableView 的滚动视图
     var scroll:UIScrollView = UIScrollView()
     // 刷新控件
-    var refreshControl = UIRefreshControl()
+//    var refreshControl = UIRefreshControl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,10 +78,10 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
 //        DATATableView.separatorColor = UIColor.white
         DATETableView.separatorColor = TextGrayColor
         // 刷新控件设置
-        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+//        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         //不需要松开自动刷新数据
 //        refreshControl.attributedTitle = NSAttributedString(string: "松开后自动刷新")
-        mainScrollView.addSubview(refreshControl)
+//        mainScrollView.addSubview(refreshControl)
 
 //        mainScrollView.backgroundColor = ThemeColor
         mainScrollView.backgroundColor = UIColor.clear
@@ -91,6 +92,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
             //make.height.equalTo(520)
         }
         
+        indicator.setupUI("",UIColor.clear)
         // create a tableView
         // **********其宽度要根据计算得出，高度也是根据数据量计算得出************
         DATETableView.dataSource = self
@@ -117,6 +119,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTable), name: NSNotification.Name(rawValue: "reloadTable"), object: nil)
 //        NotificationCenter.default.addObserver(self, selector: #selector(UpdateSuccess), name: NSNotification.Name(rawValue: "Update success"), object: nil)
         
+        
     }
     
     @objc func refreshData(){
@@ -124,7 +127,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         DATATableView.reloadData()
         DATETableView.reloadData()
         // 结束刷新
-        refreshControl.endRefreshing()
+//        refreshControl.endRefreshing()
     }
     
     @objc func reloadTable(){
@@ -133,8 +136,12 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         self.scroll.contentOffset = CGPoint(x: 0, y: 0)
         //mainScrollView.removeFromSuperview()
         // 可以刷新了
-        initTable()
-        initScroll()
+        self.initTable()
+        DispatchQueue.main.async {
+            self.initScroll()
+        }
+//        initTable()
+//        initScroll()
         
         
     }
@@ -302,9 +309,10 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         self.scroll.contentOffset = CGPoint(x: 0, y: 0)
         //mainScrollView.removeFromSuperview()
         // 可以刷新了
-        initTable()
-        initScroll()
-       // print("当前控制器的父控制器",self.parent ?? "没有")
+        self.initTable()
+        DispatchQueue.main.async {
+            self.initScroll()
+        }
     }
     // MARK: - initScroll
     // 初始化滚动视图、设置页面的所有滚动视图和表格的大小和坐标
@@ -365,6 +373,8 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
             scroll.subviews.last?.removeFromSuperview()
         }
         scroll.addSubview(DATATableView)
+        
+        indicator.stopIndicator()
     }
     // 没有数据时在视图中心显示该标签
     private lazy var label:UILabel = {
@@ -379,6 +389,12 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
     }()
     
     func initTable(){
+        self.view.addSubview(indicator)
+        indicator.snp.makeConstraints{ (make) in
+            make.edges.equalToSuperview()
+        }
+        indicator.startIndicator()
+        
         self.view.addSubview(label)
         label.snp.makeConstraints{(make) in
             make.left.right.equalToSuperview()
@@ -387,14 +403,14 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         // 重新加载表格内容
 //        DATATableView.tableHeaderView = nil
 //        DATATableView.tableHeaderView = DataTableViewOfHeader.init()
-        DATATableView.reloadData()
+        
         // 刷新之前清除单元格所有内容
 //        for i in DATETableView.visibleCells{
 //            while i.contentView.subviews.last != nil{
 //                i.contentView.subviews.last?.removeFromSuperview()
 //            }
 //        }
-        DATETableView.reloadData()
+        
 
 //        DATATableView.layoutIfNeeded()
 //        DATETableView.layoutIfNeeded()
@@ -402,7 +418,11 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         if sortedTime.count > 0{
             label.removeFromSuperview()
         }
-        
+        // 主程序异步更新表格数据
+        DispatchQueue.main.async {
+            self.DATATableView.reloadData()
+            self.DATETableView.reloadData()
+        }
     }
 }
 

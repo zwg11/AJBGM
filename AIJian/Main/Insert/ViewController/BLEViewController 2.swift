@@ -856,7 +856,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         
         // 首先确定命令字符串
         let crc = CRC16()
-        let meterStr = "&T"+String(meterType,radix:16)+" "
+        let meterStr = "&T"+String(meterType,radix:16).uppercased()+" "
         let order = meterStr + crc.string2CRC(string: meterStr)
         print("顺序"+order)
         

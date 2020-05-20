@@ -330,7 +330,7 @@ class perAndAfterMealTests: UIView {
     }
     // 总体检测视图内容初始化
     func totalInit(){
-        checkViewTitle.text = "Total - \(totalNum) Tests"
+        
         var lower = 0   // 低于
         var normal = 0  // 正常
         var high = 0    // 高于
@@ -339,29 +339,29 @@ class perAndAfterMealTests: UIView {
         // 因此需依次判断
         if totalNum > 0{
             if GetUnit.getBloodUnit() == "mg/dL"{
-                
+
                 if perMealNum > 0{
                     // perMeal
                     for i in perMealData{
                         if Double(i.bloodGlucoseMg!) < GetBloodLimit.getBeforeDinnerLow(){
-                            
+
                             lower += 1
                         }else if Double(i.bloodGlucoseMg!) < GetBloodLimit.getBeforeDinnerTop(){
-                            
+
                             normal += 1
                         }else{
                             high += 1
                         }
                     }
                 }
-                
+
                 if afterMealNum > 0{
                     // afterMeal
                     for i in afterMealData{
                         if Double(i.bloodGlucoseMg!) < GetBloodLimit.getAfterDinnerLow(){
                             lower += 1
                         }else if Double(i.bloodGlucoseMg!) < GetBloodLimit.getAfterDinnerTop(){
-                            
+
                             normal += 1
                         }else{
                             high += 1
@@ -369,79 +369,83 @@ class perAndAfterMealTests: UIView {
                     }
 
                 }
-                
+
                 if otherNum > 0{
                     // other
                     for i in otherData{
                         if Double(i.bloodGlucoseMg!) < GetBloodLimit.getRandomDinnerLow(){
                             lower += 1
                         }else if Double(i.bloodGlucoseMg!) < GetBloodLimit.getRandomDinnerTop(){
-                            
+
                             normal += 1
                         }else{
                             high += 1
                         }
                     }
                 }
-                
-                
+
+
             }else{
                 if perMealNum > 0{
                     // perMeal
                     for i in perMealData{
                         if i.bloodGlucoseMmol! < GetBloodLimit.getBeforeDinnerLow(){
-                            
+
                             lower += 1
                         }else if i.bloodGlucoseMmol! < GetBloodLimit.getBeforeDinnerTop(){
-                            
+
                             normal += 1
                         }else{
                             high += 1
                         }
                     }
                 }
-                
-                
+
+
                 if afterMealNum > 0{
                     // afterMeal
                     for i in afterMealData{
                         if i.bloodGlucoseMmol! < GetBloodLimit.getAfterDinnerLow(){
-                            
+
                             lower += 1
                         }else if i.bloodGlucoseMmol! < GetBloodLimit.getAfterDinnerTop(){
-                            
+
                             normal += 1
                         }else{
                             high += 1
                         }
                     }
                 }
-                
-                
+
+
                 if otherNum > 0{
                     // other
                     for i in otherData{
                         if i.bloodGlucoseMmol! < GetBloodLimit.getRandomDinnerLow(){
-                            
+
                             lower += 1
                         }else if i.bloodGlucoseMmol! < GetBloodLimit.getRandomDinnerTop(){
-                            
+
                             normal += 1
                         }else{
                             high += 1
                         }
                     }
                 }
-                
+
             }
         }
-        
-        // 初始化label，如果有数据则初始化，没有就全为0
-        initLabel(lower: lower, normal: normal, high: high, total: totalNum)
+        DispatchQueue.main.async {
+            self.checkViewTitle.text = "Total - \(self.totalNum) Tests"
+            // 初始化label，如果有数据则初始化，没有就全为0
+            self.initLabel(lower: lower, normal: normal, high: high, total: self.totalNum)
+        }
     }
     // 餐前检测视图内容初始化
     func perMealInit(){
-        checkViewTitle.text = "Before Meal - \(perMealNum) Tests"
+        DispatchQueue.main.async {
+            self.checkViewTitle.text = "Before Meal - \(self.perMealNum) Tests"
+        }
         
         var lower = 0   // 低于
         var normal = 0  // 正常
@@ -451,10 +455,10 @@ class perAndAfterMealTests: UIView {
             if GetUnit.getBloodUnit() == "mg/dL"{
                 for i in perMealData{
                     if Double(i.bloodGlucoseMg!) < GetBloodLimit.getBeforeDinnerLow(){
-                        
+
                         lower += 1
                     }else if Double(i.bloodGlucoseMg!) < GetBloodLimit.getBeforeDinnerTop(){
-                        
+
                         normal += 1
                     }else{
                         high += 1
@@ -464,39 +468,41 @@ class perAndAfterMealTests: UIView {
                 // perMeal
                 for i in perMealData{
                     if i.bloodGlucoseMmol! < GetBloodLimit.getBeforeDinnerLow(){
-                        
+
                         lower += 1
                     }else if i.bloodGlucoseMmol! < GetBloodLimit.getBeforeDinnerTop(){
-                        
+
                         normal += 1
                     }else{
                         high += 1
                     }
                 }
-                
+
             }
-            
+
         }
-        
-        // 初始化label，如果有数据则初始化，没有就全为0
-        initLabel(lower: lower, normal: normal, high: high, total: perMealNum)
+        DispatchQueue.main.async {
+            // 初始化label，如果有数据则初始化，没有就全为0
+            self.initLabel(lower: lower, normal: normal, high: high, total: self.perMealNum)
+        }
     }
     // 餐后检测视图内容初始化
     func afterMealInit(){
-        checkViewTitle.text = "After Meal - \(afterMealNum) Tests"
-
+        DispatchQueue.main.async {
+            self.checkViewTitle.text = "After Meal - \(self.afterMealNum) Tests"
+        }
         var lower = 0   // 低于
         var normal = 0  // 正常
         var high = 0    // 高于
         // 遍历餐后数据，根据范围得到对应的次数
         if afterMealNum > 0{
-            
+
             if GetUnit.getBloodUnit() == "mg/dL"{
                 for i in afterMealData{
                     if Double(i.bloodGlucoseMg!) < GetBloodLimit.getAfterDinnerLow(){
                         lower += 1
                     }else if Double(i.bloodGlucoseMg!) < GetBloodLimit.getAfterDinnerTop(){
-                            
+
                         normal += 1
                     }else{
                         high += 1
@@ -505,20 +511,22 @@ class perAndAfterMealTests: UIView {
             }else{
                 for i in afterMealData{
                     if i.bloodGlucoseMmol! < GetBloodLimit.getAfterDinnerLow(){
-                            
+
                         lower += 1
                     }else if i.bloodGlucoseMmol! < GetBloodLimit.getAfterDinnerTop(){
-                            
+
                         normal += 1
                     }else{
                         high += 1
                     }
                 }
-                
+
             }
         }
-        // 初始化label，如果有数据则初始化，没有就全为0
-        initLabel(lower: lower, normal: normal, high: high, total: afterMealNum)
+        DispatchQueue.main.async {
+            // 初始化label，如果有数据则初始化，没有就全为0
+            self.initLabel(lower: lower, normal: normal, high: high, total: self.afterMealNum)
+        }
     }
     // 初始化label
     func initLabel(lower:Int,normal:Int,high:Int,total:Int){

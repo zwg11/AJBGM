@@ -43,6 +43,7 @@ class StatisticalDataViewController: UIViewController,UIScrollViewDelegate {
         view.setupUI()
         return view
     }()
+    let indicator = CustomIndicatorView()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -108,6 +109,8 @@ class StatisticalDataViewController: UIViewController,UIScrollViewDelegate {
         }
     // 设置通知，当选择日期范围改变时执行动作来更新视图内容
         NotificationCenter.default.addObserver(self, selector: #selector(test), name: NSNotification.Name(rawValue: "reloadData"), object: nil)
+        // 风火轮UI初始化
+        indicator.setupUI("", UIColor.clear)
     }
     // 更新视图内容
     @objc func test(){
@@ -123,19 +126,30 @@ class StatisticalDataViewController: UIViewController,UIScrollViewDelegate {
 
 
     func initContent(){
-        
-        // 平均视图初始化
-        averageview.labelUpdate()
-        // 对检测视图的数据进行初步处理
-        totalview.checkInit()
-        // 总体检测视图初始化
-        totalview.totalInit()
-        // 饭前检测视图初始化
-        perMeal.checkInit()
-        perMeal.perMealInit()
-        // 饭后s检测视图初始化
-        afterMeal.checkInit()
-        afterMeal.afterMealInit()
+        // 风火轮启动
+        self.view.addSubview(indicator)
+        indicator.snp.makeConstraints{ (make) in
+            make.edges.equalToSuperview()
+        }
+        indicator.startIndicator()
+        DispatchQueue.global().async {
+            // 平均视图初始化
+            self.averageview.labelUpdate()
+            // 对检测视图的数据进行初步处理
+            self.totalview.checkInit()
+            // 总体检测视图初始化
+            self.totalview.totalInit()
+            // 饭前检测视图初始化
+            self.perMeal.checkInit()
+            self.perMeal.perMealInit()
+            // 饭后s检测视图初始化
+            self.afterMeal.checkInit()
+            self.afterMeal.afterMealInit()
+            // 风火轮结束
+            DispatchQueue.main.async {
+                self.indicator.removeFromSuperview()
+            }
+        }
     }
 
 }

@@ -61,7 +61,7 @@ class GeneralStatusView: UIView {
     }()
     
     private lazy var chart = ChartView()
-    
+    let indicator = CustomIndicatorView()
     
     func setupUI(){
         chart.lineChartView.leftAxis.labelTextColor = UIColor.black
@@ -94,7 +94,6 @@ class GeneralStatusView: UIView {
         }
         // 画图标
         self.addSubview(chart)
-        initChart()
         chart.setupUI()
         chart.lineChartView.leftAxis.labelFont = UIFont.systemFont(ofSize: 20)
         chart.lineChartView.xAxis.labelFont = UIFont.systemFont(ofSize: 15.0)
@@ -115,18 +114,30 @@ class GeneralStatusView: UIView {
         self.backgroundColor = UIColor.white
         self.frame = CGRect(x: 0, y: 2000, width: 1200, height: 1100 )
         NotificationCenter.default.addObserver(self, selector: #selector(test), name: NSNotification.Name(rawValue: "reloadView"), object: nil)
-        
+        indicator.setupUI("", UIColor.clear)
     }
     
     @objc func test(){
         // 可以刷新了
-        initChart()
+        DispatchQueue.global().async {
+            
+            self.initChart()
+        }
         StaticExcel.initViewData()
 
     }
     
     func initChart(){
         // 得到数据中的血糖最大值
+        DispatchQueue.main.async {
+            
+            self.superview!.addSubview(self.indicator)
+            self.indicator.snp.makeConstraints{ (make) in
+                make.edges.equalToSuperview()
+            }
+            self.indicator.startIndicator()
+        }
+        
          var maxGluValue = 0.0
          if glucoseTimeAndValue.count > 0{
              for i in glucoseTimeAndValue{
@@ -161,7 +172,6 @@ class GeneralStatusView: UIView {
 
         // 初始化 图标所需要的数据
         let array = xAxisArray(Days: daysNum!)
-        let data1 = recentDaysData(Days: daysNum!)
         // 根据所选中的时间范围器元素决定各界面的数据如何初始化
         // 画限制线，标明低于和高于的界限
         // 该界限获取自动适应单位，所以不需判断单位
@@ -180,14 +190,22 @@ class GeneralStatusView: UIView {
 //        chart.addLimitLine(GetBloodLimit.getAfterDinnerTop(), "高于", Red)
         chart.lineChartView.xAxis.gridColor = UIColor.lightGray
         chart.lineChartView.leftAxis.gridColor = UIColor.lightGray
-        switch pickerSelectedRow{
-        case 1,2,3:
-            chart.lineChartView.xAxis.axisMaximum = Double(daysNum!)
-            chart.drawLineChartWithoutAnimate(xAxisArray: array as NSArray,xAxisData: data1)
-        default:
-            chart.lineChartView.xAxis.axisMaximum = Double(daysNum!)
-            chart.drawLineChartWithoutAnimate(xAxisArray: xAxisArray(startDate: startD!, endDate: endD!) as NSArray,xAxisData: DateToData(startD!, endD!))
+        DispatchQueue.main.async {
+            // 画图
+            switch pickerSelectedRow{
+            case 1,2,3:
+                self.chart.lineChartView.xAxis.axisMaximum = Double(daysNum!)
+                let data1 = recentDaysData(Days: daysNum!)
+                self.chart.drawLineChartWithoutAnimate(xAxisArray: array as NSArray,xAxisData: data1)
+            default:
+                self.chart.lineChartView.xAxis.axisMaximum = Double(daysNum!)
+                self.chart.drawLineChartWithoutAnimate(xAxisArray: xAxisArray(startDate: startD!, endDate: endD!) as NSArray,xAxisData: DateToData(startD!, endD!))
+            }
+            // 风火轮停止
+            self.indicator.stopIndicator()
         }
+          
+        
     }
 
 }
