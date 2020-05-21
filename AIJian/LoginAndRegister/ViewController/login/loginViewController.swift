@@ -54,18 +54,15 @@ class loginViewController: UIViewController,UITextFieldDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//         print("qqqqqqqqqqqqqqqq",FormatMethodUtil.validateEmail(email: "berapin.wu@aconlab.com.cn"))
-//        print("qqqqqqqqqqqqqqqq",FormatMethodUtil.validateEmail(email: "berapin_.wu@_aconlab.com.cn"))
         if UserInfo.getEmail() != ""{
             loginview.userNameTextField.text! = UserInfo.getEmail()
-        }else{
-            
         }
         self.navigationController?.isNavigationBarHidden = true
         self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController!.navigationBar.isTranslucent = true
         
         self.automaticallyAdjustsScrollViewInsets = false
+        loginview.passwordTextField.text! = ""
     }
     
     /*
