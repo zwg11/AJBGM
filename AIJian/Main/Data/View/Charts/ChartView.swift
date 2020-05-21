@@ -131,9 +131,9 @@ class ChartView: UIView ,ChartViewDelegate{
         // 根据entry的y坐标的大小不同设置不同的颜色
         for i in 0..<set1.count{
 //            print("要画的第\(i)个点。")
-            if set1[i].y > GetBloodLimit.getRandomDinnerTop(){
+            if set1[i].y > GetBloodLimit.getAfterDinnerTop(){
                 colors.append(UIColor.red)
-            }else if set1[i].y < GetBloodLimit.getRandomDinnerLow(){
+            }else if set1[i].y < GetBloodLimit.getEmptyStomachLow(){
 //                colors.append(UIColor.yellow)
                 colors.append(UIColor.orange)
             }else{
@@ -150,7 +150,7 @@ class ChartView: UIView ,ChartViewDelegate{
         
         lineChartView.data = data
         // 设置画图动画
-        lineChartView.animate(xAxisDuration: 1.0, yAxisDuration: 1.0, easingOption: .easeInBack)
+//        lineChartView.animate(xAxisDuration: 1.0, yAxisDuration: 1.0, easingOption: .easeInBack)
     }
     
     // 该函数应传值 x轴坐标和
@@ -197,9 +197,9 @@ class ChartView: UIView ,ChartViewDelegate{
         // 根据entry的y坐标的大小不同设置不同的颜色
         for i in 0..<set1.count{
 //            print("要画的第\(i)个点。")
-            if set1[i].y > GetBloodLimit.getRandomDinnerTop(){
+            if set1[i].y > GetBloodLimit.getAfterDinnerTop(){
                 colors.append(UIColor.red)
-            }else if set1[i].y < GetBloodLimit.getRandomDinnerLow(){
+            }else if set1[i].y < GetBloodLimit.getEmptyStomachLow(){
 //                colors.append(UIColor.yellow)
                 colors.append(UIColor.orange)
             }else{

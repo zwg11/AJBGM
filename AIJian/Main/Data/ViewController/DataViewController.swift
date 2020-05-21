@@ -36,6 +36,7 @@ class DataViewController: UIViewController {
         return button
     }()
     
+    let indicator = CustomIndicatorView()
     
     
     
@@ -210,10 +211,18 @@ class DataViewController: UIViewController {
                 self.topConstraint = make.top.equalTo(self.navigationController!.bottomLayoutGuide.snp.bottom).offset(40).constraint
             }
         }
+        
+        indicator.setupUI("")
         NotificationCenter.default.addObserver(self, selector: #selector(notReload), name: NSNotification.Name(rawValue: "notReload"), object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(loadEnd), name: NSNotification.Name(rawValue: "loadEnd"), object: nil)
     }
     @objc func notReload(){
         isReload = false
+    }
+    
+    @objc func loadEnd(){
+        indicator.stopIndicator()
+        indicator.removeFromSuperview()
     }
 
 //    override var shouldAutorotate: Bool{
@@ -273,7 +282,8 @@ class DataViewController: UIViewController {
             isReload = true
         }
         // 识别 导航栏右按钮标题，做出相应值的设置
-        setDaysAndRange()
+        // 此时不需通知各页面刷新数据
+        setDaysAndRange(false)
         
         
     }
@@ -325,8 +335,8 @@ class DataViewController: UIViewController {
     }()
     // 自定义选择日期的 设置日期按钮被选中时 的动作
     @objc func selectCustomRange(){
-        
-        //print("select CustomRange")
+        // 选择日期范围视图移除
+        customRange.removeFromSuperview()
         
         let customSD = customRange.startDatePicker.date
         let customED = customRange.endDatePicker.date
@@ -347,10 +357,8 @@ class DataViewController: UIViewController {
 //            alert.custom(self, "Attention", "The Time Span Shall Not Greater Than 31 Days")
 //        }
             
-//            将日期选择器移除并处理数据
-        else{
-            // 选择日期范围视图移除
-            customRange.removeFromSuperview()
+
+        else{   // 将日期选择器移除并处理数据
             // 更新按钮标题
             rangePickerButton.setTitle(dateRangePicker.selectedContent, for: .normal)
             // 设置开始时间和结束时间
@@ -370,9 +378,8 @@ class DataViewController: UIViewController {
             pickerSelectedRow = 4
             
             // 执行对日期范围选定后的数据处理
-            setDaysAndRange()
+            setDaysAndRange(true)
             // 打印 开始时间 和 结束时间
-            //print("startD:\(startD),endD:\(endD)")
         }
     }
     
@@ -443,7 +450,7 @@ class DataViewController: UIViewController {
                 
             }
             // 识别 导航栏右按钮标题，做出相应值的设置
-            setDaysAndRange()
+            setDaysAndRange(true)
         }
         
       //  print("sure button clicked")
@@ -496,9 +503,8 @@ class DataViewController: UIViewController {
     
     
     // 对于导航栏右按钮的标题不同，做不同的事情
-    func setDaysAndRange(){
+    func setDaysAndRange(_ isNotify:Bool){
 //        let x = Date().dateAt(.endOfDay)
-//    print("x",x)
         let today = DateInRegion().dateAt(.endOfDay).date
       //  print("today:",today)
         
@@ -539,7 +545,13 @@ class DataViewController: UIViewController {
             chartData()
             
         }
-
+        // 设置是否通知子页面刷新数据
+        if(isNotify){
+            notify()
+        }
+    }
+    
+    func notify(){
         // 根据当前所在的页面刷新对应页面的数据显示
         switch self.pageViewManager.titleView.currentIndex{
         case 0:// 设置通知，通知控制器重新加载他的界面
@@ -552,10 +564,6 @@ class DataViewController: UIViewController {
             NotificationCenter.default.post(name: NSNotification.Name("reloadView"), object: self, userInfo: nil)
             
         }
-        // 设置通知，通知其他控制器重新加载他们的界面
-        //NotificationCenter.default.post(name: NSNotification.Name("reload"), object: self, userInfo: nil)
-
-    
     }
     deinit {
         NotificationCenter.default.removeObserver(self)

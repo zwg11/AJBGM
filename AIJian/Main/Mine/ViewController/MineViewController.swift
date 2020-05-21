@@ -16,7 +16,7 @@ class MineViewController: UIViewController {
     //请求出现转的效果，增加用户体验
     private lazy var indicator:CustomIndicatorView = {
         let view = CustomIndicatorView.init(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: AJScreenHeight))
-        view.setupUI("")
+        view.setupUI("",UIColor.clear)
         //view.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.1)
         return view
     }()

@@ -212,8 +212,12 @@ class averageView: UIView {
 
     // 初始化视图数据
     func labelUpdate(){
+        DispatchQueue.main.async {
+            // 单位更新
+            self.glucoseUnit.text = GetUnit.getBloodUnit()
+        }
         // 单位更新
-        glucoseUnit.text = GetUnit.getBloodUnit()
+//        glucoseUnit.text = GetUnit.getBloodUnit()
         // 如果有数据
         if sortedByDateOfData!.count > 0{
             // 计算各个label应有的内容
@@ -258,22 +262,38 @@ class averageView: UIView {
             }
             
             standardDaviation = sqrt(sumStandardDaviation/Double(sumCheckNum))
-            
-            // 将计算结果赋值给对应的label
-            if GetUnit.getBloodUnit() == "mg/dL"{
-                glucoseValue.text = String(format: "% .0f", avgGlucoseValue!)
-            }else{
-                glucoseValue.text = String(format: "% .1f", avgGlucoseValue!)
+            DispatchQueue.main.async {
+                // 将计算结果赋值给对应的label
+                if GetUnit.getBloodUnit() == "mg/dL"{
+                    self.glucoseValue.text = String(format: "% .0f", self.avgGlucoseValue!)
+                }else{
+                    self.glucoseValue.text = String(format: "% .1f", self.avgGlucoseValue!)
+                }
+                
+                self.standardDeValue.text = String(format: "% .1f", self.standardDaviation!)
+                self.testNum.text = String(format: "% .1f", self.avgCheckNum!)
             }
-            
-            standardDeValue.text = String(format: "% .1f", standardDaviation!)
-            testNum.text = String(format: "% .1f", avgCheckNum!)
+            // 将计算结果赋值给对应的label
+//            if GetUnit.getBloodUnit() == "mg/dL"{
+//                glucoseValue.text = String(format: "% .0f", avgGlucoseValue!)
+//            }else{
+//                glucoseValue.text = String(format: "% .1f", avgGlucoseValue!)
+//            }
+//
+//            standardDeValue.text = String(format: "% .1f", standardDaviation!)
+//            testNum.text = String(format: "% .1f", avgCheckNum!)
  
         }else{
+            DispatchQueue.main.async {
+                // 如果e没数据，则至为 ” - “
+                self.glucoseValue.text = "-"
+                self.standardDeValue.text = "-"
+                self.testNum.text = "-"
+            }
             // 如果e没数据，则至为 ” - “
-            glucoseValue.text = "-"
-            standardDeValue.text = "-"
-            testNum.text = "-"
+//            glucoseValue.text = "-"
+//            standardDeValue.text = "-"
+//            testNum.text = "-"
         }
     }
     
