@@ -213,7 +213,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
 //        central.stopScan()
         stopScanTimer()
         print("connnected success!!")
-
+        logUpload("connnected success!!")
         
         // 设置外设代理，并记录连接的外设对象
         peripheral.delegate = self
@@ -225,7 +225,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
     
     // MARK: - 连接设备失败时回调的方法
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-        print("连接失败")
+        self.logUpload("连接失败")
         loadV.stopIndicator()
         let x = UIAlertController(title: "", message: "Connect Failed", preferredStyle: .alert)
         self.present(x, animated: true, completion: {()->Void in
@@ -237,7 +237,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
     
     // 断开连接时回调的方法
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        print("断开连接")
+        self.logUpload("断开连接")
         loadV.stopIndicator()
         let x = UIAlertController(title: "", message: "Disconnect From Meter", preferredStyle: .alert)
         self.present(x, animated: true, completion: {()->Void in
@@ -251,17 +251,18 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         // 失败时输出对应的错误
         if ((error) != nil){
-            print("查找services时\(peripheral.name!)报错\(String(describing: error?.localizedDescription))")
+            self.logUpload("查找services时\(peripheral.name!)报错\(String(describing: error?.localizedDescription))")
         }
         else{
             for i:CBService in peripheral.services!{
-                print("外设中有服务:\(i.uuid)")
-                print("service：\(i)")
+                self.logUpload("外设中有服务:\(i.uuid)")
+                self.logUpload("service：\(i)")
                 // 连接相应的服务
                 if i.uuid.isEqual(CBUUID(string: "C14D2C0A-401F-B7A9-841F-E2E93B80F631"))
                 {
                     // 发现服务的特征值
                     peripheral.discoverCharacteristics(nil, for: i)
+                    logUpload("连接了C14D2C0A-401F-B7A9-841F-E2E93B80F631服务")
                     print("连接了C14D2C0A-401F-B7A9-841F-E2E93B80F631服务")
                 }
             }
@@ -270,6 +271,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
     //  MARK: - 发现特征值成功
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         print("发现特征值成功")
+        logUpload("发现特征值成功")
         var isSetNotify = false
         var isWrite = false
         for characteristic in service.characteristics!{
@@ -351,6 +353,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
             // 在主程序中刷新
             DispatchQueue.main.async {
                 print("收到数据")
+                self.logUpload("收到数据")
                 // 输出结果
                 print(String(data: characteristic.value!, encoding: .utf8) ?? " nothing ")
                 // 使用变量记录传输过来的 data
@@ -368,6 +371,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                         self.meterID = replyDateStr
                         print("当前设备的meterID为：\(replyDateStr)")
                         print("收到meterID,查看是否之前与之通信过")
+                        self.logUpload("当前设备的meterID为：\(replyDateStr),收到meterID,查看是否之前与之通信过")
                         
                         // 由于本次测试的仪器的 2个特征值都相同，所以要向有 write 属性的特征值发送数据
                         // 如果存储 meterID 的数组包含 蓝牙发送过来的meterID
@@ -377,6 +381,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
 //                            self.loadV.setLabelText("Discover Past Communication Records,Transferring Records")
                             self.loadV.setLabelText("Data is in History Transmission Records")
                             print("通信过，发送App记录的最晚通讯记录，包括时间、血糖值、标记位")
+                            self.logUpload("通信过，发送App记录的最晚通讯记录，包括时间、血糖值、标记位")
                             // 获取上一次传输的最新记录
                             let str = self.meterIDs![replyDateStr] as! String
                             // 按空格分开
@@ -394,6 +399,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                             // 改变显示在屏幕的提示标签文本
 //                            self.loadV.setLabelText("未发现之前的通讯记录，让血糖仪发送所有数据")
                             self.loadV.setLabelText("No History Transmission Record.Accept All Data from Meter")
+                            self.logUpload("No History Transmission Record.Accept All Data from Meter")
                             peripheral.writeValue("&N1 13183".data(using: .utf8)!, for: self.writeCharacteristic!, type: .withoutResponse)
                             //self.meterIDs![replyDateStr] = ""
                         }
@@ -408,6 +414,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                             let order = meterStr + crc.string2CRC(string: meterStr)
                             print("所发字符"+meterStr)
                             print("所发的顺序"+order)
+                            self.logUpload("尝试其他的 meter类型,发送命令\(order)")
                             // 将字符串转为Data，发送蓝牙命令必须为Data型
                             let byteDate0 = order.data(using: .utf8)
                             peripheral.writeValue(byteDate0!, for: self.writeCharacteristic!, type: .withoutResponse)
@@ -416,15 +423,18 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                         else{
                             
                             print("无法识别的仪器类型")
+                            self.logUpload("无法识别的仪器类型")
                             wrongInfo = "Unrecognizable Meter Type"
                             
                         }
                     }
                 case "D":
                     print("收到对时间的回复")
+                    self.logUpload("收到对时间的回复")
                     // 收到对时间的确认，发送血糖值
                     if replyDateStr == "&D1 12639"{
                         print("发送血糖值")
+                        self.logUpload("发送血糖值")
                         // 获取上一次传输的最新记录
                         let str = self.meterIDs![self.meterID] as! String
                         // 按空格分开
@@ -434,17 +444,17 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
 //                        let date = "&R158 "
                         // 字符串 + CRC
                         let SendData = date + crc.string2CRC(string: date)
-                        print("CRC验证码为：\(SendData)")
+                        self.logUpload("CRC验证码为：\(SendData)")
                         peripheral.writeValue(SendData.data(using: .utf8)!, for: self.writeCharacteristic!, type: .withoutResponse)
                     }else{
                         //                            self.sthWrong = true
                         wrongInfo = "Incorrect Receiving of Blood Glucose Meter Information"
                     }
                 case "R":
-                    print("收到对血糖值的回复")
+                    self.logUpload("收到对血糖值的回复")
                     // 收到对血糖值的确认，发送标志位
                     if replyDateStr == "&R1 62910"{
-                        print("发送标志位")
+                        self.logUpload("发送标志位")
                         // 获取上一次传输的最新记录
                         let str = self.meterIDs![self.meterID] as! String
                         // 按空格分开
@@ -452,22 +462,22 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                         // 抽出标志位，并将其转为一定格式的字符串
                         let date = "&K" + array[2] + " "
 //                        let date = "&K0 "
-                        print(array[2])
+                        self.logUpload(array[2])
                         // 字符串 + CRC
                         let SendData = date + crc.string2CRC(string: date)
-                        print("CRC验证码为：\(SendData)")
+                        self.logUpload("CRC验证码为：\(SendData)")
                         peripheral.writeValue(SendData.data(using: .utf8)!, for: self.writeCharacteristic!, type: .withoutResponse)
                     }else{
                         //                            self.sthWrong = true
                         wrongInfo = "Incorrect Receiving of Blood Glucose Meter Information"
                     }
                 case "K":
-                    print("收到对标志位的回复")
+                    self.logUpload("收到对标志位的回复")
                     // 收到对标志位的确认，告诉仪器发送数据
                     if replyDateStr == "&K1 12911"{
-                        print("告诉仪器发送数据")
+                        self.logUpload("告诉仪器发送数据")
                         let SendData = "&N0 " + crc.string2CRC(string: "&N0 ")
-                        print("CRC验证码为：\(SendData)")
+                        self.logUpload("CRC验证码为：\(SendData)")
                         peripheral.writeValue(SendData.data(using: .utf8)!, for: self.writeCharacteristic!, type: .withoutResponse)
                     }else{
                         //                            self.sthWrong = true
@@ -480,7 +490,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                     // 如果数据长度 >12，说明是数据。将数据解析出来并存入相应数组中
                     // 数据本身也要存入数组方便之后的CRC验证
                     if replyDateStr.count>12{
-                        print("收到血糖数据")
+                        self.logUpload("收到血糖数据")
                         if self.isFirstRecord{
                             
                             self.lastRecord = replyDateStr
@@ -545,13 +555,13 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                             
                             if String(crc.getCRC(arr: self.dataSting)) != replyDateStr[3,replyDateStr.count-2]{
                                 
-                                print("CRC:\(String(replyDateStr[2,replyDateStr.count-1]))验证错误，数据可能来源非法。")
+                                self.logUpload("CRC:\(String(replyDateStr[2,replyDateStr.count-1]))验证错误，数据可能来源非法。")
                                 wrongInfo = "CRC ERROR"
                                 //                                    self.sthWrong = true
                                 
                             }
                             else{
-                                print("CRC:\(String(replyDateStr[2,replyDateStr.count-1])) 验证正确。跳转页面显示血糖数据")
+                                self.logUpload("CRC:\(String(replyDateStr[2,replyDateStr.count-1])) 验证正确。跳转页面显示血糖数据")
                                 
                                 // 将加载视图移除界面，并使其图片动画停止
 //                                self.loadV.removeFromSuperview()
@@ -594,7 +604,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                                     self.navigationController?.pushViewController(gluVC, animated: true)
                                     
                                 }else{
-                                    print("有错误，不跳转")
+                                    self.logUpload("有错误，不跳转")
                                 }
                                 
                             }
@@ -611,16 +621,16 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                                     wrongInfo = "No Data in the Meter"
                                     
                                     self.meterType = 14
-                                    print("No Data Need To Send.")
+                                    self.logUpload("No Data Need To Send.")
                                 }else{
                                     print("将要传输的数据数量量")
                                     // 包含空格，那么该数据包含将要发送过来的数据数量
                                     // 形式类似于 &N10 63614
                                     let array:Array<String> = replyDateStr.components(separatedBy: " ")
-                                    print("将要传输\(array[0][2,array[0].count-1])个数据。")
+                                    self.logUpload("将要传输\(array[0][2,array[0].count-1])个数据。")
                                     if array[0][2,array[0].count-1] == "0"{
                                         wrongInfo = "No New Data in the Meter"
-                                        print("No New Data In Machine")
+                                        self.logUpload("No New Data In Machine")
                                         self.meterType = 14
                                     }
                                     self.dataCount = Int(array[0][2,array[0].count-1])!
@@ -631,7 +641,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                     }
                 default:
                     self.meterType = 14
-                    print("unknown")
+                    self.logUpload("unknown")
                     wrongInfo = "unknown error occured."
                     
                 }
@@ -655,10 +665,10 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
     // 发送命令的回调
     func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
         if (error != nil)  {
-            print("发生错误:\(String(describing: error))")
+            self.logUpload("发生错误:\(String(describing: error))")
         }
         else{
-            print("发送命令成功。")
+            self.logUpload("发送命令成功。")
         }
     }
     
@@ -684,7 +694,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         peripherals = []
         deviceDic = []
         deviceName = []
-        print("点击 扫描设备 按钮")
+        self.logUpload("点击 扫描设备 按钮")
         self.centralManager?.scanForPeripherals(withServices: [glucoseDevServiceCBUUID])
         tableView.reloadData()
         // 对c扫描时间进行计时
@@ -858,7 +868,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         let crc = CRC16()
         let meterStr = "&T"+String(meterType,radix:16).uppercased()+" "
         let order = meterStr + crc.string2CRC(string: meterStr)
-        print("顺序"+order)
+        self.logUpload("命令"+order)
         
         // 将字符串转为Data，发送蓝牙命令必须为Data型
         byteDate = order.data(using: .utf8)
@@ -869,7 +879,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         
         // 设置为字典型
         meterIDs = data1["meterID"] as? NSMutableDictionary
-        print("存储的meterID有:\(String(describing: meterIDs))")
+        self.logUpload("存储的meterID有:\(String(describing: meterIDs))")
         //         //取出对应的meterID的数据
         //        print(meterIDs!.value(forKey: "&M103D003E5F3 12496") as! String)
         //         //查看是否有某个 key 值
@@ -892,7 +902,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         let array:Array<String> = string.components(separatedBy: " ")
         // 将字符串拆成 每个字符串只包含一个字符 的 字符串数组
         //let data = array[0].components(separatedBy: "")
-        print("处理后的数据\(array)")
+        self.logUpload("处理后的数据\(array)")
         let data = array[0]
         // 将其组合为时间，格式为 20xx-xx-xx xx:xx 年-月-日 小时:分钟
         //let date = "20"+data[6]+data[7]+"-"+data[2]+data[3]+"-"+data[4]+data[5]+" "+data[8]+data[9]+":"+data[10]+data[11]
@@ -968,14 +978,25 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         
         // 设置为字典型
         meterIDs = data1["meterID"] as? NSMutableDictionary
-        print("存储的meterID有:\(String(describing: meterIDs))")
+        self.logUpload("存储的meterID有:\(String(describing: meterIDs))")
     }
     
     
 }
 
 extension BLEViewController{
-
+    
+    // 上传日志
+    func logUpload(_ info:String) {
+        let dictString = [ "bugInfo": info]
+        let logURL = "http://120.78.167.239:8080/app/bugUpload"
+        // 向服务器申请插入数据请求
+        AlamofireManagerForBLE.request(logURL,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
+            if response.result.isSuccess{
+                
+            }
+        }//end of request
+    }
 
     // MARK: - 为连接设备进行计时
     // 1.开始计时
@@ -1049,7 +1070,7 @@ extension BLEViewController{
             self.button.setTitle("Scan", for: .normal)
             // 不要忘了设置second以便下次使用
             second1 = 10
-            print("stop scan")
+            self.logUpload("stop scan")
          }
      }
 }
