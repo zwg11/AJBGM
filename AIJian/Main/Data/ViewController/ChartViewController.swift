@@ -39,15 +39,6 @@ class ChartViewController: UIViewController,ChartViewDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        //        self.view.addSubview(headerView)
-        //
-        //        self.headerView.snp.makeConstraints{(make) in
-        //            make.left.right.top.equalToSuperview()
-        //            make.height.equalTo(44)
-        //
-        //        }
-        
         self.view.addSubview(staticV)
         staticV.snp.makeConstraints{(make) in
             make.left.right.equalToSuperview()
@@ -81,38 +72,21 @@ class ChartViewController: UIViewController,ChartViewDelegate{
         initChart()
     }
     
+    
     @objc func test(){
-        // 风火轮启动
-//        let indicator = CustomIndicatorView.init(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: AJScreenHeight))
-        // 这样不行，不显示
-        // 风火轮启动
-//        let indicator = CustomIndicatorView()
-//        indicator.setupUI("")
-//        self.parent?.navigationController?.view.addSubview(indicator)
-//        indicator.snp.makeConstraints{ (make) in
-//            make.edges.equalToSuperview()
-//        }
-//        indicator.startIndicator()
         initChart()
         staticV.initLabelText()
-//        indicator.stopIndicator()
     }
     
     override func viewWillAppear(_ animated: Bool) {
 //        print("chartViewController appear.")
-
-        // 风火轮启动
-//        let indicator = CustomIndicatorView()
-//        indicator.setupUI("")
-//        self.view.addSubview(indicator)
-//        indicator.snp.makeConstraints{ (make) in
-//            make.edges.equalToSuperview()
-//        }
-//        indicator.startIndicator()
+        // 监听所选时间范围的变化
+        NotificationCenter.default.addObserver(self, selector: #selector(test), name: NSNotification.Name(rawValue: "reloadChart"), object: nil)
         initChart()
         staticV.initLabelText()
-        
-//        indicator.stopIndicator()
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "reloadChart"), object: nil)
     }
     
     func initChart(){

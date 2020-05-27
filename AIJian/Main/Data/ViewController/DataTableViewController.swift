@@ -110,24 +110,10 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         // 设置分割线颜色
         DATATableView.separatorColor = UIColor.clear
         
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadTable), name: NSNotification.Name(rawValue: "reloadTable"), object: nil)
+        
     }
     
-    @objc func reloadTable(){
-        // 将滚动视图置于初始状态
-        self.mainScrollView.contentOffset = CGPoint(x: 0, y: 0)
-        self.scroll.contentOffset = CGPoint(x: 0, y: 0)
-        //mainScrollView.removeFromSuperview()
-        // 可以刷新了
-        self.initTable()
-        DispatchQueue.main.async {
-            self.initScroll()
-        }
-//        initTable()
-//        initScroll()
-        
-        
-    }
+   
     
     @objc func UpdateSuccess(){
         let x = UIAlertController(title: "", message: "Data Update Success", preferredStyle: .alert)
@@ -292,7 +278,27 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         DispatchQueue.main.async {
             self.initScroll()
         }
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTable), name: NSNotification.Name(rawValue: "reloadTable"), object: nil)
     }
+    
+    @objc func reloadTable(){
+        // 将滚动视图置于初始状态
+        self.mainScrollView.contentOffset = CGPoint(x: 0, y: 0)
+        self.scroll.contentOffset = CGPoint(x: 0, y: 0)
+        //mainScrollView.removeFromSuperview()
+        // 可以刷新了
+        self.initTable()
+        DispatchQueue.main.async {
+            self.initScroll()
+        }
+//        initTable()
+//        initScroll()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "reloadTable"), object: nil)
+    }
+    
     // MARK: - initScroll
     // 初始化滚动视图、设置页面的所有滚动视图和表格的大小和坐标
     func initScroll(){
@@ -373,7 +379,6 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
             make.edges.equalToSuperview()
         }
         indicator.startIndicator()
-        
         self.view.addSubview(label)
         label.snp.makeConstraints{(make) in
             make.left.right.equalToSuperview()

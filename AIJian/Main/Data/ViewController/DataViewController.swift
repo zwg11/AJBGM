@@ -213,7 +213,7 @@ class DataViewController: UIViewController {
         }
         
         indicator.setupUI("")
-        NotificationCenter.default.addObserver(self, selector: #selector(notReload), name: NSNotification.Name(rawValue: "notReload"), object: nil)
+        
 //        NotificationCenter.default.addObserver(self, selector: #selector(loadEnd), name: NSNotification.Name(rawValue: "loadEnd"), object: nil)
     }
     @objc func notReload(){
@@ -284,7 +284,7 @@ class DataViewController: UIViewController {
         // 识别 导航栏右按钮标题，做出相应值的设置
         // 此时不需通知各页面刷新数据
         setDaysAndRange(false)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(notReload), name: NSNotification.Name(rawValue: "notReload"), object: nil)
         
     }
 
@@ -296,6 +296,7 @@ class DataViewController: UIViewController {
         appDelegate.blockRotation = false
         let value = UIInterfaceOrientation.portrait.rawValue
         UIDevice.current.setValue(value, forKey: "orientation")
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "notReload"), object: nil)
         
 
     }
@@ -359,8 +360,11 @@ class DataViewController: UIViewController {
             
 
         else{   // 将日期选择器移除并处理数据
-            // 更新按钮标题
-            rangePickerButton.setTitle(dateRangePicker.selectedContent, for: .normal)
+            DispatchQueue.main.async {
+                
+                // 更新按钮标题
+                self.rangePickerButton.setTitle(self.dateRangePicker.selectedContent, for: .normal)
+            }
             // 设置开始时间和结束时间
             // 开始时间
             let dateFormatter = DateFormatter()
@@ -376,6 +380,7 @@ class DataViewController: UIViewController {
 //            print("endD:\(endD)")
             // 设定被选中的标志位
             pickerSelectedRow = 4
+            
             
             // 执行对日期范围选定后的数据处理
             setDaysAndRange(true)
@@ -505,49 +510,73 @@ class DataViewController: UIViewController {
     // 对于导航栏右按钮的标题不同，做不同的事情
     func setDaysAndRange(_ isNotify:Bool){
 //        let x = Date().dateAt(.endOfDay)
-        let today = DateInRegion().dateAt(.endOfDay).date
+//        let today = DateInRegion().dateAt(.endOfDay).date
       //  print("today:",today)
         
         // 监听导航栏右按钮的文本，对于不同的文本生成对应的数据
         switch pickerSelectedRow{
             
         case 1:
-            endD = today + 1.seconds
-            startD = endD! - 3.days
-            daysNum = 3
-            // 向数据库索取一定时间范围的数据，并将其按时间降序排序
-            initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())
-            // 处理出为展示表格的数据
-            sortedTimeOfData()
-            // 处理出为展示图表的数据
-            chartData()
+//            endD = today + 1.seconds
+//            startD = endD! - 3.days
+//            daysNum = 3
+            initDate(3)
+//            // 向数据库索取一定时间范围的数据，并将其按时间降序排序
+//            initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())
+//            // 处理出为展示表格的数据
+//            sortedTimeOfData()
+//            // 处理出为展示图表的数据
+//            chartData()
+            
         case 2:
-            endD = today + 1.seconds
-            startD = endD! - 7.days
-            daysNum = 7
-            initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())
-            sortedTimeOfData()
-            chartData()
+//            endD = today + 1.seconds
+//            startD = endD! - 7.days
+//            daysNum = 7
+            initDate(7)
+//            initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())
+//            sortedTimeOfData()
+//            chartData()
         case 3:
-            endD = today + 1.seconds
-            startD = endD! - 30.days
-            daysNum = 30
-            initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())
-            sortedTimeOfData()
-            chartData()
+//            endD = today + 1.seconds
+//            startD = endD! - 30.days
+//            daysNum = 30
+            initDate(30)
+//            initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())
+//            sortedTimeOfData()
+//            chartData()
         default:
             let components = Calendar.current.dateComponents([.day], from: startD!, to: endD!+1.seconds)
             daysNum = components.day
             //print("daysNum:\(String(describing: daysNum))")
            // print(startD!,endD!)
-            initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())
-            sortedTimeOfData()
-            chartData()
+//            initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())
+//            sortedTimeOfData()
+//            chartData()
             
         }
+        dataProcess(startD, endD, true)
         // 设置是否通知子页面刷新数据
+//        if(isNotify){
+//            notify()
+//        }
+    }
+    // 日期初始化
+    func initDate(_ dayNum:Int){
+        let today = DateInRegion().dateAt(.endOfDay).date
+        endD = today + 1.seconds
+        startD = endD! - dayNum.days
+        daysNum = dayNum
+    }
+    // 根据日期处理数据
+    func dataProcess(_ start:Date?, _ end:Date?, _ isNotify:Bool){
+        // 向数据库索取一定时间范围的数据，并将其按时间降序排序
+        initDataSortedByDate(startDate: start!, endDate: end!, userId: UserInfo.getUserId())
+        // 处理出为展示表格的数据
+        sortedTimeOfData()
+        // 处理出为展示图表的数据
+        chartData()
         if(isNotify){
-            notify()
+            self.notify()
         }
     }
     

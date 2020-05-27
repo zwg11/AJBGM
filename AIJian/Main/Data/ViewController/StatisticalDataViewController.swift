@@ -107,8 +107,7 @@ class StatisticalDataViewController: UIViewController,UIScrollViewDelegate {
             make.top.equalTo(perMeal.snp.bottom)
             make.height.equalTo(140)
         }
-    // 设置通知，当选择日期范围改变时执行动作来更新视图内容
-        NotificationCenter.default.addObserver(self, selector: #selector(test), name: NSNotification.Name(rawValue: "reloadData"), object: nil)
+    
         // 风火轮UI初始化
         indicator.setupUI("", UIColor.clear)
     }
@@ -120,10 +119,13 @@ class StatisticalDataViewController: UIViewController,UIScrollViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         self.scrollView?.contentOffset = CGPoint(x: 0, y: 0)
         initContent()
-        
-        
+        // 设置通知，当选择日期范围改变时执行动作来更新视图内容
+        NotificationCenter.default.addObserver(self, selector: #selector(test), name: NSNotification.Name(rawValue: "reloadData"), object: nil)
     }
-
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "reloadData"), object: nil)
+    }
 
     func initContent(){
         // 风火轮启动
@@ -132,6 +134,7 @@ class StatisticalDataViewController: UIViewController,UIScrollViewDelegate {
             make.edges.equalToSuperview()
         }
         indicator.startIndicator()
+        
         DispatchQueue.global().async {
             // 平均视图初始化
             self.averageview.labelUpdate()
