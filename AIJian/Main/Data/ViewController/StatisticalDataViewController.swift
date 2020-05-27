@@ -118,22 +118,33 @@ class StatisticalDataViewController: UIViewController,UIScrollViewDelegate {
     // 设置视图每次出现时滚动视图都回到顶部
     override func viewWillAppear(_ animated: Bool) {
         self.scrollView?.contentOffset = CGPoint(x: 0, y: 0)
+        indicatorStart()
         initContent()
         // 设置通知，当选择日期范围改变时执行动作来更新视图内容
         NotificationCenter.default.addObserver(self, selector: #selector(test), name: NSNotification.Name(rawValue: "reloadData"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(indicatorStart), name: NSNotification.Name(rawValue: "indicator"), object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "reloadData"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "indicator"), object: nil)
     }
 
-    func initContent(){
-        // 风火轮启动
+    @objc func indicatorStart(){
         self.view.addSubview(indicator)
         indicator.snp.makeConstraints{ (make) in
             make.edges.equalToSuperview()
         }
         indicator.startIndicator()
+    }
+    
+    func initContent(){
+        // 风火轮启动
+//        self.view.addSubview(indicator)
+//        indicator.snp.makeConstraints{ (make) in
+//            make.edges.equalToSuperview()
+//        }
+//        indicator.startIndicator()
         
         DispatchQueue.global().async {
             // 平均视图初始化
