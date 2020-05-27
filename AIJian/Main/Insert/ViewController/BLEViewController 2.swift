@@ -989,7 +989,7 @@ extension BLEViewController{
     // 上传日志
     func logUpload(_ info:String) {
         let dictString = [ "bugInfo": info]
-        let logURL = "http://120.78.167.239:8080/app/bugUpload"
+        let logURL = "https://bgapp.acondiabetescare.com/app/bugUpload"
         // 向服务器申请插入数据请求
         AlamofireManagerForBLE.request(logURL,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
             if response.result.isSuccess{
