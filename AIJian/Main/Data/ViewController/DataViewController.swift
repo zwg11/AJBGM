@@ -297,8 +297,8 @@ class DataViewController: UIViewController {
         appDelegate.blockRotation = false
         let value = UIInterfaceOrientation.portrait.rawValue
         UIDevice.current.setValue(value, forKey: "orientation")
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "notReload"), object: nil)
-        isReload = false
+//        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "notReload"), object: nil)
+//        isReload = false
 //        clearData()
 
     }
@@ -324,6 +324,7 @@ class DataViewController: UIViewController {
 
         // 设置返回首页
         self.tabBarController?.selectedIndex = 0
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "notReload"), object: nil)
     }
     
     // MARK: - 以下为时间范围选择器显示和消失的按钮动作
