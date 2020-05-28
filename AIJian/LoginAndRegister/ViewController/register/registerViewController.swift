@@ -241,10 +241,13 @@ class registerViewController: UIViewController,UITextFieldDelegate {
                                infoInput_next.email = self.email  //将数据传入下一个页面
                                infoInput_next.verifyString = responseModel.data
                                self.navigationController?.pushViewController(infoInput_next, animated: false)  //然后跳转
-                            }else{
-                                
-                                alertController.custom(self,"Attention", "Sign Up Failure")
+                            }else if(responseModel.msg! == "Incorrect Code"){
+                                print(responseModel)
+                                alertController.custom(self,"Attention", "Incorrect Code")
                                 return 
+                            }else{
+                                alertController.custom(self,"Attention", "Sign Up Failure")
+                                return
                             }
                             
                         } //得到响应

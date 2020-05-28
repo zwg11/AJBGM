@@ -67,13 +67,13 @@ class InfoInputView: UIView {
         button.setImage(UIImage(named: "Country"), for: .normal)
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
         button.setTitleColor(TextColor, for: .normal)
-        button.setTitle("China", for: .normal)
+        button.setTitle("", for: .normal)
         button.contentHorizontalAlignment = .left
         return button
     }()
     lazy var nationTextField:UITextField = {
         let textField = UITextField()
-        textField.initTextField(placeholder: " China",keyboardType: .default)
+        textField.initTextField(placeholder: "",keyboardType: .default)
 //        let textField = initTextField(placeholder: " China",keyboardType: .default)
         let imageView = UIImageView(image: UIImage(named: "Country"))
         textField.leftView = imageView

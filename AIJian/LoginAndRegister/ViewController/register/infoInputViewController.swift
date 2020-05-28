@@ -26,7 +26,7 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
     //体重
     var weightKg:Double? 
     //国家
-    var country:String? = "Azerbaijan"
+    var country:String? = ""
     //电话
     var phoneNumber:String? = ""
     //时间
@@ -163,13 +163,13 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
             return
         }else if userName!.count >= 254 {   //设置用户名长度和电话长度
             return
-        }else if phoneNumber!.count >= 16 {
+        }else if country == ""{
+            alertController.custom(self, "Attention", "Country Empty")
             return
         }else if phoneNumber == ""{
             alertController.custom(self, "Attention", "Phone Empty")
             return
-        }else if country == ""{
-             alertController.custom(self, "Attention", "Country Empty")
+        }else if phoneNumber!.count >= 16 {
             return
         }else{  //经过验证之后的请求
             //设置了国家和用户名不能为空
