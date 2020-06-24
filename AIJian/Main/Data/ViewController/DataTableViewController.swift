@@ -36,15 +36,17 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
             cell?.backgroundColor = UIColor.clear
             return cell!
         }else{
-            var cell1 = tableView.cellForRow(at: indexPath)
-
+//            var cell1 = tableView.cellForRow(at: indexPath)
+            var cell1 = tableView.dequeueReusableCell(withIdentifier: id1)
             if(cell1 == nil){
-                cell1 = dataTableViewCell(style: .default, reuseIdentifier: id1,secion: indexPath.section,row: indexPath.row)
+                cell1 = dataTableViewCell.init(style: .default, reuseIdentifier: id1,secion: indexPath.section,row: indexPath.row)
 //                cell1 = UITableViewCell(style: .default, reuseIdentifier: id1)
             }else{
                 while cell1?.contentView.subviews.last != nil{
                     cell1?.contentView.subviews.last?.removeFromSuperview()
                 }
+                cell1 = dataTableViewCell(style: .default, reuseIdentifier: id1,secion: indexPath.section,row: indexPath.row)
+//                cell1!.initContent(secion: indexPath.section,row: indexPath.row)
             }
             return cell1!
         }
@@ -110,24 +112,10 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         // 设置分割线颜色
         DATATableView.separatorColor = UIColor.clear
         
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadTable), name: NSNotification.Name(rawValue: "reloadTable"), object: nil)
+        
     }
     
-    @objc func reloadTable(){
-        // 将滚动视图置于初始状态
-        self.mainScrollView.contentOffset = CGPoint(x: 0, y: 0)
-        self.scroll.contentOffset = CGPoint(x: 0, y: 0)
-        //mainScrollView.removeFromSuperview()
-        // 可以刷新了
-        self.initTable()
-        DispatchQueue.main.async {
-            self.initScroll()
-        }
-//        initTable()
-//        initScroll()
-        
-        
-    }
+   
     
     @objc func UpdateSuccess(){
         let x = UIAlertController(title: "", message: "Data Update Success", preferredStyle: .alert)
@@ -288,11 +276,34 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         self.scroll.contentOffset = CGPoint(x: 0, y: 0)
         //mainScrollView.removeFromSuperview()
         // 可以刷新了
+        indicatorStart()
         self.initTable()
         DispatchQueue.main.async {
             self.initScroll()
         }
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTable), name: NSNotification.Name(rawValue: "reloadTable"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(indicatorStart), name: NSNotification.Name(rawValue: "indicator"), object: nil)
     }
+    
+    @objc func reloadTable(){
+        // 将滚动视图置于初始状态
+        self.mainScrollView.contentOffset = CGPoint(x: 0, y: 0)
+        self.scroll.contentOffset = CGPoint(x: 0, y: 0)
+        //mainScrollView.removeFromSuperview()
+        // 可以刷新了
+        self.initTable()
+        DispatchQueue.main.async {
+            self.initScroll()
+        }
+//        initTable()
+//        initScroll()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "reloadTable"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "indicator"), object: nil)
+    }
+    
     // MARK: - initScroll
     // 初始化滚动视图、设置页面的所有滚动视图和表格的大小和坐标
     func initScroll(){
@@ -367,13 +378,14 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         return label
     }()
     
-    func initTable(){
+    @objc func indicatorStart(){
         self.view.addSubview(indicator)
         indicator.snp.makeConstraints{ (make) in
             make.edges.equalToSuperview()
         }
         indicator.startIndicator()
-        
+    }    
+    func initTable(){
         self.view.addSubview(label)
         label.snp.makeConstraints{(make) in
             make.left.right.equalToSuperview()

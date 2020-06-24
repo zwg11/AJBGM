@@ -43,9 +43,13 @@ class registerViewController: UIViewController,UITextFieldDelegate {
 
         // 以下代理本想单独拿出来写进函数中，但是不知为什么老是内存溢出
 //        view.userNameTextField.delegate = self
+        view.emailTextField.tag = 0
         view.emailTextField.delegate = self
+        view.authCodeTextField.tag = 1
         view.authCodeTextField.delegate = self
+        view.passwordTextField.tag = 2
         view.passwordTextField.delegate = self
+        view.passwordSecTextField.tag = 3
         view.passwordSecTextField.delegate = self
         initDelegate()
         view.nextButton.addTarget(self, action: #selector(nextAction), for: .touchUpInside)
@@ -156,54 +160,58 @@ class registerViewController: UIViewController,UITextFieldDelegate {
         if email == ""{
             alertController.custom(self, "Attention", "Email Empty")
             return
+        }else if FormatMethodUtil.validateEmail(email: email!) != true{
+            alertController.custom(self,"Attention", "Incorrect Email Format")
+            return
         }else if password == ""{
             alertController.custom(self, "Attention", "Password Empty")
             return
         }else if passwordSec == "" {
             alertController.custom(self, "Attention", "Confirm Password Empty")
             return
-        }else if password!.count > 30{  //控制密码长度
-            return 
+        }else if password!.count >= 20{
+            alertController.custom(self, "Attention", "Incorrect Confirm Password Format.The password length should be six or tewenty digits.")
+            return
+        }else if password!.count < 6 {
+            alertController.custom(self, "Attention", "Incorrect Confirm Password Format.The password length should be six or tewenty digits.")
+            return
         }else if password != passwordSec{
             alertController.custom(self, "Attention", "Password Not Match")
             return
-        }else if FormatMethodUtil.validatePasswd(passwd: password!) != true{
-            alertController.custom(self, "Attention", "Incorrect Password Format.The password format is a combination of at least two of numbers,letters,and special characters.")
-            return
-        }else if passwordSec!.count >= 254 {
-            return
         }else if isAgree == false{
-            let text = "Agree Registration Agreement and Submit the Information"
-            let textRange = NSMakeRange(6, 22)
-            let attributedText = NSMutableAttributedString(string:text)
-            attributedText.addAttribute(NSAttributedString.Key.underlineStyle,value: NSUnderlineStyle.single.rawValue, range: textRange)
-            
-            let lab = UILabel()
-           
-            let width1 = UIScreen.main.bounds.width
-            lab.numberOfLines = 0
-            lab.lineBreakMode = .byWordWrapping
-                        
-            lab.attributedText = attributedText
-            lab.textAlignment = .center
-            
-            lab.sizeToFit()
-            let alertController = UIAlertController(title: "Attention",message: "\n\n",
-            preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "Done", style: .default, handler: {
-                    action in
-            })
-            alertController.view.addSubview(lab)
-            lab.snp.makeConstraints{(make) in
-                make.width.equalTo(width1-80)
-                make.top.equalToSuperview().offset(20)
-                make.centerX.equalToSuperview()
-                make.height.equalTo(100)
-            }
-            alertController.addAction(okAction)
-            self.present(alertController, animated: true, completion: nil)
-
+            alertController.custom(self, "Attention", "Agree Registration Agreement and Submit the Information")
             return
+//            let text = "Agree Registration Agreement and Submit the Information"
+//            let textRange = NSMakeRange(6, 22)
+//            let attributedText = NSMutableAttributedString(string:text)
+//            attributedText.addAttribute(NSAttributedString.Key.underlineStyle,value: NSUnderlineStyle.single.rawValue, range: textRange)
+//
+//            let lab = UILabel()
+//
+//            let width1 = UIScreen.main.bounds.width
+//            lab.numberOfLines = 0
+//            lab.lineBreakMode = .byWordWrapping
+//
+//            lab.attributedText = attributedText
+//            lab.textAlignment = .center
+//
+//            lab.sizeToFit()
+//            let alertController = UIAlertController(title: "Attention",message: "\n\n",
+//            preferredStyle: .alert)
+//            let okAction = UIAlertAction(title: "Done", style: .default, handler: {
+//                    action in
+//            })
+//            alertController.view.addSubview(lab)
+//            lab.snp.makeConstraints{(make) in
+//                make.width.equalTo(width1-80)
+//                make.top.equalToSuperview().offset(20)
+//                make.centerX.equalToSuperview()
+//                make.height.equalTo(100)
+//            }
+//            alertController.addAction(okAction)
+//            self.present(alertController, animated: true, completion: nil)
+//
+//            return
         }else{
             // 初始化UI
             indicator.setupUI("")
@@ -237,18 +245,26 @@ class registerViewController: UIViewController,UITextFieldDelegate {
                             self.indicator.removeFromSuperview()
                             /*  此处为跳转和控制逻辑
                              */
+                            print(responseModel)
                             if(responseModel.code == 1 ){
                                infoInput_next.email = self.email  //将数据传入下一个页面
                                infoInput_next.verifyString = responseModel.data
                                self.navigationController?.pushViewController(infoInput_next, animated: false)  //然后跳转
-                            }else if(responseModel.msg! == "Incorrect Code"){
-                                print(responseModel)
-                                alertController.custom(self,"Attention", "Incorrect Code")
-                                return 
-                            }else{
-                                alertController.custom(self,"Attention", "Sign Up Failure")
+                            }else if(responseModel.code == 0){
+                                alertController.custom(self, "Attention", responseModel.msg)
                                 return
+                            }else{
+                                alertController.custom(self,"Attention","Sign Up Failure")
+                                return 
                             }
+//                            }else if(responseModel.msg! == "Incorrect Code"){
+//                                print(responseModel)
+//                                alertController.custom(self,"Attention", "Incorrect Code")
+//                                return
+//                            }else{
+//                                alertController.custom(self,"Attention", "Sign Up Failure")
+//                                return
+//                            }
                             
                         } //得到响应
                     }
@@ -326,14 +342,19 @@ class registerViewController: UIViewController,UITextFieldDelegate {
         }
     }
     
-//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        UIView.animate(withDuration: 0.2, animations: {
-//            self.register.frame.origin.y = -150
-//        })
-//
-//        return true
-//    }
-//
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+       //如果tag == 1，则为密码输入框
+       if textField.tag == 2 || textField.tag == 3{
+           let limitation = 20
+           let futureStr:NSMutableString = NSMutableString(string: textField.text!)
+           futureStr.insert(string, at: range.location)
+           if futureStr.length > limitation {
+               return false
+           }
+           return true
+       }
+       return true
+    }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // 收起键盘
 //        UIView.animate(withDuration: 0.2, animations: {

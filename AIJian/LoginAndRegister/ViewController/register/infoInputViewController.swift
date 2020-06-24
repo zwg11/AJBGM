@@ -157,7 +157,7 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
         
         userName = infoinputView.userNameTextField.text!.removeHeadAndTailSpacePro
         phoneNumber = infoinputView.phoneTextField.text!.removeHeadAndTailSpacePro
-        
+    
         if userName == ""{
             alertController.custom(self, "Attention", "Name Empty")
             return
@@ -166,10 +166,11 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
         }else if country == ""{
             alertController.custom(self, "Attention", "Country Empty")
             return
-        }else if phoneNumber == ""{
-            alertController.custom(self, "Attention", "Phone Empty")
-            return
+//        }else if phoneNumber == ""{
+//            alertController.custom(self, "Attention", "Phone Empty")
+//            return
         }else if phoneNumber!.count >= 16 {
+            alertController.custom(self, "Attention", "Phone Number Should be less than 16")
             return
         }else{  //经过验证之后的请求
             //设置了国家和用户名不能为空

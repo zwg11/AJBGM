@@ -97,10 +97,11 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
         }else if passwordSec == "" {
              alertController.custom(self, "Attention", "Confirm Password Empty")
             return
-        }else if password!.count >= 30{
+        }else if password!.count >= 20{
+            alertController.custom(self, "Attention", "Incorrect Confirm Password Format.The password length should be six or tewenty digits.")
             return
-        }else if FormatMethodUtil.validatePasswd(passwd: password!) != true{
-            alertController.custom(self, "Attention", "Incorrect Password Format.The password format is a combination of at least two of numbers,letters,and special characters.")
+        }else if password!.count < 6 {
+            alertController.custom(self, "Attention", "Incorrect Confirm Password Format.The password length should be six or tewenty digits.")
             return
         }else if password != passwordSec{
              alertController.custom(self, "Attention", "Passwords Not Match")
@@ -170,7 +171,15 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
-
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let limitation = 20
+        let futureStr:NSMutableString = NSMutableString(string: textField.text!)
+        futureStr.insert(string, at: range.location)
+        if futureStr.length > limitation {  //密码长度不能大于20
+            return false
+        }
+        return true
+    }
     
     func hideKeyboardWhenTappedAround(){
         // 添加手势，使得点击视图键盘收回/Users/ADMIN/Desktop/swift1

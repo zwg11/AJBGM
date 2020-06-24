@@ -39,15 +39,6 @@ class ChartViewController: UIViewController,ChartViewDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        //        self.view.addSubview(headerView)
-        //
-        //        self.headerView.snp.makeConstraints{(make) in
-        //            make.left.right.top.equalToSuperview()
-        //            make.height.equalTo(44)
-        //
-        //        }
-        
         self.view.addSubview(staticV)
         staticV.snp.makeConstraints{(make) in
             make.left.right.equalToSuperview()
@@ -77,46 +68,35 @@ class ChartViewController: UIViewController,ChartViewDelegate{
         indicator.setupUI("",UIColor.clear)
 //        indicator.backgroundColor = UIColor.clear
         // 监听所选时间范围的变化
-        NotificationCenter.default.addObserver(self, selector: #selector(test), name: NSNotification.Name(rawValue: "reloadChart"), object: nil)
-        initChart()
-    }
-    
-    @objc func test(){
-        // 风火轮启动
-//        let indicator = CustomIndicatorView.init(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: AJScreenHeight))
-        // 这样不行，不显示
-        // 风火轮启动
-//        let indicator = CustomIndicatorView()
-//        indicator.setupUI("")
-//        self.parent?.navigationController?.view.addSubview(indicator)
-//        indicator.snp.makeConstraints{ (make) in
-//            make.edges.equalToSuperview()
-//        }
-//        indicator.startIndicator()
+//        NotificationCenter.default.addObserver(self, selector: #selector(test), name: NSNotification.Name(rawValue: "reloadChart"), object: nil)
+        indicatorStart()
         initChart()
         staticV.initLabelText()
-//        indicator.stopIndicator()
+    }
+    
+    
+    @objc func test(){
+        initChart()
+        staticV.initLabelText()
     }
     
     override func viewWillAppear(_ animated: Bool) {
 //        print("chartViewController appear.")
-
-        // 风火轮启动
-//        let indicator = CustomIndicatorView()
-//        indicator.setupUI("")
-//        self.view.addSubview(indicator)
-//        indicator.snp.makeConstraints{ (make) in
-//            make.edges.equalToSuperview()
-//        }
-//        indicator.startIndicator()
+        // 监听所选时间范围的变化
+        NotificationCenter.default.addObserver(self, selector: #selector(test), name: NSNotification.Name(rawValue: "reloadChart"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(indicatorStart), name: NSNotification.Name(rawValue: "indicator"), object: nil)
+        indicatorStart()
         initChart()
         staticV.initLabelText()
-        
-//        indicator.stopIndicator()
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "reloadChart"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "indicator"), object: nil)
+        // 移除原图表
+        lineChartView.removeFromSuperview()
     }
     
-    func initChart(){
-        // 风火轮加载
+    @objc func indicatorStart(){
         self.view.addSubview(indicator)
         indicator.snp.makeConstraints{ (make) in
             make.edges.equalToSuperview()
@@ -124,6 +104,10 @@ class ChartViewController: UIViewController,ChartViewDelegate{
         indicator.startIndicator()
         // 移除原图表
         lineChartView.removeFromSuperview()
+    }
+    func initChart(){
+
+
         // 异步设置图表
         DispatchQueue.global().async {
             // 设置x轴的最大坐标值
@@ -135,32 +119,9 @@ class ChartViewController: UIViewController,ChartViewDelegate{
             for i in self.lineChartView.lineChartView.leftAxis.limitLines{
                 self.lineChartView.lineChartView.leftAxis.removeLimitLine(i)
             }
-            // 得到数据中的血糖最大值
-            var maxGluValue = 0.0
-            if glucoseTimeAndValue.count > 0{
-                for i in glucoseTimeAndValue{
-                    if maxGluValue < i.value{
-                        maxGluValue = i.value
-                    }
-                }
-            }
+            
             // print("maxgluvalue:",maxGluValue)
-            // 如果maxGluValue不超过300，则y轴坐标最大值为300，否则设为maxGluValue+10
-            if GetUnit.getBloodUnit() == "mmol/L"{
-                if maxGluValue < 16.6{
-                    self.lineChartView.lineChartView.leftAxis.axisMaximum = 16.6
-                }else{
-                    self.lineChartView.lineChartView.leftAxis.axisMaximum = maxGluValue+2
-                }
-                
-            }else{
-                if maxGluValue < 300{
-                    self.lineChartView.lineChartView.leftAxis.axisMaximum = 300
-                }else{
-                    self.lineChartView.lineChartView.leftAxis.axisMaximum = maxGluValue+10
-                }
-                //                lineChartView.lineChartView.leftAxis.axisMaximum = 300
-            }
+            
             
             
             let low = GetBloodLimit.getEmptyStomachLow()
@@ -172,7 +133,32 @@ class ChartViewController: UIViewController,ChartViewDelegate{
   
             // 主程序中刷新图表
             DispatchQueue.main.async {
+                // 得到数据中的血糖最大值
+                var maxGluValue = 0.0
+                if glucoseTimeAndValue.count > 0{
+                    for i in glucoseTimeAndValue{
+                        if maxGluValue < i.value{
+                            maxGluValue = i.value
+                        }
+                    }
+                }
                 self.lineChartView.lineChartView.xAxis.axisMaximum = Double(daysNum!)
+                // 如果maxGluValue不超过300，则y轴坐标最大值为300，否则设为maxGluValue+10
+                if GetUnit.getBloodUnit() == "mmol/L"{
+                    if maxGluValue < 16.6{
+                        self.lineChartView.lineChartView.leftAxis.axisMaximum = 16.6
+                    }else{
+                        self.lineChartView.lineChartView.leftAxis.axisMaximum = maxGluValue+2
+                    }
+                    
+                }else{
+                    if maxGluValue < 300{
+                        self.lineChartView.lineChartView.leftAxis.axisMaximum = 300
+                    }else{
+                        self.lineChartView.lineChartView.leftAxis.axisMaximum = maxGluValue+10
+                    }
+                    //                lineChartView.lineChartView.leftAxis.axisMaximum = 300
+                }
                 // 根据所选中的时间范围器元素决定各界面的数据如何初始化
                 switch pickerSelectedRow{
                 case 1,2,3:

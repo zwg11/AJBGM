@@ -27,6 +27,8 @@ class loginViewController: UIViewController,UITextFieldDelegate {
         //从这里去寻找登录的视图
         let view = loginView()
         view.setupUI()
+        view.userNameTextField.tag = 0
+        view.passwordTextField.tag = 1
         view.userNameTextField.delegate = self
         view.passwordTextField.delegate = self
         view.loginwordButton.addTarget(self, action: #selector(login), for: .touchUpInside)
@@ -217,7 +219,19 @@ class loginViewController: UIViewController,UITextFieldDelegate {
     @objc func dismissKeyboard(){
         self.view.endEditing(true)
     }
-    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        //如果tag == 1，则为密码输入框
+        if textField.tag == 1{
+            let limitation = 20
+            let futureStr:NSMutableString = NSMutableString(string: textField.text!)
+            futureStr.insert(string, at: range.location)
+            if futureStr.length > limitation {
+                return false
+            }
+            return true
+        }
+        return true
+    }
 }
 
 

@@ -80,12 +80,13 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
             return
         }
         // 加载视图旋转
-        self.parent?.navigationController?.view.addSubview(indicator)
-        self.parent?.navigationController?.view.bringSubviewToFront(indicator)
-        indicator.snp.makeConstraints{(make) in
-            make.edges.equalToSuperview()
-        }
-        indicator.startIndicator()
+//        self.parent?.navigationController?.view.addSubview(indicator)
+//        self.parent?.navigationController?.view.bringSubviewToFront(indicator)
+//        indicator.snp.makeConstraints{(make) in
+//            make.edges.equalToSuperview()
+//        }
+//        indicator.startIndicator()
+        
         
         //设置名字和电话
         general.nameLabel.text = name?.removeHeadAndTailSpacePro
@@ -107,7 +108,7 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
         // 创建
         let toVC = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
         // 加载视图移除
-        indicator.stopIndicator()
+//        indicator.stopIndicator()
         self.present(toVC, animated: true, completion: nil)
     }
     
@@ -149,7 +150,6 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
         self.view.backgroundColor = UIColor.clear
 //        self.view.backgroundColor = ThemeColor
         self.view.clipsToBounds = true
-
         self.view.addSubview(general)
         
         let sharedScrollView = UIScrollView()

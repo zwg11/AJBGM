@@ -31,7 +31,7 @@ class CustomIndicatorView: UIView {
     }
     // 风火轮控件停止旋转
     func stopIndicator(){
-        sleep(1)
+        
         Indicator.stopAnimating()
         self.removeFromSuperview()
     }
