@@ -64,6 +64,7 @@ class DataViewController: UIViewController {
         style.titleColor = UIColor.white
         style.bottomLineColor = UIColor.green
         style.bottomLineHeight = 2
+//        style.isContentScrollEnabled = false
         
         // 标题内容
         let titles = ["Chart","Statistics","Datalist","Share"]
@@ -607,15 +608,15 @@ class DataViewController: UIViewController {
     // 根据日期处理数据
     func dataProcess(_ start:Date?, _ end:Date?, _ isNotify:Bool){
         DispatchQueue.global().async {
-            let start1 = Date()
+//            let start1 = Date()
             // 向数据库索取一定时间范围的数据，并将其按时间降序排序
             initDataSortedByDate(startDate: start!, endDate: end!, userId: UserInfo.getUserId())
             // 处理出为展示表格的数据
             sortedTimeOfData()
             // 处理出为展示图表的数据
             chartData()
-            let end1 = Date()
-            print("运行时间", end1.timeIntervalSince(start1))
+//            let end1 = Date()
+//            print("运行时间", end1.timeIntervalSince(start1))
             DispatchQueue.main.async {
                 
                 if(isNotify){
