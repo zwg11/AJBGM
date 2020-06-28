@@ -583,13 +583,13 @@ class DataViewController: UIViewController {
         }else{
             DispatchQueue.main.async {
                 
-                // 向数据库索取一定时间范围的数据，并将其按时间降序排序
-                initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())
-                // 处理出为展示表格的数据
-                sortedTimeOfData()
-                // 处理出为展示图表的数据
-                chartData()
             }
+            // 向数据库索取一定时间范围的数据，并将其按时间降序排序
+            initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())
+            // 处理出为展示表格的数据
+            sortedTimeOfData()
+            // 处理出为展示图表的数据
+            chartData()
         }
         // 设置是否通知子页面刷新数据
 //        if(isNotify){

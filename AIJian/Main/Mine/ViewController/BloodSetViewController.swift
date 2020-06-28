@@ -812,8 +812,10 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             let f_Double:Double = Double(((save_data["afterDinnerHighLimit"] as? NSNumber)?.stringValue)!)!
             let g_Double:Double = Double(((save_data["randomDinnerLowLimit"] as? NSNumber)?.stringValue)!)!
             let h_Double:Double = Double(((save_data["randomDinnerHighLimit"] as? NSNumber)?.stringValue)!)!
-        showPlaceholder(String(a_Double),String(b_Double),String(c_Double),String(d_Double),String(e_Double),String(f_Double),String(g_Double),String(h_Double))
-            clearEmpty()
+        
+           clearEmpty()
+            showPlaceholder(String(a_Double),String(b_Double),String(c_Double),String(d_Double),String(e_Double),String(f_Double),String(g_Double),String(h_Double))
+//            clearEmpty()
             alert.custom_cengji(self,"","Save Success")
             
           //---------------------------------------------------------------------------------------------------------------------------------
@@ -1017,8 +1019,9 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             let g_Int:Int = Int(((save_mgdl_data["randomDinnerLowLimit"] as? NSNumber)?.stringValue)!)!
             let h_Int:Int = Int(((save_mgdl_data["randomDinnerHighLimit"] as? NSNumber)?.stringValue)!)!
             
-            showPlaceholder(String(a_Int),String(b_Int),String(c_Int),String(d_Int),String(e_Int),String(f_Int),String(g_Int),String(h_Int))
             clearEmpty()
+            showPlaceholder(String(a_Int),String(b_Int),String(c_Int),String(d_Int),String(e_Int),String(f_Int),String(g_Int),String(h_Int))
+//            clearEmpty()
         } //end of mg/dl
         
          alert.custom_cengji(self,"","Save Success")
@@ -1127,22 +1130,30 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
     }
     //函数功能：无单位限制。传入多少显示多少。只显示在框中，与单位无关。设置text的placeholder显示,函数参数可匿名
     func showPlaceholder(_ a:String,_ b:String,_ c:String,_ d:String,_ e:String,_ f:String,_ g:String,_ h:String){
-        let a1:NSMutableAttributedString = NSMutableAttributedString(string: a, attributes: [NSAttributedString.Key.foregroundColor:TextColor])
-        emptyStomach_left.attributedPlaceholder  = a1
-        let b1:NSMutableAttributedString = NSMutableAttributedString(string: b, attributes: [NSAttributedString.Key.foregroundColor:TextColor])
-        emptyStomach_right.attributedPlaceholder  = b1
-        let c1:NSMutableAttributedString = NSMutableAttributedString(string: c, attributes: [NSAttributedString.Key.foregroundColor:TextColor])
-        beforeDinner_left.attributedPlaceholder  = c1
-        let d1:NSMutableAttributedString = NSMutableAttributedString(string: d, attributes: [NSAttributedString.Key.foregroundColor:TextColor])
-        beforeDinner_right.attributedPlaceholder  = d1
-        let e1:NSMutableAttributedString = NSMutableAttributedString(string: e, attributes: [NSAttributedString.Key.foregroundColor:TextColor])
-        afterDinner_left.attributedPlaceholder  = e1
-        let f1:NSMutableAttributedString = NSMutableAttributedString(string: f, attributes: [NSAttributedString.Key.foregroundColor:TextColor])
-        afterDinner_right.attributedPlaceholder  = f1
-        let g1:NSMutableAttributedString = NSMutableAttributedString(string: g, attributes: [NSAttributedString.Key.foregroundColor:TextColor])
-        randomDinner_left.attributedPlaceholder  = g1
-        let h1:NSMutableAttributedString = NSMutableAttributedString(string: h, attributes: [NSAttributedString.Key.foregroundColor:TextColor])
-        randomDinner_right.attributedPlaceholder  = h1
+        emptyStomach_left.text  = a
+        emptyStomach_right.text = b
+        beforeDinner_left.text  = c
+        beforeDinner_right.text = d
+        afterDinner_left.text   = e
+        afterDinner_right.text  = f
+        randomDinner_left.text  = g
+        randomDinner_right.text = h
+//        let a1:NSMutableAttributedString = NSMutableAttributedString(string: a, attributes: [NSAttributedString.Key.foregroundColor:TextColor])
+//        emptyStomach_left.attributedPlaceholder  = a1
+//        let b1:NSMutableAttributedString = NSMutableAttributedString(string: b, attributes: [NSAttributedString.Key.foregroundColor:TextColor])
+//        emptyStomach_right.attributedPlaceholder  = b1
+//        let c1:NSMutableAttributedString = NSMutableAttributedString(string: c, attributes: [NSAttributedString.Key.foregroundColor:TextColor])
+//        beforeDinner_left.attributedPlaceholder  = c1
+//        let d1:NSMutableAttributedString = NSMutableAttributedString(string: d, attributes: [NSAttributedString.Key.foregroundColor:TextColor])
+//        beforeDinner_right.attributedPlaceholder  = d1
+//        let e1:NSMutableAttributedString = NSMutableAttributedString(string: e, attributes: [NSAttributedString.Key.foregroundColor:TextColor])
+//        afterDinner_left.attributedPlaceholder  = e1
+//        let f1:NSMutableAttributedString = NSMutableAttributedString(string: f, attributes: [NSAttributedString.Key.foregroundColor:TextColor])
+//        afterDinner_right.attributedPlaceholder  = f1
+//        let g1:NSMutableAttributedString = NSMutableAttributedString(string: g, attributes: [NSAttributedString.Key.foregroundColor:TextColor])
+//        randomDinner_left.attributedPlaceholder  = g1
+//        let h1:NSMutableAttributedString = NSMutableAttributedString(string: h, attributes: [NSAttributedString.Key.foregroundColor:TextColor])
+//        randomDinner_right.attributedPlaceholder  = h1
     }
     //当text开始被编辑时，就直接将颜色改回来
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {

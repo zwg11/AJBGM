@@ -26,7 +26,7 @@ class nationComponent: UIView {
     lazy var nationButton:UIButton = {
         let button = UIButton()
         button.setTitleColor(TextColor, for: .normal)
-        button.setTitle("China", for: .normal)
+        button.setTitle("", for: .normal)
         button.contentHorizontalAlignment = .left
         return button
     }()

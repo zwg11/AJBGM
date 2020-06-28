@@ -54,7 +54,7 @@ class CurrentVersion:UIViewController{
         }
         
         let information = UILabel(frame: CGRect())
-        information.text = "On Call v1.0"
+        information.text = "On Call v1.1"
         information.textAlignment = .center
         information.textColor = TextColor
         information.font = UIFont.systemFont(ofSize: 18)

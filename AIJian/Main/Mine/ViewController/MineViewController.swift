@@ -54,6 +54,8 @@ class MineViewController: UIViewController {
         //自动调整滚动视图和表格视图的偏移量
         self.automaticallyAdjustsScrollViewInsets = false
         
+        
+        
 
     }
     override func viewDidLoad() {
@@ -254,6 +256,11 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
 //                headview.textButton.addTarget(self, action: #selector(MineLogin), for: .touchUpInside)
                 let userInfo = DBSQLiteManager.manager.selectUserRecord(userId: UserInfo.getUserId())
                 let cell = AJMineHeaderView(style: .value1, reuseIdentifier: cellid)
+                if userInfo.gender == 1{ //女
+                    cell.titleImage.image = UIImage(named:"headWomanImage")
+                }else{
+                    cell.titleImage.image = UIImage(named:"headManImage")
+                }
                 cell.textButton.setTitle(userInfo.user_name, for: .normal)
                 cell.selectionStyle = .none
                 cell.backgroundColor = ThemeColor

@@ -198,11 +198,16 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
                 make.height.equalTo(AJScreenHeight/15)
                 make.top.equalTo(line_frame4.snp.bottom).offset(AJScreenHeight*3/15)
             }
-            
-            
-            
         }
-        
+        func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+            let limitation = 20
+            let futureStr:NSMutableString = NSMutableString(string: textField.text!)
+            futureStr.insert(string, at: range.location)
+            if futureStr.length > limitation {  //保护密码不大于20
+                return false
+            }
+            return true
+        }
         
         @objc private func leftButtonClick(){
             self.navigationController?.popViewController(animated: false)
@@ -215,7 +220,7 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
 //            email = "6666"
 //            token = "666"
             
-            
+//            先检查是否为空，后检查长度是否符合要求
             if oldP == ""{
                 alert.custom(self, "Attention", "Original Password Empty")
                 return
@@ -225,16 +230,16 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
             }else if verfiedP == ""{
                 alert.custom(self, "Attention", "Confirm Password Empty")
                 return
-            }else if verfiedP!.count >= 30 {
-                //不能让密码大于30个字符
-                return 
-            }else if oldP == newP {  //让旧密码和新密码不能一样
+            }else if verfiedP!.count >= 20{
+                alert.custom(self, "Attention", "Incorrect Confirm Password Format.The password length should be six or tewenty digits.")
+                return
+            }else if verfiedP!.count < 6 {
+                alert.custom(self, "Attention", "Incorrect Confirm Password Format.The password length should be six or tewenty digits.")
+                return
+            }else if oldP == newP {    //让旧密码和新密码不能一样
                 alert.custom(self, "Attention", "New Password Matches Old")
                 return
-            }else if FormatMethodUtil.validatePasswd(passwd: verfiedP!) != true{
-                alert.custom(self, "Attention", "Incorrect Password Format.The password format is a combination of at least two of numbers,letters,and special characters.")
-                return
-            }else if newP != verfiedP{
+            }else if newP != verfiedP{ //两次新密码是否一致
                 alert.custom(self, "Attention", "Passwords Not Match")
                 return
             }else{
