@@ -9,7 +9,7 @@
 import UIKit
 import Charts
 import SnapKit
-import SwiftDate
+//import SwiftDate
 
 class ChartView: UIView ,ChartViewDelegate{
 
@@ -82,7 +82,7 @@ class ChartView: UIView ,ChartViewDelegate{
     }()
     
     // 该函数应传值 x轴坐标 和 x轴对应label
-    func drawLineChart(xAxisArray:NSArray,xAxisData:[Double]){
+    func drawLineChart(xAxisArray:NSArray?,xAxisData:[Double]){
 
 //        print("xAxisArray",xAxisArray)
         // 根据日期范围生成对应的x轴的label,这里需自定义 x轴坐标显示

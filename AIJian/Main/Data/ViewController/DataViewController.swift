@@ -569,9 +569,9 @@ class DataViewController: UIViewController {
             // 向数据库索取一定时间范围的数据，并将其按时间降序排序
             initDataSortedByDate(startDate: start!, endDate: end!, userId: UserInfo.getUserId())
             // 处理出为展示表格的数据
-            sortedTimeOfData()
+//            sortedTimeOfData()
             // 处理出为展示图表的数据
-            chartData()
+//            chartData()
             DispatchQueue.main.async {
                 
                 if(isNotify){

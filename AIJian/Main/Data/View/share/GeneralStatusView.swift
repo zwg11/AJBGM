@@ -196,10 +196,12 @@ class GeneralStatusView: UIView {
             case 1,2,3:
                 self.chart.lineChartView.xAxis.axisMaximum = Double(daysNum!)
                 let data1 = recentDaysData(Days: daysNum!, isGetData: false)
-                self.chart.drawLineChartWithoutAnimate(xAxisArray: array as NSArray,xAxisData: data1)
+//                self.chart.drawLineChartWithoutAnimate(xAxisArray: array as NSArray,xAxisData: data1)
+                self.chart.drawLineChart(xAxisArray:nil,xAxisData: data1)
             default:
                 self.chart.lineChartView.xAxis.axisMaximum = Double(daysNum!)
-                self.chart.drawLineChartWithoutAnimate(xAxisArray: xAxisArray(startDate: startD!, endDate: endD!) as NSArray,xAxisData: DateToData(startD!, endD!, isGetData: false))
+//                self.chart.drawLineChartWithoutAnimate(xAxisArray: xAxisArray(startDate: startD!, endDate: endD!) as NSArray,xAxisData: DateToData(startD!, endD!, isGetData: false))
+                self.chart.drawLineChart(xAxisArray: nil,xAxisData: DateToData(startD!, endD!, isGetData: false))
             }
             // 风火轮停止
             self.indicator.stopIndicator()

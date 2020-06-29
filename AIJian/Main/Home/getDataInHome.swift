@@ -87,7 +87,7 @@ class getDataInHome{
                 result.append(lowestValue)
             }else{
                 // 平均值为1位小数
-                let x = String(format: "%.1f", avgValue)
+                let x = String(format: "%.0f", avgValue)
                 result.append(x)
                 result.append(checkNum)
                 result.append(String(format: "%.0f", highestValue))

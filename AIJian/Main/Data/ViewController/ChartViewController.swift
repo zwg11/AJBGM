@@ -82,13 +82,10 @@ class ChartViewController: UIViewController,ChartViewDelegate{
 
     
     override func viewWillAppear(_ animated: Bool) {
-//        print("chartViewController appear.")
-        // 监听所选时间范围的变化
-//        NotificationCenter.default.addObserver(self, selector: #selector(reloadChart), name: NSNotification.Name(rawValue: "reloadChart"), object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(indicatorStart), name: NSNotification.Name(rawValue: "indicator"), object: nil)
-        indicatorStart()
-        initChart()
-        staticV.initLabelText()
+//        indicatorStart()
+//        initChart()
+//        staticV.initLabelText()
+        reloadChart()
     }
     
     @objc func reloadChart(){
@@ -117,6 +114,7 @@ class ChartViewController: UIViewController,ChartViewDelegate{
 
         // 异步设置图表
         DispatchQueue.global().async {
+            chartData()
             // 设置x轴的最大坐标值
 //            self.lineChartView.lineChartView.xAxis.axisMaximum = Double(daysNum!)
             // 画限制线，标明低于和高于的界限
@@ -168,7 +166,7 @@ class ChartViewController: UIViewController,ChartViewDelegate{
             }
             
             let list = DateToData(startD!, endD!, isGetData: false)
-            let xAxisArr = xAxisArray(startDate: startD!, endDate: endD!) as NSArray
+//            let xAxisArr = xAxisArray(startDate: startD!, endDate: endD!) as NSArray
             // 主程序中刷新图表
             DispatchQueue.main.async {
                 
@@ -180,14 +178,14 @@ class ChartViewController: UIViewController,ChartViewDelegate{
                     let data1 = recentDaysData(Days: daysNum!, isGetData: false)
                     // 设置x轴的最大坐标值
                     //                 self.lineChartView.lineChartView.xAxis.axisMaximum = Double(daysNum!)
-                    self.lineChartView.drawLineChart(xAxisArray: array as NSArray,xAxisData: data1)
-                    //                NotificationCenter.default.post(name: NSNotification.Name("loadEnd"), object: self, userInfo: nil)
+//                    self.lineChartView.drawLineChart(xAxisArray: array as NSArray,xAxisData: data1)
+                    self.lineChartView.drawLineChart(xAxisArray: nil,xAxisData: data1)
                     
 
                 default:
                     
                     
-                    self.lineChartView.drawLineChart(xAxisArray: xAxisArr,xAxisData: list)
+                    self.lineChartView.drawLineChart(xAxisArray: nil,xAxisData: list)
                 }
                 self.indicator.stopIndicator()
                 
