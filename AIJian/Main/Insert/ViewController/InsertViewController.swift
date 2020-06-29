@@ -159,7 +159,7 @@ class InsertViewController: UIViewController {
         medicineChooseAlert.tabelView.reloadData()
         // 显示 警示框
         self.present(medicineChooseAlert, animated: true, completion: nil)
-        print("alert success")
+//        print("alert success")
    
     }
     
@@ -289,7 +289,7 @@ class InsertViewController: UIViewController {
         if(date1.compare(now) == .orderedDescending){
             Message += "\nTime shall not be the future time."
         }
-        print(createTime)
+//        print(createTime)
         // ********* 记录血糖 *********
         var bloodGlucoseValueMmol:Double?
         var bloodGlucoseValueMg:Double?
@@ -794,9 +794,9 @@ class InsertViewController: UIViewController {
                                 // 否则不更新
                                 if !self.isHome{
                                     // 更新所展示的数据
-                                    initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())
-                                    sortedTimeOfData()
-                                    chartData()
+//                                    initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())
+//                                    sortedTimeOfData()
+//                                    chartData()
                                 }
                                 
                                
@@ -987,7 +987,7 @@ extension InsertViewController{
     // MARK: - 当从表格视图转来时
     // 将单元格的内容传入手动输入界面
     func EditData(date:glucoseDate){
-        print(date)
+//        print(date)
         let x = date
 //        let y = sortedTime[section][row]
         // 设置当前标题

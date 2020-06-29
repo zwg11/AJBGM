@@ -148,6 +148,7 @@ class ChartViewController: UIViewController,ChartViewDelegate{
                     }
                 }
             }
+            // 设置x轴的最大坐标值
             self.lineChartView.lineChartView.xAxis.axisMaximum = Double(daysNum!)
             // 如果maxGluValue不超过300，则y轴坐标最大值为300，否则设为maxGluValue+10
             if GetUnit.getBloodUnit() == "mmol/L"{
@@ -166,7 +167,7 @@ class ChartViewController: UIViewController,ChartViewDelegate{
                 //                lineChartView.lineChartView.leftAxis.axisMaximum = 300
             }
             
-            let list = DateToData(startD!, endD!)
+            let list = DateToData(startD!, endD!, isGetData: false)
             let xAxisArr = xAxisArray(startDate: startD!, endDate: endD!) as NSArray
             // 主程序中刷新图表
             DispatchQueue.main.async {
@@ -176,7 +177,7 @@ class ChartViewController: UIViewController,ChartViewDelegate{
                 case 1,2,3:
                     // 初始化 图标所需要的数据
                     let array = xAxisArray(Days: daysNum!)
-                    let data1 = recentDaysData(Days: daysNum!)
+                    let data1 = recentDaysData(Days: daysNum!, isGetData: false)
                     // 设置x轴的最大坐标值
                     //                 self.lineChartView.lineChartView.xAxis.axisMaximum = Double(daysNum!)
                     self.lineChartView.drawLineChart(xAxisArray: array as NSArray,xAxisData: data1)

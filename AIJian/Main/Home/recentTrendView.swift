@@ -42,7 +42,7 @@ class recentTrendView: UIView {
         
         self.addSubview(recentTrendView)
         // 画图
-        self.recentTrendView.drawLineChart(xAxisArray: xAxisArrayToWeek(Days: 7) as NSArray,xAxisData: recentDaysData(Days: 7))
+        self.recentTrendView.drawLineChart(xAxisArray: xAxisArrayToWeek(Days: 7) as NSArray,xAxisData: recentDaysData(Days: 7, isGetData: true))
         self.recentTrendView.snp_makeConstraints{(make) in
             make.left.top.equalToSuperview()
             

@@ -64,7 +64,7 @@ class DataViewController: UIViewController {
         style.titleColor = UIColor.white
         style.bottomLineColor = UIColor.green
         style.bottomLineHeight = 2
-//        style.isContentScrollEnabled = false
+        style.isContentScrollEnabled = false
         
         // 标题内容
         let titles = ["Chart","Statistics","Datalist","Share"]
@@ -505,18 +505,15 @@ class DataViewController: UIViewController {
         // 告诉当前控制器的View要更新约束了，动态更新约束，没有这句的话更新约束就没有动画效果
         self.navigationController!.view.layoutIfNeeded()
     }// 选择器消失
-    
-    
+        
     //选择器显示
     func appear(){
         
         // 重新布置约束
         // 时间选择器界面移到屏幕内底部，视觉效果为出现
-      //  print("func appear done.")
         // 删除顶部约束
         self.topConstraint?.uninstall()
         dateRangePicker.snp.makeConstraints{(make) in
-//            self.bottomConstraint = make.bottom.equalTo(self.navigationController!.view.snp.bottom).constraint
             // 添加底部约束
             if #available(iOS 11.0, *) {
                 self.bottomConstraint = make.bottom.equalTo(self.navigationController!.view.safeAreaLayoutGuide.snp.bottom).constraint
@@ -532,58 +529,24 @@ class DataViewController: UIViewController {
     // 对于导航栏右按钮的标题不同，做不同的事情
     func setDaysAndRange(_ isNotify:Bool){
         NotificationCenter.default.post(name: NSNotification.Name("indicator"), object: self, userInfo: nil)
-//        let x = Date().dateAt(.endOfDay)
-//        let today = DateInRegion().dateAt(.endOfDay).date
-      //  print("today:",today)
         
         // 监听导航栏右按钮的文本，对于不同的文本生成对应的数据
         switch pickerSelectedRow{
             
         case 1:
-//            endD = today + 1.seconds
-//            startD = endD! - 3.days
-//            daysNum = 3
             initDate(3)
-//            // 向数据库索取一定时间范围的数据，并将其按时间降序排序
-//            initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())
-//            // 处理出为展示表格的数据
-//            sortedTimeOfData()
-//            // 处理出为展示图表的数据
-//            chartData()
-            
         case 2:
-//            endD = today + 1.seconds
-//            startD = endD! - 7.days
-//            daysNum = 7
             initDate(7)
-//            initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())
-//            sortedTimeOfData()
-//            chartData()
         case 3:
-//            endD = today + 1.seconds
-//            startD = endD! - 30.days
-//            daysNum = 30
             initDate(30)
-//            initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())
-//            sortedTimeOfData()
-//            chartData()
         default:
             let components = Calendar.current.dateComponents([.day], from: startD!, to: endD!+1.seconds)
             daysNum = components.day
-            //print("daysNum:\(String(describing: daysNum))")
-           // print(startD!,endD!)
-//            initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())
-//            sortedTimeOfData()
-//            chartData()
-            
         }
-//        let now = CFAbsoluteTimeGetCurrent()
+
         if(isNotify){
             self.dataProcess(startD, endD, isNotify)
         }else{
-            DispatchQueue.main.async {
-                
-            }
             // 向数据库索取一定时间范围的数据，并将其按时间降序排序
             initDataSortedByDate(startDate: startD!, endDate: endD!, userId: UserInfo.getUserId())
             // 处理出为展示表格的数据
@@ -591,12 +554,7 @@ class DataViewController: UIViewController {
             // 处理出为展示图表的数据
             chartData()
         }
-        // 设置是否通知子页面刷新数据
-//        if(isNotify){
-//            notify()
-//        }
-//        let endtime = CFAbsoluteTimeGetCurrent()
-//        print("代码执行时间：%f ms", (endtime - now)*1000)
+
     }
     // 日期初始化
     func initDate(_ dayNum:Int){
@@ -608,15 +566,12 @@ class DataViewController: UIViewController {
     // 根据日期处理数据
     func dataProcess(_ start:Date?, _ end:Date?, _ isNotify:Bool){
         DispatchQueue.global().async {
-//            let start1 = Date()
             // 向数据库索取一定时间范围的数据，并将其按时间降序排序
             initDataSortedByDate(startDate: start!, endDate: end!, userId: UserInfo.getUserId())
             // 处理出为展示表格的数据
             sortedTimeOfData()
             // 处理出为展示图表的数据
             chartData()
-//            let end1 = Date()
-//            print("运行时间", end1.timeIntervalSince(start1))
             DispatchQueue.main.async {
                 
                 if(isNotify){
