@@ -124,7 +124,7 @@ func xAxisArray(startDate:Date,endDate:Date)->[String]{
     var xAxisStrings:[String] = []
     // 使得日期数组都装着每天的开始
     while x <= endDate+1.seconds {
-        xAxisStrings.append(x.toFormat("yyyy/MM/dd"))
+        xAxisStrings.append(x.toFormat("MM/dd"))
         x = x + 1.days
     }
     //dates.sort()
