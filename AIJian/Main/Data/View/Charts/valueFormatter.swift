@@ -30,6 +30,13 @@ class VDChartAxisValueFormatter: NSObject,IAxisValueFormatter {
             dateFormatter.dateFormat = "MM/dd"
             
             dateFormatter.timeZone = timezone
+            if(Int(value) == 0){
+                return ""
+            }
+            if((daysNum != nil) && Int(value) == daysNum){
+                return ""
+            }
+            
             if(startD != nil){
                 let xVal = startD! + Int(value).days
                 return dateFormatter.string(from: xVal)

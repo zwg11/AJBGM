@@ -102,7 +102,8 @@ class ChartView: UIView ,ChartViewDelegate{
                 // y 的位置为 glucoseTimeAndValue 根据时间读取对应的血糖值
                 // 注意坐标的 axisMinimum 和 axisMaximum 属性
                 // 点的位置要相对于 这两个属性来画出
-                let entry = ChartDataEntry.init(x: xData[j], y: glucoseTimeAndValue[glucoseTime[j]]!)
+//                let entry = ChartDataEntry.init(x: xData[j], y: glucoseTimeAndValue[glucoseTime[j]]!)
+                let entry = ChartDataEntry.init(x: xData[j], y: glucoseValue[j])
                 // 将数据添加到图表数据数组中
                 yDataArray1.append(entry)
             }
@@ -173,7 +174,8 @@ class ChartView: UIView ,ChartViewDelegate{
                 // y 的位置为 glucoseTimeAndValue 根据时间读取对应的血糖值
                 // 注意坐标的 axisMinimum 和 axisMaximum 属性
                 // 点的位置要相对于 这两个属性来画出
-                let entry = ChartDataEntry.init(x: xData[j], y: glucoseTimeAndValue[glucoseTime[j]]!)
+//                let entry = ChartDataEntry.init(x: xData[j], y: glucoseTimeAndValue[glucoseTime[j]]!)
+                let entry = ChartDataEntry.init(x: xData[j], y: glucoseValue[j])
                 // 将数据添加到图表数据数组中
                 yDataArray1.append(entry)
             }

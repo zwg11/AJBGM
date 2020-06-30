@@ -139,13 +139,15 @@ class GeneralStatusView: UIView {
         }
         
          var maxGluValue = 0.0
+        /*
          if glucoseTimeAndValue.count > 0{
              for i in glucoseTimeAndValue{
                  if maxGluValue < i.value{
                      maxGluValue = i.value
                  }
              }
-         }
+         }*/
+        maxGluValue = glucoseValue.max() ?? 0.0
         // print("maxgluvalue:",maxGluValue)
          // 如果maxGluValue不超过300，则y轴坐标最大值为300，否则设为maxGluValue+10
          if GetUnit.getBloodUnit() == "mmol/L"{

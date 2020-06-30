@@ -314,8 +314,9 @@ class DataViewController: UIViewController {
         sortedByDateOfData = nil
         // 用于图表显示
         glucoseTime = []
+        glucoseValue = []
         // 该数组存储已经排好序的 key为时间，value为血糖值 的字典数组
-        glucoseTimeAndValue = [:]
+//        glucoseTimeAndValue = [:]
         // 声明2个二维数组，用于数据的表格视图
         sortedTime = []
         sortedData = []

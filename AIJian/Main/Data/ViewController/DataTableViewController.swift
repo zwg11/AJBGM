@@ -152,11 +152,17 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
             // 如果列表章节数大于0
             if section<sortedTime.count{
                 // 判断日期是否为今天、明天
-                if sortedTime[section][0].compare(.isToday){
-                    label.text = "Today"
-                }else if sortedTime[section][0].compare(.isYesterday){
-                    label.text = "Yesterday"
-                }else{
+                if section <= 1{
+                    if sortedTime[section][0].compare(.isToday){
+                        label.text = "Today"
+                    }else if sortedTime[section][0].compare(.isYesterday){
+                        label.text = "Yesterday"
+                    }else{
+                        label.text = sortedTime[section][0].toFormat("MM/dd")
+                    }
+                }
+                
+                else{
                     label.text = sortedTime[section][0].toFormat("MM/dd")
                 }
                 

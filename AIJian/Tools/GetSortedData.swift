@@ -16,9 +16,9 @@ var sortedByDateOfData:[glucoseDate]?
 //var glucoseValue:[Double] = []
 // 该数组存储用于图表显示的时间
 var glucoseTime:[Date] = []
-
+var glucoseValue:[Double] = []
 // 该数组存储已经排好序的 key为时间，value为血糖值 的字典数组
-var glucoseTimeAndValue:Dictionary<Date,Double> = [:]
+//var glucoseTimeAndValue:Dictionary<Date,Double> = [:]
 
 
 // 声明2个二维数组，用于数据的表格视图
@@ -48,40 +48,33 @@ func initDataSortedByDate(startDate:Date,endDate:Date,userId:Int64){
 // 另一个对应着时间数组存储数据
 func sortedTimeOfData(){
     
-    var Time:[[Date]] = []
-    var Data:[[glucoseDate]] = []
+    sortedTime = []
+    sortedData = []
     if sortedByDateOfData?.count != 0{
         for i in 0..<sortedByDateOfData!.count{
             // 开始时 二维数组为空，直接添加
             let date = sortedByDateOfData![i].createTime!.toDate()!
-            if i == 0{
-                Time.append([date.date])
-                Data.append([sortedByDateOfData![i]])
-                
-            }else{
-                
+            if i != 0{
                 // 先判断二维数组中对应的同一天有没有其他时间了
                 //如果有，则在对应的数组添加该日期
 //                if sortedByDateOfData![i].createTime!.toDate()!.toFormat("yyyy/MM/dd") == sortedByDateOfData![i-1].createTime!.toDate()!.toFormat("yyyy/MM/dd")
                 if sortedByDateOfData![i].createTime!.prefix(10) == sortedByDateOfData![i-1].createTime!.prefix(10)
                 {
-                    let index = Time.count - 1
-                    Time[index].append(date.date)
-                    Data[index].append(sortedByDateOfData![i])
+                    let index = sortedTime.count - 1
+                    sortedTime[index].append(date.date)
+                    sortedData[index].append(sortedByDateOfData![i])
                 }
                     // 如果没有，则添加一个数组
                 else{
-                    Time.append([date.date])
-                    Data.append([sortedByDateOfData![i]])
+                    sortedTime.append([date.date])
+                    sortedData.append([sortedByDateOfData![i]])
                 }
+            }else{
+                sortedTime.append([date.date])
+                sortedData.append([sortedByDateOfData![i]])
             }
         }
     }
-    // 将排好序的时间和数据赋值给准备好的数组
-    sortedTime = Time
-    sortedData = Data
-//    print(sortedData)
-//    print(sortedTime)
     
 }
 
@@ -93,7 +86,8 @@ func chartData(){
     // 该数组存储用于图表显示的时间
     var Time:[Date] = []
     // 该数组存储已经排好序的 key为时间，value为血糖值 的字典数组
-    var TimeAndValue:Dictionary<Date,Double> = [:]
+//    var TimeAndValue:Dictionary<Date,Double> = [:]
+    var Value:[Double] = []
     // 如果有数据，那么得到适合生成图表的数组
     
     if sortedByDateOfData!.count > 0{
@@ -104,16 +98,19 @@ func chartData(){
             // 判断单位设定，根据不同的单位封装不同的数据
             if GetUnit.getBloodUnit() == "mmol/L"{
                 // updateValue函数在字典中有对应key时更新value，没有对应key时添加
-                TimeAndValue.updateValue(i.bloodGlucoseMmol!, forKey: date11!)
+//                TimeAndValue.updateValue(i.bloodGlucoseMmol!, forKey: date11!)
+                Value.append(i.bloodGlucoseMmol!)
             }else{
-                TimeAndValue.updateValue(Double(i.bloodGlucoseMg!), forKey: date11!)
+//                TimeAndValue.updateValue(Double(i.bloodGlucoseMg!), forKey: date11!)
+                Value.append(i.bloodGlucoseMg!)
             }
         }
     }
     
     // 将处理好的数组赋值给对应数组
     glucoseTime = Time
-    glucoseTimeAndValue = TimeAndValue
+    glucoseValue = Value
+//    glucoseTimeAndValue = TimeAndValue
 //    print("glucoseTimeAndValue:\(glucoseTimeAndValue)")
     
 }

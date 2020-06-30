@@ -535,15 +535,15 @@ class perAndAfterMealTests: UIView {
         if total > 0{
             if lower > 0{
                 lowerValue.text = "\(lower)"
-                lowerPercent.text = String(Int(Double(lower)/Double(total)*100)) + "%"
+                lowerPercent.text = String(lroundf(Float(Double(lower)/Double(total)*100))) + "%"
             }
             if normal > 0{
                 normalValue.text = "\(normal)"
-                normalPercent.text = String(Int(Double(normal)/Double(total)*100)) + "%"
+                normalPercent.text = String(lroundf(Float(Double(normal)/Double(total)*100))) + "%"
             }
             if high > 0{
                 higherNormalValue.text = "\(high)"
-                higherNormalPercent.text = String(Int(Double(high)/Double(total)*100)) + "%"
+                higherNormalPercent.text = String(lroundf(Float(Double(high)/Double(total)*100.0))) + "%"
             }
         }
     }

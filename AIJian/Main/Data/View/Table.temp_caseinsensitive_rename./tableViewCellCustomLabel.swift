@@ -19,7 +19,7 @@ class tableViewCellCustomLabel: UILabel {
         self.textColor = UIColor.white
         self.font = UIFont.systemFont(ofSize: 13)
 //        self.backgroundColor = SendButtonColor
-        self.backgroundColor = kRGBColor(8, 52, 84, 1)
+        self.backgroundColor = UIColor.clear
         self.numberOfLines = 0
 //        self.layer.borderColor = UIColor.white.cgColor
 //        self.layer.borderWidth = 1

@@ -150,7 +150,7 @@ class StaticView: UIView {
     
     func initLabelText(){
         // 得到该时间范围的 血糖平均值、检测次数、最大值、最小值
-        let result = getDataInHome.getRecentValue(startD!, endD!)
+        let result = getDataInHome.getRecentValue(startD!, endD!, false)
         // 获得血糖单位
         let unit = GetUnit.getBloodUnit()
         // 初始化对应的label
