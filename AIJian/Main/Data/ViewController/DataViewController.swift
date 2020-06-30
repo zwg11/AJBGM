@@ -64,13 +64,19 @@ class DataViewController: UIViewController {
         style.titleColor = UIColor.white
         style.bottomLineColor = UIColor.green
         style.bottomLineHeight = 2
+//        style.isContentScrollEnabled = false
         
         // 标题内容
         let titles = ["Chart","Statistics","Datalist","Share"]
+        let chart = ChartViewController.init()
+        let staticv = StatisticalDataViewController()
+        let table = DataTableViewController()
+        let share = SharedViewController()
         // 设置每个标题对应的ViewController
-        let viewControllers:[UIViewController] = [ChartViewController(),StatisticalDataViewController(),DataTableViewController(),SharedViewController()]
+        let viewControllers:[UIViewController] = [chart,staticv,table,share]
         let y = UIApplication.shared.statusBarFrame.height + (navigationController?.navigationBar.frame.height ?? 0)
         let size = UIScreen.main.bounds.size
+//        chart.beginAppearanceTransition(true, animated: false)
         for vc in viewControllers{
             self.addChild(vc)
         }
@@ -283,7 +289,7 @@ class DataViewController: UIViewController {
         }
         // 识别 导航栏右按钮标题，做出相应值的设置
         // 此时不需通知各页面刷新数据
-        setDaysAndRange(false)
+        setDaysAndRange(true)
 //        dataProcess(startD, endD, false)
         NotificationCenter.default.addObserver(self, selector: #selector(notReload), name: NSNotification.Name(rawValue: "notReload"), object: nil)
         
@@ -573,7 +579,7 @@ class DataViewController: UIViewController {
         }
 //        let now = CFAbsoluteTimeGetCurrent()
         if(isNotify){
-            self.dataProcess(startD, endD, true)
+            self.dataProcess(startD, endD, isNotify)
         }else{
             DispatchQueue.main.async {
                 
@@ -602,13 +608,15 @@ class DataViewController: UIViewController {
     // 根据日期处理数据
     func dataProcess(_ start:Date?, _ end:Date?, _ isNotify:Bool){
         DispatchQueue.global().async {
-            
+//            let start1 = Date()
             // 向数据库索取一定时间范围的数据，并将其按时间降序排序
             initDataSortedByDate(startDate: start!, endDate: end!, userId: UserInfo.getUserId())
             // 处理出为展示表格的数据
             sortedTimeOfData()
             // 处理出为展示图表的数据
             chartData()
+//            let end1 = Date()
+//            print("运行时间", end1.timeIntervalSince(start1))
             DispatchQueue.main.async {
                 
                 if(isNotify){

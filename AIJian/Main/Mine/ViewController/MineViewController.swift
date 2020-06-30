@@ -46,6 +46,12 @@ class MineViewController: UIViewController {
             //print("个人信息页面开始请求")
             requestUserInfo()
         }
+//        if userInfo.gender == 1{ //女
+//            self.tableview.cellForRow(at: [IndexPath(row:0,section: 0)
+////            cell.titleImage.image = UIImage(named:"headWomanImage")
+//        }else{
+////            cell.titleImage.image = UIImage(named:"headManImage")
+//        }
         self.tableview.reloadRows(at: [IndexPath(row:0,section:0)], with: .none)
 
         self.navigationController!.navigationBar.setBackgroundImage(UIImage(), for: .default)

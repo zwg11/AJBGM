@@ -72,26 +72,33 @@ class ChartViewController: UIViewController,ChartViewDelegate{
         indicatorStart()
         initChart()
         staticV.initLabelText()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadChart), name: NSNotification.Name(rawValue: "reloadChart"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(indicatorStart), name: NSNotification.Name(rawValue: "indicator"), object: nil)
+
     }
     
     
-    @objc func test(){
-        initChart()
-        staticV.initLabelText()
-    }
+
     
     override func viewWillAppear(_ animated: Bool) {
 //        print("chartViewController appear.")
         // 监听所选时间范围的变化
-        NotificationCenter.default.addObserver(self, selector: #selector(test), name: NSNotification.Name(rawValue: "reloadChart"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(indicatorStart), name: NSNotification.Name(rawValue: "indicator"), object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(reloadChart), name: NSNotification.Name(rawValue: "reloadChart"), object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(indicatorStart), name: NSNotification.Name(rawValue: "indicator"), object: nil)
+        indicatorStart()
+        initChart()
+        staticV.initLabelText()
+    }
+    
+    @objc func reloadChart(){
         indicatorStart()
         initChart()
         staticV.initLabelText()
     }
     override func viewWillDisappear(_ animated: Bool) {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "reloadChart"), object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "indicator"), object: nil)
+//        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "reloadChart"), object: nil)
+//        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "indicator"), object: nil)
         // 移除原图表
         lineChartView.removeFromSuperview()
     }
@@ -130,35 +137,40 @@ class ChartViewController: UIViewController,ChartViewDelegate{
             let Red = kRGBColor(255, 0, 0, 0.5)
             self.lineChartView.addLimitLine(low, low, Orange)
             self.lineChartView.addLimitLine(high, high, Red)
-  
+            
+            // 图表参数设置
+            // 得到数据中的血糖最大值
+            var maxGluValue = 0.0
+            if glucoseTimeAndValue.count > 0{
+                for i in glucoseTimeAndValue{
+                    if maxGluValue < i.value{
+                        maxGluValue = i.value
+                    }
+                }
+            }
+            self.lineChartView.lineChartView.xAxis.axisMaximum = Double(daysNum!)
+            // 如果maxGluValue不超过300，则y轴坐标最大值为300，否则设为maxGluValue+10
+            if GetUnit.getBloodUnit() == "mmol/L"{
+                if maxGluValue < 16.6{
+                    self.lineChartView.lineChartView.leftAxis.axisMaximum = 16.6
+                }else{
+                    self.lineChartView.lineChartView.leftAxis.axisMaximum = maxGluValue+2
+                }
+                
+            }else{
+                if maxGluValue < 300{
+                    self.lineChartView.lineChartView.leftAxis.axisMaximum = 300
+                }else{
+                    self.lineChartView.lineChartView.leftAxis.axisMaximum = maxGluValue+10
+                }
+                //                lineChartView.lineChartView.leftAxis.axisMaximum = 300
+            }
+            
+            let list = DateToData(startD!, endD!)
+            let xAxisArr = xAxisArray(startDate: startD!, endDate: endD!) as NSArray
             // 主程序中刷新图表
             DispatchQueue.main.async {
-                // 得到数据中的血糖最大值
-                var maxGluValue = 0.0
-                if glucoseTimeAndValue.count > 0{
-                    for i in glucoseTimeAndValue{
-                        if maxGluValue < i.value{
-                            maxGluValue = i.value
-                        }
-                    }
-                }
-                self.lineChartView.lineChartView.xAxis.axisMaximum = Double(daysNum!)
-                // 如果maxGluValue不超过300，则y轴坐标最大值为300，否则设为maxGluValue+10
-                if GetUnit.getBloodUnit() == "mmol/L"{
-                    if maxGluValue < 16.6{
-                        self.lineChartView.lineChartView.leftAxis.axisMaximum = 16.6
-                    }else{
-                        self.lineChartView.lineChartView.leftAxis.axisMaximum = maxGluValue+2
-                    }
-                    
-                }else{
-                    if maxGluValue < 300{
-                        self.lineChartView.lineChartView.leftAxis.axisMaximum = 300
-                    }else{
-                        self.lineChartView.lineChartView.leftAxis.axisMaximum = maxGluValue+10
-                    }
-                    //                lineChartView.lineChartView.leftAxis.axisMaximum = 300
-                }
+                
                 // 根据所选中的时间范围器元素决定各界面的数据如何初始化
                 switch pickerSelectedRow{
                 case 1,2,3:
@@ -170,10 +182,10 @@ class ChartViewController: UIViewController,ChartViewDelegate{
                     self.lineChartView.drawLineChart(xAxisArray: array as NSArray,xAxisData: data1)
                     //                NotificationCenter.default.post(name: NSNotification.Name("loadEnd"), object: self, userInfo: nil)
                     
+
                 default:
                     
-                    let list = DateToData(startD!, endD!)
-                    let xAxisArr = xAxisArray(startDate: startD!, endDate: endD!) as NSArray
+                    
                     self.lineChartView.drawLineChart(xAxisArray: xAxisArr,xAxisData: list)
                 }
                 self.indicator.stopIndicator()
@@ -182,7 +194,7 @@ class ChartViewController: UIViewController,ChartViewDelegate{
                 self.lineChartView.snp.makeConstraints{(make) in
                     make.left.equalToSuperview().offset(AJScreenWidth/30)
                     make.right.equalToSuperview().offset(-AJScreenWidth/30)
-                    
+
                     //            make.top.equalTo(self.headerView.snp.bottom)
                     make.top.equalToSuperview()
                     make.bottom.equalTo(self.staticV.snp.top)
