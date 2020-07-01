@@ -36,7 +36,7 @@ class getDataInHome{
     
     // 给一段时间，返回数组，分别为该段时间血糖的 平均值、检测次数、最高值、最低值
     static func getRecentValue(_ startDate:Date,_ endDate:Date, _ isGetData:Bool = true) -> [Any]{
-        var result:[Any] = []
+        var result:[Any] = [0,0,"--","--"]
         var avgValue = 0.0
         var checkNum = 0
         var highestValue = 0.0
@@ -81,27 +81,18 @@ class getDataInHome{
                 if GetUnit.getBloodUnit() == "mmol/L"{
                     // 平均值为1位小数
                     let x = String(format: "%.1f", avgValue)
-                    result.append(x)
-                    result.append(checkNum)
-                    result.append(highestValue)
-                    result.append(lowestValue)
+                    result[0] = x
+                    result[1] = checkNum
+                    result[2] = highestValue
+                    result[3] = lowestValue
                 }else{
                     // 平均值为1位小数
                     let x = String(format: "%.0f", avgValue)
-                    result.append(x)
-                    result.append(checkNum)
-                    result.append(String(format: "%.0f", highestValue))
-                    result.append(String(format: "%.0f", lowestValue))
+                    result[0] = (x)
+                    result[1] = (checkNum)
+                    result[2] = (String(format: "%.0f", highestValue))
+                    result[3] = (String(format: "%.0f", lowestValue))
                 }
-                
-                return result
-            }else{
-                // 如果没数据，平均值、检测次数为0，最高值、最低值设为 --
-                result.append(Int(avgValue))
-                result.append(checkNum)
-                result.append("--")
-                result.append("--")
-                
             }
             
         }
@@ -121,17 +112,17 @@ class getDataInHome{
                 if GetUnit.getBloodUnit() == "mmol/L"{
                     // 平均值为1位小数
                     let x = String(format: "%.1f", avgValue)
-                    result.append(x)
-                    result.append(checkNum)
-                    result.append(highestValue)
-                    result.append(lowestValue)
+                    result[0] = (x)
+                    result[1] = (checkNum)
+                    result[2] = (highestValue)
+                    result[3] = (lowestValue)
                 }else{
                     // 平均值为1位小数
                     let x = String(format: "%.0f", avgValue)
-                    result.append(x)
-                    result.append(checkNum)
-                    result.append(String(format: "%.0f", highestValue))
-                    result.append(String(format: "%.0f", lowestValue))
+                    result[0] = (x)
+                    result[1] = (checkNum)
+                    result[2] = (String(format: "%.0f", highestValue))
+                    result[3] = (String(format: "%.0f", lowestValue))
                 }
             }
         }
