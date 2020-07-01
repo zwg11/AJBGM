@@ -264,8 +264,10 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
                 let cell = AJMineHeaderView(style: .value1, reuseIdentifier: cellid)
                 if userInfo.gender == 1{ //女
                     cell.titleImage.image = UIImage(named:"headWomanImage")
-                }else{
+                }else if userInfo.gender == 0{
                     cell.titleImage.image = UIImage(named:"headManImage")
+                }else{
+                    cell.titleImage.image = UIImage(named:"defaultUserImage")
                 }
                 cell.textButton.setTitle(userInfo.user_name, for: .normal)
                 cell.selectionStyle = .none

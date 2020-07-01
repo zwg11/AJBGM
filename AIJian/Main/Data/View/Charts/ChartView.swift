@@ -9,7 +9,7 @@
 import UIKit
 import Charts
 import SnapKit
-import SwiftDate
+//import SwiftDate
 
 class ChartView: UIView ,ChartViewDelegate{
 
@@ -82,7 +82,7 @@ class ChartView: UIView ,ChartViewDelegate{
     }()
     
     // 该函数应传值 x轴坐标 和 x轴对应label
-    func drawLineChart(xAxisArray:NSArray,xAxisData:[Double]){
+    func drawLineChart(xAxisArray:NSArray?,xAxisData:[Double]){
 
 //        print("xAxisArray",xAxisArray)
         // 根据日期范围生成对应的x轴的label,这里需自定义 x轴坐标显示
@@ -102,7 +102,8 @@ class ChartView: UIView ,ChartViewDelegate{
                 // y 的位置为 glucoseTimeAndValue 根据时间读取对应的血糖值
                 // 注意坐标的 axisMinimum 和 axisMaximum 属性
                 // 点的位置要相对于 这两个属性来画出
-                let entry = ChartDataEntry.init(x: xData[j], y: glucoseTimeAndValue[glucoseTime[j]]!)
+//                let entry = ChartDataEntry.init(x: xData[j], y: glucoseTimeAndValue[glucoseTime[j]]!)
+                let entry = ChartDataEntry.init(x: xData[j], y: glucoseValue[j])
                 // 将数据添加到图表数据数组中
                 yDataArray1.append(entry)
             }
@@ -173,7 +174,8 @@ class ChartView: UIView ,ChartViewDelegate{
                 // y 的位置为 glucoseTimeAndValue 根据时间读取对应的血糖值
                 // 注意坐标的 axisMinimum 和 axisMaximum 属性
                 // 点的位置要相对于 这两个属性来画出
-                let entry = ChartDataEntry.init(x: xData[j], y: glucoseTimeAndValue[glucoseTime[j]]!)
+//                let entry = ChartDataEntry.init(x: xData[j], y: glucoseTimeAndValue[glucoseTime[j]]!)
+                let entry = ChartDataEntry.init(x: xData[j], y: glucoseValue[j])
                 // 将数据添加到图表数据数组中
                 yDataArray1.append(entry)
             }

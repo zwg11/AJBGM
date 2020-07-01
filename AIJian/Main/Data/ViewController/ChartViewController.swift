@@ -32,7 +32,6 @@ class ChartViewController: UIViewController,ChartViewDelegate{
     private lazy var staticV:StaticView = {
         let view = StaticView()
         view.setupUI()
-        view.initLabelText()
         return view
     }()
     
@@ -66,35 +65,21 @@ class ChartViewController: UIViewController,ChartViewDelegate{
         // Do any additional setup after loading the view.
         
         indicator.setupUI("",UIColor.clear)
-//        indicator.backgroundColor = UIColor.clear
-        // 监听所选时间范围的变化
-//        NotificationCenter.default.addObserver(self, selector: #selector(test), name: NSNotification.Name(rawValue: "reloadChart"), object: nil)
-        indicatorStart()
-        initChart()
-        staticV.initLabelText()
+        reloadChart()
         
         NotificationCenter.default.addObserver(self, selector: #selector(reloadChart), name: NSNotification.Name(rawValue: "reloadChart"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(indicatorStart), name: NSNotification.Name(rawValue: "indicator"), object: nil)
 
     }
-    
-    
-
-    
+     
     override func viewWillAppear(_ animated: Bool) {
-//        print("chartViewController appear.")
-        // 监听所选时间范围的变化
-//        NotificationCenter.default.addObserver(self, selector: #selector(reloadChart), name: NSNotification.Name(rawValue: "reloadChart"), object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(indicatorStart), name: NSNotification.Name(rawValue: "indicator"), object: nil)
-        indicatorStart()
-        initChart()
-        staticV.initLabelText()
+        reloadChart()
     }
     
     @objc func reloadChart(){
         indicatorStart()
         initChart()
-        staticV.initLabelText()
+        
     }
     override func viewWillDisappear(_ animated: Bool) {
 //        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "reloadChart"), object: nil)
@@ -117,6 +102,8 @@ class ChartViewController: UIViewController,ChartViewDelegate{
 
         // 异步设置图表
         DispatchQueue.global().async {
+            // 设置图表的数据
+            chartData()
             // 设置x轴的最大坐标值
 //            self.lineChartView.lineChartView.xAxis.axisMaximum = Double(daysNum!)
             // 画限制线，标明低于和高于的界限
@@ -126,10 +113,7 @@ class ChartViewController: UIViewController,ChartViewDelegate{
             for i in self.lineChartView.lineChartView.leftAxis.limitLines{
                 self.lineChartView.lineChartView.leftAxis.removeLimitLine(i)
             }
-            
-            // print("maxgluvalue:",maxGluValue)
-            
-            
+
             
             let low = GetBloodLimit.getEmptyStomachLow()
             let high = GetBloodLimit.getAfterDinnerTop()
@@ -141,13 +125,16 @@ class ChartViewController: UIViewController,ChartViewDelegate{
             // 图表参数设置
             // 得到数据中的血糖最大值
             var maxGluValue = 0.0
+            /*
             if glucoseTimeAndValue.count > 0{
                 for i in glucoseTimeAndValue{
                     if maxGluValue < i.value{
                         maxGluValue = i.value
                     }
                 }
-            }
+            }*/
+            maxGluValue = glucoseValue.max() ?? 0.0
+            // 设置x轴的最大坐标值
             self.lineChartView.lineChartView.xAxis.axisMaximum = Double(daysNum!)
             // 如果maxGluValue不超过300，则y轴坐标最大值为300，否则设为maxGluValue+10
             if GetUnit.getBloodUnit() == "mmol/L"{
@@ -166,29 +153,26 @@ class ChartViewController: UIViewController,ChartViewDelegate{
                 //                lineChartView.lineChartView.leftAxis.axisMaximum = 300
             }
             
-            let list = DateToData(startD!, endD!)
-            let xAxisArr = xAxisArray(startDate: startD!, endDate: endD!) as NSArray
+            let list = DateToData(startD!, endD!, isGetData: false)
+//            let xAxisArr = xAxisArray(startDate: startD!, endDate: endD!) as NSArray
             // 主程序中刷新图表
             DispatchQueue.main.async {
-                
+                // 图表底部视图加载
+                self.staticV.initLabelText()
                 // 根据所选中的时间范围器元素决定各界面的数据如何初始化
                 switch pickerSelectedRow{
                 case 1,2,3:
                     // 初始化 图标所需要的数据
-                    let array = xAxisArray(Days: daysNum!)
-                    let data1 = recentDaysData(Days: daysNum!)
-                    // 设置x轴的最大坐标值
-                    //                 self.lineChartView.lineChartView.xAxis.axisMaximum = Double(daysNum!)
-                    self.lineChartView.drawLineChart(xAxisArray: array as NSArray,xAxisData: data1)
-                    //                NotificationCenter.default.post(name: NSNotification.Name("loadEnd"), object: self, userInfo: nil)
+//                    let array = xAxisArray(Days: daysNum!)
+                    let data1 = recentDaysData(Days: daysNum!, isGetData: false)
+//                    self.lineChartView.drawLineChart(xAxisArray: array as NSArray,xAxisData: data1)
+                    self.lineChartView.drawLineChart(xAxisArray: nil,xAxisData: data1)
                     
 
                 default:
-                    
-                    
-                    self.lineChartView.drawLineChart(xAxisArray: xAxisArr,xAxisData: list)
+                    self.lineChartView.drawLineChart(xAxisArray: nil,xAxisData: list)
                 }
-                self.indicator.stopIndicator()
+
                 
                 self.view.addSubview(self.lineChartView)
                 self.lineChartView.snp.makeConstraints{(make) in
@@ -199,6 +183,7 @@ class ChartViewController: UIViewController,ChartViewDelegate{
                     make.top.equalToSuperview()
                     make.bottom.equalTo(self.staticV.snp.top)
                 }
+                self.indicator.stopIndicator()
             }
         }
 

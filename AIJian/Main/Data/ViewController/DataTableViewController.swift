@@ -152,11 +152,17 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
             // 如果列表章节数大于0
             if section<sortedTime.count{
                 // 判断日期是否为今天、明天
-                if sortedTime[section][0].compare(.isToday){
-                    label.text = "Today"
-                }else if sortedTime[section][0].compare(.isYesterday){
-                    label.text = "Yesterday"
-                }else{
+                if section <= 1{
+                    if sortedTime[section][0].compare(.isToday){
+                        label.text = "Today"
+                    }else if sortedTime[section][0].compare(.isYesterday){
+                        label.text = "Yesterday"
+                    }else{
+                        label.text = sortedTime[section][0].toFormat("MM/dd")
+                    }
+                }
+                
+                else{
                     label.text = sortedTime[section][0].toFormat("MM/dd")
                 }
                 
@@ -276,25 +282,39 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         self.scroll.contentOffset = CGPoint(x: 0, y: 0)
         //mainScrollView.removeFromSuperview()
         // 可以刷新了
-        indicatorStart()
-        self.initTable()
-        DispatchQueue.main.async {
-            self.initScroll()
+        DispatchQueue.global().async {
+            DispatchQueue.main.async {
+                self.indicatorStart()
+            }
+            sortedTimeOfData()
+            DispatchQueue.main.async {
+                self.initTable()
+                self.initScroll()
+                
+            }
         }
+        
+        
+        
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTable), name: NSNotification.Name(rawValue: "reloadTable"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(indicatorStart), name: NSNotification.Name(rawValue: "indicator"), object: nil)
     }
     
     @objc func reloadTable(){
-        // 将滚动视图置于初始状态
-        self.mainScrollView.contentOffset = CGPoint(x: 0, y: 0)
-        self.scroll.contentOffset = CGPoint(x: 0, y: 0)
-        //mainScrollView.removeFromSuperview()
-        // 可以刷新了
-        self.initTable()
-        DispatchQueue.main.async {
-            self.initScroll()
+        DispatchQueue.global().async {
+            sortedTimeOfData()
+            DispatchQueue.main.async {
+                // 将滚动视图置于初始状态
+                self.mainScrollView.contentOffset = CGPoint(x: 0, y: 0)
+                self.scroll.contentOffset = CGPoint(x: 0, y: 0)
+                //mainScrollView.removeFromSuperview()
+                // 可以刷新了
+                self.initTable()
+                self.initScroll()
+            }
         }
+        
+        
 //        initTable()
 //        initScroll()
     }
@@ -363,6 +383,10 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
             scroll.subviews.last?.removeFromSuperview()
         }
         scroll.addSubview(DATATableView)
+        // 更新表格数据
+        
+        self.DATATableView.reloadData()
+        self.DATETableView.reloadData()
         
         indicator.stopIndicator()
     }
@@ -409,11 +433,11 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         if sortedTime.count > 0{
             label.removeFromSuperview()
         }
-        // 主程序异步更新表格数据
-        DispatchQueue.main.async {
-            self.DATATableView.reloadData()
-            self.DATETableView.reloadData()
-        }
+        // 更新表格数据
+        
+//        self.DATATableView.reloadData()
+//        self.DATETableView.reloadData()
+        
     }
 }
 
@@ -497,7 +521,7 @@ extension DataTableViewController{
                                 // 表格数据初始化
                                 sortedTimeOfData()
                                 // 图表数据初始化
-                                chartData()
+//                                chartData()
                                 // 重新布局表格视图
                                 self.initTable()
                                 self.initScroll()

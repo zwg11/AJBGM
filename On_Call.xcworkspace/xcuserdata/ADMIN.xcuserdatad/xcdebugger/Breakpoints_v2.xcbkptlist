@@ -770,6 +770,38 @@
             endingLineNumber = "586"
             landmarkName = "setDaysAndRange(_:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "5B124981-D61A-4EF6-B144-F1B98A4AF80A - 58eb0efec7477e7a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "On_Call.DataViewController.notify() -&gt; ()"
+                  moduleName = "On Call"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ADMIN/Desktop/OnCall/AIJian/Main/Data/ViewController/DataViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "587"
+                  endingLineNumber = "587"
+                  offsetFromSymbolStart = "35">
+               </Location>
+               <Location
+                  uuid = "5B124981-D61A-4EF6-B144-F1B98A4AF80A - 58eb0efec7477e7a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "On_Call.DataViewController.notify() -&gt; ()"
+                  moduleName = "On Call"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ADMIN/Desktop/OnCall/AIJian/Main/Data/ViewController/DataViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "587"
+                  endingLineNumber = "587"
+                  offsetFromSymbolStart = "193">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

@@ -42,7 +42,7 @@ class recentTrendView: UIView {
         
         self.addSubview(recentTrendView)
         // 画图
-        self.recentTrendView.drawLineChart(xAxisArray: xAxisArrayToWeek(Days: 7) as NSArray,xAxisData: recentDaysData(Days: 7))
+        self.recentTrendView.drawLineChart(xAxisArray: xAxisArrayToWeek(Days: 7) as NSArray,xAxisData: recentDaysData(Days: 7, isGetData: true))
         self.recentTrendView.snp_makeConstraints{(make) in
             make.left.top.equalToSuperview()
             
@@ -60,11 +60,12 @@ class recentTrendView: UIView {
         // 得到数据中的血糖最大值
         var maxGluValue = 0.0
         if sortedByDateOfData != nil{
-            for i in sortedByDateOfData!{
-                if maxGluValue < i.bloodGlucoseMg!{
-                    maxGluValue = i.bloodGlucoseMg!
-                }
-            }
+//            for i in sortedByDateOfData!{
+//                if maxGluValue < i.bloodGlucoseMg!{
+//                    maxGluValue = i.bloodGlucoseMg!
+//                }
+//            }
+            maxGluValue = glucoseValue.max() ?? 0
         }
         // 如果maxGluValue不超过300，则y轴坐标最大值为300，否则设为maxGluValue+10
         if maxGluValue < 300{

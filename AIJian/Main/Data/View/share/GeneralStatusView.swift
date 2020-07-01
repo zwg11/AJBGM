@@ -139,13 +139,15 @@ class GeneralStatusView: UIView {
         }
         
          var maxGluValue = 0.0
+        /*
          if glucoseTimeAndValue.count > 0{
              for i in glucoseTimeAndValue{
                  if maxGluValue < i.value{
                      maxGluValue = i.value
                  }
              }
-         }
+         }*/
+        maxGluValue = glucoseValue.max() ?? 0.0
         // print("maxgluvalue:",maxGluValue)
          // 如果maxGluValue不超过300，则y轴坐标最大值为300，否则设为maxGluValue+10
          if GetUnit.getBloodUnit() == "mmol/L"{
@@ -195,11 +197,13 @@ class GeneralStatusView: UIView {
             switch pickerSelectedRow{
             case 1,2,3:
                 self.chart.lineChartView.xAxis.axisMaximum = Double(daysNum!)
-                let data1 = recentDaysData(Days: daysNum!)
-                self.chart.drawLineChartWithoutAnimate(xAxisArray: array as NSArray,xAxisData: data1)
+                let data1 = recentDaysData(Days: daysNum!, isGetData: false)
+//                self.chart.drawLineChartWithoutAnimate(xAxisArray: array as NSArray,xAxisData: data1)
+                self.chart.drawLineChart(xAxisArray:nil,xAxisData: data1)
             default:
                 self.chart.lineChartView.xAxis.axisMaximum = Double(daysNum!)
-                self.chart.drawLineChartWithoutAnimate(xAxisArray: xAxisArray(startDate: startD!, endDate: endD!) as NSArray,xAxisData: DateToData(startD!, endD!))
+//                self.chart.drawLineChartWithoutAnimate(xAxisArray: xAxisArray(startDate: startD!, endDate: endD!) as NSArray,xAxisData: DateToData(startD!, endD!, isGetData: false))
+                self.chart.drawLineChart(xAxisArray: nil,xAxisData: DateToData(startD!, endD!, isGetData: false))
             }
             // 风火轮停止
             self.indicator.stopIndicator()

@@ -79,15 +79,17 @@ func xAxisArrayToWeek(Days:Int)->[String]{
 
 // 给定最近几天时
 // 给定一个日期数组，返回响应的x轴坐标
-func recentDaysData(Days:Int)->[Double]{
+func recentDaysData(Days:Int, isGetData: Bool)->[Double]{
     let today = DateInRegion().dateAt(.endOfDay).date
     let end = today + 1.seconds
-//    print(end)
+    //    print(end)
     let start = end - Days.days
-    // 向数据库提取近些天的数据
-    initDataSortedByDate(startDate: start, endDate: end, userId: UserInfo.getUserId())
-    // 将数据处理成 图表所需的数据
-    chartData()
+    if(isGetData){ // 如果需要获取数据
+        // 向数据库提取近些天的数据
+        initDataSortedByDate(startDate: start, endDate: end, userId: UserInfo.getUserId())
+        // 将数据处理成 图表所需的数据
+        chartData()
+    }
     
     var xAxisData:[Double] = []
     let calendar = NSCalendar.current
@@ -122,7 +124,7 @@ func xAxisArray(startDate:Date,endDate:Date)->[String]{
     var xAxisStrings:[String] = []
     // 使得日期数组都装着每天的开始
     while x <= endDate+1.seconds {
-        xAxisStrings.append(x.toFormat("yyyy/MM/dd"))
+        xAxisStrings.append(x.toFormat("MM/dd"))
         x = x + 1.days
     }
     //dates.sort()
@@ -139,12 +141,13 @@ func xAxisArray(startDate:Date,endDate:Date)->[String]{
 
 
 // 传入 坐标轴0点 表示的日期，要画的点 的日期数组，该数组必须要排好序
-func DateToData(_ start:Date,_ end:Date)->[Double]{
-    
-    // 向数据库提取近些天的数据
-    initDataSortedByDate(startDate: start, endDate: end, userId: UserInfo.getUserId())
-    // 将数据处理成 图表所需的数据
-    chartData()
+func DateToData(_ start:Date,_ end:Date, isGetData: Bool)->[Double]{
+    if(isGetData){ // 如果需要获取数据
+        // 向数据库提取近些天的数据
+        initDataSortedByDate(startDate: start, endDate: end, userId: UserInfo.getUserId())
+        // 将数据处理成 图表所需的数据
+        chartData()
+    }
     
     var xAxisData:[Double] = []
     let calendar = NSCalendar.current
@@ -160,23 +163,6 @@ func DateToData(_ start:Date,_ end:Date)->[Double]{
         xAxisData.append(Double(result1)/1440.0)
     }
     return xAxisData
-    
-//    var x = start
-//    var dates:[Date] = []
-//    // 使得日期数组都装着每天的开始
-//    while x <= end {
-//        dates.append(x)
-//        x = x + 1.days
-//    }
-//    //dates.sort()
-//    var xAxisStrings:[String] = []
-//    for i in dates{
-//        xAxisStrings.append(i.toFormat("MM-dd"))
-//    }
-//    print(xAxisStrings)
-//    xAxisStrings[0] = ""
-//    xAxisStrings[xAxisStrings.count-1] = ""
-//    return xAxisStrings
 }
 
 

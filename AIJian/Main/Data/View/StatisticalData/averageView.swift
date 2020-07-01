@@ -193,7 +193,7 @@ class averageView: UIView {
             make.centerX.equalTo(glucoseValue)
             make.bottom.equalTo(sDLabel.snp.bottom)
             make.height.equalTo(sDLabel.snp.height)
-            make.width.equalTo((AJScreenWidth-20)/8 )
+            make.width.equalTo((AJScreenWidth-20)/5 )
             
         }
         
@@ -228,10 +228,7 @@ class averageView: UIView {
             // 总标准差和
             var sumStandardDaviation = 0.0
             // 总检测次数
-            for i in 0..<sortedTime.count{
-                sumCheckNum += sortedTime[i].count
-                
-            }
+            sumCheckNum = sortedByDateOfData!.count
             // 平均检测次数
             avgCheckNum = Double(sumCheckNum)/Double(daysNum!)
             
