@@ -398,7 +398,6 @@ class DataViewController: UIViewController {
 //            startD = customSD.dateAt(.startOfDay)
 //            print("startD:\(startD)")
             // 结束时间
-//            let ED = customED
             endD = (DateInRegion(ED)?.date.dateAt(.endOfDay))!+1.seconds
 //            print("endD:\(endD)")
             // 设定被选中的标志位
@@ -598,6 +597,17 @@ class DataViewController: UIViewController {
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    func isScroll(view: UIView) -> Bool {
+        if(view.isKind(of: UIScrollView.self)){
+            print("IS UISCROLL")
+            let scrollV = view as! UIScrollView
+            if(scrollV.isDragging || scrollV.isDecelerating){
+                return true
+            }
+        }
+        return false
     }
     
     
