@@ -30,7 +30,8 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
         view.setupUI()
 //        view.emailTextField.delegate = self
         view.nameTextField.delegate = self
-
+        view.phoneTextField.delegate = self
+        view.phoneTextField.tag = 1
         view.sendButton.addTarget(self, action: #selector(sendImage), for: .touchUpInside)
         return view
     }()
@@ -73,12 +74,7 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
         if name!.count >= 50{
             return
         }
-        if phone!.count >= 30{
-            return
-        }
-        if phone!.count >= 30{
-            return
-        }
+      
         // 加载视图旋转
 //        self.parent?.navigationController?.view.addSubview(indicator)
 //        self.parent?.navigationController?.view.bringSubviewToFront(indicator)
@@ -202,6 +198,19 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
 
         // Do any additional setup after loading the view.
 
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    
+        if textField.tag == 1{   //电话
+            let limitation = 20
+            let futureStr:NSMutableString = NSMutableString(string: textField.text!)
+            futureStr.insert(string, at: range.location)
+            if futureStr.length > limitation {
+                return false
+            }
+        }
+        return true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

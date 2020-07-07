@@ -47,6 +47,7 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
         view.userNameTextField.delegate = self  //用户名
 
         view.phoneTextField.delegate = self     //电话
+        view.phoneTextField.tag = 1  //手机号tag  =1
         initDelegate()
         view.gender_man_button.addTarget(self, action: #selector(genderMan), for: .touchUpInside)
         view.gender_woman_button.addTarget(self, action: #selector(genderWoman), for: .touchUpInside)
@@ -169,8 +170,8 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
 //        }else if phoneNumber == ""{
 //            alertController.custom(self, "Attention", "Phone Empty")
 //            return
-        }else if phoneNumber!.count >= 16 {
-            alertController.custom(self, "Attention", "Phone Number Should be less than 16")
+        }else if phoneNumber!.count > 20  {
+            alertController.custom(self, "Attention", "Phone Number Should be less than 20")
             return
         }else{  //经过验证之后的请求
             //设置了国家和用户名不能为空
@@ -253,6 +254,23 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
         textField.resignFirstResponder()
         return true
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        //如果tag == 1，则为手机号输入框限定长度为20位
+        if textField.tag == 1{
+            let limitation = 20
+            let futureStr:NSMutableString = NSMutableString(string: textField.text!)
+            futureStr.insert(string, at: range.location)
+            if futureStr.length > limitation {
+                return false
+            }
+            return true
+        }
+        return true
+    }
+    
+    
+    
      //选择出生日期
     @objc func chooseDate(){
         let pickerView = BHJPickerView.init(self, .date)

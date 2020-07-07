@@ -370,7 +370,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                     return
                 }
                 // 输出结果
-                print(String(data: characteristic.value!, encoding: .utf8) ?? " nothing ")
+//                print(String(data: characteristic.value!, encoding: .utf8) ?? " nothing ")
                 // 使用变量记录传输过来的 data
                 let replyDateStr = String(data: characteristic.value!, encoding: .utf8)!
                 
@@ -492,9 +492,11 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                         self.logUpload("CRC验证码为：\(SendData)")
                         if let xdata=SendData.data(using: .utf8){
                             peripheral.writeValue(xdata, for: self.writeCharacteristic ?? characteristic, type: .withoutResponse)
+                            self.logUpload("发送CRC验证码：\(SendData)")
                         }else{
                             self.logUpload("\(SendData)转utf8失败")
                         }
+                        
                         
                     }else{
                         wrongInfo = "Incorrect Receiving of Blood Glucose Meter Information"

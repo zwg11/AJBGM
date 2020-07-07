@@ -501,6 +501,8 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
         alertController.addTextField {
             (textField: UITextField!) -> Void in
             textField.keyboardType = .numberPad
+            textField.delegate = self
+            textField.tag = 3
 //            textField.placeholder = "电话"
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -531,6 +533,17 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
 extension InfoViewController{
     // *************** 详细用法请看glucoseView中的注释 *****************
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if textField.tag == 3{   //电话
+            let limitation = 20
+            let futureStr:NSMutableString = NSMutableString(string: textField.text!)
+            futureStr.insert(string, at: range.location)
+            if futureStr.length > limitation {
+                return false
+            }
+            return true
+        }
+        
         let testString = ".0123456789"
         let char = NSCharacterSet.init(charactersIn: testString).inverted
         
@@ -547,7 +560,7 @@ extension InfoViewController{
                     numFrontDot = 3
                     numAfterDot = 0
                 }
-            }else{   //身高
+            }else if textField.tag == 0{   //身高
                 numFrontDot = 3
                 numAfterDot = 2
             }
