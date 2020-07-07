@@ -152,8 +152,13 @@ class ChartViewController: UIViewController,ChartViewDelegate{
                 }
                 //                lineChartView.lineChartView.leftAxis.axisMaximum = 300
             }
-            
+            // 得到startD到endD之间的数据
             let list = DateToData(startD!, endD!, isGetData: false)
+            // 得到当前图表的放大倍数
+            let scalex = self.lineChartView.lineChartView.scaleX
+//            print("scalex:", scalex)
+            // 设置当前图表缩小，缩小程度视scalex的大小
+            self.lineChartView.lineChartView.zoomToCenter(scaleX: 1/scalex, scaleY: 1)
 //            let xAxisArr = xAxisArray(startDate: startD!, endDate: endD!) as NSArray
             // 主程序中刷新图表
             DispatchQueue.main.async {

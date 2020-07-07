@@ -344,7 +344,11 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         let crc = CRC16()
         
         if(error) != nil{
-            print(String(describing: error?.localizedDescription))
+            let ERROR_INFO = String(describing: error?.localizedDescription)
+            print(ERROR_INFO)
+            self.logUpload("ERROR:" + ERROR_INFO)
+            let alert = CustomAlertController()
+            alert.custom(self, "ERROR", ERROR_INFO)
         }else{
             //print("特征值：\(characteristic)")
             //print("特征值的value：\(characteristic.value!)")
@@ -377,8 +381,6 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                         // 如果存储 meterID 的数组包含 蓝牙发送过来的meterID
                         if self.meterIDs![replyDateStr] != nil{
                             // 改变显示在屏幕的提示标签文本
-//                            self.loadV.setLabelText("发现之前的通讯记录，传输记录")
-//                            self.loadV.setLabelText("Discover Past Communication Records,Transferring Records")
                             self.loadV.setLabelText("Data is in History Transmission Records")
                             print("通信过，发送App记录的最晚通讯记录，包括时间、血糖值、标记位")
                             self.logUpload("通信过，发送App记录的最晚通讯记录，包括时间、血糖值、标记位")
@@ -388,19 +390,17 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                             let array:Array<String> = str.components(separatedBy: " ")
                             // 抽出时间，并将其转为d一定格式的字符串
                             let date = "&D" + array[0][2,11] + " "
-//                            let date = "&D" + "0521191438" + " "
                             let SendData = date + crc.string2CRC(string: date)
                             print("CRC验证码为：\(SendData)")
                             // 发送时间
-                            peripheral.writeValue(SendData.data(using: .utf8)!, for: self.writeCharacteristic!, type: .withoutResponse)
+                            peripheral.writeValue(SendData.data(using: .utf8)!, for: self.writeCharacteristic ?? characteristic, type: .withoutResponse)
                         }
                             // 如果之前未与该蓝牙通信过，则让其发送所有蓝牙数据
                         else{
                             // 改变显示在屏幕的提示标签文本
-//                            self.loadV.setLabelText("未发现之前的通讯记录，让血糖仪发送所有数据")
                             self.loadV.setLabelText("No History Transmission Record.Accept All Data from Meter")
                             self.logUpload("No History Transmission Record.Accept All Data from Meter")
-                            peripheral.writeValue("&N1 13183".data(using: .utf8)!, for: self.writeCharacteristic!, type: .withoutResponse)
+                            peripheral.writeValue("&N1 13183".data(using: .utf8)!, for: self.writeCharacteristic ?? characteristic, type: .withoutResponse)
                             //self.meterIDs![replyDateStr] = ""
                         }
                     }
@@ -417,7 +417,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                             self.logUpload("尝试其他的 meter类型,发送命令\(order)")
                             // 将字符串转为Data，发送蓝牙命令必须为Data型
                             let byteDate0 = order.data(using: .utf8)
-                            peripheral.writeValue(byteDate0!, for: self.writeCharacteristic!, type: .withoutResponse)
+                            peripheral.writeValue(byteDate0!, for: self.writeCharacteristic ?? characteristic, type: .withoutResponse)
                             self.meterType -= 1
                         }
                         else{
@@ -445,9 +445,8 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                         // 字符串 + CRC
                         let SendData = date + crc.string2CRC(string: date)
                         self.logUpload("CRC验证码为：\(SendData)")
-                        peripheral.writeValue(SendData.data(using: .utf8)!, for: self.writeCharacteristic!, type: .withoutResponse)
+                        peripheral.writeValue(SendData.data(using: .utf8)!, for: self.writeCharacteristic ?? characteristic, type: .withoutResponse)
                     }else{
-                        //                            self.sthWrong = true
                         wrongInfo = "Incorrect Receiving of Blood Glucose Meter Information"
                     }
                 case "R":
@@ -466,9 +465,8 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                         // 字符串 + CRC
                         let SendData = date + crc.string2CRC(string: date)
                         self.logUpload("CRC验证码为：\(SendData)")
-                        peripheral.writeValue(SendData.data(using: .utf8)!, for: self.writeCharacteristic!, type: .withoutResponse)
+                        peripheral.writeValue(SendData.data(using: .utf8)!, for: self.writeCharacteristic ?? characteristic, type: .withoutResponse)
                     }else{
-                        //                            self.sthWrong = true
                         wrongInfo = "Incorrect Receiving of Blood Glucose Meter Information"
                     }
                 case "K":
@@ -478,9 +476,8 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                         self.logUpload("告诉仪器发送数据")
                         let SendData = "&N0 " + crc.string2CRC(string: "&N0 ")
                         self.logUpload("CRC验证码为：\(SendData)")
-                        peripheral.writeValue(SendData.data(using: .utf8)!, for: self.writeCharacteristic!, type: .withoutResponse)
+                        peripheral.writeValue(SendData.data(using: .utf8)!, for: self.writeCharacteristic ?? characteristic, type: .withoutResponse)
                     }else{
-                        //                            self.sthWrong = true
                         wrongInfo = "Incorrect Receiving of Blood Glucose Meter Information"
                     }
                     
@@ -557,14 +554,12 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                                 
                                 self.logUpload("CRC:\(String(replyDateStr[2,replyDateStr.count-1]))验证错误，数据可能来源非法。")
                                 wrongInfo = "CRC ERROR"
-                                //                                    self.sthWrong = true
                                 
                             }
                             else{
                                 self.logUpload("CRC:\(String(replyDateStr[2,replyDateStr.count-1])) 验证正确。跳转页面显示血糖数据")
                                 
                                 // 将加载视图移除界面，并使其图片动画停止
-//                                self.loadV.removeFromSuperview()
                                 self.loadV.stopIndicator()
                                 
                                 //如果lastRecord不为”“，说明有数据，跳转
@@ -616,7 +611,6 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                                     // 改变显示在屏幕的提示标签文本
                                     self.loadV.setLabelText("No Data in the Meter")
                                     // 将加载视图移除界面，并使其图片动画停止
-                                    //                                self.loadV.removeFromSuperview()
                                     self.loadV.stopIndicator()
                                     wrongInfo = "No Data in the Meter"
                                     
@@ -795,56 +789,13 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
             }
             make.height.equalTo(44)
         }
-        
-//        let tableHeadLabel = UILabel()
-//        tableHeadLabel.backgroundColor = UIColor.clear
-//        tableHeadLabel.textColor = UIColor.white
-//        tableHeadLabel.textAlignment = .left
-//        tableHeadLabel.text = "Connected Glucose Meter"
-//        tableHeadLabel.font = UIFont.boldSystemFont(ofSize: 16)
-//        self.view.addSubview(tableHeadLabel)
-//        tableHeadLabel.snp.makeConstraints{(make) in
-//            make.right.equalToSuperview()
-//            make.left.equalToSuperview().offset(15)
-//            make.height.equalTo(44)
-//            if #available(iOS 11.0, *) {
-//                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
-//                //                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
-//            } else {
-//                make.top.equalTo(topLayoutGuide.snp.bottom)
-//                //                make.bottom.equalTo(bottomLayoutGuide.snp.top)
-//                // Fallback on earlier versions
-//            }
-//
-//        }
         // 设置表格布局，设置其代理和数据来源，将其加入视图
-//        tableView.frame.size = CGSize(width: UIScreen.ma in.bounds.width, height: UIScreen.main.bounds.height-108)
-//        self.view.addSubview(tableView)
-//        tableView.snp.makeConstraints{(make) in
-//            make.left.right.equalToSuperview()
-//            make.bottom.equalTo(button.snp.top)
-//            make.top.equalTo(tableHeadLabel.snp.bottom)
-////            if #available(iOS 11.0, *) {
-////                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
-//////                make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
-////            } else {
-////                make.top.equalTo(topLayoutGuide.snp.bottom)
-//////                make.bottom.equalTo(bottomLayoutGuide.snp.top)
-////                // Fallback on earlier versions
-////            }
-//
-//        }
         // tableView设置
         tableView.separatorColor = UIColor.clear
         tableView.backgroundColor = UIColor.clear
         tableView.delegate = self
         tableView.dataSource = self
         self.view.addSubview(tableView)
-        //        tableView.snp.makeConstraints{(make) in
-        //            make.left.right.equalToSuperview()
-        //            make.top.equalToSuperview()
-        //            make.bottom.equalToSuperview().offset(-44)
-        //        }
         tableView.clipsToBounds = true
         self.view.addSubview(tableView)
         tableView.snp.makeConstraints{(make) in
