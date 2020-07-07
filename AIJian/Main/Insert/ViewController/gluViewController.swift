@@ -223,7 +223,6 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
                             arr[self.meterID] = self.lastRecord
                             data["meterID"] = arr
                             data.write(toFile: path, atomically: true)
-                            //                            if self.UpdateMeterInfo(){
                             let x = UIAlertController(title: "", message: "Insert Success.", preferredStyle: .alert)
                             // 移除风火轮
                             self.indicator.stopIndicator()

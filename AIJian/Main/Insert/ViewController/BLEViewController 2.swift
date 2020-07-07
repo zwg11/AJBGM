@@ -347,6 +347,8 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
             let ERROR_INFO = String(describing: error?.localizedDescription)
             print(ERROR_INFO)
             self.logUpload("ERROR:" + ERROR_INFO)
+            self.loadV.stopIndicator()
+            self.initAllDate()
             let alert = CustomAlertController()
             alert.custom(self, "ERROR", ERROR_INFO)
         }else{
@@ -357,7 +359,16 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
             // 在主程序中刷新
             DispatchQueue.main.async {
                 print("收到数据")
-                self.logUpload("收到数据")
+                if characteristic.value != nil{
+                    self.logUpload("收到数据:\(String(data: characteristic.value!, encoding: .utf8) ?? "nothing")")
+                }else{
+                    self.logUpload("收到的数据为nil，不明原因")
+                    self.loadV.stopIndicator()
+                    self.initAllDate()
+                    let alert = CustomAlertController()
+                    alert.custom(self, "ERROR", "unknown error occured,received data is null.")
+                    return
+                }
                 // 输出结果
                 print(String(data: characteristic.value!, encoding: .utf8) ?? " nothing ")
                 // 使用变量记录传输过来的 data
@@ -394,6 +405,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                             print("CRC验证码为：\(SendData)")
                             // 发送时间
                             peripheral.writeValue(SendData.data(using: .utf8)!, for: self.writeCharacteristic ?? characteristic, type: .withoutResponse)
+                            self.logUpload("发送CRC验证码：\(SendData)")
                         }
                             // 如果之前未与该蓝牙通信过，则让其发送所有蓝牙数据
                         else{
@@ -446,6 +458,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                         let SendData = date + crc.string2CRC(string: date)
                         self.logUpload("CRC验证码为：\(SendData)")
                         peripheral.writeValue(SendData.data(using: .utf8)!, for: self.writeCharacteristic ?? characteristic, type: .withoutResponse)
+                        self.logUpload("发送CRC验证码：\(SendData)")
                     }else{
                         wrongInfo = "Incorrect Receiving of Blood Glucose Meter Information"
                     }
@@ -466,6 +479,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                         let SendData = date + crc.string2CRC(string: date)
                         self.logUpload("CRC验证码为：\(SendData)")
                         peripheral.writeValue(SendData.data(using: .utf8)!, for: self.writeCharacteristic ?? characteristic, type: .withoutResponse)
+                        self.logUpload("发送CRC验证码：\(SendData)")
                     }else{
                         wrongInfo = "Incorrect Receiving of Blood Glucose Meter Information"
                     }
@@ -476,7 +490,12 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                         self.logUpload("告诉仪器发送数据")
                         let SendData = "&N0 " + crc.string2CRC(string: "&N0 ")
                         self.logUpload("CRC验证码为：\(SendData)")
-                        peripheral.writeValue(SendData.data(using: .utf8)!, for: self.writeCharacteristic ?? characteristic, type: .withoutResponse)
+                        if let xdata=SendData.data(using: .utf8){
+                            peripheral.writeValue(xdata, for: self.writeCharacteristic ?? characteristic, type: .withoutResponse)
+                        }else{
+                            self.logUpload("\(SendData)转utf8失败")
+                        }
+                        
                     }else{
                         wrongInfo = "Incorrect Receiving of Blood Glucose Meter Information"
                     }
@@ -531,10 +550,6 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                                 self.dataSting.append(Int(scalar.value))
                             }
                             /*
-                             
-                             for i in replyDateStr{
-                             print("****\(i)*****")
-                             }
                              会打印
                              ****&*****
                              ****N*****
@@ -546,9 +561,6 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                              *********
                              所以要将 得到的CRC变成字符串 与 replyDateStr字符串的 3...replyDateStr.count-2 比较
                              */
-                            //                            print(replyDateStr[3,replyDateStr.count-2])
-                            //
-                            //                            print(replyDateStr.count)
                             
                             if String(crc.getCRC(arr: self.dataSting)) != replyDateStr[3,replyDateStr.count-2]{
                                 
@@ -819,7 +831,8 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         let crc = CRC16()
         let meterStr = "&T"+String(meterType,radix:16).uppercased()+" "
         let order = meterStr + crc.string2CRC(string: meterStr)
-        self.logUpload("命令"+order)
+        logUpload("/***************蓝牙界面开始*****************/")
+        self.logUpload("初始命令"+order)
         
         // 将字符串转为Data，发送蓝牙命令必须为Data型
         byteDate = order.data(using: .utf8)
@@ -831,10 +844,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         // 设置为字典型
         meterIDs = data1["meterID"] as? NSMutableDictionary
         self.logUpload("存储的meterID有:\(String(describing: meterIDs))")
-        //         //取出对应的meterID的数据
-        //        print(meterIDs!.value(forKey: "&M103D003E5F3 12496") as! String)
-        //         //查看是否有某个 key 值
-        //        print(meterIDs!["&M103D003E5F3 12496"] != nil)
+
         // 设置监听器，监听是否弹出插入成功r弹窗
         NotificationCenter.default.addObserver(self, selector: #selector(InsertSuccess), name: NSNotification.Name(rawValue: "InsertData"), object: nil)
 
