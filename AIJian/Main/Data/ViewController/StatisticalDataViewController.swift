@@ -43,7 +43,7 @@ class StatisticalDataViewController: UIViewController,UIScrollViewDelegate {
         view.setupUI()
         return view
     }()
-    let indicator = CustomIndicatorView()
+    private lazy var indicatorS = CustomIndicatorView()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -109,7 +109,7 @@ class StatisticalDataViewController: UIViewController,UIScrollViewDelegate {
         }
     
         // 风火轮UI初始化
-        indicator.setupUI("", UIColor.clear)
+        indicatorS.setupUI("", UIColor.clear)
     }
     // 更新视图内容
     @objc func test(){
@@ -131,11 +131,11 @@ class StatisticalDataViewController: UIViewController,UIScrollViewDelegate {
     }
 
     @objc func indicatorStart(){
-        self.view.addSubview(indicator)
-        indicator.snp.makeConstraints{ (make) in
+        self.parent?.view.addSubview(indicatorS)
+        indicatorS.snp.makeConstraints{ (make) in
             make.edges.equalToSuperview()
         }
-        indicator.startIndicator()
+        indicatorS.startIndicator()
     }
     
     func initContent(){
@@ -161,7 +161,7 @@ class StatisticalDataViewController: UIViewController,UIScrollViewDelegate {
             self.afterMeal.afterMealInit()
             // 风火轮结束
             DispatchQueue.main.async {
-                self.indicator.removeFromSuperview()
+                self.indicatorS.stopIndicator()
             }
         }
     }

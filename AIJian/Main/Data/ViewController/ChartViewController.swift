@@ -28,7 +28,7 @@ class ChartViewController: UIViewController,ChartViewDelegate{
         view.lineChartView.xAxis.labelCount = 4
         return view
     }()
-    let indicator = CustomIndicatorView()
+    private lazy var indicator = CustomIndicatorView()
     private lazy var staticV:StaticView = {
         let view = StaticView()
         view.setupUI()
@@ -67,13 +67,17 @@ class ChartViewController: UIViewController,ChartViewDelegate{
         indicator.setupUI("",UIColor.clear)
         reloadChart()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadChart), name: NSNotification.Name(rawValue: "reloadChart"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(indicatorStart), name: NSNotification.Name(rawValue: "indicator"), object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(reloadChart), name: NSNotification.Name(rawValue: "reloadChart"), object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(indicatorStart), name: NSNotification.Name(rawValue: "indicator"), object: nil)
 
     }
      
     override func viewWillAppear(_ animated: Bool) {
         reloadChart()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadChart), name: NSNotification.Name(rawValue: "reloadChart"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(indicatorStart), name: NSNotification.Name(rawValue: "indicator"), object: nil)
     }
     
     @objc func reloadChart(){
@@ -82,14 +86,15 @@ class ChartViewController: UIViewController,ChartViewDelegate{
         
     }
     override func viewWillDisappear(_ animated: Bool) {
-//        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "reloadChart"), object: nil)
-//        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "indicator"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "reloadChart"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "indicator"), object: nil)
         // 移除原图表
         lineChartView.removeFromSuperview()
     }
     
     @objc func indicatorStart(){
-        self.view.addSubview(indicator)
+        self.parent?.view.addSubview(indicator)
+//        self.view.addSubview(indicator)
         indicator.snp.makeConstraints{ (make) in
             make.edges.equalToSuperview()
         }

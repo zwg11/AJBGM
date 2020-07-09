@@ -355,12 +355,13 @@ extension loginViewController{
                             let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path0)!
                             let arr:NSMutableDictionary = [:]
                             // 更新配置文件内容
+                            print("远端meter数据：\(responseModel)")
                             if let Info = responseModel.data{
                                 for i in Info{
                                     arr[i.meterId as Any] = i.recentRecord
                                 }
                             }
-
+                            print(arr)
                             data["meterID"] = arr
                             data.write(toFile: path0, atomically: true)
                             

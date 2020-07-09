@@ -105,7 +105,7 @@ class dateRangePickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
             make.left.equalToSuperview()
             make.width.equalTo(UIScreen.main.bounds.width/3)
             make.top.equalToSuperview()
-            make.height.equalTo(UIScreen.main.bounds.height/15)
+            make.height.equalTo(44)
         }
         // 确定按钮布局
         self.addSubview(sureButton)
@@ -113,17 +113,14 @@ class dateRangePickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
             make.right.equalToSuperview()
             make.width.equalTo(UIScreen.main.bounds.width/3)
             make.top.equalToSuperview()
-            make.height.equalTo(UIScreen.main.bounds.height/15)
-//            make.top.bottom.equalTo(cancelButton)
-            //make.height.equalTo(UIScreen.main.bounds.height/15)
+            make.height.equalTo(44)
         }
         
         // 时间选择器布局
         self.addSubview(rangePicker)
         rangePicker.snp.makeConstraints{(make) in
             make.right.left.bottom.equalToSuperview()
-            
-            make.top.equalTo(sureButton.snp.bottom)
+            make.top.equalToSuperview().offset(45)
         }
         
         

@@ -65,7 +65,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
     // 数据tableView
     var DATATableView:UITableView = UITableView()
 
-    let indicator = CustomIndicatorView()
+    private lazy var indicatorT = CustomIndicatorView()
     // 整个页面的滚动视图
     var mainScrollView:UIScrollView = UIScrollView()
     // 只含有 数据tableView 的滚动视图
@@ -85,7 +85,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
             //make.height.equalTo(520)
         }
         
-        indicator.setupUI("",UIColor.clear)
+        indicatorT.setupUI("",UIColor.clear)
         // create a tableView
         // **********其宽度要根据计算得出，高度也是根据数据量计算得出************
         DATETableView.dataSource = self
@@ -313,10 +313,6 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
                 self.initScroll()
             }
         }
-        
-        
-//        initTable()
-//        initScroll()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -388,7 +384,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         self.DATATableView.reloadData()
         self.DATETableView.reloadData()
         
-        indicator.stopIndicator()
+        self.indicatorT.stopIndicator()
     }
     // 没有数据时在视图中心显示该标签
     private lazy var label:UILabel = {
@@ -403,11 +399,11 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
     }()
     
     @objc func indicatorStart(){
-        self.view.addSubview(indicator)
-        indicator.snp.makeConstraints{ (make) in
+        self.parent?.view.addSubview(indicatorT)
+        indicatorT.snp.makeConstraints{ (make) in
             make.edges.equalToSuperview()
         }
-        indicator.startIndicator()
+        indicatorT.startIndicator()
     }    
     func initTable(){
         self.view.addSubview(label)

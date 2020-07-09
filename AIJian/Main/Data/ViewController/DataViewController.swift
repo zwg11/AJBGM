@@ -36,10 +36,6 @@ class DataViewController: UIViewController {
         return button
     }()
     
-    let indicator = CustomIndicatorView()
-    
-    
-    
     // 设置导航栏左按钮x样式
     private lazy var leftButton:UIButton = {
         let button = UIButton.init(type: .custom)
@@ -123,8 +119,6 @@ class DataViewController: UIViewController {
         return view
     }()
     
-    var topConstraint:Constraint?
-    var bottomConstraint:Constraint?
     // 判断是否更新按钮
     var isReload = true
     
@@ -211,26 +205,18 @@ class DataViewController: UIViewController {
             make.left.right.equalToSuperview()
             make.height.equalTo(UIScreen.main.bounds.height/4)
             if #available(iOS 11.0, *) {
-                self.topConstraint = make.top.equalTo(self.navigationController!.view.safeAreaLayoutGuide.snp.bottom).offset(40).constraint
+                 make.top.equalTo(self.navigationController!.view.safeAreaLayoutGuide.snp.bottom).offset(40)
             } else {
                 // Fallback on earlier versions
-                self.topConstraint = make.top.equalTo(self.navigationController!.bottomLayoutGuide.snp.bottom).offset(40).constraint
+                 make.top.equalTo(self.navigationController!.bottomLayoutGuide.snp.bottom).offset(40)
             }
         }
-        
-        indicator.setupUI("")
-        
-//        NotificationCenter.default.addObserver(self, selector: #selector(loadEnd), name: NSNotification.Name(rawValue: "loadEnd"), object: nil)
+    
     }
     @objc func notReload(){
         isReload = false
     }
     
-    @objc func loadEnd(){
-        indicator.stopIndicator()
-        indicator.removeFromSuperview()
-    }
-
 //    override var shouldAutorotate: Bool{
 //            return true
 //    }
@@ -491,15 +477,17 @@ class DataViewController: UIViewController {
         //shareV.pickDateView.frame.origin = CGPoint(x: 0, y: shareV.snp.bottom)
        // print("func dismiss done.")
         // 删除顶部约束
-        self.bottomConstraint?.uninstall()
-        dateRangePicker.snp.makeConstraints{(make) in
+
+        dateRangePicker.snp.remakeConstraints{(make) in
+            make.left.right.equalToSuperview()
+            make.height.equalTo(UIScreen.main.bounds.height/4)
 //            self.topConstraint = make.top.equalTo(self.navigationController!.view.snp.bottom).offset(40).constraint
             // 添加底部约束
             if #available(iOS 11.0, *) {
-                self.topConstraint = make.top.equalTo(self.navigationController!.view.safeAreaLayoutGuide.snp.bottom).offset(40).constraint
+ make.top.equalTo(self.navigationController!.view.safeAreaLayoutGuide.snp.bottom).offset(40)
             } else {
                 // Fallback on earlier versions
-                self.topConstraint = make.top.equalTo(self.navigationController!.bottomLayoutGuide.snp.bottom).offset(40).constraint
+ make.top.equalTo(self.navigationController!.bottomLayoutGuide.snp.bottom).offset(40)
             }
         }
         // 告诉当前控制器的View要更新约束了，动态更新约束，没有这句的话更新约束就没有动画效果
@@ -512,14 +500,16 @@ class DataViewController: UIViewController {
         // 重新布置约束
         // 时间选择器界面移到屏幕内底部，视觉效果为出现
         // 删除顶部约束
-        self.topConstraint?.uninstall()
-        dateRangePicker.snp.makeConstraints{(make) in
+
+        dateRangePicker.snp.remakeConstraints{(make) in
+            make.left.right.equalToSuperview()
+            make.height.equalTo(UIScreen.main.bounds.height/4)
             // 添加底部约束
             if #available(iOS 11.0, *) {
-                self.bottomConstraint = make.bottom.equalTo(self.navigationController!.view.safeAreaLayoutGuide.snp.bottom).constraint
+ make.bottom.equalTo(self.navigationController!.view.safeAreaLayoutGuide.snp.bottom)
             } else {
                 // Fallback on earlier versions
-                self.bottomConstraint = make.bottom.equalTo(self.navigationController!.bottomLayoutGuide.snp.top).constraint
+                make.bottom.equalTo(self.navigationController!.bottomLayoutGuide.snp.top)
             }
         }
         self.navigationController!.view.layoutIfNeeded()
