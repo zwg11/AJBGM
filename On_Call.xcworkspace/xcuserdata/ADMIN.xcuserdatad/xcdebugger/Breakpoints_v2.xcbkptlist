@@ -40,8 +40,6 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "FB09793A-00E6-434D-846C-FA5DE3863720"
-<<<<<<< HEAD
-=======
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -58,18 +56,12 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "D9A28F60-0F39-4682-B98D-204DA6D9EF02"
->>>>>>> de1cc45e3d51fa5776c79e3f6fbf1381fb25b252
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AIJian/Main/Data/ViewController/ChartViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-<<<<<<< HEAD
-            startingLineNumber = "92"
-            endingLineNumber = "92"
-            landmarkName = "viewWillDisappear(_:)"
-=======
             startingLineNumber = "96"
             endingLineNumber = "96"
             landmarkName = "indicatorStart()"
@@ -89,19 +81,16 @@
             startingLineNumber = "95"
             endingLineNumber = "95"
             landmarkName = "indicatorStart()"
->>>>>>> de1cc45e3d51fa5776c79e3f6fbf1381fb25b252
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D82FB0AF-8188-4E28-A409-76BF8331881C"
+            uuid = "67650085-3DD5-44E3-9FDA-C3AB72CE526E"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-<<<<<<< HEAD
-=======
             filePath = "AIJian/Main/Data/ViewController/ChartViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
@@ -182,12 +171,27 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
->>>>>>> de1cc45e3d51fa5776c79e3f6fbf1381fb25b252
             filePath = "AIJian/Main/Data/ViewController/DataViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "508"
             endingLineNumber = "508"
+            landmarkName = "DataViewController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D82FB0AF-8188-4E28-A409-76BF8331881C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AIJian/Main/Data/ViewController/DataViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "518"
+            endingLineNumber = "518"
             landmarkName = "appear()"
             landmarkType = "7">
          </BreakpointContent>
@@ -196,14 +200,14 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "0A4E7ADF-3573-43C5-8151-8BB912517529"
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AIJian/Main/Data/ViewController/DataViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "515"
-            endingLineNumber = "515"
+            startingLineNumber = "525"
+            endingLineNumber = "525"
             landmarkName = "appear()"
             landmarkType = "7">
          </BreakpointContent>
@@ -211,8 +215,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-<<<<<<< HEAD
-=======
             uuid = "8223D93B-7985-4983-B027-FCBF1AC23248"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -261,7 +263,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
->>>>>>> de1cc45e3d51fa5776c79e3f6fbf1381fb25b252
             uuid = "276AC9C3-F044-4C3F-85B7-EAE20ED097D1"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -269,8 +270,8 @@
             filePath = "AIJian/Main/Data/ViewController/ChartViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "161"
-            endingLineNumber = "161"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
             landmarkName = "initChart()"
             landmarkType = "7">
          </BreakpointContent>
@@ -381,9 +382,41 @@
             filePath = "AIJian/LoginAndRegister/ViewController/login/loginViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "426"
-            endingLineNumber = "426"
+            startingLineNumber = "425"
+            endingLineNumber = "425"
             landmarkName = "GetMeterInfo()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "61466DDC-D1DD-4A29-864F-233EAE19875B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AIJian/LoginAndRegister/ViewController/login/loginViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "281"
+            endingLineNumber = "281"
+            landmarkName = "requestData(day:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "525D1ADC-D81E-411E-A9D5-476604E771C1"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AIJian/LoginAndRegister/ViewController/login/loginViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "283"
+            endingLineNumber = "283"
+            landmarkName = "requestData(day:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -397,8 +430,8 @@
             filePath = "AIJian/LoginAndRegister/ViewController/login/loginViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "362"
-            endingLineNumber = "362"
+            startingLineNumber = "361"
+            endingLineNumber = "361"
             landmarkName = "GetMeterInfo()"
             landmarkType = "7">
          </BreakpointContent>
@@ -413,8 +446,8 @@
             filePath = "AIJian/LoginAndRegister/ViewController/login/loginViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "369"
-            endingLineNumber = "369"
+            startingLineNumber = "368"
+            endingLineNumber = "368"
             landmarkName = "GetMeterInfo()"
             landmarkType = "7">
          </BreakpointContent>
@@ -429,8 +462,8 @@
             filePath = "AIJian/LoginAndRegister/ViewController/login/loginViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "377"
-            endingLineNumber = "377"
+            startingLineNumber = "376"
+            endingLineNumber = "376"
             landmarkName = "GetMeterInfo()"
             landmarkType = "7">
          </BreakpointContent>
@@ -445,8 +478,8 @@
             filePath = "AIJian/LoginAndRegister/ViewController/login/loginViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "383"
-            endingLineNumber = "383"
+            startingLineNumber = "382"
+            endingLineNumber = "382"
             landmarkName = "GetMeterInfo()"
             landmarkType = "7">
          </BreakpointContent>
@@ -477,8 +510,8 @@
             filePath = "AIJian/LoginAndRegister/ViewController/login/loginViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "378"
-            endingLineNumber = "378"
+            startingLineNumber = "377"
+            endingLineNumber = "377"
             landmarkName = "GetMeterInfo()"
             landmarkType = "7">
          </BreakpointContent>
@@ -493,8 +526,8 @@
             filePath = "AIJian/LoginAndRegister/ViewController/login/loginViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "374"
-            endingLineNumber = "374"
+            startingLineNumber = "373"
+            endingLineNumber = "373"
             landmarkName = "GetMeterInfo()"
             landmarkType = "7">
          </BreakpointContent>
@@ -509,8 +542,8 @@
             filePath = "AIJian/LoginAndRegister/ViewController/login/loginViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "389"
-            endingLineNumber = "389"
+            startingLineNumber = "388"
+            endingLineNumber = "388"
             landmarkName = "GetMeterInfo()"
             landmarkType = "7">
          </BreakpointContent>
@@ -593,38 +626,6 @@
             endingLineNumber = "610"
             landmarkName = "save()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "B52474F7-D914-4E70-BE4A-2D2D5E1D1986 - dcb06aba11c1e1c2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "On_Call.InsertViewController.save() -&gt; ()"
-                  moduleName = "On Call"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ADMIN/Desktop/ios%E9%A1%B9%E7%9B%AE%E8%AF%95%E9%AA%8C/AIJian/AIJian/Main/Insert/ViewController/InsertViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "615"
-                  endingLineNumber = "615"
-                  offsetFromSymbolStart = "9083">
-               </Location>
-               <Location
-                  uuid = "B52474F7-D914-4E70-BE4A-2D2D5E1D1986 - dcb06aba11c1e1c2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "On_Call.InsertViewController.save() -&gt; ()"
-                  moduleName = "On Call"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ADMIN/Desktop/ios%E9%A1%B9%E7%9B%AE%E8%AF%95%E9%AA%8C/AIJian/AIJian/Main/Insert/ViewController/InsertViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "615"
-                  endingLineNumber = "615"
-                  offsetFromSymbolStart = "9318">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -669,9 +670,9 @@
             filePath = "AIJian/Main/Data/ViewController/DataViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "597"
-            endingLineNumber = "597"
-            landmarkName = "isScroll(view:)"
+            startingLineNumber = "607"
+            endingLineNumber = "607"
+            landmarkName = "initDate(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -685,10 +686,10 @@
             filePath = "AIJian/Main/Data/ViewController/DataViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "602"
-            endingLineNumber = "602"
-            landmarkName = "DataViewController"
-            landmarkType = "3">
+            startingLineNumber = "612"
+            endingLineNumber = "612"
+            landmarkName = "dataProcess(_:_:_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -701,89 +702,67 @@
             filePath = "AIJian/Main/Data/ViewController/DataViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "601"
-            endingLineNumber = "601"
-            landmarkName = "isScroll(view:)"
+            startingLineNumber = "611"
+            endingLineNumber = "611"
+            landmarkName = "dataProcess(_:_:_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "BB2D2937-1E5A-454F-8856-EBBC61D7FDB6"
+            uuid = "C9E7B4CD-28C5-4664-8887-663C33F68E73"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AIJian/Main/Data/ViewController/DataTableViewController.swift"
+            filePath = "AIJian/Main/Data/ViewController/ChartViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-<<<<<<< HEAD
-            startingLineNumber = "384"
-            endingLineNumber = "384"
-            landmarkName = "initScroll()"
-=======
             startingLineNumber = "86"
             endingLineNumber = "86"
             landmarkName = "viewWillDisappear(_:)"
->>>>>>> de1cc45e3d51fa5776c79e3f6fbf1381fb25b252
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "3CA72563-1C7C-4B46-A201-A983DE812755"
+            uuid = "732ACF83-6037-46D4-85A8-BEDD67D32236"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AIJian/Main/Data/ViewController/DataTableViewController.swift"
+            filePath = "AIJian/Main/Data/ViewController/ChartViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-<<<<<<< HEAD
-            startingLineNumber = "387"
-            endingLineNumber = "387"
-            landmarkName = "initScroll()"
-=======
             startingLineNumber = "89"
             endingLineNumber = "89"
             landmarkName = "viewWillDisappear(_:)"
->>>>>>> de1cc45e3d51fa5776c79e3f6fbf1381fb25b252
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D4FDEE7D-CE35-45DC-A3E8-E8989592FF94"
+            uuid = "B27EE1C4-2AB7-42AE-B284-528288B07CA5"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AIJian/Tools/CustomActivityIndicatorView.swift"
+            filePath = "AIJian/Main/Data/ViewController/ChartViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-<<<<<<< HEAD
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "stopIndicator()"
-            landmarkType = "7">
-=======
             startingLineNumber = "90"
             endingLineNumber = "90"
             landmarkName = "ChartViewController"
             landmarkType = "3">
->>>>>>> de1cc45e3d51fa5776c79e3f6fbf1381fb25b252
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "9578013C-EB6F-4008-A373-5A0D9D324A3D"
+            uuid = "5B124981-D61A-4EF6-B144-F1B98A4AF80A"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-<<<<<<< HEAD
-            filePath = "AIJian/Tools/CustomActivityIndicatorView.swift"
-=======
             filePath = "AIJian/Main/Data/ViewController/DataViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
@@ -881,12 +860,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AIJian/Main/Data/ViewController/DataViewController.swift"
->>>>>>> de1cc45e3d51fa5776c79e3f6fbf1381fb25b252
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "stopIndicator()"
+            startingLineNumber = "584"
+            endingLineNumber = "584"
+            landmarkName = "setDaysAndRange(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -900,8 +878,8 @@
             filePath = "AIJian/Main/Insert/ViewController/BLEViewController 2.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "523"
-            endingLineNumber = "523"
+            startingLineNumber = "522"
+            endingLineNumber = "522"
             landmarkName = "peripheral(_:didUpdateValueFor:error:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1041,8 +1019,8 @@
             filePath = "AIJian/Main/Insert/ViewController/BLEViewController 2.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "870"
-            endingLineNumber = "870"
+            startingLineNumber = "852"
+            endingLineNumber = "852"
             landmarkName = "glucoseDataAnalysis(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1057,8 +1035,8 @@
             filePath = "AIJian/Main/Insert/ViewController/BLEViewController 2.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "873"
-            endingLineNumber = "873"
+            startingLineNumber = "855"
+            endingLineNumber = "855"
             landmarkName = "glucoseDataAnalysis(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1073,8 +1051,8 @@
             filePath = "AIJian/Main/Insert/ViewController/BLEViewController 2.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "874"
-            endingLineNumber = "874"
+            startingLineNumber = "856"
+            endingLineNumber = "856"
             landmarkName = "glucoseDataAnalysis(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1089,8 +1067,8 @@
             filePath = "AIJian/Main/Insert/ViewController/BLEViewController 2.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "877"
-            endingLineNumber = "877"
+            startingLineNumber = "859"
+            endingLineNumber = "859"
             landmarkName = "glucoseDataAnalysis(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1105,8 +1083,8 @@
             filePath = "AIJian/Main/Insert/ViewController/BLEViewController 2.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "542"
-            endingLineNumber = "542"
+            startingLineNumber = "541"
+            endingLineNumber = "541"
             landmarkName = "peripheral(_:didUpdateValueFor:error:)"
             landmarkType = "7">
          </BreakpointContent>

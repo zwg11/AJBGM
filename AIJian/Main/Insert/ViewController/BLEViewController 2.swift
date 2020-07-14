@@ -891,6 +891,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
         // 是否为第一个血糖数据
         isFirstRecord = true
         
+        
         // 以int型存储要传过来的血糖数据以便使用CRC验证码验证
         dataSting = []
         
