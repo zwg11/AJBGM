@@ -376,10 +376,10 @@ class DataViewController: UIViewController {
             }
             // 设置开始时间和结束时间
             // 开始时间
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            let SD = dateFormatter.string(from: customSD)
-            let ED = dateFormatter.string(from: customED)
+            let dateFormatter1 = DateFormatter()
+            dateFormatter1.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            let SD = dateFormatter1.string(from: customSD)
+            let ED = dateFormatter1.string(from: customED)
             startD = DateInRegion(SD)?.date.dateAt(.startOfDay)
 //            startD = customSD.dateAt(.startOfDay)
 //            print("startD:\(startD)")

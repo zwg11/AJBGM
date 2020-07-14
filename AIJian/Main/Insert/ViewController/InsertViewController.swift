@@ -14,6 +14,7 @@ class InsertViewController: UIViewController {
 
     private let path = PlistSetting.getFilePath(File: "inputChoose.plist")
     private var recordUUID:String?
+    private var type:Int64 = 1
     lazy var input:InputView = {
         let view = InputView()
         view.setupUI()
@@ -546,7 +547,7 @@ class InsertViewController: UIViewController {
         insertData.sportType = (sport == "None") ? nil:sport
         insertData.sportTime = sport_time
         insertData.sportStrength = sport_strength
-        insertData.inputType = 1
+        insertData.inputType = Int64(type)
         insertData.remark = input.getRemark()?.removeHeadAndTailSpacePro
      
 //        print("insertdata:\(insertData)")
@@ -646,22 +647,17 @@ class InsertViewController: UIViewController {
                         } //end of letif
                     }
                 }else{
-//                print("插入失败")
                 // 风火轮停止
                     indicator.stopIndicator()
-    //                indicator.removeFromSuperview()
                     alert.custom(self, "Error", "Network Exception,Please Try Again Later.")
                     self.rightButton.isEnabled = true
                     
                 }
             }//end of request
-//            indicator.stopIndicator()
-//            indicator.removeFromSuperview()
         }else{ // 这是数据更新页面
             //  通知data页面不要更新日期范围
             NotificationCenter.default.post(name: NSNotification.Name("notReload"), object: nil, userInfo: nil)
             let dic = ["userId":UserInfo.getUserId(),"token":UserInfo.getToken(),"userBloodGlucoseRecord":insertData.toJSONString()!] as [String : Any]
-//            print("dic:\(dic)")
             // 向服务器申请更新数据请求
             AlamofireManager.request(UPDATE_RECORD,method: .post,parameters: dic as Parameters, headers:vheader).responseString{ (response) in
                 if response.result.isSuccess {
@@ -755,7 +751,6 @@ class InsertViewController: UIViewController {
                         } //end of letif
                     }
                 }else{
-//                print("更新失败")
                 // 风火轮停止
                     indicator.stopIndicator()
     //                indicator.removeFromSuperview()
@@ -764,14 +759,7 @@ class InsertViewController: UIViewController {
                     
                 }
             }//end of request
-            
-//            indicator.stopIndicator()
-//            indicator.removeFromSuperview()
         }
-//        self.rightButton.isEnabled = true
-
-//        print("点击了保存")
-        
     }
     
     //视图将要出现的时候
@@ -820,8 +808,6 @@ class InsertViewController: UIViewController {
         let arr1 = data["medicine"] as! NSArray
         for i in medicineChooseAlert.boolarr{
             if i{
-//                print("药物")
-//                print(i)
                 arr.append(arr1[j] as! String)
             }
             j = j+1
@@ -882,10 +868,10 @@ class InsertViewController: UIViewController {
 extension InsertViewController{
     // MARK: - 当从表格视图转来时
     // 将单元格的内容传入手动输入界面
-    func EditData(date:glucoseDate){
-//        print(date)
-        let x = date
-//        let y = sortedTime[section][row]
+    func EditData(data:glucoseDate){
+        
+        let x = data
+        type = x.inputType ?? 1
         // 设置当前标题
         self.title = "Update"
         
