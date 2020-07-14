@@ -31,7 +31,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
                 cell = UITableViewCell(style: .default, reuseIdentifier: id)
             }
             cell?.selectionStyle = .none
-            cell?.textLabel?.text = sortedTime[indexPath.section][indexPath.row].toFormat("HH:mm")
+            cell?.textLabel?.text = String(sortedTime[indexPath.section][indexPath.row].suffix(5))
             cell?.textLabel?.textColor = UIColor.white
             cell?.backgroundColor = UIColor.clear
             return cell!
@@ -70,8 +70,12 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
     var mainScrollView:UIScrollView = UIScrollView()
     // 只含有 数据tableView 的滚动视图
     var scroll:UIScrollView = UIScrollView()
-    // 刷新控件
-//    var refreshControl = UIRefreshControl()
+
+    private let dateFormatter = DateFormatter()
+    private let timezone = NSTimeZone.system
+    // 今天和明天的字符串表示
+    private var ts = ""
+    private var ys = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,28 +106,22 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         
         scroll.alwaysBounceHorizontal = false
         
-//        mainScrollView.addSubview(scroll)
         // 数据表格设置
-
         DATATableView.dataSource = self
         DATATableView.delegate = self
         DATATableView.isScrollEnabled = false
         DATATableView.backgroundColor = UIColor.clear
         // 设置分割线颜色
         DATATableView.separatorColor = UIColor.clear
-        
-        
+                
     }
-    
-   
-    
+
     @objc func UpdateSuccess(){
         let x = UIAlertController(title: "", message: "Data Update Success", preferredStyle: .alert)
         self.present(x, animated: true, completion: {()->Void in
             sleep(1)
             x.dismiss(animated: true, completion: nil)
         })
-
     }
     
     // MARK: - 设置导航栏头部尾部高度，注意heightFor和viewFor函数都实现才能调节高度
@@ -149,21 +147,23 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
             label.minimumScaleFactor = 0.5
             label.adjustsFontSizeToFitWidth = true
             view.addSubview(label)
+
             // 如果列表章节数大于0
             if section<sortedTime.count{
+                let curDate = String(sortedTime[section][0].prefix(10))
                 // 判断日期是否为今天、明天
-                if section <= 1{
-                    if sortedTime[section][0].compare(.isToday){
+                if section <= 1{                    
+                    if curDate == ts{
                         label.text = "Today"
-                    }else if sortedTime[section][0].compare(.isYesterday){
+                    }else if curDate == ys{
                         label.text = "Yesterday"
                     }else{
-                        label.text = sortedTime[section][0].toFormat("yy/MM/dd")
+                        label.text = String(curDate.suffix(8))
                     }
                 }
                 
                 else{
-                    label.text = sortedTime[section][0].toFormat("yy/MM/dd")
+                    label.text = String(curDate.suffix(8))
                 }
                 
             }
@@ -215,18 +215,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
 
     // 表格章节数依据数据里的日期，有几天有数据就是几个章节
     func numberOfSections(in tableView: UITableView) -> Int {
-        if (sortedTime.count != 0) {
-            if tableView == DATATableView{
-               // print("DATATableView num of section:\(sortedTime.count)")
-            }else{
-               // print("num of section:\(sortedTime.count)")
-            }
-            return sortedTime.count
-        }
-        else{
-           // print("num of section:\(sortedTime.count)")
-            return 0
-        }
+        return sortedTime.count
     }
     
     
@@ -282,22 +271,37 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         self.scroll.contentOffset = CGPoint(x: 0, y: 0)
         //mainScrollView.removeFromSuperview()
         // 可以刷新了
-        DispatchQueue.global().async {
-            DispatchQueue.main.async {
-                self.indicatorStart()
-            }
+//        DispatchQueue.global().async {
+//            DispatchQueue.main.async {
+//                self.indicatorStart()
+//            }
+//            sortedTimeOfData()
+//            DispatchQueue.main.async {
+//                self.initTable()
+//                self.initScroll()
+//
+//            }
+//        }
+        self.indicatorStart()
+        DispatchQueue.main.async {
+            
             sortedTimeOfData()
-            DispatchQueue.main.async {
-                self.initTable()
-                self.initScroll()
-                
-            }
+            self.initTable()
+            self.initScroll()
+            
         }
         
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTable), name: NSNotification.Name(rawValue: "reloadTable"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(indicatorStart), name: NSNotification.Name(rawValue: "indicator"), object: nil)
+        
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.timeZone = timezone
+        ts = dateFormatter.string(from: Date())
+        ys = dateFormatter.string(from: Date() - 1.days)
+
+
     }
     
     @objc func reloadTable(){
@@ -368,12 +372,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         // create a tableView
         // **********其宽度要根据计算得出，高度也是根据数据量计算得出************
         DATATableView.frame = CGRect(x: 0, y: 0, width: 9*90 + 200, height: scHeight)
-//        DATATableView.dataSource = self
-//        DATATableView.delegate = self
-//        DATATableView.isScrollEnabled = false
-//        DATATableView.backgroundColor = UIColor.clear
-//        // 设置分割线颜色
-//        DATATableView.separatorColor = UIColor.clear
+
         // 清除滚动视图中的内容
         while scroll.subviews.last != nil{
             scroll.subviews.last?.removeFromSuperview()
@@ -463,9 +462,9 @@ extension DataTableViewController{
                // print("收到删除的回复")
                 if let jsonString = response.result.value {
                     
-                    /// json转model
-                    /// 写法一：responseModel.deserialize(from: jsonString)
-                    /// 写法二：用JSONDeserializer<T>
+                    // json转model
+                    // 写法一：responseModel.deserialize(from: jsonString)
+                    // 写法二：用JSONDeserializer<T>
                     /*
                      利用JSONDeserializer封装成一个对象。然后再把这个对象解析为
                      */
@@ -521,7 +520,6 @@ extension DataTableViewController{
                                 // 重新布局表格视图
                                 self.initTable()
                                 self.initScroll()
-                                
                                 
                                 // 弹出警示框，提示用户
                                 let alert = CustomAlertController()
