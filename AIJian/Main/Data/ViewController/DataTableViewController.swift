@@ -31,7 +31,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
                 cell = UITableViewCell(style: .default, reuseIdentifier: id)
             }
             cell?.selectionStyle = .none
-            cell?.textLabel?.text = String(sortedTime[indexPath.section][indexPath.row].suffix(5))
+            cell?.textLabel?.text = String(sortedTime[indexPath.section][indexPath.row].components(separatedBy: " ")[1].prefix(5))
             cell?.textLabel?.textColor = UIColor.white
             cell?.backgroundColor = UIColor.clear
             return cell!
@@ -158,12 +158,12 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
                     }else if curDate == ys{
                         label.text = "Yesterday"
                     }else{
-                        label.text = String(curDate.suffix(8))
+                        label.text = String(curDate.suffix(8)).components(separatedBy: "-").joined(separator: "/")
                     }
                 }
                 
                 else{
-                    label.text = String(curDate.suffix(8))
+                    label.text = String(curDate.suffix(8)).components(separatedBy: "-").joined(separator: "/")
                 }
                 
             }
@@ -237,8 +237,8 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
             
             self.navigationController?.pushViewController(insert, animated: false)
             // 将当前单元格的内容传入手动输入界面
-            let date = sortedData[indexPath.section][indexPath.row]
-            insert.EditData(date: date)
+            let data = sortedData[indexPath.section][indexPath.row]
+            insert.EditData(data: data)
    
         })
         // 该动作删除一条记录，先删除服务器的，再删除本地数据库，最后删除全局变量的
@@ -288,11 +288,8 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
             sortedTimeOfData()
             self.initTable()
             self.initScroll()
-            
         }
-        
-        
-        
+           
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTable), name: NSNotification.Name(rawValue: "reloadTable"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(indicatorStart), name: NSNotification.Name(rawValue: "indicator"), object: nil)
         

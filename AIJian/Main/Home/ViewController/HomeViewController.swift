@@ -110,7 +110,7 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                 // 初始化insert界面
                 let insert = InsertViewController()
                 insert.isHome = true
-                insert.EditData(date: data!)
+                insert.EditData(data: data!)
                 self.navigationController?.pushViewController(insert, animated: false)
             }else{
 //                let alert = CustomAlertController()

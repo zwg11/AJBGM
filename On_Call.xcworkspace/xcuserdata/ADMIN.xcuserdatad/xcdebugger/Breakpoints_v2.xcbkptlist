@@ -634,8 +634,8 @@
 >>>>>>> 8abc921a4a07318bdf88ab46f62f95a9ff9f5949
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "408"
-            endingLineNumber = "408"
+            startingLineNumber = "405"
+            endingLineNumber = "405"
             landmarkName = "initTable()"
             landmarkType = "7">
          </BreakpointContent>
@@ -651,12 +651,17 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
 <<<<<<< HEAD
+<<<<<<< HEAD
             startingLineNumber = "607"
             endingLineNumber = "607"
             landmarkName = "initDate(_:)"
 =======
             startingLineNumber = "331"
             endingLineNumber = "331"
+=======
+            startingLineNumber = "328"
+            endingLineNumber = "328"
+>>>>>>> 9709cda5b72f28649b403b52eaeabdd0e4606066
             landmarkName = "initScroll()"
 >>>>>>> 8abc921a4a07318bdf88ab46f62f95a9ff9f5949
             landmarkType = "7">
@@ -693,12 +698,17 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
 <<<<<<< HEAD
+<<<<<<< HEAD
             startingLineNumber = "611"
             endingLineNumber = "611"
             landmarkName = "dataProcess(_:_:_:)"
 =======
             startingLineNumber = "383"
             endingLineNumber = "383"
+=======
+            startingLineNumber = "380"
+            endingLineNumber = "380"
+>>>>>>> 9709cda5b72f28649b403b52eaeabdd0e4606066
             landmarkName = "initScroll()"
 >>>>>>> 8abc921a4a07318bdf88ab46f62f95a9ff9f5949
             landmarkType = "7">
@@ -719,12 +729,17 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
 <<<<<<< HEAD
+<<<<<<< HEAD
             startingLineNumber = "86"
             endingLineNumber = "86"
             landmarkName = "viewWillDisappear(_:)"
 =======
             startingLineNumber = "384"
             endingLineNumber = "384"
+=======
+            startingLineNumber = "381"
+            endingLineNumber = "381"
+>>>>>>> 9709cda5b72f28649b403b52eaeabdd0e4606066
             landmarkName = "initScroll()"
 >>>>>>> 8abc921a4a07318bdf88ab46f62f95a9ff9f5949
             landmarkType = "7">
@@ -737,8 +752,12 @@
             uuid = "732ACF83-6037-46D4-85A8-BEDD67D32236"
 =======
             uuid = "FED4DF6A-FF0D-461E-AD8C-01730FB90B98"
+<<<<<<< HEAD
 >>>>>>> 8abc921a4a07318bdf88ab46f62f95a9ff9f5949
             shouldBeEnabled = "Yes"
+=======
+            shouldBeEnabled = "No"
+>>>>>>> 9709cda5b72f28649b403b52eaeabdd0e4606066
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AIJian/Main/Data/ViewController/ChartViewController.swift"
@@ -1102,6 +1121,22 @@
             endingLineNumber = "218"
             landmarkName = "numberOfSections(in:)"
 >>>>>>> 8abc921a4a07318bdf88ab46f62f95a9ff9f5949
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "22BD75F6-81DD-45C2-9CE9-F99CACB2AF2A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AIJian/Main/Data/ViewController/DataTableViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
