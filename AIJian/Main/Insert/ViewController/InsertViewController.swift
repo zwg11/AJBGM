@@ -508,23 +508,6 @@ class InsertViewController: UIViewController {
             return
         }
         
-//        if medicine != []{
-////            print("药物",medicine)
-//            var j:Int = 1
-//            for i in medicine{
-//                if j == 1 {
-//                    medicine_string = i
-//                }else if j <= medicine.count - 1{
-//                    medicine_string = medicine_string + "," + i
-//                }else{
-//                    medicine_string = medicine_string  + i
-//                }
-//                j = j + 1
-//            }
-//        }
-//        print(medicine_string)
-        
-        
         // **************** 运动类型 **************
         let sport = input.getSportType()
 //        print("获得运动类型:",sport)
@@ -572,23 +555,7 @@ class InsertViewController: UIViewController {
                 }
             }
         }
-//        if sport == "None"{
-//            if sport_time != nil && sport_strength != nil{
-//                Message += "\nSelect Exercise Based on Time and Intensity."
-//
-//            }else if sport_time != nil{
-//                Message += "\nSelect Exercise and Intensity."
-//            }else{
-//                Message += "\nSelect Exercise and Time."
-//            }
-//        }else if let time = sport_time{
-//            if time < 5 && time > 360{
-////                print(time)
-//                Message += "\n Effective Duration of Exercise:5~360."
-//            }
-//        }
-        
-//        print("获得运动持续时间:",sport_time ?? "no sport time")
+
 
         // 如果警示信息不为空，说明需要警示
         if Message != ""{
