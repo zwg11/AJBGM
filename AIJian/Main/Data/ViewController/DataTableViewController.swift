@@ -288,11 +288,8 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
             sortedTimeOfData()
             self.initTable()
             self.initScroll()
-            
         }
-        
-        
-        
+           
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTable), name: NSNotification.Name(rawValue: "reloadTable"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(indicatorStart), name: NSNotification.Name(rawValue: "indicator"), object: nil)
         

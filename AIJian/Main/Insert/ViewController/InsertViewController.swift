@@ -34,20 +34,7 @@ class InsertViewController: UIViewController {
     // 选择药物按钮弹出的alert
     private var medicineChooseAlert:alertViewController = {
         
-//        let path1 = PlistSetting.getFilePath(File: "inputChoose.plist")
-//        // 读取配置文件
-//        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path1)!
-//        let arr = data["medicine"] as! NSArray
-        var mess = ""
-//        if arr.count >= 8{
-//            mess = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
-//        }else{
-//            for _ in 0 ..< arr.count{
-//                mess += "\n\n"
-//            }
-//        }
-        mess = "\n\n\n\n\n\n\n\n"
-//        print(mess)
+        var mess = "\n\n\n\n\n\n\n\n"
         let VC = alertViewController(title: "Please Select", message: mess, preferredStyle: .alert)
 
         // 避免懒加载导致数据未初始化就被使用
@@ -138,23 +125,6 @@ class InsertViewController: UIViewController {
     // ************** 药物选择栏按钮动作 **************
     // 选择 药物 按钮被点击时的动作
     @objc func chooseMedicine(){
-      //  print("choose medicine button clicked,appear done.")
-        // 读取配置文件
-//        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
-//        let arr = data["medicine"] as! NSArray
-        // 由于 药物 一定是有可选项的，所以不需判断是否有可选项
-        // 若需更新，重新加载数据和表格
-    
-//        medicineChooseAlert.alertData = data["medicine"] as! [String]
-        // 设置框的高度，根据单元格数量和表格上下约束计算得出
-//        medicineChooseAlert.view.snp.updateConstraints{(make) in
-//            if arr.count>8{
-//                make.height.equalTo(8*33+80)
-//            }else{
-//                make.height.equalTo(arr.count*33+80)
-//            }
-//
-//        }
         // 更新单元格
         medicineChooseAlert.tabelView.reloadData()
         // 显示 警示框
@@ -186,7 +156,6 @@ class InsertViewController: UIViewController {
             }else if alert.textFields![0].text!.removeHeadAndTailSpacePro.count >= 50 { //单个不能超过100个字符
                 return
             }else{
-//                self.medicineChooseAlert.message! += "\n\n"
                 //  检测添加的药物是否已存在
                 let addMedicine = alert.textFields![0].text!.removeHeadAndTailSpacePro
                 for i in arr{
@@ -204,11 +173,8 @@ class InsertViewController: UIViewController {
             
             // 改变对应的选择器的内容和沙盒中对应队列的内容
             data["medicine"] = arr
-            //print(self.path)
             // 将改变后的结果写入沙盒
             data.write(toFile: self.path, atomically: true)
-           // print(data["medicine"] ?? "no medicine")
-//            print(self.medicineChooseAlert.alertData)
 //             将新添加的事件 添加到 表格状态数组中并值为 true
             self.medicineChooseAlert.boolarr.append(true)
             self.medicineChooseAlert.boolArray.append(true)
@@ -277,8 +243,6 @@ class InsertViewController: UIViewController {
         let date = input.getDate()
         //print("当前创建的date:",date)
         let time = input.getTime()
-        //print("获得日期:",date)
-        //print("获得时间:",time)
         // ********* 记录时间 *********
         let createTime = date + " " + time
         //print("存入到数据库的时间",createTime)
@@ -359,8 +323,6 @@ class InsertViewController: UIViewController {
                 }
             }
         }
-        //print("胰岛素的量",insulin_num ?? "no")
-        //print("胰岛素的量调试成功*********************")
        
         // ******************** 体重 ********************
         var weight_kg:Double?
@@ -386,31 +348,6 @@ class InsertViewController: UIViewController {
             }
         }
         
-        //print("体重调试成功")
-        
-        
-//        //获取身高
-//        var height:Double?
-//        if input.bodyInfo.heightTextfield.text! != ""{
-//            if FormatMethodUtil.validateHeightNum(number: input.bodyInfo.heightTextfield.text!) == true{
-//                if Double(input.bodyInfo.heightTextfield.text!)! >= 999.9{
-//                    alert.custom(self, "Attention", "身高有效范围为0.0~999.9")
-//                    return
-//                }else{
-//                    height = Double(input.bodyInfo.heightTextfield.text!)!
-//                }
-//            }else{
-//                alert.custom(self, "Attention", "请正确输入身高值")
-//                return
-//            }
-//        }
-//        print("获得身高的值:",height ?? 0)
-//        print("身高的值调试成功*********************")
-        
-      
-        // ***************** 血压 *******************
-      //  print("获得收缩压:",type(of:input.getSysValue()))
-//        print("获的舒张压:",type(of:input.getDiaValue()))
         var sys_press_mmHg:Double?
         var sys_press_kPa:Double?
         var dis_press_mmHg:Double?
@@ -562,8 +499,6 @@ class InsertViewController: UIViewController {
             self.rightButton.isEnabled = true
             // 风火轮停止，并移除
             indicator.stopIndicator()
-//            indicator.removeFromSuperview()
-//            alert.custom(self, "Attention", Message)
             let alertCtrl = UIAlertController.init(title: "Attention", message: Message, preferredStyle: .alert)
             let okAct = UIAlertAction(title: "Done", style: .default, handler: {
                 action in
@@ -580,7 +515,6 @@ class InsertViewController: UIViewController {
         
         //备注信息 不能超过100个字符
         if input.remark.remarkTextField.text!.removeHeadAndTailSpacePro.count >= 254{
-//            alert.custom(self, "Attention", Message)
             return
         }
         
@@ -589,9 +523,7 @@ class InsertViewController: UIViewController {
         insertData.userId = UserInfo.getUserId()
         // 如果为添加数据，创建一个recordId
         if isInsert{
-//            let uuid = UUID().uuidString.components(separatedBy: "-").joined()
             insertData.bloodGlucoseRecordId = recordUUID
-//            print(recordUUID ?? "Not set uuid")
         }// 否则用从b上一页传过来的recordId
         else{
             insertData.bloodGlucoseRecordId = recordId!
@@ -642,15 +574,12 @@ class InsertViewController: UIViewController {
                          利用JSONDeserializer封装成一个对象。然后再解析这个对象，此处返回的不同，需要封装成responseAModel的响应体
                          //                         */
                         if let responseModel = JSONDeserializer<responseModel>.deserializeFrom(json: jsonString) {
-                            /// model转json 为了方便在控制台查看
-//                            print("瞧瞧输出的是什么",responseModel.toJSONString(prettyPrint: true)!)
+                            // model转json 为了方便在控制台查看
                             /*  此处为跳转和控制逻辑
                              */
                             // 风火轮停止
                             indicator.stopIndicator()
                             if(responseModel.code == 1 ){
-//                                print(responseModel.code)
-//                                print("插入成功")
                                 
                                 // 向数据库插入数据
                                 DBSQLiteManager.manager.addGlucoseRecords(add: tempArray)
@@ -972,20 +901,10 @@ extension InsertViewController{
             if GetUnit.getBloodUnit() == "mmol/L"{
                 // 设置文本框文本
                 self.input.setGlucoseValue("\(value)")
-                // 设置滑块位置
-                //                self.input.glucose.XTSlider.setValue(Float(value), animated: false)
-//                self.input.glucose.setValueAndThumbColor(value: Float(value))
-                //                self.input.glucose.value = Float(value)
+
             }else{
                 // 设置文本框文本
                 self.input.setGlucoseValue(String(format: "%.0f", x.bloodGlucoseMg!))
-                // 设置滑块位置
-//                self.input.glucose.XTSlider.setValue(Float(x.bloodGlucoseMg!), animated: false)
-//                self.input.glucose.tfvalueChange()
-//                self.input.glucose.XTSlider.value = Float(x.bloodGlucoseMg!)
-//                self.input.setSlider(Float(x.bloodGlucoseMg!))
-                //                self.input.glucose.value = Float(x.bloodGlucoseMg!)
-//                self.input.glucose.setValueAndThumbColor(value: Float(value))
             }
             
         }
@@ -1017,14 +936,6 @@ extension InsertViewController{
                 self.input.setWeightValue(String(format: "%.0f", x.weightLbs!))
             }
         }
-//        else{
-//            self.input.setWeightValue("")
-//        }
-        
-        //        // 身高
-        //        if let height = x.height{
-        //            self.input.setHeightValue("\(height)")
-        //        }
         
         // 血压
         if x.systolicPressureKpa != nil{
@@ -1061,18 +972,6 @@ extension InsertViewController{
         self.input.setRemark(text: x.remark ?? "")
         
     }
-    
-//    override var shouldAutorotate: Bool {
-//        return false
-//    }
-//    
-//    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-//        return .portrait
-//    }
-//    
-//    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
-//        return .portrait
-//    }
 
 }
 
