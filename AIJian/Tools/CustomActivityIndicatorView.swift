@@ -13,7 +13,7 @@ import SnapKit
 class CustomIndicatorView: UIView {
 
     // 风火轮控件
-    private lazy var Indicator:UIActivityIndicatorView = {
+    lazy var Indicator:UIActivityIndicatorView = {
         // whiteLarge 37*37
         // white      22*22
         // gray       22*22
@@ -49,7 +49,7 @@ class CustomIndicatorView: UIView {
     }
     
     // 传入label的文本内容
-    func setupUI(_ text:String,_ bgcolor:UIColor = UIColor.lightGray){
+    func setupUI(_ text:String,_ bgcolor:UIColor = kRGBColor(0, 0, 0, 0.5)){
         // 设置背景为浅灰色
         self.backgroundColor = bgcolor
         // 设置透明度为0.8

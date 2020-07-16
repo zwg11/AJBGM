@@ -64,7 +64,7 @@ class ChartViewController: UIViewController,ChartViewDelegate{
         self.view.backgroundColor = UIColor.clear
         // Do any additional setup after loading the view.
         
-        indicator.setupUI("",UIColor.clear)
+        indicator.setupUI("")
         reloadChart()
         
 //        NotificationCenter.default.addObserver(self, selector: #selector(reloadChart), name: NSNotification.Name(rawValue: "reloadChart"), object: nil)

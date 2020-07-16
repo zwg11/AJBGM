@@ -109,7 +109,7 @@ class StatisticalDataViewController: UIViewController,UIScrollViewDelegate {
         }
     
         // 风火轮UI初始化
-        indicatorS.setupUI("", UIColor.clear)
+        indicatorS.setupUI("")
     }
     // 更新视图内容
     @objc func test(){
@@ -131,6 +131,9 @@ class StatisticalDataViewController: UIViewController,UIScrollViewDelegate {
     }
 
     @objc func indicatorStart(){
+        if indicatorS.Indicator.isAnimating{
+            return
+        }
         self.parent?.view.addSubview(indicatorS)
         indicatorS.snp.makeConstraints{ (make) in
             make.edges.equalToSuperview()
@@ -147,22 +150,23 @@ class StatisticalDataViewController: UIViewController,UIScrollViewDelegate {
 //        indicator.startIndicator()
         
         DispatchQueue.global().async {
-            // 平均视图初始化
-            self.averageview.labelUpdate()
-            // 对检测视图的数据进行初步处理
-            self.totalview.checkInit()
-            // 总体检测视图初始化
-            self.totalview.totalInit()
-            // 饭前检测视图初始化
-            self.perMeal.checkInit()
-            self.perMeal.perMealInit()
-            // 饭后s检测视图初始化
-            self.afterMeal.checkInit()
-            self.afterMeal.afterMealInit()
-            // 风火轮结束
-            DispatchQueue.main.async {
-                self.indicatorS.stopIndicator()
-            }
+            
+        }
+        // 平均视图初始化
+        self.averageview.labelUpdate()
+        // 对检测视图的数据进行初步处理
+        self.totalview.checkInit()
+        // 总体检测视图初始化
+        self.totalview.totalInit()
+        // 饭前检测视图初始化
+        self.perMeal.checkInit()
+        self.perMeal.perMealInit()
+        // 饭后s检测视图初始化
+        self.afterMeal.checkInit()
+        self.afterMeal.afterMealInit()
+        // 风火轮结束
+        DispatchQueue.main.async {
+            self.indicatorS.stopIndicator()
         }
     }
 

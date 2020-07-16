@@ -89,7 +89,8 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
             //make.height.equalTo(520)
         }
         
-        indicatorT.setupUI("",UIColor.clear)
+//        indicatorT.setupUI("",UIColor.clear)
+        indicatorT.setupUI("")
         // create a tableView
         // **********其宽度要根据计算得出，高度也是根据数据量计算得出************
         DATETableView.dataSource = self
@@ -263,7 +264,9 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
   
     // MARK: - viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
-        
+
+        print(self.parent)
+        print(self.parent?.parent)
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor:UIColor.white]
         //print("DateTableView appear.")
         // 将滚动视图置于初始状态
@@ -319,6 +322,11 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "reloadTable"), object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "indicator"), object: nil)
+        for cellD in DATATableView.visibleCells{
+            while cellD.contentView.subviews.last != nil{
+                cellD.contentView.subviews.last?.removeFromSuperview()
+            }
+        }
     }
     
     // MARK: - initScroll
@@ -395,7 +403,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
     }()
     
     @objc func indicatorStart(){
-        self.parent?.view.addSubview(indicatorT)
+        self.parent?.parent?.view.addSubview(indicatorT)
         indicatorT.snp.makeConstraints{ (make) in
             make.edges.equalToSuperview()
         }

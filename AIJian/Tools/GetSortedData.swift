@@ -52,8 +52,8 @@ func sortedTimeOfData(){
     }
     // 设为true,以防后续该函数被调用引起冲突
     isTableUpdate = true
-    sortedTime = []
-    sortedData = []
+    var sortedT:[[String]] = []
+    var sortedD:[[glucoseDate]] = []
     
     if sortedByDateOfData?.count != 0{
         for i in 0..<sortedByDateOfData!.count{
@@ -65,24 +65,26 @@ func sortedTimeOfData(){
 //                if sortedByDateOfData![i].createTime!.toDate()!.toFormat("yyyy/MM/dd") == sortedByDateOfData![i-1].createTime!.toDate()!.toFormat("yyyy/MM/dd")
                 if date.prefix(10) == sortedByDateOfData![i-1].createTime!.prefix(10)
                 {
-                    let index = sortedTime.count - 1
-                    sortedTime[index].append(date)
-                    sortedData[index].append(sortedByDateOfData![i])
+                    let index = sortedT.count - 1
+                    sortedT[index].append(date)
+                    sortedD[index].append(sortedByDateOfData![i])
                 }
                     // 如果没有，则添加一个数组
                 else{
-                    sortedTime.append([date])
-                    sortedData.append([sortedByDateOfData![i]])
+                    sortedT.append([date])
+                    sortedD.append([sortedByDateOfData![i]])
                 }
             }else{
-                sortedTime.append([date])
-                sortedData.append([sortedByDateOfData![i]])
+                sortedT.append([date])
+                sortedD.append([sortedByDateOfData![i]])
             }
         }
     }
     
     // 处理结束，设为false
     isTableUpdate = false
+    sortedTime = sortedT
+    sortedData = sortedD
     
 }
 
