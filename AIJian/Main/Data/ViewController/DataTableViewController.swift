@@ -23,12 +23,13 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let id = "DATE"
-        let id1 = "DATA"
+//        let id = "DATE"
+//        let id1 = "DATA"
         if(tableView.isEqual(DATETableView)){
-            var cell = tableView.dequeueReusableCell(withIdentifier: id)
+//            var cell = tableView.dequeueReusableCell(withIdentifier: id)
+            var cell = tableView.cellForRow(at: indexPath)
             if(cell == nil){
-                cell = UITableViewCell(style: .default, reuseIdentifier: id)
+                cell = UITableViewCell(style: .default, reuseIdentifier: nil)
             }
             cell?.selectionStyle = .none
             cell?.textLabel?.text = String(sortedTime[indexPath.section][indexPath.row].components(separatedBy: " ")[1].prefix(5))
@@ -36,16 +37,17 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
             cell?.backgroundColor = UIColor.clear
             return cell!
         }else{
-//            var cell1 = tableView.cellForRow(at: indexPath)
-            var cell1 = tableView.dequeueReusableCell(withIdentifier: id1)
+            var cell1 = tableView.cellForRow(at: indexPath)
+//            var cell1 = tableView.dequeueReusableCell(withIdentifier: id1)
             if(cell1 == nil){
-                cell1 = dataTableViewCell.init(style: .default, reuseIdentifier: id1,secion: indexPath.section,row: indexPath.row)
+                cell1 = dataTableViewCell.init(style: .default, reuseIdentifier: nil,secion: indexPath.section,row: indexPath.row)
+//                cell1 = dataTableViewCell.init()
 //                cell1 = UITableViewCell(style: .default, reuseIdentifier: id1)
             }else{
                 while cell1?.contentView.subviews.last != nil{
                     cell1?.contentView.subviews.last?.removeFromSuperview()
                 }
-                cell1 = dataTableViewCell(style: .default, reuseIdentifier: id1,secion: indexPath.section,row: indexPath.row)
+                cell1 = dataTableViewCell(style: .default, reuseIdentifier: nil,secion: indexPath.section,row: indexPath.row)
 //                cell1!.initContent(secion: indexPath.section,row: indexPath.row)
             }
             return cell1!
@@ -116,13 +118,13 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         DATATableView.separatorColor = UIColor.clear
                 
     }
-
+    //弹出alert的弹窗
     @objc func UpdateSuccess(){
-        let x = UIAlertController(title: "", message: "Data Update Success", preferredStyle: .alert)
-        self.present(x, animated: true, completion: {()->Void in
-            sleep(1)
-            x.dismiss(animated: true, completion: nil)
-        })
+//        let x = UIAlertController(title: "", message: "", preferredStyle: .alert)
+//        self.present(x, animated: true, completion: {()->Void in
+//            sleep(1)
+//            x.dismiss(animated: true, completion: nil)
+//        })
     }
     
     // MARK: - 设置导航栏头部尾部高度，注意heightFor和viewFor函数都实现才能调节高度
@@ -265,8 +267,6 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
     // MARK: - viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
 
-        print(self.parent)
-        print(self.parent?.parent)
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor:UIColor.white]
         //print("DateTableView appear.")
         // 将滚动视图置于初始状态
@@ -291,6 +291,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
             sortedTimeOfData()
             self.initTable()
             self.initScroll()
+            self.UpdateSuccess()
         }
            
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTable), name: NSNotification.Name(rawValue: "reloadTable"), object: nil)
@@ -315,18 +316,21 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
                 // 可以刷新了
                 self.initTable()
                 self.initScroll()
+                self.UpdateSuccess()
             }
         }
     }
-    
+    // MARK: - viewWillDisappear
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "reloadTable"), object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "indicator"), object: nil)
-        for cellD in DATATableView.visibleCells{
-            while cellD.contentView.subviews.last != nil{
-                cellD.contentView.subviews.last?.removeFromSuperview()
-            }
+        DispatchQueue.main.async {
+            sortedData = []
+            sortedTime = []
+            self.DATATableView.reloadData()
+            self.DATETableView.reloadData()
         }
+        
     }
     
     // MARK: - initScroll
@@ -342,6 +346,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
                 }
             }
         }
+        print(scHeight)
         
         // 设置整个视图的 滚动视图
         mainScrollView.contentSize = CGSize(width: AJScreenWidth, height: CGFloat(scHeight))
@@ -349,7 +354,6 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
         mainScrollView.addSubview(DATETableView)
         DATETableView.snp.remakeConstraints{(make) in
             make.top.left.equalToSuperview()
-            
             make.height.equalTo(scHeight)
             make.width.equalTo(80)
         }

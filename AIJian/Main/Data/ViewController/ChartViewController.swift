@@ -93,7 +93,7 @@ class ChartViewController: UIViewController,ChartViewDelegate{
     }
     
     @objc func indicatorStart(){
-        self.parent?.view.addSubview(indicator)
+        self.parent?.parent?.view.addSubview(indicator)
 //        self.view.addSubview(indicator)
         indicator.snp.makeConstraints{ (make) in
             make.edges.equalToSuperview()
@@ -174,7 +174,7 @@ class ChartViewController: UIViewController,ChartViewDelegate{
                 case 1,2,3:
                     // 初始化 图标所需要的数据
 //                    let array = xAxisArray(Days: daysNum!)
-                    let data1 = recentDaysData(Days: daysNum!, isGetData: false)
+                    let data1 = recentDaysData(Days: daysNum!, isGetData: true)
 //                    self.lineChartView.drawLineChart(xAxisArray: array as NSArray,xAxisData: data1)
                     self.lineChartView.drawLineChart(xAxisArray: nil,xAxisData: data1)
                     

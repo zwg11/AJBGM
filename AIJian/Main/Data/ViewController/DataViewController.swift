@@ -351,10 +351,10 @@ class DataViewController: UIViewController {
         let customSD = customRange.startDatePicker.date
         let customED = customRange.endDatePicker.date
         
-//        print("开始时间：\(customRange.startDatePicker.date)")
-//        print("结束时间：\(customRange.endDatePicker.date)")
+        print("开始时间：\(customRange.startDatePicker.date)")
+        print("结束时间：\(customRange.endDatePicker.date)")
         // 求出开始时间与结束时间之间相隔的天数
-//        let components = NSCalendar.current.dateComponents([.day], from: customSD, to: customED)
+        let components = NSCalendar.current.dateComponents([.day], from: customSD, to: customED)
 //        let components = customED - customSD
 //        如果开始日期在结束日期之后
         if customSD > customED{
@@ -362,10 +362,10 @@ class DataViewController: UIViewController {
             alert.custom(self, "Attention", "Start Date Needs to Come Before End Date")
         }
 //            如果超过31天警告
-//        else if components.day! > 31{
-//            let alert = CustomAlertController()
-//            alert.custom(self, "Attention", "The Time Span Shall Not Greater Than 31 Days")
-//        }
+        else if components.day! > 365*5{
+            let alert = CustomAlertController()
+            alert.custom(self, "Attention", "The Time Span Shall Not Greater Than 5 Years")
+        }
             
 
         else{   // 将日期选择器移除并处理数据
