@@ -31,7 +31,7 @@ class ProtocalViewController: UIViewController {
         Overview
                 Welcome! This app is designed to help you to manage diabetes, including:
                 * Input health data
-                * Transfer data from your On Call blood glucose meter
+                * Downloading data from your On Call blood glucose meter
                 * Sharing the data to your healthcare provider (HCP) or caregiver
                 * Assist in general diabetes management trough logging of contextual data
 

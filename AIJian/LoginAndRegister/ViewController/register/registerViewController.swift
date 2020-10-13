@@ -158,30 +158,30 @@ class registerViewController: UIViewController,UITextFieldDelegate {
        // print(passwordSec!)
         let alertController = CustomAlertController()
         if email == ""{
-            alertController.custom(self, "Attention", "Email Empty")
+            alertController.custom(self, "Attention", "No Email Address")
             return
         }else if FormatMethodUtil.validateEmail(email: email!) != true{
             alertController.custom(self,"Attention", "Incorrect Email Format")
             return
         }else if password == ""{
-            alertController.custom(self, "Attention", "Password Empty")
+            alertController.custom(self, "Attention", "No Password")
             return
         }else if passwordSec == "" {
-            alertController.custom(self, "Attention", "Confirm Password Empty")
+            alertController.custom(self, "Attention", "No Confirm Password")
             return
         }else if password!.count >= 20{
-            alertController.custom(self, "Attention", "Incorrect Confirm Password Format.The password length should be six or tewenty digits.")
+            alertController.custom(self, "Attention", "Incorrect Confirm Password Format.The password length should be 6 or 20 digits.")
             return
         }else if password!.count < 6 {
-            alertController.custom(self, "Attention", "Incorrect Confirm Password Format.The password length should be six or tewenty digits.")
+            alertController.custom(self, "Attention", "Incorrect Confirm Password Format.The password length should be 6 or 20 digits.")
             return
         }else if password != passwordSec{
             alertController.custom(self, "Attention", "Password Not Match")
             return
         }else if isAgree == false{
-            alertController.custom(self, "Attention", "Agree Registration Agreement and Submit the Information")
+            alertController.custom(self, "Attention", "Agree Registration Protocol and Submit the Information")
             return
-//            let text = "Agree Registration Agreement and Submit the Information"
+//            let text = "Agree Registration Protocol and Submit the Information"
 //            let textRange = NSMakeRange(6, 22)
 //            let attributedText = NSMutableAttributedString(string:text)
 //            attributedText.addAttribute(NSAttributedString.Key.underlineStyle,value: NSUnderlineStyle.single.rawValue, range: textRange)
@@ -271,7 +271,7 @@ class registerViewController: UIViewController,UITextFieldDelegate {
                 }else{
                     self.indicator.stopIndicator()
                     self.indicator.removeFromSuperview()
-                    alertController.custom(self,"Attention", "Internet Error")
+                    alertController.custom(self,"Attention", "Failed!Internet Error")
                     return
                 }
             }
@@ -288,7 +288,7 @@ class registerViewController: UIViewController,UITextFieldDelegate {
         email = register.emailTextField.text!
         
         if email == ""{
-            alertController.custom(self, "Attention", "Email Empty")
+            alertController.custom(self, "Attention", "No Email Address")
             return
         }
         if FormatMethodUtil.validateEmail(email: email!) == true{
@@ -319,12 +319,12 @@ class registerViewController: UIViewController,UITextFieldDelegate {
                                 //返回1，让其倒计时
                                 self.register.getAuthCodeButton.countDown(count: 90)
                             }else if(responseModel.code == -1 ){
-                                alertController.custom(self,"Attention", "Email Registered")
+                                alertController.custom(self,"Attention", "The email has been registered")
                                 self.register.getAuthCodeButton.setButtonEnable()
                             }else if responseModel.code == 3{
-                                alertController.custom(self,"Attention", "Your account has been disabled.Please contact oncall@acondiabetescare.com")
+                                alertController.custom(self,"Attention", "Your account is disabled. Please contact info@aconlabs.com")
                             }else{
-                                alertController.custom(self,"Attention", "Email Send Error")
+                                alertController.custom(self,"Attention", "Failed")
                                 self.register.getAuthCodeButton.setButtonEnable()
                             }
                     }
@@ -332,7 +332,7 @@ class registerViewController: UIViewController,UITextFieldDelegate {
                 }else{
                     self.indicator.stopIndicator()
                     self.indicator.removeFromSuperview()
-                    alertController.custom(self, "Attention", "Internet Error")
+                    alertController.custom(self, "Attention", "Failed!Internet Error")
                 }//end of response.result.isSuccess
             }//end of request
             

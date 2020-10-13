@@ -170,7 +170,7 @@ class MineViewController: UIViewController {
                              x.addAction(okAction)
                              self.present(x, animated: true, completion: nil)
                         }else if (responseModel.code! == 3){
-                            let x = UIAlertController(title: "", message: "Your account has been disabled.Please contact oncall@acondiabetescare.com", preferredStyle: .alert)
+                            let x = UIAlertController(title: "", message: "Your account is disabled. Please contact info@aconlabs.com", preferredStyle: .alert)
                             let okAction = UIAlertAction(title: "Done", style: .default, handler: {
                                         action in
                                         LoginOff.loginOff(self)
@@ -207,11 +207,6 @@ class MineViewController: UIViewController {
         
     } //end of requestUserInfo
 
-    //点击登录，不允许跳转
-    @objc public func MineLogin(){
-//        self.navigationController?.pushViewController(loginViewController(), animated: false)
-//        self.present(loginViewController(), animated: true, completion: nil)
-    }
     /*
      如果是第一次登陆的话，需要dismiss。登陆的界面
      如果不是第一次登陆的话，还需要判断界面中有无登陆界面的底下。
@@ -220,24 +215,8 @@ class MineViewController: UIViewController {
      每个present,都需要对应一个dismiss.
      */
     @objc public func loginOff(){
-        
-//        //用do...catch语句来做。。。无论怎么样，都进行dismiss。如果出错了，就直接present
 //        // 回到登录界面
-     
         LoginOff.loginOff(self)
-//        let viewController = loginViewController()
-//        let nv = loginNavigationController(rootViewController: viewController)
-//        // 设置弹出模式为占满屏幕
-//        nv.modalPresentationStyle = .fullScreen
-//        self.present(nv, animated: true, completion: nil)
-//
-//        // 将对应的用户的token设为空
-//        //let path = Bundle.main.path(forResource: "User", ofType: "plist")
-//        let path = PlistSetting.getFilePath(File: "User.plist")
-//        let data:NSMutableDictionary = NSMutableDictionary.init(contentsOfFile: path)!
-//        //退出登录，需要把token清空
-//        data.setObject("", forKey: "token" as NSCopying )
-//        data.write(toFile: path, atomically: true)
     }
 }
 extension MineViewController:UITableViewDelegate,UITableViewDataSource{
@@ -258,8 +237,6 @@ extension MineViewController:UITableViewDelegate,UITableViewDataSource{
         //根据注册的cell类ID值获取到载体cell
         switch indexPath.row{
             case 0:
-//                let headview = AJMineHeaderView(frame: CGRect(x: 0, y: 0, width: AJScreenWidth, height: AJScreenHeight/5))
-//                headview.textButton.addTarget(self, action: #selector(MineLogin), for: .touchUpInside)
                 let userInfo = DBSQLiteManager.manager.selectUserRecord(userId: UserInfo.getUserId())
                 let cell = AJMineHeaderView(style: .value1, reuseIdentifier: cellid)
                 if userInfo.gender == 1{ //女

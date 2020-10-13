@@ -275,7 +275,7 @@ class InsertViewController: UIViewController {
                 }
             }
             else{
-                Message += "\nEmpty Glucose Data."
+                Message += "\nPlease input Blood Glucose data"
                 wrongTextField =  input.glucose.XTTextfield
 //                alert.custom(self, "Attention", "血糖不能为空")
 //                return
@@ -295,7 +295,7 @@ class InsertViewController: UIViewController {
                 }
             
             }else{
-                Message += "\nEmpty Glucose Data."
+                Message += "\nPlease input Blood Glucose data"
                 wrongTextField =  input.glucose.XTTextfield
 //                alert.custom(self, "Attention", "血糖不能为空")
 //                return
@@ -316,7 +316,7 @@ class InsertViewController: UIViewController {
         let insulin_num:Double? = input.getInsNumValue()
         if insulin_num != nil{
             if insulin_type == "None"{
-                Message += "\nEmpty Insulin Type."
+                Message += "\nPlease input Insulin Type"
             }else if insulin_num! > 100.0{
                 Message += "\nInsulin Range:100."
                 if (wrongTextField == nil){
@@ -386,7 +386,7 @@ class InsertViewController: UIViewController {
                             wrongTextField = input.bodyInfo.blood_diaPressureTextfield
                         }
                     }
-                    Message += "\nDBP or SBP Empty."
+                    Message += "\nNo DBP or SBP."
                 }
             }
             
@@ -419,7 +419,7 @@ class InsertViewController: UIViewController {
                             wrongTextField = input.bodyInfo.blood_diaPressureTextfield
                         }
                     }
-                    Message += "\nDBP or SBP Empty."
+                    Message += "\nNo DBP or SBP."
                 }
             }
         }
@@ -460,25 +460,25 @@ class InsertViewController: UIViewController {
             // 如果时间和强度都不为空，检测运动类型
             if sport_time != nil && sport_strength != nil{
                 if sport == "None"{
-                    Message += "\nSelect Exercise Based on Duration and Intensity."
+                    Message += "\nSelect Type of Exercise (Duration and Intensity)."
                 }
             }else if let time = sport_time{ // 如果强度为空
                 // 检测运动类型
                 if sport == "None"{
-                    Message += "\nSelect Exercise and Intensity."
+                    Message += "\nSelect Type of Exercise and Intensity."
                 }else{
                     Message += "\nSelect Intensity."
                 }
                 
                 if time < 5 && time > 360{
-                    Message += "\nEffective Duration of Exercise:5~360."
+                    Message += "\nDuration of Exercise: 5–360."
                 }
             }else{ // 如果时间为空
                 // 检测运动类型
                 if sport == "None"{
-                    Message += "\nSelect Exercise and Duration."
+                    Message += "\nSelect Type of Exercise and Duration."
                 }else{
-                    Message += "\nEmpty Duration."
+                    Message += "\nPlease input Duration"
                 }
                 if (wrongTextField == nil){
                     
@@ -487,7 +487,7 @@ class InsertViewController: UIViewController {
             }
         }else{// 如果强度和时间都为空
             if sport != "None"{ // 运动不为空，则报错
-                Message += "\nEmpty Duration and Intensity."
+                Message += "\nPlease input Duration and Intensity"
                 if (wrongTextField == nil){
                     wrongTextField = input.sport.timeOfDurationTextfield
                 }
@@ -585,7 +585,7 @@ class InsertViewController: UIViewController {
                                 // 向数据库插入数据
                                 DBSQLiteManager.manager.addGlucoseRecords(add: tempArray)
 
-                                let x = UIAlertController(title: "", message: "Data Input Success", preferredStyle: .alert)
+                                let x = UIAlertController(title: "", message: "Data Input Successfully", preferredStyle: .alert)
                                 self.present(x, animated: true, completion: {()->Void in
                                     sleep(1)
                                     x.dismiss(animated: true, completion: {
@@ -618,7 +618,7 @@ class InsertViewController: UIViewController {
 //                                alert.custom(self, "", "Your account is already logged in at the other end!")
                                 self.rightButton.isEnabled = true
                             }else if (responseModel.code! == 3){  //user disable
-                                  let x = UIAlertController(title: "", message: "Your account has been disabled.Please contact oncall@acondiabetescare.com", preferredStyle: .alert)
+                                  let x = UIAlertController(title: "", message: "Your account is disabled. Please contact info@aconlabs.com", preferredStyle: .alert)
                                   let okAction = UIAlertAction(title: "Done", style: .default, handler: {
                                          action in
                                          LoginOff.loginOff(self)
@@ -641,7 +641,7 @@ class InsertViewController: UIViewController {
                                     
                             }else{
                                
-                                alert.custom(self, "", "Data Insert Failure.")
+                                alert.custom(self, "", "Data Input Failed")
                                 self.rightButton.isEnabled = true
                             }
                         } //end of letif
@@ -649,7 +649,7 @@ class InsertViewController: UIViewController {
                 }else{
                 // 风火轮停止
                     indicator.stopIndicator()
-                    alert.custom(self, "Error", "Network Exception,Please Try Again Later.")
+                    alert.custom(self, "Error", "Failed!Internet Error")
                     self.rightButton.isEnabled = true
                     
                 }
@@ -694,7 +694,7 @@ class InsertViewController: UIViewController {
                                
 //                                indicator.removeFromSuperview()
                                 // 提示更新成功
-                                let x = UIAlertController(title: "", message: "Update Success.", preferredStyle: .alert)
+                                let x = UIAlertController(title: "", message: "Data Updated", preferredStyle: .alert)
                                 self.present(x, animated: true, completion: {()->Void in
                                     sleep(1)
                                     x.dismiss(animated: true, completion: {
@@ -703,7 +703,7 @@ class InsertViewController: UIViewController {
                                     })
                                 })
 
-//                                NotificationCenter.default.post(name: NSNotification.Name("Data Update success"), object: self, userInfo: nil)
+//                                NotificationCenter.default.post(name: NSNotification.Name("Data Updated"), object: self, userInfo: nil)
                                 self.rightButton.isEnabled = true
                             }else if (responseModel.code! == 2 ){
                                
@@ -721,7 +721,7 @@ class InsertViewController: UIViewController {
 //                                alert.custom(self, "", "Your account is already logged in at the other end!")
                             }else if (responseModel.code! == 3){  //user disable
                                
-                                let x = UIAlertController(title: "", message: "Your account has been disabled.Please contact oncall@acondiabetescare.com", preferredStyle: .alert)
+                                let x = UIAlertController(title: "", message: "Your account is disabled. Please contact info@aconlabs.com", preferredStyle: .alert)
                                 let okAction = UIAlertAction(title: "Done", style: .default, handler: {
                                     action in
                                     LoginOff.loginOff(self)
@@ -744,7 +744,7 @@ class InsertViewController: UIViewController {
                                 // 弹窗提示
                                 let alert = CustomAlertController()
 
-                                alert.custom(self, "Attention", "Data Update Failure")
+                                alert.custom(self, "Attention", "Data Update Failed")
                                 self.rightButton.isEnabled = true
                                 
                             }
@@ -754,7 +754,7 @@ class InsertViewController: UIViewController {
                 // 风火轮停止
                     indicator.stopIndicator()
     //                indicator.removeFromSuperview()
-                    alert.custom(self, "Error", "Network Exception,Please Try Again Later.")
+                    alert.custom(self, "Error", "Failed!Internet Error")
                     self.rightButton.isEnabled = true
                     
                 }

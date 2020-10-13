@@ -39,7 +39,7 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     @objc func leftButtonClick(){
 
         // 点击删除时弹出的警示框
-        let alert = UIAlertController(title: "Back Without Save Data?", message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: "", message: "Data unsaved. Are you sure you want to return?", preferredStyle: .alert)
         // 该动作删除一条记录
         let sureAction = UIAlertAction(title: "Done", style: .default, handler: {(UIAlertAction)->Void in
             self.navigationController?.popViewController(animated: true)
@@ -255,7 +255,7 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
                           
                             self.button.isEnabled = true
                         }else if (responseModel.code! == 3){
-                            let x = UIAlertController(title: "", message: "Your account has been disabled.Please contact oncall@acondiabetescare.com", preferredStyle: .alert)
+                            let x = UIAlertController(title: "", message: "Your account is disabled. Please contact info@aconlabs.com", preferredStyle: .alert)
                             let okAction = UIAlertAction(title: "Done", style: .default, handler: {
                                         action in
                                         LoginOff.loginOff(self)
@@ -282,7 +282,7 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
                             self.indicator.removeFromSuperview()
                             // 警示框出现
                             let alert = CustomAlertController()
-                            alert.custom(self, "", "Insert Failed,Please Try Again Later.")
+                            alert.custom(self, "", "Failed.")
                             self.button.isEnabled = true
                         }
                     } //end of letif
@@ -295,7 +295,7 @@ class gluViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
                 //print("插入失败")
                 // 插入成功
                 let alert = CustomAlertController()
-                alert.custom(self, "", "Internet Error,Please Try Again Later.")
+                alert.custom(self, "", "Failed!Internet Error")
                 self.button.isEnabled = true
             }
         }//end of request
@@ -460,7 +460,7 @@ extension gluViewController{
                                 }else if (responseModel.code! == 3){
                                     LoginOff.loginOff(self)
                                     let alert = CustomAlertController()
-                                    alert.custom(self,"Attention", "Your account has been disabled.Please contact oncall@acondiabetescare.com")
+                                    alert.custom(self,"Attention", "Your account is disabled. Please contact info@aconlabs.com")
                                 }else if(responseModel.code!==4){
                                     LoginOff.loginOff(self)
                                     let alert = CustomAlertController()

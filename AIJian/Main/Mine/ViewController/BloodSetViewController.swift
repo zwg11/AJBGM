@@ -816,7 +816,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
            clearEmpty()
             showPlaceholder(String(a_Double),String(b_Double),String(c_Double),String(d_Double),String(e_Double),String(f_Double),String(g_Double),String(h_Double))
 //            clearEmpty()
-            alert.custom_cengji(self,"","Save Success")
+            alert.custom_cengji(self,"","Saved")
             
           //---------------------------------------------------------------------------------------------------------------------------------
         }else{  //此单位为mg/dL
@@ -1024,7 +1024,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
 //            clearEmpty()
         } //end of mg/dl
         
-         alert.custom_cengji(self,"","Save Success")
+         alert.custom_cengji(self,"","Saved")
     }
     
     //恢复默认设置的按钮
@@ -1108,7 +1108,7 @@ class BloodSetViewController: UIViewController,UITextFieldDelegate {
             //当单位为mg/dL
             showPlaceholder(String(amg_Double),String(bmg_Double),String(cmg_Double),String(dmg_Double),String(emg_Double),String(fmg_Double),String(gmg_Double),String(hmg_Double))
         }
-//       alert.custom_cengji(self,"","Save Success")
+//       alert.custom_cengji(self,"","Saved")
     }
     //函数功能：清空用户在文本框中的输入
     func clearEmpty(){

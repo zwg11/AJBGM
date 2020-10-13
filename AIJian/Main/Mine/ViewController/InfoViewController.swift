@@ -175,7 +175,7 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
                         if(responseModel.code! == 1 ){
                             // 向数据库插入数据  更新完远端，再更新本地
                             self.updateUserInfoInSqlite(updateUserInfo)
-//                            let x = UIAlertController(title: "", message: "Update Success", preferredStyle: .alert)
+//                            let x = UIAlertController(title: "", message: "Updated", preferredStyle: .alert)
 //                            self.present(x, animated: true, completion: {()->Void in
 //                                sleep(1)
 //                                x.dismiss(animated: true, completion: {
@@ -186,7 +186,7 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
 //                                })
 //                            })
                             let alert = CustomAlertController()
-                            alert.custom(self, "", "Update Success")
+                            alert.custom(self, "", "Updated")
                            
                         }else if (responseModel.code! == 2 ){
                             let x = UIAlertController(title: "", message: "Your account was logged in on another device,it will log out there!", preferredStyle: .alert)
@@ -198,7 +198,7 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
                              x.addAction(okAction)
                              self.present(x, animated: true, completion: nil)
                         }else if (responseModel.code! == 3){
-                            let x = UIAlertController(title: "", message: "Your account has been disabled.Please contact oncall@acondiabetescare.com", preferredStyle: .alert)
+                            let x = UIAlertController(title: "", message: "Your account is disabled. Please contact info@aconlabs.com", preferredStyle: .alert)
                             let okAction = UIAlertAction(title: "Done", style: .default, handler: {
                                         action in
                                         LoginOff.loginOff(self)
@@ -217,7 +217,7 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
                              self.present(x, animated: true, completion: nil)
                         } else{
                             let alert = CustomAlertController()
-                            alert.custom(self, "Attention", "Update Failure")
+                            alert.custom(self, "Attention", "Update Failed")
                             //print(responseModel.code!)
                         }
                     } //end of letif
@@ -226,7 +226,7 @@ class InfoViewController: UIViewController ,PickerDelegate,UITextFieldDelegate{
                 self.indicator.stopIndicator()
                 self.indicator.removeFromSuperview()
                 let alert = CustomAlertController()
-                alert.custom(self, "Attention", "Internet Error")
+                alert.custom(self, "Attention", "Failed!Internet Error")
             }
         }//end of request
     }
@@ -371,7 +371,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
     
     //输入用户名
     @objc func inputUserName(){
-        let alertController = UIAlertController(title: "Please Enter Name",message: "",
+        let alertController = UIAlertController(title: "Please input your Name",message: "",
                                                 preferredStyle: .alert)
         alertController.addTextField {
             (textField: UITextField!) -> Void in
@@ -410,7 +410,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
     }
     //改体重
     func inputWeight(){
-        let alertController = UIAlertController(title: "Please Enter Weight",message: "",
+        let alertController = UIAlertController(title: "Please input your Weight",message: "",
                                                 preferredStyle: .alert)
         alertController.addTextField {
             (textField: UITextField!) -> Void in
@@ -448,7 +448,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
     
     //改身高
     func inputHeight(){
-        let alertController = UIAlertController(title: "Please Enter Height",message: "",
+        let alertController = UIAlertController(title: "Please input your Height",message: "",
                                                 preferredStyle: .alert)
         alertController.addTextField {
             (textField: UITextField!) -> Void in
@@ -496,7 +496,7 @@ extension InfoViewController:UITableViewDelegate,UITableViewDataSource{
     
     //改电话
     func inputPhone(){
-        let alertController = UIAlertController(title: "Please Enter Phone",message: "",
+        let alertController = UIAlertController(title: "Please input your Phone",message: "",
                                                 preferredStyle: .alert)
         alertController.addTextField {
             (textField: UITextField!) -> Void in

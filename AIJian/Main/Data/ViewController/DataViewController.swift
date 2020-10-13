@@ -364,7 +364,7 @@ class DataViewController: UIViewController {
 //            如果超过31天警告
         else if components.day! > 365*5{
             let alert = CustomAlertController()
-            alert.custom(self, "Attention", "The Time Span Shall Not Greater Than 5 Years")
+            alert.custom(self, "Attention", "The time span shall not be more than 5 years!")
         }
             
 

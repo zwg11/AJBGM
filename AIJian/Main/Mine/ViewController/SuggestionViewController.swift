@@ -197,13 +197,13 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
          let alert = CustomAlertController()
         
         if content_field.text!.removeHeadAndTailSpacePro == ""{
-            alert.custom(self, "Attention", "Feedback Empty！")
+            alert.custom(self, "Attention", "No Feedback！")
             return
         }
         
         //print(content_field.text!.count)
         if content_field.text!.count >= 300{
-            alert.custom(self, "Attention", "Words should be less than 300！")
+            alert.custom(self, "Attention", "Words should be less than 300 characters！")
             return
         }
         indicator.startIndicator()
@@ -250,7 +250,7 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
                             x.addAction(okAction)
                               self.present(x, animated: true, completion: nil)
                         }else if (responseModel.code! == 3){
-                            let x = UIAlertController(title: "", message: "Your account has been disabled.Please contact oncall@acondiabetescare.com", preferredStyle: .alert)
+                            let x = UIAlertController(title: "", message: "Your account is disabled. Please contact info@aconlabs.com", preferredStyle: .alert)
                              let okAction = UIAlertAction(title: "Done", style: .default, handler: {
                                    action in
                                     LoginOff.loginOff(self)
@@ -268,7 +268,7 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
                             x.addAction(okAction)
                             self.present(x, animated: true, completion: nil)
                         }else{
-                            alert.custom_cengji(self,"Attention", "Sorry.Feedback Failure！")
+                            alert.custom_cengji(self,"Attention", "Failed!")
                             self.navigationController?.popViewController(animated: false)
                         }
                     }
@@ -276,7 +276,7 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
             }else{
                 self.indicator.stopIndicator()
                 self.indicator.removeFromSuperview()
-                alert.custom(self,"Attention", "Internet Error")
+                alert.custom(self,"Attention", "Failed!,Failed!Internet Error")
             }
     }
 }

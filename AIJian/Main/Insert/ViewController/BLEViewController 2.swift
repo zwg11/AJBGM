@@ -227,7 +227,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         self.logUpload("连接失败")
         loadV.stopIndicator()
-        let x = UIAlertController(title: "", message: "Connect Failed", preferredStyle: .alert)
+        let x = UIAlertController(title: "", message: "Connecting Failed", preferredStyle: .alert)
         self.present(x, animated: true, completion: {()->Void in
             sleep(1)
             x.dismiss(animated: true, completion: {
@@ -239,7 +239,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         self.logUpload("断开连接")
         loadV.stopIndicator()
-        let x = UIAlertController(title: "", message: "Disconnect From Meter", preferredStyle: .alert)
+        let x = UIAlertController(title: "", message: "Disconnected", preferredStyle: .alert)
         self.present(x, animated: true, completion: {()->Void in
             sleep(1)
             x.dismiss(animated: true, completion: {
@@ -603,7 +603,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                                 }else{ // 没有数据，提示
                                     // 将加载视图移除界面，并使其图片动画停止
                                     self.loadV.stopIndicator()
-                                    wrongInfo = "No New Data in the Meter"
+                                    wrongInfo = "No new data"
                                     self.logUpload("No New Data In Machine")
                                 }
                             }
@@ -625,7 +625,7 @@ CBPeripheralDelegate,UITableViewDelegate,UITableViewDataSource{
                                 let array:Array<String> = replyDateStr.components(separatedBy: " ")
                                 self.logUpload("将要传输\(array[0][2,array[0].count-1])个数据。")
                                 if array[0][2,array[0].count-1] == "0"{
-                                    wrongInfo = "No New Data in the Meter"
+                                    wrongInfo = "No new data"
                                     self.logUpload("No New Data In Machine")
                                 }
                                 self.dataCount = Int(array[0][2,array[0].count-1])!
@@ -961,7 +961,7 @@ extension BLEViewController{
             timer!.invalidate() //销毁timer
             timer = nil
             loadV.stopIndicator()
-            let x = UIAlertController(title: "", message: "connect failed", preferredStyle: .alert)
+            let x = UIAlertController(title: "", message: "Connecting Failed", preferredStyle: .alert)
             self.present(x, animated: true, completion: {()->Void in
                 sleep(1)
                 x.dismiss(animated: true, completion: {

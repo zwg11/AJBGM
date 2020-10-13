@@ -68,7 +68,7 @@ class SharedViewController: UIViewController,UITextFieldDelegate {
             return
         }
         if phone == ""{
-            alert.custom(self,"Attention", "Phone Empty")
+            alert.custom(self,"Attention", "Please input phone number")
             return
         }
         if name!.count >= 50{

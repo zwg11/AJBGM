@@ -40,7 +40,7 @@ class modelViewController: UIViewController {
         let backImage = UIImage.init(named: "按钮 nor")
         button.addTarget(self, action: #selector(input), for: .touchUpInside)
    
-        button.inputModelStyle(background: backImage!, image: bleImage!, title: "Edit", offset: 70)
+        button.inputModelStyle(background: backImage!, image: bleImage!, title: "Manually", offset: 70)
     
        return button
     }()

@@ -160,18 +160,18 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
         phoneNumber = infoinputView.phoneTextField.text!.removeHeadAndTailSpacePro
     
         if userName == ""{
-            alertController.custom(self, "Attention", "Name Empty")
+            alertController.custom(self, "Attention", "No Name")
             return
         }else if userName!.count >= 254 {   //设置用户名长度和电话长度
             return
         }else if country == ""{
-            alertController.custom(self, "Attention", "Country Empty")
+            alertController.custom(self, "Attention", "No Country")
             return
 //        }else if phoneNumber == ""{
 //            alertController.custom(self, "Attention", "Phone Empty")
 //            return
         }else if phoneNumber!.count > 20  {
-            alertController.custom(self, "Attention", "Phone Number Should be less than 20")
+            alertController.custom(self, "Attention", "Phone Number should be less than 20 digitals")
             return
         }else{  //经过验证之后的请求
             //设置了国家和用户名不能为空
@@ -230,20 +230,20 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
                                 self.indicator.removeFromSuperview()
                                // print(responseModel.code)
                                 self.navigationController?.popToRootViewController(animated: false)
-                                alertController.custom_cengji(self,"", "Sign Up Success！")
+                                alertController.custom_cengji(self,"", "Sign Up")
                             }else{
                                 self.indicator.stopIndicator()
                                 self.indicator.removeFromSuperview()
                                 //print(responseModel.code)
                                 self.navigationController?.popToRootViewController(animated: false)
-                                alertController.custom_cengji(self,"Attention", "Sign Up Success！")
+                                alertController.custom_cengji(self,"", "Sign Up")
                             }
                         } //end of letif
                     }
                 }else{
                     self.indicator.stopIndicator()
                     self.indicator.removeFromSuperview()
-                    alertController.custom(self, "Attention", "Internet Error")
+                    alertController.custom(self, "Attention", "Failed!Internet Error")
                 }
             }//end of request
         }

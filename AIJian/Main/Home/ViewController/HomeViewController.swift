@@ -242,7 +242,7 @@ extension HomeViewController{
                             let viewController = loginViewController()
                             let loginNv = loginNavigationController(rootViewController: viewController)
                             loginNv.modalPresentationStyle = .fullScreen
-                            let alertToLigin = UIAlertController(title: "Attention", message: "Your login information has expired.", preferredStyle: .alert)
+                            let alertToLigin = UIAlertController(title: "Attention", message: "Login info has expired.", preferredStyle: .alert)
                             let okAction = UIAlertAction(title: "Done", style: .default, handler:{
                                 action in
                                 // 跳转到登录界面

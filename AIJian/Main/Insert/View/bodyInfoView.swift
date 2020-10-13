@@ -106,7 +106,7 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
     // 药物编辑按钮
     lazy var medicineEditButton:UIButton = {
         let button = UIButton(type: .system)
-        button.NorStyle(title: "Edit")
+        button.NorStyle(title: "Manually")
         return button
     }()
     

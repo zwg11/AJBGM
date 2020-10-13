@@ -222,19 +222,19 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
             
 //            先检查是否为空，后检查长度是否符合要求
             if oldP == ""{
-                alert.custom(self, "Attention", "Original Password Empty")
+                alert.custom(self, "Attention", "No Original Password")
                 return
             }else if newP == ""{
-                alert.custom(self, "Attention", "New Password Empty")
+                alert.custom(self, "Attention", "No New Password")
                 return
             }else if verfiedP == ""{
-                alert.custom(self, "Attention", "Confirm Password Empty")
+                alert.custom(self, "Attention", "No Confirm Password")
                 return
             }else if verfiedP!.count >= 20{
-                alert.custom(self, "Attention", "Incorrect Confirm Password Format.The password length should be six or tewenty digits.")
+                alert.custom(self, "Attention", "Incorrect Confirm Password Format.The password length should be 6 or 20 digits.")
                 return
             }else if verfiedP!.count < 6 {
-                alert.custom(self, "Attention", "Incorrect Confirm Password Format.The password length should be six or tewenty digits.")
+                alert.custom(self, "Attention", "Incorrect Confirm Password Format.The password length should be 6 or 20 digits.")
                 return
             }else if oldP == newP {    //让旧密码和新密码不能一样
                 alert.custom(self, "Attention", "New Password Matches Old")
@@ -277,7 +277,7 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
                                     x.addAction(okAction)
                                     self.present(x, animated: true, completion: nil)
                                 }else if (responseModel.code! == 3){
-                                    let x = UIAlertController(title: "", message: "Your account has been disabled.Please contact oncall@acondiabetescare.com", preferredStyle: .alert)
+                                    let x = UIAlertController(title: "", message: "Your account is disabled. Please contact info@aconlabs.com", preferredStyle: .alert)
                                     let okAction = UIAlertAction(title: "Done", style: .default, handler: {
                                              action in
                                             LoginOff.loginOff(self)
@@ -307,7 +307,7 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
                     }else{
                         self.indicator.stopIndicator()
                         self.indicator.removeFromSuperview()
-                        alert.custom(self,"Attention", "Internet Error")
+                        alert.custom(self,"Attention", "Failed!Internet Error")
                     }
                 }
             }   

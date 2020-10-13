@@ -234,7 +234,7 @@ class DataTableViewController: UIViewController,UITableViewDelegate,UITableViewD
     
         let alert = UIAlertController(title: "Select", message: "", preferredStyle: .alert)
         // 该动作编辑一条记录
-        let editAction = UIAlertAction(title: "Edit", style: .default, handler: {(UIAlertAction)->Void in
+        let editAction = UIAlertAction(title: "Manually", style: .default, handler: {(UIAlertAction)->Void in
 
             let insert = InsertViewController()
             
@@ -483,7 +483,7 @@ extension DataTableViewController{
                         if deleteResponse.code != 1{
 //                            self.loadV.stopIndicator()
                             let alert = CustomAlertController()
-                            alert.custom(self, "Attention", "Delete failed, please try again later.")
+                            alert.custom(self, "Attention", "Failed")
                             // 删除失败函数直接退出
                             return
                         }else if (deleteResponse.code! == 2 ){
@@ -496,7 +496,7 @@ extension DataTableViewController{
                             x.addAction(okAction)
                             self.present(x, animated: true, completion: nil)
                         }else if (deleteResponse.code! == 3){
-                            let x = UIAlertController(title: "", message: "Your account has been disabled.Please contact oncall@acondiabetescare.com", preferredStyle: .alert)
+                            let x = UIAlertController(title: "", message: "Your account is disabled. Please contact info@aconlabs.com", preferredStyle: .alert)
                              let okAction = UIAlertAction(title: "Done", style: .default, handler: {
                                    action in
                                     LoginOff.loginOff(self)
@@ -532,7 +532,7 @@ extension DataTableViewController{
                                 
                                 // 弹出警示框，提示用户
                                 let alert = CustomAlertController()
-                                alert.custom(self, "", "Delete Success")
+                                alert.custom(self, "", "Deleted")
                                 
                             }else{
                                 // not local data
@@ -549,7 +549,7 @@ extension DataTableViewController{
                 self.loadV.stopIndicator()
                 // 弹出警示框，提示用户
                 let alert = CustomAlertController()
-                alert.custom(self, "Error", "Internet Error.Please Try Again!")
+                alert.custom(self, "", "Failed!Internet Error")
                 return
             }// 如果请求未得到回复
         }

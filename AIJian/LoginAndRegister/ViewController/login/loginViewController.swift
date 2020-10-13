@@ -82,16 +82,16 @@ class loginViewController: UIViewController,UITextFieldDelegate {
         email = loginview.userNameTextField.text!.removeHeadAndTailSpacePro
         password = loginview.passwordTextField.text!
         if email == ""{
-            alertController.custom(self,"Attention", "Email Empty")
+            alertController.custom(self,"Attention", "No Email Address")
             return
         }else if password == ""{
-            alertController.custom(self,"Attention", "Password Empty")
+            alertController.custom(self,"Attention", "No Password")
             return
         }else if FormatMethodUtil.validateEmail(email: email!) == true{
             // ****** 弹出加载风火轮 ******
             
             // 初始化UI
-            indicator.setupUI("Logining in...")
+            indicator.setupUI("Logging")
             // 设置风火轮视图在父视图中心
             // 开始转
             indicator.startIndicator()
@@ -144,12 +144,12 @@ class loginViewController: UIViewController,UITextFieldDelegate {
                                 user1.email = UserInfo.getEmail()
                                 sqliteManager.addUserRecord(user1)
                                 // 登陆成功，请求数据
-                                self.indicator.setLabelText("Login in Success，Initializing Data..")
+                                self.indicator.setLabelText("Logged in.Initializing Data..")
                                 self.requestData(day: 365*40)
                             }else if(responseModel.code == -1){  //返回-1,表示账号被停用了
                                 self.indicator.stopIndicator()
                                 self.indicator.removeFromSuperview()
-                                alertController.custom(self,"Attention", "Your account has been disabled.Please contact oncall@acondiabetescare.com")
+                                alertController.custom(self,"Attention", "Your account is disabled. Please contact info@aconlabs.com")
                             }else if(responseModel.code == -2){   // 返回-2，表示该邮箱未注册
                                 self.indicator.stopIndicator()
                                 self.indicator.removeFromSuperview()
@@ -171,7 +171,7 @@ class loginViewController: UIViewController,UITextFieldDelegate {
                     self.indicator.stopIndicator()
                     self.indicator.removeFromSuperview()
                     
-                    alertController.custom(self,"Attention", "Internet Error！")
+                    alertController.custom(self,"Attention", "Failed!Internet Error！")
                 }
             }
             //print("邮箱格式正确,登录成功")
@@ -276,10 +276,10 @@ extension loginViewController{
                         }
                         // 存储血糖信息，请求meter信息
                         self.glucoseRecords = recordInDaysResponse.data
+                        self.requestUserInfo()
                         print("开始请求meter数据")
                         self.GetMeterInfo()
-                        
-                        
+
                         
 //                        // ******** 将得到的所有数据都添加到数据库 ***********
 //                        let sqliteManager = DBSQLiteManager()
@@ -313,7 +313,7 @@ extension loginViewController{
                 self.indicator.removeFromSuperview()
                 
                 let alert = CustomAlertController()
-                alert.custom(self, "Attention", "Internet Error")
+                alert.custom(self, "Attention", "Failed!Internet Error")
               //  print("没网了")
             }
             
@@ -385,7 +385,7 @@ extension loginViewController{
                             
                             tabbar.modalPresentationStyle = .fullScreen
                             self.present(tabbar, animated: true, completion: {
-                                self.glucoseRecords = nil
+//                                self.glucoseRecords = nil
                             })
                             
                         }else{ // 如果没请求到数据
@@ -407,7 +407,7 @@ extension loginViewController{
                         self.indicator.removeFromSuperview()
                         
                         let alert = CustomAlertController()
-                        alert.custom(self, "Attention", "Internet Error")
+                        alert.custom(self, "Attention", "Failed!Internet Error")
                     }
                 }else{
                     // 将风火轮移除，并停止转动
@@ -417,7 +417,7 @@ extension loginViewController{
                     self.indicator.removeFromSuperview()
                     
                     let alert = CustomAlertController()
-                    alert.custom(self, "Attention", "Internet Error")
+                    alert.custom(self, "Attention", "Failed!Internet Error")
                 }
             }// 请求失败
             else{
@@ -428,11 +428,50 @@ extension loginViewController{
                 self.indicator.removeFromSuperview()
                 
                 let alert = CustomAlertController()
-                alert.custom(self, "Attention", "Internet Error")
+                alert.custom(self, "Attention", "Failed!Internet Error")
             }
         }//end of request
         
     }
     
-
+    // 获取用户信息
+    func requestUserInfo(){
+        
+        
+        let dictString = ["userId":UserInfo.getUserId(),"token":UserInfo.getToken()] as [String : Any]
+        // 数据请求超时时间为10s
+        AlamofireManager.request(USER_INFO_REQUEST,method: .post,parameters: dictString, headers:vheader).responseString{ (response) in
+            if response.result.isSuccess {
+                if let jsonString = response.result.value {
+                    // json转model
+                    // 写法一：responseModel.deserialize(from: jsonString)
+                    // 写法二：用JSONDeserializer<T>
+                    /*
+                     利用JSONDeserializer封装成一个对象。然后再解析这个对象，此处返回的不同，需要封装成responseAModel的响应体
+                     //                         */
+                    if var responseModel = JSONDeserializer<USERINFO_REQUEST>.deserializeFrom(json: jsonString) {
+                        /// model转json 为了方便在控制台查看
+                        /*  此处为跳转和控制逻辑
+                         */
+//                        self.indicator.stopIndicator()
+//                        self.indicator.removeFromSuperview()
+                        if(responseModel.code! == 1 ){
+                            // 向数据库插入数据
+                            // 将风火轮移除，并停止转动
+                            //print(responseModel.data!)
+                            if responseModel.data!.userName == nil{
+                                responseModel.data!.userName = ""
+                            }
+                            if responseModel.data!.gender == nil{
+                                responseModel.data!.gender = 1
+                            }
+                            print("请求用户数据成功")
+                            DBSQLiteManager.manager.updateUserInfo(responseModel.data!)
+                        }
+                    } //end of letif
+                }
+            }
+        }//end of request
+        
+    } //end of requestUserInfo
 }

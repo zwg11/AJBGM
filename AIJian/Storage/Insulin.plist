@@ -4,8 +4,8 @@
 <dict>
 	<key>Bolus Insulin</key>
 	<array>
-		<string>Humulin R(Short-acting)</string>
-		<string>Novolin R(Short-acting)</string>
+		<string>Humulin R (Short-acting)</string>
+		<string>Novolin R (Short-acting)</string>
 		<string>Regular (Short-acting)</string>
 		<string>Apidra (Rapid-acting)</string>
 		<string>Generic Bolus (Rapid-acting)</string>

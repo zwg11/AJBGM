@@ -82,7 +82,7 @@ class loginView: UIView {
     // 注册按钮
     lazy var registerButton:UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("New here?Sign up", for: .normal)
+        button.setTitle("New here? Sign up", for: .normal)
         button.backgroundColor = UIColor.clear
         button.setTitleColor(TextColor, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)

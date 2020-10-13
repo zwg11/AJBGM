@@ -92,16 +92,16 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
         password = emailCheckSec.passwordTextField.text!
         passwordSec = emailCheckSec.passwordSecTextField.text!
         if password == ""{
-             alertController.custom(self, "Attention", "New Password Empty")
+             alertController.custom(self, "Attention", "No New Password")
             return
         }else if passwordSec == "" {
-             alertController.custom(self, "Attention", "Confirm Password Empty")
+             alertController.custom(self, "Attention", "No Confirm Password")
             return
         }else if password!.count >= 20{
-            alertController.custom(self, "Attention", "Incorrect Confirm Password Format.The password length should be six or tewenty digits.")
+            alertController.custom(self, "Attention", "Incorrect Confirm Password Format.The password length should be 6 or 20 digits.")
             return
         }else if password!.count < 6 {
-            alertController.custom(self, "Attention", "Incorrect Confirm Password Format.The password length should be six or tewenty digits.")
+            alertController.custom(self, "Attention", "Incorrect Confirm Password Format.The password length should be 6 or 20 digits.")
             return
         }else if password != passwordSec{
              alertController.custom(self, "Attention", "Passwords Not Match")
@@ -142,20 +142,20 @@ class emailCheckSecViewController: UIViewController,UITextFieldDelegate {
                                 self.indicator.removeFromSuperview()
                                 self.navigationController?.popToRootViewController(animated: false)
                                 //更新成功不需要，attention
-                                 alertController.custom_cengji(self,"", "Password Reset Success")
+                                 alertController.custom_cengji(self,"", "Reset")
                             }else{
                                 //先转，后弹
                                 self.indicator.stopIndicator()
                                 self.indicator.removeFromSuperview()
                                 self.navigationController?.popToRootViewController(animated: false)
-                                alertController.custom_cengji(self,"Attention", "Password Reset Failed")
+                                alertController.custom_cengji(self,"Attention", "Failed")
                             }
                         } //end of letif
                     }
                 }else{
                     self.indicator.stopIndicator()
                     self.indicator.removeFromSuperview()
-                    alertController.custom(self,"Attention", "Internet Error！")
+                    alertController.custom(self,"Attention", "Failed!Internet Error！")
                 }
             }//end of request
         }

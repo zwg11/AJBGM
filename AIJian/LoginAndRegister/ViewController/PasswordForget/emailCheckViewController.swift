@@ -88,7 +88,7 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
         //获得email和验证码
         //邮箱不能为空
         if email == ""{
-            alertController.custom(self, "Attention", "Email Empty")
+            alertController.custom(self, "Attention", "No Email Address")
             return
         }else{
             // 初始化UI
@@ -143,7 +143,7 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
                     self.indicator.stopIndicator()
                     self.indicator.removeFromSuperview()
                     
-                    alertController.custom(self,"Attention", "Internet Error！")
+                    alertController.custom(self,"Attention", "Failed!Internet Error！")
                 }
             }//end of request
         }
@@ -160,7 +160,7 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
          需要判断邮箱不为空才能获取验证码
          */
         if email == ""{
-            alertController.custom(self, "Attention", "Email Empty")
+            alertController.custom(self, "Attention", "No Email Address")
             return
         }else if FormatMethodUtil.validateEmail(email: email!) == true{
             // 初始化UI
@@ -192,15 +192,15 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
 //                                self.emailCheck.getAuthCodeButton.setButtonEnable()
                                 self.emailCheck.getAuthCodeButton.countDown(count: 90)
                             }else if responseModel.code == -1{
-                                alertController.custom(self,"Attention", "Email is not Registered")
+                                alertController.custom(self,"Attention", "The email has been registered")
                                 self.emailCheck.getAuthCodeButton.setButtonEnable()
                             }else if responseModel.code == 0{
-                                alertController.custom(self,"Attention", "Send Error")
+                                alertController.custom(self,"Attention", "Failed")
                                 self.emailCheck.getAuthCodeButton.setButtonEnable()
 //                                self.emailCheck.getAuthCodeButton.setTitle("Resend", for: .normal)
 //                                self.emailCheck.getAuthCodeButton.countDown(count: 0)
                             }else if responseModel.code == 3{
-                                 alertController.custom(self,"Attention", "Your account has been disabled.Please contact oncall@acondiabetescare.com")
+                                 alertController.custom(self,"Attention", "Your account is disabled. Please contact info@aconlabs.com")
                             }
                           //  print("注册时，获取验证码阶段")
                         }
@@ -208,7 +208,7 @@ class emailCheckViewController: UIViewController,UITextFieldDelegate {
                 }else{
                     self.indicator.stopIndicator()
                     self.indicator.removeFromSuperview()
-                    alertController.custom(self, "Attention", "Internet Error")
+                    alertController.custom(self, "Attention", "Failed!Internet Error")
                 }//end of response.result.isSuccess
             }//end of request
            

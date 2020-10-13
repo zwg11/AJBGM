@@ -33,7 +33,7 @@ class SharedStaticView: UIView {
     private lazy var TestNumTitleLabel:UILabel = {
         let label = UILabel()
         label.textAlignment = .right
-        label.text = "Detection Times"
+        label.text = "Testing Time"
         label.textColor = UIColor.black
         label.font = UIFont.systemFont(ofSize: 25)
         return label
