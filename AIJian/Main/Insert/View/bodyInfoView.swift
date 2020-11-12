@@ -220,7 +220,7 @@ class bodyInfoView: UIView ,UITextFieldDelegate{
         medicineEditButton.snp.makeConstraints{(make) in
             make.left.equalTo(medicineChooseButton.snp.right).offset(10)
             make.top.equalTo(medicineChooseButton)
-            make.width.equalTo(AJScreenWidth/8)
+            make.width.equalTo(AJScreenWidth/4)
             make.height.equalTo(AJScreenWidth/12)
         }
     }

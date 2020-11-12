@@ -262,7 +262,7 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
                                 self.indicator.removeFromSuperview()
                                 /*  此处为跳转和控制逻辑*/
                                 if(responseModel.code == 1 ){
-                                    alert.custom_cengji(self,"", "Password Reset Success")
+                                    alert.custom_cengji(self,"", "Reset")
                                     self.oldPasswd_textF.text! = ""
                                     self.newPasswd_textF.text! = ""
                                     self.verfiedPasswd_textF.text! = ""
@@ -295,7 +295,7 @@ class PassChangeViewController: UIViewController,UITextFieldDelegate {
                                     x.addAction(okAction)
                                     self.present(x, animated: true, completion: nil)
                                 }else{
-                                    alert.custom_cengji(self,"Attention", "Password Reset Failure")
+                                    alert.custom_cengji(self,"Attention", "Failed")
                                     self.oldPasswd_textF.text! = ""
                                     self.newPasswd_textF.text! = ""
                                     self.verfiedPasswd_textF.text! = ""

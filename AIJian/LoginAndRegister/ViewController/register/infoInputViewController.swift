@@ -230,13 +230,13 @@ class infoInputViewController: UIViewController,UITextFieldDelegate,PickerDelega
                                 self.indicator.removeFromSuperview()
                                // print(responseModel.code)
                                 self.navigationController?.popToRootViewController(animated: false)
-                                alertController.custom_cengji(self,"", "Sign Up")
+                                alertController.custom_cengji(self,"", "Sign Up Successfully")
                             }else{
                                 self.indicator.stopIndicator()
                                 self.indicator.removeFromSuperview()
                                 //print(responseModel.code)
                                 self.navigationController?.popToRootViewController(animated: false)
-                                alertController.custom_cengji(self,"", "Sign Up")
+                                alertController.custom_cengji(self,"", "Sign Up Successfully")
                             }
                         } //end of letif
                     }

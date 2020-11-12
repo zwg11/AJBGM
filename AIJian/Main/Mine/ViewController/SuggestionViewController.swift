@@ -197,7 +197,7 @@ class SuggestionViewController: UIViewController,UITextViewDelegate,UITableViewD
          let alert = CustomAlertController()
         
         if content_field.text!.removeHeadAndTailSpacePro == ""{
-            alert.custom(self, "Attention", "No Feedback！")
+            alert.custom(self, "Attention", "No Feedback")
             return
         }
         
